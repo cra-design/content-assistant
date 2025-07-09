@@ -45,7 +45,7 @@
 	"--------PAGE ASSISTANT---------------": "--------------------------------PAGE ASSISTANT---------------------------------------",
 	"page.description": "Comparer les pages Canada.ca avec les versions prototypes côte à côte.",
 	"page.step2.title": "Télécharger le contenu",
-	"page.step2.urlForm.legend": "Entrez votre URL",
+	"page.uploadUrl.legend": "Entrez votre URL",
 	"page.step2.urlForm.legend2": "Entrez vos URLs",
 	"page.step2.urlForm.example": "Par exemple :<br>Source :<br>https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/tps-tvh-entreprises.html<br>Prototype :<br>https://cra-design.github.io/gst-hst-business/fr/sujets/tps-tvh-entreprises.html</p>",
 	"page.step2.error": "Doit commencer par http:// ou https://",

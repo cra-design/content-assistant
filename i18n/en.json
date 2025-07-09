@@ -46,7 +46,7 @@
 	"--------PAGE ASSISTANT---------------": "--------------------------------PAGE ASSISTANT---------------------------------------",
 	"page.description": "Compare Canada.ca pages with prototype versions side-by-side.",
 	"page.step2.title": "Upload content",
-	"page.step2.urlForm.legend": "Enter your URL",
+	"page.uploadUrl.legend": "Enter your URL",
 	"page.step2.urlForm.legend2": "Enter your URLs",
 	"page.step2.urlForm.example": "For example:<br>Source:<br>https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html<br>Prototype:<br>https://cra-design.github.io/gst-hst-business/en/topics/gst-hst-businesses.html</p>",
 	"page.step2.error": "Must start with http:// or https://",
