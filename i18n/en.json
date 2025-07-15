@@ -56,6 +56,7 @@
 	"image.csv.noData": "No data processed successfully to generate CSV.",
 	"image.description": "Upload images (PNG, JPG) or PDF files to create alt text with French translations using AI vision models.",
 	"image.error.unknown": "Unknown error during analysis.",
+	"image.error.paidModel": "This is a paid model. Please add credits to your API key.",
 	"image.model.changeAlert": "Vision model changed. Please re-upload files to process them with the new model.",
 	"image.model.label": "Choose Vision Model:",
 	"image.model.pdfNote": "Note: PDFs will be converted to images. Each page will be processed separately.",
