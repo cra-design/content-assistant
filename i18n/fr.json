@@ -29,6 +29,7 @@
 	"continue": "Continuer",
 	"Source URL": "URL source",
 	"is required": "est requis",
+	"fileSizeTypes": ["o", "Ko", "Mo", "Go", "To"],
 	"--------API KEY----------------------": "--------------------------------API KEY----------------------------------------------",
 	"apiKey.change": "Changer la clé API",
 	"apiKey.save": "Enregistrer la clé API",
