@@ -60,6 +60,7 @@
 	"page.upload.url.placeholder": "https://(votre chemin)",
 	"page.upload.url.error.pattern": "Doit commencer par http:// ou https://",
 	"page.upload.url.error.required": "L'URL est requise",
+	"page.upload.url.toggleHelp": "Activer/désactiver le texte d'aide pour la saisie d'URL",
 	"page.upload.url.example": "Exemple :<br>https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/tps-tvh-entreprises.html<br>ou<br>https://cra-design.github.io/gst-hst-business/fr/sujets/tps-tvh-entreprises.html</p>",
 	"page.upload.paste.legend": "Copiez et collez votre contenu",
 	"page.upload.paste.original": "HTML original",

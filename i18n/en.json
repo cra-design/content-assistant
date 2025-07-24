@@ -54,17 +54,23 @@
 
 	"page.upload.sample": "Load sample data",
 	"page.upload.continue": "Continue",
+	"page.upload.error.unknown": "Unknown error.",
+
 	"page.upload.url.legend": "Enter your URL",
 	"page.upload.url.original": "Original URL",
 	"page.upload.url.modified": "Modified URL",
 	"page.upload.url.placeholder": "https://(your path)",
 	"page.upload.url.error.pattern": "Must start with http:// or https://",
 	"page.upload.url.error.required": "URL is required",
+	"page.upload.url.error.try": "Failed to fetch page: ",
+	"page.upload.url.toggleHelp": "Toggle help text for URL input",
 	"page.upload.url.example": "Example:<br>https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html<br>or<br>https://cra-design.github.io/gst-hst-business/en/topics/gst-hst-businesses.html</p>",
+	
 	"page.upload.paste.legend": "Copy and paste your content",
 	"page.upload.paste.original": "Original HTML",
 	"page.upload.paste.modified": "Modified HTML",
 	"page.upload.paste.error.required": "User input is required",
+	
 	"page.upload.word.legend": "Upload your word document",
 	"page.upload.word.original": "Original .docx file",
 	"page.upload.word.modified": "Modified .docx file",
