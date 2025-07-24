@@ -23,7 +23,7 @@
 	"menu.about": "About us",
 	"menu.feedback": "Feedback",
 	"feedback.email": "mailto:AIPIA-PIAAI@cra-arc.gc.ca?subject=Feedback%20for%20Content%20Assistant&body=",
-  "menu.appInfo": "App info",
+  "menu.appInfo": "Tool info",
 	"--------COMMON TEXT------------------": "--------------------------------COMMON TEXT------------------------------------------",
 	"GoC": "Government of Canada",
 	"CRA": "Canada Revenue Agency",
@@ -65,12 +65,12 @@
 	"page.upload.url.error.try": "Failed to fetch page: ",
 	"page.upload.url.toggleHelp": "Toggle help text for URL input",
 	"page.upload.url.example": "Example:<br>https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html<br>or<br>https://cra-design.github.io/gst-hst-business/en/topics/gst-hst-businesses.html</p>",
-	
+
 	"page.upload.paste.legend": "Copy and paste your content",
 	"page.upload.paste.original": "Original HTML",
 	"page.upload.paste.modified": "Modified HTML",
 	"page.upload.paste.error.required": "User input is required",
-	
+
 	"page.upload.word.legend": "Upload your word document",
 	"page.upload.word.original": "Original .docx file",
 	"page.upload.word.modified": "Modified .docx file",
