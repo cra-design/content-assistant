@@ -85,7 +85,7 @@
 	"page.compare.view.modified": "Modifié",
 	"page.compare.view.diff": "Différences",
 	"page.compare.view.sidebyside": "Côte à côte",
-	"page.compare.view.unified": "Unifié",
+	"page.compare.view.linebyline": "",
 	"page.ai-options.header": "Options GenIA",
 	"page.ai-options.task.header": "Tâche",
 	"page.ai-options.task.legend": "Comparer votre contenu avec :",
