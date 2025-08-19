@@ -86,6 +86,7 @@
 	"page.compare.button.compare": "Compare HTML",
 	"page.compare.button.options": "Options",
 	"page.compare.button.reset": "Reset",
+	"page.compare.button.undo": "Undo",
 	"page.compare.view": "View:",
 	"page.compare.view.original": "Original",
 	"page.compare.view.modified": "Modified",
