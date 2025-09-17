@@ -29725,6 +29725,18 @@ function getRule(selector, properties) {
   }
   return "";
 }
+var $dt = (tokenPath) => {
+  var _a;
+  const theme29 = config_default.getTheme();
+  const variable = dtwt(theme29, tokenPath, void 0, "variable");
+  const name = (_a = variable == null ? void 0 : variable.match(/--[\w-]+/g)) == null ? void 0 : _a[0];
+  const value = dtwt(theme29, tokenPath, void 0, "value");
+  return {
+    name,
+    variable,
+    value
+  };
+};
 var dt = (...args) => {
   return dtwt(config_default.getTheme(), ...args);
 };
@@ -78664,6 +78676,7 @@ export {
   TranslationKeys,
   TreeDragDropService,
   definePreset,
+  $dt,
   BaseStyle,
   PrimeNG,
   providePrimeNG,
@@ -78793,4 +78806,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-KXD5M6RT.js.map
+//# sourceMappingURL=chunk-PDXFAW5G.js.map

@@ -1,4 +1,5 @@
 import {
+  $dt,
   Accordion,
   AccordionContent,
   AccordionHeader,
@@ -166,7 +167,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-KXD5M6RT.js";
+} from "./chunk-PDXFAW5G.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -250,6 +251,7 @@ import {
   ɵɵqueryRefresh,
   ɵɵreference,
   ɵɵresetView,
+  ɵɵresolveDocument,
   ɵɵrestoreView,
   ɵɵsanitizeHtml,
   ɵɵsanitizeUrl,
@@ -1211,9 +1213,9 @@ var require_core = __commonJS({
         return options.noHighlightRe.test(languageName);
       }
       function blockLanguage(block) {
-        let classes13 = block.className + " ";
-        classes13 += block.parentNode ? block.parentNode.className : "";
-        const match = options.languageDetectRe.exec(classes13);
+        let classes14 = block.className + " ";
+        classes14 += block.parentNode ? block.parentNode.className : "";
+        const match = options.languageDetectRe.exec(classes14);
         if (match) {
           const language = getLanguage(match[1]);
           if (!language) {
@@ -1222,7 +1224,7 @@ var require_core = __commonJS({
           }
           return language ? match[1] : "no-highlight";
         }
-        return classes13.split(/\s+/).find((_class) => shouldNotHighlight(_class) || getLanguage(_class));
+        return classes14.split(/\s+/).find((_class) => shouldNotHighlight(_class) || getLanguage(_class));
       }
       function highlight2(codeOrLanguageName, optionsOrCode, ignoreIllegals) {
         let code = "";
@@ -46285,12 +46287,12 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     return __async(this, null, function* () {
       const css = yield firstValueFrom(this.http.get(url, { responseType: "text" }));
       const classPattern = /\.([a-zA-Z0-9_-]+)/g;
-      const classes13 = /* @__PURE__ */ new Set();
+      const classes14 = /* @__PURE__ */ new Set();
       let match;
       while ((match = classPattern.exec(css)) !== null) {
-        classes13.add(match[1]);
+        classes14.add(match[1]);
       }
-      return [...classes13].sort();
+      return [...classes14].sort();
     });
   }
   static \u0275fac = function ComponentGuidanceComponent_Factory(__ngFactoryType__) {
@@ -46670,31 +46672,806 @@ var UserInsightsComponent = class _UserInsightsComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserInsightsComponent, { className: "UserInsightsComponent", filePath: "src/app/views/page-assistant/components/tools/user-insights.component.ts", lineNumber: 19 });
 })();
 
-// src/app/views/page-assistant/components/tools/link-report.component.ts
-var _c016 = () => ({ "min-width": "50rem" });
-function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
+// node_modules/primeng/fesm2022/primeng-overlaypanel.mjs
+var _c016 = ["content"];
+var _c121 = ["closeicon"];
+var _c214 = ["*"];
+var _c314 = (a0, a1) => ({
+  showTransitionParams: a0,
+  hideTransitionParams: a1
+});
+var _c413 = (a0, a1) => ({
+  value: a0,
+  params: a1
+});
+function OverlayPanel_div_0_ng_container_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "th");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainer(0);
+  }
+}
+function OverlayPanel_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 1);
+    \u0275\u0275listener("click", function OverlayPanel_div_0_Template_div_click_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onOverlayClick($event));
+    })("@animation.start", function OverlayPanel_div_0_Template_div_animation_animation_start_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onAnimationStart($event));
+    })("@animation.done", function OverlayPanel_div_0_Template_div_animation_animation_done_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onAnimationEnd($event));
+    });
+    \u0275\u0275elementStart(1, "div", 2);
+    \u0275\u0275listener("click", function OverlayPanel_div_0_Template_div_click_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onContentClick($event));
+    })("mousedown", function OverlayPanel_div_0_Template_div_mousedown_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onContentClick($event));
+    });
+    \u0275\u0275projection(2);
+    \u0275\u0275template(3, OverlayPanel_div_0_ng_container_3_Template, 1, 0, "ng-container", 3);
+    \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const col_r1 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r1.styleClass);
+    \u0275\u0275property("ngClass", "p-popover p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction2(12, _c413, ctx_r1.overlayVisible ? "open" : "close", \u0275\u0275pureFunction2(9, _c314, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
+    \u0275\u0275attribute("aria-modal", ctx_r1.overlayVisible)("aria-label", ctx_r1.ariaLabel)("aria-labelledBy", ctx_r1.ariaLabelledBy);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate);
+  }
+}
+var theme13 = ({
+  dt
+}) => `
+.p-popover {
+    margin-top: ${dt("popover.gutter")};
+    background: ${dt("popover.background")};
+    color: ${dt("popover.color")};
+    border: 1px solid ${dt("popover.border.color")};
+    border-radius: ${dt("popover.border.radius")};
+    box-shadow: ${dt("popover.shadow")};
+    position: absolute
+}
+
+.p-popover-content {
+    padding: ${dt("popover.content.padding")};
+}
+
+.p-popover-flipped {
+    margin-top: calc(${dt("popover.gutter")} * -1);
+    margin-bottom: ${dt("popover.gutter")};
+}
+
+.p-popover-enter-from {
+    opacity: 0;
+    transform: scaleY(0.8);
+}
+
+.p-popover-leave-to {
+    opacity: 0;
+}
+
+.p-popover-enter-active {
+    transition: transform 0.12s cubic-bezier(0, 0, 0.2, 1), opacity 0.12s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.p-popover-leave-active {
+    transition: opacity 0.1s linear;
+}
+
+.p-popover:after,
+.p-popover:before {
+    bottom: 100%;
+    left: calc(${dt("popover.arrow.offset")} + ${dt("popover.arrow.left")});
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.p-popover:after {
+    border-width: calc(${dt("popover.gutter")} - 2px);
+    margin-left: calc(-1 * (${dt("popover.gutter")} - 2px));
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: ${dt("popover.background")};
+}
+
+.p-popover:before {
+    border-width: ${dt("popover.gutter")};
+    margin-left: calc(-1 * ${dt("popover.gutter")});
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: ${dt("popover.border.color")};
+}
+
+.p-popover-flipped:after,
+.p-popover-flipped:before {
+    bottom: auto;
+    top: 100%;
+}
+
+.p-popover.p-popover-flipped:after {
+    border-bottom-color: transparent;
+    border-top-color: ${dt("popover.background")};
+}
+
+.p-popover.p-popover-flipped:before {
+    border-bottom-color: transparent;
+    border-top-color: ${dt("popover.border.color")};
+}
+
+`;
+var classes13 = {
+  root: "p-popover p-component",
+  content: "p-popover-content"
+};
+var PopoverStyle = class _PopoverStyle extends BaseStyle {
+  name = "popover";
+  theme = theme13;
+  classes = classes13;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275PopoverStyle_BaseFactory;
+    return function PopoverStyle_Factory(__ngFactoryType__) {
+      return (\u0275PopoverStyle_BaseFactory || (\u0275PopoverStyle_BaseFactory = \u0275\u0275getInheritedFactory(_PopoverStyle)))(__ngFactoryType__ || _PopoverStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _PopoverStyle,
+    factory: _PopoverStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PopoverStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var PopoverClasses;
+(function(PopoverClasses2) {
+  PopoverClasses2["root"] = "p-popover";
+  PopoverClasses2["content"] = "p-popover-content";
+})(PopoverClasses || (PopoverClasses = {}));
+var OverlayPanel = class _OverlayPanel extends BaseComponent {
+  zone;
+  overlayService;
+  /**
+   * Defines a string that labels the input for accessibility.
+   * @group Props
+   */
+  ariaLabel;
+  /**
+   * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+   * @group Props
+   */
+  ariaLabelledBy;
+  /**
+   * Enables to hide the overlay when outside is clicked.
+   * @group Props
+   */
+  dismissable = true;
+  /**
+   * When enabled, displays a close icon at top right corner.
+   * @group Props
+   */
+  showCloseIcon;
+  /**
+   * Inline style of the component.
+   * @group Props
+   */
+  style;
+  /**
+   * Style class of the component.
+   * @group Props
+   */
+  styleClass;
+  /**
+   *  Target element to attach the panel, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
+   * @group Props
+   */
+  appendTo = "body";
+  /**
+   * Whether to automatically manage layering.
+   * @group Props
+   */
+  autoZIndex = true;
+  /**
+   * Aria label of the close icon.
+   * @group Props
+   */
+  ariaCloseLabel;
+  /**
+   * Base zIndex value to use in layering.
+   * @group Props
+   */
+  baseZIndex = 0;
+  /**
+   * When enabled, first button receives focus on show.
+   * @group Props
+   */
+  focusOnShow = true;
+  /**
+   * Transition options of the show animation.
+   * @group Props
+   */
+  showTransitionOptions = ".12s cubic-bezier(0, 0, 0.2, 1)";
+  /**
+   * Transition options of the hide animation.
+   * @group Props
+   */
+  hideTransitionOptions = ".1s linear";
+  /**
+   * Callback to invoke when an overlay becomes visible.
+   * @group Emits
+   */
+  onShow = new EventEmitter();
+  /**
+   * Callback to invoke when an overlay gets hidden.
+   * @group Emits
+   */
+  onHide = new EventEmitter();
+  container;
+  overlayVisible = false;
+  render = false;
+  isOverlayAnimationInProgress = false;
+  selfClick = false;
+  documentClickListener;
+  target;
+  willHide;
+  scrollHandler;
+  documentResizeListener;
+  contentTemplate;
+  closeIconTemplate;
+  templates;
+  _contentTemplate;
+  destroyCallback;
+  overlayEventListener;
+  overlaySubscription;
+  _componentStyle = inject(PopoverStyle);
+  constructor(zone, overlayService) {
+    super();
+    this.zone = zone;
+    this.overlayService = overlayService;
+    console.log("OverlayPanel is deprecated. Use Popover instead.");
+  }
+  ngAfterContentInit() {
+    this.templates?.forEach((item) => {
+      switch (item.getType()) {
+        case "content":
+          this._contentTemplate = item.template;
+          break;
+        default:
+          this._contentTemplate = item.template;
+          break;
+      }
+      this.cd.markForCheck();
+    });
+  }
+  bindDocumentClickListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.documentClickListener) {
+        let documentEvent = isIOS() ? "touchstart" : "click";
+        const documentTarget = this.el ? this.el.nativeElement.ownerDocument : this.document;
+        this.documentClickListener = this.renderer.listen(documentTarget, documentEvent, (event) => {
+          if (!this.dismissable) {
+            return;
+          }
+          if (!this.container?.contains(event.target) && this.target !== event.target && !this.target.contains(event.target) && !this.selfClick) {
+            this.hide();
+          }
+          this.selfClick = false;
+          this.cd.markForCheck();
+        });
+      }
+    }
+  }
+  unbindDocumentClickListener() {
+    if (this.documentClickListener) {
+      this.documentClickListener();
+      this.documentClickListener = null;
+      this.selfClick = false;
+    }
+  }
+  /**
+   * Toggles the visibility of the panel.
+   * @param {Event} event - Browser event
+   * @param {Target} target - Target element.
+   * @group Method
+   */
+  toggle(event, target) {
+    if (this.isOverlayAnimationInProgress) {
+      return;
+    }
+    if (this.overlayVisible) {
+      if (this.hasTargetChanged(event, target)) {
+        this.destroyCallback = () => {
+          this.show(null, target || event.currentTarget || event.target);
+        };
+      }
+      this.hide();
+    } else {
+      this.show(event, target);
+    }
+  }
+  /**
+   * Displays the panel.
+   * @param {Event} event - Browser event
+   * @param {Target} target - Target element.
+   * @group Method
+   */
+  show(event, target) {
+    target && event && event.stopPropagation();
+    if (this.isOverlayAnimationInProgress) {
+      return;
+    }
+    this.target = target || event.currentTarget || event.target;
+    this.overlayVisible = true;
+    this.render = true;
+    this.cd.markForCheck();
+  }
+  onOverlayClick(event) {
+    this.overlayService.add({
+      originalEvent: event,
+      target: this.el.nativeElement
+    });
+    this.selfClick = true;
+  }
+  onContentClick(event) {
+    const targetElement = event.target;
+    this.selfClick = event.offsetX < targetElement.clientWidth && event.offsetY < targetElement.clientHeight;
+  }
+  hasTargetChanged(event, target) {
+    return this.target != null && this.target !== (target || event.currentTarget || event.target);
+  }
+  appendContainer() {
+    if (this.appendTo) {
+      if (this.appendTo === "body") this.renderer.appendChild(this.document.body, this.container);
+      else appendChild(this.appendTo, this.container);
+    }
+  }
+  restoreAppend() {
+    if (this.container && this.appendTo) {
+      this.renderer.appendChild(this.el.nativeElement, this.container);
+    }
+  }
+  align() {
+    if (this.autoZIndex) {
+      zindexutils.set("overlay", this.container, this.baseZIndex + this.config.zIndex.overlay);
+    }
+    absolutePosition(this.container, this.target, false);
+    const containerOffset = getOffset(this.container);
+    const targetOffset = getOffset(this.target);
+    const borderRadius = this.document.defaultView?.getComputedStyle(this.container).getPropertyValue("border-radius");
+    let arrowLeft = 0;
+    if (containerOffset.left < targetOffset.left) {
+      arrowLeft = targetOffset.left - containerOffset.left - parseFloat(borderRadius) * 2;
+    }
+    this.container?.style.setProperty($dt("popover.arrow.left").name, `${arrowLeft}px`);
+    if (containerOffset.top < targetOffset.top) {
+      this.container.setAttribute("data-p-popover-flipped", "true");
+      addClass(this.container, "p-popover-flipped");
+      if (this.showCloseIcon) {
+        this.renderer.setStyle(this.container, "margin-top", "-30px");
+      }
+    }
+  }
+  onAnimationStart(event) {
+    if (event.toState === "open") {
+      this.container = event.element;
+      this.appendContainer();
+      this.align();
+      this.bindDocumentClickListener();
+      this.bindDocumentResizeListener();
+      this.bindScrollListener();
+      if (this.focusOnShow) {
+        this.focus();
+      }
+      this.overlayEventListener = (e) => {
+        if (this.container && this.container.contains(e.target)) {
+          this.selfClick = true;
+        }
+      };
+      this.overlaySubscription = this.overlayService.clickObservable.subscribe(this.overlayEventListener);
+      this.onShow.emit(null);
+    }
+    this.isOverlayAnimationInProgress = true;
+  }
+  onAnimationEnd(event) {
+    switch (event.toState) {
+      case "void":
+        if (this.destroyCallback) {
+          this.destroyCallback();
+          this.destroyCallback = null;
+        }
+        if (this.overlaySubscription) {
+          this.overlaySubscription.unsubscribe();
+        }
+        break;
+      case "close":
+        if (this.autoZIndex) {
+          zindexutils.clear(this.container);
+        }
+        if (this.overlaySubscription) {
+          this.overlaySubscription.unsubscribe();
+        }
+        this.onContainerDestroy();
+        this.onHide.emit({});
+        this.render = false;
+        break;
+    }
+    this.isOverlayAnimationInProgress = false;
+  }
+  focus() {
+    let focusable = findSingle(this.container, "[autofocus]");
+    if (focusable) {
+      this.zone.runOutsideAngular(() => {
+        setTimeout(() => focusable.focus(), 5);
+      });
+    }
+  }
+  /**
+   * Hides the panel.
+   * @group Method
+   */
+  hide() {
+    this.overlayVisible = false;
+    this.cd.markForCheck();
+  }
+  onCloseClick(event) {
+    this.hide();
+    event.preventDefault();
+  }
+  onEscapeKeydown(event) {
+    this.hide();
+  }
+  onWindowResize() {
+    if (this.overlayVisible && !isTouchDevice()) {
+      this.hide();
+    }
+  }
+  bindDocumentResizeListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.documentResizeListener) {
+        const window2 = this.document.defaultView;
+        this.documentResizeListener = this.renderer.listen(window2, "resize", this.onWindowResize.bind(this));
+      }
+    }
+  }
+  unbindDocumentResizeListener() {
+    if (this.documentResizeListener) {
+      this.documentResizeListener();
+      this.documentResizeListener = null;
+    }
+  }
+  bindScrollListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.scrollHandler) {
+        this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, () => {
+          if (this.overlayVisible) {
+            this.hide();
+          }
+        });
+      }
+      this.scrollHandler.bindScrollListener();
+    }
+  }
+  unbindScrollListener() {
+    if (this.scrollHandler) {
+      this.scrollHandler.unbindScrollListener();
+    }
+  }
+  onContainerDestroy() {
+    if (!this.cd.destroyed) {
+      this.target = null;
+    }
+    this.unbindDocumentClickListener();
+    this.unbindDocumentResizeListener();
+    this.unbindScrollListener();
+  }
+  ngOnDestroy() {
+    if (this.scrollHandler) {
+      this.scrollHandler.destroy();
+      this.scrollHandler = null;
+    }
+    if (this.container && this.autoZIndex) {
+      zindexutils.clear(this.container);
+    }
+    if (!this.cd.destroyed) {
+      this.target = null;
+    }
+    this.destroyCallback = null;
+    if (this.container) {
+      this.restoreAppend();
+      this.onContainerDestroy();
+    }
+    if (this.overlaySubscription) {
+      this.overlaySubscription.unsubscribe();
+    }
+    super.ngOnDestroy();
+  }
+  static \u0275fac = function OverlayPanel_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _OverlayPanel)(\u0275\u0275directiveInject(NgZone), \u0275\u0275directiveInject(OverlayService));
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _OverlayPanel,
+    selectors: [["p-overlayPanel"], ["p-overlaypanel"]],
+    contentQueries: function OverlayPanel_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c016, 4);
+        \u0275\u0275contentQuery(dirIndex, _c121, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.closeIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    hostBindings: function OverlayPanel_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("keydown.escape", function OverlayPanel_keydown_escape_HostBindingHandler($event) {
+          return ctx.onEscapeKeydown($event);
+        }, false, \u0275\u0275resolveDocument);
+      }
+    },
+    inputs: {
+      ariaLabel: "ariaLabel",
+      ariaLabelledBy: "ariaLabelledBy",
+      dismissable: [2, "dismissable", "dismissable", booleanAttribute],
+      showCloseIcon: [2, "showCloseIcon", "showCloseIcon", booleanAttribute],
+      style: "style",
+      styleClass: "styleClass",
+      appendTo: "appendTo",
+      autoZIndex: [2, "autoZIndex", "autoZIndex", booleanAttribute],
+      ariaCloseLabel: "ariaCloseLabel",
+      baseZIndex: [2, "baseZIndex", "baseZIndex", numberAttribute],
+      focusOnShow: [2, "focusOnShow", "focusOnShow", booleanAttribute],
+      showTransitionOptions: "showTransitionOptions",
+      hideTransitionOptions: "hideTransitionOptions"
+    },
+    outputs: {
+      onShow: "onShow",
+      onHide: "onHide"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([PopoverStyle]), \u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c214,
+    decls: 1,
+    vars: 1,
+    consts: [["role", "dialog", 3, "ngClass", "ngStyle", "class", "click", 4, "ngIf"], ["role", "dialog", 3, "click", "ngClass", "ngStyle"], [1, "p-popover-content", 3, "click", "mousedown"], [4, "ngTemplateOutlet"]],
+    template: function OverlayPanel_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275template(0, OverlayPanel_div_0_Template, 4, 15, "div", 0);
+      }
+      if (rf & 2) {
+        \u0275\u0275property("ngIf", ctx.render);
+      }
+    },
+    dependencies: [NgClass, NgIf, NgTemplateOutlet, NgStyle],
+    encapsulation: 2,
+    data: {
+      animation: [trigger("animation", [state("void", style({
+        transform: "scaleY(0.8)",
+        opacity: 0
+      })), state("close", style({
+        opacity: 0
+      })), state("open", style({
+        transform: "translateY(0)",
+        opacity: 1
+      })), transition("void => open", animate("{{showTransitionParams}}")), transition("open => close", animate("{{hideTransitionParams}}"))])]
+    },
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(OverlayPanel, [{
+    type: Component,
+    args: [{
+      selector: "p-overlayPanel, p-overlaypanel",
+      standalone: false,
+      template: `
+        <div
+            *ngIf="render"
+            [ngClass]="'p-popover p-component'"
+            [ngStyle]="style"
+            [class]="styleClass"
+            (click)="onOverlayClick($event)"
+            [@animation]="{
+                value: overlayVisible ? 'open' : 'close',
+                params: { showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions }
+            }"
+            (@animation.start)="onAnimationStart($event)"
+            (@animation.done)="onAnimationEnd($event)"
+            role="dialog"
+            [attr.aria-modal]="overlayVisible"
+            [attr.aria-label]="ariaLabel"
+            [attr.aria-labelledBy]="ariaLabelledBy"
+        >
+            <div class="p-popover-content" (click)="onContentClick($event)" (mousedown)="onContentClick($event)">
+                <ng-content></ng-content>
+                <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
+            </div>
+        </div>
+    `,
+      animations: [trigger("animation", [state("void", style({
+        transform: "scaleY(0.8)",
+        opacity: 0
+      })), state("close", style({
+        opacity: 0
+      })), state("open", style({
+        transform: "translateY(0)",
+        opacity: 1
+      })), transition("void => open", animate("{{showTransitionParams}}")), transition("open => close", animate("{{hideTransitionParams}}"))])],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      providers: [PopoverStyle]
+    }]
+  }], () => [{
+    type: NgZone
+  }, {
+    type: OverlayService
+  }], {
+    ariaLabel: [{
+      type: Input
+    }],
+    ariaLabelledBy: [{
+      type: Input
+    }],
+    dismissable: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    showCloseIcon: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    style: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    appendTo: [{
+      type: Input
+    }],
+    autoZIndex: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    ariaCloseLabel: [{
+      type: Input
+    }],
+    baseZIndex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    focusOnShow: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    showTransitionOptions: [{
+      type: Input
+    }],
+    hideTransitionOptions: [{
+      type: Input
+    }],
+    onShow: [{
+      type: Output
+    }],
+    onHide: [{
+      type: Output
+    }],
+    contentTemplate: [{
+      type: ContentChild,
+      args: ["content", {
+        descendants: false
+      }]
+    }],
+    closeIconTemplate: [{
+      type: ContentChild,
+      args: ["closeicon", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }],
+    onEscapeKeydown: [{
+      type: HostListener,
+      args: ["document:keydown.escape", ["$event"]]
+    }]
+  });
+})();
+var OverlayPanelModule = class _OverlayPanelModule {
+  static \u0275fac = function OverlayPanelModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _OverlayPanelModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _OverlayPanelModule,
+    declarations: [OverlayPanel],
+    imports: [CommonModule, Ripple, SharedModule, TimesIcon],
+    exports: [OverlayPanel, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [CommonModule, SharedModule, TimesIcon, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(OverlayPanelModule, [{
+    type: NgModule,
+    args: [{
+      imports: [CommonModule, Ripple, SharedModule, TimesIcon],
+      exports: [OverlayPanel, SharedModule],
+      declarations: [OverlayPanel]
+    }]
+  }], null, null);
+})();
+
+// src/app/views/page-assistant/components/tools/link-report.component.ts
+var _c017 = ["typePanel"];
+var _c127 = () => ({ "min-width": "50rem" });
+function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 16);
+    \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_4_Template_button_click_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      \u0275\u0275nextContext(3);
+      const typePanel_r3 = \u0275\u0275reference(4);
+      return \u0275\u0275resetView(typePanel_r3 == null ? null : typePanel_r3.toggle($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+}
+function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "th")(1, "div", 14)(2, "span");
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 15);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const col_r4 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(col_r4.header);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(col_r1.header);
+    \u0275\u0275property("ngIf", col_r4.field === "type");
   }
 }
 function LinkReportComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr");
-    \u0275\u0275element(1, "th", 3);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 2, 1, "th", 4);
+    \u0275\u0275element(1, "th", 12);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 5, 2, "th", 13);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
+    const ctx_r4 = \u0275\u0275nextContext();
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r1.cols);
+    \u0275\u0275property("ngForOf", ctx_r4.cols);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_2_Template(rf, ctx) {
@@ -46704,9 +47481,9 @@ function LinkReportComponent_ng_template_2_td_3_span_2_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r3 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r3.order);
+    \u0275\u0275textInterpolate(rowData_r6.order);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
@@ -46716,81 +47493,81 @@ function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r3 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r3.type);
+    \u0275\u0275textInterpolate(rowData_r6.type);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 15);
+    \u0275\u0275elementStart(0, "div", 27);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r3 = \u0275\u0275nextContext(3).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(3).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1("(", rowData_r3.href, ")");
+    \u0275\u0275textInterpolate1("(", rowData_r6.href, ")");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 13);
+    \u0275\u0275elementStart(0, "span", 25);
     \u0275\u0275text(1);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template, 2, 1, "div", 14);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template, 2, 1, "div", 26);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r3 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngClass", ctx_r1.getTextClass(rowData_r3))("ngStyle", ctx_r1.getTextStyle(rowData_r3));
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r4 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngClass", ctx_r4.getTextClass(rowData_r6))("ngStyle", ctx_r4.getTextStyle(rowData_r6));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r3.text, " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r6.text, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r3.href);
+    \u0275\u0275property("ngIf", rowData_r6.href);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 16);
+    \u0275\u0275elementStart(0, "span", 28);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r3 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r3.destH1 || "\u2014", " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r6.destH1 || "\u2014", " ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 21);
+    \u0275\u0275element(0, "i", 33);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 22);
+    \u0275\u0275element(0, "i", 34);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 23);
+    \u0275\u0275element(0, "i", 35);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 17);
-    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template, 1, 0, "i", 18)(2, LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template, 1, 0, "i", 19)(3, LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template, 1, 0, "i", 20);
+    \u0275\u0275elementStart(0, "span", 29);
+    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template, 1, 0, "i", 30)(2, LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template, 1, 0, "i", 31)(3, LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template, 1, 0, "i", 32);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r3 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r3.matchStatus === "match");
+    \u0275\u0275property("ngIf", rowData_r6.matchStatus === "match");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r3.matchStatus === "mismatch");
+    \u0275\u0275property("ngIf", rowData_r6.matchStatus === "mismatch");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r3.matchStatus === "unknown" || rowData_r3.matchStatus === "na");
+    \u0275\u0275property("ngIf", rowData_r6.matchStatus === "unknown" || rowData_r6.matchStatus === "na");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_7_Template(rf, ctx) {
@@ -46800,24 +47577,24 @@ function LinkReportComponent_ng_template_2_td_3_span_7_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r4 = \u0275\u0275nextContext().$implicit;
-    const rowData_r3 = \u0275\u0275nextContext().$implicit;
+    const col_r7 = \u0275\u0275nextContext().$implicit;
+    const rowData_r6 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r3[col_r4.field]);
+    \u0275\u0275textInterpolate(rowData_r6[col_r7.field] || "\u2014");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "td");
-    \u0275\u0275elementContainerStart(1, 7);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 8)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 8)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 3, 4, "span", 9)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 2, 1, "span", 10)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 4, 3, "span", 11)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 2, 1, "span", 12);
+    \u0275\u0275elementContainerStart(1, 19);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 20)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 20)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 3, 4, "span", 21)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 2, 1, "span", 22)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 4, 3, "span", 23)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 2, 1, "span", 24);
     \u0275\u0275elementContainerEnd();
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r4 = ctx.$implicit;
+    const col_r7 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngSwitch", col_r4.field);
+    \u0275\u0275property("ngSwitch", col_r7.field);
     \u0275\u0275advance();
     \u0275\u0275property("ngSwitchCase", "order");
     \u0275\u0275advance();
@@ -46832,41 +47609,172 @@ function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr", 5)(1, "td");
-    \u0275\u0275element(2, "span", 6);
+    \u0275\u0275elementStart(0, "tr", 17)(1, "td");
+    \u0275\u0275element(2, "span", 18);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 8, 6, "td", 4);
+    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 8, 6, "td", 13);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r3 = ctx.$implicit;
-    const rowIndex_r5 = ctx.rowIndex;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("pReorderableRow", rowIndex_r5)("pSelectableRow", rowData_r3);
+    const rowData_r6 = ctx.$implicit;
+    const rowIndex_r8 = ctx.rowIndex;
+    const ctx_r4 = \u0275\u0275nextContext();
+    \u0275\u0275property("pReorderableRow", rowIndex_r8)("pSelectableRow", rowData_r6);
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r1.cols);
+    \u0275\u0275property("ngForOf", ctx_r4.cols);
   }
+}
+function LinkReportComponent_div_11_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 6)(1, "p-checkbox", 36);
+    \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_div_11_Template_p_checkbox_ngModelChange_1_listener($event) {
+      const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
+      const ctx_r4 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r4.typeChecks[t_r10], $event) || (ctx_r4.typeChecks[t_r10] = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("onChange", function LinkReportComponent_div_11_Template_p_checkbox_onChange_1_listener() {
+      const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
+      const ctx_r4 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r4.onTypeToggle(t_r10));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "label", 37);
+    \u0275\u0275listener("click", function LinkReportComponent_div_11_Template_label_click_2_listener() {
+      const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
+      const ctx_r4 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r4.toggleType(t_r10));
+    });
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const t_r10 = ctx.$implicit;
+    const i_r11 = ctx.index;
+    const ctx_r4 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r4.typeChecks[t_r10]);
+    \u0275\u0275property("disabled", ctx_r4.allSelected)("inputId", "type-" + i_r11);
+    \u0275\u0275advance();
+    \u0275\u0275attribute("for", "type-" + i_r11);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", t_r10, " ");
+  }
+}
+function LinkReportComponent_div_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 38);
+    \u0275\u0275text(1, " All types are currently included. ");
+    \u0275\u0275elementEnd();
+  }
+}
+var CANADA_ORIGIN = "https://www.canada.ca";
+function isCanadaHost(u) {
+  const h = u.hostname.toLowerCase().replace(/^www\./, "");
+  return h === "canada.ca";
+}
+function canonicalizeCanadaHref(href) {
+  if (!href)
+    return href;
+  href = href.replace(/^https?:\/\/(?:www\.)?canada\.ca\/content\/canadasite/i, CANADA_ORIGIN);
+  href = href.replace(/^\/content\/canadasite/i, "");
+  return href;
+}
+function isFootnoteLink(a) {
+  const hrefAttr = (a.getAttribute("href") || "").trim();
+  const textish = (a.textContent || "") + " " + (a.getAttribute("aria-label") || "") + " " + (a.title || "");
+  if (a.closest('.footnote, .footnotes, #footnotes, section.footnotes, ol.footnotes, .ref-list, .references, [role="doc-footnote"], [role="doc-endnotes"], [role="doc-backlink"], nav[aria-label="Footnotes"]'))
+    return true;
+  if (a.closest("sup"))
+    return true;
+  const hash = (() => {
+    try {
+      return new URL(hrefAttr, "https://x").hash || hrefAttr;
+    } catch {
+      return hrefAttr;
+    }
+  })();
+  if (/^#(?:fn|fnref|footnote)\w*/i.test(hash) || /#(?:fn|footnote)\d+(?:[-:_][\w]+)*$/i.test(hash))
+    return true;
+  if (/\b(return|back)\s+to\s+footnote\b/i.test(textish))
+    return true;
+  if (/\breferrer\b/i.test(textish) && /footnote/i.test(textish))
+    return true;
+  if (/\b(doc-noteref|noteref|fnref|fn-rtn|return-footnote|footnote-back)\b/i.test(a.className))
+    return true;
+  return false;
+}
+function stripFootnoteText(text) {
+  return (text || "").replace(/\[\d+\]/g, "").replace(/(?:^|\s)\(\s*footnote\s*\d+\s*\)/gi, "").replace(/[*†‡§¶]+/g, "").replace(/\s+/g, " ").trim();
 }
 var LinkReportComponent = class _LinkReportComponent {
   uploadState;
   constructor(uploadState) {
     this.uploadState = uploadState;
   }
-  // table data & selection
+  // Expose the overlay panel referenced as #typePanel in the template
+  typePanel;
+  // data & selection
   headings = [];
   selectedHeading;
-  // 5 columns exactly
+  // columns (with placeholders at the end)
   cols = [
     { field: "order", header: "Index" },
     { field: "type", header: "Link Type" },
     { field: "text", header: "Link name on page" },
     { field: "destH1", header: "Destination link header (H1)" },
-    { field: "matchStatus", header: "Match" }
+    { field: "matchStatus", header: "Match" },
+    { field: "searchTerm", header: "Search term" },
+    { field: "clicks", header: "Clicks" }
   ];
   sourceVersion = "original";
-  concurrency = 4;
-  // Origin of the page being analyzed (from upload state / base tag / pageUrl)
-  baseOrigin = null;
+  // ----- Filter state (dropdown with ALL + 6 types) -----
+  linkTypes = [
+    "Canada.ca",
+    "external",
+    "anchor",
+    "tel",
+    "mailto",
+    "download"
+  ];
+  /** ALL is checked by default (means: include all types). */
+  allSelected = true;
+  /** Individual type checkboxes are listed, initially unchecked. */
+  typeChecks = {
+    "Canada.ca": false,
+    external: false,
+    anchor: false,
+    tel: false,
+    mailto: false,
+    download: false
+  };
+  /** Toggle ALL; when turning ALL on, keep individuals unchecked but ignored. */
+  onAllToggle() {
+  }
+  /** Toggle an individual type; any individual selection disables ALL. */
+  onTypeToggle(_t) {
+    if (this.allSelected)
+      this.allSelected = false;
+  }
+  /** Optional: click label to toggle (if your HTML uses a label click handler). */
+  toggleType(t) {
+    if (this.allSelected)
+      this.allSelected = false;
+    this.typeChecks[t] = !this.typeChecks[t];
+  }
+  /** Active set used by the table. */
+  activeTypes() {
+    if (this.allSelected)
+      return new Set(this.linkTypes);
+    const picked = this.linkTypes.filter((t) => this.typeChecks[t]);
+    return new Set(picked);
+  }
+  /** Table feeds from filtered rows */
+  get filteredHeadings() {
+    const active = this.activeTypes();
+    return this.headings.filter((r) => active.has(r.type));
+  }
   ngOnInit() {
     this.extractLinks();
   }
@@ -46878,22 +47786,23 @@ var LinkReportComponent = class _LinkReportComponent {
         return;
       }
       const doc = new DOMParser().parseFromString(html, "text/html");
-      const anchors = Array.from(doc.querySelectorAll("body a[href]"));
+      const anchors = Array.from(doc.querySelectorAll("body a[href]")).filter((a) => !isFootnoteLink(a));
       this.headings = anchors.map((a, i) => {
-        const href = (a.getAttribute("href") || "").trim();
-        const absUrl = this.resolveUrl(href, baseUrl);
-        const text = (a.textContent || a.getAttribute("aria-label") || a.title || "").trim();
-        const type = this.classify(href, absUrl);
+        const rawHref = (a.getAttribute("href") || "").trim();
+        const absUrl = this.resolveUrl(rawHref, baseUrl);
+        const visible = a.textContent || a.getAttribute("aria-label") || a.title || "";
+        const text = stripFootnoteText(visible);
+        const type = this.classify(rawHref, absUrl, a);
         let destH1 = null;
         let matchStatus = "unknown";
         if (type === "anchor") {
           const h1 = doc.querySelector("h1");
           destH1 = h1 ? (h1.textContent || "").trim() : null;
           matchStatus = this.smartMatch(text, destH1);
-        } else if (type === "mailto" || type === "tel" || type === "file") {
+        } else if (type === "mailto" || type === "tel" || type === "download") {
           matchStatus = "na";
-        } else if (type === "external") {
-          const { guess, pathTokens } = this.smartSlugGuess(text, absUrl || href);
+        } else {
+          const { guess, pathTokens } = this.smartSlugGuess(text, absUrl || rawHref);
           destH1 = guess;
           matchStatus = this.smartMatch(text, destH1, pathTokens);
         }
@@ -46901,17 +47810,19 @@ var LinkReportComponent = class _LinkReportComponent {
           order: i + 1,
           type,
           text,
-          href,
+          href: rawHref,
           absUrl,
           destH1,
-          matchStatus
+          matchStatus,
+          searchTerm: "",
+          // placeholder
+          clicks: null
+          // placeholder
         };
       });
-      const tasks = this.headings.filter((r) => r.type === "internal" && !r.destH1 && r.absUrl && this.isSameOrigin(r.absUrl)).map((r) => () => this.resolveDestH1(r));
-      yield this.runWithConcurrency(tasks, this.concurrency);
     });
   }
-  // ---------- helpers (no server required) ----------
+  // ---------- helpers ----------
   getHtmlToAnalyze() {
     const data = this.uploadState.getUploadData?.();
     if (!data)
@@ -46929,13 +47840,6 @@ var LinkReportComponent = class _LinkReportComponent {
     }
     if (!baseUrl && data.pageUrl)
       baseUrl = data.pageUrl;
-    this.baseOrigin = null;
-    if (baseUrl) {
-      try {
-        this.baseOrigin = new URL(baseUrl).origin;
-      } catch {
-      }
-    }
     return { html, baseUrl };
   }
   resolveUrl(href, baseUrl) {
@@ -46944,6 +47848,13 @@ var LinkReportComponent = class _LinkReportComponent {
         return null;
       if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:"))
         return href;
+      if (/^\/(?:content\/canadasite|en|fr)\//i.test(href)) {
+        const canon = canonicalizeCanadaHref(href);
+        return new URL(canon, CANADA_ORIGIN).toString();
+      }
+      if (/^https?:\/\/(?:www\.)?canada\.ca\/content\/canadasite/i.test(href)) {
+        return canonicalizeCanadaHref(href);
+      }
       if (baseUrl)
         return new URL(href, baseUrl).toString();
       return new URL(href).toString();
@@ -46951,62 +47862,38 @@ var LinkReportComponent = class _LinkReportComponent {
       return null;
     }
   }
-  classify(href, absUrl) {
-    if (!href)
-      return "internal";
-    if (href.startsWith("#"))
+  /** 6-type classifier; order matters. Canada.ca = apex or www only. */
+  classify(href, absUrl, anchorEl) {
+    const raw = (href || "").trim();
+    if (raw.startsWith("#"))
       return "anchor";
-    if (href.startsWith("mailto:"))
+    if (/^mailto:/i.test(raw))
       return "mailto";
-    if (href.startsWith("tel:"))
+    if (/^tel:/i.test(raw))
       return "tel";
-    if (/\.(pdf|docx?|pptx?|xlsx?|zip)$/i.test(href))
-      return "file";
-    if (/^https?:\/\//i.test(href)) {
-      if (absUrl && this.baseOrigin) {
-        try {
-          return new URL(absUrl).origin === this.baseOrigin ? "internal" : "external";
-        } catch {
-          return "external";
-        }
-      }
-      return "external";
-    }
-    return "internal";
-  }
-  isSameOrigin(absUrl) {
+    const pathForTest = absUrl || raw;
+    const isPdf = /\.pdf(\?|#|$)/i.test(pathForTest);
+    const hasDownloadAttr = !!anchorEl?.hasAttribute("download");
+    let isWebform = false;
     try {
-      return this.baseOrigin ? new URL(absUrl).origin === this.baseOrigin : false;
+      const u = new URL(absUrl || raw, CANADA_ORIGIN);
+      isWebform = /\/webform(s)?\//i.test(u.pathname);
     } catch {
-      return false;
     }
-  }
-  // same-origin internal: fetch and compute match against real H1
-  resolveDestH1(row) {
-    return __async(this, null, function* () {
-      if (!row.absUrl)
-        return;
-      try {
-        const resp = yield fetch(row.absUrl, { credentials: "same-origin" });
-        if (!resp.ok)
-          throw new Error("fetch failed");
-        const html = yield resp.text();
-        const doc = new DOMParser().parseFromString(html, "text/html");
-        const h1 = doc.querySelector("h1");
-        row.destH1 = h1 ? (h1.textContent || "").trim() : null;
-        row.matchStatus = this.smartMatch(row.text, row.destH1);
-      } catch {
-        if (!row.destH1)
-          row.matchStatus = "unknown";
-      }
-    });
+    if (isPdf || hasDownloadAttr || isWebform)
+      return "download";
+    try {
+      const u = new URL(absUrl || raw, CANADA_ORIGIN);
+      if (isCanadaHost(u))
+        return "Canada.ca";
+    } catch {
+    }
+    return "external";
   }
   // ---------- smart slug + smart match ----------
-  /** Normalize: strip accents, lowercase, treat /-_ as separators, remove punctuation */
   normalizeText(s) {
     return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[\/\-_]+/g, " ").replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim();
   }
-  /** Tokenize & drop light stopwords */
   tokenize(s) {
     const STOP = /* @__PURE__ */ new Set([
       "a",
@@ -47038,7 +47925,6 @@ var LinkReportComponent = class _LinkReportComponent {
     ]);
     return this.normalizeText(s).split(" ").filter((w) => w && !STOP.has(w));
   }
-  /** Decode path segments and strip common extensions */
   pathSegments(urlStr) {
     if (!urlStr)
       return [];
@@ -47050,11 +47936,6 @@ var LinkReportComponent = class _LinkReportComponent {
       return [];
     }
   }
-  /**
-   * Smart slug guess:
-   * - score each segment against link text (coverage + Jaccard)
-   * - return best segment as guess, plus all path tokens for matching
-   */
   smartSlugGuess(linkText, absUrl) {
     const linkTokens = this.tokenize(linkText);
     const segs = this.pathSegments(absUrl);
@@ -47087,7 +47968,6 @@ var LinkReportComponent = class _LinkReportComponent {
     }
     return { guess: bestGuess, pathTokens: allTokens };
   }
-  /** Token-aware loose match: exact → containment (with path tokens) → Jaccard */
   smartMatch(linkText, candidate, extraTokens) {
     if (!candidate && (!extraTokens || extraTokens.size === 0))
       return "unknown";
@@ -47111,20 +47991,6 @@ var LinkReportComponent = class _LinkReportComponent {
     const j = inter / union;
     return j >= 0.6 ? "match" : "mismatch";
   }
-  // Concurrency runner
-  runWithConcurrency(tasks, limit) {
-    return __async(this, null, function* () {
-      const q = tasks.slice();
-      const workers = [];
-      for (let i = 0; i < Math.min(limit, q.length); i++) {
-        workers.push((() => __async(null, null, function* () {
-          while (q.length)
-            yield q.shift()();
-        }))());
-      }
-      yield Promise.all(workers);
-    });
-  }
   // style hooks used by template
   getTextStyle(_row) {
     return {};
@@ -47135,27 +48001,69 @@ var LinkReportComponent = class _LinkReportComponent {
   static \u0275fac = function LinkReportComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _LinkReportComponent)(\u0275\u0275directiveInject(UploadStateService));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkReportComponent, selectors: [["ca-link-report"]], decls: 3, vars: 4, consts: [["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngClass", "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngClass", "ngStyle"], ["class", "muted", 4, "ngIf"], [1, "muted"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"]], template: function LinkReportComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkReportComponent, selectors: [["ca-link-report"]], viewQuery: function LinkReportComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "p-table", 0);
-      \u0275\u0275twoWayListener("selectionChange", function LinkReportComponent_Template_p_table_selectionChange_0_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.selectedHeading, $event) || (ctx.selectedHeading = $event);
-        return $event;
-      });
-      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 1)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 2);
-      \u0275\u0275elementEnd();
+      \u0275\u0275viewQuery(_c017, 5);
     }
     if (rf & 2) {
-      \u0275\u0275property("value", ctx.headings)("tableStyle", \u0275\u0275pureFunction0(3, _c016));
-      \u0275\u0275twoWayProperty("selection", ctx.selectedHeading);
+      let _t;
+      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.typePanel = _t.first);
     }
-  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
+  }, decls: 13, vars: 10, consts: [["typePanel", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "showCloseIcon", "appendTo"], [1, "filter-panel"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngClass", "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngClass", "ngStyle"], ["class", "muted", 4, "ngIf"], [1, "muted"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label", 3, "click"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      const _r1 = \u0275\u0275getCurrentView();
+      \u0275\u0275elementStart(0, "p-table", 1);
+      \u0275\u0275twoWayListener("selectionChange", function LinkReportComponent_Template_p_table_selectionChange_0_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.selectedHeading, $event) || (ctx.selectedHeading = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 2)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 3);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(3, "p-overlayPanel", 4, 0)(5, "div", 5)(6, "div", 6)(7, "p-checkbox", 7);
+      \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_7_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.allSelected, $event) || (ctx.allSelected = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275listener("onChange", function LinkReportComponent_Template_p_checkbox_onChange_7_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onAllToggle());
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(8, "label", 8);
+      \u0275\u0275text(9, "ALL");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275element(10, "div", 9);
+      \u0275\u0275template(11, LinkReportComponent_div_11_Template, 4, 5, "div", 10)(12, LinkReportComponent_div_12_Template, 2, 0, "div", 11);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(9, _c127));
+      \u0275\u0275twoWayProperty("selection", ctx.selectedHeading);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("dismissable", true)("showCloseIcon", true)("appendTo", "body");
+      \u0275\u0275advance(4);
+      \u0275\u0275twoWayProperty("ngModel", ctx.allSelected);
+      \u0275\u0275advance(4);
+      \u0275\u0275property("ngForOf", ctx.linkTypes);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.allSelected);
+    }
+  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, OverlayPanelModule, OverlayPanel, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkReportComponent, [{
     type: Component,
-    args: [{ selector: "ca-link-report", standalone: true, imports: [CommonModule, FormsModule, TableModule], template: `<p-table\r
-  [value]="headings"\r
+    args: [{ selector: "ca-link-report", standalone: true, imports: [
+      CommonModule,
+      FormsModule,
+      TableModule,
+      OverlayPanelModule,
+      CheckboxModule,
+      ButtonModule
+    ], template: `<p-table\r
+  [value]="filteredHeadings"\r
   size="small"\r
   stripedRows\r
   [tableStyle]="{ 'min-width': '50rem' }"\r
@@ -47164,15 +48072,29 @@ var LinkReportComponent = class _LinkReportComponent {
   dataKey="order"\r
   metaKeySelection="false"\r
 >\r
-  <!-- \u53EA\u7528\u4F60\u81EA\u5DF1\u7684 cols \u6E32\u67D3\u8868\u5934 -->\r
   <ng-template pTemplate="header">\r
     <tr>\r
       <th style="width: 3rem"></th>\r
-      <th *ngFor="let col of cols">{{ col.header }}</th>\r
+\r
+      <th *ngFor="let col of cols">\r
+        <div class="header-with-filter">\r
+          <span>{{ col.header }}</span>\r
+\r
+          <!-- Down-arrow filter button ONLY for Link Type -->\r
+          <button\r
+            *ngIf="col.field === 'type'"\r
+            pButton\r
+            type="button"\r
+            class="p-button-text p-button-sm"\r
+            icon="pi pi-chevron-down"\r
+            (click)="typePanel?.toggle($event)"\r
+            aria-label="Filter link types"\r
+          ></button>\r
+        </div>\r
+      </th>\r
     </tr>\r
   </ng-template>\r
 \r
-  <!-- \u53EA\u7528\u4F60\u81EA\u5DF1\u7684 cols \u6E32\u67D3\u8868\u4F53 -->\r
   <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">\r
     <tr [pReorderableRow]="rowIndex" [pSelectableRow]="rowData">\r
       <td><span class="pi pi-bars" pReorderableRowHandle></span></td>\r
@@ -47180,6 +48102,7 @@ var LinkReportComponent = class _LinkReportComponent {
       <td *ngFor="let col of cols">\r
         <ng-container [ngSwitch]="col.field">\r
           <span *ngSwitchCase="'order'">{{ rowData.order }}</span>\r
+\r
           <span *ngSwitchCase="'type'">{{ rowData.type }}</span>\r
 \r
           <span\r
@@ -47216,17 +48139,66 @@ var LinkReportComponent = class _LinkReportComponent {
             ></i>\r
           </span>\r
 \r
-          <span *ngSwitchDefault>{{ rowData[col.field] }}</span>\r
+          <!-- Search term / Clicks and any other fields -->\r
+          <span *ngSwitchDefault>{{ rowData[col.field] || "\u2014" }}</span>\r
         </ng-container>\r
       </td>\r
     </tr>\r
   </ng-template>\r
 </p-table>\r
-`, styles: ["/* angular:styles/component:css;fbb9b1e938c6e536662de9e9abb3c037d6f99e568d5c1313dece8acd203a770f;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
-  }], () => [{ type: UploadStateService }], null);
+\r
+<!-- Move the overlay OUTSIDE the table to avoid table parser issues -->\r
+<p-overlayPanel\r
+  #typePanel\r
+  [dismissable]="true"\r
+  [showCloseIcon]="true"\r
+  [appendTo]="'body'"\r
+>\r
+  <div class="filter-panel">\r
+    <!-- ALL (default checked) -->\r
+    <div class="filter-row">\r
+      <p-checkbox\r
+        [(ngModel)]="allSelected"\r
+        (onChange)="onAllToggle()"\r
+        inputId="allTypes"\r
+        binary="true"\r
+      ></p-checkbox>\r
+      <label class="filter-label" for="allTypes">ALL</label>\r
+    </div>\r
+\r
+    <div class="divider"></div>\r
+\r
+    <!-- Six types (default unchecked; disabled while ALL is checked) -->\r
+    <div class="filter-row" *ngFor="let t of linkTypes; let i = index">\r
+      <p-checkbox\r
+        [(ngModel)]="typeChecks[t]"\r
+        (onChange)="onTypeToggle(t)"\r
+        [disabled]="allSelected"\r
+        [inputId]="'type-' + i"\r
+        binary="true"\r
+      ></p-checkbox>\r
+      <label\r
+        class="filter-label"\r
+        [attr.for]="'type-' + i"\r
+        (click)="toggleType(t)"\r
+      >\r
+        {{ t }}\r
+      </label>\r
+    </div>\r
+\r
+    <div class="filter-muted" *ngIf="allSelected">\r
+      All types are currently included.\r
+    </div>\r
+  </div>\r
+</p-overlayPanel>\r
+`, styles: ["/* angular:styles/component:css;f867ed4ff822b366cb9432ca0b7c19af5afc1fceac7a7483c72da2155928f42a;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
+  }], () => [{ type: UploadStateService }], { typePanel: [{
+    type: ViewChild,
+    args: ["typePanel"]
+  }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 58 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 197 });
 })();
 
 // src/app/views/page-assistant/components/tools/template-conversion.component.ts
@@ -47490,11 +48462,11 @@ var PageToolsComponent = class _PageToolsComponent {
 })();
 
 // src/app/views/page-assistant/page-assistant.component.ts
-var _c017 = ["liveContainer"];
-var _c121 = ["sourceContainer"];
-var _c214 = () => ({ "ariaLabel": "Accept selected changes" });
-var _c314 = () => ({ "ariaLabel": "More accept options" });
-var _c413 = () => ({ "ariaLabel": "Reject selected changes" });
+var _c018 = ["liveContainer"];
+var _c128 = ["sourceContainer"];
+var _c215 = () => ({ "ariaLabel": "Accept selected changes" });
+var _c315 = () => ({ "ariaLabel": "More accept options" });
+var _c414 = () => ({ "ariaLabel": "Reject selected changes" });
 var _c512 = () => ({ "ariaLabel": "More reject options" });
 var _c610 = (a0, a1) => ({ "background-color": a0, border: a1 });
 function PageAssistantCompareComponent_p_button_11_Template(rf, ctx) {
@@ -47588,9 +48560,9 @@ function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template(rf
     \u0275\u0275advance(5);
     \u0275\u0275textInterpolate(ctx_r2.displayCounter);
     \u0275\u0275advance(2);
-    \u0275\u0275property("model", ctx_r2.acceptItems)("buttonProps", \u0275\u0275pureFunction0(8, _c214))("menuButtonProps", \u0275\u0275pureFunction0(9, _c314));
+    \u0275\u0275property("model", ctx_r2.acceptItems)("buttonProps", \u0275\u0275pureFunction0(8, _c215))("menuButtonProps", \u0275\u0275pureFunction0(9, _c315));
     \u0275\u0275advance();
-    \u0275\u0275property("model", ctx_r2.rejectItems)("buttonProps", \u0275\u0275pureFunction0(10, _c413))("menuButtonProps", \u0275\u0275pureFunction0(11, _c512));
+    \u0275\u0275property("model", ctx_r2.rejectItems)("buttonProps", \u0275\u0275pureFunction0(10, _c414))("menuButtonProps", \u0275\u0275pureFunction0(11, _c512));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r2.displayNumHighlighted);
   }
@@ -48361,8 +49333,8 @@ ${base}`;
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageAssistantCompareComponent, selectors: [["ca-page-assistant-compare"]], viewQuery: function PageAssistantCompareComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c017, 5);
-      \u0275\u0275viewQuery(_c121, 5);
+      \u0275\u0275viewQuery(_c018, 5);
+      \u0275\u0275viewQuery(_c128, 5);
     }
     if (rf & 2) {
       let _t;
@@ -48633,4 +49605,4 @@ ${base}`;
 export {
   PageAssistantCompareComponent
 };
-//# sourceMappingURL=chunk-IFKISTV4.js.map
+//# sourceMappingURL=chunk-ETNENRZI.js.map
