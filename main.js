@@ -60,6 +60,7 @@ import {
   NgSwitch,
   NgSwitchCase,
   NgTemplateOutlet,
+  OrganizationChart,
   Overlay,
   OverlayModule,
   OverlayService,
@@ -138,7 +139,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-PDXFAW5G.js";
+} from "./chunk-7BRZT5O3.js";
 import {
   ANIMATION_MODULE_TYPE,
   BehaviorSubject,
@@ -10158,7 +10159,7 @@ var Dropdown = class _Dropdown extends BaseComponent {
   lastHiddenFocusableElementOnOverlay;
   // @todo to be refactored
   get hostClass() {
-    const classes12 = this._componentStyle.classes.root({
+    const classes10 = this._componentStyle.classes.root({
       instance: this
     }).map((cls) => {
       if (typeof cls === "string") {
@@ -10167,7 +10168,7 @@ var Dropdown = class _Dropdown extends BaseComponent {
         return Object.keys(cls).filter((key) => cls[key]).join(" ");
       }
     }).join(" ");
-    return classes12 + " " + this.styleClass;
+    return classes10 + " " + this.styleClass;
   }
   get hostStyle() {
     return this.style;
@@ -16343,7 +16344,7 @@ var render = function(iconDefinition) {
     maskId = null,
     title = null,
     titleId = null,
-    classes: classes12 = [],
+    classes: classes10 = [],
     attributes = {},
     styles: styles2 = {}
   } = params;
@@ -16388,7 +16389,7 @@ var render = function(iconDefinition) {
       extra: {
         attributes,
         styles: styles2,
-        classes: classes12
+        classes: classes10
       }
     });
   });
@@ -16490,7 +16491,7 @@ var Layers = {
       layer(assembler) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
-          classes: classes12 = []
+          classes: classes10 = []
         } = params;
         return domVariants({
           type: "layer"
@@ -16508,7 +16509,7 @@ var Layers = {
           return [{
             tag: "span",
             attributes: {
-              class: ["".concat(config.cssPrefix, "-layers"), ...classes12].join(" ")
+              class: ["".concat(config.cssPrefix, "-layers"), ...classes10].join(" ")
             },
             children
           }];
@@ -16524,7 +16525,7 @@ var LayersCounter = {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           title = null,
-          classes: classes12 = [],
+          classes: classes10 = [],
           attributes = {},
           styles: styles2 = {}
         } = params;
@@ -16542,7 +16543,7 @@ var LayersCounter = {
             extra: {
               attributes,
               styles: styles2,
-              classes: ["".concat(config.cssPrefix, "-layers-counter"), ...classes12]
+              classes: ["".concat(config.cssPrefix, "-layers-counter"), ...classes10]
             }
           });
         });
@@ -16558,7 +16559,7 @@ var LayersText = {
         const {
           transform = meaninglessTransform,
           title = null,
-          classes: classes12 = [],
+          classes: classes10 = [],
           attributes = {},
           styles: styles2 = {}
         } = params;
@@ -16577,7 +16578,7 @@ var LayersText = {
             extra: {
               attributes,
               styles: styles2,
-              classes: ["".concat(config.cssPrefix, "-layers-text"), ...classes12]
+              classes: ["".concat(config.cssPrefix, "-layers-text"), ...classes10]
             }
           });
         });
@@ -17152,7 +17153,7 @@ var faWarnIfIconSpecMissing = () => {
 var isKnownRotateValue = (rotate) => rotate != null && (rotate === 90 || rotate === 180 || rotate === 270 || rotate === "90" || rotate === "180" || rotate === "270");
 var faClassList = (props) => {
   const knownRotateValue = isKnownRotateValue(props.rotate);
-  const classes12 = {
+  const classes10 = {
     [`fa-${props.animation}`]: props.animation != null && !props.animation.startsWith("spin"),
     "fa-spin": props.animation === "spin" || props.animation === "spin-reverse",
     "fa-spin-pulse": props.animation === "spin-pulse" || props.animation === "spin-pulse-reverse",
@@ -17173,7 +17174,7 @@ var faClassList = (props) => {
     [`fa-pull-${props.pull}`]: props.pull !== null,
     [`fa-stack-${props.stackItemSize}`]: props.stackItemSize != null
   };
-  return Object.keys(classes12).map((key) => classes12[key] ? key : null).filter((key) => key);
+  return Object.keys(classes10).map((key) => classes10[key] ? key : null).filter((key) => key);
 };
 var cssInserted = /* @__PURE__ */ new WeakSet();
 var autoCssId = "fa-auto-css";
@@ -20409,11 +20410,11 @@ var Chip = class _Chip extends BaseComponent {
     }
   }
   containerClass() {
-    let classes12 = "p-chip p-component";
+    let classes10 = "p-chip p-component";
     if (this.styleClass) {
-      classes12 += ` ${this.styleClass}`;
+      classes10 += ` ${this.styleClass}`;
     }
-    return classes12;
+    return classes10;
   }
   close(event) {
     this.visible = false;
@@ -21154,17 +21155,17 @@ var Tag = class _Tag extends BaseComponent {
     });
   }
   containerClass() {
-    let classes12 = "p-tag p-component";
+    let classes10 = "p-tag p-component";
     if (this.severity) {
-      classes12 += ` p-tag-${this.severity}`;
+      classes10 += ` p-tag-${this.severity}`;
     }
     if (this.rounded) {
-      classes12 += " p-tag-rounded";
+      classes10 += " p-tag-rounded";
     }
     if (this.styleClass) {
-      classes12 += ` ${this.styleClass}`;
+      classes10 += ` ${this.styleClass}`;
     }
-    return classes12;
+    return classes10;
   }
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275Tag_BaseFactory;
@@ -23093,6 +23094,113 @@ var AboutComponent = class _AboutComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AboutComponent, { className: "AboutComponent", filePath: "src/app/views/static/about.component.ts", lineNumber: 13 });
 })();
 
+// src/app/services/fetch.service.ts
+var FetchService = class _FetchService {
+  //Block unknown hosts
+  prodHost = "www.canada.ca";
+  protoHosts = /* @__PURE__ */ new Set([
+    "cra-design.github.io",
+    //"cra-proto.github.io", //Currently blocked by browser because it looks like a phishing site
+    //"gc-proto.github.io", //CORS error but redirects to test.canada.ca which works
+    "test.canada.ca"
+  ]);
+  getAllowedHosts(mode) {
+    const allowed = /* @__PURE__ */ new Set();
+    if (mode === "prod" || mode === "both")
+      allowed.add(this.prodHost);
+    if (mode === "proto" || mode === "both")
+      this.protoHosts.forEach((host) => allowed.add(host));
+    return allowed;
+  }
+  //Validates URL and checks if it's in the specified allowed host list
+  validateHost(url, hostMode) {
+    url = url.trim().toLowerCase();
+    let hostname;
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.protocol !== "https:" || /\s/.test(url))
+        throw new Error();
+      hostname = parsedUrl.hostname;
+    } catch {
+      throw new Error(`Invalid URL: ${url}`);
+    }
+    if (hostMode !== "none") {
+      const allowedHosts = this.getAllowedHosts(hostMode);
+      if (!allowedHosts.has(hostname)) {
+        throw new Error(`Blocked host: ${hostname} blocked for url ${url}`);
+      }
+    }
+    return url;
+  }
+  //Uses specified fetch method and retries if initial fetch fails (can happen due to intermittent server issues etc.)
+  fetchWithRetry(url, mode = "HEAD", retries = 3, delay = "none") {
+    return __async(this, null, function* () {
+      for (let attempt = 1; attempt <= retries; attempt++) {
+        yield this.simulateDelay(delay);
+        try {
+          const response = mode === "HEAD" ? yield fetch(url, { method: "HEAD", cache: "no-store" }) : yield fetch(url);
+          if (response.ok)
+            return response;
+          else {
+            console.warn(`Fetch attempt #${attempt}. Status: ${response.status}. Method: ${mode}`);
+            if (attempt === retries)
+              throw new Error(`Fetch failed ${attempt} times. Method: ${mode}. Status: ${response.status} for ${url}`);
+            yield this.delay(50);
+          }
+        } catch (error) {
+          if (attempt === retries)
+            throw new Error(error.message);
+        }
+      }
+      throw new Error(`Unexpected error for ${url}`);
+    });
+  }
+  fetchContent(url, hostMode = "both", retries = 3, delay = "none") {
+    return __async(this, null, function* () {
+      url = this.validateHost(url, hostMode);
+      const response = yield this.fetchWithRetry(url, "GET", retries, delay);
+      const html = yield response.text();
+      return new DOMParser().parseFromString(html, "text/html");
+    });
+  }
+  fetchStatus(url, hostMode = "both", retries = 3, delay = "none") {
+    return __async(this, null, function* () {
+      url = this.validateHost(url, hostMode);
+      return this.fetchWithRetry(url, "HEAD", retries, delay);
+    });
+  }
+  //only delays on development build
+  simulateDelay(delay = "none") {
+    return __async(this, null, function* () {
+      if (environment.production || delay === "none")
+        return;
+      if (delay === "random") {
+        yield new Promise((resolve) => setTimeout(resolve, 100 + Math.random() * 1500));
+      } else if (typeof delay === "number" && delay > 0) {
+        yield new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    });
+  }
+  //adds delay on both dev and prod (useful for adding short delays before retrying a failed fetch, only use this if the delay is required on prod)
+  delay(delay) {
+    return __async(this, null, function* () {
+      yield new Promise((resolve) => setTimeout(resolve, delay));
+    });
+  }
+  static \u0275fac = function FetchService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FetchService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _FetchService, factory: _FetchService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FetchService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
 // src/app/views/example/test.component.ts
 function TestComponent_ng_template_20_Template(rf, ctx) {
   if (rf & 1) {
@@ -23110,7 +23218,7 @@ function TestComponent_ng_template_21_Template(rf, ctx) {
     \u0275\u0275elementStart(0, "tr")(1, "td");
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "td")(4, "p-button", 15);
+    \u0275\u0275elementStart(3, "td")(4, "p-button", 16);
     \u0275\u0275listener("onClick", function TestComponent_ng_template_21_Template_p_button_onClick_4_listener() {
       const link_r2 = \u0275\u0275restoreView(_r1).$implicit;
       const ctx_r2 = \u0275\u0275nextContext();
@@ -23133,6 +23241,7 @@ var TestComponent = class _TestComponent {
   uploadState = inject(UploadStateService);
   router = inject(Router);
   translate = inject(TranslateService);
+  fetchService = inject(FetchService);
   //Your functions go here
   //This runs once after the constuctor, delete if not needed.
   ngOnInit() {
@@ -23192,10 +23301,30 @@ var TestComponent = class _TestComponent {
     { title: "Income earned illegally is taxable", url: "https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/income-earned-illegally-taxable.html" },
     { title: "Return a payment - Canada Dental Benefit - Closed", url: "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/dental-benefit/return-payment.html" }
   ];
+  //Example for fetch service
+  testUrls = [
+    "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit.html",
+    "https://cra-design.github.io/gst-hst-business/en/topics/gst-hst-businesses.html",
+    "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit.htm",
+    "https://www.canada.ca/en/broken-link-example.html",
+    "https://test.canada.ca/cra-arc/payroll/index.html"
+  ];
+  testFetch() {
+    return __async(this, null, function* () {
+      for (const url of this.testUrls) {
+        try {
+          const data = yield this.fetchService.fetchContent(url, "both", 5);
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
+  }
   static \u0275fac = function TestComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _TestComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TestComponent, selectors: [["ca-test"]], decls: 40, vars: 12, consts: [["id", "wb-cont"], [3, "innerHTML"], [1, "flex", "flex-row", "gap-2"], ["label", "Primary"], ["label", "Secondary", "severity", "secondary"], ["label", "Help", "severity", "help"], ["label", "Info", "severity", "info"], ["label", "Success", "severity", "success"], ["label", "Danger", "severity", "danger"], ["label", "Warn", "severity", "warn"], ["label", "Contrast", "severity", "contrast"], [3, "value"], ["pTemplate", "header"], ["pTemplate", "body"], ["label", "your.translation.key", "name", "unique-name", 3, "selectedChange", "options", "selected"], ["variant", "text", "severity", "info", 3, "onClick"]], template: function TestComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TestComponent, selectors: [["ca-test"]], decls: 43, vars: 12, consts: [["id", "wb-cont"], [3, "innerHTML"], [1, "flex", "flex-row", "gap-2"], ["label", "Primary"], ["label", "Secondary", "severity", "secondary"], ["label", "Help", "severity", "help"], ["label", "Info", "severity", "info"], ["label", "Success", "severity", "success"], ["label", "Danger", "severity", "danger"], ["label", "Warn", "severity", "warn"], ["label", "Contrast", "severity", "contrast"], [3, "value"], ["pTemplate", "header"], ["pTemplate", "body"], ["label", "your.translation.key", "name", "unique-name", 3, "selectedChange", "options", "selected"], ["label", "Test Fetch", "icon", "pi pi-file-import", 3, "onClick"], ["variant", "text", "severity", "info", 3, "onClick"]], template: function TestComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "h1", 0);
       \u0275\u0275text(1);
@@ -23247,6 +23376,14 @@ var TestComponent = class _TestComponent {
       });
       \u0275\u0275listener("selectedChange", function TestComponent_Template_ca_horizontal_radio_buttons_selectedChange_39_listener($event) {
         return ctx.yourFunction($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(40, "h2");
+      \u0275\u0275text(41, "Fetch service example (check console log)");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(42, "p-button", 15);
+      \u0275\u0275listener("onClick", function TestComponent_Template_p_button_onClick_42_listener() {
+        return ctx.testFetch();
       });
       \u0275\u0275elementEnd();
     }
@@ -23317,153 +23454,359 @@ var TestComponent = class _TestComponent {
 <p>The component emits the value of the selected radio button.</p>\r
 <ca-horizontal-radio-buttons label="your.translation.key" name="unique-name" [options]="yourArray"\r
                              [(selected)]="yourSelectedButton" (selectedChange)="yourFunction($event)">\r
-</ca-horizontal-radio-buttons>` }]
+</ca-horizontal-radio-buttons>\r
+<h2>Fetch service example (check console log)</h2>\r
+<p-button label="Test Fetch" icon="pi pi-file-import" (onClick)="testFetch()"></p-button>` }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TestComponent, { className: "TestComponent", filePath: "src/app/views/example/test.component.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TestComponent, { className: "TestComponent", filePath: "src/app/views/example/test.component.ts", lineNumber: 24 });
 })();
 
-// node_modules/primeng/fesm2022/primeng-buttongroup.mjs
+// node_modules/primeng/fesm2022/primeng-stepper.mjs
 var _c011 = ["*"];
+var _c111 = ["content"];
+var _c23 = (a0, a1, a2) => ({
+  activateCallback: a0,
+  value: a1,
+  active: a2
+});
+function Step_Conditional_0_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "p-stepper-separator");
+  }
+}
+function Step_Conditional_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 0);
+    \u0275\u0275listener("click", function Step_Conditional_0_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onStepClick());
+    });
+    \u0275\u0275elementStart(1, "span", 1);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "span", 2);
+    \u0275\u0275projection(4);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(5, Step_Conditional_0_Conditional_5_Template, 1, 0, "p-stepper-separator");
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("tabindex", ctx_r1.isStepDisabled() ? -1 : void 0)("disabled", ctx_r1.isStepDisabled());
+    \u0275\u0275attribute("id", ctx_r1.id())("role", "tab")("aria-controls", ctx_r1.ariaControls());
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r1.value());
+    \u0275\u0275advance(3);
+    \u0275\u0275conditional(ctx_r1.isSeparatorVisible() ? 5 : -1);
+  }
+}
+function Step_Conditional_1_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Step_Conditional_1_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "p-stepper-separator");
+  }
+}
+function Step_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Step_Conditional_1_ng_container_0_Template, 1, 0, "ng-container", 3)(1, Step_Conditional_1_Conditional_1_Template, 1, 0, "p-stepper-separator");
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.content || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(3, _c23, ctx_r1.onStepClick.bind(ctx_r1), ctx_r1.value(), ctx_r1.active()));
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r1.isSeparatorVisible() ? 1 : -1);
+  }
+}
+var _c33 = (a0) => ({
+  transitionParams: a0
+});
+var _c43 = (a0) => ({
+  value: "visible",
+  params: a0
+});
+var _c53 = (a0) => ({
+  value: "hidden",
+  params: a0
+});
+function StepPanel_Conditional_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "p-stepper-separator");
+  }
+}
+function StepPanel_Conditional_2_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function StepPanel_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, StepPanel_Conditional_2_ng_container_0_Template, 1, 0, "ng-container", 1);
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r0.contentTemplate || ctx_r0._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(2, _c23, ctx_r0.updateValue.bind(ctx_r0), ctx_r0.value(), ctx_r0.active()));
+  }
+}
 var theme8 = ({
   dt
 }) => `
-.p-buttongroup .p-button {
+.p-steplist {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow-x: auto;
 }
 
-.p-buttongroup .p-button:not(:last-child),
-.p-buttongroup .p-button:not(:last-child):hover {
-    border-right: 0 none;
-}
-
-.p-buttongroup .p-button:not(:first-of-type):not(:last-of-type) {
-    border-radius: 0;
-}
-
-.p-buttongroup .p-button:first-of-type:not(:only-of-type) {
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-}
-
-.p-buttongroup .p-button:last-of-type:not(:only-of-type) {
-    border-start-start-radius: 0;
-    border-end-start-radius: 0;
-}
-
-.p-buttongroup .p-button:focus {
+.p-step {
     position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: ${dt("stepper.step.gap")};
+    padding: ${dt("stepper.step.padding")};
+}
+
+.p-step:last-of-type {
+    flex: initial;
+}
+
+.p-step-header {
+    border: 0 none;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background ${dt("stepper.transition.duration")}, color ${dt("stepper.transition.duration")}, border-color ${dt("stepper.transition.duration")}, outline-color ${dt("stepper.transition.duration")}, box-shadow ${dt("stepper.transition.duration")};
+    border-radius: ${dt("stepper.step.header.border.radius")};
+    outline-color: transparent;
+    background: transparent;
+    padding: ${dt("stepper.step.header.padding")};
+    gap: ${dt("stepper.step.header.gap")};
+}
+
+.p-step-header:focus-visible {
+    box-shadow: ${dt("stepper.step.header.focus.ring.shadow")};
+    outline: ${dt("stepper.step.header.focus.ring.width")} ${dt("stepper.step.header.focus.ring.style")} ${dt("stepper.step.header.focus.ring.color")};
+    outline-offset: ${dt("stepper.step.header.focus.ring.offset")};
+}
+
+.p-stepper.p-stepper-readonly .p-step {
+    cursor: auto;
+}
+
+.p-step-title {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    color: ${dt("stepper.step.title.color")};
+    font-weight: ${dt("stepper.step.title.font.weight")};
+    transition: background ${dt("stepper.transition.duration")}, color ${dt("stepper.transition.duration")}, border-color ${dt("stepper.transition.duration")}, box-shadow ${dt("stepper.transition.duration")}, outline-color ${dt("stepper.transition.duration")};
+}
+
+.p-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${dt("stepper.step.number.color")};
+    border: 2px solid ${dt("stepper.step.number.border.color")};
+    background: ${dt("stepper.step.number.background")};
+    min-width: ${dt("stepper.step.number.size")};
+    height: ${dt("stepper.step.number.size")};
+    line-height: ${dt("stepper.step.number.size")};
+    font-size: ${dt("stepper.step.number.font.size")};
     z-index: 1;
+    border-radius: ${dt("stepper.step.number.border.radius")};
+    position: relative;
+    font-weight: ${dt("stepper.step.number.font.weight")};
 }
 
-.p-buttongroup {
-    display:flex;
+.p-step-number::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: ${dt("stepper.step.number.border.radius")};
+    box-shadow: ${dt("stepper.step.number.shadow")};
 }
 
-.p-buttongroup > .p-button {
-    flex: 1;
+.p-step-active .p-step-header {
+    cursor: default;
 }
 
+.p-step-active .p-step-number {
+    background: ${dt("stepper.step.number.active.background")};
+    border-color: ${dt("stepper.step.number.active.border.color")};
+    color: ${dt("stepper.step.number.active.color")};
+}
+
+.p-step-active .p-step-title {
+    color: ${dt("stepper.step.title.active.color")};
+}
+
+.p-step:not(.p-disabled):focus-visible {
+    outline: ${dt("focus.ring.width")} ${dt("focus.ring.style")} ${dt("focus.ring.color")};
+    outline-offset: ${dt("focus.ring.offset")};
+}
+
+.p-step:has(~ .p-step-active) .p-stepper-separator {
+    background: ${dt("stepper.separator.active.background")};
+}
+
+.p-stepper-separator {
+    flex: 1 1 0;
+    background: ${dt("stepper.separator.background")};
+    width: 100%;
+    height: ${dt("stepper.separator.size")};
+    transition: background ${dt("stepper.transition.duration")}, color ${dt("stepper.transition.duration")}, border-color ${dt("stepper.transition.duration")}, box-shadow ${dt("stepper.transition.duration")}, outline-color ${dt("stepper.transition.duration")};
+}
+
+.p-steppanels {
+    padding: ${dt("stepper.steppanels.padding")};
+}
+
+.p-steppanel {
+    background: ${dt("stepper.steppanel.background")};
+    color: ${dt("stepper.steppanel.color")};
+}
+
+.p-stepper:has(.p-stepitem) {
+    display: flex;
+    flex-direction: column;
+}
+
+.p-stepitem {
+    display: flex;
+    flex-direction: column;
+    flex: initial;
+}
+
+.p-stepitem.p-stepitem-active {
+    flex: 1 1 auto;
+}
+
+.p-stepitem .p-step {
+    flex: initial;
+}
+
+.p-stepitem .p-steppanel-content {
+    width: 100%;
+    padding: ${dt("stepper.steppanel.padding")};
+    margin-inline-start: 1rem;
+}
+
+.p-stepitem .p-steppanel {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.p-stepitem .p-stepper-separator {
+    flex: 0 0 auto;
+    width: ${dt("stepper.separator.size")};
+    height: auto;
+    margin: ${dt("stepper.separator.margin")};
+    position: relative;
+    left: calc(-1 * ${dt("stepper.separator.size")});
+}
+
+.p-stepitem .p-stepper-separator:dir(rtl) {
+    left: calc(-9 * ${dt("stepper.separator.size")});
+}
+
+.p-stepitem:has(~ .p-stepitem-active) .p-stepper-separator {
+    background: ${dt("stepper.separator.active.background")};
+}
+
+.p-stepitem:last-of-type .p-steppanel {
+    padding-inline-start: ${dt("stepper.step.number.size")};
+}
 /* For PrimeNG */
-
-.p-buttongroup .p-button:focus,
-.p-buttongroup p-button:focus .p-button,
-.p-buttonset .p-button:focus,
-.p-buttonset .p-button:focus,
-.p-buttonset p-button:focus .p-button,
-.p-buttonset .p-button:focus {
-    position: relative;
-    z-index: 1;
+.p-steppanel {
+    overflow: hidden;
 }
 
-.p-buttongroup .p-button:not(:last-child),
-.p-buttongroup .p-button:not(:last-child):hover,
-.p-buttongroup p-button:not(:last-child) .p-button,
-.p-buttongroup p-button:not(:last-child) .p-button:hover,
-.p-buttonset .p-button:not(:last-child),
-.p-buttonset .p-button:not(:last-child):hover,
-.p-buttonset p-button:not(:last-child) .p-button,
-.p-buttonset p-button:not(:last-child) .p-button:hover {
-    border-right: 0 none;
-}
-
-.p-buttongroup .p-button:not(:first-of-type):not(:last-of-type),
-.p-buttongroup p-button:not(:first-of-type):not(:last-of-type) .p-button,
-.p-buttonset .p-button:not(:first-of-type):not(:last-of-type),
-.p-buttonset p-button:not(:first-of-type):not(:last-of-type) .p-button {
-    border-radius: 0;
-}
-
-.p-buttongroup .p-button:first-of-type:not(:only-of-type),
-.p-buttongroup p-button:first-of-type:not(:only-of-type) .p-button,
-.p-buttonset .p-button:first-of-type:not(:only-of-type),
-.p-buttonset p-button:first-of-type:not(:only-of-type) .p-button {
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-}
-
-.p-buttongroup .p-button:last-of-type:not(:only-of-type),
-.p-buttongroup p-button:last-of-type:not(:only-of-type) .p-button,
-.p-buttonset .p-button:last-of-type:not(:only-of-type),
-.p-buttonset p-button:last-of-type:not(:only-of-type) .p-button {
-    border-start-start-radius: 0;
-    border-end-start-radius: 0;
-}
-
-p-button[iconpos='right'] spinnericon {
-    order: 1;
+.p-stepppanel:not(.ng-animating) {
+    overflow: inherit;
 }
 `;
 var classes8 = {
-  root: "p-buttongroup p-component"
+  root: ({
+    props
+  }) => ["p-stepper p-component", {
+    "p-readonly": props.linear
+  }],
+  separator: "p-stepper-separator"
 };
-var ButtonGroupStyle = class _ButtonGroupStyle extends BaseStyle {
-  name = "buttongroup";
+var StepperStyle = class _StepperStyle extends BaseStyle {
+  name = "stepper";
   theme = theme8;
   classes = classes8;
   static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275ButtonGroupStyle_BaseFactory;
-    return function ButtonGroupStyle_Factory(__ngFactoryType__) {
-      return (\u0275ButtonGroupStyle_BaseFactory || (\u0275ButtonGroupStyle_BaseFactory = \u0275\u0275getInheritedFactory(_ButtonGroupStyle)))(__ngFactoryType__ || _ButtonGroupStyle);
+    let \u0275StepperStyle_BaseFactory;
+    return function StepperStyle_Factory(__ngFactoryType__) {
+      return (\u0275StepperStyle_BaseFactory || (\u0275StepperStyle_BaseFactory = \u0275\u0275getInheritedFactory(_StepperStyle)))(__ngFactoryType__ || _StepperStyle);
     };
   })();
   static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _ButtonGroupStyle,
-    factory: _ButtonGroupStyle.\u0275fac
+    token: _StepperStyle,
+    factory: _StepperStyle.\u0275fac
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ButtonGroupStyle, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepperStyle, [{
     type: Injectable
   }], null, null);
 })();
-var ButtonGroupClasses;
-(function(ButtonGroupClasses2) {
-  ButtonGroupClasses2["root"] = "p-buttongroup";
-})(ButtonGroupClasses || (ButtonGroupClasses = {}));
-var ButtonGroup = class _ButtonGroup extends BaseComponent {
-  _componentStyle = inject(ButtonGroupStyle);
+var StepperClasses;
+(function(StepperClasses2) {
+  StepperClasses2["root"] = "p-stepper";
+  StepperClasses2["separator"] = "p-stepper-separator";
+})(StepperClasses || (StepperClasses = {}));
+var StepList = class _StepList extends BaseComponent {
+  steps = contentChildren(forwardRef(() => Step));
   static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275ButtonGroup_BaseFactory;
-    return function ButtonGroup_Factory(__ngFactoryType__) {
-      return (\u0275ButtonGroup_BaseFactory || (\u0275ButtonGroup_BaseFactory = \u0275\u0275getInheritedFactory(_ButtonGroup)))(__ngFactoryType__ || _ButtonGroup);
+    let \u0275StepList_BaseFactory;
+    return function StepList_Factory(__ngFactoryType__) {
+      return (\u0275StepList_BaseFactory || (\u0275StepList_BaseFactory = \u0275\u0275getInheritedFactory(_StepList)))(__ngFactoryType__ || _StepList);
     };
   })();
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _ButtonGroup,
-    selectors: [["p-buttonGroup"], ["p-buttongroup"], ["p-button-group"]],
-    features: [\u0275\u0275ProvidersFeature([ButtonGroupStyle]), \u0275\u0275InheritDefinitionFeature],
+    type: _StepList,
+    selectors: [["p-step-list"]],
+    contentQueries: function StepList_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuerySignal(dirIndex, ctx.steps, Step, 4);
+      }
+      if (rf & 2) {
+        \u0275\u0275queryAdvance();
+      }
+    },
+    hostVars: 4,
+    hostBindings: function StepList_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("p-steplist", true)("p-component", true);
+      }
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
     ngContentSelectors: _c011,
-    decls: 2,
+    decls: 1,
     vars: 0,
-    consts: [["role", "group", 1, "p-buttongroup", "p-component"]],
-    template: function ButtonGroup_Template(rf, ctx) {
+    template: function StepList_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
-        \u0275\u0275elementStart(0, "span", 0);
-        \u0275\u0275projection(1);
-        \u0275\u0275elementEnd();
+        \u0275\u0275projection(0);
       }
     },
     dependencies: [CommonModule],
@@ -23472,56 +23815,651 @@ var ButtonGroup = class _ButtonGroup extends BaseComponent {
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ButtonGroup, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepList, [{
     type: Component,
     args: [{
-      selector: "p-buttonGroup, p-buttongroup, p-button-group",
+      selector: "p-step-list",
       standalone: true,
       imports: [CommonModule],
-      template: `
-        <span class="p-buttongroup p-component" role="group">
-            <ng-content></ng-content>
-        </span>
-    `,
+      template: ` <ng-content></ng-content>`,
       changeDetection: ChangeDetectionStrategy.OnPush,
       encapsulation: ViewEncapsulation.None,
-      providers: [ButtonGroupStyle]
+      host: {
+        "[class.p-steplist]": "true",
+        "[class.p-component]": "true"
+      }
     }]
   }], null, null);
 })();
-var ButtonGroupModule = class _ButtonGroupModule {
-  static \u0275fac = function ButtonGroupModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ButtonGroupModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _ButtonGroupModule,
-    imports: [ButtonGroup],
-    exports: [ButtonGroup]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [ButtonGroup]
+var StepperSeparator = class _StepperSeparator extends BaseComponent {
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275StepperSeparator_BaseFactory;
+    return function StepperSeparator_Factory(__ngFactoryType__) {
+      return (\u0275StepperSeparator_BaseFactory || (\u0275StepperSeparator_BaseFactory = \u0275\u0275getInheritedFactory(_StepperSeparator)))(__ngFactoryType__ || _StepperSeparator);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _StepperSeparator,
+    selectors: [["p-stepper-separator"]],
+    hostVars: 4,
+    hostBindings: function StepperSeparator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("p-stepper-separator", true)("p-component", true);
+      }
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c011,
+    decls: 1,
+    vars: 0,
+    template: function StepperSeparator_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+      }
+    },
+    dependencies: [CommonModule],
+    encapsulation: 2,
+    changeDetection: 0
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ButtonGroupModule, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepperSeparator, [{
+    type: Component,
+    args: [{
+      selector: "p-stepper-separator",
+      standalone: true,
+      imports: [CommonModule],
+      template: ` <ng-content></ng-content>`,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      host: {
+        "[class.p-stepper-separator]": "true",
+        "[class.p-component]": "true"
+      }
+    }]
+  }], null, null);
+})();
+var StepItem = class _StepItem extends BaseComponent {
+  pcStepper = inject(forwardRef(() => Stepper));
+  /**
+   * Value of step.
+   * @type {<number | undefined>}
+   * @defaultValue undefined
+   * @group Props
+   */
+  value = model();
+  isActive = computed(() => this.pcStepper.value() === this.value());
+  step = contentChild(forwardRef(() => Step));
+  stepPanel = contentChild(forwardRef(() => StepPanel));
+  constructor() {
+    super();
+    effect(() => {
+      this.step().value.set(this.value());
+    });
+    effect(() => {
+      this.stepPanel().value.set(this.value());
+    });
+  }
+  static \u0275fac = function StepItem_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _StepItem)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _StepItem,
+    selectors: [["p-step-item"]],
+    contentQueries: function StepItem_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuerySignal(dirIndex, ctx.step, Step, 5);
+        \u0275\u0275contentQuerySignal(dirIndex, ctx.stepPanel, StepPanel, 5);
+      }
+      if (rf & 2) {
+        \u0275\u0275queryAdvance(2);
+      }
+    },
+    hostVars: 5,
+    hostBindings: function StepItem_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("data-p-active", ctx.isActive());
+        \u0275\u0275classProp("p-stepitem", true)("p-component", true);
+      }
+    },
+    inputs: {
+      value: [1, "value"]
+    },
+    outputs: {
+      value: "valueChange"
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c011,
+    decls: 1,
+    vars: 0,
+    template: function StepItem_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+      }
+    },
+    dependencies: [CommonModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepItem, [{
+    type: Component,
+    args: [{
+      selector: "p-step-item",
+      standalone: true,
+      imports: [CommonModule],
+      template: ` <ng-content></ng-content>`,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      host: {
+        "[class.p-stepitem]": "true",
+        "[class.p-component]": "true",
+        "[attr.data-p-active]": "isActive()"
+      }
+    }]
+  }], () => [], null);
+})();
+var Step = class _Step extends BaseComponent {
+  pcStepper = inject(forwardRef(() => Stepper));
+  /**
+   * Active value of stepper.
+   * @type {number}
+   * @defaultValue undefined
+   * @group Props
+   */
+  value = model();
+  /**
+   * Whether the step is disabled.
+   * @type {boolean}
+   * @defaultValue false
+   * @group Props
+   */
+  disabled = input(false, {
+    transform: (v) => transformToBoolean(v)
+  });
+  active = computed(() => this.pcStepper.isStepActive(this.value()));
+  isStepDisabled = computed(() => !this.active() && (this.pcStepper.linear() || this.disabled()));
+  id = computed(() => `${this.pcStepper.id()}_step_${this.value()}`);
+  ariaControls = computed(() => `${this.pcStepper.id()}_steppanel_${this.value()}`);
+  isSeparatorVisible = computed(() => {
+    if (this.pcStepper.stepList()) {
+      const steps = this.pcStepper.stepList().steps();
+      const index = steps.indexOf(this);
+      const stepLen = steps.length;
+      return index !== stepLen - 1;
+    } else {
+      return false;
+    }
+  });
+  /**
+   * Content template.
+   * @type {TemplateRef<StepContentTemplateContext>}
+   * @group Templates
+   */
+  content;
+  templates;
+  _contentTemplate;
+  ngAfterContentInit() {
+    this.templates?.forEach((item) => {
+      switch (item.getType()) {
+        case "content":
+          this._contentTemplate = item.template;
+          break;
+      }
+    });
+  }
+  onStepClick() {
+    this.pcStepper.updateValue(this.value());
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Step_BaseFactory;
+    return function Step_Factory(__ngFactoryType__) {
+      return (\u0275Step_BaseFactory || (\u0275Step_BaseFactory = \u0275\u0275getInheritedFactory(_Step)))(__ngFactoryType__ || _Step);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Step,
+    selectors: [["p-step"]],
+    contentQueries: function Step_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c111, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.content = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    hostVars: 13,
+    hostBindings: function Step_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("aria-current", ctx.active() ? "step" : void 0)("role", "presentation")("data-p-active", ctx.active())("data-p-disabled", ctx.isStepDisabled())("data-pc-name", "step");
+        \u0275\u0275classProp("p-step", true)("p-step-active", ctx.active())("p-disabled", ctx.isStepDisabled())("p-component", true);
+      }
+    },
+    inputs: {
+      value: [1, "value"],
+      disabled: [1, "disabled"]
+    },
+    outputs: {
+      value: "valueChange"
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c011,
+    decls: 2,
+    vars: 1,
+    consts: [["type", "button", 1, "p-step-header", 3, "click", "tabindex", "disabled"], [1, "p-step-number"], [1, "p-step-title"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
+    template: function Step_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275template(0, Step_Conditional_0_Template, 6, 7)(1, Step_Conditional_1_Template, 2, 7);
+      }
+      if (rf & 2) {
+        \u0275\u0275conditional(!ctx.content && !ctx._contentTemplate ? 0 : 1);
+      }
+    },
+    dependencies: [CommonModule, NgTemplateOutlet, StepperSeparator, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Step, [{
+    type: Component,
+    args: [{
+      selector: "p-step",
+      standalone: true,
+      imports: [CommonModule, StepperSeparator, SharedModule],
+      template: `
+        @if (!content && !_contentTemplate) {
+            <button [attr.id]="id()" class="p-step-header" [attr.role]="'tab'" [tabindex]="isStepDisabled() ? -1 : undefined" [attr.aria-controls]="ariaControls()" [disabled]="isStepDisabled()" (click)="onStepClick()" type="button">
+                <span class="p-step-number">{{ value() }}</span>
+                <span class="p-step-title">
+                    <ng-content></ng-content>
+                </span>
+            </button>
+            @if (isSeparatorVisible()) {
+                <p-stepper-separator />
+            }
+        } @else {
+            <ng-container *ngTemplateOutlet="content || _contentTemplate; context: { activateCallback: onStepClick.bind(this), value: value(), active: active() }"></ng-container>
+            @if (isSeparatorVisible()) {
+                <p-stepper-separator />
+            }
+        }
+    `,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      host: {
+        "[class.p-step]": "true",
+        "[class.p-step-active]": "active()",
+        "[class.p-disabled]": "isStepDisabled()",
+        "[class.p-component]": "true",
+        "[attr.aria-current]": 'active() ? "step" : undefined',
+        "[attr.role]": '"presentation"',
+        "[attr.data-p-active]": "active()",
+        "[attr.data-p-disabled]": "isStepDisabled()",
+        "[attr.data-pc-name]": '"step"'
+      }
+    }]
+  }], null, {
+    content: [{
+      type: ContentChild,
+      args: ["content", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var StepPanel = class _StepPanel extends BaseComponent {
+  pcStepper = inject(forwardRef(() => Stepper));
+  transitionOptions = computed(() => this.pcStepper.transitionOptions());
+  /**
+   * Active value of stepper.
+   * @type {number}
+   * @defaultValue undefined
+   * @group Props
+   */
+  value = model(void 0);
+  active = computed(() => this.pcStepper.value() === this.value());
+  ariaControls = computed(() => `${this.pcStepper.id()}_step_${this.value()}`);
+  id = computed(() => `${this.pcStepper.id()}_steppanel_${this.value()}`);
+  isVertical = computed(() => this.pcStepper.stepItems().length > 0);
+  isSeparatorVisible = computed(() => {
+    if (this.pcStepper.stepItems()) {
+      const stepLen = this.pcStepper.stepItems().length;
+      const stepPanelElements = find(this.pcStepper.el.nativeElement, '[data-pc-name="steppanel"]');
+      const index = findIndexInList(this.el.nativeElement, stepPanelElements);
+      return index !== stepLen - 1;
+    }
+  });
+  /**
+   * Content template.
+   * @param {StepPanelContentTemplateContext} context - Context of the template
+   * @see {@link StepPanelContentTemplateContext}
+   * @group Templates
+   */
+  contentTemplate;
+  templates;
+  _contentTemplate;
+  ngAfterContentInit() {
+    this.templates?.forEach((item) => {
+      switch (item.getType()) {
+        case "content":
+          this._contentTemplate = item.template;
+          break;
+      }
+    });
+  }
+  updateValue(value) {
+    this.pcStepper.updateValue(value);
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275StepPanel_BaseFactory;
+    return function StepPanel_Factory(__ngFactoryType__) {
+      return (\u0275StepPanel_BaseFactory || (\u0275StepPanel_BaseFactory = \u0275\u0275getInheritedFactory(_StepPanel)))(__ngFactoryType__ || _StepPanel);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _StepPanel,
+    selectors: [["p-step-panel"]],
+    contentQueries: function StepPanel_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c111, 5);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    hostVars: 11,
+    hostBindings: function StepPanel_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("role", "tabpanel")("aria-controls", ctx.ariaControls())("id", ctx.id())("data-p-active", ctx.active())("data-pc-name", "steppanel");
+        \u0275\u0275classProp("p-steppanel", true)("p-component", true)("p-steppanel-active", ctx.active());
+      }
+    },
+    inputs: {
+      value: [1, "value"]
+    },
+    outputs: {
+      value: "valueChange"
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
+    decls: 3,
+    vars: 11,
+    consts: [[1, "p-steppanel-content"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
+    template: function StepPanel_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, StepPanel_Conditional_0_Template, 1, 0, "p-stepper-separator");
+        \u0275\u0275elementStart(1, "div", 0);
+        \u0275\u0275template(2, StepPanel_Conditional_2_Template, 1, 6, "ng-container");
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275conditional(ctx.isSeparatorVisible() ? 0 : -1);
+        \u0275\u0275advance();
+        \u0275\u0275property("@content", ctx.isVertical() ? ctx.active() ? \u0275\u0275pureFunction1(5, _c43, \u0275\u0275pureFunction1(3, _c33, ctx.transitionOptions())) : \u0275\u0275pureFunction1(9, _c53, \u0275\u0275pureFunction1(7, _c33, ctx.transitionOptions())) : void 0);
+        \u0275\u0275advance();
+        \u0275\u0275conditional(ctx.active() ? 2 : -1);
+      }
+    },
+    dependencies: [CommonModule, NgTemplateOutlet, StepperSeparator, SharedModule],
+    encapsulation: 2,
+    data: {
+      animation: [trigger("content", [state("hidden", style({
+        height: "0",
+        visibility: "hidden"
+      })), state("visible", style({
+        height: "*",
+        visibility: "visible"
+      })), transition("visible <=> hidden", [animate("250ms cubic-bezier(0.86, 0, 0.07, 1)")]), transition("void => *", animate(0))])]
+    },
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepPanel, [{
+    type: Component,
+    args: [{
+      selector: "p-step-panel",
+      standalone: true,
+      imports: [CommonModule, StepperSeparator, SharedModule],
+      template: `
+        @if (isSeparatorVisible()) {
+            <p-stepper-separator />
+        }
+        <div class="p-steppanel-content" [@content]="isVertical() ? (active() ? { value: 'visible', params: { transitionParams: transitionOptions() } } : { value: 'hidden', params: { transitionParams: transitionOptions() } }) : undefined">
+            @if (active()) {
+                <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate; context: { activateCallback: updateValue.bind(this), value: value(), active: active() }"></ng-container>
+            }
+        </div>
+    `,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      host: {
+        "[class.p-steppanel]": "true",
+        "[class.p-component]": "true",
+        "[class.p-steppanel-active]": "active()",
+        "[attr.role]": '"tabpanel"',
+        "[attr.aria-controls]": "ariaControls()",
+        "[attr.id]": "id()",
+        "[attr.data-p-active]": "active()",
+        "[attr.data-pc-name]": '"steppanel"'
+      },
+      animations: [trigger("content", [state("hidden", style({
+        height: "0",
+        visibility: "hidden"
+      })), state("visible", style({
+        height: "*",
+        visibility: "visible"
+      })), transition("visible <=> hidden", [animate("250ms cubic-bezier(0.86, 0, 0.07, 1)")]), transition("void => *", animate(0))])]
+    }]
+  }], null, {
+    contentTemplate: [{
+      type: ContentChild,
+      args: ["content"]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var StepPanels = class _StepPanels extends BaseComponent {
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275StepPanels_BaseFactory;
+    return function StepPanels_Factory(__ngFactoryType__) {
+      return (\u0275StepPanels_BaseFactory || (\u0275StepPanels_BaseFactory = \u0275\u0275getInheritedFactory(_StepPanels)))(__ngFactoryType__ || _StepPanels);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _StepPanels,
+    selectors: [["p-step-panels"]],
+    hostVars: 4,
+    hostBindings: function StepPanels_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("p-steppanels", true)("p-component", true);
+      }
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c011,
+    decls: 1,
+    vars: 0,
+    template: function StepPanels_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+      }
+    },
+    dependencies: [CommonModule, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepPanels, [{
+    type: Component,
+    args: [{
+      selector: "p-step-panels",
+      standalone: true,
+      imports: [CommonModule, SharedModule],
+      template: ` <ng-content></ng-content>`,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      host: {
+        "[class.p-steppanels]": "true",
+        "[class.p-component]": "true"
+      }
+    }]
+  }], null, null);
+})();
+var Stepper = class _Stepper extends BaseComponent {
+  /**
+   * A model that can hold a numeric value or be undefined.
+   * @defaultValue undefined
+   * @type {ModelSignal<number | undefined>}
+   * @group Props
+   */
+  value = model(void 0);
+  /**
+   * A boolean variable that captures user input.
+   * @defaultValue false
+   * @type {InputSignalWithTransform<any, boolean >}
+   * @group Props
+   */
+  linear = input(false, {
+    transform: (v) => transformToBoolean(v)
+  });
+  /**
+   * Transition options of the animation.
+   * @defaultValue 400ms cubic-bezier(0.86, 0, 0.07, 1)
+   * @type {InputSignal<string >}
+   * @group Props
+   */
+  transitionOptions = input("400ms cubic-bezier(0.86, 0, 0.07, 1)");
+  _componentStyle = inject(StepperStyle);
+  id = signal(uuid("pn_id_"));
+  stepItems = contentChildren(StepItem);
+  steps = contentChildren(Step);
+  stepList = contentChild(StepList);
+  updateValue(value) {
+    this.value.set(value);
+  }
+  isStepActive(value) {
+    return this.value() === value;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Stepper_BaseFactory;
+    return function Stepper_Factory(__ngFactoryType__) {
+      return (\u0275Stepper_BaseFactory || (\u0275Stepper_BaseFactory = \u0275\u0275getInheritedFactory(_Stepper)))(__ngFactoryType__ || _Stepper);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Stepper,
+    selectors: [["p-stepper"]],
+    contentQueries: function Stepper_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuerySignal(dirIndex, ctx.stepItems, StepItem, 4);
+        \u0275\u0275contentQuerySignal(dirIndex, ctx.steps, Step, 4);
+        \u0275\u0275contentQuerySignal(dirIndex, ctx.stepList, StepList, 5);
+      }
+      if (rf & 2) {
+        \u0275\u0275queryAdvance(3);
+      }
+    },
+    hostVars: 6,
+    hostBindings: function Stepper_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("role", "tablist")("id", ctx.id());
+        \u0275\u0275classProp("p-stepper", true)("p-component", true);
+      }
+    },
+    inputs: {
+      value: [1, "value"],
+      linear: [1, "linear"],
+      transitionOptions: [1, "transitionOptions"]
+    },
+    outputs: {
+      value: "valueChange"
+    },
+    features: [\u0275\u0275ProvidersFeature([StepperStyle]), \u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c011,
+    decls: 1,
+    vars: 0,
+    template: function Stepper_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+      }
+    },
+    dependencies: [CommonModule, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Stepper, [{
+    type: Component,
+    args: [{
+      selector: "p-stepper",
+      standalone: true,
+      imports: [CommonModule, SharedModule],
+      template: ` <ng-content></ng-content>`,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      providers: [StepperStyle],
+      host: {
+        "[class.p-stepper]": "true",
+        "[class.p-component]": "true",
+        "[attr.role]": '"tablist"',
+        "[attr.id]": "id()"
+      }
+    }]
+  }], null, null);
+})();
+var StepperModule = class _StepperModule {
+  static \u0275fac = function StepperModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _StepperModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _StepperModule,
+    imports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule],
+    exports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepperModule, [{
     type: NgModule,
     args: [{
-      imports: [ButtonGroup],
-      exports: [ButtonGroup]
+      imports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule],
+      exports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule]
     }]
   }], null, null);
 })();
 
 // node_modules/primeng/fesm2022/primeng-confirmpopup.mjs
 var _c012 = ["content"];
-var _c111 = ["accepticon"];
-var _c23 = ["rejecticon"];
-var _c33 = ["headless"];
-var _c43 = (a0, a1) => ({
+var _c113 = ["accepticon"];
+var _c24 = ["rejecticon"];
+var _c34 = ["headless"];
+var _c44 = (a0, a1) => ({
   showTransitionParams: a0,
   hideTransitionParams: a1
 });
-var _c53 = (a0) => ({
+var _c54 = (a0) => ({
   value: "open",
   params: a0
 });
@@ -23706,7 +24644,7 @@ function ConfirmPopup_div_0_Template(rf, ctx) {
     const notHeadless_r6 = \u0275\u0275reference(3);
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classMap(ctx_r1.styleClass);
-    \u0275\u0275property("ngClass", "p-confirmpopup p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction1(10, _c53, \u0275\u0275pureFunction2(7, _c43, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
+    \u0275\u0275property("ngClass", "p-confirmpopup p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction1(10, _c54, \u0275\u0275pureFunction2(7, _c44, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.headlessTemplate || ctx_r1._headlessTemplate)("ngIfElse", notHeadless_r6);
   }
@@ -24184,9 +25122,9 @@ var ConfirmPopup = class _ConfirmPopup extends BaseComponent {
     contentQueries: function ConfirmPopup_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
         \u0275\u0275contentQuery(dirIndex, _c012, 4);
-        \u0275\u0275contentQuery(dirIndex, _c111, 4);
-        \u0275\u0275contentQuery(dirIndex, _c23, 4);
-        \u0275\u0275contentQuery(dirIndex, _c33, 4);
+        \u0275\u0275contentQuery(dirIndex, _c113, 4);
+        \u0275\u0275contentQuery(dirIndex, _c24, 4);
+        \u0275\u0275contentQuery(dirIndex, _c34, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -24429,1538 +25367,6 @@ var ConfirmPopupModule = class _ConfirmPopupModule {
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-stepper.mjs
-var _c013 = ["*"];
-var _c113 = ["content"];
-var _c24 = (a0, a1, a2) => ({
-  activateCallback: a0,
-  value: a1,
-  active: a2
-});
-function Step_Conditional_0_Conditional_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "p-stepper-separator");
-  }
-}
-function Step_Conditional_0_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 0);
-    \u0275\u0275listener("click", function Step_Conditional_0_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.onStepClick());
-    });
-    \u0275\u0275elementStart(1, "span", 1);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "span", 2);
-    \u0275\u0275projection(4);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(5, Step_Conditional_0_Conditional_5_Template, 1, 0, "p-stepper-separator");
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("tabindex", ctx_r1.isStepDisabled() ? -1 : void 0)("disabled", ctx_r1.isStepDisabled());
-    \u0275\u0275attribute("id", ctx_r1.id())("role", "tab")("aria-controls", ctx_r1.ariaControls());
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r1.value());
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx_r1.isSeparatorVisible() ? 5 : -1);
-  }
-}
-function Step_Conditional_1_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Step_Conditional_1_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "p-stepper-separator");
-  }
-}
-function Step_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Step_Conditional_1_ng_container_0_Template, 1, 0, "ng-container", 3)(1, Step_Conditional_1_Conditional_1_Template, 1, 0, "p-stepper-separator");
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.content || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(3, _c24, ctx_r1.onStepClick.bind(ctx_r1), ctx_r1.value(), ctx_r1.active()));
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r1.isSeparatorVisible() ? 1 : -1);
-  }
-}
-var _c34 = (a0) => ({
-  transitionParams: a0
-});
-var _c44 = (a0) => ({
-  value: "visible",
-  params: a0
-});
-var _c54 = (a0) => ({
-  value: "hidden",
-  params: a0
-});
-function StepPanel_Conditional_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "p-stepper-separator");
-  }
-}
-function StepPanel_Conditional_2_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function StepPanel_Conditional_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, StepPanel_Conditional_2_ng_container_0_Template, 1, 0, "ng-container", 1);
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r0.contentTemplate || ctx_r0._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(2, _c24, ctx_r0.updateValue.bind(ctx_r0), ctx_r0.value(), ctx_r0.active()));
-  }
-}
-var theme10 = ({
-  dt
-}) => `
-.p-steplist {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    overflow-x: auto;
-}
-
-.p-step {
-    position: relative;
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-    gap: ${dt("stepper.step.gap")};
-    padding: ${dt("stepper.step.padding")};
-}
-
-.p-step:last-of-type {
-    flex: initial;
-}
-
-.p-step-header {
-    border: 0 none;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background ${dt("stepper.transition.duration")}, color ${dt("stepper.transition.duration")}, border-color ${dt("stepper.transition.duration")}, outline-color ${dt("stepper.transition.duration")}, box-shadow ${dt("stepper.transition.duration")};
-    border-radius: ${dt("stepper.step.header.border.radius")};
-    outline-color: transparent;
-    background: transparent;
-    padding: ${dt("stepper.step.header.padding")};
-    gap: ${dt("stepper.step.header.gap")};
-}
-
-.p-step-header:focus-visible {
-    box-shadow: ${dt("stepper.step.header.focus.ring.shadow")};
-    outline: ${dt("stepper.step.header.focus.ring.width")} ${dt("stepper.step.header.focus.ring.style")} ${dt("stepper.step.header.focus.ring.color")};
-    outline-offset: ${dt("stepper.step.header.focus.ring.offset")};
-}
-
-.p-stepper.p-stepper-readonly .p-step {
-    cursor: auto;
-}
-
-.p-step-title {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    color: ${dt("stepper.step.title.color")};
-    font-weight: ${dt("stepper.step.title.font.weight")};
-    transition: background ${dt("stepper.transition.duration")}, color ${dt("stepper.transition.duration")}, border-color ${dt("stepper.transition.duration")}, box-shadow ${dt("stepper.transition.duration")}, outline-color ${dt("stepper.transition.duration")};
-}
-
-.p-step-number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${dt("stepper.step.number.color")};
-    border: 2px solid ${dt("stepper.step.number.border.color")};
-    background: ${dt("stepper.step.number.background")};
-    min-width: ${dt("stepper.step.number.size")};
-    height: ${dt("stepper.step.number.size")};
-    line-height: ${dt("stepper.step.number.size")};
-    font-size: ${dt("stepper.step.number.font.size")};
-    z-index: 1;
-    border-radius: ${dt("stepper.step.number.border.radius")};
-    position: relative;
-    font-weight: ${dt("stepper.step.number.font.weight")};
-}
-
-.p-step-number::after {
-    content: " ";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: ${dt("stepper.step.number.border.radius")};
-    box-shadow: ${dt("stepper.step.number.shadow")};
-}
-
-.p-step-active .p-step-header {
-    cursor: default;
-}
-
-.p-step-active .p-step-number {
-    background: ${dt("stepper.step.number.active.background")};
-    border-color: ${dt("stepper.step.number.active.border.color")};
-    color: ${dt("stepper.step.number.active.color")};
-}
-
-.p-step-active .p-step-title {
-    color: ${dt("stepper.step.title.active.color")};
-}
-
-.p-step:not(.p-disabled):focus-visible {
-    outline: ${dt("focus.ring.width")} ${dt("focus.ring.style")} ${dt("focus.ring.color")};
-    outline-offset: ${dt("focus.ring.offset")};
-}
-
-.p-step:has(~ .p-step-active) .p-stepper-separator {
-    background: ${dt("stepper.separator.active.background")};
-}
-
-.p-stepper-separator {
-    flex: 1 1 0;
-    background: ${dt("stepper.separator.background")};
-    width: 100%;
-    height: ${dt("stepper.separator.size")};
-    transition: background ${dt("stepper.transition.duration")}, color ${dt("stepper.transition.duration")}, border-color ${dt("stepper.transition.duration")}, box-shadow ${dt("stepper.transition.duration")}, outline-color ${dt("stepper.transition.duration")};
-}
-
-.p-steppanels {
-    padding: ${dt("stepper.steppanels.padding")};
-}
-
-.p-steppanel {
-    background: ${dt("stepper.steppanel.background")};
-    color: ${dt("stepper.steppanel.color")};
-}
-
-.p-stepper:has(.p-stepitem) {
-    display: flex;
-    flex-direction: column;
-}
-
-.p-stepitem {
-    display: flex;
-    flex-direction: column;
-    flex: initial;
-}
-
-.p-stepitem.p-stepitem-active {
-    flex: 1 1 auto;
-}
-
-.p-stepitem .p-step {
-    flex: initial;
-}
-
-.p-stepitem .p-steppanel-content {
-    width: 100%;
-    padding: ${dt("stepper.steppanel.padding")};
-    margin-inline-start: 1rem;
-}
-
-.p-stepitem .p-steppanel {
-    display: flex;
-    flex: 1 1 auto;
-}
-
-.p-stepitem .p-stepper-separator {
-    flex: 0 0 auto;
-    width: ${dt("stepper.separator.size")};
-    height: auto;
-    margin: ${dt("stepper.separator.margin")};
-    position: relative;
-    left: calc(-1 * ${dt("stepper.separator.size")});
-}
-
-.p-stepitem .p-stepper-separator:dir(rtl) {
-    left: calc(-9 * ${dt("stepper.separator.size")});
-}
-
-.p-stepitem:has(~ .p-stepitem-active) .p-stepper-separator {
-    background: ${dt("stepper.separator.active.background")};
-}
-
-.p-stepitem:last-of-type .p-steppanel {
-    padding-inline-start: ${dt("stepper.step.number.size")};
-}
-/* For PrimeNG */
-.p-steppanel {
-    overflow: hidden;
-}
-
-.p-stepppanel:not(.ng-animating) {
-    overflow: inherit;
-}
-`;
-var classes10 = {
-  root: ({
-    props
-  }) => ["p-stepper p-component", {
-    "p-readonly": props.linear
-  }],
-  separator: "p-stepper-separator"
-};
-var StepperStyle = class _StepperStyle extends BaseStyle {
-  name = "stepper";
-  theme = theme10;
-  classes = classes10;
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275StepperStyle_BaseFactory;
-    return function StepperStyle_Factory(__ngFactoryType__) {
-      return (\u0275StepperStyle_BaseFactory || (\u0275StepperStyle_BaseFactory = \u0275\u0275getInheritedFactory(_StepperStyle)))(__ngFactoryType__ || _StepperStyle);
-    };
-  })();
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _StepperStyle,
-    factory: _StepperStyle.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepperStyle, [{
-    type: Injectable
-  }], null, null);
-})();
-var StepperClasses;
-(function(StepperClasses2) {
-  StepperClasses2["root"] = "p-stepper";
-  StepperClasses2["separator"] = "p-stepper-separator";
-})(StepperClasses || (StepperClasses = {}));
-var StepList = class _StepList extends BaseComponent {
-  steps = contentChildren(forwardRef(() => Step));
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275StepList_BaseFactory;
-    return function StepList_Factory(__ngFactoryType__) {
-      return (\u0275StepList_BaseFactory || (\u0275StepList_BaseFactory = \u0275\u0275getInheritedFactory(_StepList)))(__ngFactoryType__ || _StepList);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _StepList,
-    selectors: [["p-step-list"]],
-    contentQueries: function StepList_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuerySignal(dirIndex, ctx.steps, Step, 4);
-      }
-      if (rf & 2) {
-        \u0275\u0275queryAdvance();
-      }
-    },
-    hostVars: 4,
-    hostBindings: function StepList_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275classProp("p-steplist", true)("p-component", true);
-      }
-    },
-    features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c013,
-    decls: 1,
-    vars: 0,
-    template: function StepList_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-      }
-    },
-    dependencies: [CommonModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepList, [{
-    type: Component,
-    args: [{
-      selector: "p-step-list",
-      standalone: true,
-      imports: [CommonModule],
-      template: ` <ng-content></ng-content>`,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      host: {
-        "[class.p-steplist]": "true",
-        "[class.p-component]": "true"
-      }
-    }]
-  }], null, null);
-})();
-var StepperSeparator = class _StepperSeparator extends BaseComponent {
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275StepperSeparator_BaseFactory;
-    return function StepperSeparator_Factory(__ngFactoryType__) {
-      return (\u0275StepperSeparator_BaseFactory || (\u0275StepperSeparator_BaseFactory = \u0275\u0275getInheritedFactory(_StepperSeparator)))(__ngFactoryType__ || _StepperSeparator);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _StepperSeparator,
-    selectors: [["p-stepper-separator"]],
-    hostVars: 4,
-    hostBindings: function StepperSeparator_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275classProp("p-stepper-separator", true)("p-component", true);
-      }
-    },
-    features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c013,
-    decls: 1,
-    vars: 0,
-    template: function StepperSeparator_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-      }
-    },
-    dependencies: [CommonModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepperSeparator, [{
-    type: Component,
-    args: [{
-      selector: "p-stepper-separator",
-      standalone: true,
-      imports: [CommonModule],
-      template: ` <ng-content></ng-content>`,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      host: {
-        "[class.p-stepper-separator]": "true",
-        "[class.p-component]": "true"
-      }
-    }]
-  }], null, null);
-})();
-var StepItem = class _StepItem extends BaseComponent {
-  pcStepper = inject(forwardRef(() => Stepper));
-  /**
-   * Value of step.
-   * @type {<number | undefined>}
-   * @defaultValue undefined
-   * @group Props
-   */
-  value = model();
-  isActive = computed(() => this.pcStepper.value() === this.value());
-  step = contentChild(forwardRef(() => Step));
-  stepPanel = contentChild(forwardRef(() => StepPanel));
-  constructor() {
-    super();
-    effect(() => {
-      this.step().value.set(this.value());
-    });
-    effect(() => {
-      this.stepPanel().value.set(this.value());
-    });
-  }
-  static \u0275fac = function StepItem_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _StepItem)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _StepItem,
-    selectors: [["p-step-item"]],
-    contentQueries: function StepItem_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuerySignal(dirIndex, ctx.step, Step, 5);
-        \u0275\u0275contentQuerySignal(dirIndex, ctx.stepPanel, StepPanel, 5);
-      }
-      if (rf & 2) {
-        \u0275\u0275queryAdvance(2);
-      }
-    },
-    hostVars: 5,
-    hostBindings: function StepItem_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("data-p-active", ctx.isActive());
-        \u0275\u0275classProp("p-stepitem", true)("p-component", true);
-      }
-    },
-    inputs: {
-      value: [1, "value"]
-    },
-    outputs: {
-      value: "valueChange"
-    },
-    features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c013,
-    decls: 1,
-    vars: 0,
-    template: function StepItem_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-      }
-    },
-    dependencies: [CommonModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepItem, [{
-    type: Component,
-    args: [{
-      selector: "p-step-item",
-      standalone: true,
-      imports: [CommonModule],
-      template: ` <ng-content></ng-content>`,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      host: {
-        "[class.p-stepitem]": "true",
-        "[class.p-component]": "true",
-        "[attr.data-p-active]": "isActive()"
-      }
-    }]
-  }], () => [], null);
-})();
-var Step = class _Step extends BaseComponent {
-  pcStepper = inject(forwardRef(() => Stepper));
-  /**
-   * Active value of stepper.
-   * @type {number}
-   * @defaultValue undefined
-   * @group Props
-   */
-  value = model();
-  /**
-   * Whether the step is disabled.
-   * @type {boolean}
-   * @defaultValue false
-   * @group Props
-   */
-  disabled = input(false, {
-    transform: (v) => transformToBoolean(v)
-  });
-  active = computed(() => this.pcStepper.isStepActive(this.value()));
-  isStepDisabled = computed(() => !this.active() && (this.pcStepper.linear() || this.disabled()));
-  id = computed(() => `${this.pcStepper.id()}_step_${this.value()}`);
-  ariaControls = computed(() => `${this.pcStepper.id()}_steppanel_${this.value()}`);
-  isSeparatorVisible = computed(() => {
-    if (this.pcStepper.stepList()) {
-      const steps = this.pcStepper.stepList().steps();
-      const index = steps.indexOf(this);
-      const stepLen = steps.length;
-      return index !== stepLen - 1;
-    } else {
-      return false;
-    }
-  });
-  /**
-   * Content template.
-   * @type {TemplateRef<StepContentTemplateContext>}
-   * @group Templates
-   */
-  content;
-  templates;
-  _contentTemplate;
-  ngAfterContentInit() {
-    this.templates?.forEach((item) => {
-      switch (item.getType()) {
-        case "content":
-          this._contentTemplate = item.template;
-          break;
-      }
-    });
-  }
-  onStepClick() {
-    this.pcStepper.updateValue(this.value());
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275Step_BaseFactory;
-    return function Step_Factory(__ngFactoryType__) {
-      return (\u0275Step_BaseFactory || (\u0275Step_BaseFactory = \u0275\u0275getInheritedFactory(_Step)))(__ngFactoryType__ || _Step);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _Step,
-    selectors: [["p-step"]],
-    contentQueries: function Step_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c113, 4);
-        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.content = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
-      }
-    },
-    hostVars: 13,
-    hostBindings: function Step_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("aria-current", ctx.active() ? "step" : void 0)("role", "presentation")("data-p-active", ctx.active())("data-p-disabled", ctx.isStepDisabled())("data-pc-name", "step");
-        \u0275\u0275classProp("p-step", true)("p-step-active", ctx.active())("p-disabled", ctx.isStepDisabled())("p-component", true);
-      }
-    },
-    inputs: {
-      value: [1, "value"],
-      disabled: [1, "disabled"]
-    },
-    outputs: {
-      value: "valueChange"
-    },
-    features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c013,
-    decls: 2,
-    vars: 1,
-    consts: [["type", "button", 1, "p-step-header", 3, "click", "tabindex", "disabled"], [1, "p-step-number"], [1, "p-step-title"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
-    template: function Step_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275template(0, Step_Conditional_0_Template, 6, 7)(1, Step_Conditional_1_Template, 2, 7);
-      }
-      if (rf & 2) {
-        \u0275\u0275conditional(!ctx.content && !ctx._contentTemplate ? 0 : 1);
-      }
-    },
-    dependencies: [CommonModule, NgTemplateOutlet, StepperSeparator, SharedModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Step, [{
-    type: Component,
-    args: [{
-      selector: "p-step",
-      standalone: true,
-      imports: [CommonModule, StepperSeparator, SharedModule],
-      template: `
-        @if (!content && !_contentTemplate) {
-            <button [attr.id]="id()" class="p-step-header" [attr.role]="'tab'" [tabindex]="isStepDisabled() ? -1 : undefined" [attr.aria-controls]="ariaControls()" [disabled]="isStepDisabled()" (click)="onStepClick()" type="button">
-                <span class="p-step-number">{{ value() }}</span>
-                <span class="p-step-title">
-                    <ng-content></ng-content>
-                </span>
-            </button>
-            @if (isSeparatorVisible()) {
-                <p-stepper-separator />
-            }
-        } @else {
-            <ng-container *ngTemplateOutlet="content || _contentTemplate; context: { activateCallback: onStepClick.bind(this), value: value(), active: active() }"></ng-container>
-            @if (isSeparatorVisible()) {
-                <p-stepper-separator />
-            }
-        }
-    `,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      host: {
-        "[class.p-step]": "true",
-        "[class.p-step-active]": "active()",
-        "[class.p-disabled]": "isStepDisabled()",
-        "[class.p-component]": "true",
-        "[attr.aria-current]": 'active() ? "step" : undefined',
-        "[attr.role]": '"presentation"',
-        "[attr.data-p-active]": "active()",
-        "[attr.data-p-disabled]": "isStepDisabled()",
-        "[attr.data-pc-name]": '"step"'
-      }
-    }]
-  }], null, {
-    content: [{
-      type: ContentChild,
-      args: ["content", {
-        descendants: false
-      }]
-    }],
-    templates: [{
-      type: ContentChildren,
-      args: [PrimeTemplate]
-    }]
-  });
-})();
-var StepPanel = class _StepPanel extends BaseComponent {
-  pcStepper = inject(forwardRef(() => Stepper));
-  transitionOptions = computed(() => this.pcStepper.transitionOptions());
-  /**
-   * Active value of stepper.
-   * @type {number}
-   * @defaultValue undefined
-   * @group Props
-   */
-  value = model(void 0);
-  active = computed(() => this.pcStepper.value() === this.value());
-  ariaControls = computed(() => `${this.pcStepper.id()}_step_${this.value()}`);
-  id = computed(() => `${this.pcStepper.id()}_steppanel_${this.value()}`);
-  isVertical = computed(() => this.pcStepper.stepItems().length > 0);
-  isSeparatorVisible = computed(() => {
-    if (this.pcStepper.stepItems()) {
-      const stepLen = this.pcStepper.stepItems().length;
-      const stepPanelElements = find(this.pcStepper.el.nativeElement, '[data-pc-name="steppanel"]');
-      const index = findIndexInList(this.el.nativeElement, stepPanelElements);
-      return index !== stepLen - 1;
-    }
-  });
-  /**
-   * Content template.
-   * @param {StepPanelContentTemplateContext} context - Context of the template
-   * @see {@link StepPanelContentTemplateContext}
-   * @group Templates
-   */
-  contentTemplate;
-  templates;
-  _contentTemplate;
-  ngAfterContentInit() {
-    this.templates?.forEach((item) => {
-      switch (item.getType()) {
-        case "content":
-          this._contentTemplate = item.template;
-          break;
-      }
-    });
-  }
-  updateValue(value) {
-    this.pcStepper.updateValue(value);
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275StepPanel_BaseFactory;
-    return function StepPanel_Factory(__ngFactoryType__) {
-      return (\u0275StepPanel_BaseFactory || (\u0275StepPanel_BaseFactory = \u0275\u0275getInheritedFactory(_StepPanel)))(__ngFactoryType__ || _StepPanel);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _StepPanel,
-    selectors: [["p-step-panel"]],
-    contentQueries: function StepPanel_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c113, 5);
-        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
-      }
-    },
-    hostVars: 11,
-    hostBindings: function StepPanel_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("role", "tabpanel")("aria-controls", ctx.ariaControls())("id", ctx.id())("data-p-active", ctx.active())("data-pc-name", "steppanel");
-        \u0275\u0275classProp("p-steppanel", true)("p-component", true)("p-steppanel-active", ctx.active());
-      }
-    },
-    inputs: {
-      value: [1, "value"]
-    },
-    outputs: {
-      value: "valueChange"
-    },
-    features: [\u0275\u0275InheritDefinitionFeature],
-    decls: 3,
-    vars: 11,
-    consts: [[1, "p-steppanel-content"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
-    template: function StepPanel_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, StepPanel_Conditional_0_Template, 1, 0, "p-stepper-separator");
-        \u0275\u0275elementStart(1, "div", 0);
-        \u0275\u0275template(2, StepPanel_Conditional_2_Template, 1, 6, "ng-container");
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        \u0275\u0275conditional(ctx.isSeparatorVisible() ? 0 : -1);
-        \u0275\u0275advance();
-        \u0275\u0275property("@content", ctx.isVertical() ? ctx.active() ? \u0275\u0275pureFunction1(5, _c44, \u0275\u0275pureFunction1(3, _c34, ctx.transitionOptions())) : \u0275\u0275pureFunction1(9, _c54, \u0275\u0275pureFunction1(7, _c34, ctx.transitionOptions())) : void 0);
-        \u0275\u0275advance();
-        \u0275\u0275conditional(ctx.active() ? 2 : -1);
-      }
-    },
-    dependencies: [CommonModule, NgTemplateOutlet, StepperSeparator, SharedModule],
-    encapsulation: 2,
-    data: {
-      animation: [trigger("content", [state("hidden", style({
-        height: "0",
-        visibility: "hidden"
-      })), state("visible", style({
-        height: "*",
-        visibility: "visible"
-      })), transition("visible <=> hidden", [animate("250ms cubic-bezier(0.86, 0, 0.07, 1)")]), transition("void => *", animate(0))])]
-    },
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepPanel, [{
-    type: Component,
-    args: [{
-      selector: "p-step-panel",
-      standalone: true,
-      imports: [CommonModule, StepperSeparator, SharedModule],
-      template: `
-        @if (isSeparatorVisible()) {
-            <p-stepper-separator />
-        }
-        <div class="p-steppanel-content" [@content]="isVertical() ? (active() ? { value: 'visible', params: { transitionParams: transitionOptions() } } : { value: 'hidden', params: { transitionParams: transitionOptions() } }) : undefined">
-            @if (active()) {
-                <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate; context: { activateCallback: updateValue.bind(this), value: value(), active: active() }"></ng-container>
-            }
-        </div>
-    `,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      host: {
-        "[class.p-steppanel]": "true",
-        "[class.p-component]": "true",
-        "[class.p-steppanel-active]": "active()",
-        "[attr.role]": '"tabpanel"',
-        "[attr.aria-controls]": "ariaControls()",
-        "[attr.id]": "id()",
-        "[attr.data-p-active]": "active()",
-        "[attr.data-pc-name]": '"steppanel"'
-      },
-      animations: [trigger("content", [state("hidden", style({
-        height: "0",
-        visibility: "hidden"
-      })), state("visible", style({
-        height: "*",
-        visibility: "visible"
-      })), transition("visible <=> hidden", [animate("250ms cubic-bezier(0.86, 0, 0.07, 1)")]), transition("void => *", animate(0))])]
-    }]
-  }], null, {
-    contentTemplate: [{
-      type: ContentChild,
-      args: ["content"]
-    }],
-    templates: [{
-      type: ContentChildren,
-      args: [PrimeTemplate]
-    }]
-  });
-})();
-var StepPanels = class _StepPanels extends BaseComponent {
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275StepPanels_BaseFactory;
-    return function StepPanels_Factory(__ngFactoryType__) {
-      return (\u0275StepPanels_BaseFactory || (\u0275StepPanels_BaseFactory = \u0275\u0275getInheritedFactory(_StepPanels)))(__ngFactoryType__ || _StepPanels);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _StepPanels,
-    selectors: [["p-step-panels"]],
-    hostVars: 4,
-    hostBindings: function StepPanels_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275classProp("p-steppanels", true)("p-component", true);
-      }
-    },
-    features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c013,
-    decls: 1,
-    vars: 0,
-    template: function StepPanels_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-      }
-    },
-    dependencies: [CommonModule, SharedModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepPanels, [{
-    type: Component,
-    args: [{
-      selector: "p-step-panels",
-      standalone: true,
-      imports: [CommonModule, SharedModule],
-      template: ` <ng-content></ng-content>`,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      host: {
-        "[class.p-steppanels]": "true",
-        "[class.p-component]": "true"
-      }
-    }]
-  }], null, null);
-})();
-var Stepper = class _Stepper extends BaseComponent {
-  /**
-   * A model that can hold a numeric value or be undefined.
-   * @defaultValue undefined
-   * @type {ModelSignal<number | undefined>}
-   * @group Props
-   */
-  value = model(void 0);
-  /**
-   * A boolean variable that captures user input.
-   * @defaultValue false
-   * @type {InputSignalWithTransform<any, boolean >}
-   * @group Props
-   */
-  linear = input(false, {
-    transform: (v) => transformToBoolean(v)
-  });
-  /**
-   * Transition options of the animation.
-   * @defaultValue 400ms cubic-bezier(0.86, 0, 0.07, 1)
-   * @type {InputSignal<string >}
-   * @group Props
-   */
-  transitionOptions = input("400ms cubic-bezier(0.86, 0, 0.07, 1)");
-  _componentStyle = inject(StepperStyle);
-  id = signal(uuid("pn_id_"));
-  stepItems = contentChildren(StepItem);
-  steps = contentChildren(Step);
-  stepList = contentChild(StepList);
-  updateValue(value) {
-    this.value.set(value);
-  }
-  isStepActive(value) {
-    return this.value() === value;
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275Stepper_BaseFactory;
-    return function Stepper_Factory(__ngFactoryType__) {
-      return (\u0275Stepper_BaseFactory || (\u0275Stepper_BaseFactory = \u0275\u0275getInheritedFactory(_Stepper)))(__ngFactoryType__ || _Stepper);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _Stepper,
-    selectors: [["p-stepper"]],
-    contentQueries: function Stepper_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuerySignal(dirIndex, ctx.stepItems, StepItem, 4);
-        \u0275\u0275contentQuerySignal(dirIndex, ctx.steps, Step, 4);
-        \u0275\u0275contentQuerySignal(dirIndex, ctx.stepList, StepList, 5);
-      }
-      if (rf & 2) {
-        \u0275\u0275queryAdvance(3);
-      }
-    },
-    hostVars: 6,
-    hostBindings: function Stepper_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("role", "tablist")("id", ctx.id());
-        \u0275\u0275classProp("p-stepper", true)("p-component", true);
-      }
-    },
-    inputs: {
-      value: [1, "value"],
-      linear: [1, "linear"],
-      transitionOptions: [1, "transitionOptions"]
-    },
-    outputs: {
-      value: "valueChange"
-    },
-    features: [\u0275\u0275ProvidersFeature([StepperStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c013,
-    decls: 1,
-    vars: 0,
-    template: function Stepper_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-      }
-    },
-    dependencies: [CommonModule, SharedModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Stepper, [{
-    type: Component,
-    args: [{
-      selector: "p-stepper",
-      standalone: true,
-      imports: [CommonModule, SharedModule],
-      template: ` <ng-content></ng-content>`,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      providers: [StepperStyle],
-      host: {
-        "[class.p-stepper]": "true",
-        "[class.p-component]": "true",
-        "[attr.role]": '"tablist"',
-        "[attr.id]": "id()"
-      }
-    }]
-  }], null, null);
-})();
-var StepperModule = class _StepperModule {
-  static \u0275fac = function StepperModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _StepperModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _StepperModule,
-    imports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule],
-    exports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule, SharedModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepperModule, [{
-    type: NgModule,
-    args: [{
-      imports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule],
-      exports: [Stepper, StepList, StepPanels, StepPanel, StepItem, Step, StepperSeparator, SharedModule]
-    }]
-  }], null, null);
-})();
-
-// node_modules/primeng/fesm2022/primeng-toggleswitch.mjs
-var _c014 = ["handle"];
-var _c114 = ["input"];
-var _c25 = (a0) => ({
-  checked: a0
-});
-function ToggleSwitch_Conditional_5_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function ToggleSwitch_Conditional_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, ToggleSwitch_Conditional_5_ng_container_0_Template, 1, 0, "ng-container", 4);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.handleTemplate || ctx_r1._handleTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c25, ctx_r1.checked()));
-  }
-}
-var theme11 = ({
-  dt
-}) => `
-.p-toggleswitch {
-    display: inline-block;
-    width: ${dt("toggleswitch.width")};
-    height: ${dt("toggleswitch.height")};
-}
-
-.p-toggleswitch-input {
-    cursor: pointer;
-    appearance: none;
-    position: absolute;
-    top: 0;
-    inset-inline-start: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    opacity: 0;
-    z-index: 1;
-    outline: 0 none;
-    border-radius: ${dt("toggleswitch.border.radius")};
-}
-
-.p-toggleswitch-slider {
-    display: inline-block;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    border-width: ${dt("toggleswitch.border.width")};
-    border-style: solid;
-    border-color: ${dt("toggleswitch.border.color")};
-    background: ${dt("toggleswitch.background")};
-    transition: background ${dt("toggleswitch.transition.duration")}, color ${dt("toggleswitch.transition.duration")}, border-color ${dt("toggleswitch.transition.duration")}, outline-color ${dt("toggleswitch.transition.duration")}, box-shadow ${dt("toggleswitch.transition.duration")};
-    border-radius: ${dt("toggleswitch.border.radius")};
-    outline-color: transparent;
-    box-shadow: ${dt("toggleswitch.shadow")};
-}
-
-.p-toggleswitch-handle {
-    position: absolute;
-    top: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: ${dt("toggleswitch.handle.background")};
-    color: ${dt("toggleswitch.handle.color")};
-    width: ${dt("toggleswitch.handle.size")};
-    height: ${dt("toggleswitch.handle.size")};
-    inset-inline-start: ${dt("toggleswitch.gap")};
-    margin-block-start: calc(-1 * calc(${dt("toggleswitch.handle.size")} / 2));
-    border-radius: ${dt("toggleswitch.handle.border.radius")};
-    transition: background ${dt("toggleswitch.transition.duration")}, color ${dt("toggleswitch.transition.duration")}, inset-inline-start ${dt("toggleswitch.slide.duration")}, box-shadow ${dt("toggleswitch.slide.duration")};
-}
-
-.p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-slider {
-    background: ${dt("toggleswitch.checked.background")};
-    border-color: ${dt("toggleswitch.checked.border.color")};
-}
-
-.p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-handle {
-    background: ${dt("toggleswitch.handle.checked.background")};
-    color: ${dt("toggleswitch.handle.checked.color")};
-    inset-inline-start: calc(${dt("toggleswitch.width")} - calc(${dt("toggleswitch.handle.size")} + ${dt("toggleswitch.gap")}));
-}
-
-.p-toggleswitch:not(.p-disabled):has(.p-toggleswitch-input:hover) .p-toggleswitch-slider {
-    background: ${dt("toggleswitch.hover.background")};
-    border-color: ${dt("toggleswitch.hover.border.color")};
-}
-
-.p-toggleswitch:not(.p-disabled):has(.p-toggleswitch-input:hover) .p-toggleswitch-handle {
-    background: ${dt("toggleswitch.handle.hover.background")};
-    color: ${dt("toggleswitch.handle.hover.color")};
-}
-
-.p-toggleswitch:not(.p-disabled):has(.p-toggleswitch-input:hover).p-toggleswitch-checked .p-toggleswitch-slider {
-    background: ${dt("toggleswitch.checked.hover.background")};
-    border-color: ${dt("toggleswitch.checked.hover.border.color")};
-}
-
-.p-toggleswitch:not(.p-disabled):has(.p-toggleswitch-input:hover).p-toggleswitch-checked .p-toggleswitch-handle {
-    background: ${dt("toggleswitch.handle.checked.hover.background")};
-    color: ${dt("toggleswitch.handle.checked.hover.color")};
-}
-
-.p-toggleswitch:not(.p-disabled):has(.p-toggleswitch-input:focus-visible) .p-toggleswitch-slider {
-    box-shadow: ${dt("toggleswitch.focus.ring.shadow")};
-    outline: ${dt("toggleswitch.focus.ring.width")} ${dt("toggleswitch.focus.ring.style")} ${dt("toggleswitch.focus.ring.color")};
-    outline-offset: ${dt("toggleswitch.focus.ring.offset")};
-}
-
-.p-toggleswitch.p-invalid > .p-toggleswitch-slider {
-    border-color: ${dt("toggleswitch.invalid.border.color")};
-}
-
-.p-toggleswitch.p-disabled {
-    opacity: 1;
-}
-
-.p-toggleswitch.p-disabled .p-toggleswitch-slider {
-    background: ${dt("toggleswitch.disabled.background")};
-}
-
-.p-toggleswitch.p-disabled .p-toggleswitch-handle {
-    background: ${dt("toggleswitch.handle.disabled.background")};
-}
-
-/* For PrimeNG */
-
-p-toggleSwitch.ng-invalid.ng-dirty > .p-toggleswitch > .p-toggleswitch-slider,
-p-toggle-switch.ng-invalid.ng-dirty > .p-toggleswitch > .p-toggleswitch-slider,
-p-toggleswitch.ng-invalid.ng-dirty > .p-toggleswitch > .p-toggleswitch-slider {
-    border-color: ${dt("toggleswitch.invalid.border.color")};
-}`;
-var inlineStyles2 = {
-  root: {
-    position: "relative"
-  }
-};
-var classes11 = {
-  root: ({
-    instance
-  }) => ({
-    "p-toggleswitch p-component": true,
-    "p-toggleswitch-checked": instance.checked(),
-    "p-disabled": instance.disabled,
-    "p-invalid": instance.invalid
-  }),
-  input: "p-toggleswitch-input",
-  slider: "p-toggleswitch-slider",
-  handle: "p-toggleswitch-handle"
-};
-var ToggleSwitchStyle = class _ToggleSwitchStyle extends BaseStyle {
-  name = "toggleswitch";
-  theme = theme11;
-  classes = classes11;
-  inlineStyles = inlineStyles2;
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275ToggleSwitchStyle_BaseFactory;
-    return function ToggleSwitchStyle_Factory(__ngFactoryType__) {
-      return (\u0275ToggleSwitchStyle_BaseFactory || (\u0275ToggleSwitchStyle_BaseFactory = \u0275\u0275getInheritedFactory(_ToggleSwitchStyle)))(__ngFactoryType__ || _ToggleSwitchStyle);
-    };
-  })();
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _ToggleSwitchStyle,
-    factory: _ToggleSwitchStyle.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ToggleSwitchStyle, [{
-    type: Injectable
-  }], null, null);
-})();
-var ToggleSwitchClasses;
-(function(ToggleSwitchClasses2) {
-  ToggleSwitchClasses2["root"] = "p-toggleswitch";
-  ToggleSwitchClasses2["input"] = "p-toggleswitch-input";
-  ToggleSwitchClasses2["slider"] = "p-toggleswitch-slider";
-})(ToggleSwitchClasses || (ToggleSwitchClasses = {}));
-var TOGGLESWITCH_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => ToggleSwitch),
-  multi: true
-};
-var ToggleSwitch = class _ToggleSwitch extends BaseComponent {
-  /**
-   * Inline style of the component.
-   * @group Props
-   */
-  style;
-  /**
-   * Style class of the component.
-   * @group Props
-   */
-  styleClass;
-  /**
-   * Index of the element in tabbing order.
-   * @group Props
-   */
-  tabindex;
-  /**
-   * Identifier of the input element.
-   * @group Props
-   */
-  inputId;
-  /**
-   * Name of the input element.
-   * @group Props
-   */
-  name;
-  /**
-   * When present, it specifies that the element should be disabled.
-   * @group Props
-   */
-  disabled;
-  /**
-   * When present, it specifies that the component cannot be edited.
-   * @group Props
-   */
-  readonly;
-  /**
-   * Value in checked state.
-   * @group Props
-   */
-  trueValue = true;
-  /**
-   * Value in unchecked state.
-   * @group Props
-   */
-  falseValue = false;
-  /**
-   * Used to define a string that autocomplete attribute the current element.
-   * @group Props
-   */
-  ariaLabel;
-  /**
-   * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
-   * @group Props
-   */
-  ariaLabelledBy;
-  /**
-   * When present, it specifies that the component should automatically get focus on load.
-   * @group Props
-   */
-  autofocus;
-  /**
-   * Callback to invoke when the on value change.
-   * @param {ToggleSwitchChangeEvent} event - Custom change event.
-   * @group Emits
-   */
-  onChange = new EventEmitter();
-  input;
-  /**
-   * Callback to invoke when the on value change.
-   * @type {TemplateRef<ToggleSwitchHandleTemplateContext>} context - Context of the template
-   * @example
-   * ```html
-   * <ng-template #handle let-checked="checked"> </ng-template>
-   * ```
-   * @see {@link ToggleSwitchHandleTemplateContext}
-   * @group Templates
-   */
-  handleTemplate;
-  _handleTemplate;
-  modelValue = false;
-  focused = false;
-  onModelChange = () => {
-  };
-  onModelTouched = () => {
-  };
-  _componentStyle = inject(ToggleSwitchStyle);
-  templates;
-  ngAfterContentInit() {
-    this.templates.forEach((item) => {
-      switch (item.getType()) {
-        case "handle":
-          this._handleTemplate = item.template;
-          break;
-        default:
-          this._handleTemplate = item.template;
-          break;
-      }
-    });
-  }
-  onClick(event) {
-    if (!this.disabled && !this.readonly) {
-      this.modelValue = this.checked() ? this.falseValue : this.trueValue;
-      this.onModelChange(this.modelValue);
-      this.onChange.emit({
-        originalEvent: event,
-        checked: this.modelValue
-      });
-      this.input.nativeElement.focus();
-    }
-  }
-  onFocus() {
-    this.focused = true;
-  }
-  onBlur() {
-    this.focused = false;
-    this.onModelTouched();
-  }
-  writeValue(value) {
-    this.modelValue = value;
-    this.cd.markForCheck();
-  }
-  registerOnChange(fn) {
-    this.onModelChange = fn;
-  }
-  registerOnTouched(fn) {
-    this.onModelTouched = fn;
-  }
-  setDisabledState(val) {
-    this.disabled = val;
-    this.cd.markForCheck();
-  }
-  checked() {
-    return this.modelValue === this.trueValue;
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275ToggleSwitch_BaseFactory;
-    return function ToggleSwitch_Factory(__ngFactoryType__) {
-      return (\u0275ToggleSwitch_BaseFactory || (\u0275ToggleSwitch_BaseFactory = \u0275\u0275getInheritedFactory(_ToggleSwitch)))(__ngFactoryType__ || _ToggleSwitch);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _ToggleSwitch,
-    selectors: [["p-toggleswitch"], ["p-toggleSwitch"], ["p-toggle-switch"]],
-    contentQueries: function ToggleSwitch_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c014, 4);
-        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.handleTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
-      }
-    },
-    viewQuery: function ToggleSwitch_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c114, 5);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.input = _t.first);
-      }
-    },
-    inputs: {
-      style: "style",
-      styleClass: "styleClass",
-      tabindex: [2, "tabindex", "tabindex", numberAttribute],
-      inputId: "inputId",
-      name: "name",
-      disabled: [2, "disabled", "disabled", booleanAttribute],
-      readonly: [2, "readonly", "readonly", booleanAttribute],
-      trueValue: "trueValue",
-      falseValue: "falseValue",
-      ariaLabel: "ariaLabel",
-      ariaLabelledBy: "ariaLabelledBy",
-      autofocus: [2, "autofocus", "autofocus", booleanAttribute]
-    },
-    outputs: {
-      onChange: "onChange"
-    },
-    features: [\u0275\u0275ProvidersFeature([TOGGLESWITCH_VALUE_ACCESSOR, ToggleSwitchStyle]), \u0275\u0275InheritDefinitionFeature],
-    decls: 6,
-    vars: 23,
-    consts: [["input", ""], [3, "click", "ngClass", "ngStyle"], ["type", "checkbox", "role", "switch", 3, "focus", "blur", "ngClass", "checked", "disabled", "pAutoFocus"], [3, "ngClass"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
-    template: function ToggleSwitch_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 1);
-        \u0275\u0275listener("click", function ToggleSwitch_Template_div_click_0_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onClick($event));
-        });
-        \u0275\u0275elementStart(1, "input", 2, 0);
-        \u0275\u0275listener("focus", function ToggleSwitch_Template_input_focus_1_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onFocus());
-        })("blur", function ToggleSwitch_Template_input_blur_1_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onBlur());
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "span", 3)(4, "div", 3);
-        \u0275\u0275template(5, ToggleSwitch_Conditional_5_Template, 1, 4, "ng-container");
-        \u0275\u0275elementEnd()()();
-      }
-      if (rf & 2) {
-        \u0275\u0275styleMap(ctx.sx("root"));
-        \u0275\u0275classMap(ctx.styleClass);
-        \u0275\u0275property("ngClass", ctx.cx("root"))("ngStyle", ctx.style);
-        \u0275\u0275attribute("data-pc-name", "toggleswitch")("data-pc-section", "root");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngClass", ctx.cx("input"))("checked", ctx.checked())("disabled", ctx.disabled)("pAutoFocus", ctx.autofocus);
-        \u0275\u0275attribute("id", ctx.inputId)("aria-checked", ctx.checked())("aria-labelledby", ctx.ariaLabelledBy)("aria-label", ctx.ariaLabel)("name", ctx.name)("tabindex", ctx.tabindex)("data-pc-section", "hiddenInput");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngClass", ctx.cx("slider"));
-        \u0275\u0275attribute("data-pc-section", "slider");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngClass", ctx.cx("handle"));
-        \u0275\u0275advance();
-        \u0275\u0275conditional(ctx.handleTemplate || ctx._handleTemplate ? 5 : -1);
-      }
-    },
-    dependencies: [CommonModule, NgClass, NgTemplateOutlet, NgStyle, AutoFocus, SharedModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ToggleSwitch, [{
-    type: Component,
-    args: [{
-      selector: "p-toggleswitch, p-toggleSwitch, p-toggle-switch",
-      standalone: true,
-      imports: [CommonModule, AutoFocus, SharedModule],
-      template: `
-        <div [ngClass]="cx('root')" [style]="sx('root')" [ngStyle]="style" [class]="styleClass" (click)="onClick($event)" [attr.data-pc-name]="'toggleswitch'" [attr.data-pc-section]="'root'">
-            <input
-                #input
-                [attr.id]="inputId"
-                type="checkbox"
-                role="switch"
-                [ngClass]="cx('input')"
-                [checked]="checked()"
-                [disabled]="disabled"
-                [attr.aria-checked]="checked()"
-                [attr.aria-labelledby]="ariaLabelledBy"
-                [attr.aria-label]="ariaLabel"
-                [attr.name]="name"
-                [attr.tabindex]="tabindex"
-                (focus)="onFocus()"
-                (blur)="onBlur()"
-                [attr.data-pc-section]="'hiddenInput'"
-                [pAutoFocus]="autofocus"
-            />
-            <span [ngClass]="cx('slider')" [attr.data-pc-section]="'slider'">
-                <div [ngClass]="cx('handle')">
-                    @if (handleTemplate || _handleTemplate) {
-                        <ng-container *ngTemplateOutlet="handleTemplate || _handleTemplate; context: { checked: checked() }" />
-                    }
-                </div>
-            </span>
-        </div>
-    `,
-      providers: [TOGGLESWITCH_VALUE_ACCESSOR, ToggleSwitchStyle],
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None
-    }]
-  }], null, {
-    style: [{
-      type: Input
-    }],
-    styleClass: [{
-      type: Input
-    }],
-    tabindex: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    inputId: [{
-      type: Input
-    }],
-    name: [{
-      type: Input
-    }],
-    disabled: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    readonly: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    trueValue: [{
-      type: Input
-    }],
-    falseValue: [{
-      type: Input
-    }],
-    ariaLabel: [{
-      type: Input
-    }],
-    ariaLabelledBy: [{
-      type: Input
-    }],
-    autofocus: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    onChange: [{
-      type: Output
-    }],
-    input: [{
-      type: ViewChild,
-      args: ["input"]
-    }],
-    handleTemplate: [{
-      type: ContentChild,
-      args: ["handle", {
-        descendants: false
-      }]
-    }],
-    templates: [{
-      type: ContentChildren,
-      args: [PrimeTemplate]
-    }]
-  });
-})();
-var ToggleSwitchModule = class _ToggleSwitchModule {
-  static \u0275fac = function ToggleSwitchModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ToggleSwitchModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _ToggleSwitchModule,
-    imports: [ToggleSwitch, SharedModule],
-    exports: [ToggleSwitch, SharedModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [ToggleSwitch, SharedModule, SharedModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ToggleSwitchModule, [{
-    type: NgModule,
-    args: [{
-      imports: [ToggleSwitch, SharedModule],
-      exports: [ToggleSwitch, SharedModule]
-    }]
-  }], null, null);
-})();
-
 // src/app/views/ia-assistant/components/link-list.component.ts
 function LinkListComponent_ng_container_0_ng_container_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -26171,8 +25577,479 @@ var LinkListComponent = class _LinkListComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkListComponent, { className: "LinkListComponent", filePath: "src/app/views/ia-assistant/components/link-list.component.ts", lineNumber: 65 });
 })();
 
+// src/app/views/ia-assistant/services/ia-relationship.service.ts
+var IaRelationshipService = class _IaRelationshipService {
+  fetchService = inject(FetchService);
+  //Get breadcrumb
+  getBreadcrumb(doc, baseUrl) {
+    const breadcrumbItems = doc.querySelectorAll(".breadcrumb li a");
+    const breadcrumbArray = [];
+    breadcrumbItems.forEach((el) => {
+      const rawHref = el.getAttribute("href") || "";
+      let absoluteUrl = "";
+      try {
+        absoluteUrl = new URL(rawHref, baseUrl).href;
+      } catch {
+        console.warn(`Invalid breadcrumb href: ${rawHref}`);
+      }
+      breadcrumbArray.push({
+        label: el.textContent?.trim() || "",
+        url: absoluteUrl
+      });
+    });
+    return breadcrumbArray;
+  }
+  //Add breadcrumb trail & H1 to user input urls (keep prototype url for later use)
+  getAllBreadcrumbs(urlPairs) {
+    return __async(this, null, function* () {
+      const results = [];
+      for (const pair of urlPairs) {
+        const prodUrl = pair.production.href;
+        if (!prodUrl)
+          continue;
+        try {
+          const doc = yield this.fetchService.fetchContent(prodUrl, "prod", 5, "random");
+          const breadcrumb = this.getBreadcrumb(doc, "https://www.canada.ca");
+          const h1Elements = Array.from(doc.querySelectorAll("h1"));
+          const h1 = h1Elements.map((e) => e.textContent?.trim()).filter(Boolean).join("<br>");
+          results.push({
+            href: prodUrl,
+            h1,
+            breadcrumb,
+            descendants: [],
+            minDepth: 0,
+            prototype: pair.prototype?.href
+          });
+        } catch (error) {
+          console.error(`Error fetching ${prodUrl}:`, error);
+        }
+      }
+      return results;
+    });
+  }
+  //Gets root URLs by checking to see if each page is in the breadcrumb of another page
+  getRoots(pages) {
+    const byHref = new Map(pages.map((p2) => [p2.href, p2]));
+    for (const page of pages) {
+      for (const crumb of page.breadcrumb) {
+        const ancestor = byHref.get(crumb.url);
+        if (!ancestor || ancestor.href === page.href)
+          continue;
+        if (!ancestor.descendants.includes(page.href)) {
+          ancestor.descendants.push(page.href);
+        }
+      }
+    }
+    const descendantSet = new Set(pages.flatMap((p2) => p2.descendants));
+    const roots = pages.filter((p2) => !descendantSet.has(p2.href));
+    for (const root of roots) {
+      let minDepth = 2;
+      for (const childHref of root.descendants) {
+        const childPage = byHref.get(childHref);
+        if (!childPage)
+          continue;
+        const index = childPage.breadcrumb.findIndex((bc) => bc.url === root.href);
+        if (index !== -1) {
+          const depth = childPage.breadcrumb.length + 1 - index;
+          minDepth = Math.max(minDepth, depth);
+        }
+      }
+      root.minDepth = minDepth;
+    }
+    return roots;
+  }
+  //Colors and styles for breadcrumbs
+  Icons = {
+    pending: "pi pi-question-circle",
+    valid: "pi pi-arrow-circle-right",
+    orphan: "pi pi-times-circle",
+    error: "pi pi-times"
+  };
+  Colors = {
+    gray: "text-gray-400 hover:text-gray-600",
+    green: "text-green-500 hover:text-green-600",
+    red: "text-red-500 hover:text-red-600",
+    blue: "text-blue-500 hover:text-blue-600"
+  };
+  Modifiers = {
+    bold: "font-bold",
+    errorBorder: "border-dotted"
+  };
+  //Filter out redundant breadcrumb trails (so we can do least number of fetches in validation step)
+  filterBreadcrumbs(pages) {
+    const trails = pages.map((p2) => [
+      ...p2.breadcrumb[0] ? [__spreadProps(__spreadValues({}, p2.breadcrumb[0]), {
+        styleClass: this.Colors.green,
+        linkTooltip: "Breadcrumb root"
+      })] : [],
+      ...p2.breadcrumb.slice(1).map((crumb) => __spreadProps(__spreadValues({}, crumb), {
+        icon: `${this.Icons.pending} ${this.Colors.gray}`,
+        iconTooltip: "Validation pending",
+        styleClass: this.Colors.gray,
+        linkTooltip: "Validation pending"
+      })),
+      {
+        label: p2.h1,
+        url: p2.href,
+        icon: `${this.Icons.pending} ${this.Colors.gray}`,
+        iconTooltip: "Validation pending",
+        styleClass: this.Colors.gray,
+        linkTooltip: "Validation pending"
+      }
+    ].filter(Boolean));
+    const filtered = trails.filter((trail) => !trails.some((other) => other !== trail && other.length > trail.length && trail.every((crumb, i) => other[i]?.url === crumb.url)));
+    filtered.sort((a, b) => {
+      const minLength = Math.min(a.length, b.length);
+      for (let i = 0; i < minLength; i++) {
+        if (a[i].url !== b[i].url) {
+          return a[i].url.localeCompare(b[i].url);
+        }
+      }
+      return a.length - b.length;
+    });
+    for (const page of pages) {
+      if (page.prototype) {
+        for (const breadcrumb of filtered) {
+          for (const crumb of breadcrumb) {
+            if (crumb.url === page.href) {
+              crumb.prototype = page.prototype;
+            }
+          }
+        }
+      }
+    }
+    return filtered;
+  }
+  //Check if breadcrumb parent pages link to their children
+  validateBreadcrumbs(breadcrumbs) {
+    return __async(this, null, function* () {
+      for (const breadcrumb of breadcrumbs) {
+        for (let i = 1; i < breadcrumb.length; i++) {
+          const parent = breadcrumb[i - 1];
+          const child = breadcrumb[i];
+          if (!parent.url || !child.url) {
+            child.icon = `${this.Icons.error} ${this.Colors.red}`;
+            child.iconTooltip = "Link missing from breadcrumb";
+            child.valid = false;
+            continue;
+          }
+          try {
+            const doc = yield this.fetchService.fetchContent(parent.url, "prod", 5, "random");
+            const links = Array.from(doc.querySelectorAll("a")).map((a) => a.getAttribute("href")).filter((href) => !!href).map((href) => {
+              try {
+                return new URL(href, parent.url).href;
+              } catch {
+                return href;
+              }
+            });
+            if (links.includes(child.url)) {
+              child.icon = `${this.Icons.valid} ${this.Colors.green}`;
+              child.iconTooltip = "Valid connection";
+              child.valid = true;
+              child.styleClass = this.Colors.green;
+              child.linkTooltip = "Valid child page";
+            } else {
+              child.icon = `${this.Icons.orphan} ${this.Colors.red}`;
+              child.iconTooltip = "No link from parent";
+              child.valid = false;
+              child.styleClass = this.Colors.red;
+              child.linkTooltip = "IA Orphan";
+            }
+          } catch (error) {
+            console.error(`Error validating breadcrumb link from ${parent.url} to ${child.url}:`, error);
+            child.icon = `${this.Icons.error} ${this.Colors.red}`;
+            child.iconTooltip = "Error validating link";
+            child.valid = false;
+            child.styleClass = `${this.Colors.red} ${this.Modifiers.errorBorder}`;
+            child.linkTooltip = "Error validating link";
+          }
+        }
+      }
+      return breadcrumbs;
+    });
+  }
+  highlightBreadcrumbs(breadcrumbs, rootPages) {
+    const rootSet = new Set(rootPages.map((r2) => r2.href));
+    const descendantSet = new Set(rootPages.flatMap((r2) => r2.descendants || []));
+    let hasBreakAfterRoot = false;
+    let hasBreakBeforeRoot = false;
+    const highlighted = breadcrumbs.map((chain) => {
+      let isAfterRoot = false;
+      let broken = false;
+      return chain.map((crumb) => {
+        const isRoot = rootSet.has(crumb.url);
+        const isDescendant = descendantSet.has(crumb.url);
+        crumb.isRoot = isRoot;
+        crumb.isDescendant = isDescendant;
+        if (isRoot) {
+          isAfterRoot = true;
+          broken = false;
+          crumb.styleClass = `${this.Colors.blue} ${this.Modifiers.bold}`;
+          crumb.linkTooltip = "Starting point for IA crawl (user-added page)";
+        } else if (isAfterRoot) {
+          if (broken) {
+            crumb.styleClass = this.Colors.red;
+            crumb.linkTooltip = "Descendant of IA orphan";
+          } else if (crumb.icon?.includes("pi-times")) {
+            broken = true;
+            hasBreakAfterRoot = true;
+          }
+        } else {
+          if (crumb.icon?.includes("pi-times")) {
+            hasBreakBeforeRoot = true;
+          }
+          crumb.styleClass = this.Colors.gray;
+          crumb.linkTooltip = "Page will be shown in IA map for context but no links will be crawled";
+        }
+        if (isDescendant) {
+          crumb.styleClass += ` ${this.Modifiers.bold}`;
+          crumb.linkTooltip += " (user-added page)";
+        }
+        return crumb;
+      });
+    });
+    return { breadcrumbs: highlighted, hasBreakAfterRoot, hasBreakBeforeRoot };
+  }
+  static \u0275fac = function IaRelationshipService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _IaRelationshipService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaRelationshipService, factory: _IaRelationshipService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaRelationshipService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// src/app/views/ia-assistant/services/ia-tree.service.ts
+var IaTreeService = class _IaTreeService {
+  theme = inject(ThemeService);
+  fetchService = inject(FetchService);
+  constructor() {
+    effect(() => {
+      this.theme.darkMode();
+      this.updateNodeStyles(this.iaChart, 0);
+    });
+  }
+  originalUrl = "";
+  //Breadcrumb & orphan status
+  breadcrumb = [];
+  urlFound = null;
+  //IA chart
+  iaChart = null;
+  brokenLinks = [];
+  depth = 4;
+  //default value
+  //For tracking progress while building IA chart
+  isChartLoading = false;
+  iaProgress = 0;
+  totalUrls = 0;
+  processedUrls = 0;
+  //Pages to skip children when building IA chart
+  skipFormsAndPubs = /* @__PURE__ */ new Set([
+    "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms.html",
+    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/formulaires.html",
+    "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html",
+    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/publications.html"
+  ]);
+  //Set background color
+  get bgColors() {
+    return this.theme.darkMode() ? this.bgColorsDark : this.bgColorsLight;
+  }
+  bgColorsLight = [
+    "surface-0 hover:bg-primary-50",
+    "bg-primary-50 hover:bg-primary-100",
+    "bg-primary-100 hover:bg-primary-200",
+    "bg-primary-200 hover:bg-primary-300",
+    "bg-primary-300 hover:bg-primary-400",
+    "bg-primary-400 hover:bg-primary-500",
+    "bg-primary-500 hover:bg-primary-600 text-white",
+    "bg-primary-600 hover:bg-primary-700 text-white",
+    "bg-primary-700 hover:bg-primary-800 text-white",
+    "bg-primary-800 hover:bg-primary-900 text-white"
+  ];
+  bgColorsDark = [
+    "surface-0 hover:bg-primary-900",
+    "bg-primary-900 hover:bg-primary-800",
+    "bg-primary-800 hover:bg-primary-700",
+    "bg-primary-700 hover:bg-primary-600",
+    "bg-primary-600 hover:bg-primary-500",
+    "bg-primary-500 hover:bg-primary-400",
+    "bg-primary-400 hover:bg-primary-300  text-black",
+    "bg-primary-300 hover:bg-primary-200 text-black",
+    "bg-primary-200 hover:bg-primary-100 text-black",
+    "bg-primary-100 hover:bg-primary-50 text-black"
+  ];
+  get contextStyles() {
+    return this.theme.darkMode() ? this.contextStylesDark : this.contextStylesLight;
+  }
+  contextStylesLight = {
+    new: "bg-green-200 hover:bg-green-300 text-black",
+    rot: "bg-red-200 hover:bg-red-300 text-black",
+    move: "bg-yellow-200 hover:bg-yellow-300 text-black",
+    template: "surface-200 hover:surface-300 text-black"
+  };
+  contextStylesDark = {
+    new: "bg-green-700 hover:bg-green-600 text-white",
+    rot: "bg-red-700 hover:bg-red-600 text-white",
+    move: "bg-yellow-700 hover:bg-yellow-600 text-black",
+    template: "surface-700 hover:surface-600 text-white"
+  };
+  updateNodeStyles(nodes, level = 0) {
+    if (!nodes)
+      return;
+    for (const node of nodes) {
+      const borderStyle = node.data?.borderStyle || "border-2 border-primary border-round shadow-2";
+      const bgClass = this.bgColors[level % this.bgColors.length];
+      const bgStyle = this.contextStyles[node.data?.customStyleKey] ?? bgClass;
+      node.styleClass = `${borderStyle} ${bgStyle}`;
+      if (node.children && node.children.length > 0) {
+        const nextLevel = node.data.isContainer ? level : level + 1;
+        this.updateNodeStyles(node.children, nextLevel);
+      }
+    }
+  }
+  //Step 2a: Get single page IA data
+  getPageMetaAndLinks(url) {
+    return __async(this, null, function* () {
+      try {
+        const doc = yield this.fetchService.fetchContent(url, "prod", 5);
+        const h1Elements = Array.from(doc.querySelectorAll("h1"));
+        const h1 = h1Elements.map((e) => e.textContent?.trim()).filter(Boolean).join("<br>");
+        const breadcrumb = Array.from(doc.querySelectorAll(".breadcrumb li a")).map((a) => new URL(a.getAttribute("href") || "", url).href);
+        const anchors = Array.from(doc.querySelectorAll("main a[href]"));
+        const baseUrl = new URL(url).origin;
+        const links = Array.from(new Set(
+          //unique set
+          anchors.map((a) => {
+            const u = new URL(a.getAttribute("href") || "", url);
+            u.hash = "";
+            return u.href;
+          }).filter((u) => u.startsWith(baseUrl) && u !== url)
+          // on same domain but not self
+        ));
+        return { h1, breadcrumb, links, status: 200 };
+      } catch (err) {
+        console.error(`Failed to fetch ${url}`, err);
+        return { status: 0 };
+      }
+    });
+  }
+  //Step 2b: Crawl all child pages for IA data
+  buildIaTree(urls, depth, parentUrl, level = 0) {
+    return __async(this, null, function* () {
+      if (depth <= 0)
+        return [];
+      if (!parentUrl && level === 0) {
+        this.isChartLoading = true;
+        this.iaProgress = 5;
+        this.processedUrls = 0;
+        this.totalUrls = urls.length;
+      }
+      const nodes = [];
+      const bgClass = this.bgColors[level % this.bgColors.length];
+      for (const url of urls) {
+        const meta = yield this.getPageMetaAndLinks(url);
+        this.processedUrls++;
+        this.iaProgress = Math.round(this.processedUrls / this.totalUrls * 100);
+        if (!meta || meta.status !== 200) {
+          this.brokenLinks.push({
+            parentUrl,
+            url,
+            status: meta?.status || 0
+          });
+          continue;
+        }
+        if (!meta.breadcrumb || !meta.links)
+          continue;
+        if (parentUrl && meta.breadcrumb.at(-1) !== parentUrl) {
+          continue;
+        }
+        const node = {
+          label: meta.h1,
+          data: {
+            h1: meta.h1,
+            url,
+            originalParent: parentUrl,
+            editing: null,
+            customStyle: false,
+            customStyleKey: null,
+            borderStyle: "border-2 border-primary border-round shadow-2",
+            isRoot: false,
+            isCrawled: false,
+            crawlDepth: 0,
+            isUserAdded: false,
+            notOrphan: true,
+            prototype: null
+          },
+          expanded: true,
+          styleClass: `border-2 border-primary border-round shadow-2 ${bgClass}`,
+          children: []
+        };
+        if (meta.links?.length && depth > 1) {
+          this.totalUrls += meta.links.length;
+          const total = meta.links.length;
+          let limit = total;
+          if (this.skipFormsAndPubs.has(url)) {
+            limit = 5;
+          }
+          const links = meta.links.slice(0, limit);
+          node.children = yield this.buildIaTree(links, depth - 1, url, level + 1);
+          if (total > limit) {
+            node.children?.push({
+              label: `+ ${total - limit} more...`,
+              data: {
+                h1: `+ ${total - limit} more...`,
+                url: null,
+                originalParent: parentUrl,
+                editing: null,
+                customStyle: true,
+                customStyleKey: "template",
+                borderStyle: "border-2 border-primary border-round shadow-2 border-dashed",
+                isRoot: false,
+                isCrawled: false,
+                crawlDepth: 0,
+                isUserAdded: false,
+                notOrphan: true,
+                prototype: null
+              },
+              expanded: true,
+              styleClass: `border-2 border-primary border-round shadow-2 border-dashed surface-100 hover:surface-200`,
+              children: []
+            });
+          }
+        }
+        nodes.push(node);
+      }
+      if (!parentUrl && level === 0) {
+        this.iaProgress = 100;
+        setTimeout(() => {
+          this.isChartLoading = false;
+          this.iaProgress = 0;
+        }, 1e3);
+      }
+      return nodes;
+    });
+  }
+  static \u0275fac = function IaTreeService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _IaTreeService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaTreeService, factory: _IaTreeService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaTreeService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [], null);
+})();
+
 // src/app/views/ia-assistant/ia-assistant.component.ts
-function IaAssistantComponent_ng_template_16_p_table_9_ng_template_1_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_table_9_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr")(1, "th");
     \u0275\u0275text(2, "Production URL");
@@ -26182,7 +26059,7 @@ function IaAssistantComponent_ng_template_16_p_table_9_ng_template_1_Template(rf
     \u0275\u0275elementEnd()();
   }
 }
-function IaAssistantComponent_ng_template_16_p_table_9_ng_template_3_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_table_9_ng_template_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr")(1, "td");
     \u0275\u0275text(2);
@@ -26199,10 +26076,10 @@ function IaAssistantComponent_ng_template_16_p_table_9_ng_template_3_Template(rf
     \u0275\u0275textInterpolate(url_r4.prototype == null ? null : url_r4.prototype.href);
   }
 }
-function IaAssistantComponent_ng_template_16_p_table_9_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_table_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-table", 21);
-    \u0275\u0275template(1, IaAssistantComponent_ng_template_16_p_table_9_ng_template_1_Template, 5, 0, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(3, IaAssistantComponent_ng_template_16_p_table_9_ng_template_3_Template, 5, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementStart(0, "p-table", 22);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_18_p_table_9_ng_template_1_Template, 5, 0, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(3, IaAssistantComponent_ng_template_18_p_table_9_ng_template_3_Template, 5, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -26210,21 +26087,21 @@ function IaAssistantComponent_ng_template_16_p_table_9_Template(rf, ctx) {
     \u0275\u0275property("value", ctx_r2.urlPairs)("scrollable", true);
   }
 }
-function IaAssistantComponent_ng_template_16_p_chip_22_p_badge_1_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_chip_22_p_badge_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "p-badge", 24);
+    \u0275\u0275element(0, "p-badge", 25);
   }
 }
-function IaAssistantComponent_ng_template_16_p_chip_22_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_chip_22_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-chip", 22);
-    \u0275\u0275listener("onRemove", function IaAssistantComponent_ng_template_16_p_chip_22_Template_p_chip_onRemove_0_listener() {
+    \u0275\u0275elementStart(0, "p-chip", 23);
+    \u0275\u0275listener("onRemove", function IaAssistantComponent_ng_template_18_p_chip_22_Template_p_chip_onRemove_0_listener() {
       const term_r6 = \u0275\u0275restoreView(_r5).$implicit;
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.removeTerm(term_r6));
     });
-    \u0275\u0275template(1, IaAssistantComponent_ng_template_16_p_chip_22_p_badge_1_Template, 1, 0, "p-badge", 23);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_18_p_chip_22_p_badge_1_Template, 1, 0, "p-badge", 24);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -26235,23 +26112,24 @@ function IaAssistantComponent_ng_template_16_p_chip_22_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r2.isRegex(term_r6));
   }
 }
-function IaAssistantComponent_ng_template_16_p_button_24_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_button_24_Template(rf, ctx) {
   if (rf & 1) {
     const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-button", 25);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_16_p_button_24_Template_p_button_onClick_0_listener() {
+    \u0275\u0275elementStart(0, "p-button", 26);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_18_p_button_24_Template_p_button_onClick_0_listener() {
       \u0275\u0275restoreView(_r7);
       const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.urlPairs = []);
+      ctx_r2.urlPairs = [];
+      return \u0275\u0275resetView(ctx_r2.iaTree = []);
     });
     \u0275\u0275elementEnd();
   }
 }
-function IaAssistantComponent_ng_template_16_p_button_25_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_button_25_Template(rf, ctx) {
   if (rf & 1) {
     const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-button", 26);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_16_p_button_25_Template_p_button_onClick_0_listener() {
+    \u0275\u0275elementStart(0, "p-button", 27);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_18_p_button_25_Template_p_button_onClick_0_listener() {
       \u0275\u0275restoreView(_r8);
       const activateCallback_r9 = \u0275\u0275nextContext().activateCallback;
       const ctx_r2 = \u0275\u0275nextContext();
@@ -26261,11 +26139,11 @@ function IaAssistantComponent_ng_template_16_p_button_25_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-function IaAssistantComponent_ng_template_16_p_button_26_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_p_button_26_Template(rf, ctx) {
   if (rf & 1) {
     const _r10 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-button", 27);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_16_p_button_26_Template_p_button_onClick_0_listener() {
+    \u0275\u0275elementStart(0, "p-button", 28);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_18_p_button_26_Template_p_button_onClick_0_listener() {
       \u0275\u0275restoreView(_r10);
       const activateCallback_r9 = \u0275\u0275nextContext().activateCallback;
       return \u0275\u0275resetView(activateCallback_r9(2));
@@ -26277,76 +26155,76 @@ function IaAssistantComponent_ng_template_16_p_button_26_Template(rf, ctx) {
     \u0275\u0275property("disabled", ctx_r2.urlPairs.length === 0);
   }
 }
-function IaAssistantComponent_ng_template_16_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_18_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 7)(1, "h2", 8);
+    \u0275\u0275elementStart(0, "div", 8)(1, "h2", 9);
     \u0275\u0275text(2, "Canada.ca URLs");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "p", 9);
+    \u0275\u0275elementStart(3, "p", 10);
     \u0275\u0275text(4, "Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "p-iftalabel")(6, "textarea", 10);
-    \u0275\u0275twoWayListener("ngModelChange", function IaAssistantComponent_ng_template_16_Template_textarea_ngModelChange_6_listener($event) {
+    \u0275\u0275elementStart(5, "p-iftalabel")(6, "textarea", 11);
+    \u0275\u0275twoWayListener("ngModelChange", function IaAssistantComponent_ng_template_18_Template_textarea_ngModelChange_6_listener($event) {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r2.rawUrls, $event) || (ctx_r2.rawUrls = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("blur", function IaAssistantComponent_ng_template_16_Template_textarea_blur_6_listener() {
+    \u0275\u0275listener("change", function IaAssistantComponent_ng_template_18_Template_textarea_change_6_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.setUrlPairs());
-    })("paste", function IaAssistantComponent_ng_template_16_Template_textarea_paste_6_listener() {
+    })("paste", function IaAssistantComponent_ng_template_18_Template_textarea_paste_6_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.onPasteUrls());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "label", 11);
+    \u0275\u0275elementStart(7, "label", 12);
     \u0275\u0275text(8, "URLs");
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(9, IaAssistantComponent_ng_template_16_p_table_9_Template, 5, 2, "p-table", 12);
-    \u0275\u0275elementStart(10, "h2", 8);
+    \u0275\u0275template(9, IaAssistantComponent_ng_template_18_p_table_9_Template, 5, 2, "p-table", 13);
+    \u0275\u0275elementStart(10, "h2", 9);
     \u0275\u0275text(11, "Search criteria");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "p", 9);
+    \u0275\u0275elementStart(12, "p", 10);
     \u0275\u0275text(13, "Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is ");
     \u0275\u0275elementStart(14, "strong");
     \u0275\u0275text(15, "not");
     \u0275\u0275elementEnd();
     \u0275\u0275text(16, ' case-sensitive. Regex patterns should begin with "regex:".');
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "p-iftalabel")(18, "textarea", 13);
-    \u0275\u0275twoWayListener("ngModelChange", function IaAssistantComponent_ng_template_16_Template_textarea_ngModelChange_18_listener($event) {
+    \u0275\u0275elementStart(17, "p-iftalabel")(18, "textarea", 14);
+    \u0275\u0275twoWayListener("ngModelChange", function IaAssistantComponent_ng_template_18_Template_textarea_ngModelChange_18_listener($event) {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r2.rawTerms, $event) || (ctx_r2.rawTerms = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("blur", function IaAssistantComponent_ng_template_16_Template_textarea_blur_18_listener() {
+    \u0275\u0275listener("blur", function IaAssistantComponent_ng_template_18_Template_textarea_blur_18_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       ctx_r2.updateTerms();
       return \u0275\u0275resetView(ctx_r2.updateRawTerms());
-    })("keydown", function IaAssistantComponent_ng_template_16_Template_textarea_keydown_18_listener($event) {
+    })("keydown", function IaAssistantComponent_ng_template_18_Template_textarea_keydown_18_listener($event) {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.onKeydownTerm($event));
-    })("paste", function IaAssistantComponent_ng_template_16_Template_textarea_paste_18_listener() {
+    })("paste", function IaAssistantComponent_ng_template_18_Template_textarea_paste_18_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.onPasteTerm());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "label", 14);
+    \u0275\u0275elementStart(19, "label", 15);
     \u0275\u0275text(20, "Search terms (optional)");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(21, "div", 15);
-    \u0275\u0275template(22, IaAssistantComponent_ng_template_16_p_chip_22_Template, 2, 4, "p-chip", 16);
+    \u0275\u0275elementStart(21, "div", 16);
+    \u0275\u0275template(22, IaAssistantComponent_ng_template_18_p_chip_22_Template, 2, 4, "p-chip", 17);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(23, "div", 17);
-    \u0275\u0275template(24, IaAssistantComponent_ng_template_16_p_button_24_Template, 1, 0, "p-button", 18)(25, IaAssistantComponent_ng_template_16_p_button_25_Template, 1, 0, "p-button", 19)(26, IaAssistantComponent_ng_template_16_p_button_26_Template, 1, 1, "p-button", 20);
+    \u0275\u0275elementStart(23, "div", 18);
+    \u0275\u0275template(24, IaAssistantComponent_ng_template_18_p_button_24_Template, 1, 0, "p-button", 19)(25, IaAssistantComponent_ng_template_18_p_button_25_Template, 1, 0, "p-button", 20)(26, IaAssistantComponent_ng_template_18_p_button_26_Template, 1, 1, "p-button", 21);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -26367,21 +26245,21 @@ function IaAssistantComponent_ng_template_16_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r2.urlsChecking.length === 0);
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_1_h2_1_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_1_h2_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "h2");
     \u0275\u0275text(1, "Validating links");
     \u0275\u0275elementEnd();
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_1_h2_2_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_1_h2_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "h2");
     \u0275\u0275text(1, "Validated links");
     \u0275\u0275elementEnd();
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_1_ng_template_4_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_1_ng_template_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span");
     \u0275\u0275text(1);
@@ -26393,11 +26271,11 @@ function IaAssistantComponent_ng_template_19_ng_container_1_ng_template_4_Templa
     \u0275\u0275textInterpolate2("", ctx_r2.urlChecked, "/", ctx_r2.urlTotal, "");
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_1_div_6_ng_container_1_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_1_div_6_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p-chip", 42);
-    \u0275\u0275element(2, "i", 43);
+    \u0275\u0275elementStart(1, "p-chip", 43);
+    \u0275\u0275element(2, "i", 44);
     \u0275\u0275elementStart(3, "span");
     \u0275\u0275text(4);
     \u0275\u0275elementEnd()();
@@ -26409,11 +26287,11 @@ function IaAssistantComponent_ng_template_19_ng_container_1_div_6_ng_container_1
     \u0275\u0275textInterpolate(url_r12.href);
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_1_div_6_ng_container_2_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_1_div_6_ng_container_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p-chip", 44);
-    \u0275\u0275element(2, "i", 43);
+    \u0275\u0275elementStart(1, "p-chip", 45);
+    \u0275\u0275element(2, "i", 44);
     \u0275\u0275elementStart(3, "span");
     \u0275\u0275text(4);
     \u0275\u0275elementEnd()();
@@ -26425,10 +26303,10 @@ function IaAssistantComponent_ng_template_19_ng_container_1_div_6_ng_container_2
     \u0275\u0275textInterpolate(url_r13.href);
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_1_div_6_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_1_div_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 40);
-    \u0275\u0275template(1, IaAssistantComponent_ng_template_19_ng_container_1_div_6_ng_container_1_Template, 5, 1, "ng-container", 41)(2, IaAssistantComponent_ng_template_19_ng_container_1_div_6_ng_container_2_Template, 5, 1, "ng-container", 41);
+    \u0275\u0275elementStart(0, "div", 41);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_21_ng_container_1_div_6_ng_container_1_Template, 5, 1, "ng-container", 42)(2, IaAssistantComponent_ng_template_21_ng_container_1_div_6_ng_container_2_Template, 5, 1, "ng-container", 42);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -26439,14 +26317,14 @@ function IaAssistantComponent_ng_template_19_ng_container_1_div_6_Template(rf, c
     \u0275\u0275property("ngForOf", ctx_r2.urlsProtoChecking);
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_1_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, IaAssistantComponent_ng_template_19_ng_container_1_h2_1_Template, 2, 0, "h2", 28)(2, IaAssistantComponent_ng_template_19_ng_container_1_h2_2_Template, 2, 0, "h2", 28);
-    \u0275\u0275elementStart(3, "p-progressbar", 6);
-    \u0275\u0275template(4, IaAssistantComponent_ng_template_19_ng_container_1_ng_template_4_Template, 2, 2, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_21_ng_container_1_h2_1_Template, 2, 0, "h2", 29)(2, IaAssistantComponent_ng_template_21_ng_container_1_h2_2_Template, 2, 0, "h2", 29);
+    \u0275\u0275elementStart(3, "p-progressbar", 7);
+    \u0275\u0275template(4, IaAssistantComponent_ng_template_21_ng_container_1_ng_template_4_Template, 2, 2, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(6, IaAssistantComponent_ng_template_19_ng_container_1_div_6_Template, 3, 2, "div", 39);
+    \u0275\u0275template(6, IaAssistantComponent_ng_template_21_ng_container_1_div_6_Template, 3, 2, "div", 40);
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
@@ -26461,22 +26339,22 @@ function IaAssistantComponent_ng_template_19_ng_container_1_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r2.urlsChecking.length > 0 || ctx_r2.urlsProtoChecking.length > 0);
   }
 }
-function IaAssistantComponent_ng_template_19_h2_3_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_h2_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 45);
+    \u0275\u0275elementStart(0, "h2", 46);
     \u0275\u0275text(1, "Broken links");
     \u0275\u0275elementEnd();
   }
 }
-function IaAssistantComponent_ng_template_19_ca_link_list_4_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ca_link_list_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r14 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 46);
-    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_19_ca_link_list_4_Template_ca_link_list_approve_0_listener($event) {
+    \u0275\u0275elementStart(0, "ca-link-list", 47);
+    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_21_ca_link_list_4_Template_ca_link_list_approve_0_listener($event) {
       \u0275\u0275restoreView(_r14);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.approve($event.url, $event.event, "prod"));
-    })("remove", function IaAssistantComponent_ng_template_19_ca_link_list_4_Template_ca_link_list_remove_0_listener($event) {
+    })("remove", function IaAssistantComponent_ng_template_21_ca_link_list_4_Template_ca_link_list_remove_0_listener($event) {
       \u0275\u0275restoreView(_r14);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.remove($event, "prod"));
@@ -26488,15 +26366,15 @@ function IaAssistantComponent_ng_template_19_ca_link_list_4_Template(rf, ctx) {
     \u0275\u0275property("links", ctx_r2.urlsBad);
   }
 }
-function IaAssistantComponent_ng_template_19_ca_link_list_5_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ca_link_list_5_Template(rf, ctx) {
   if (rf & 1) {
     const _r15 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 47);
-    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_19_ca_link_list_5_Template_ca_link_list_approve_0_listener($event) {
+    \u0275\u0275elementStart(0, "ca-link-list", 48);
+    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_21_ca_link_list_5_Template_ca_link_list_approve_0_listener($event) {
       \u0275\u0275restoreView(_r15);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.approve($event.url, $event.event, "proto"));
-    })("remove", function IaAssistantComponent_ng_template_19_ca_link_list_5_Template_ca_link_list_remove_0_listener($event) {
+    })("remove", function IaAssistantComponent_ng_template_21_ca_link_list_5_Template_ca_link_list_remove_0_listener($event) {
       \u0275\u0275restoreView(_r15);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.remove($event, "proto"));
@@ -26508,22 +26386,22 @@ function IaAssistantComponent_ng_template_19_ca_link_list_5_Template(rf, ctx) {
     \u0275\u0275property("links", ctx_r2.urlsProtoBad);
   }
 }
-function IaAssistantComponent_ng_template_19_h2_6_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_h2_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 45);
+    \u0275\u0275elementStart(0, "h2", 46);
     \u0275\u0275text(1, "Redirected links");
     \u0275\u0275elementEnd();
   }
 }
-function IaAssistantComponent_ng_template_19_ca_link_list_7_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ca_link_list_7_Template(rf, ctx) {
   if (rf & 1) {
     const _r16 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 48);
-    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_19_ca_link_list_7_Template_ca_link_list_approve_0_listener($event) {
+    \u0275\u0275elementStart(0, "ca-link-list", 49);
+    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_21_ca_link_list_7_Template_ca_link_list_approve_0_listener($event) {
       \u0275\u0275restoreView(_r16);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.approve($event.url, $event.event, "prod"));
-    })("remove", function IaAssistantComponent_ng_template_19_ca_link_list_7_Template_ca_link_list_remove_0_listener($event) {
+    })("remove", function IaAssistantComponent_ng_template_21_ca_link_list_7_Template_ca_link_list_remove_0_listener($event) {
       \u0275\u0275restoreView(_r16);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.remove($event, "prod"));
@@ -26535,15 +26413,15 @@ function IaAssistantComponent_ng_template_19_ca_link_list_7_Template(rf, ctx) {
     \u0275\u0275property("links", ctx_r2.urlsRedirected);
   }
 }
-function IaAssistantComponent_ng_template_19_ca_link_list_8_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ca_link_list_8_Template(rf, ctx) {
   if (rf & 1) {
     const _r17 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 49);
-    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_19_ca_link_list_8_Template_ca_link_list_approve_0_listener($event) {
+    \u0275\u0275elementStart(0, "ca-link-list", 50);
+    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_21_ca_link_list_8_Template_ca_link_list_approve_0_listener($event) {
       \u0275\u0275restoreView(_r17);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.approve($event.url, $event.event, "proto"));
-    })("remove", function IaAssistantComponent_ng_template_19_ca_link_list_8_Template_ca_link_list_remove_0_listener($event) {
+    })("remove", function IaAssistantComponent_ng_template_21_ca_link_list_8_Template_ca_link_list_remove_0_listener($event) {
       \u0275\u0275restoreView(_r17);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.remove($event, "proto"));
@@ -26555,22 +26433,22 @@ function IaAssistantComponent_ng_template_19_ca_link_list_8_Template(rf, ctx) {
     \u0275\u0275property("links", ctx_r2.urlsProtoRedirected);
   }
 }
-function IaAssistantComponent_ng_template_19_h2_9_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_h2_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 45);
+    \u0275\u0275elementStart(0, "h2", 46);
     \u0275\u0275text(1, "Blocked links");
     \u0275\u0275elementEnd();
   }
 }
-function IaAssistantComponent_ng_template_19_ca_link_list_10_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ca_link_list_10_Template(rf, ctx) {
   if (rf & 1) {
     const _r18 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 50);
-    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_19_ca_link_list_10_Template_ca_link_list_approve_0_listener($event) {
+    \u0275\u0275elementStart(0, "ca-link-list", 51);
+    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_21_ca_link_list_10_Template_ca_link_list_approve_0_listener($event) {
       \u0275\u0275restoreView(_r18);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.approve($event.url, $event.event, "prod"));
-    })("remove", function IaAssistantComponent_ng_template_19_ca_link_list_10_Template_ca_link_list_remove_0_listener($event) {
+    })("remove", function IaAssistantComponent_ng_template_21_ca_link_list_10_Template_ca_link_list_remove_0_listener($event) {
       \u0275\u0275restoreView(_r18);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.remove($event, "prod"));
@@ -26582,15 +26460,15 @@ function IaAssistantComponent_ng_template_19_ca_link_list_10_Template(rf, ctx) {
     \u0275\u0275property("links", ctx_r2.urlsBlocked);
   }
 }
-function IaAssistantComponent_ng_template_19_ca_link_list_11_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ca_link_list_11_Template(rf, ctx) {
   if (rf & 1) {
     const _r19 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 51);
-    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_19_ca_link_list_11_Template_ca_link_list_approve_0_listener($event) {
+    \u0275\u0275elementStart(0, "ca-link-list", 52);
+    \u0275\u0275listener("approve", function IaAssistantComponent_ng_template_21_ca_link_list_11_Template_ca_link_list_approve_0_listener($event) {
       \u0275\u0275restoreView(_r19);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.approve($event.url, $event.event, "proto"));
-    })("remove", function IaAssistantComponent_ng_template_19_ca_link_list_11_Template_ca_link_list_remove_0_listener($event) {
+    })("remove", function IaAssistantComponent_ng_template_21_ca_link_list_11_Template_ca_link_list_remove_0_listener($event) {
       \u0275\u0275restoreView(_r19);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.remove($event, "proto"));
@@ -26602,10 +26480,10 @@ function IaAssistantComponent_ng_template_19_ca_link_list_11_Template(rf, ctx) {
     \u0275\u0275property("links", ctx_r2.urlsProtoBlocked);
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_12_li_4_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_12_li_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "li");
-    \u0275\u0275element(1, "i", 53);
+    \u0275\u0275element(1, "i", 54);
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
   }
@@ -26615,10 +26493,10 @@ function IaAssistantComponent_ng_template_19_ng_container_12_li_4_Template(rf, c
     \u0275\u0275textInterpolate(url_r20.href);
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_12_li_5_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_12_li_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "li");
-    \u0275\u0275element(1, "i", 54);
+    \u0275\u0275element(1, "i", 55);
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
   }
@@ -26628,14 +26506,14 @@ function IaAssistantComponent_ng_template_19_ng_container_12_li_5_Template(rf, c
     \u0275\u0275textInterpolate(url_r21.href);
   }
 }
-function IaAssistantComponent_ng_template_19_ng_container_12_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_ng_container_12_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "h2", 45);
+    \u0275\u0275elementStart(1, "h2", 46);
     \u0275\u0275text(2, "Valid links");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "ul", 52);
-    \u0275\u0275template(4, IaAssistantComponent_ng_template_19_ng_container_12_li_4_Template, 3, 1, "li", 41)(5, IaAssistantComponent_ng_template_19_ng_container_12_li_5_Template, 3, 1, "li", 41);
+    \u0275\u0275elementStart(3, "ul", 53);
+    \u0275\u0275template(4, IaAssistantComponent_ng_template_21_ng_container_12_li_4_Template, 3, 1, "li", 42)(5, IaAssistantComponent_ng_template_21_ng_container_12_li_5_Template, 3, 1, "li", 42);
     \u0275\u0275elementEnd();
     \u0275\u0275elementContainerEnd();
   }
@@ -26647,22 +26525,22 @@ function IaAssistantComponent_ng_template_19_ng_container_12_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", ctx_r2.urlsProtoOk);
   }
 }
-function IaAssistantComponent_ng_template_19_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_21_Template(rf, ctx) {
   if (rf & 1) {
     const _r11 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 7);
-    \u0275\u0275template(1, IaAssistantComponent_ng_template_19_ng_container_1_Template, 7, 4, "ng-container", 28);
+    \u0275\u0275elementStart(0, "div", 8);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_21_ng_container_1_Template, 7, 4, "ng-container", 29);
     \u0275\u0275element(2, "p-confirmpopup");
-    \u0275\u0275template(3, IaAssistantComponent_ng_template_19_h2_3_Template, 2, 0, "h2", 29)(4, IaAssistantComponent_ng_template_19_ca_link_list_4_Template, 1, 1, "ca-link-list", 30)(5, IaAssistantComponent_ng_template_19_ca_link_list_5_Template, 1, 1, "ca-link-list", 31)(6, IaAssistantComponent_ng_template_19_h2_6_Template, 2, 0, "h2", 29)(7, IaAssistantComponent_ng_template_19_ca_link_list_7_Template, 1, 1, "ca-link-list", 32)(8, IaAssistantComponent_ng_template_19_ca_link_list_8_Template, 1, 1, "ca-link-list", 33)(9, IaAssistantComponent_ng_template_19_h2_9_Template, 2, 0, "h2", 29)(10, IaAssistantComponent_ng_template_19_ca_link_list_10_Template, 1, 1, "ca-link-list", 34)(11, IaAssistantComponent_ng_template_19_ca_link_list_11_Template, 1, 1, "ca-link-list", 35)(12, IaAssistantComponent_ng_template_19_ng_container_12_Template, 6, 2, "ng-container", 28);
+    \u0275\u0275template(3, IaAssistantComponent_ng_template_21_h2_3_Template, 2, 0, "h2", 30)(4, IaAssistantComponent_ng_template_21_ca_link_list_4_Template, 1, 1, "ca-link-list", 31)(5, IaAssistantComponent_ng_template_21_ca_link_list_5_Template, 1, 1, "ca-link-list", 32)(6, IaAssistantComponent_ng_template_21_h2_6_Template, 2, 0, "h2", 30)(7, IaAssistantComponent_ng_template_21_ca_link_list_7_Template, 1, 1, "ca-link-list", 33)(8, IaAssistantComponent_ng_template_21_ca_link_list_8_Template, 1, 1, "ca-link-list", 34)(9, IaAssistantComponent_ng_template_21_h2_9_Template, 2, 0, "h2", 30)(10, IaAssistantComponent_ng_template_21_ca_link_list_10_Template, 1, 1, "ca-link-list", 35)(11, IaAssistantComponent_ng_template_21_ca_link_list_11_Template, 1, 1, "ca-link-list", 36)(12, IaAssistantComponent_ng_template_21_ng_container_12_Template, 6, 2, "ng-container", 29);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "div", 36)(14, "p-button", 37);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_19_Template_p_button_onClick_14_listener() {
+    \u0275\u0275elementStart(13, "div", 37)(14, "p-button", 38);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_21_Template_p_button_onClick_14_listener() {
       const activateCallback_r22 = \u0275\u0275restoreView(_r11).activateCallback;
       return \u0275\u0275resetView(activateCallback_r22(1));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(15, "p-button", 38);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_19_Template_p_button_onClick_15_listener() {
+    \u0275\u0275elementStart(15, "p-button", 39);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_21_Template_p_button_onClick_15_listener() {
       const activateCallback_r22 = \u0275\u0275restoreView(_r11).activateCallback;
       return \u0275\u0275resetView(activateCallback_r22(3));
     });
@@ -26694,27 +26572,401 @@ function IaAssistantComponent_ng_template_19_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r2.urlsOk.length > 0 || ctx_r2.urlsProtoOk.length > 0);
   }
 }
-function IaAssistantComponent_ng_template_22_Template(rf, ctx) {
+function IaAssistantComponent_ng_template_24_h2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2");
+    \u0275\u0275text(1, "Validating breadcrumb");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_h2_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2");
+    \u0275\u0275text(1, "Validated breadcrumb");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r2.breadcrumbStep);
+  }
+}
+function IaAssistantComponent_ng_template_24_h2_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2", 46);
+    \u0275\u0275text(1, "Root pages");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "li")(2, "a", 59);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const root_r24 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", root_r24.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(root_r24.h1);
+  }
+}
+function IaAssistantComponent_ng_template_24_h2_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2", 46);
+    \u0275\u0275text(1, "Breadcrumb branches");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_i_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 68);
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_i_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 69);
+    \u0275\u0275pipe(1, "translate");
+    \u0275\u0275pipe(2, "translate");
+  }
+  if (rf & 2) {
+    const crumb_r25 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275classMap(crumb_r25.icon);
+    \u0275\u0275property("pTooltip", \u0275\u0275pipeBind1(1, 4, `${crumb_r25.iconTooltip}`));
+    \u0275\u0275attribute("aria-label", \u0275\u0275pipeBind1(2, 6, `${crumb_r25.iconTooltip}`));
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_i_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 68);
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 65);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_i_1_Template, 1, 0, "i", 66)(2, IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_i_2_Template, 3, 8, "i", 67)(3, IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_i_3_Template, 1, 0, "i", 66);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const crumb_r25 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", crumb_r25.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", crumb_r25.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", crumb_r25.icon);
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "span", 62);
+    \u0275\u0275template(2, IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_span_2_Template, 4, 3, "span", 63);
+    \u0275\u0275elementStart(3, "a", 64);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const crumb_r25 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", crumb_r25.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("href", crumb_r25.url, \u0275\u0275sanitizeUrl)("ngClass", crumb_r25.styleClass)("pTooltip", \u0275\u0275pipeBind1(4, 5, `${crumb_r25.linkTooltip}`));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(crumb_r25.label);
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "li", 60)(2, "div", 61);
+    \u0275\u0275template(3, IaAssistantComponent_ng_template_24_ng_container_11_ng_container_3_Template, 6, 7, "ng-container", 42);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const breadcrumb_r26 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", breadcrumb_r26);
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_12_p_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 73);
+    \u0275\u0275text(1, "One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_12_p_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 74);
+    \u0275\u0275text(1, "One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won't impact the crawl since they occur before the detected root pages.");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_12_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 75);
+    \u0275\u0275text(1, "There are no problems with your breadcrumb!");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_ng_container_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_24_ng_container_12_p_1_Template, 2, 0, "p", 70)(2, IaAssistantComponent_ng_template_24_ng_container_12_p_2_Template, 2, 0, "p", 71)(3, IaAssistantComponent_ng_template_24_ng_container_12_p_3_Template, 2, 0, "p", 72);
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "To-do: set up method for user to change which pages to crawl");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.hasBreakAfterRoot);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.hasBreakBeforeRoot && !ctx_r2.hasBreakAfterRoot);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.hasBreakBeforeRoot && !ctx_r2.hasBreakAfterRoot);
+  }
+}
+function IaAssistantComponent_ng_template_24_p_button_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r28 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 76);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_24_p_button_15_Template_p_button_onClick_0_listener() {
+      \u0275\u0275restoreView(_r28);
+      const activateCallback_r27 = \u0275\u0275nextContext().activateCallback;
+      const ctx_r2 = \u0275\u0275nextContext();
+      ctx_r2.buildIaTree();
+      return \u0275\u0275resetView(activateCallback_r27(4));
+    });
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_24_p_button_16_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r29 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 77);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_24_p_button_16_Template_p_button_onClick_0_listener() {
+      \u0275\u0275restoreView(_r29);
+      const activateCallback_r27 = \u0275\u0275nextContext().activateCallback;
+      return \u0275\u0275resetView(activateCallback_r27(4));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("disabled", ctx_r2.breadcrumbProgress !== 100);
+  }
+}
+function IaAssistantComponent_ng_template_24_Template(rf, ctx) {
   if (rf & 1) {
     const _r23 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 7);
-    \u0275\u0275text(1, " To do: set up progress bars & fxns for checking relationship between pasted links, crawling root URLs to create IA tree, & referring link/search term/url structure crawl (for unique links that aren't in the IA tree) ");
+    \u0275\u0275elementStart(0, "div", 8);
+    \u0275\u0275template(1, IaAssistantComponent_ng_template_24_h2_1_Template, 2, 0, "h2", 29)(2, IaAssistantComponent_ng_template_24_h2_2_Template, 2, 0, "h2", 29);
+    \u0275\u0275elementStart(3, "p-progressbar", 7);
+    \u0275\u0275template(4, IaAssistantComponent_ng_template_24_ng_template_4_Template, 2, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "div", 55)(3, "p-button", 37);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_22_Template_p_button_onClick_3_listener() {
-      const activateCallback_r24 = \u0275\u0275restoreView(_r23).activateCallback;
-      return \u0275\u0275resetView(activateCallback_r24(2));
+    \u0275\u0275template(6, IaAssistantComponent_ng_template_24_h2_6_Template, 2, 0, "h2", 30);
+    \u0275\u0275elementStart(7, "ol", 56);
+    \u0275\u0275template(8, IaAssistantComponent_ng_template_24_ng_container_8_Template, 4, 2, "ng-container", 42);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(9, IaAssistantComponent_ng_template_24_h2_9_Template, 2, 0, "h2", 30);
+    \u0275\u0275elementStart(10, "ol", 56);
+    \u0275\u0275template(11, IaAssistantComponent_ng_template_24_ng_container_11_Template, 4, 1, "ng-container", 42);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(12, IaAssistantComponent_ng_template_24_ng_container_12_Template, 6, 3, "ng-container", 29);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "div", 37)(14, "p-button", 38);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_24_Template_p_button_onClick_14_listener() {
+      const activateCallback_r27 = \u0275\u0275restoreView(_r23).activateCallback;
+      return \u0275\u0275resetView(activateCallback_r27(2));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(15, IaAssistantComponent_ng_template_24_p_button_15_Template, 1, 0, "p-button", 57)(16, IaAssistantComponent_ng_template_24_p_button_16_Template, 1, 1, "p-button", 58);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.breadcrumbProgress < 100);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.breadcrumbProgress === 100);
+    \u0275\u0275advance();
+    \u0275\u0275property("value", ctx_r2.breadcrumbProgress);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r2.rootPages.length > 0);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r2.rootPages);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.breadcrumbs.length > 0);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r2.breadcrumbs);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.breadcrumbProgress === 100);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r2.iaTree.length === 0);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.iaTree.length > 0);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p");
+    \u0275\u0275text(1, "No child pages found.");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 91);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 92);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 93);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 94);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 95);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 96);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 82)(1, "span", 83);
+    \u0275\u0275template(2, IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_2_Template, 1, 0, "i", 84)(3, IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_3_Template, 1, 0, "i", 85);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "span", 83);
+    \u0275\u0275template(5, IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_5_Template, 1, 0, "i", 86)(6, IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_6_Template, 1, 0, "i", 87);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "span", 83);
+    \u0275\u0275template(8, IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_8_Template, 1, 0, "i", 88)(9, IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_i_9_Template, 1, 0, "i", 89);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "p");
+    \u0275\u0275element(11, "a", 90);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const node_r31 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", node_r31.data.notOrphan);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !node_r31.data.notOrphan && node_r31.data.originalParent);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", node_r31.data.isRoot && !node_r31.data.isCrawled);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", node_r31.data.isCrawled);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", node_r31.data.prototype);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", node_r31.data.isUserAdded || node_r31.data.isRoot);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", node_r31.data.url, \u0275\u0275sanitizeUrl)("innerHTML", node_r31.label, \u0275\u0275sanitizeHtml);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 80, 3)(2, "p-organization-chart", 7);
+    \u0275\u0275template(3, IaAssistantComponent_ng_template_27_ng_container_3_div_4_ng_template_3_Template, 12, 8, "ng-template", 81);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("value", ctx_r2.iaTree);
+  }
+}
+function IaAssistantComponent_ng_template_27_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h2");
+    \u0275\u0275text(2, "IA structure");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, IaAssistantComponent_ng_template_27_ng_container_3_p_3_Template, 2, 0, "p", 29)(4, IaAssistantComponent_ng_template_27_ng_container_3_div_4_Template, 4, 1, "div", 79);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r2.iaTree.length === 0);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.iaTree.length > 0);
+  }
+}
+function IaAssistantComponent_ng_template_27_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r30 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 8)(1, "p");
+    \u0275\u0275text(2, "To do: set up crawl for root URLs to complete IA tree, also set up referring link/search term/url structure crawl (for unique links that aren't in the IA tree)");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, IaAssistantComponent_ng_template_27_ng_container_3_Template, 5, 2, "ng-container", 29);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 78)(5, "p-button", 38);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_27_Template_p_button_onClick_5_listener() {
+      const activateCallback_r32 = \u0275\u0275restoreView(_r30).activateCallback;
+      return \u0275\u0275resetView(activateCallback_r32(3));
     });
     \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r2.iaTree);
   }
 }
 var IaAssistantComponent = class _IaAssistantComponent {
   confirmationService = inject(ConfirmationService);
+  iaService = inject(IaRelationshipService);
+  fetchService = inject(FetchService);
+  theme = inject(ThemeService);
+  iaTreeService = inject(IaTreeService);
   //Step
   activeStep = 1;
-  /****************
-   * SEARCH TERMS *
-   ****************/
+  /*** Advance to step 3 if all URLs are good ***/
+  goToStep3() {
+    if (this.urlsOk.length + this.urlsProtoOk.length === this.urlTotal) {
+      this.activeStep = 3;
+      this.checkBreadcrumbs();
+    }
+  }
+  /*** Advance to step 4 if all breadcrumbs are good ***/
+  goToStep4() {
+    if (!this.hasBreakAfterRoot && !this.hasBreakBeforeRoot) {
+      this.activeStep = 4;
+    }
+  }
+  /*****************
+   * SEARCH TERMS  *
+   *****************/
   rawTerms = "";
   terms = [];
   updateTerms() {
@@ -26765,9 +27017,9 @@ var IaAssistantComponent = class _IaAssistantComponent {
     else
       return "bg-green-100";
   }
-  /****************
-   *     URLS     *
-   ****************/
+  /*****************
+   * VALIDATE URLS *
+   *****************/
   rawUrls = "";
   urlPairs = [];
   includePrototypeLinks = false;
@@ -26780,15 +27032,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
     this.urlChecked = 0;
     this.urlPercent = 0;
   }
-  //Block unknown hosts <-- will probably separate canada.ca from GitHub repos so that only Canada.ca is crawled for the IA tree
-  allowedHosts = /* @__PURE__ */ new Set([
-    "cra-design.github.io",
-    "cra-proto.github.io",
-    "gc-proto.github.io",
-    "test.canada.ca",
-    "www.canada.ca"
-  ]);
-  /*** Set URL pairs from user input & boolean if any prototypes were included ***/
+  /*** Set URL pairs from user input & set boolean if any prototypes were included ***/
   setUrlPairs() {
     this.urlPairs = this.rawUrls.split(/\r?\n/).map((line) => line.trim().toLowerCase()).filter(Boolean).map((line) => {
       const [prod, proto] = line.split(/[\t,; ]+/);
@@ -26801,6 +27045,9 @@ var IaAssistantComponent = class _IaAssistantComponent {
     });
     this.urlPairs = Array.from(new Map(this.urlPairs.map((p2) => [p2.production.href, p2])).values());
     this.includePrototypeLinks = this.urlPairs.some((p2) => p2.prototype && p2.prototype.href !== "");
+    this.breadcrumbs = [];
+    this.rootPages = [];
+    this.iaTree = [];
   }
   onPasteUrls() {
     setTimeout(() => this.setUrlPairs(), 0);
@@ -26809,15 +27056,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
   checkStatus(link) {
     return __async(this, null, function* () {
       try {
-        if (!environment.production) {
-          yield new Promise((resolve) => setTimeout(resolve, 500 + Math.random() * 1e3));
-        }
-        const url = new URL(link.href);
-        if (!this.allowedHosts.has(url.host)) {
-          link.status = "blocked";
-          return;
-        }
-        const response = yield fetch(link.href, { method: "HEAD", cache: "no-store" });
+        const response = yield this.fetchService.fetchStatus(link.href, "prod", 5, "random");
         if (!response.ok || response.url.includes("404.html")) {
           link.status = "bad";
         } else if (response.url !== link.href) {
@@ -26829,7 +27068,10 @@ var IaAssistantComponent = class _IaAssistantComponent {
         }
       } catch (error) {
         console.log(error);
-        link.status = "bad";
+        if (error.message.startsWith("Blocked host")) {
+          link.status = "blocked";
+        } else
+          link.status = "bad";
       }
     });
   }
@@ -26841,7 +27083,6 @@ var IaAssistantComponent = class _IaAssistantComponent {
         this.urlPercent = this.urlChecked / this.urlTotal * 100;
       }));
       yield Promise.all(urlsToCheck);
-      yield new Promise((resolve) => setTimeout(resolve, 100));
       const badUrls = urls.filter((url) => url.status === "bad");
       badUrls.forEach((badUrl) => badUrl.status = "checking");
       this.urlChecked -= badUrls.length;
@@ -26865,13 +27106,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
       this.goToStep3();
     });
   }
-  /*** Advance to step 3 if all URLs are good ***/
-  goToStep3() {
-    if (this.urlsOk.length + this.urlsProtoOk.length === this.urlTotal) {
-      this.activeStep = 3;
-    }
-  }
-  //Filter based on status
+  /*** Filter based on status***/
   get urlsChecking() {
     return this.urlPairs.map((p2) => p2.production).filter((u) => u.status === "checking");
   }
@@ -26902,6 +27137,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
   get urlsProtoOk() {
     return this.urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "ok");
   }
+  /*** Remove a bad link pair or just the link for prototypes ***/
   remove(link, type) {
     let decrement = 1;
     if (type === "prod") {
@@ -26920,6 +27156,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
     this.urlPercent = this.urlChecked / this.urlTotal * 100;
     this.goToStep3();
   }
+  /*** Approve an edited link for revalidation ***/
   approve(link, $event, type) {
     link.href = link.href.trim().toLowerCase();
     const urlsToCheck = type === "prod" ? this.urlPairs.map((p2) => p2.production) : this.urlPairs.map((p2) => p2.prototype).filter((p2) => !!p2);
@@ -26934,6 +27171,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
     }
     this.revalidate(link);
   }
+  /*** Revalidates a single link rather than the whole array ***/
   revalidate(link) {
     link.status = "checking";
     this.urlChecked -= 1;
@@ -26944,6 +27182,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
       this.goToStep3();
     });
   }
+  /*** Popup message for duplicate production links ***/
   confirmDuplicate(event, link) {
     this.confirmationService.confirm({
       target: event.currentTarget,
@@ -26966,6 +27205,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
       }
     });
   }
+  /*** Popup message for duplicate prototype links ***/
   confirmProtoDuplicate(event, link) {
     this.confirmationService.confirm({
       target: event.currentTarget,
@@ -26988,13 +27228,241 @@ var IaAssistantComponent = class _IaAssistantComponent {
       }
     });
   }
+  /******************************************
+   * GET ROOT URLS AND VALIDATE BREADCRUMBS *
+   ******************************************/
+  breadcrumbs = [];
+  rootPages = [];
+  breadcrumbProgress = 0;
+  breadcrumbStep = "";
+  hasBreakBeforeRoot = false;
+  hasBreakAfterRoot = false;
+  checkBreadcrumbs() {
+    return __async(this, null, function* () {
+      this.breadcrumbProgress = 0;
+      this.breadcrumbStep = "";
+      this.breadcrumbProgress = 20;
+      this.breadcrumbStep = "Getting all breadcrumbs";
+      const allPages = yield this.iaService.getAllBreadcrumbs(this.urlPairs);
+      this.breadcrumbProgress = 40;
+      this.breadcrumbStep = "Finding root pages";
+      yield this.fetchService.simulateDelay(2e3);
+      this.rootPages = this.iaService.getRoots(allPages);
+      this.breadcrumbProgress = 50;
+      this.breadcrumbStep = "Filtering breadcrumbs";
+      yield this.fetchService.simulateDelay(2e3);
+      this.breadcrumbs = this.iaService.filterBreadcrumbs(allPages);
+      this.breadcrumbProgress = 60;
+      this.breadcrumbStep = "Validating breadcrumbs";
+      this.breadcrumbs = yield this.iaService.validateBreadcrumbs(this.breadcrumbs);
+      this.breadcrumbProgress = 90;
+      this.breadcrumbStep = "Highlighting breadcrumbs";
+      yield this.fetchService.simulateDelay(2e3);
+      ({ breadcrumbs: this.breadcrumbs, hasBreakAfterRoot: this.hasBreakAfterRoot, hasBreakBeforeRoot: this.hasBreakBeforeRoot } = this.iaService.highlightBreadcrumbs(this.breadcrumbs, this.rootPages));
+      this.breadcrumbProgress = 100;
+      this.breadcrumbStep = "Complete";
+      console.log(`Breadcrumb branches: `, this.breadcrumbs);
+      console.log(`Root pages: `, this.rootPages);
+      this.goToStep4();
+    });
+  }
+  /**********************
+  *  BUILD THE IA TREE  *
+  ***********************/
+  // Dummy breadcrumb data for testing
+  dummyBreadcrumbs = [
+    [
+      {
+        label: "Canada.ca",
+        url: "https://www.canada.ca/en.html",
+        styleClass: "text-blue-500 hover:text-blue-600 font-bold",
+        linkTooltip: "Starting point for IA crawl (user-added page)",
+        isRoot: true,
+        isDescendant: false
+      },
+      {
+        label: "Canada Revenue Agency (CRA)",
+        url: "https://www.canada.ca/en/revenue-agency.html",
+        icon: "pi pi-times-circle text-red-500 hover:text-red-600",
+        iconTooltip: "No link from parent",
+        styleClass: "text-red-500 hover:text-red-600",
+        linkTooltip: "IA Orphan",
+        valid: false,
+        isRoot: false,
+        isDescendant: false
+      },
+      {
+        label: "Forms and publications - CRA",
+        url: "https://www.canada.ca/en/revenue-agency/services/forms-publications.html",
+        icon: "pi pi-arrow-circle-right text-green-500 hover:text-green-600",
+        iconTooltip: "Valid connection",
+        styleClass: "text-red-500 hover:text-red-600",
+        linkTooltip: "Descendant of IA orphan",
+        valid: true,
+        isRoot: false,
+        isDescendant: false
+      },
+      {
+        label: "Canada Revenue Agency publications listed by number",
+        url: "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html",
+        icon: "pi pi-arrow-circle-right text-green-500 hover:text-green-600",
+        iconTooltip: "Valid connection",
+        styleClass: "text-red-500 hover:text-red-600 font-bold",
+        linkTooltip: "Descendant of IA orphan (user-added page)",
+        valid: true,
+        isRoot: false,
+        isDescendant: true
+      },
+      {
+        label: "T4001 Employers' Guide - Payroll Deductions and Remittances",
+        url: "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4001.html",
+        icon: "pi pi-arrow-circle-right text-green-500 hover:text-green-600",
+        iconTooltip: "Valid connection",
+        styleClass: "text-red-500 hover:text-red-600",
+        linkTooltip: "Descendant of IA orphan",
+        valid: true,
+        isRoot: false,
+        isDescendant: false
+      },
+      {
+        label: "Employers\u2019 Guide \u2013 Payroll Deductions and Remittances",
+        url: "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4001/employers-guide-payroll-deductions-remittances.html",
+        icon: "pi pi-arrow-circle-right text-green-500 hover:text-green-600",
+        iconTooltip: "Valid connection",
+        styleClass: "text-red-500 hover:text-red-600 font-bold",
+        linkTooltip: "Descendant of IA orphan (user-added page)",
+        valid: true,
+        isRoot: false,
+        isDescendant: true
+      }
+    ],
+    [
+      {
+        label: "Canada.ca",
+        url: "https://www.canada.ca/en.html",
+        styleClass: "text-blue-500 hover:text-blue-600 font-bold",
+        linkTooltip: "Starting point for IA crawl (user-added page)",
+        isRoot: true,
+        isDescendant: false
+      },
+      {
+        label: "Taxes",
+        url: "https://www.canada.ca/en/services/taxes.html",
+        icon: "pi pi-arrow-circle-right text-green-500 hover:text-green-600",
+        iconTooltip: "Valid connection",
+        styleClass: "text-green-500 hover:text-green-600",
+        linkTooltip: "Valid child page",
+        valid: true,
+        isRoot: false,
+        isDescendant: false
+      },
+      {
+        label: "Income tax",
+        url: "https://www.canada.ca/en/services/taxes/income-tax.html",
+        icon: "pi pi-arrow-circle-right text-green-500 hover:text-green-600",
+        iconTooltip: "Valid connection",
+        styleClass: "text-green-500 hover:text-green-600 font-bold",
+        linkTooltip: "Valid child page (user-added page)",
+        valid: true,
+        isRoot: false,
+        isDescendant: true
+      }
+    ]
+  ];
+  iaTree = [];
+  buildIaTree() {
+    return __async(this, null, function* () {
+      this.setTreeContext();
+      this.crawlFromRoots(3);
+    });
+  }
+  //Build initial context for crawl (i.e. the start of the breadcrumb)
+  setTreeContext() {
+    const findChildByUrl = (nodes, url) => {
+      if (!nodes || !url)
+        return void 0;
+      return nodes.find((n) => n.data?.url === url);
+    };
+    for (const breadcrumb of this.breadcrumbs) {
+      let currentLevel = this.iaTree;
+      let parentUrl = null;
+      for (const crumb of breadcrumb) {
+        let node = findChildByUrl(currentLevel, crumb.url);
+        if (!node) {
+          node = {
+            label: crumb.label,
+            data: {
+              h1: crumb.label,
+              url: crumb.url ?? null,
+              originalParent: parentUrl,
+              editing: null,
+              customStyle: false,
+              customStyleKey: null,
+              borderStyle: "border-2 border-primary border-round shadow-2",
+              isRoot: crumb.isRoot,
+              isCrawled: false,
+              crawlDepth: 3,
+              //note: use the depth we calculated in findRoots to get this number
+              isUserAdded: crumb.isDescendant,
+              notOrphan: crumb.valid,
+              prototype: crumb.prototype ?? null
+            },
+            expanded: true,
+            styleClass: "border-2 border-primary border-round shadow-2 surface-ground",
+            children: []
+          };
+          currentLevel.push(node);
+        }
+        parentUrl = node.data.url ?? null;
+        currentLevel = node.children;
+      }
+    }
+    console.log("Built IA tree context:", this.iaTree);
+  }
+  //Find the root pages we need to crawl
+  findCrawlRoots(nodes) {
+    const roots = [];
+    const walk = (list) => {
+      for (const n of list) {
+        if (n.data?.isRoot) {
+          roots.push(n);
+        }
+        if (n.children?.length) {
+          walk(n.children);
+        }
+      }
+    };
+    walk(nodes);
+    return roots;
+  }
+  //Crawl from pages marked as data.isRoot
+  crawlFromRoots(depth) {
+    return __async(this, null, function* () {
+      const roots = this.findCrawlRoots(this.iaTree);
+      let index = 1;
+      const numRoots = roots.length;
+      for (const root of roots) {
+        if (!root.data?.url)
+          continue;
+        console.log(`Crawling from root: ${root.data.url}`);
+        const children = yield this.iaTreeService.buildIaTree([root.data.url], depth, void 0, 0);
+        if (children.length > 0) {
+          const builtRoot = children[0];
+          root.children = builtRoot.children;
+          root.data.isCrawled = true;
+        }
+        console.log(`Crawl ${index} of ${numRoots} complete`);
+        index++;
+      }
+    });
+  }
   static \u0275fac = function IaAssistantComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _IaAssistantComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaAssistantComponent, selectors: [["ca-ia-assistant"]], decls: 24, vars: 14, consts: [["content", ""], ["header", ""], ["body", ""], ["id", "wb-cont"], [3, "valueChange", "value", "linear"], [1, "-mx-4"], [3, "value"], [1, "flex", "flex-column", "gap-2", "p-3", "border-2", "border-dashed", "border-primary"], [1, "my-0"], [1, "my-0", "text-color-secondary", "text-xs"], ["id", "urls", "autoResize", "true", "rows", "5", "pTextarea", "", "fluid", "", 3, "ngModelChange", "blur", "paste", "ngModel"], ["for", "urls"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", 3, "value", "scrollable", 4, "ngIf"], ["id", "search", "autoResize", "true", "rows", "2", "pTextarea", "", "fluid", "", "placeholder", "", 3, "ngModelChange", "blur", "keydown", "paste", "ngModel"], ["for", "search"], [1, "flex", "gap-2", "flex-wrap"], [3, "label", "styleClass", "removable", "onRemove", 4, "ngFor", "ngForOf"], [1, "flex", "pt-4", "gap-2", "justify-content-between"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick", 4, "ngIf"], ["label", "Validate URLs", "icon", "pi pi-arrow-right", "iconPos", "right", "class", "ml-auto", 3, "onClick", 4, "ngIf"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", "class", "ml-auto", 3, "disabled", "onClick", 4, "ngIf"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", 3, "value", "scrollable"], [3, "onRemove", "label", "styleClass", "removable"], ["value", "regex", "severity", "info", 4, "ngIf"], ["value", "regex", "severity", "info"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick"], ["label", "Validate URLs", "icon", "pi pi-arrow-right", "iconPos", "right", 1, "ml-auto", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 1, "ml-auto", 3, "onClick", "disabled"], [4, "ngIf"], ["class", "mb-0", 4, "ngIf"], ["labelKey", "Broken", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Broken", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], [1, "flex", "pt-4", "justify-content-between"], ["label", "Back", "severity", "secondary", "icon", "pi pi-arrow-left", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick"], ["class", "flex flex-column gap-2 mt-3", 4, "ngIf"], [1, "flex", "flex-column", "gap-2", "mt-3"], [4, "ngFor", "ngForOf"], ["styleClass", "bg-yellow-100", 1, "max-w-max"], [1, "pi", "pi-spin", "pi-spinner"], ["styleClass", "bg-orange-100", 1, "max-w-max"], [1, "mb-0"], ["labelKey", "Broken", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Broken", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "proto", 3, "approve", "remove", "links"], [1, "my-0", "list-none"], [1, "pi", "pi-check", "text-green-500", "mr-2"], [1, "pi", "pi-check", "text-blue-500", "mr-2"], [1, "flex", "pt-4", "justify-content-start"]], template: function IaAssistantComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaAssistantComponent, selectors: [["ca-ia-assistant"]], decls: 29, vars: 16, consts: [["content", ""], ["header", ""], ["body", ""], ["chartContainer", ""], ["id", "wb-cont"], [3, "valueChange", "value", "linear"], [1, "-mx-4"], [3, "value"], [1, "flex", "flex-column", "gap-2", "p-3", "border-2", "border-dashed", "border-primary"], [1, "my-0"], [1, "my-0", "text-color-secondary", "text-xs"], ["id", "urls", "autoResize", "true", "rows", "5", "pTextarea", "", "fluid", "", 3, "ngModelChange", "change", "paste", "ngModel"], ["for", "urls"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", 3, "value", "scrollable", 4, "ngIf"], ["id", "search", "autoResize", "true", "rows", "2", "pTextarea", "", "fluid", "", "placeholder", "", 3, "ngModelChange", "blur", "keydown", "paste", "ngModel"], ["for", "search"], [1, "flex", "gap-2", "flex-wrap"], [3, "label", "styleClass", "removable", "onRemove", 4, "ngFor", "ngForOf"], [1, "flex", "pt-4", "gap-2", "justify-content-between"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick", 4, "ngIf"], ["label", "Validate URLs", "icon", "pi pi-arrow-right", "iconPos", "right", "class", "ml-auto", 3, "onClick", 4, "ngIf"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", "class", "ml-auto", 3, "disabled", "onClick", 4, "ngIf"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", 3, "value", "scrollable"], [3, "onRemove", "label", "styleClass", "removable"], ["value", "regex", "severity", "info", 4, "ngIf"], ["value", "regex", "severity", "info"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick"], ["label", "Validate URLs", "icon", "pi pi-arrow-right", "iconPos", "right", 1, "ml-auto", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 1, "ml-auto", 3, "onClick", "disabled"], [4, "ngIf"], ["class", "mb-0", 4, "ngIf"], ["labelKey", "Broken", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Broken", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], [1, "flex", "pt-4", "justify-content-between"], ["label", "Back", "severity", "secondary", "icon", "pi pi-arrow-left", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick"], ["class", "flex flex-column gap-2 mt-3", 4, "ngIf"], [1, "flex", "flex-column", "gap-2", "mt-3"], [4, "ngFor", "ngForOf"], ["styleClass", "bg-yellow-100", 1, "max-w-max"], [1, "pi", "pi-spin", "pi-spinner"], ["styleClass", "bg-orange-100", 1, "max-w-max"], [1, "mb-0"], ["labelKey", "Broken", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Broken", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "proto", 3, "approve", "remove", "links"], [1, "my-0", "list-none"], [1, "pi", "pi-check", "text-green-500", "mr-2"], [1, "pi", "pi-check", "text-blue-500", "mr-2"], [1, "mt-0"], ["label", "Build IA Tree", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", 4, "ngIf"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "disabled", "onClick", 4, "ngIf"], ["target", "_blank", 1, "text-color-secondary", "hover:text-color", "no-underline", "flex-wrap", 3, "href"], [1, "mb-3", "pl-2"], [1, "flex", "flex-row", "flex-wrap", "gap-1"], [1, "flex", "flex-row", "align-items-center", "justify-content-around", "gap-1", "max-w-12rem"], ["class", "flex flex-row", 4, "ngIf"], ["target", "_blank", "tooltipPosition", "top", 1, "no-underline", "flex-wrap", "hover:bg-surface", "p-1", "-mx-1", "border-2", "shadow-2", "border-round-lg", "text-center", 3, "href", "ngClass", "pTooltip"], [1, "flex", "flex-row"], ["class", "pi pi-minus text-gray-300", "aria-hidden", "true", "style", "font-size: 1.25rem", 4, "ngIf"], ["tooltipPosition", "top", "style", "font-size: 1.25rem", 3, "class", "pTooltip", 4, "ngIf"], ["aria-hidden", "true", 1, "pi", "pi-minus", "text-gray-300", 2, "font-size", "1.25rem"], ["tooltipPosition", "top", 2, "font-size", "1.25rem", 3, "pTooltip"], ["class", "text-red-500", 4, "ngIf"], ["class", "text-blue-500", 4, "ngIf"], ["class", "text-green-500", 4, "ngIf"], [1, "text-red-500"], [1, "text-blue-500"], [1, "text-green-500"], ["label", "Build IA Tree", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", "disabled"], [1, "flex", "pt-4", "justify-content-start"], ["class", "overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container", 4, "ngIf"], [1, "overflow-auto", "max-h-75vh", "surface-ground", "surface-border", "border-1", "py-3", "mb-3", "ia-chart-container"], ["pTemplate", "default"], [1, "flex", "flex-row", "flex-wrap", "gap-2", "justify-content-between", "-my-2"], [1, "flex", "gap-2"], ["class", "pi pi-verified text-green-500", "pTooltip", "Linked from parent", 4, "ngIf"], ["class", "pi pi-ban text-red-500 flex align-content-center", "pTooltip", "IA orphan", 4, "ngIf"], ["class", "pi pi-spin pi-spinner text-color-secondary", "pTooltip", "crawling", 4, "ngIf"], ["class", "pi pi-list-check text-color-secondary", "pTooltip", "crawled", 4, "ngIf"], ["class", "pi pi-github", "pTooltip", "has prototype", 4, "ngIf"], ["class", "pi pi-file-plus text-primary", "pTooltip", "in-scope", 4, "ngIf"], ["target", "_blank", 1, "ia-label", 3, "href", "innerHTML"], ["pTooltip", "Linked from parent", 1, "pi", "pi-verified", "text-green-500"], ["pTooltip", "IA orphan", 1, "pi", "pi-ban", "text-red-500", "flex", "align-content-center"], ["pTooltip", "crawling", 1, "pi", "pi-spin", "pi-spinner", "text-color-secondary"], ["pTooltip", "crawled", 1, "pi", "pi-list-check", "text-color-secondary"], ["pTooltip", "has prototype", 1, "pi", "pi-github"], ["pTooltip", "in-scope", 1, "pi", "pi-file-plus", "text-primary"]], template: function IaAssistantComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275elementStart(0, "h1", 3);
+      \u0275\u0275elementStart(0, "h1", 4);
       \u0275\u0275text(1);
       \u0275\u0275pipe(2, "translate");
       \u0275\u0275elementEnd();
@@ -27002,36 +27470,42 @@ var IaAssistantComponent = class _IaAssistantComponent {
       \u0275\u0275text(4);
       \u0275\u0275pipe(5, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "p-stepper", 4);
+      \u0275\u0275elementStart(6, "p-stepper", 5);
       \u0275\u0275twoWayListener("valueChange", function IaAssistantComponent_Template_p_stepper_valueChange_6_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.activeStep, $event) || (ctx.activeStep = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275elementStart(7, "p-step-list", 5)(8, "p-step", 6);
+      \u0275\u0275elementStart(7, "p-step-list", 6)(8, "p-step", 7);
       \u0275\u0275text(9, "Enter URLs and search criteria");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(10, "p-step", 6);
+      \u0275\u0275elementStart(10, "p-step", 7);
       \u0275\u0275text(11, "Validate URLs");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(12, "p-step", 6);
-      \u0275\u0275text(13, "Build IA Tree");
+      \u0275\u0275elementStart(12, "p-step", 7);
+      \u0275\u0275text(13, "Validate breadcrumbs");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(14, "p-step", 7);
+      \u0275\u0275text(15, "Build IA tree");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(14, "p-step-panels")(15, "p-step-panel", 6);
-      \u0275\u0275template(16, IaAssistantComponent_ng_template_16_Template, 27, 7, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementStart(16, "p-step-panels")(17, "p-step-panel", 7);
+      \u0275\u0275template(18, IaAssistantComponent_ng_template_18_Template, 27, 7, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(18, "p-step-panel", 6);
-      \u0275\u0275template(19, IaAssistantComponent_ng_template_19_Template, 16, 11, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementStart(20, "p-step-panel", 7);
+      \u0275\u0275template(21, IaAssistantComponent_ng_template_21_Template, 16, 11, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(21, "p-step-panel", 6);
-      \u0275\u0275template(22, IaAssistantComponent_ng_template_22_Template, 4, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementStart(23, "p-step-panel", 7);
+      \u0275\u0275template(24, IaAssistantComponent_ng_template_24_Template, 17, 10, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(26, "p-step-panel", 7);
+      \u0275\u0275template(27, IaAssistantComponent_ng_template_27_Template, 6, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
       \u0275\u0275advance();
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 10, "title.ia"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 12, "title.ia"));
       \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 12, "ia.description"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 14, "ia.description"));
       \u0275\u0275advance(2);
       \u0275\u0275twoWayProperty("value", ctx.activeStep);
       \u0275\u0275property("linear", true);
@@ -27041,14 +27515,59 @@ var IaAssistantComponent = class _IaAssistantComponent {
       \u0275\u0275property("value", 2);
       \u0275\u0275advance(2);
       \u0275\u0275property("value", 3);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("value", 4);
       \u0275\u0275advance(3);
       \u0275\u0275property("value", 1);
       \u0275\u0275advance(3);
       \u0275\u0275property("value", 2);
       \u0275\u0275advance(3);
       \u0275\u0275property("value", 3);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("value", 4);
     }
-  }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, TranslateModule, TranslatePipe, TextareaModule, Textarea, InputTextModule, IftaLabelModule, IftaLabel, ProgressBarModule, ProgressBar, ButtonModule, Button, ButtonGroupModule, InputGroupModule, InputGroupAddonModule, ChipModule, Chip, StepperModule, Stepper, StepList, StepPanels, StepPanel, Step, ConfirmPopupModule, ConfirmPopup, ToggleSwitchModule, TableModule, Table, BadgeModule, Badge, LinkListComponent], encapsulation: 2 });
+  }, dependencies: [
+    CommonModule,
+    NgClass,
+    NgForOf,
+    NgIf,
+    FormsModule,
+    DefaultValueAccessor,
+    NgControlStatus,
+    NgModel,
+    TranslateModule,
+    TranslatePipe,
+    TextareaModule,
+    Textarea,
+    InputTextModule,
+    IftaLabelModule,
+    IftaLabel,
+    PrimeTemplate,
+    InputGroupModule,
+    InputGroupAddonModule,
+    ButtonModule,
+    Button,
+    ProgressBarModule,
+    ProgressBar,
+    ChipModule,
+    Chip,
+    StepperModule,
+    Stepper,
+    StepList,
+    StepPanels,
+    StepPanel,
+    Step,
+    ConfirmPopupModule,
+    ConfirmPopup,
+    TableModule,
+    Table,
+    BadgeModule,
+    Badge,
+    TooltipModule,
+    Tooltip,
+    OrganizationChart,
+    LinkListComponent
+  ], encapsulation: 2 });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaAssistantComponent, [{
@@ -27060,17 +27579,17 @@ var IaAssistantComponent = class _IaAssistantComponent {
       TextareaModule,
       InputTextModule,
       IftaLabelModule,
-      ProgressBarModule,
-      ButtonModule,
-      ButtonGroupModule,
       InputGroupModule,
       InputGroupAddonModule,
+      ButtonModule,
+      ProgressBarModule,
       ChipModule,
       StepperModule,
       ConfirmPopupModule,
-      ToggleSwitchModule,
       TableModule,
       BadgeModule,
+      TooltipModule,
+      OrganizationChart,
       LinkListComponent
     ], template: `<h1 id="wb-cont">{{ 'title.ia' | translate}}</h1>\r
 <p>{{'ia.description' | translate }}</p>\r
@@ -27079,7 +27598,8 @@ var IaAssistantComponent = class _IaAssistantComponent {
     <p-step-list class="-mx-4">\r
         <p-step [value]="1">Enter URLs and search criteria</p-step>\r
         <p-step [value]="2">Validate URLs</p-step>\r
-        <p-step [value]="3">Build IA Tree</p-step>\r
+        <p-step [value]="3">Validate breadcrumbs</p-step>\r
+        <p-step [value]="4">Build IA tree</p-step>\r
     </p-step-list>\r
     <p-step-panels>\r
 \r
@@ -27090,9 +27610,8 @@ var IaAssistantComponent = class _IaAssistantComponent {
                     <h2 class="my-0">Canada.ca URLs</h2>\r
                     <p class="my-0 text-color-secondary text-xs">Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.</p>\r
 \r
-\r
                     <p-iftalabel>\r
-                        <textarea id="urls" autoResize="true" rows="5" pTextarea [(ngModel)]="rawUrls" (blur)="setUrlPairs()" (paste)="onPasteUrls()" fluid></textarea>\r
+                        <textarea id="urls" autoResize="true" rows="5" pTextarea [(ngModel)]="rawUrls" (change)="setUrlPairs()" (paste)="onPasteUrls()" fluid></textarea>\r
                         <label for="urls">URLs</label>\r
                     </p-iftalabel>\r
 \r
@@ -27111,6 +27630,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
                             </tr>\r
                         </ng-template>\r
                     </p-table>\r
+\r
                     <h2 class="my-0">Search criteria</h2>\r
                     <p class="my-0 text-color-secondary text-xs">Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is <strong>not</strong> case-sensitive. Regex patterns should begin with "regex:".</p>\r
                     <p-iftalabel>\r
@@ -27124,9 +27644,9 @@ var IaAssistantComponent = class _IaAssistantComponent {
                     </div>\r
 \r
                 </div>\r
-                <!--FIX: blur event block button event if input is focused when button is clicked-->\r
+\r
                 <div class="flex pt-4 gap-2 justify-content-between">\r
-                    <p-button label="Reset" icon="pi pi-trash" severity="danger" (onClick)="urlPairs = []" *ngIf="urlPairs.length > 0 && urlsChecking.length === 0" />\r
+                    <p-button label="Reset" icon="pi pi-trash" severity="danger" (onClick)="urlPairs = []; iaTree = []" *ngIf="urlPairs.length > 0 && urlsChecking.length === 0" />\r
                     <p-button label="Validate URLs" icon="pi pi-arrow-right" iconPos="right" class="ml-auto" (onClick)="validateUrlPairs(); activateCallback(2)" *ngIf="urlsChecking.length > 0" />\r
                     <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" class="ml-auto" (onClick)="activateCallback(2)" *ngIf="urlsChecking.length === 0" [disabled]="urlPairs.length === 0" />\r
                 </div>\r
@@ -27225,16 +27745,116 @@ var IaAssistantComponent = class _IaAssistantComponent {
                 </div>\r
             </ng-template>\r
         </p-step-panel>\r
+        <!-- TEST LINKS\r
+https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4001/employers-guide-payroll-deductions-remittances.html\r
+https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html\r
+https://www.canada.ca/en/services/taxes/income-tax.html\r
+https://www.canada.ca/en.html\r
 \r
+Top 5 search results for GST:\r
+https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit.html\r
+https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit/goods-services-tax-harmonized-sales-tax-gst-hst-credit-payment-amounts-tax-years-2013-2015.html\r
+https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html\r
+https://www.canada.ca/en/services/taxes/resources-for-small-and-medium-businesses/gst-hst.html\r
+https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit/goods-services-tax-harmonized-sales-tax-gst-hst-credit-payment-amounts-tax-year-2016.html\r
+-->\r
         <p-step-panel [value]="3">\r
             <ng-template #content let-activateCallback="activateCallback">\r
                 <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">\r
 \r
-                    To do: set up progress bars & fxns for checking relationship between pasted links, crawling root URLs to create IA tree, & referring link/search term/url structure crawl (for unique links that aren't in the IA tree)\r
+                    <h2 *ngIf="breadcrumbProgress < 100">Validating breadcrumb</h2>\r
+                    <h2 *ngIf="breadcrumbProgress === 100">Validated breadcrumb</h2>\r
+                    <!--Progress bar-->\r
+                    <p-progressbar [value]="breadcrumbProgress">\r
+                        <ng-template #content let-value>\r
+                            <span>{{breadcrumbStep}}</span>\r
+                        </ng-template>\r
+                    </p-progressbar>\r
+\r
+                    <!--Display detected root pages-->\r
+                    <h2 *ngIf="rootPages.length > 0" class="mb-0">Root pages</h2>\r
+                    <ol class="mt-0">\r
+                        <ng-container *ngFor="let root of rootPages">\r
+                            <li><a [href]="root.href" target="_blank" class="text-color-secondary hover:text-color no-underline flex-wrap">{{root.h1}}</a>\r
+                                <!--Display user-added children of roots-->\r
+                                <!--ul *ngIf="root.descendants.length > 0">\r
+                                    <ng-container *ngFor="let page of root.descendants">\r
+                                        <li>{{page}}</li>\r
+                                    </ng-container>\r
+                                </ul-->\r
+                            </li>\r
+                        </ng-container>\r
+                    </ol>\r
+\r
+                    <!--Display detected breadcrumb trails-->\r
+                    <h2 *ngIf="breadcrumbs.length > 0" class="mb-0">Breadcrumb branches</h2>\r
+                    <ol class="mt-0">\r
+                        <ng-container *ngFor="let breadcrumb of breadcrumbs">\r
+                            <li class="mb-3 pl-2">\r
+                                <div class="flex flex-row flex-wrap gap-1">\r
+                                    <ng-container *ngFor="let crumb of breadcrumb">\r
+                                        <span class="flex flex-row align-items-center justify-content-around gap-1 max-w-12rem">\r
+                                            <span class="flex flex-row" *ngIf="crumb.icon">\r
+                                                <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r
+                                                <i *ngIf="crumb.icon" [class]="crumb.icon" [pTooltip]="\`\${crumb.iconTooltip}\` | translate" tooltipPosition="top" [attr.aria-label]="\`\${crumb.iconTooltip}\` | translate" style="font-size: 1.25rem"></i>\r
+                                                <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r
+                                            </span>\r
+                                            <a [href]="crumb.url" target="_blank" class="no-underline flex-wrap hover:bg-surface p-1 -mx-1 border-2 shadow-2 border-round-lg text-center" [ngClass]="crumb.styleClass" [pTooltip]="\`\${crumb.linkTooltip}\` | translate" tooltipPosition="top">{{crumb.label}}</a>\r
+                                        </span>\r
+                                    </ng-container>\r
+                                </div>\r
+                            </li>\r
+                        </ng-container>\r
+                    </ol>\r
+                    <ng-container *ngIf="breadcrumbProgress === 100">\r
+                        <p *ngIf="hasBreakAfterRoot" class="text-red-500">One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.</p>\r
+                        <p *ngIf="hasBreakBeforeRoot && !hasBreakAfterRoot" class="text-blue-500">One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won't impact the crawl since they occur before the detected root pages.</p>\r
+                        <p *ngIf="!hasBreakBeforeRoot && !hasBreakAfterRoot" class="text-green-500">There are no problems with your breadcrumb!</p>\r
+                        <p>To-do: set up method for user to change which pages to crawl</p>\r
+                    </ng-container>\r
+                </div>\r
+                <div class="flex pt-4 justify-content-between">\r
+                    <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />\r
+                    <p-button label="Build IA Tree" icon="pi pi-arrow-right" iconPos="right" (onClick)="buildIaTree(); activateCallback(4)" *ngIf="iaTree.length === 0" />\r
+                    <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4)" *ngIf="iaTree.length > 0" [disabled]="breadcrumbProgress !== 100" />\r
+                </div>\r
+            </ng-template>\r
+        </p-step-panel>\r
+\r
+        <p-step-panel [value]="4">\r
+            <ng-template #content let-activateCallback="activateCallback">\r
+                <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">\r
+                    <p>To do: set up crawl for root URLs to complete IA tree, also set up referring link/search term/url structure crawl (for unique links that aren't in the IA tree)</p>\r
+                    <!--p-button label="Test" severity="secondary" icon="pi pi-sitemap" (onClick)="setTreeContext()" /-->\r
+                    <ng-container *ngIf="iaTree">\r
+                        <h2>IA structure</h2>\r
+                        <p *ngIf="iaTree.length === 0">No child pages found.</p>\r
+                        <div #chartContainer *ngIf="iaTree.length > 0" class="overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container">\r
+                            <p-organization-chart [value]="iaTree">\r
+                                <ng-template let-node pTemplate="default">\r
+                                    <div class="flex flex-row flex-wrap gap-2 justify-content-between -my-2">\r
+                                        <span class="flex gap-2">\r
+                                            <i class="pi pi-verified text-green-500" pTooltip="Linked from parent" *ngIf="node.data.notOrphan"></i>\r
+                                            <i class="pi pi-ban text-red-500 flex align-content-center" pTooltip="IA orphan" *ngIf="!node.data.notOrphan && node.data.originalParent"></i>\r
+                                        </span>\r
+                                        <span class="flex gap-2">\r
+                                            <i class="pi pi-spin pi-spinner text-color-secondary" pTooltip="crawling" *ngIf="node.data.isRoot && !node.data.isCrawled"></i>\r
+                                            <i class="pi pi-list-check text-color-secondary" pTooltip="crawled" *ngIf="node.data.isCrawled"></i>\r
+                                        </span>\r
+                                        <span class="flex gap-2">\r
+                                            <i class="pi pi-github" pTooltip="has prototype" *ngIf="node.data.prototype"></i>\r
+                                            <i class="pi pi-file-plus text-primary" pTooltip="in-scope" *ngIf="node.data.isUserAdded || node.data.isRoot"></i>\r
+                                        </span>\r
+                                    </div>\r
+                                    <p><a [href]="node.data.url" target="_blank" [innerHTML]="node.label" class="ia-label"></a></p>\r
+                                </ng-template>\r
+                            </p-organization-chart>\r
+                        </div>\r
+                    </ng-container>\r
 \r
                 </div>\r
                 <div class="flex pt-4 justify-content-start">\r
-                    <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />\r
+                    <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(3)" />\r
                 </div>\r
             </ng-template>\r
         </p-step-panel>\r
@@ -27244,7 +27864,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaAssistantComponent, { className: "IaAssistantComponent", filePath: "src/app/views/ia-assistant/ia-assistant.component.ts", lineNumber: 35 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaAssistantComponent, { className: "IaAssistantComponent", filePath: "src/app/views/ia-assistant/ia-assistant.component.ts", lineNumber: 40 });
 })();
 
 // src/app/app.routes.ts
@@ -27266,7 +27886,7 @@ var routes = [
       }
       return true;
     }],
-    loadComponent: () => import("./chunk-ETNENRZI.js").then((m) => m.PageAssistantCompareComponent)
+    loadComponent: () => import("./chunk-HPMLVKRO.js").then((m) => m.PageAssistantCompareComponent)
   },
   {
     path: "page-assistant/share",
@@ -27505,9 +28125,9 @@ var HeaderComponent = class _HeaderComponent {
 })();
 
 // src/app/template/sidebar.component.ts
-var _c015 = () => ["/"];
-var _c115 = () => ["/page-assistant"];
-var _c26 = () => ["/image-assistant"];
+var _c013 = () => ["/"];
+var _c114 = () => ["/page-assistant"];
+var _c25 = () => ["/image-assistant"];
 var _c35 = () => ["/translation-assistant"];
 var _c45 = () => ["/inventory-assistant"];
 var _c55 = () => ["/metadata-assistant"];
@@ -27621,7 +28241,7 @@ var SidebarComponent = class _SidebarComponent {
     }
     if (rf & 2) {
       \u0275\u0275advance(3);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(52, _c015));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(52, _c013));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(8, 28, "title.landing"));
       \u0275\u0275advance(5);
@@ -27631,11 +28251,11 @@ var SidebarComponent = class _SidebarComponent {
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.main);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(53, _c115));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(53, _c114));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(22, 32, "menu.page"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(54, _c26));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(54, _c25));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(28, 34, "menu.image"));
       \u0275\u0275advance(2);
@@ -27950,8 +28570,23 @@ var AppComponent = class _AppComponent {
   titleService = inject(Title);
   localStore = inject(LocalStorageService);
   primeng = inject(PrimeNG);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
   ngOnInit() {
     this.primeng.ripple.set(true);
+    this.route.queryParams.subscribe((params) => {
+      const apiKey = params["key"];
+      if (apiKey) {
+        this.localStore.saveData("apiKey", apiKey);
+        const allParams = __spreadValues({}, params);
+        delete allParams["key"];
+        this.router.navigate([], {
+          queryParams: allParams,
+          replaceUrl: true
+          // replaces the current history entry
+        });
+      }
+    });
     console.log("The initial API key is: ", this.localStore.getData("apiKey"));
   }
   static \u0275fac = function AppComponent_Factory(__ngFactoryType__) {
@@ -27989,7 +28624,7 @@ var AppComponent = class _AppComponent {
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 20 });
 })();
 
 // src/main.ts
