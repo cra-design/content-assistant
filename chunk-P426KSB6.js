@@ -7,6 +7,7 @@ import {
   AccordionPanel,
   AiModel,
   AngleRightIcon,
+  ApiKeyService,
   ArrowDownIcon,
   ArrowUpIcon,
   AutoFocus,
@@ -34,11 +35,13 @@ import {
   DOCUMENT,
   DefaultValueAccessor,
   DomHandler,
+  FetchService,
   FilterService,
   Footer,
   FormsModule,
   HorizontalRadioButtonsComponent,
   HttpClient,
+  HttpHeaders,
   IconField,
   IftaLabel,
   IftaLabelModule,
@@ -168,7 +171,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-7BRZT5O3.js";
+} from "./chunk-AYDFT5MC.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -234,6 +237,7 @@ import {
   ɵɵelementStart,
   ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
+  ɵɵinject,
   ɵɵlistener,
   ɵɵloadQuery,
   ɵɵnamespaceSVG,
@@ -45698,61 +45702,65 @@ var UserInsightsComponent = class _UserInsightsComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserInsightsComponent, { className: "UserInsightsComponent", filePath: "src/app/views/page-assistant/components/tools/user-insights.component.ts", lineNumber: 19 });
 })();
 
-// node_modules/primeng/fesm2022/primeng-overlaypanel.mjs
+// node_modules/primeng/fesm2022/primeng-popover.mjs
 var _c015 = ["content"];
-var _c120 = ["closeicon"];
-var _c213 = ["*"];
-var _c313 = (a0, a1) => ({
+var _c120 = ["*"];
+var _c213 = (a0, a1) => ({
   showTransitionParams: a0,
   hideTransitionParams: a1
 });
-var _c412 = (a0, a1) => ({
+var _c313 = (a0, a1) => ({
   value: a0,
   params: a1
 });
-function OverlayPanel_div_0_ng_container_3_Template(rf, ctx) {
+var _c412 = (a0) => ({
+  closeCallback: a0
+});
+function Popover_div_0_3_ng_template_0_Template(rf, ctx) {
+}
+function Popover_div_0_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    \u0275\u0275template(0, Popover_div_0_3_ng_template_0_Template, 0, 0, "ng-template");
   }
 }
-function OverlayPanel_div_0_Template(rf, ctx) {
+function Popover_div_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 1);
-    \u0275\u0275listener("click", function OverlayPanel_div_0_Template_div_click_0_listener($event) {
+    \u0275\u0275listener("click", function Popover_div_0_Template_div_click_0_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onOverlayClick($event));
-    })("@animation.start", function OverlayPanel_div_0_Template_div_animation_animation_start_0_listener($event) {
+    })("@animation.start", function Popover_div_0_Template_div_animation_animation_start_0_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onAnimationStart($event));
-    })("@animation.done", function OverlayPanel_div_0_Template_div_animation_animation_done_0_listener($event) {
+    })("@animation.done", function Popover_div_0_Template_div_animation_animation_done_0_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onAnimationEnd($event));
     });
     \u0275\u0275elementStart(1, "div", 2);
-    \u0275\u0275listener("click", function OverlayPanel_div_0_Template_div_click_1_listener($event) {
+    \u0275\u0275listener("click", function Popover_div_0_Template_div_click_1_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onContentClick($event));
-    })("mousedown", function OverlayPanel_div_0_Template_div_mousedown_1_listener($event) {
+    })("mousedown", function Popover_div_0_Template_div_mousedown_1_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onContentClick($event));
     });
     \u0275\u0275projection(2);
-    \u0275\u0275template(3, OverlayPanel_div_0_ng_container_3_Template, 1, 0, "ng-container", 3);
+    \u0275\u0275template(3, Popover_div_0_3_Template, 1, 0, null, 3);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classMap(ctx_r1.styleClass);
-    \u0275\u0275property("ngClass", "p-popover p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction2(12, _c412, ctx_r1.overlayVisible ? "open" : "close", \u0275\u0275pureFunction2(9, _c313, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
+    \u0275\u0275property("ngClass", "p-popover p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction2(13, _c313, ctx_r1.overlayVisible ? "open" : "close", \u0275\u0275pureFunction2(10, _c213, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
     \u0275\u0275attribute("aria-modal", ctx_r1.overlayVisible)("aria-label", ctx_r1.ariaLabel)("aria-labelledBy", ctx_r1.ariaLabelledBy);
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(16, _c412, ctx_r1.onCloseClick.bind(ctx_r1)));
   }
 }
 var theme12 = ({
@@ -45862,14 +45870,7 @@ var PopoverStyle = class _PopoverStyle extends BaseStyle {
     type: Injectable
   }], null, null);
 })();
-var PopoverClasses;
-(function(PopoverClasses2) {
-  PopoverClasses2["root"] = "p-popover";
-  PopoverClasses2["content"] = "p-popover-content";
-})(PopoverClasses || (PopoverClasses = {}));
-var OverlayPanel = class _OverlayPanel extends BaseComponent {
-  zone;
-  overlayService;
+var Popover = class _Popover extends BaseComponent {
   /**
    * Defines a string that labels the input for accessibility.
    * @group Props
@@ -45886,11 +45887,6 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
    */
   dismissable = true;
   /**
-   * When enabled, displays a close icon at top right corner.
-   * @group Props
-   */
-  showCloseIcon;
-  /**
    * Inline style of the component.
    * @group Props
    */
@@ -45901,7 +45897,7 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
    */
   styleClass;
   /**
-   *  Target element to attach the panel, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
+   * Target element to attach the panel, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
    * @group Props
    */
   appendTo = "body";
@@ -45955,31 +45951,26 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
   willHide;
   scrollHandler;
   documentResizeListener;
+  /**
+   * Custom content template.
+   * @group Templates
+   */
   contentTemplate;
-  closeIconTemplate;
   templates;
   _contentTemplate;
   destroyCallback;
   overlayEventListener;
   overlaySubscription;
   _componentStyle = inject(PopoverStyle);
-  constructor(zone, overlayService) {
-    super();
-    this.zone = zone;
-    this.overlayService = overlayService;
-    console.log("OverlayPanel is deprecated. Use Popover instead.");
-  }
+  zone = inject(NgZone);
+  overlayService = inject(OverlayService);
   ngAfterContentInit() {
-    this.templates?.forEach((item) => {
+    this.templates.forEach((item) => {
       switch (item.getType()) {
         case "content":
           this._contentTemplate = item.template;
           break;
-        default:
-          this._contentTemplate = item.template;
-          break;
       }
-      this.cd.markForCheck();
     });
   }
   bindDocumentClickListener() {
@@ -46085,14 +46076,12 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
     if (containerOffset.top < targetOffset.top) {
       this.container.setAttribute("data-p-popover-flipped", "true");
       addClass(this.container, "p-popover-flipped");
-      if (this.showCloseIcon) {
-        this.renderer.setStyle(this.container, "margin-top", "-30px");
-      }
     }
   }
   onAnimationStart(event) {
     if (event.toState === "open") {
       this.container = event.element;
+      this.container?.setAttribute(this.attrSelector, "");
       this.appendContainer();
       this.align();
       this.bindDocumentClickListener();
@@ -46224,28 +46213,29 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
     }
     super.ngOnDestroy();
   }
-  static \u0275fac = function OverlayPanel_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _OverlayPanel)(\u0275\u0275directiveInject(NgZone), \u0275\u0275directiveInject(OverlayService));
-  };
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Popover_BaseFactory;
+    return function Popover_Factory(__ngFactoryType__) {
+      return (\u0275Popover_BaseFactory || (\u0275Popover_BaseFactory = \u0275\u0275getInheritedFactory(_Popover)))(__ngFactoryType__ || _Popover);
+    };
+  })();
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _OverlayPanel,
-    selectors: [["p-overlayPanel"], ["p-overlaypanel"]],
-    contentQueries: function OverlayPanel_ContentQueries(rf, ctx, dirIndex) {
+    type: _Popover,
+    selectors: [["p-popover"]],
+    contentQueries: function Popover_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
         \u0275\u0275contentQuery(dirIndex, _c015, 4);
-        \u0275\u0275contentQuery(dirIndex, _c120, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
         let _t;
         \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.closeIconTemplate = _t.first);
         \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
       }
     },
-    hostBindings: function OverlayPanel_HostBindings(rf, ctx) {
+    hostBindings: function Popover_HostBindings(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275listener("keydown.escape", function OverlayPanel_keydown_escape_HostBindingHandler($event) {
+        \u0275\u0275listener("keydown.escape", function Popover_keydown_escape_HostBindingHandler($event) {
           return ctx.onEscapeKeydown($event);
         }, false, \u0275\u0275resolveDocument);
       }
@@ -46254,7 +46244,6 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
       ariaLabel: "ariaLabel",
       ariaLabelledBy: "ariaLabelledBy",
       dismissable: [2, "dismissable", "dismissable", booleanAttribute],
-      showCloseIcon: [2, "showCloseIcon", "showCloseIcon", booleanAttribute],
       style: "style",
       styleClass: "styleClass",
       appendTo: "appendTo",
@@ -46269,22 +46258,21 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
       onShow: "onShow",
       onHide: "onHide"
     },
-    standalone: false,
     features: [\u0275\u0275ProvidersFeature([PopoverStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c213,
+    ngContentSelectors: _c120,
     decls: 1,
     vars: 1,
-    consts: [["role", "dialog", 3, "ngClass", "ngStyle", "class", "click", 4, "ngIf"], ["role", "dialog", 3, "click", "ngClass", "ngStyle"], [1, "p-popover-content", 3, "click", "mousedown"], [4, "ngTemplateOutlet"]],
-    template: function OverlayPanel_Template(rf, ctx) {
+    consts: [["role", "dialog", 3, "ngClass", "ngStyle", "class", "click", 4, "ngIf"], ["role", "dialog", 3, "click", "ngClass", "ngStyle"], [1, "p-popover-content", 3, "click", "mousedown"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
+    template: function Popover_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
-        \u0275\u0275template(0, OverlayPanel_div_0_Template, 4, 15, "div", 0);
+        \u0275\u0275template(0, Popover_div_0_Template, 4, 18, "div", 0);
       }
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.render);
       }
     },
-    dependencies: [NgClass, NgIf, NgTemplateOutlet, NgStyle],
+    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, SharedModule],
     encapsulation: 2,
     data: {
       animation: [trigger("animation", [state("void", style({
@@ -46301,11 +46289,12 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(OverlayPanel, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Popover, [{
     type: Component,
     args: [{
-      selector: "p-overlayPanel, p-overlaypanel",
-      standalone: false,
+      selector: "p-popover",
+      standalone: true,
+      imports: [CommonModule, SharedModule],
       template: `
         <div
             *ngIf="render"
@@ -46326,7 +46315,7 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
         >
             <div class="p-popover-content" (click)="onContentClick($event)" (mousedown)="onContentClick($event)">
                 <ng-content></ng-content>
-                <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
+                <ng-template *ngTemplateOutlet="contentTemplate || _contentTemplate; context: { closeCallback: onCloseClick.bind(this) }"></ng-template>
             </div>
         </div>
     `,
@@ -46343,11 +46332,7 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
       encapsulation: ViewEncapsulation.None,
       providers: [PopoverStyle]
     }]
-  }], () => [{
-    type: NgZone
-  }, {
-    type: OverlayService
-  }], {
+  }], null, {
     ariaLabel: [{
       type: Input
     }],
@@ -46355,12 +46340,6 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
       type: Input
     }],
     dismissable: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    showCloseIcon: [{
       type: Input,
       args: [{
         transform: booleanAttribute
@@ -46414,12 +46393,6 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
         descendants: false
       }]
     }],
-    closeIconTemplate: [{
-      type: ContentChild,
-      args: ["closeicon", {
-        descendants: false
-      }]
-    }],
     templates: [{
       type: ContentChildren,
       args: [PrimeTemplate]
@@ -46430,29 +46403,411 @@ var OverlayPanel = class _OverlayPanel extends BaseComponent {
     }]
   });
 })();
-var OverlayPanelModule = class _OverlayPanelModule {
-  static \u0275fac = function OverlayPanelModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _OverlayPanelModule)();
+var PopoverModule = class _PopoverModule {
+  static \u0275fac = function PopoverModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PopoverModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _OverlayPanelModule,
-    declarations: [OverlayPanel],
-    imports: [CommonModule, Ripple, SharedModule, TimesIcon],
-    exports: [OverlayPanel, SharedModule]
+    type: _PopoverModule,
+    imports: [Popover, SharedModule],
+    exports: [Popover, SharedModule]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [CommonModule, SharedModule, TimesIcon, SharedModule]
+    imports: [Popover, SharedModule, SharedModule]
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(OverlayPanelModule, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PopoverModule, [{
     type: NgModule,
     args: [{
-      imports: [CommonModule, Ripple, SharedModule, TimesIcon],
-      exports: [OverlayPanel, SharedModule],
-      declarations: [OverlayPanel]
+      imports: [Popover, SharedModule],
+      exports: [Popover, SharedModule]
     }]
   }], null, null);
+})();
+
+// src/app/views/page-assistant/services/link-ai.service.ts
+var LinkAiService = class _LinkAiService {
+  http;
+  apiKeyService;
+  openRouterApiUrl = "https://openrouter.ai/api/v1/chat/completions";
+  // Reuse your model rotation style
+  models = [
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "google/gemini-2.0-flash-exp:free",
+    "google/gemini-exp-1206:free",
+    "cognitivecomputations/dolphin3.0-mistral-24b:free",
+    "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
+    "nvidia/llama-3.1-nemotron-70b-instruct:free",
+    "deepseek/deepseek-r1:free"
+  ];
+  constructor(http, apiKeyService) {
+    this.http = http;
+    this.apiKeyService = apiKeyService;
+  }
+  /**
+   * Ask the model whether a link label matches the destination page content.
+   * Returns a structured verdict or null if all models fail.
+   */
+  judge(linkText, meta) {
+    return __async(this, null, function* () {
+      const systemPrompt = `You judge if a link label matches its destination page.
+Use ONLY the provided extracted fields (h1,h2,h3, meta description,bodyPreview).
+Consider abbreviations and synonyms.Respond with a single compact JSON object and nothing else:
+{"verdict":"match|mismatch|uncertain","confidence":0..1,}`;
+      const userPayload = {
+        linkText,
+        destination: {
+          url: meta.finalUrl,
+          h1: meta.h1,
+          title: meta.title,
+          ogTitle: meta.ogTitle,
+          metaDescription: meta.metaDescription,
+          headings: meta.headings?.slice(0, 10),
+          bodyPreview: meta.bodyPreview
+        }
+      };
+      const messages = [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: JSON.stringify(userPayload) }
+      ];
+      for (const model2 of this.models) {
+        const resp = yield this.callOpenRouter(model2, messages, 0);
+        const text = resp?.choices?.[0]?.message?.content;
+        if (!text)
+          continue;
+        const cleaned = this.stripCodeFences(text);
+        const parsed = this.looseJsonParse(cleaned);
+        const verdict = this.toVerdict(parsed);
+        if (verdict)
+          return verdict;
+      }
+      return null;
+    });
+  }
+  // ------- OpenRouter plumbing (matches your TranslationService approach) -------
+  callOpenRouter(model2, messages, temperature = 0) {
+    return __async(this, null, function* () {
+      const apiKey = this.apiKeyService.getCurrentKey();
+      if (!apiKey)
+        throw new Error("API key is required.");
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-Title": "Content Assistant - Link Report"
+      });
+      const payload = { model: model2, messages, temperature };
+      try {
+        const resp = yield this.http.post(this.openRouterApiUrl, payload, {
+          headers,
+          responseType: "text",
+          // IMPORTANT: prevents Angular JSON parser errors on non-JSON
+          observe: "response"
+        }).toPromise();
+        const ct = resp?.headers.get("content-type") || "";
+        if (ct.includes("application/json")) {
+          return JSON.parse(resp.body);
+        } else {
+          console.error(`OpenRouter non-JSON (status ${resp?.status}, ${ct}):
+`, (resp?.body || "").slice(0, 500));
+          return void 0;
+        }
+      } catch (err) {
+        const status = err?.status;
+        const bodySnippet = typeof err?.error === "string" ? err.error.slice(0, 500) : JSON.stringify(err?.error);
+        console.error(`OpenRouter HTTP error (model: ${model2}) status=${status}: ${bodySnippet}`);
+        return void 0;
+      }
+    });
+  }
+  // ------- Output hygiene -------
+  /** Remove ``` fences if a model adds them. */
+  stripCodeFences(s) {
+    return s.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  }
+  /**
+   * Try to parse JSON even if the model wraps it with text.
+   * - First try direct JSON.parse
+   * - Then try the first {...} block via regex
+   */
+  looseJsonParse(s) {
+    try {
+      return JSON.parse(s);
+    } catch {
+    }
+    const m = s.match(/\{[\s\S]*\}/);
+    if (m) {
+      try {
+        return JSON.parse(m[0]);
+      } catch {
+      }
+    }
+    return null;
+  }
+  /** Validate & coerce to AiVerdict */
+  toVerdict(j) {
+    if (!j || typeof j !== "object")
+      return null;
+    const verdict = j.verdict;
+    if (!["match", "mismatch", "uncertain"].includes(verdict))
+      return null;
+    let confidence = Number(j.confidence);
+    if (!isFinite(confidence))
+      confidence = 0;
+    confidence = Math.max(0, Math.min(1, confidence));
+    let matchedFields;
+    if (Array.isArray(j.matchedFields)) {
+      matchedFields = j.matchedFields.filter((x) => [
+        "h1",
+        "title",
+        "ogTitle",
+        "metaDescription",
+        "headings",
+        "bodyPreview"
+      ].includes(x));
+    }
+    const out = { verdict, confidence };
+    if (typeof j.rationale === "string")
+      out.rationale = j.rationale;
+    if (matchedFields && matchedFields.length)
+      out.matchedFields = matchedFields;
+    return out;
+  }
+  static \u0275fac = function LinkAiService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _LinkAiService)(\u0275\u0275inject(HttpClient), \u0275\u0275inject(ApiKeyService));
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _LinkAiService, factory: _LinkAiService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkAiService, [{
+    type: Injectable,
+    args: [{ providedIn: "root" }]
+  }], () => [{ type: HttpClient }, { type: ApiKeyService }], null);
+})();
+
+// src/app/views/page-assistant/services/content-extractor.service.ts
+var ContentExtractorService = class _ContentExtractorService {
+  fetchService;
+  CANADA_ORIGIN = "https://www.canada.ca";
+  constructor(fetchService) {
+    this.fetchService = fetchService;
+  }
+  // ========== PUBLIC API ==========
+  /** Fetch & extract from a Canada.ca page (H1 + intro) */
+  extractCanada(absUrl, opts) {
+    return __async(this, null, function* () {
+      const retries = opts?.retries ?? 3;
+      const delay = opts?.delay ?? "none";
+      try {
+        const doc = yield this.fetchService.fetchContent(absUrl, "prod", retries, delay);
+        return this.fromCanadaDoc(doc);
+      } catch {
+        return null;
+      }
+    });
+  }
+  /** Fetch & extract from an external page allowed by your fetchService */
+  extractExternal(absUrl, opts) {
+    return __async(this, null, function* () {
+      const retries = opts?.retries ?? 3;
+      const delay = opts?.delay ?? "none";
+      try {
+        const doc = yield this.fetchService.fetchContent(absUrl, "none", retries, delay);
+        return this.fromExternalDoc(doc);
+      } catch (e) {
+        console.warn("extractExternal CORS/Fetch error for", absUrl, e);
+        return null;
+      }
+    });
+  }
+  /** Extract from a same-page #anchor using the already-uploaded page Document (no network). */
+  extractAnchor(sourceDoc, hashHref) {
+    const id = (hashHref || "").replace(/^#/, "").trim();
+    const target = this.findAnchorTarget(sourceDoc, id);
+    if (!target) {
+      return { source: "anchor", title: null, intro: null };
+    }
+    const heading = this.closestHeading(target);
+    const title = this.cleanText(heading?.textContent || target.textContent || null);
+    const intro = this.cleanText(this.firstParagraphInSection(heading || target));
+    return { source: "anchor", title, intro };
+  }
+  /** Combine title + intro into a single candidate string you can feed your smartMatch() */
+  buildCandidateText(res) {
+    if (!res)
+      return "";
+    return [res.title || "", res.intro || ""].filter(Boolean).join(" ").trim();
+  }
+  // ========== CANADA.CA RULES ==========
+  fromCanadaDoc(doc) {
+    const main = doc.querySelector("main") || doc.body;
+    let titleSource = void 0;
+    let h1Text = main.querySelector("h1")?.textContent?.trim() || doc.querySelector("h1")?.textContent?.trim() || null;
+    if (main.querySelector("h1"))
+      titleSource = "main>h1";
+    else if (doc.querySelector("h1"))
+      titleSource = "document h1";
+    let introEl = main.querySelector(".gc-lead, .lead, .pagetagline, p.lead") || null;
+    let introSource = null;
+    if (introEl) {
+      const cls = introEl.classList;
+      if (cls.contains("gc-lead"))
+        introSource = "gc-lead";
+      else if (cls.contains("pagetagline"))
+        introSource = "pagetagline";
+      else if (cls.contains("lead") && introEl.tagName === "P")
+        introSource = "p.lead";
+      else
+        introSource = "lead";
+    } else {
+      const beforeH2 = this.firstMeaningfulPBeforeHeading(main, /^H2$/i);
+      if (beforeH2) {
+        introEl = beforeH2;
+        introSource = "firstMeaningfulPBeforeH2";
+      } else {
+        const firstP = this.firstMeaningfulP(main);
+        introEl = firstP;
+        introSource = firstP ? "firstMeaningfulP" : null;
+      }
+    }
+    const title = this.cleanText(h1Text);
+    const intro = this.cleanText(introEl?.textContent || null);
+    return {
+      source: "canada",
+      title,
+      intro,
+      titleSource,
+      introSource
+    };
+  }
+  // ========== EXTERNAL RULES ==========
+  fromExternalDoc(doc) {
+    let titleSource = void 0;
+    let h1 = doc.querySelector("h1")?.textContent?.trim() || doc.querySelector("title")?.textContent?.trim() || null;
+    if (doc.querySelector("h1"))
+      titleSource = "h1";
+    else if (doc.querySelector("title"))
+      titleSource = "title";
+    const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute("content")?.trim() || null;
+    const paras = Array.from(doc.querySelectorAll("p")).map((p) => (p.textContent || "").trim()).filter((t) => this.isMeaningful(t)).slice(0, 2);
+    const introSource = metaDesc ? "metaDescription" : paras.length ? "firstParas" : null;
+    return {
+      source: "external",
+      title: this.cleanText(h1),
+      intro: this.cleanText(metaDesc) || this.cleanText(paras.join("  ")) || null,
+      contentText: this.cleanText(paras.join("  ")) || null,
+      titleSource,
+      introSource
+    };
+  }
+  buildDestMetaFromDoc(doc, finalUrl) {
+    const h1 = doc.querySelector("h1")?.textContent?.trim() || null;
+    const title = doc.querySelector("title")?.textContent?.trim() || null;
+    const ogTitle = doc.querySelector('meta[property="og:title"]')?.getAttribute("content")?.trim() || null;
+    const metaDescription = doc.querySelector('meta[name="description"]')?.getAttribute("content")?.trim() || null;
+    const headings = Array.from(doc.querySelectorAll("h2, h3")).map((h) => (h.textContent || "").trim()).filter(Boolean).slice(0, 10).map((t) => this.cleanText(t) || "").filter(Boolean);
+    const paras = Array.from(doc.querySelectorAll("p")).map((p) => (p.textContent || "").trim()).filter((t) => this.isMeaningful(t)).slice(0, 2).join("  ");
+    return {
+      finalUrl,
+      h1: this.cleanText(h1),
+      title: this.cleanText(title),
+      ogTitle: this.cleanText(ogTitle),
+      metaDescription: this.cleanText(metaDescription),
+      headings,
+      bodyPreview: this.cleanText(paras) || null
+    };
+  }
+  /** Build a DestMeta from a same-page #anchor (no network). */
+  buildDestMetaFromAnchor(sourceDoc, hashHref) {
+    const res = this.extractAnchor(sourceDoc, hashHref);
+    return {
+      finalUrl: hashHref || null,
+      h1: res.title,
+      title: res.title,
+      metaDescription: res.intro,
+      headings: res.title ? [res.title] : [],
+      bodyPreview: res.intro || null
+    };
+  }
+  // ========== ANCHOR HELPERS ==========
+  findAnchorTarget(doc, id) {
+    if (!id)
+      return null;
+    const safe = window.CSS?.escape ? window.CSS.escape(id) : id.replace(/["\\]/g, "\\$&");
+    return doc.getElementById(id) || doc.querySelector(`[name="${safe}"]`);
+  }
+  closestHeading(start) {
+    if (/^H[2-4]$/i.test(start.tagName))
+      return start;
+    const direct = start.querySelector(":scope > h2, :scope > h3, :scope > h4");
+    if (direct)
+      return direct;
+    let sib = start;
+    while (sib = sib.previousElementSibling || null) {
+      if (/^H[2-4]$/i.test(sib.tagName))
+        return sib;
+      const inner = sib.querySelector("h2, h3, h4");
+      if (inner)
+        return inner;
+    }
+    let el = start.parentElement;
+    while (el && !/^MAIN|ARTICLE|BODY$/i.test(el.tagName)) {
+      const h = el.querySelector(":scope > h2, :scope > h3, :scope > h4");
+      if (h)
+        return h;
+      el = el.parentElement;
+    }
+    return null;
+  }
+  firstParagraphInSection(sectionRoot) {
+    let el = sectionRoot.nextElementSibling;
+    while (el) {
+      if (/^H[2-4]$/i.test(el.tagName))
+        break;
+      if (el.tagName === "P" && this.isMeaningful(el.textContent || "")) {
+        return el.textContent?.trim() || null;
+      }
+      el = el.nextElementSibling;
+    }
+    return null;
+  }
+  // ========== GENERIC HELPERS ==========
+  cleanText(s) {
+    if (!s)
+      return null;
+    return s.replace(/\[\d+\]/g, "").replace(/(?:^|\s)\(\s*footnote\s*\d+\s*\)/gi, "").replace(/[*†‡§¶]+/g, "").replace(/\s+/g, " ").trim();
+  }
+  isMeaningful(t) {
+    if (!t)
+      return false;
+    const s = t.replace(/\s+/g, " ").trim();
+    return s.length >= 40;
+  }
+  firstMeaningfulP(root) {
+    return Array.from(root.querySelectorAll("p")).find((p) => this.isMeaningful(p.textContent || "")) || null;
+  }
+  firstMeaningfulPBeforeHeading(root, stopAt) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
+    while (walker.nextNode()) {
+      const el = walker.currentNode;
+      if (stopAt.test(el.tagName))
+        break;
+      if (el.tagName === "P" && this.isMeaningful(el.textContent || ""))
+        return el;
+    }
+    return null;
+  }
+  static \u0275fac = function ContentExtractorService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ContentExtractorService)(\u0275\u0275inject(FetchService));
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ContentExtractorService, factory: _ContentExtractorService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ContentExtractorService, [{
+    type: Injectable,
+    args: [{ providedIn: "root" }]
+  }], () => [{ type: FetchService }], null);
 })();
 
 // src/app/views/page-assistant/components/tools/link-report.component.ts
@@ -46461,7 +46816,7 @@ var _c121 = () => ({ "min-width": "50rem" });
 function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 16);
+    \u0275\u0275elementStart(0, "button", 17);
     \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_4_Template_button_click_0_listener($event) {
       \u0275\u0275restoreView(_r2);
       \u0275\u0275nextContext(3);
@@ -46473,10 +46828,10 @@ function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "th")(1, "div", 14)(2, "span");
+    \u0275\u0275elementStart(0, "th")(1, "div", 15)(2, "span");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 15);
+    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 16);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -46490,8 +46845,8 @@ function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
 function LinkReportComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr");
-    \u0275\u0275element(1, "th", 12);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 5, 2, "th", 13);
+    \u0275\u0275element(1, "th", 13);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 5, 2, "th", 14);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -46526,7 +46881,7 @@ function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27);
+    \u0275\u0275elementStart(0, "div", 28);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -46538,9 +46893,9 @@ function LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 25);
+    \u0275\u0275elementStart(0, "span", 26);
     \u0275\u0275text(1);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template, 2, 1, "div", 26);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template, 2, 1, "div", 27);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -46555,7 +46910,7 @@ function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_td_3_span_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 28);
+    \u0275\u0275elementStart(0, "span", 29);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -46567,23 +46922,23 @@ function LinkReportComponent_ng_template_2_td_3_span_5_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 33);
+    \u0275\u0275element(0, "i", 34);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 34);
+    \u0275\u0275element(0, "i", 35);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 35);
+    \u0275\u0275element(0, "i", 36);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 29);
-    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template, 1, 0, "i", 30)(2, LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template, 1, 0, "i", 31)(3, LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template, 1, 0, "i", 32);
+    \u0275\u0275elementStart(0, "span", 30);
+    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template, 1, 0, "i", 31)(2, LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template, 1, 0, "i", 32)(3, LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template, 1, 0, "i", 33);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -46612,8 +46967,8 @@ function LinkReportComponent_ng_template_2_td_3_span_7_Template(rf, ctx) {
 function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "td");
-    \u0275\u0275elementContainerStart(1, 19);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 20)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 20)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 3, 4, "span", 21)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 2, 1, "span", 22)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 4, 3, "span", 23)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 2, 1, "span", 24);
+    \u0275\u0275elementContainerStart(1, 20);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 21)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 21)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 3, 4, "span", 22)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 2, 1, "span", 23)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 4, 3, "span", 24)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 2, 1, "span", 25);
     \u0275\u0275elementContainerEnd();
     \u0275\u0275elementEnd();
   }
@@ -46635,10 +46990,10 @@ function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr", 17)(1, "td");
-    \u0275\u0275element(2, "span", 18);
+    \u0275\u0275elementStart(0, "tr", 18)(1, "td");
+    \u0275\u0275element(2, "span", 19);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 8, 6, "td", 13);
+    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 8, 6, "td", 14);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -46650,24 +47005,24 @@ function LinkReportComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", ctx_r4.cols);
   }
 }
-function LinkReportComponent_div_11_Template(rf, ctx) {
+function LinkReportComponent_div_12_Template(rf, ctx) {
   if (rf & 1) {
     const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 6)(1, "p-checkbox", 36);
-    \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_div_11_Template_p_checkbox_ngModelChange_1_listener($event) {
+    \u0275\u0275elementStart(0, "div", 7)(1, "p-checkbox", 37);
+    \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_div_12_Template_p_checkbox_ngModelChange_1_listener($event) {
       const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
       const ctx_r4 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r4.typeChecks[t_r10], $event) || (ctx_r4.typeChecks[t_r10] = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("onChange", function LinkReportComponent_div_11_Template_p_checkbox_onChange_1_listener() {
+    \u0275\u0275listener("onChange", function LinkReportComponent_div_12_Template_p_checkbox_onChange_1_listener() {
       const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
       const ctx_r4 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r4.onTypeToggle(t_r10));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "label", 37);
-    \u0275\u0275listener("click", function LinkReportComponent_div_11_Template_label_click_2_listener() {
+    \u0275\u0275elementStart(2, "label", 38);
+    \u0275\u0275listener("click", function LinkReportComponent_div_12_Template_label_click_2_listener() {
       const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
       const ctx_r4 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r4.toggleType(t_r10));
@@ -46688,9 +47043,9 @@ function LinkReportComponent_div_11_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", t_r10, " ");
   }
 }
-function LinkReportComponent_div_12_Template(rf, ctx) {
+function LinkReportComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 38);
+    \u0275\u0275elementStart(0, "div", 39);
     \u0275\u0275text(1, " All types are currently included. ");
     \u0275\u0275elementEnd();
   }
@@ -46736,10 +47091,13 @@ function stripFootnoteText(text) {
 }
 var LinkReportComponent = class _LinkReportComponent {
   uploadState;
-  constructor(uploadState) {
+  linkAi;
+  extractor;
+  constructor(uploadState, linkAi, extractor) {
     this.uploadState = uploadState;
+    this.linkAi = linkAi;
+    this.extractor = extractor;
   }
-  // Expose the overlay panel referenced as #typePanel in the template
   typePanel;
   // data & selection
   headings = [];
@@ -46754,6 +47112,84 @@ var LinkReportComponent = class _LinkReportComponent {
     { field: "searchTerm", header: "Search term" },
     { field: "clicks", header: "Clicks" }
   ];
+  // --- DEBUG LOGGING HELPERS ---
+  COLLAPSE_GROUPS = false;
+  // Turn logging on/off
+  DEBUG_LOG = true;
+  // Helper to keep logs readable
+  truncate(s, n = 200) {
+    if (s == null)
+      return "";
+    const t = String(s).trim();
+    return t.length > n ? t.slice(0, n) + "\u2026" : t;
+  }
+  logRowExtraction(row, source, result, meta, candidate, heuristic, ai, finalStatus, err) {
+    if (!this.DEBUG_LOG)
+      return;
+    const r = result;
+    const header = `[Link#${row.order}] ${row.type} \u2014 ${row.text}  \u2192  ${row.absUrl || row.href || ""}`;
+    if (this.COLLAPSE_GROUPS)
+      console.groupCollapsed(header);
+    else
+      console.group(header);
+    console.log("Type:", row.type);
+    console.log("href:", row.href);
+    console.log("absUrl:", row.absUrl);
+    if (source === "canada" && result) {
+      console.log(`CANADA H1 (titleSource=${r?.titleSource ?? "-"}) ::`);
+      console.log(this.truncate(result.title, 1e3));
+      console.log(`CANADA Intro (introSource=${r?.introSource ?? "-"}) ::`);
+      console.log(this.truncate(result.intro, 1e3));
+    } else if (source === "anchor" && result) {
+      console.log("ANCHOR id:", r?.anchorMeta?.id || "(none)");
+      console.log("ANCHOR heading tag:", r?.anchorMeta?.headingTag || "(none)");
+      console.log(`Section heading (titleSource=${r?.titleSource ?? "-"}) ::`);
+      console.log(this.truncate(result.title, 1e3));
+      console.log(`First paragraph in section (introSource=${r?.introSource ?? "-"}) ::`);
+      console.log(this.truncate(result.intro, 1e3));
+    } else if (source === "external" && result) {
+      console.log(`EXTERNAL Title (titleSource=${r?.titleSource ?? "-"}) ::`);
+      console.log(this.truncate(result.title, 1e3));
+      console.log(`EXTERNAL Intro (introSource=${r?.introSource ?? "-"}) ::`);
+      console.log(this.truncate(result.intro, 1e3));
+      if (r?.contentText) {
+        console.log("EXTERNAL Body preview ::");
+        console.log(this.truncate(r.contentText, 1e3));
+      }
+    } else if (row.type === "mailto" || row.type === "tel" || row.type === "download") {
+      console.log("No extract (mailto/tel/download).");
+    } else {
+      console.log("No extract \u2014 likely blocked host or fetch failure.");
+    }
+    if (meta) {
+      console.log("AI meta sent \u2192", meta);
+    }
+    console.log("Candidate (title + intro) \u2192");
+    console.log(this.truncate(candidate, 1e3));
+    console.log("Heuristic:", heuristic);
+    console.log("AI verdict:", ai);
+    console.log("Final matchStatus:", finalStatus);
+    if (err)
+      console.warn("Extract/AI error:", err);
+    console.groupEnd();
+  }
+  logSummaryTable() {
+    if (!this.DEBUG_LOG)
+      return;
+    const rows = this.headings.map((r) => ({
+      order: r.order,
+      type: r.type,
+      text: this.truncate(r.text, 80),
+      url: r.absUrl || r.href,
+      // show the exact extracted strings in the summary too
+      extractedTitle: this.truncate(r.extractedTitle, 200),
+      extractedIntro: this.truncate(r.extractedIntro, 200),
+      match: r.matchStatus,
+      ai: r.aiVerdict || "",
+      conf: r.aiConfidence ?? ""
+    }));
+    console.table(rows);
+  }
   sourceVersion = "original";
   // ----- Filter state (dropdown with ALL + 6 types) -----
   linkTypes = [
@@ -46775,28 +47211,23 @@ var LinkReportComponent = class _LinkReportComponent {
     mailto: false,
     download: false
   };
-  /** Toggle ALL; when turning ALL on, keep individuals unchecked but ignored. */
   onAllToggle() {
   }
-  /** Toggle an individual type; any individual selection disables ALL. */
   onTypeToggle(_t) {
     if (this.allSelected)
       this.allSelected = false;
   }
-  /** Optional: click label to toggle (if your HTML uses a label click handler). */
   toggleType(t) {
     if (this.allSelected)
       this.allSelected = false;
     this.typeChecks[t] = !this.typeChecks[t];
   }
-  /** Active set used by the table. */
   activeTypes() {
     if (this.allSelected)
       return new Set(this.linkTypes);
     const picked = this.linkTypes.filter((t) => this.typeChecks[t]);
     return new Set(picked);
   }
-  /** Table feeds from filtered rows */
   get filteredHeadings() {
     const active = this.activeTypes();
     return this.headings.filter((r) => active.has(r.type));
@@ -46841,11 +47272,112 @@ var LinkReportComponent = class _LinkReportComponent {
           destH1,
           matchStatus,
           searchTerm: "",
-          // placeholder
           clicks: null
-          // placeholder
         };
       });
+      yield this.enrichWithExtractedContent(doc);
+    });
+  }
+  /**
+   * For each row, use ContentExtractorService to fetch a better "candidate text"
+   * (title + intro), ask AI, and re-evaluate matchStatus. Logs the exact content used.
+   */
+  enrichWithExtractedContent(sourceDoc) {
+    return __async(this, null, function* () {
+      const rows = this.headings;
+      const CONCURRENCY = Math.min(4, rows.length);
+      let idx = 0;
+      const worker = () => __async(this, null, function* () {
+        while (true) {
+          const i = idx++;
+          if (i >= rows.length)
+            break;
+          const row = rows[i];
+          if (row.type === "mailto" || row.type === "tel" || row.type === "download") {
+            this.logRowExtraction(row, row.type, null, null, null, row.matchStatus, null, row.matchStatus);
+            continue;
+          }
+          let result = null;
+          let source = null;
+          let lastError = null;
+          try {
+            if (row.type === "anchor") {
+              const res = this.extractor.extractAnchor(sourceDoc, row.href);
+              result = res;
+              source = "anchor";
+            } else if (row.absUrl) {
+              let isCanada = false;
+              try {
+                const u = new URL(row.absUrl);
+                isCanada = isCanadaHost(u);
+              } catch {
+              }
+              if (isCanada) {
+                result = yield this.extractor.extractCanada(row.absUrl, {
+                  retries: 2,
+                  delay: "none"
+                });
+                source = "canada";
+              } else {
+                result = yield this.extractor.extractExternal(row.absUrl, {
+                  retries: 2,
+                  delay: "none"
+                });
+                source = "external";
+              }
+            }
+          } catch (err) {
+            lastError = err;
+          }
+          if (result) {
+            const candidate = this.extractor.buildCandidateText(result);
+            const meta = {
+              finalUrl: row.absUrl ?? row.href ?? null,
+              h1: result.title ?? null,
+              title: result.title ?? null,
+              metaDescription: result.intro ?? null,
+              headings: row.destH1 ? [row.destH1] : [],
+              bodyPreview: result.contentText || result.intro || null
+            };
+            let ai = null;
+            try {
+              ai = yield this.linkAi.judge(row.text, meta);
+            } catch (err) {
+              lastError = lastError || err;
+            }
+            const heuristic = this.smartMatch(row.text, candidate);
+            const blend = (v, fallback) => {
+              if (!v)
+                return fallback;
+              if (v.verdict === "match" && v.confidence >= 0.7)
+                return "match";
+              if (v.verdict === "mismatch" && v.confidence >= 0.7)
+                return "mismatch";
+              return fallback;
+            };
+            const base = heuristic === "unknown" ? row.matchStatus : heuristic;
+            const finalStatus = blend(ai, base);
+            rows[i] = __spreadProps(__spreadValues({}, row), {
+              extractedSource: source || void 0,
+              extractedTitle: result.title ?? null,
+              extractedIntro: result.intro ?? null,
+              extractedCandidate: candidate || null,
+              destH1: result.title ?? row.destH1,
+              matchStatus: finalStatus,
+              aiVerdict: ai?.verdict,
+              aiConfidence: ai?.confidence,
+              aiMatchedFields: ai?.matchedFields,
+              aiRationale: ai?.rationale
+            });
+            this.logRowExtraction(rows[i], source || "none", result, meta, candidate, heuristic, ai, finalStatus, lastError);
+          } else {
+            this.logRowExtraction(row, source || "none", null, null, null, row.matchStatus, null, row.matchStatus, lastError);
+          }
+        }
+      });
+      yield Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
+      this.headings = [...rows];
+      this.logSummaryTable();
     });
   }
   // ---------- helpers ----------
@@ -46872,8 +47404,9 @@ var LinkReportComponent = class _LinkReportComponent {
     try {
       if (!href)
         return null;
-      if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:"))
+      if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
         return href;
+      }
       if (/^\/(?:content\/canadasite|en|fr)\//i.test(href)) {
         const canon = canonicalizeCanadaHref(href);
         return new URL(canon, CANADA_ORIGIN).toString();
@@ -46881,9 +47414,16 @@ var LinkReportComponent = class _LinkReportComponent {
       if (/^https?:\/\/(?:www\.)?canada\.ca\/content\/canadasite/i.test(href)) {
         return canonicalizeCanadaHref(href);
       }
+      let out;
       if (baseUrl)
-        return new URL(href, baseUrl).toString();
-      return new URL(href).toString();
+        out = new URL(href, baseUrl);
+      else
+        out = new URL(href);
+      const hostLc = out.hostname.toLowerCase().replace(/^www\./, "");
+      if (hostLc === "canada.ca") {
+        out.hostname = "www.canada.ca";
+      }
+      return out.toString();
     } catch {
       return null;
     }
@@ -47025,7 +47565,7 @@ var LinkReportComponent = class _LinkReportComponent {
     return {};
   }
   static \u0275fac = function LinkReportComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _LinkReportComponent)(\u0275\u0275directiveInject(UploadStateService));
+    return new (__ngFactoryType__ || _LinkReportComponent)(\u0275\u0275directiveInject(UploadStateService), \u0275\u0275directiveInject(LinkAiService), \u0275\u0275directiveInject(ContentExtractorService));
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkReportComponent, selectors: [["ca-link-report"]], viewQuery: function LinkReportComponent_Query(rf, ctx) {
     if (rf & 1) {
@@ -47035,7 +47575,7 @@ var LinkReportComponent = class _LinkReportComponent {
       let _t;
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.typePanel = _t.first);
     }
-  }, decls: 13, vars: 10, consts: [["typePanel", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "showCloseIcon", "appendTo"], [1, "filter-panel"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngClass", "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngClass", "ngStyle"], ["class", "muted", 4, "ngIf"], [1, "muted"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label", 3, "click"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
+  }, decls: 14, vars: 10, consts: [["typePanel", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "appendTo", "styleClass"], [1, "filter-panel"], ["pButton", "", "type", "button", "icon", "pi pi-times", "aria-label", "Close filter", 1, "p-button-text", "p-button-sm", "close-btn", 3, "click"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngClass", "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngClass", "ngStyle"], ["class", "muted", 4, "ngIf"], [1, "muted"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label", 3, "click"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "p-table", 1);
@@ -47046,37 +47586,44 @@ var LinkReportComponent = class _LinkReportComponent {
       });
       \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 2)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 3);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "p-overlayPanel", 4, 0)(5, "div", 5)(6, "div", 6)(7, "p-checkbox", 7);
-      \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_7_listener($event) {
+      \u0275\u0275elementStart(3, "p-popover", 4, 0)(5, "div", 5)(6, "button", 6);
+      \u0275\u0275listener("click", function LinkReportComponent_Template_button_click_6_listener() {
+        \u0275\u0275restoreView(_r1);
+        const typePanel_r3 = \u0275\u0275reference(4);
+        return \u0275\u0275resetView(typePanel_r3.hide());
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "div", 7)(8, "p-checkbox", 8);
+      \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_8_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.allSelected, $event) || (ctx.allSelected = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275listener("onChange", function LinkReportComponent_Template_p_checkbox_onChange_7_listener() {
+      \u0275\u0275listener("onChange", function LinkReportComponent_Template_p_checkbox_onChange_8_listener() {
         \u0275\u0275restoreView(_r1);
         return \u0275\u0275resetView(ctx.onAllToggle());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(8, "label", 8);
-      \u0275\u0275text(9, "ALL");
+      \u0275\u0275elementStart(9, "label", 9);
+      \u0275\u0275text(10, "ALL");
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(10, "div", 9);
-      \u0275\u0275template(11, LinkReportComponent_div_11_Template, 4, 5, "div", 10)(12, LinkReportComponent_div_12_Template, 2, 0, "div", 11);
+      \u0275\u0275element(11, "div", 10);
+      \u0275\u0275template(12, LinkReportComponent_div_12_Template, 4, 5, "div", 11)(13, LinkReportComponent_div_13_Template, 2, 0, "div", 12);
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
       \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(9, _c121));
       \u0275\u0275twoWayProperty("selection", ctx.selectedHeading);
       \u0275\u0275advance(3);
-      \u0275\u0275property("dismissable", true)("showCloseIcon", true)("appendTo", "body");
-      \u0275\u0275advance(4);
+      \u0275\u0275property("dismissable", true)("appendTo", "body")("styleClass", "link-type-popover");
+      \u0275\u0275advance(5);
       \u0275\u0275twoWayProperty("ngModel", ctx.allSelected);
       \u0275\u0275advance(4);
       \u0275\u0275property("ngForOf", ctx.linkTypes);
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", ctx.allSelected);
     }
-  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, OverlayPanelModule, OverlayPanel, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
+  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, PopoverModule, Popover, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkReportComponent, [{
@@ -47085,7 +47632,7 @@ var LinkReportComponent = class _LinkReportComponent {
       CommonModule,
       FormsModule,
       TableModule,
-      OverlayPanelModule,
+      PopoverModule,
       CheckboxModule,
       ButtonModule
     ], template: `<p-table\r
@@ -47174,14 +47721,24 @@ var LinkReportComponent = class _LinkReportComponent {
 </p-table>\r
 \r
 <!-- Move the overlay OUTSIDE the table to avoid table parser issues -->\r
-<p-overlayPanel\r
+<p-popover\r
   #typePanel\r
   [dismissable]="true"\r
-  [showCloseIcon]="true"\r
   [appendTo]="'body'"\r
+  [styleClass]="'link-type-popover'"\r
 >\r
   <div class="filter-panel">\r
-    <!-- ALL (default checked) -->\r
+    <!-- custom close button -->\r
+    <button\r
+      pButton\r
+      type="button"\r
+      class="p-button-text p-button-sm close-btn"\r
+      icon="pi pi-times"\r
+      (click)="typePanel.hide()"\r
+      aria-label="Close filter"\r
+    ></button>\r
+\r
+    <!-- ALL / types UI stays the same -->\r
     <div class="filter-row">\r
       <p-checkbox\r
         [(ngModel)]="allSelected"\r
@@ -47194,7 +47751,6 @@ var LinkReportComponent = class _LinkReportComponent {
 \r
     <div class="divider"></div>\r
 \r
-    <!-- Six types (default unchecked; disabled while ALL is checked) -->\r
     <div class="filter-row" *ngFor="let t of linkTypes; let i = index">\r
       <p-checkbox\r
         [(ngModel)]="typeChecks[t]"\r
@@ -47216,15 +47772,15 @@ var LinkReportComponent = class _LinkReportComponent {
       All types are currently included.\r
     </div>\r
   </div>\r
-</p-overlayPanel>\r
+</p-popover>\r
 `, styles: ["/* angular:styles/component:css;f867ed4ff822b366cb9432ca0b7c19af5afc1fceac7a7483c72da2155928f42a;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
-  }], () => [{ type: UploadStateService }], { typePanel: [{
+  }], () => [{ type: UploadStateService }, { type: LinkAiService }, { type: ContentExtractorService }], { typePanel: [{
     type: ViewChild,
     args: ["typePanel"]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 197 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 214 });
 })();
 
 // src/app/views/page-assistant/components/tools/template-conversion.component.ts
@@ -48631,4 +49187,4 @@ ${base}`;
 export {
   PageAssistantCompareComponent
 };
-//# sourceMappingURL=chunk-HPMLVKRO.js.map
+//# sourceMappingURL=chunk-P426KSB6.js.map
