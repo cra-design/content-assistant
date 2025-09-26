@@ -171,7 +171,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-AYDFT5MC.js";
+} from "./chunk-CIYSAO4Q.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -237,7 +237,6 @@ import {
   ɵɵelementStart,
   ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
-  ɵɵinject,
   ɵɵlistener,
   ɵɵloadQuery,
   ɵɵnamespaceSVG,
@@ -46428,8 +46427,6 @@ var PopoverModule = class _PopoverModule {
 
 // src/app/views/page-assistant/services/link-ai.service.ts
 var LinkAiService = class _LinkAiService {
-  http;
-  apiKeyService;
   openRouterApiUrl = "https://openrouter.ai/api/v1/chat/completions";
   // Reuse your model rotation style
   models = [
@@ -46441,10 +46438,9 @@ var LinkAiService = class _LinkAiService {
     "nvidia/llama-3.1-nemotron-70b-instruct:free",
     "deepseek/deepseek-r1:free"
   ];
-  constructor(http, apiKeyService) {
-    this.http = http;
-    this.apiKeyService = apiKeyService;
-  }
+  // prefer-inject over constructor DI
+  http = inject(HttpClient);
+  apiKeyService = inject(ApiKeyService);
   /**
    * Ask the model whether a link label matches the destination page content.
    * Returns a structured verdict or null if all models fail.
@@ -46454,7 +46450,7 @@ var LinkAiService = class _LinkAiService {
       const systemPrompt = `You judge if a link label matches its destination page.
 Use ONLY the provided extracted fields (h1,h2,h3, meta description,bodyPreview).
 Consider abbreviations and synonyms.Respond with a single compact JSON object and nothing else:
-{"verdict":"match|mismatch|uncertain","confidence":0..1,}`;
+{"verdict":"match|mismatch|uncertain","confidence":0..1}`;
       const userPayload = {
         linkText,
         destination: {
@@ -46485,7 +46481,7 @@ Consider abbreviations and synonyms.Respond with a single compact JSON object an
       return null;
     });
   }
-  // ------- OpenRouter plumbing (matches your TranslationService approach) -------
+  // ------- OpenRouter plumbing -------
   callOpenRouter(model2, messages, temperature = 0) {
     return __async(this, null, function* () {
       const apiKey = this.apiKeyService.getCurrentKey();
@@ -46502,11 +46498,11 @@ Consider abbreviations and synonyms.Respond with a single compact JSON object an
         const resp = yield this.http.post(this.openRouterApiUrl, payload, {
           headers,
           responseType: "text",
-          // IMPORTANT: prevents Angular JSON parser errors on non-JSON
+          // prevents Angular JSON parse issues on non-JSON
           observe: "response"
         }).toPromise();
         const ct = resp?.headers.get("content-type") || "";
-        if (ct.includes("application/json")) {
+        if (ct.includes("application/json") && typeof resp?.body === "string") {
           return JSON.parse(resp.body);
         } else {
           console.error(`OpenRouter non-JSON (status ${resp?.status}, ${ct}):
@@ -46514,8 +46510,9 @@ Consider abbreviations and synonyms.Respond with a single compact JSON object an
           return void 0;
         }
       } catch (err) {
-        const status = err?.status;
-        const bodySnippet = typeof err?.error === "string" ? err.error.slice(0, 500) : JSON.stringify(err?.error);
+        const httpErr = err;
+        const status = httpErr?.status;
+        const bodySnippet = typeof httpErr?.error === "string" ? httpErr.error.slice(0, 500) : JSON.stringify(httpErr?.error);
         console.error(`OpenRouter HTTP error (model: ${model2}) status=${status}: ${bodySnippet}`);
         return void 0;
       }
@@ -46549,33 +46546,38 @@ Consider abbreviations and synonyms.Respond with a single compact JSON object an
   toVerdict(j) {
     if (!j || typeof j !== "object")
       return null;
-    const verdict = j.verdict;
-    if (!["match", "mismatch", "uncertain"].includes(verdict))
+    const obj = j;
+    const verdict = obj["verdict"];
+    if (verdict !== "match" && verdict !== "mismatch" && verdict !== "uncertain")
       return null;
-    let confidence = Number(j.confidence);
-    if (!isFinite(confidence))
+    let confidence = Number(obj["confidence"]);
+    if (!Number.isFinite(confidence))
       confidence = 0;
     confidence = Math.max(0, Math.min(1, confidence));
     let matchedFields;
-    if (Array.isArray(j.matchedFields)) {
-      matchedFields = j.matchedFields.filter((x) => [
+    if (Array.isArray(obj["matchedFields"])) {
+      const arr = obj["matchedFields"];
+      const allowed = /* @__PURE__ */ new Set([
         "h1",
         "title",
         "ogTitle",
         "metaDescription",
         "headings",
         "bodyPreview"
-      ].includes(x));
+      ]);
+      matchedFields = arr.filter((x) => {
+        return typeof x === "string" && allowed.has(x);
+      }).slice();
     }
     const out = { verdict, confidence };
-    if (typeof j.rationale === "string")
-      out.rationale = j.rationale;
+    if (typeof obj["rationale"] === "string")
+      out.rationale = obj["rationale"];
     if (matchedFields && matchedFields.length)
       out.matchedFields = matchedFields;
     return out;
   }
   static \u0275fac = function LinkAiService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _LinkAiService)(\u0275\u0275inject(HttpClient), \u0275\u0275inject(ApiKeyService));
+    return new (__ngFactoryType__ || _LinkAiService)();
   };
   static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _LinkAiService, factory: _LinkAiService.\u0275fac, providedIn: "root" });
 };
@@ -46583,16 +46585,14 @@ Consider abbreviations and synonyms.Respond with a single compact JSON object an
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkAiService, [{
     type: Injectable,
     args: [{ providedIn: "root" }]
-  }], () => [{ type: HttpClient }, { type: ApiKeyService }], null);
+  }], null, null);
 })();
 
 // src/app/views/page-assistant/services/content-extractor.service.ts
 var ContentExtractorService = class _ContentExtractorService {
-  fetchService;
   CANADA_ORIGIN = "https://www.canada.ca";
-  constructor(fetchService) {
-    this.fetchService = fetchService;
-  }
+  // prefer-inject over constructor DI
+  fetchService = inject(FetchService);
   // ========== PUBLIC API ==========
   /** Fetch & extract from a Canada.ca page (H1 + intro) */
   extractCanada(absUrl, opts) {
@@ -46643,7 +46643,7 @@ var ContentExtractorService = class _ContentExtractorService {
   fromCanadaDoc(doc) {
     const main = doc.querySelector("main") || doc.body;
     let titleSource = void 0;
-    let h1Text = main.querySelector("h1")?.textContent?.trim() || doc.querySelector("h1")?.textContent?.trim() || null;
+    const h1Text = main.querySelector("h1")?.textContent?.trim() || doc.querySelector("h1")?.textContent?.trim() || null;
     if (main.querySelector("h1"))
       titleSource = "main>h1";
     else if (doc.querySelector("h1"))
@@ -46684,18 +46684,22 @@ var ContentExtractorService = class _ContentExtractorService {
   // ========== EXTERNAL RULES ==========
   fromExternalDoc(doc) {
     let titleSource = void 0;
-    let h1 = doc.querySelector("h1")?.textContent?.trim() || doc.querySelector("title")?.textContent?.trim() || null;
-    if (doc.querySelector("h1"))
-      titleSource = "h1";
-    else if (doc.querySelector("title"))
-      titleSource = "title";
+    const h1El = doc.querySelector("h1");
+    const h1 = h1El?.textContent?.trim() || null;
+    const ogTitle = doc.querySelector('meta[property="og:title"]')?.getAttribute("content")?.trim() || null;
+    const titleTag = doc.querySelector("title")?.textContent?.trim() || null;
+    const title = this.cleanText(h1 || ogTitle || titleTag) || null;
+    titleSource = h1 ? "h1" : "title";
     const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute("content")?.trim() || null;
+    const ogDesc = doc.querySelector('meta[property="og:description"]')?.getAttribute("content")?.trim() || null;
     const paras = Array.from(doc.querySelectorAll("p")).map((p) => (p.textContent || "").trim()).filter((t) => this.isMeaningful(t)).slice(0, 2);
+    const introRaw = metaDesc || ogDesc || (paras.length ? paras.join("  ") : null);
+    const intro = this.cleanText(introRaw) || null;
     const introSource = metaDesc ? "metaDescription" : paras.length ? "firstParas" : null;
     return {
       source: "external",
-      title: this.cleanText(h1),
-      intro: this.cleanText(metaDesc) || this.cleanText(paras.join("  ")) || null,
+      title,
+      intro,
       contentText: this.cleanText(paras.join("  ")) || null,
       titleSource,
       introSource
@@ -46734,7 +46738,8 @@ var ContentExtractorService = class _ContentExtractorService {
   findAnchorTarget(doc, id) {
     if (!id)
       return null;
-    const safe = window.CSS?.escape ? window.CSS.escape(id) : id.replace(/["\\]/g, "\\$&");
+    const cssNs = globalThis.CSS;
+    const safe = cssNs?.escape ? cssNs.escape(id) : id.replace(/["\\]/g, "\\$&");
     return doc.getElementById(id) || doc.querySelector(`[name="${safe}"]`);
   }
   closestHeading(start) {
@@ -46799,7 +46804,7 @@ var ContentExtractorService = class _ContentExtractorService {
     return null;
   }
   static \u0275fac = function ContentExtractorService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ContentExtractorService)(\u0275\u0275inject(FetchService));
+    return new (__ngFactoryType__ || _ContentExtractorService)();
   };
   static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ContentExtractorService, factory: _ContentExtractorService.\u0275fac, providedIn: "root" });
 };
@@ -46807,7 +46812,7 @@ var ContentExtractorService = class _ContentExtractorService {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ContentExtractorService, [{
     type: Injectable,
     args: [{ providedIn: "root" }]
-  }], () => [{ type: FetchService }], null);
+  }], null, null);
 })();
 
 // src/app/views/page-assistant/components/tools/link-report.component.ts
@@ -46816,7 +46821,7 @@ var _c121 = () => ({ "min-width": "50rem" });
 function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 17);
+    \u0275\u0275elementStart(0, "button", 25);
     \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_4_Template_button_click_0_listener($event) {
       \u0275\u0275restoreView(_r2);
       \u0275\u0275nextContext(3);
@@ -46826,33 +46831,48 @@ function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
+function LinkReportComponent_ng_template_1_th_2_button_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 26);
+    \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_5_Template_button_click_0_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      \u0275\u0275nextContext(3);
+      const statusPanel_r5 = \u0275\u0275reference(15);
+      return \u0275\u0275resetView(statusPanel_r5 == null ? null : statusPanel_r5.toggle($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+}
 function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "th")(1, "div", 15)(2, "span");
+    \u0275\u0275elementStart(0, "th")(1, "div", 22)(2, "span");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 16);
+    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 23)(5, LinkReportComponent_ng_template_1_th_2_button_5_Template, 1, 0, "button", 24);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const col_r4 = ctx.$implicit;
+    const col_r6 = ctx.$implicit;
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(col_r4.header);
+    \u0275\u0275textInterpolate(col_r6.header);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", col_r4.field === "type");
+    \u0275\u0275property("ngIf", col_r6.field === "type");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", col_r6.field === "matchStatus");
   }
 }
 function LinkReportComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr");
-    \u0275\u0275element(1, "th", 13);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 5, 2, "th", 14);
+    \u0275\u0275element(1, "th", 20);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 6, 3, "th", 21);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r4 = \u0275\u0275nextContext();
+    const ctx_r6 = \u0275\u0275nextContext();
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r4.cols);
+    \u0275\u0275property("ngForOf", ctx_r6.cols);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_2_Template(rf, ctx) {
@@ -46862,9 +46882,9 @@ function LinkReportComponent_ng_template_2_td_3_span_2_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r6.order);
+    \u0275\u0275textInterpolate(rowData_r8.order);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
@@ -46874,81 +46894,155 @@ function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r6.type);
+    \u0275\u0275textInterpolate(rowData_r8.type);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1, " \xB7 ");
+    \u0275\u0275elementEnd();
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_span_2_Template, 2, 0, "span", 39);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const v_r9 = ctx.$implicit;
+    const last_r10 = ctx.last;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", v_r9, "");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !last_r10);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const rowData_r8 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r6 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" , +", ctx_r6.getOtherVariantsExtraCount(rowData_r8), " more ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 28);
-    \u0275\u0275text(1);
+    \u0275\u0275elementStart(0, "div", 38);
+    \u0275\u0275text(1, " also: ");
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_Template, 3, 2, "ng-container", 21)(3, LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_3_Template, 2, 1, "ng-container", 39);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r6 = \u0275\u0275nextContext(3).$implicit;
+    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r6 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r6.getOtherVariantsPreview(rowData_r8));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1("(", rowData_r6.href, ")");
+    \u0275\u0275property("ngIf", ctx_r6.getOtherVariantsExtraCount(rowData_r8) > 0);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_4_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 40);
+    \u0275\u0275text(1, " ( ");
+    \u0275\u0275elementStart(2, "a", 41);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(4, " ) ");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", rowData_r8.absUrl || rowData_r8.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", rowData_r8.href, " ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 26);
+    \u0275\u0275elementStart(0, "span", 35);
     \u0275\u0275text(1);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template, 2, 1, "div", 27);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template, 4, 2, "div", 36)(3, LinkReportComponent_ng_template_2_td_3_span_4_div_3_Template, 5, 2, "div", 37);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r4 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngClass", ctx_r4.getTextClass(rowData_r6))("ngStyle", ctx_r4.getTextStyle(rowData_r6));
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r6 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngStyle", ctx_r6.getTextStyle(rowData_r8));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r6.text, " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r8.text, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r6.href);
+    \u0275\u0275property("ngIf", rowData_r8.hasTextConflict && ctx_r6.getOtherVariants(rowData_r8).length);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.href);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 29);
+    \u0275\u0275elementStart(0, "span", 42);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r6.destH1 || "\u2014", " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r8.destH1 || "\u2014", " ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 34);
+    \u0275\u0275element(0, "i", 49);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 35);
+    \u0275\u0275element(0, "i", 50);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 36);
+    \u0275\u0275element(0, "i", 51);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_6_i_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 52);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_6_i_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 53);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 30);
-    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template, 1, 0, "i", 31)(2, LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template, 1, 0, "i", 32)(3, LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template, 1, 0, "i", 33);
+    \u0275\u0275elementStart(0, "span", 43);
+    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template, 1, 0, "i", 44)(2, LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template, 1, 0, "i", 45)(3, LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template, 1, 0, "i", 46)(4, LinkReportComponent_ng_template_2_td_3_span_6_i_4_Template, 1, 0, "i", 47)(5, LinkReportComponent_ng_template_2_td_3_span_6_i_5_Template, 1, 0, "i", 48);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r6.matchStatus === "match");
+    \u0275\u0275property("ngIf", rowData_r8.is404);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r6.matchStatus === "mismatch");
+    \u0275\u0275property("ngIf", rowData_r8.anchorMissing);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r6.matchStatus === "unknown" || rowData_r6.matchStatus === "na");
+    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "match");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "mismatch");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "unknown" || rowData_r8.matchStatus === "na");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_7_Template(rf, ctx) {
@@ -46958,24 +47052,24 @@ function LinkReportComponent_ng_template_2_td_3_span_7_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r7 = \u0275\u0275nextContext().$implicit;
-    const rowData_r6 = \u0275\u0275nextContext().$implicit;
+    const col_r11 = \u0275\u0275nextContext().$implicit;
+    const rowData_r8 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r6[col_r7.field] || "\u2014");
+    \u0275\u0275textInterpolate(rowData_r8[col_r11.field] || "\u2014");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "td");
-    \u0275\u0275elementContainerStart(1, 20);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 21)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 21)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 3, 4, "span", 22)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 2, 1, "span", 23)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 4, 3, "span", 24)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 2, 1, "span", 25);
+    \u0275\u0275elementContainerStart(1, 29);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 30)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 30)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 4, 4, "span", 31)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 2, 1, "span", 32)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 6, 5, "span", 33)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 2, 1, "span", 34);
     \u0275\u0275elementContainerEnd();
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r7 = ctx.$implicit;
+    const col_r11 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngSwitch", col_r7.field);
+    \u0275\u0275property("ngSwitch", col_r11.field);
     \u0275\u0275advance();
     \u0275\u0275property("ngSwitchCase", "order");
     \u0275\u0275advance();
@@ -46990,63 +47084,65 @@ function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr", 18)(1, "td");
-    \u0275\u0275element(2, "span", 19);
+    \u0275\u0275elementStart(0, "tr", 27)(1, "td");
+    \u0275\u0275element(2, "span", 28);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 8, 6, "td", 14);
+    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 8, 6, "td", 21);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r6 = ctx.$implicit;
-    const rowIndex_r8 = ctx.rowIndex;
-    const ctx_r4 = \u0275\u0275nextContext();
-    \u0275\u0275property("pReorderableRow", rowIndex_r8)("pSelectableRow", rowData_r6);
+    const rowData_r8 = ctx.$implicit;
+    const rowIndex_r12 = ctx.rowIndex;
+    const ctx_r6 = \u0275\u0275nextContext();
+    \u0275\u0275property("pReorderableRow", rowIndex_r12)("pSelectableRow", rowData_r8);
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r4.cols);
+    \u0275\u0275property("ngForOf", ctx_r6.cols);
   }
 }
 function LinkReportComponent_div_12_Template(rf, ctx) {
   if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 7)(1, "p-checkbox", 37);
+    const _r13 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 8)(1, "p-checkbox", 54);
     \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_div_12_Template_p_checkbox_ngModelChange_1_listener($event) {
-      const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
-      const ctx_r4 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r4.typeChecks[t_r10], $event) || (ctx_r4.typeChecks[t_r10] = $event);
+      const t_r14 = \u0275\u0275restoreView(_r13).$implicit;
+      const ctx_r6 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r6.typeChecks[t_r14], $event) || (ctx_r6.typeChecks[t_r14] = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275listener("onChange", function LinkReportComponent_div_12_Template_p_checkbox_onChange_1_listener() {
-      const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
-      const ctx_r4 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r4.onTypeToggle(t_r10));
+      const t_r14 = \u0275\u0275restoreView(_r13).$implicit;
+      const ctx_r6 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r6.onTypeToggle(t_r14));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "label", 38);
-    \u0275\u0275listener("click", function LinkReportComponent_div_12_Template_label_click_2_listener() {
-      const t_r10 = \u0275\u0275restoreView(_r9).$implicit;
-      const ctx_r4 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r4.toggleType(t_r10));
-    });
+    \u0275\u0275elementStart(2, "label", 55);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const t_r10 = ctx.$implicit;
-    const i_r11 = ctx.index;
-    const ctx_r4 = \u0275\u0275nextContext();
+    const t_r14 = ctx.$implicit;
+    const i_r15 = ctx.index;
+    const ctx_r6 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", ctx_r4.typeChecks[t_r10]);
-    \u0275\u0275property("disabled", ctx_r4.allSelected)("inputId", "type-" + i_r11);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r6.typeChecks[t_r14]);
+    \u0275\u0275property("disabled", ctx_r6.allSelected)("inputId", "type-" + i_r15);
     \u0275\u0275advance();
-    \u0275\u0275attribute("for", "type-" + i_r11);
+    \u0275\u0275attribute("for", "type-" + i_r15);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", t_r10, " ");
+    \u0275\u0275textInterpolate1(" ", t_r14, " ");
   }
 }
 function LinkReportComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 39);
+    \u0275\u0275elementStart(0, "div", 56);
     \u0275\u0275text(1, " All types are currently included. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function LinkReportComponent_div_31_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 56);
+    \u0275\u0275text(1, " All match statuses are currently included. ");
     \u0275\u0275elementEnd();
   }
 }
@@ -47090,14 +47186,11 @@ function stripFootnoteText(text) {
   return (text || "").replace(/\[\d+\]/g, "").replace(/(?:^|\s)\(\s*footnote\s*\d+\s*\)/gi, "").replace(/[*†‡§¶]+/g, "").replace(/\s+/g, " ").trim();
 }
 var LinkReportComponent = class _LinkReportComponent {
-  uploadState;
-  linkAi;
-  extractor;
-  constructor(uploadState, linkAi, extractor) {
-    this.uploadState = uploadState;
-    this.linkAi = linkAi;
-    this.extractor = extractor;
-  }
+  // prefer-inject: replace constructor DI
+  uploadState = inject(UploadStateService);
+  linkAi = inject(LinkAiService);
+  extractor = inject(ContentExtractorService);
+  fetchService = inject(FetchService);
   typePanel;
   // data & selection
   headings = [];
@@ -47107,26 +47200,36 @@ var LinkReportComponent = class _LinkReportComponent {
     { field: "order", header: "Index" },
     { field: "type", header: "Link Type" },
     { field: "text", header: "Link name on page" },
-    { field: "destH1", header: "Destination link header (H1)" },
-    { field: "matchStatus", header: "Match" },
+    { field: "destH1", header: "Destination link content" },
+    { field: "matchStatus", header: "Link text health" },
     { field: "searchTerm", header: "Search term" },
     { field: "clicks", header: "Clicks" }
   ];
   // --- DEBUG LOGGING HELPERS ---
   COLLAPSE_GROUPS = false;
-  // Turn logging on/off
   DEBUG_LOG = true;
-  // Helper to keep logs readable
   truncate(s, n = 200) {
     if (s == null)
       return "";
     const t = String(s).trim();
     return t.length > n ? t.slice(0, n) + "\u2026" : t;
   }
+  getOtherVariants(row) {
+    if (!row?.textVariants?.length)
+      return [];
+    return row.textVariants.filter((v) => v !== row.text);
+  }
+  getOtherVariantsPreview(row, take = 5) {
+    return this.getOtherVariants(row).slice(0, take);
+  }
+  getOtherVariantsExtraCount(row, take = 5) {
+    const total = this.getOtherVariants(row).length;
+    return total > take ? total - take : 0;
+  }
   logRowExtraction(row, source, result, meta, candidate, heuristic, ai, finalStatus, err) {
     if (!this.DEBUG_LOG)
       return;
-    const r = result;
+    const r = result ?? {};
     const header = `[Link#${row.order}] ${row.type} \u2014 ${row.text}  \u2192  ${row.absUrl || row.href || ""}`;
     if (this.COLLAPSE_GROUPS)
       console.groupCollapsed(header);
@@ -47135,28 +47238,34 @@ var LinkReportComponent = class _LinkReportComponent {
     console.log("Type:", row.type);
     console.log("href:", row.href);
     console.log("absUrl:", row.absUrl);
+    if (row.httpStatus != null) {
+      console.log("HTTP status (HEAD):", row.httpStatus, row.is404 ? "\u2192 NOT FOUND" : "");
+    }
+    if (row.anchorMissing) {
+      console.log("Anchor target not found on the page.");
+    }
     if (source === "canada" && result) {
-      console.log(`CANADA H1 (titleSource=${r?.titleSource ?? "-"}) ::`);
+      console.log(`CANADA H1 (titleSource=${r.titleSource ?? "-"}) ::`);
       console.log(this.truncate(result.title, 1e3));
-      console.log(`CANADA Intro (introSource=${r?.introSource ?? "-"}) ::`);
+      console.log(`CANADA Intro (introSource=${r.introSource ?? "-"}) ::`);
       console.log(this.truncate(result.intro, 1e3));
     } else if (source === "anchor" && result) {
-      console.log("ANCHOR id:", r?.anchorMeta?.id || "(none)");
-      console.log("ANCHOR heading tag:", r?.anchorMeta?.headingTag || "(none)");
-      console.log(`Section heading (titleSource=${r?.titleSource ?? "-"}) ::`);
+      console.log("ANCHOR id:", r.anchorMeta?.id || "(none)");
+      console.log("ANCHOR heading tag:", r.anchorMeta?.headingTag || "(none)");
+      console.log(`Section heading (titleSource=${r.titleSource ?? "-"}) ::`);
       console.log(this.truncate(result.title, 1e3));
-      console.log(`First paragraph in section (introSource=${r?.introSource ?? "-"}) ::`);
+      console.log(`First paragraph in section (introSource=${r.introSource ?? "-"}) ::`);
       console.log(this.truncate(result.intro, 1e3));
     } else if (source === "external" && result) {
-      console.log(`EXTERNAL Title (titleSource=${r?.titleSource ?? "-"}) ::`);
+      console.log(`EXTERNAL Title (titleSource=${r.titleSource ?? "-"}) ::`);
       console.log(this.truncate(result.title, 1e3));
-      console.log(`EXTERNAL Intro (introSource=${r?.introSource ?? "-"}) ::`);
+      console.log(`EXTERNAL Intro (introSource=${r.introSource ?? "-"}) ::`);
       console.log(this.truncate(result.intro, 1e3));
-      if (r?.contentText) {
+      if (r.contentText) {
         console.log("EXTERNAL Body preview ::");
         console.log(this.truncate(r.contentText, 1e3));
       }
-    } else if (row.type === "mailto" || row.type === "tel" || row.type === "download") {
+    } else if (row.type === "mailto" || row.type === "download") {
       console.log("No extract (mailto/tel/download).");
     } else {
       console.log("No extract \u2014 likely blocked host or fetch failure.");
@@ -47181,7 +47290,6 @@ var LinkReportComponent = class _LinkReportComponent {
       type: r.type,
       text: this.truncate(r.text, 80),
       url: r.absUrl || r.href,
-      // show the exact extracted strings in the summary too
       extractedTitle: this.truncate(r.extractedTitle, 200),
       extractedIntro: this.truncate(r.extractedIntro, 200),
       match: r.matchStatus,
@@ -47193,10 +47301,10 @@ var LinkReportComponent = class _LinkReportComponent {
   sourceVersion = "original";
   // ----- Filter state (dropdown with ALL + 6 types) -----
   linkTypes = [
+    "CRA page",
     "Canada.ca",
     "external",
     "anchor",
-    "tel",
     "mailto",
     "download"
   ];
@@ -47204,23 +47312,19 @@ var LinkReportComponent = class _LinkReportComponent {
   allSelected = true;
   /** Individual type checkboxes are listed, initially unchecked. */
   typeChecks = {
+    "CRA page": false,
     "Canada.ca": false,
     external: false,
     anchor: false,
-    tel: false,
     mailto: false,
     download: false
   };
   onAllToggle() {
   }
-  onTypeToggle(_t) {
+  onTypeToggle(t) {
     if (this.allSelected)
       this.allSelected = false;
-  }
-  toggleType(t) {
-    if (this.allSelected)
-      this.allSelected = false;
-    this.typeChecks[t] = !this.typeChecks[t];
+    this.typeChecks[t] = !!this.typeChecks[t];
   }
   activeTypes() {
     if (this.allSelected)
@@ -47229,11 +47333,55 @@ var LinkReportComponent = class _LinkReportComponent {
     return new Set(picked);
   }
   get filteredHeadings() {
-    const active = this.activeTypes();
-    return this.headings.filter((r) => active.has(r.type));
+    const activeTypes = this.activeTypes();
+    return this.headings.filter((r) => activeTypes.has(r.type) && this.matchStatusPass(r.matchStatus));
   }
   ngOnInit() {
-    this.extractLinks();
+    void this.extractLinks();
+  }
+  /** Build a stable key for the "destination" (dedupe by this). */
+  destKeyForRow(r) {
+    const raw = r.absUrl || r.href || "";
+    if (!raw)
+      return "";
+    if (r.type === "anchor") {
+      return raw.trim().toLowerCase();
+    }
+    try {
+      const u = new URL(raw);
+      u.hash = "";
+      u.hostname = u.hostname.toLowerCase();
+      if (u.pathname.endsWith("/") && u.pathname !== "/") {
+        u.pathname = u.pathname.slice(0, -1);
+      }
+      return u.toString();
+    } catch {
+      return raw.trim().toLowerCase();
+    }
+  }
+  dedupeByDestination(rows) {
+    const map = /* @__PURE__ */ new Map();
+    for (const r of rows) {
+      const key2 = this.destKeyForRow(r) || `row-${r.order}`;
+      const g = map.get(key2);
+      if (g) {
+        g.names.add(r.text);
+      } else {
+        map.set(key2, { rep: __spreadValues({}, r), names: /* @__PURE__ */ new Set([r.text]) });
+      }
+    }
+    const out = [];
+    let idx = 1;
+    for (const { rep, names } of map.values()) {
+      out.push(__spreadProps(__spreadValues({}, rep), {
+        order: idx++,
+        // only flag conflicts (different texts → same destination)
+        hasTextConflict: names.size > 1,
+        textVariants: Array.from(names)
+        // repeatCount intentionally omitted
+      }));
+    }
+    return out;
   }
   extractLinks() {
     return __async(this, null, function* () {
@@ -47243,8 +47391,15 @@ var LinkReportComponent = class _LinkReportComponent {
         return;
       }
       const doc = new DOMParser().parseFromString(html, "text/html");
-      const anchors = Array.from(doc.querySelectorAll("body a[href]")).filter((a) => !isFootnoteLink(a));
-      this.headings = anchors.map((a, i) => {
+      const anchors = Array.from(doc.querySelectorAll("body a[href]")).filter((a) => {
+        if (isFootnoteLink(a))
+          return false;
+        const href = (a.getAttribute("href") || "").trim().toLowerCase();
+        if (href.startsWith("tel:"))
+          return false;
+        return true;
+      });
+      const initialRows = anchors.map((a, i) => {
         const rawHref = (a.getAttribute("href") || "").trim();
         const absUrl = this.resolveUrl(rawHref, baseUrl);
         const visible = a.textContent || a.getAttribute("aria-label") || a.title || "";
@@ -47256,7 +47411,7 @@ var LinkReportComponent = class _LinkReportComponent {
           const h1 = doc.querySelector("h1");
           destH1 = h1 ? (h1.textContent || "").trim() : null;
           matchStatus = this.smartMatch(text, destH1);
-        } else if (type === "mailto" || type === "tel" || type === "download") {
+        } else if (type === "mailto" || type === "download") {
           matchStatus = "na";
         } else {
           const { guess, pathTokens } = this.smartSlugGuess(text, absUrl || rawHref);
@@ -47273,10 +47428,54 @@ var LinkReportComponent = class _LinkReportComponent {
           matchStatus,
           searchTerm: "",
           clicks: null
+          // repeatCount/textVariants/hasTextConflict are filled by the deduper
         };
       });
+      this.headings = this.dedupeByDestination(initialRows);
       yield this.enrichWithExtractedContent(doc);
     });
+  }
+  // Match-status filter state
+  matchAllSelected = true;
+  // ALL by default
+  matchChecks = {
+    match: false,
+    mismatch: false
+  };
+  onMatchAllToggle() {
+  }
+  onMatchToggle(s) {
+    if (this.matchAllSelected)
+      this.matchAllSelected = false;
+    this.matchChecks[s] = !!this.matchChecks[s];
+  }
+  // Helper to check if a row passes the match-status filter
+  matchStatusPass(ms) {
+    if (this.matchAllSelected)
+      return true;
+    if (ms === "match")
+      return !!this.matchChecks.match;
+    if (ms === "mismatch")
+      return !!this.matchChecks.mismatch;
+    return false;
+  }
+  /** HEAD the destination to detect 404/410/etc. Uses allowlist for Canada.ca, 'none' for externals. */
+  checkUrlStatus(absUrl) {
+    return __async(this, null, function* () {
+      try {
+        const url = new URL(absUrl);
+        const hostLc = url.hostname.toLowerCase().replace(/^www\./, "");
+        const hostMode = hostLc === "canada.ca" ? "prod" : "none";
+        const resp = yield this.fetchService.fetchStatus(absUrl, hostMode, 2, "none");
+        return resp.status ?? null;
+      } catch {
+        return null;
+      }
+    });
+  }
+  /** Treat 404/410 as "not found". */
+  isNotFoundStatus(code) {
+    return code === 404 || code === 410;
   }
   /**
    * For each row, use ContentExtractorService to fetch a better "candidate text"
@@ -47288,12 +47487,12 @@ var LinkReportComponent = class _LinkReportComponent {
       const CONCURRENCY = Math.min(4, rows.length);
       let idx = 0;
       const worker = () => __async(this, null, function* () {
-        while (true) {
+        for (; ; ) {
           const i = idx++;
           if (i >= rows.length)
             break;
           const row = rows[i];
-          if (row.type === "mailto" || row.type === "tel" || row.type === "download") {
+          if (row.type === "mailto" || row.type === "download") {
             this.logRowExtraction(row, row.type, null, null, null, row.matchStatus, null, row.matchStatus);
             continue;
           }
@@ -47382,10 +47581,23 @@ var LinkReportComponent = class _LinkReportComponent {
   }
   // ---------- helpers ----------
   getHtmlToAnalyze() {
-    const data = this.uploadState.getUploadData?.();
-    if (!data)
+    const get = this.uploadState.getUploadData?.();
+    const data = get;
+    const shape = (d) => {
+      if (d && typeof d === "object") {
+        const o = d;
+        return {
+          originalHtml: o["originalHtml"] ?? null,
+          modifiedHtml: o["modifiedHtml"] ?? null,
+          pageUrl: o["pageUrl"] ?? null
+        };
+      }
+      return null;
+    };
+    const parsed = shape(data);
+    if (!parsed)
       return { html: null, baseUrl: null };
-    const html = (this.sourceVersion === "modified" ? data.modifiedHtml : data.originalHtml) || null;
+    const html = (this.sourceVersion === "modified" ? parsed.modifiedHtml : parsed.originalHtml) || null;
     let baseUrl = null;
     if (html) {
       try {
@@ -47396,8 +47608,8 @@ var LinkReportComponent = class _LinkReportComponent {
       } catch {
       }
     }
-    if (!baseUrl && data.pageUrl)
-      baseUrl = data.pageUrl;
+    if (!baseUrl && parsed.pageUrl)
+      baseUrl = parsed.pageUrl;
     return { html, baseUrl };
   }
   resolveUrl(href, baseUrl) {
@@ -47435,8 +47647,6 @@ var LinkReportComponent = class _LinkReportComponent {
       return "anchor";
     if (/^mailto:/i.test(raw))
       return "mailto";
-    if (/^tel:/i.test(raw))
-      return "tel";
     const pathForTest = absUrl || raw;
     const isPdf = /\.pdf(\?|#|$)/i.test(pathForTest);
     const hasDownloadAttr = !!anchorEl?.hasAttribute("download");
@@ -47450,15 +47660,24 @@ var LinkReportComponent = class _LinkReportComponent {
       return "download";
     try {
       const u = new URL(absUrl || raw, CANADA_ORIGIN);
-      if (isCanadaHost(u))
+      const hostLc = u.hostname.toLowerCase().replace(/^www\./, "");
+      if (hostLc === "canada.ca") {
+        const p = u.pathname.toLowerCase();
+        if (p.startsWith("/en/revenue-agency")) {
+          return "CRA page";
+        }
+        if (p.startsWith("/en/services")) {
+          return "Canada.ca";
+        }
         return "Canada.ca";
+      }
     } catch {
     }
     return "external";
   }
   // ---------- smart slug + smart match ----------
   normalizeText(s) {
-    return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[\/\-_]+/g, " ").replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim();
+    return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[/\-_]+/g, " ").replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim();
   }
   tokenize(s) {
     const STOP = /* @__PURE__ */ new Set([
@@ -47505,13 +47724,48 @@ var LinkReportComponent = class _LinkReportComponent {
   smartSlugGuess(linkText, absUrl) {
     const linkTokens = this.tokenize(linkText);
     const segs = this.pathSegments(absUrl);
+    const IGNORE = /* @__PURE__ */ new Set([
+      "en",
+      "fr",
+      "gov",
+      "content",
+      "services",
+      "service",
+      "government",
+      "governments",
+      "government-id",
+      "id",
+      "topics",
+      "programs",
+      "about",
+      "info"
+    ]);
+    const splitHard = (s) => {
+      const spaced = s.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/([A-Za-z])([0-9])/g, "$1 $2").replace(/([0-9])([A-Za-z])/g, "$1 $2");
+      const soft = spaced.replace(/(bcservice|bcservices|service|services|card|login|app)/gi, " $1 ");
+      const tokens = this.tokenize(soft);
+      return tokens.length ? tokens : this.tokenize(spaced);
+    };
+    const segTokensList = segs.map((raw) => {
+      const lowered = raw.toLowerCase();
+      if (IGNORE.has(lowered))
+        return [];
+      const tokens = this.tokenize(raw);
+      if (tokens.length <= 1 && /[a-z]{8,}/i.test(raw))
+        return splitHard(raw);
+      return tokens;
+    });
+    const allTokens = /* @__PURE__ */ new Set();
+    for (const toks of segTokensList)
+      for (const t of toks)
+        allTokens.add(t);
     let bestGuess = null;
     let bestScore = -1;
-    const allTokens = /* @__PURE__ */ new Set();
-    for (const seg of segs) {
-      const segTokens = this.tokenize(seg);
-      for (const t of segTokens)
-        allTokens.add(t);
+    for (let i = 0; i < segTokensList.length; i++) {
+      const segTokens = segTokensList[i];
+      if (!segTokens.length)
+        continue;
+      let score = 0;
       if (linkTokens.length) {
         const cover = linkTokens.filter((t) => segTokens.includes(t)).length / linkTokens.length;
         const setL = new Set(linkTokens);
@@ -47519,18 +47773,25 @@ var LinkReportComponent = class _LinkReportComponent {
         const inter = [...setL].filter((w) => setS.has(w)).length;
         const union = (/* @__PURE__ */ new Set([...setL, ...setS])).size || 1;
         const jacc = inter / union;
-        const score = cover * 0.7 + jacc * 0.3;
-        if (score > bestScore) {
-          bestScore = score;
-          bestGuess = segTokens.join(" ") || seg;
-        }
+        score = cover * 0.7 + jacc * 0.3;
+      }
+      score += i / 1e3;
+      if (score > bestScore) {
+        bestScore = score;
+        bestGuess = segTokens.join(" ");
       }
     }
-    if (!bestGuess && segs.length) {
-      const lastTokens = this.tokenize(segs[segs.length - 1]);
-      bestGuess = lastTokens.join(" ") || segs[segs.length - 1] || null;
-      for (const t of lastTokens)
-        allTokens.add(t);
+    if (!bestGuess) {
+      for (let i = segs.length - 1; i >= 0; i--) {
+        const s = segs[i].toLowerCase();
+        if (IGNORE.has(s))
+          continue;
+        const toks = splitHard(segs[i]);
+        bestGuess = toks.join(" ") || segs[i];
+        for (const t of toks)
+          allTokens.add(t);
+        break;
+      }
     }
     return { guess: bestGuess, pathTokens: allTokens };
   }
@@ -47557,15 +47818,12 @@ var LinkReportComponent = class _LinkReportComponent {
     const j = inter / union;
     return j >= 0.6 ? "match" : "mismatch";
   }
-  // style hooks used by template
-  getTextStyle(_row) {
-    return {};
-  }
-  getTextClass(_row) {
-    return {};
+  // style hooks used by template — actually use the row to satisfy no-unused-vars
+  getTextStyle(row) {
+    return row.matchStatus === "na" ? { opacity: 0.7 } : {};
   }
   static \u0275fac = function LinkReportComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _LinkReportComponent)(\u0275\u0275directiveInject(UploadStateService), \u0275\u0275directiveInject(LinkAiService), \u0275\u0275directiveInject(ContentExtractorService));
+    return new (__ngFactoryType__ || _LinkReportComponent)();
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkReportComponent, selectors: [["ca-link-report"]], viewQuery: function LinkReportComponent_Query(rf, ctx) {
     if (rf & 1) {
@@ -47575,25 +47833,25 @@ var LinkReportComponent = class _LinkReportComponent {
       let _t;
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.typePanel = _t.first);
     }
-  }, decls: 14, vars: 10, consts: [["typePanel", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "appendTo", "styleClass"], [1, "filter-panel"], ["pButton", "", "type", "button", "icon", "pi pi-times", "aria-label", "Close filter", 1, "p-button-text", "p-button-sm", "close-btn", 3, "click"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngClass", "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngClass", "ngStyle"], ["class", "muted", 4, "ngIf"], [1, "muted"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label", 3, "click"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
+  }, decls: 32, vars: 19, consts: [["typePanel", ""], ["statusPanel", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "appendTo", "styleClass"], [1, "filter-panel"], ["pButton", "", "type", "button", "icon", "pi pi-times", "aria-label", "Close filter", 1, "p-button-text", "p-button-sm", "close-btn", 3, "click"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], ["inputId", "allMatch", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allMatch", 1, "filter-label"], ["inputId", "ms-match", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-match", 1, "filter-label"], ["inputId", "ms-mismatch", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-mismatch", 1, "filter-label"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", "aria-hidden", "true", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngStyle"], ["class", "muted variants", 4, "ngIf"], ["class", "muted", 4, "ngIf"], [1, "muted", "variants"], [4, "ngIf"], [1, "muted"], ["target", "_blank", "rel", "noopener", 1, "break-all", 3, "href"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-exclamation-triangle text-bad", "title", "404/410 (Not found)", "style", "margin-right: 0.25rem", 4, "ngIf"], ["class", "pi pi-link", "title", "Anchor target not found on page", "style", "\n                margin-right: 0.25rem;\n                transform: rotate(45deg);\n                opacity: 0.8;\n              ", 4, "ngIf"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "404/410 (Not found)", 1, "pi", "pi-exclamation-triangle", "text-bad", 2, "margin-right", "0.25rem"], ["title", "Anchor target not found on page", 1, "pi", "pi-link", 2, "margin-right", "0.25rem", "transform", "rotate(45deg)", "opacity", "0.8"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275elementStart(0, "p-table", 1);
+      \u0275\u0275elementStart(0, "p-table", 2);
       \u0275\u0275twoWayListener("selectionChange", function LinkReportComponent_Template_p_table_selectionChange_0_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.selectedHeading, $event) || (ctx.selectedHeading = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 2)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 3);
+      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 3)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 4);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "p-popover", 4, 0)(5, "div", 5)(6, "button", 6);
+      \u0275\u0275elementStart(3, "p-popover", 5, 0)(5, "div", 6)(6, "button", 7);
       \u0275\u0275listener("click", function LinkReportComponent_Template_button_click_6_listener() {
         \u0275\u0275restoreView(_r1);
         const typePanel_r3 = \u0275\u0275reference(4);
         return \u0275\u0275resetView(typePanel_r3.hide());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(7, "div", 7)(8, "p-checkbox", 8);
+      \u0275\u0275elementStart(7, "div", 8)(8, "p-checkbox", 9);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_8_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.allSelected, $event) || (ctx.allSelected = $event);
@@ -47604,15 +47862,67 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onAllToggle());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "label", 9);
+      \u0275\u0275elementStart(9, "label", 10);
       \u0275\u0275text(10, "ALL");
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(11, "div", 10);
-      \u0275\u0275template(12, LinkReportComponent_div_12_Template, 4, 5, "div", 11)(13, LinkReportComponent_div_13_Template, 2, 0, "div", 12);
+      \u0275\u0275element(11, "div", 11);
+      \u0275\u0275template(12, LinkReportComponent_div_12_Template, 4, 5, "div", 12)(13, LinkReportComponent_div_13_Template, 2, 0, "div", 13);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(14, "p-popover", 5, 1)(16, "div", 6)(17, "button", 7);
+      \u0275\u0275listener("click", function LinkReportComponent_Template_button_click_17_listener() {
+        \u0275\u0275restoreView(_r1);
+        const statusPanel_r5 = \u0275\u0275reference(15);
+        return \u0275\u0275resetView(statusPanel_r5.hide());
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(18, "div", 8)(19, "p-checkbox", 14);
+      \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_19_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.matchAllSelected, $event) || (ctx.matchAllSelected = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275listener("onChange", function LinkReportComponent_Template_p_checkbox_onChange_19_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onMatchAllToggle());
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(20, "label", 15);
+      \u0275\u0275text(21, "ALL");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275element(22, "div", 11);
+      \u0275\u0275elementStart(23, "div", 8)(24, "p-checkbox", 16);
+      \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_24_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.matchChecks.match, $event) || (ctx.matchChecks.match = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275listener("pOnChange", function LinkReportComponent_Template_p_checkbox_pOnChange_24_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onMatchToggle("match"));
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(25, "label", 17);
+      \u0275\u0275text(26, "match");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(27, "div", 8)(28, "p-checkbox", 18);
+      \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_28_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.matchChecks.mismatch, $event) || (ctx.matchChecks.mismatch = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275listener("pOnChange", function LinkReportComponent_Template_p_checkbox_pOnChange_28_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onMatchToggle("mismatch"));
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(29, "label", 19);
+      \u0275\u0275text(30, "mismatch");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(31, LinkReportComponent_div_31_Template, 2, 0, "div", 13);
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(9, _c121));
+      \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(18, _c121));
       \u0275\u0275twoWayProperty("selection", ctx.selectedHeading);
       \u0275\u0275advance(3);
       \u0275\u0275property("dismissable", true)("appendTo", "body")("styleClass", "link-type-popover");
@@ -47622,8 +47932,20 @@ var LinkReportComponent = class _LinkReportComponent {
       \u0275\u0275property("ngForOf", ctx.linkTypes);
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", ctx.allSelected);
+      \u0275\u0275advance();
+      \u0275\u0275property("dismissable", true)("appendTo", "body")("styleClass", "link-type-popover");
+      \u0275\u0275advance(5);
+      \u0275\u0275twoWayProperty("ngModel", ctx.matchAllSelected);
+      \u0275\u0275advance(5);
+      \u0275\u0275twoWayProperty("ngModel", ctx.matchChecks.match);
+      \u0275\u0275property("disabled", ctx.matchAllSelected);
+      \u0275\u0275advance(4);
+      \u0275\u0275twoWayProperty("ngModel", ctx.matchChecks.mismatch);
+      \u0275\u0275property("disabled", ctx.matchAllSelected);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", ctx.matchAllSelected);
     }
-  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, PopoverModule, Popover, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
+  }, dependencies: [CommonModule, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, PopoverModule, Popover, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkReportComponent, [{
@@ -47653,7 +47975,7 @@ var LinkReportComponent = class _LinkReportComponent {
         <div class="header-with-filter">\r
           <span>{{ col.header }}</span>\r
 \r
-          <!-- Down-arrow filter button ONLY for Link Type -->\r
+          <!-- Down-arrow filter button for Link Type -->\r
           <button\r
             *ngIf="col.field === 'type'"\r
             pButton\r
@@ -47663,6 +47985,17 @@ var LinkReportComponent = class _LinkReportComponent {
             (click)="typePanel?.toggle($event)"\r
             aria-label="Filter link types"\r
           ></button>\r
+\r
+          <!-- NEW: Down-arrow filter button for Match status -->\r
+          <button\r
+            *ngIf="col.field === 'matchStatus'"\r
+            pButton\r
+            type="button"\r
+            class="p-button-text p-button-sm"\r
+            icon="pi pi-chevron-down"\r
+            (click)="statusPanel?.toggle($event)"\r
+            aria-label="Filter link text health"\r
+          ></button>\r
         </div>\r
       </th>\r
     </tr>\r
@@ -47670,7 +48003,13 @@ var LinkReportComponent = class _LinkReportComponent {
 \r
   <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">\r
     <tr [pReorderableRow]="rowIndex" [pSelectableRow]="rowData">\r
-      <td><span class="pi pi-bars" pReorderableRowHandle></span></td>\r
+      <td>\r
+        <span\r
+          class="pi pi-bars"\r
+          pReorderableRowHandle\r
+          aria-hidden="true"\r
+        ></span>\r
+      </td>\r
 \r
       <td *ngFor="let col of cols">\r
         <ng-container [ngSwitch]="col.field">\r
@@ -47678,13 +48017,41 @@ var LinkReportComponent = class _LinkReportComponent {
 \r
           <span *ngSwitchCase="'type'">{{ rowData.type }}</span>\r
 \r
-          <span\r
-            *ngSwitchCase="'text'"\r
-            [ngClass]="getTextClass(rowData)"\r
-            [ngStyle]="getTextStyle(rowData)"\r
-          >\r
+          <span *ngSwitchCase="'text'" [ngStyle]="getTextStyle(rowData)">\r
             {{ rowData.text }}\r
-            <div class="muted" *ngIf="rowData.href">({{ rowData.href }})</div>\r
+\r
+            <div\r
+              class="muted variants"\r
+              *ngIf="\r
+                rowData.hasTextConflict && getOtherVariants(rowData).length\r
+              "\r
+            >\r
+              also:\r
+              <ng-container\r
+                *ngFor="\r
+                  let v of getOtherVariantsPreview(rowData);\r
+                  let last = last\r
+                "\r
+              >\r
+                {{ v }}<span *ngIf="!last"> \xB7 </span>\r
+              </ng-container>\r
+              <ng-container *ngIf="getOtherVariantsExtraCount(rowData) > 0">\r
+                , +{{ getOtherVariantsExtraCount(rowData) }} more\r
+              </ng-container>\r
+            </div>\r
+\r
+            <div class="muted" *ngIf="rowData.href">\r
+              (\r
+              <a\r
+                [href]="rowData.absUrl || rowData.href"\r
+                target="_blank"\r
+                rel="noopener"\r
+                class="break-all"\r
+              >\r
+                {{ rowData.href }}\r
+              </a>\r
+              )\r
+            </div>\r
           </span>\r
 \r
           <span *ngSwitchCase="'destH1'" class="break-all">\r
@@ -47692,6 +48059,26 @@ var LinkReportComponent = class _LinkReportComponent {
           </span>\r
 \r
           <span *ngSwitchCase="'matchStatus'" class="flex justify-center">\r
+            <!-- 404 / broken -->\r
+            <i\r
+              *ngIf="rowData.is404"\r
+              class="pi pi-exclamation-triangle text-bad"\r
+              title="404/410 (Not found)"\r
+              style="margin-right: 0.25rem"\r
+            ></i>\r
+\r
+            <!-- Missing anchor on same page -->\r
+            <i\r
+              *ngIf="rowData.anchorMissing"\r
+              class="pi pi-link"\r
+              title="Anchor target not found on page"\r
+              style="\r
+                margin-right: 0.25rem;\r
+                transform: rotate(45deg);\r
+                opacity: 0.8;\r
+              "\r
+            ></i>\r
+\r
             <i\r
               *ngIf="rowData.matchStatus === 'match'"\r
               class="pi pi-check-circle text-ok"\r
@@ -47712,7 +48099,6 @@ var LinkReportComponent = class _LinkReportComponent {
             ></i>\r
           </span>\r
 \r
-          <!-- Search term / Clicks and any other fields -->\r
           <span *ngSwitchDefault>{{ rowData[col.field] || "\u2014" }}</span>\r
         </ng-container>\r
       </td>\r
@@ -47720,7 +48106,7 @@ var LinkReportComponent = class _LinkReportComponent {
   </ng-template>\r
 </p-table>\r
 \r
-<!-- Move the overlay OUTSIDE the table to avoid table parser issues -->\r
+<!-- Popover for Link Type -->\r
 <p-popover\r
   #typePanel\r
   [dismissable]="true"\r
@@ -47728,7 +48114,6 @@ var LinkReportComponent = class _LinkReportComponent {
   [styleClass]="'link-type-popover'"\r
 >\r
   <div class="filter-panel">\r
-    <!-- custom close button -->\r
     <button\r
       pButton\r
       type="button"\r
@@ -47738,7 +48123,6 @@ var LinkReportComponent = class _LinkReportComponent {
       aria-label="Close filter"\r
     ></button>\r
 \r
-    <!-- ALL / types UI stays the same -->\r
     <div class="filter-row">\r
       <p-checkbox\r
         [(ngModel)]="allSelected"\r
@@ -47759,11 +48143,7 @@ var LinkReportComponent = class _LinkReportComponent {
         [inputId]="'type-' + i"\r
         binary="true"\r
       ></p-checkbox>\r
-      <label\r
-        class="filter-label"\r
-        [attr.for]="'type-' + i"\r
-        (click)="toggleType(t)"\r
-      >\r
+      <label class="filter-label" [attr.for]="'type-' + i">\r
         {{ t }}\r
       </label>\r
     </div>\r
@@ -47773,14 +48153,71 @@ var LinkReportComponent = class _LinkReportComponent {
     </div>\r
   </div>\r
 </p-popover>\r
+\r
+<!-- NEW: Popover for Match status -->\r
+<p-popover\r
+  #statusPanel\r
+  [dismissable]="true"\r
+  [appendTo]="'body'"\r
+  [styleClass]="'link-type-popover'"\r
+>\r
+  <div class="filter-panel">\r
+    <button\r
+      pButton\r
+      type="button"\r
+      class="p-button-text p-button-sm close-btn"\r
+      icon="pi pi-times"\r
+      (click)="statusPanel.hide()"\r
+      aria-label="Close filter"\r
+    ></button>\r
+\r
+    <div class="filter-row">\r
+      <p-checkbox\r
+        [(ngModel)]="matchAllSelected"\r
+        (onChange)="onMatchAllToggle()"\r
+        inputId="allMatch"\r
+        binary="true"\r
+      ></p-checkbox>\r
+      <label class="filter-label" for="allMatch">ALL</label>\r
+    </div>\r
+\r
+    <div class="divider"></div>\r
+\r
+    <div class="filter-row">\r
+      <p-checkbox\r
+        [(ngModel)]="matchChecks.match"\r
+        (pOnChange)="onMatchToggle('match')"\r
+        [disabled]="matchAllSelected"\r
+        inputId="ms-match"\r
+        binary="true"\r
+      ></p-checkbox>\r
+      <label class="filter-label" for="ms-match">match</label>\r
+    </div>\r
+\r
+    <div class="filter-row">\r
+      <p-checkbox\r
+        [(ngModel)]="matchChecks.mismatch"\r
+        (pOnChange)="onMatchToggle('mismatch')"\r
+        [disabled]="matchAllSelected"\r
+        inputId="ms-mismatch"\r
+        binary="true"\r
+      ></p-checkbox>\r
+      <label class="filter-label" for="ms-mismatch">mismatch</label>\r
+    </div>\r
+\r
+    <div class="filter-muted" *ngIf="matchAllSelected">\r
+      All match statuses are currently included.\r
+    </div>\r
+  </div>\r
+</p-popover>\r
 `, styles: ["/* angular:styles/component:css;f867ed4ff822b366cb9432ca0b7c19af5afc1fceac7a7483c72da2155928f42a;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
-  }], () => [{ type: UploadStateService }, { type: LinkAiService }, { type: ContentExtractorService }], { typePanel: [{
+  }], null, { typePanel: [{
     type: ViewChild,
     args: ["typePanel"]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 214 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 253 });
 })();
 
 // src/app/views/page-assistant/components/tools/template-conversion.component.ts
@@ -49187,4 +49624,4 @@ ${base}`;
 export {
   PageAssistantCompareComponent
 };
-//# sourceMappingURL=chunk-P426KSB6.js.map
+//# sourceMappingURL=chunk-JD5CI6GX.js.map

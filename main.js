@@ -141,7 +141,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-AYDFT5MC.js";
+} from "./chunk-CIYSAO4Q.js";
 import {
   ANIMATION_MODULE_TYPE,
   BehaviorSubject,
@@ -17970,153 +17970,6 @@ var faFilePowerpoint = {
   icon: [384, 512, [], "f1c4", "M64 464c-8.8 0-16-7.2-16-16L48 64c0-8.8 7.2-16 16-16l160 0 0 80c0 17.7 14.3 32 32 32l80 0 0 288c0 8.8-7.2 16-16 16L64 464zM64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-293.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0L64 0zm72 208c-13.3 0-24 10.7-24 24l0 104 0 56c0 13.3 10.7 24 24 24s24-10.7 24-24l0-32 44 0c42 0 76-34 76-76s-34-76-76-76l-68 0zm68 104l-44 0 0-56 44 0c15.5 0 28 12.5 28 28s-12.5 28-28 28z"]
 };
 
-// src/app/services/translation.service.ts
-var TranslationService = class _TranslationService {
-  http;
-  apiKeyService;
-  openRouterApiUrl = "https://openrouter.ai/api/v1/chat/completions";
-  docxPrompt = `You are a document formatting assistant. 
-You will be provided two inputs in HTML format:
-1. An English HTML document that contains unique identifiers for each text segment (e.g., <p id="P1">, <p id="P2">).
-2. A block of French text that is the translation of the English document.
-
-Your task: return the French document in HTML format such that:
-1. All English text is replaced with its correct French translation.
-2. The HTML structure (tags, attributes, order) remains unchanged.
-3. Each text element retains its original unique ID.
-Do not add extra commentary or leftover English text.`;
-  pptxPrompt = `You are a presentation formatting assistant. 
-Inputs:
-1. English HTML containing IDs like S3_T1, S3_T2.
-2. A block of French text.
-
-Your task: 
-1. Replace the English text with correct French translation.
-2. Preserve the same HTML structure and unique IDs.
-3. If the French text is one paragraph but the English input is split into multiple segments, split it appropriately.
-Return only the French HTML document.`;
-  constructor(http, apiKeyService) {
-    this.http = http;
-    this.apiKeyService = apiKeyService;
-  }
-  /**
-   * Aligns French text with the English HTML structure.
-   */
-  alignTranslation(englishHtml, frenchText, englishFile) {
-    return __async(this, null, function* () {
-      englishHtml = englishHtml.replace(/<img[^>]*>/g, "");
-      const fileExtension = englishFile?.name.split(".").pop()?.toLowerCase();
-      const systemPrompt = fileExtension === "pptx" ? this.pptxPrompt : this.docxPrompt;
-      const combinedPrompt = `${systemPrompt}
-
-English Document (HTML):
-${englishHtml}
-
-French Text:
-${frenchText}
-
-Return the French document in HTML format that exactly follows the structure of the English document.`;
-      const requestJson = [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: combinedPrompt }
-      ];
-      const models = [
-        "meta-llama/llama-3.3-70b-instruct:free",
-        "google/gemini-2.0-flash-exp:free",
-        "google/gemini-exp-1206:free",
-        "cognitivecomputations/dolphin3.0-mistral-24b:free",
-        "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
-        "nvidia/llama-3.1-nemotron-70b-instruct:free",
-        "deepseek/deepseek-r1:free"
-      ];
-      let finalResponse = null;
-      for (const model2 of models) {
-        const aiResponse = yield this.getORData(model2, requestJson, 0);
-        if (aiResponse?.choices?.[0]?.message?.content) {
-          finalResponse = this.removeCodeFences(aiResponse.choices[0].message.content);
-          console.log("AI response received.");
-          break;
-        }
-      }
-      return finalResponse;
-    });
-  }
-  /**
-   * Fetches data from OpenRouter API
-   */
-  getORData(model2, requestJson, temperature = 0) {
-    return __async(this, null, function* () {
-      const apiKey = this.apiKeyService.getCurrentKey();
-      if (!apiKey)
-        throw new Error("API key is required.");
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "X-Title": "Content Assistant"
-        // optional but nice
-      });
-      const payload = { model: model2, messages: requestJson, temperature };
-      try {
-        const resp = yield this.http.post(this.openRouterApiUrl, payload, {
-          headers,
-          responseType: "text",
-          // <-- key change
-          observe: "response"
-        }).toPromise();
-        const ct = resp?.headers.get("content-type") || "";
-        if (ct.includes("application/json")) {
-          return JSON.parse(resp.body);
-        } else {
-          console.error(`OpenRouter non-JSON (status ${resp?.status}, ${ct}):
-`, (resp?.body || "").slice(0, 500));
-          return void 0;
-        }
-      } catch (err) {
-        const status = err?.status;
-        const bodySnippet = typeof err?.error === "string" ? err.error.slice(0, 500) : JSON.stringify(err?.error);
-        console.error(`OpenRouter HTTP error (model: ${model2}) status=${status}: ${bodySnippet}`);
-        return void 0;
-      }
-    });
-  }
-  /**
-   * Removes ``` code fences from AI output
-   */
-  removeCodeFences(str) {
-    str = str.replace(/^```.*\n/, "");
-    str = str.replace(/\n\s*```+\s*$/, "");
-    return str.trim();
-  }
-  /**
-   * Builds a mapping of paragraph IDs to French text from HTML.
-   */
-  buildFrenchTextMap(finalFrenchHtml) {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = finalFrenchHtml;
-    const frenchMap = {};
-    tempDiv.querySelectorAll("p[id]").forEach((p2) => {
-      const id = p2.getAttribute("id");
-      const text2 = p2.textContent?.trim() || "";
-      if (text2)
-        frenchMap[id] = text2;
-    });
-    return frenchMap;
-  }
-  static \u0275fac = function TranslationService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _TranslationService)(\u0275\u0275inject(HttpClient), \u0275\u0275inject(ApiKeyService));
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _TranslationService, factory: _TranslationService.\u0275fac, providedIn: "root" });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TranslationService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [{ type: HttpClient }, { type: ApiKeyService }], null);
-})();
-
 // src/app/services/file-parse.service.ts
 var FileParseService = class _FileParseService {
   extractDocxParagraphs(arrayBuffer) {
@@ -18232,6 +18085,147 @@ var FileParseService = class _FileParseService {
   }], null, null);
 })();
 
+// src/app/services/translation.service.ts
+var TranslationService = class _TranslationService {
+  openRouterApiUrl = "https://openrouter.ai/api/v1/chat/completions";
+  // prefer-inject over constructor DI
+  http = inject(HttpClient);
+  apiKeyService = inject(ApiKeyService);
+  docxPrompt = `You are a document formatting assistant. 
+You will be provided two inputs in HTML format:
+1. An English HTML document that contains unique identifiers for each text segment (e.g., <p id="P1">, <p id="P2">).
+2. A block of French text that is the translation of the English document.
+
+Your task: return the French document in HTML format such that:
+1. All English text is replaced with its correct French translation.
+2. The HTML structure (tags, attributes, order) remains unchanged.
+3. Each text element retains its original unique ID.
+Do not add extra commentary or leftover English text.`;
+  pptxPrompt = `You are a presentation formatting assistant. 
+Inputs:
+1. English HTML containing IDs like S3_T1, S3_T2.
+2. A block of French text.
+
+Your task: 
+1. Replace the English text with correct French translation.
+2. Preserve the same HTML structure and unique IDs.
+3. If the French text is one paragraph but the English input is split into multiple segments, split it appropriately.
+Return only the French HTML document.`;
+  models = [
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "google/gemini-2.0-flash-exp:free",
+    "google/gemini-exp-1206:free",
+    "cognitivecomputations/dolphin3.0-mistral-24b:free",
+    "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
+    "nvidia/llama-3.1-nemotron-70b-instruct:free",
+    "deepseek/deepseek-r1:free"
+  ];
+  /**
+   * Aligns French text with the English HTML structure.
+   */
+  alignTranslation(englishHtml, frenchText, englishFile) {
+    return __async(this, null, function* () {
+      englishHtml = englishHtml.replace(/<img[^>]*>/g, "");
+      const fileExtension = englishFile?.name.split(".").pop()?.toLowerCase();
+      const systemPrompt = fileExtension === "pptx" ? this.pptxPrompt : this.docxPrompt;
+      const combinedPrompt = `${systemPrompt}
+
+English Document (HTML):
+${englishHtml}
+
+French Text:
+${frenchText}
+
+Return the French document in HTML format that exactly follows the structure of the English document.`;
+      const requestMessages = [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: combinedPrompt }
+      ];
+      let finalResponse = null;
+      for (const model2 of this.models) {
+        const aiResponse = yield this.getORData(model2, requestMessages, 0);
+        const text2 = aiResponse?.choices?.[0]?.message?.content;
+        if (text2) {
+          finalResponse = this.removeCodeFences(text2);
+          console.log("AI response received.");
+          break;
+        }
+      }
+      return finalResponse;
+    });
+  }
+  /**
+   * Fetches data from OpenRouter API
+   */
+  getORData(model2, messages, temperature = 0) {
+    return __async(this, null, function* () {
+      const apiKey = this.apiKeyService.getCurrentKey();
+      if (!apiKey)
+        throw new Error("API key is required.");
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-Title": "Content Assistant"
+      });
+      const payload = { model: model2, messages, temperature };
+      try {
+        const resp = yield this.http.post(this.openRouterApiUrl, payload, {
+          headers,
+          responseType: "text",
+          // keep text to check content-type ourselves
+          observe: "response"
+        }).toPromise();
+        const ct = resp?.headers.get("content-type") || "";
+        if (ct.includes("application/json") && typeof resp?.body === "string") {
+          return JSON.parse(resp.body);
+        } else {
+          console.error(`OpenRouter non-JSON (status ${resp?.status}, ${ct}):
+`, (resp?.body || "").slice(0, 500));
+          return void 0;
+        }
+      } catch (err) {
+        const httpErr = err;
+        const status = httpErr?.status;
+        const bodySnippet = typeof httpErr?.error === "string" ? httpErr.error.slice(0, 500) : JSON.stringify(httpErr?.error);
+        console.error(`OpenRouter HTTP error (model: ${model2}) status=${status}: ${bodySnippet}`);
+        return void 0;
+      }
+    });
+  }
+  /**
+   * Removes ``` code fences from AI output
+   */
+  removeCodeFences(str) {
+    return str.replace(/^```(?:html|json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  }
+  /**
+   * Builds a mapping of paragraph IDs to French text from HTML.
+   */
+  buildFrenchTextMap(finalFrenchHtml) {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = finalFrenchHtml;
+    const frenchMap = {};
+    tempDiv.querySelectorAll("p[id]").forEach((p2) => {
+      const id = p2.getAttribute("id");
+      const text2 = p2.textContent?.trim() || "";
+      if (id && text2)
+        frenchMap[id] = text2;
+    });
+    return frenchMap;
+  }
+  static \u0275fac = function TranslationService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _TranslationService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _TranslationService, factory: _TranslationService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TranslationService, [{
+    type: Injectable,
+    args: [{ providedIn: "root" }]
+  }], null, null);
+})();
+
 // src/app/views/translation-assistant/translation-assistant.component.ts
 var _c06 = (a0, a1) => ({ "pi-plus": a0, "pi-minus": a1 });
 function TranslationAssistantComponent_ng_container_12_i_2_Template(rf, ctx) {
@@ -18275,9 +18269,9 @@ function TranslationAssistantComponent_ng_template_13_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-function TranslationAssistantComponent_div_17_div_9_Template(rf, ctx) {
+function TranslationAssistantComponent_div_18_div_11_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 31)(1, "span");
+    \u0275\u0275elementStart(0, "div", 32)(1, "span");
     \u0275\u0275text(2);
     \u0275\u0275elementEnd()();
   }
@@ -18287,11 +18281,19 @@ function TranslationAssistantComponent_div_17_div_9_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r2.previewText);
   }
 }
-function TranslationAssistantComponent_div_17_Template(rf, ctx) {
+function TranslationAssistantComponent_div_18_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 22)(1, "div", 23)(2, "div", 24);
-    \u0275\u0275listener("click", function TranslationAssistantComponent_div_17_Template_div_click_2_listener() {
+    \u0275\u0275listener("click", function TranslationAssistantComponent_div_18_Template_div_click_2_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.isExpanded = !ctx_r2.isExpanded);
+    })("keyup.enter", function TranslationAssistantComponent_div_18_Template_div_keyup_enter_2_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.isExpanded = !ctx_r2.isExpanded);
+    })("keyup.space", function TranslationAssistantComponent_div_18_Template_div_keyup_space_2_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.isExpanded = !ctx_r2.isExpanded);
@@ -18299,50 +18301,55 @@ function TranslationAssistantComponent_div_17_Template(rf, ctx) {
     \u0275\u0275elementStart(3, "div", 25);
     \u0275\u0275element(4, "i", 26);
     \u0275\u0275elementStart(5, "span", 27);
-    \u0275\u0275text(6, "Preview source language file");
+    \u0275\u0275text(6, " Preview source language file ");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(7, "button", 28);
-    \u0275\u0275listener("click", function TranslationAssistantComponent_div_17_Template_button_click_7_listener($event) {
+    \u0275\u0275listener("click", function TranslationAssistantComponent_div_18_Template_button_click_7_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.copyAll($event));
     });
     \u0275\u0275element(8, "span", 29);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(9, TranslationAssistantComponent_div_17_div_9_Template, 3, 1, "div", 30);
+    \u0275\u0275elementStart(9, "span", 30);
+    \u0275\u0275text(10, "Copy All");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275template(11, TranslationAssistantComponent_div_18_div_11_Template, 3, 1, "div", 31);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(2, _c06, !ctx_r2.isExpanded, ctx_r2.isExpanded));
-    \u0275\u0275advance(5);
+    \u0275\u0275advance(2);
+    \u0275\u0275attribute("aria-expanded", ctx_r2.isExpanded);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(3, _c06, !ctx_r2.isExpanded, ctx_r2.isExpanded));
+    \u0275\u0275advance(7);
     \u0275\u0275property("ngIf", ctx_r2.isExpanded);
   }
 }
-function TranslationAssistantComponent_div_18_Template(rf, ctx) {
+function TranslationAssistantComponent_div_19_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 32)(1, "p-card")(2, "h2", 33);
+    \u0275\u0275elementStart(0, "div", 33)(1, "p-card")(2, "h2", 34);
     \u0275\u0275text(3, "Paste target language content");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "p");
     \u0275\u0275text(5, " Paste the full translation of the uploaded source content into the box below. ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "textarea", 34);
-    \u0275\u0275twoWayListener("ngModelChange", function TranslationAssistantComponent_div_18_Template_textarea_ngModelChange_6_listener($event) {
+    \u0275\u0275elementStart(6, "textarea", 35);
+    \u0275\u0275twoWayListener("ngModelChange", function TranslationAssistantComponent_div_19_Template_textarea_ngModelChange_6_listener($event) {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r2.frenchText, $event) || (ctx_r2.frenchText = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 10)(8, "button", 35);
-    \u0275\u0275listener("click", function TranslationAssistantComponent_div_18_Template_button_click_8_listener() {
+    \u0275\u0275elementStart(7, "div", 10)(8, "button", 36);
+    \u0275\u0275listener("click", function TranslationAssistantComponent_div_19_Template_button_click_8_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.onFormatTargetLanguageContent());
     });
+    \u0275\u0275text(9, " Format target language content ");
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
@@ -18351,39 +18358,41 @@ function TranslationAssistantComponent_div_18_Template(rf, ctx) {
     \u0275\u0275twoWayProperty("ngModel", ctx_r2.frenchText);
   }
 }
-function TranslationAssistantComponent_div_19_Template(rf, ctx) {
+function TranslationAssistantComponent_div_20_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 36);
-    \u0275\u0275element(1, "p-progressSpinner", 37);
-    \u0275\u0275elementStart(2, "p", 38);
+    \u0275\u0275elementStart(0, "div", 37);
+    \u0275\u0275element(1, "p-progressSpinner", 38);
+    \u0275\u0275elementStart(2, "p", 39);
     \u0275\u0275text(3, "Generating files...");
     \u0275\u0275elementEnd()();
   }
 }
-function TranslationAssistantComponent_div_20_Template(rf, ctx) {
+function TranslationAssistantComponent_div_21_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 32)(1, "p-card")(2, "h2", 33);
+    \u0275\u0275elementStart(0, "div", 33)(1, "p-card")(2, "h2", 34);
     \u0275\u0275text(3, "Formatting complete");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "p");
     \u0275\u0275text(5, " The translated file has been formatted to match the original layout and is ready for download. ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "div", 10)(7, "button", 39);
-    \u0275\u0275listener("click", function TranslationAssistantComponent_div_20_Template_button_click_7_listener() {
+    \u0275\u0275elementStart(6, "div", 10)(7, "button", 40);
+    \u0275\u0275listener("click", function TranslationAssistantComponent_div_21_Template_button_click_7_listener() {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.onDownloadFile());
     });
+    \u0275\u0275text(8, " Download file ");
     \u0275\u0275elementEnd()()()();
   }
 }
 var TranslationAssistantComponent = class _TranslationAssistantComponent {
-  apiKeyService;
-  translationService;
-  router;
-  route;
-  parseSrv;
+  // prefer-inject: replace constructor DI with inject()
+  apiKeyService = inject(ApiKeyService);
+  translationService = inject(TranslationService);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  parseSrv = inject(FileParseService);
   isExpanded = false;
   isDragging = false;
   selectedFile = null;
@@ -18397,13 +18406,6 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
   finalFrenchHtml = "";
   sourceError = "";
   faFilePowerpoint = faFilePowerpoint;
-  constructor(apiKeyService, translationService, router, route, parseSrv) {
-    this.apiKeyService = apiKeyService;
-    this.translationService = translationService;
-    this.router = router;
-    this.route = route;
-    this.parseSrv = parseSrv;
-  }
   onClear() {
     this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => this.router.navigate([this.router.url]));
   }
@@ -18623,7 +18625,7 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       aggregated[paraId].texts.push(item.text);
     });
     return Object.values(aggregated).map((entry) => {
-      let combined = entry.texts.join("").replace(/\s+/g, " ").trim();
+      const combined = entry.texts.join("").replace(/\s+/g, " ").trim();
       return { id: entry.id, text: combined };
     });
   }
@@ -18728,9 +18730,9 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
   static \u0275fac = function TranslationAssistantComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _TranslationAssistantComponent)(\u0275\u0275directiveInject(ApiKeyService), \u0275\u0275directiveInject(TranslationService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(FileParseService));
+    return new (__ngFactoryType__ || _TranslationAssistantComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TranslationAssistantComponent, selectors: [["app-translation-assistant"]], decls: 21, vars: 7, consts: [["fileInput", ""], ["dragArea", ""], [1, "p-mb-3"], [1, "p-text-bold"], [1, "surface-100", "border-round", "shadow-3", "p-4", "max-w-3xl", "mx-auto"], [1, "p-mb-4"], [1, "p-m-0", "p-text-bold", "p-text-2xl", 2, "color", "black"], [1, "flex", "flex-column", "align-items-center", "justify-content-center", "p-3", "border-dashed", "border-round", "border-200", "surface-100", "hover:surface-200", "hover:border-primary-400", "transition-colors", "transition-duration-300", "cursor-pointer", "w-full", "max-w-30rem", "min-h-12rem", 3, "click", "dragover", "dragleave", "drop"], ["type", "file", "accept", ".docx,.pptx", 2, "display", "none", 3, "change"], [4, "ngIf", "ngIfElse"], [1, "flex", "gap-2", "mt-3"], ["pButton", "", "type", "button", "label", "Upload file", "icon", "pi pi-upload", 1, "p-button", "p-component", "p-button-primary", 3, "click", "disabled"], ["class", "mt-3", 4, "ngIf"], ["class", "surface-100 border-round shadow-3", "style", "border: 2px solid #00000000; padding: 1rem", 4, "ngIf"], ["class", "p-mt-4 text-center", 4, "ngIf"], [1, "text-xl", "text-center"], ["class", "pi pi-file-word text-blue-500 text-2xl mr-1", 4, "ngIf"], ["class", "text-orange-500 text-2xl mr-1", 3, "icon", 4, "ngIf"], [1, "pi", "pi-file-word", "text-blue-500", "text-2xl", "mr-1"], [1, "text-orange-500", "text-2xl", "mr-1", 3, "icon"], [1, "pi", "pi-upload", "border-2", "border-circle", "border-300", "p-3", "text-3xl", "text-color-secondary", "mb-2", "hover:bg-primary", "hover:text-white", "transition-colors", "transition-duration-300"], [1, "m-0", "text-center", "text-sm"], [1, "mt-3"], [1, "p-panel", "p-component", "border-1", "border-round", "surface-100", 2, "border-color", "#00000023", "font-size", "1rem", "font-family", '"Segoe UI", Roboto, sans-serif'], [1, "p-panel-header", "d-flex", "justify-content-between", "align-items-center", "cursor-pointer", 2, "height", "4rem", "padding", "0 1rem", "display", "flex", "font-size", "1rem", "justify-content", "space-between", "align-items", "center", "flex-wrap", "nowrap", "gap", "0.5rem", "width", "100%", 3, "click"], [1, "d-flex", "align-items-center"], [1, "pi", 2, "margin-right", "0.5rem", 3, "ngClass"], [1, "p-panel-title", "font-semibold", 2, "color", "black"], ["pButton", "", "type", "button", "title", "Copy All", 1, "p-button-text", "p-button-icon-only", "flex-shrink-0", 2, "width", "3rem", "height", "3rem", 3, "click"], [1, "pi", "pi-copy", 2, "font-size", "1.4rem"], ["class", "p-panel-content p-mt-2", "style", "\n            background-color: white;\n            padding: 1rem;\n            border-top: 1px solid #ccc;\n          ", 4, "ngIf"], [1, "p-panel-content", "p-mt-2", 2, "background-color", "white", "padding", "1rem", "border-top", "1px solid #ccc"], [1, "surface-100", "border-round", "shadow-3", 2, "border", "2px solid #00000000", "padding", "1rem"], [1, "p-mb-3", 2, "color", "black"], ["pInputTextarea", "", "rows", "15", "cols", "70", "placeholder", "", 1, "p-inputtext", "p-mb-3", "w-full", 2, "border-color", "#00000052", "min-height", "10rem", "resize", "vertical text", "font-family", '"Segoe UI", Roboto, sans-serif', "font-size", "1rem", "color", "#000000be", 3, "ngModelChange", "ngModel"], ["pButton", "", "type", "button", "label", "Format target language content", "icon", "pi pi-align-left", 1, "p-button-primary", 3, "click"], [1, "p-mt-4", "text-center"], ["styleClass", "p-mt-3"], [1, "p-mt-2", "font-bold"], ["pButton", "", "type", "button", "label", "Download file", "icon", "pi pi-download", 1, "p-button-primary", 3, "click"]], template: function TranslationAssistantComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TranslationAssistantComponent, selectors: [["ca-translation-assistant"]], decls: 22, vars: 7, consts: [["fileInput", ""], ["dragArea", ""], [1, "p-mb-3"], [1, "p-text-bold"], [1, "surface-100", "border-round", "shadow-3", "p-4", "max-w-3xl", "mx-auto"], [1, "p-mb-4"], [1, "p-m-0", "p-text-bold", "p-text-2xl", 2, "color", "black"], ["role", "button", "tabindex", "0", "aria-label", "Select a source .docx or .pptx file", 1, "flex", "flex-column", "align-items-center", "justify-content-center", "p-3", "border-dashed", "border-round", "border-200", "surface-100", "hover:surface-200", "hover:border-primary-400", "transition-colors", "transition-duration-300", "cursor-pointer", "w-full", "max-w-30rem", "min-h-12rem", 3, "click", "keyup.enter", "keyup.space", "dragover", "dragleave", "drop"], ["type", "file", "accept", ".docx,.pptx", 2, "display", "none", 3, "change"], [4, "ngIf", "ngIfElse"], [1, "flex", "gap-2", "mt-3"], ["pButton", "", "type", "button", "icon", "pi pi-upload", 1, "p-button", "p-component", "p-button-primary", 3, "click", "disabled"], ["class", "mt-3", 4, "ngIf"], ["class", "surface-100 border-round shadow-3", "style", "border: 2px solid #00000000; padding: 1rem", 4, "ngIf"], ["class", "p-mt-4 text-center", 4, "ngIf"], [1, "text-xl", "text-center"], ["class", "pi pi-file-word text-blue-500 text-2xl mr-1", "aria-hidden", "true", 4, "ngIf"], ["class", "text-orange-500 text-2xl mr-1", "aria-hidden", "true", 3, "icon", 4, "ngIf"], ["aria-hidden", "true", 1, "pi", "pi-file-word", "text-blue-500", "text-2xl", "mr-1"], ["aria-hidden", "true", 1, "text-orange-500", "text-2xl", "mr-1", 3, "icon"], ["aria-hidden", "true", 1, "pi", "pi-upload", "border-2", "border-circle", "border-300", "p-3", "text-3xl", "text-color-secondary", "mb-2", "hover:bg-primary", "hover:text-white", "transition-colors", "transition-duration-300"], [1, "m-0", "text-center", "text-sm"], [1, "mt-3"], [1, "p-panel", "p-component", "border-1", "border-round", "surface-100", 2, "border-color", "#00000023", "font-size", "1rem", "font-family", '"Segoe UI", Roboto, sans-serif'], ["role", "button", "tabindex", "0", "aria-controls", "preview-panel-content", 1, "p-panel-header", "d-flex", "justify-content-between", "align-items-center", "cursor-pointer", 2, "height", "4rem", "padding", "0 1rem", "display", "flex", "font-size", "1rem", "justify-content", "space-between", "align-items", "center", "flex-wrap", "nowrap", "gap", "0.5rem", "width", "100%", 3, "click", "keyup.enter", "keyup.space"], [1, "d-flex", "align-items-center"], ["aria-hidden", "true", 1, "pi", 2, "margin-right", "0.5rem", 3, "ngClass"], [1, "p-panel-title", "font-semibold", 2, "color", "black"], ["pButton", "", "type", "button", "title", "Copy All", "aria-label", "Copy all preview text", 1, "p-button-text", "p-button-icon-only", "flex-shrink-0", 2, "width", "3rem", "height", "3rem", 3, "click"], ["aria-hidden", "true", 1, "pi", "pi-copy", 2, "font-size", "1.4rem"], [1, "sr-only"], ["id", "preview-panel-content", "class", "p-panel-content p-mt-2", "style", "\n            background-color: white;\n            padding: 1rem;\n            border-top: 1px solid #ccc;\n          ", 4, "ngIf"], ["id", "preview-panel-content", 1, "p-panel-content", "p-mt-2", 2, "background-color", "white", "padding", "1rem", "border-top", "1px solid #ccc"], [1, "surface-100", "border-round", "shadow-3", 2, "border", "2px solid #00000000", "padding", "1rem"], [1, "p-mb-3", 2, "color", "black"], ["pInputTextarea", "", "rows", "15", "cols", "70", "placeholder", "", 1, "p-inputtext", "p-mb-3", "w-full", 2, "border-color", "#00000052", "min-height", "10rem", "resize", "vertical text", "font-family", '"Segoe UI", Roboto, sans-serif', "font-size", "1rem", "color", "#000000be", 3, "ngModelChange", "ngModel"], ["pButton", "", "type", "button", "icon", "pi pi-align-left", 1, "p-button-primary", 3, "click"], [1, "p-mt-4", "text-center"], ["styleClass", "p-mt-3"], [1, "p-mt-2", "font-bold"], ["pButton", "", "type", "button", "icon", "pi pi-download", 1, "p-button-primary", 3, "click"]], template: function TranslationAssistantComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "div", 2)(1, "h1", 3);
@@ -18744,6 +18746,14 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(9, "div", 7);
       \u0275\u0275listener("click", function TranslationAssistantComponent_Template_div_click_9_listener() {
+        \u0275\u0275restoreView(_r1);
+        const fileInput_r2 = \u0275\u0275reference(11);
+        return \u0275\u0275resetView(fileInput_r2.click());
+      })("keyup.enter", function TranslationAssistantComponent_Template_div_keyup_enter_9_listener() {
+        \u0275\u0275restoreView(_r1);
+        const fileInput_r2 = \u0275\u0275reference(11);
+        return \u0275\u0275resetView(fileInput_r2.click());
+      })("keyup.space", function TranslationAssistantComponent_Template_div_keyup_space_9_listener() {
         \u0275\u0275restoreView(_r1);
         const fileInput_r2 = \u0275\u0275reference(11);
         return \u0275\u0275resetView(fileInput_r2.click());
@@ -18770,10 +18780,11 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
         \u0275\u0275restoreView(_r1);
         return \u0275\u0275resetView(ctx.previewSource());
       });
+      \u0275\u0275text(17, " Upload file ");
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(17, TranslationAssistantComponent_div_17_Template, 10, 5, "div", 12);
+      \u0275\u0275template(18, TranslationAssistantComponent_div_18_Template, 12, 6, "div", 12);
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(18, TranslationAssistantComponent_div_18_Template, 9, 1, "div", 13)(19, TranslationAssistantComponent_div_19_Template, 4, 0, "div", 14)(20, TranslationAssistantComponent_div_20_Template, 8, 0, "div", 13);
+      \u0275\u0275template(19, TranslationAssistantComponent_div_19_Template, 10, 1, "div", 13)(20, TranslationAssistantComponent_div_20_Template, 4, 0, "div", 14)(21, TranslationAssistantComponent_div_21_Template, 9, 0, "div", 13);
     }
     if (rf & 2) {
       const dragArea_r7 = \u0275\u0275reference(14);
@@ -18781,7 +18792,7 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       \u0275\u0275property("ngIf", ctx.selectedFile)("ngIfElse", dragArea_r7);
       \u0275\u0275advance(4);
       \u0275\u0275property("disabled", !ctx.selectedFile);
-      \u0275\u0275advance();
+      \u0275\u0275advance(2);
       \u0275\u0275property("ngIf", ctx.previewText);
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", ctx.showSecondUpload);
@@ -18815,7 +18826,7 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TranslationAssistantComponent, [{
     type: Component,
-    args: [{ selector: "app-translation-assistant", imports: [
+    args: [{ selector: "ca-translation-assistant", imports: [
       CommonModule,
       RouterModule,
       ButtonModule,
@@ -18844,7 +18855,12 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
     <!-- Upload Section -->\r
     <div\r
       class="flex flex-column align-items-center justify-content-center p-3 border-dashed border-round border-200 surface-100 hover:surface-200 hover:border-primary-400 transition-colors transition-duration-300 cursor-pointer w-full max-w-30rem min-h-12rem"\r
+      role="button"\r
+      tabindex="0"\r
+      aria-label="Select a source .docx or .pptx file"\r
       (click)="fileInput.click()"\r
+      (keyup.enter)="fileInput.click()"\r
+      (keyup.space)="fileInput.click()"\r
       (dragover)="onDragOver($event)"\r
       (dragleave)="onDragLeave($event)"\r
       (drop)="onDrop($event)"\r
@@ -18861,11 +18877,13 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
           <i\r
             *ngIf="isDocx(selectedFile)"\r
             class="pi pi-file-word text-blue-500 text-2xl mr-1"\r
+            aria-hidden="true"\r
           ></i>\r
           <fa-icon\r
             *ngIf="isPptx(selectedFile)"\r
             [icon]="faFilePowerpoint"\r
             class="text-orange-500 text-2xl mr-1"\r
+            aria-hidden="true"\r
           ></fa-icon>\r
 \r
           {{ selectedFile.name }}\r
@@ -18874,6 +18892,7 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       <ng-template #dragArea>\r
         <i\r
           class="pi pi-upload border-2 border-circle border-300 p-3 text-3xl text-color-secondary mb-2 hover:bg-primary hover:text-white transition-colors transition-duration-300"\r
+          aria-hidden="true"\r
         ></i>\r
         <p class="m-0 text-center text-sm">\r
           Drag and drop .docx or .pptx source language file here.\r
@@ -18885,12 +18904,13 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       <button\r
         pButton\r
         type="button"\r
-        label="Upload file"\r
         icon="pi pi-upload"\r
         class="p-button p-component p-button-primary"\r
         [disabled]="!selectedFile"\r
         (click)="previewSource()"\r
-      ></button>\r
+      >\r
+        Upload file\r
+      </button>\r
     </div>\r
 \r
     <!-- Preview Panel -->\r
@@ -18916,7 +18936,13 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
             gap: 0.5rem;\r
             width: 100%;\r
           "\r
+          role="button"\r
+          tabindex="0"\r
           (click)="isExpanded = !isExpanded"\r
+          (keyup.enter)="isExpanded = !isExpanded"\r
+          (keyup.space)="isExpanded = !isExpanded"\r
+          [attr.aria-expanded]="isExpanded"\r
+          aria-controls="preview-panel-content"\r
         >\r
           <div class="d-flex align-items-center">\r
             <i\r
@@ -18926,10 +18952,11 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
                 'pi-minus': isExpanded,\r
               }"\r
               style="margin-right: 0.5rem"\r
+              aria-hidden="true"\r
             ></i>\r
-            <span class="p-panel-title font-semibold" style="color: black"\r
-              >Preview source language file</span\r
-            >\r
+            <span class="p-panel-title font-semibold" style="color: black">\r
+              Preview source language file\r
+            </span>\r
           </div>\r
 \r
           <button\r
@@ -18937,15 +18964,22 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
             type="button"\r
             class="p-button-text p-button-icon-only flex-shrink-0"\r
             title="Copy All"\r
+            aria-label="Copy all preview text"\r
             (click)="copyAll($event)"\r
             style="width: 3rem; height: 3rem"\r
           >\r
-            <span class="pi pi-copy" style="font-size: 1.4rem"></span>\r
+            <span\r
+              class="pi pi-copy"\r
+              style="font-size: 1.4rem"\r
+              aria-hidden="true"\r
+            ></span>\r
+            <span class="sr-only">Copy All</span>\r
           </button>\r
         </div>\r
 \r
         <div\r
           *ngIf="isExpanded"\r
+          id="preview-panel-content"\r
           class="p-panel-content p-mt-2"\r
           style="\r
             background-color: white;\r
@@ -18993,11 +19027,12 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       <button\r
         pButton\r
         type="button"\r
-        label="Format target language content"\r
         icon="pi pi-align-left"\r
         class="p-button-primary"\r
         (click)="onFormatTargetLanguageContent()"\r
-      ></button>\r
+      >\r
+        Format target language content\r
+      </button>\r
     </div>\r
   </p-card>\r
 </div>\r
@@ -19023,19 +19058,20 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       <button\r
         pButton\r
         type="button"\r
-        label="Download file"\r
         icon="pi pi-download"\r
         class="p-button-primary"\r
         (click)="onDownloadFile()"\r
-      ></button>\r
+      >\r
+        Download file\r
+      </button>\r
     </div>\r
   </p-card>\r
 </div>\r
 ` }]
-  }], () => [{ type: ApiKeyService }, { type: TranslationService }, { type: Router }, { type: ActivatedRoute }, { type: FileParseService }], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TranslationAssistantComponent, { className: "TranslationAssistantComponent", filePath: "src/app/views/translation-assistant/translation-assistant.component.ts", lineNumber: 40 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TranslationAssistantComponent, { className: "TranslationAssistantComponent", filePath: "src/app/views/translation-assistant/translation-assistant.component.ts", lineNumber: 41 });
 })();
 
 // src/app/views/project-assistant/project-assistant.component.ts
@@ -27705,7 +27741,7 @@ var routes = [
       }
       return true;
     }],
-    loadComponent: () => import("./chunk-P426KSB6.js").then((m) => m.PageAssistantCompareComponent)
+    loadComponent: () => import("./chunk-JD5CI6GX.js").then((m) => m.PageAssistantCompareComponent)
   },
   {
     path: "page-assistant/share",
@@ -27948,9 +27984,10 @@ var _c013 = () => ["/"];
 var _c114 = () => ["/page-assistant"];
 var _c25 = () => ["/image-assistant"];
 var _c35 = () => ["/translation-assistant"];
-var _c45 = () => ["/inventory-assistant"];
-var _c55 = () => ["/metadata-assistant"];
-var _c64 = () => ["/about-us"];
+var _c45 = () => ["/ia-assistant"];
+var _c55 = () => ["/inventory-assistant"];
+var _c64 = () => ["/metadata-assistant"];
+var _c73 = () => ["/about-us"];
 var SidebarComponent = class _SidebarComponent {
   // Section toggle state
   isExpanded = {
@@ -27961,154 +27998,163 @@ var SidebarComponent = class _SidebarComponent {
   toggleSection(section) {
     this.isExpanded[section] = !this.isExpanded[section];
   }
+  toggleOnEnter(event, section) {
+    if (event.key === "Enter" || event.key === " ") {
+      this.toggleSection(section);
+    }
+  }
   static \u0275fac = function SidebarComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _SidebarComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SidebarComponent, selectors: [["ca-sidebar"]], decls: 76, vars: 59, consts: [["id", "nav-bar", 1, "l-navbar", "show-n"], [1, "nav"], [1, "nav_logo"], [3, "routerLink"], [1, "material-icons", "text-primary-200"], [1, "logo_text"], [1, "nav_section"], [1, "nav_header", "text-primary-200", "hover:text-primary-400", 3, "click"], [1, "nav_section_text"], [1, "material-icons", "toggle-icon"], [1, "nav_section_body"], ["routerLinkActive", "active", 1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "routerLink"], [1, "material-icons"], [1, "nav_link_text"], [1, "section"], [1, "nav_header", "text-primary-200", "hover:text-primary-400", "hover:font-bold", 3, "click"], [1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "href"]], template: function SidebarComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SidebarComponent, selectors: [["ca-sidebar"]], decls: 78, vars: 62, consts: [["id", "nav-bar", 1, "l-navbar", "show-n"], [1, "nav"], [1, "flex", "flex-column", "justify-content-between", "min-h-full"], [1, "nav_logo"], [3, "routerLink"], [1, "material-icons", "text-primary-200"], [1, "logo_text"], [1, "section"], ["tabindex", "0", "role", "button", "aria-controls", "main", 1, "nav_header", "text-primary-200", "hover:text-primary-400", 3, "click", "keydown"], ["id", "menu-content", 1, "nav_section_text"], [1, "material-icons", "toggle-icon"], ["id", "main", "role", "region", "aria-labelledby", "menu-content", 1, "nav_section_body"], ["routerLinkActive", "active", 1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "routerLink"], [1, "material-icons"], [1, "nav_link_text"], ["tabindex", "0", "role", "button", "aria-controls", "project", 1, "nav_header", "text-primary-200", "hover:text-primary-400", "hover:font-bold", 3, "click", "keydown"], ["id", "menu-project", 1, "nav_section_text"], ["id", "project", "role", "region", "aria-labelledby", "menu-project", 1, "nav_section_body"], [1, "nav_section_body"], [1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "href"]], template: function SidebarComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0)(1, "nav", 1)(2, "div", 2)(3, "a", 3)(4, "span", 4);
-      \u0275\u0275text(5, "design_services");
+      \u0275\u0275elementStart(0, "div", 0)(1, "nav", 1)(2, "div", 2)(3, "div")(4, "div", 3)(5, "a", 4)(6, "span", 5);
+      \u0275\u0275text(7, "design_services");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "span", 5);
-      \u0275\u0275text(7);
-      \u0275\u0275pipe(8, "translate");
+      \u0275\u0275elementStart(8, "span", 6);
+      \u0275\u0275text(9);
+      \u0275\u0275pipe(10, "translate");
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(9, "div", 6)(10, "div", 7);
-      \u0275\u0275listener("click", function SidebarComponent_Template_div_click_10_listener() {
+      \u0275\u0275elementStart(11, "div", 7)(12, "div", 8);
+      \u0275\u0275listener("click", function SidebarComponent_Template_div_click_12_listener() {
         return ctx.toggleSection("main");
+      })("keydown", function SidebarComponent_Template_div_keydown_12_listener($event) {
+        return ctx.toggleOnEnter($event, "main");
       });
-      \u0275\u0275elementStart(11, "span", 8);
-      \u0275\u0275text(12);
-      \u0275\u0275pipe(13, "translate");
+      \u0275\u0275elementStart(13, "span", 9);
+      \u0275\u0275text(14);
+      \u0275\u0275pipe(15, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(14, "span", 9);
-      \u0275\u0275text(15);
+      \u0275\u0275elementStart(16, "span", 10);
+      \u0275\u0275text(17);
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(16, "div", 10)(17, "a", 11)(18, "span", 12);
-      \u0275\u0275text(19, "article");
+      \u0275\u0275elementStart(18, "div", 11)(19, "a", 12)(20, "span", 13);
+      \u0275\u0275text(21, "article");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(20, "span", 13);
-      \u0275\u0275text(21);
-      \u0275\u0275pipe(22, "translate");
+      \u0275\u0275elementStart(22, "span", 14);
+      \u0275\u0275text(23);
+      \u0275\u0275pipe(24, "translate");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(23, "a", 11)(24, "span", 12);
-      \u0275\u0275text(25, "photo");
+      \u0275\u0275elementStart(25, "a", 12)(26, "span", 13);
+      \u0275\u0275text(27, "photo");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(26, "span", 13);
-      \u0275\u0275text(27);
-      \u0275\u0275pipe(28, "translate");
+      \u0275\u0275elementStart(28, "span", 14);
+      \u0275\u0275text(29);
+      \u0275\u0275pipe(30, "translate");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(29, "a", 11)(30, "span", 12);
-      \u0275\u0275text(31, "language");
+      \u0275\u0275elementStart(31, "a", 12)(32, "span", 13);
+      \u0275\u0275text(33, "language");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(32, "span", 13);
-      \u0275\u0275text(33);
-      \u0275\u0275pipe(34, "translate");
+      \u0275\u0275elementStart(34, "span", 14);
+      \u0275\u0275text(35);
+      \u0275\u0275pipe(36, "translate");
       \u0275\u0275elementEnd()()()();
-      \u0275\u0275elementStart(35, "div", 14)(36, "div", 15);
-      \u0275\u0275listener("click", function SidebarComponent_Template_div_click_36_listener() {
+      \u0275\u0275elementStart(37, "div", 7)(38, "div", 15);
+      \u0275\u0275listener("click", function SidebarComponent_Template_div_click_38_listener() {
         return ctx.toggleSection("project");
+      })("keydown", function SidebarComponent_Template_div_keydown_38_listener($event) {
+        return ctx.toggleOnEnter($event, "project");
       });
-      \u0275\u0275elementStart(37, "span", 8);
-      \u0275\u0275text(38);
-      \u0275\u0275pipe(39, "translate");
+      \u0275\u0275elementStart(39, "span", 16);
+      \u0275\u0275text(40);
+      \u0275\u0275pipe(41, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(40, "span", 9);
-      \u0275\u0275text(41);
+      \u0275\u0275elementStart(42, "span", 10);
+      \u0275\u0275text(43);
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(42, "div", 10)(43, "a", 11)(44, "span", 12);
-      \u0275\u0275text(45, "inventory");
+      \u0275\u0275elementStart(44, "div", 17)(45, "a", 12)(46, "span", 13);
+      \u0275\u0275text(47, "lan");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(46, "span", 13);
-      \u0275\u0275text(47);
-      \u0275\u0275pipe(48, "translate");
+      \u0275\u0275elementStart(48, "span", 14);
+      \u0275\u0275text(49);
+      \u0275\u0275pipe(50, "translate");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(49, "a", 11)(50, "span", 12);
-      \u0275\u0275text(51, "description");
+      \u0275\u0275elementStart(51, "a", 12)(52, "span", 13);
+      \u0275\u0275text(53, "inventory");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(52, "span", 13);
-      \u0275\u0275text(53);
-      \u0275\u0275pipe(54, "translate");
-      \u0275\u0275elementEnd()()()();
-      \u0275\u0275elementStart(55, "div", 14)(56, "div", 7);
-      \u0275\u0275listener("click", function SidebarComponent_Template_div_click_56_listener() {
-        return ctx.toggleSection("info");
-      });
-      \u0275\u0275elementStart(57, "span", 8);
-      \u0275\u0275text(58);
-      \u0275\u0275pipe(59, "translate");
+      \u0275\u0275elementStart(54, "span", 14);
+      \u0275\u0275text(55);
+      \u0275\u0275pipe(56, "translate");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(57, "a", 12)(58, "span", 13);
+      \u0275\u0275text(59, "description");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(60, "span", 9);
+      \u0275\u0275elementStart(60, "span", 14);
       \u0275\u0275text(61);
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(62, "div", 10)(63, "a", 11)(64, "span", 12);
-      \u0275\u0275text(65, "web_asset");
+      \u0275\u0275pipe(62, "translate");
+      \u0275\u0275elementEnd()()()()();
+      \u0275\u0275elementStart(63, "div", 7)(64, "div", 18)(65, "a", 12)(66, "span", 13);
+      \u0275\u0275text(67, "web_asset");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(66, "span", 13);
-      \u0275\u0275text(67);
-      \u0275\u0275pipe(68, "translate");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(69, "a", 16);
+      \u0275\u0275elementStart(68, "span", 14);
+      \u0275\u0275text(69);
       \u0275\u0275pipe(70, "translate");
-      \u0275\u0275elementStart(71, "span", 12);
-      \u0275\u0275text(72, "feedback");
-      \u0275\u0275elementEnd();
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(71, "a", 19);
+      \u0275\u0275pipe(72, "translate");
       \u0275\u0275elementStart(73, "span", 13);
-      \u0275\u0275text(74);
-      \u0275\u0275pipe(75, "translate");
-      \u0275\u0275elementEnd()()()()()();
+      \u0275\u0275text(74, "feedback");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(75, "span", 14);
+      \u0275\u0275text(76);
+      \u0275\u0275pipe(77, "translate");
+      \u0275\u0275elementEnd()()()()()()();
     }
     if (rf & 2) {
-      \u0275\u0275advance(3);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(52, _c013));
-      \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(8, 28, "title.landing"));
       \u0275\u0275advance(5);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(13, 30, "menu.content"));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(54, _c013));
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 30, "title.landing"));
+      \u0275\u0275advance(3);
+      \u0275\u0275attribute("aria-expanded", ctx.isExpanded.main);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 32, "menu.content"));
       \u0275\u0275advance(3);
       \u0275\u0275textInterpolate(ctx.isExpanded.main ? "expand_less" : "expand_more");
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.main);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(53, _c114));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(55, _c114));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(22, 32, "menu.page"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(24, 34, "menu.page"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(54, _c25));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(56, _c25));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(28, 34, "menu.image"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(30, 36, "menu.image"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(55, _c35));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(57, _c35));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(34, 36, "menu.translation"));
-      \u0275\u0275advance(5);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(39, 38, "menu.project"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(36, 38, "menu.translation"));
+      \u0275\u0275advance(3);
+      \u0275\u0275attribute("aria-expanded", ctx.isExpanded.project);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(41, 40, "menu.project"));
       \u0275\u0275advance(3);
       \u0275\u0275textInterpolate(ctx.isExpanded.project ? "expand_less" : "expand_more");
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.project);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(56, _c45));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(58, _c45));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(48, 40, "menu.inventory"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(50, 42, "menu.ia"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(57, _c55));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(59, _c55));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(54, 42, "menu.metadata"));
-      \u0275\u0275advance(5);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(59, 44, "menu.appInfo"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(56, 44, "menu.inventory"));
+      \u0275\u0275advance(2);
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(60, _c64));
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(62, 46, "menu.metadata"));
       \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(ctx.isExpanded.info ? "expand_less" : "expand_more");
-      \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.info);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(58, _c64));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(61, _c73));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(68, 46, "menu.about"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(70, 48, "menu.about"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("href", \u0275\u0275pipeBind1(70, 48, "feedback.email"), \u0275\u0275sanitizeUrl);
+      \u0275\u0275property("href", \u0275\u0275pipeBind1(72, 50, "feedback.email"), \u0275\u0275sanitizeUrl);
       \u0275\u0275advance(5);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(75, 50, "menu.feedback"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(77, 52, "menu.feedback"));
     }
   }, dependencies: [CommonModule, RouterModule, RouterLink, RouterLinkActive, TranslateModule, TranslatePipe], styles: ["\n\n.l-navbar[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  text-decoration: none;\n}\n.l-navbar[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: -30%;\n  width: var(--nav-width);\n  height: 100vh;\n  background-color: var(--p-gray-800);\n  padding: .5rem 1rem 1rem;\n  transition: .3s;\n  z-index: var(--z-fixed);\n}\n.nav[_ngcontent-%COMP%] {\n  height: 100%;\n  display: contents;\n  flex-direction: column;\n  justify-content: space-between;\n  overflow: hidden;\n}\n.nav_link[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: .3rem 0 0 .3rem;\n  position: relative;\n  color: var(--first-color-light);\n  margin-bottom: .8rem;\n  transition: .3s;\n}\n.nav_link[_ngcontent-%COMP%]:hover {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: 0rem;\n}\n.nav_link.active[_ngcontent-%COMP%]:hover {\n  color: #fff;\n}\n.nav_link.active[_ngcontent-%COMP%] {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .3rem;\n  margin-bottom: .1rem;\n}\n.nav_link.active-hide[_ngcontent-%COMP%] {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.nav_logo[_ngcontent-%COMP%] {\n  display: flex;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: 0;\n  margin-bottom: 2rem;\n}\n.nav_logo-icon[_ngcontent-%COMP%] {\n  font-size: 1.25rem;\n}\n.nav_logo-name[_ngcontent-%COMP%] {\n  color: var(--first-color-light);\n  font-weight: 700;\n}\n.show-n[_ngcontent-%COMP%] {\n  left: 0;\n}\n.section[_ngcontent-%COMP%] {\n  padding: .1rem;\n}\n.nav_section_body[_ngcontent-%COMP%] {\n  padding-left: .7rem;\n}\n.nav_section_body.hidden[_ngcontent-%COMP%] {\n  display: none;\n}\n.nav_link_text[_ngcontent-%COMP%] {\n  margin-left: 0rem;\n}\n.nav_header[_ngcontent-%COMP%] {\n  font-size: 18px;\n  border-radius: .25rem;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 0.5rem 0;\n}\n.nav_header[_ngcontent-%COMP%]:hover {\n  font-weight: bold;\n  padding-bottom: .5rem;\n}\n.nav_header.active[_ngcontent-%COMP%]:hover {\n  color: #fff;\n}\n.nav_header.active[_ngcontent-%COMP%] {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: .1rem;\n}\n.nav_header.active-hide[_ngcontent-%COMP%] {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.toggle-icon[_ngcontent-%COMP%] {\n  margin-left: auto;\n}\n.nav_icon[_ngcontent-%COMP%], \n.nav_section_text[_ngcontent-%COMP%] {\n  margin-left: .5rem;\n}\n.nav_section[_ngcontent-%COMP%] {\n  overflow: hidden;\n  max-width: 100%;\n}\n@media (max-width: 600px) {\n  .section[_ngcontent-%COMP%], \n   .nav_section-body[_ngcontent-%COMP%], \n   .nav_section_text[_ngcontent-%COMP%] {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 100%;\n    min-width: 0;\n    display: block;\n  }\n  .nav_header[_ngcontent-%COMP%], \n   .nav_link_text[_ngcontent-%COMP%] {\n    display: none;\n  }\n  .toggle-icon[_ngcontent-%COMP%] {\n    margin-left: 0;\n    margin-top: 0.5rem;\n    align-self: flex-end;\n  }\n  .logo_text[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n.nav_logo[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0;\n  color: var(--first-color-light);\n}\n.nav_logo[_ngcontent-%COMP%]   .material-icons[_ngcontent-%COMP%] {\n  font-size: 2.2rem;\n  align-self: flex-start;\n  margin-right: 0.5rem;\n  border-radius: 0.25rem;\n}\n.logo_text[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n  font-weight: 600;\n  letter-spacing: 0.05em;\n  padding: 0 .5rem;\n  align-self: flex-start;\n}\n@media screen and (min-width: 600px) {\n  .l-navbar[_ngcontent-%COMP%] {\n    left: 0;\n    padding: 1rem 1rem 0;\n  }\n  .show-n[_ngcontent-%COMP%] {\n    width: calc(var(--nav-width) + 110px);\n  }\n}\n/*# sourceMappingURL=sidebar.component.css.map */"] });
 };
@@ -28117,80 +28163,86 @@ var SidebarComponent = class _SidebarComponent {
     type: Component,
     args: [{ selector: "ca-sidebar", standalone: true, imports: [CommonModule, RouterModule, TranslateModule], template: `<div class="l-navbar show-n" id="nav-bar">\r
   <nav class="nav">\r
-    <!-- App Title -->\r
-    <div class="nav_logo">\r
-      <a [routerLink]="['/']">\r
-        <span class="material-icons text-primary-200">design_services</span>\r
-        <span class="logo_text">{{ 'title.landing' | translate }}</span>\r
-      </a>\r
-    </div>\r
+    <div class="flex flex-column justify-content-between min-h-full">\r
+      <div>\r
+        <!-- App Title -->\r
+        <div class="nav_logo">\r
+          <a [routerLink]="['/']">\r
+            <span class="material-icons text-primary-200">design_services</span>\r
+            <span class="logo_text">{{ 'title.landing' | translate }}</span>\r
+          </a>\r
+        </div>\r
 \r
-    <!-- Main Tools -->\r
-    <div class="nav_section">\r
-      <div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('main')">\r
-        <span class="nav_section_text">{{ 'menu.content' | translate }}</span>\r
-        <span class="material-icons toggle-icon">{{ isExpanded.main ? 'expand_less' : 'expand_more' }}</span>\r
+        <!-- Main Tools -->\r
+        <div class="section">\r
+          <div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('main')" (keydown)="toggleOnEnter($event, 'main')" tabindex="0" role="button" [attr.aria-expanded]="isExpanded.main" aria-controls="main">\r
+            <span id="menu-content" class="nav_section_text">{{ 'menu.content' | translate }}</span>\r
+            <span class="material-icons toggle-icon">{{ isExpanded.main ? 'expand_less' : 'expand_more' }}</span>\r
+          </div>\r
+          <div class="nav_section_body" id="main" role="region" aria-labelledby="menu-content" [class.hidden]="!isExpanded.main">\r
+            <a [routerLink]="['/page-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round ">\r
+              <span class="material-icons">article</span>\r
+              <span class="nav_link_text">{{ 'menu.page' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/image-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">photo</span>\r
+              <span class="nav_link_text">{{ 'menu.image' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/translation-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">language</span>\r
+              <span class="nav_link_text">{{ 'menu.translation' | translate }}</span>\r
+            </a>\r
+          </div>\r
+        </div>\r
+\r
+        <!-- Project Tools -->\r
+        <div class="section">\r
+          <div class="nav_header text-primary-200 hover:text-primary-400 hover:font-bold" (click)="toggleSection('project')" (keydown)="toggleOnEnter($event, 'project')" tabindex="0" role="button" [attr.aria-expanded]="isExpanded.project" aria-controls="project">\r
+            <span id="menu-project" class="nav_section_text">{{ 'menu.project' | translate }}</span>\r
+            <span class="material-icons toggle-icon">{{ isExpanded.project ? 'expand_less' : 'expand_more' }}</span>\r
+          </div>\r
+          <div class="nav_section_body" id="project" role="region" aria-labelledby="menu-project" [class.hidden]="!isExpanded.project">\r
+            <a [routerLink]="['/ia-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">lan</span>\r
+              <span class="nav_link_text">{{ 'menu.ia' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/inventory-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">inventory</span>\r
+              <span class="nav_link_text">{{ 'menu.inventory' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/metadata-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">description</span>\r
+              <span class="nav_link_text">{{ 'menu.metadata' | translate }}</span>\r
+            </a>\r
+          </div>\r
+        </div>\r
       </div>\r
-      <div class="nav_section_body" [class.hidden]="!isExpanded.main">\r
-        <a [routerLink]="['/page-assistant']" routerLinkActive="active"\r
-          class="nav_link flex hover:bg-primary-600 border-round ">\r
-          <span class="material-icons">article</span>\r
-          <span class="nav_link_text">{{ 'menu.page' | translate }}</span>\r
-        </a>\r
-        <a [routerLink]="['/image-assistant']" routerLinkActive="active"\r
-          class="nav_link flex hover:bg-primary-600 border-round">\r
-          <span class="material-icons">photo</span>\r
-          <span class="nav_link_text">{{ 'menu.image' | translate }}</span>\r
-        </a>\r
-        <a [routerLink]="['/translation-assistant']" routerLinkActive="active"\r
-          class="nav_link flex hover:bg-primary-600 border-round">\r
-          <span class="material-icons">language</span>\r
-          <span class="nav_link_text">{{ 'menu.translation' | translate }}</span>\r
-        </a>\r
+      <!-- App Info -->\r
+      <div class="section">\r
+        <!--div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('info')">\r
+          <span class="nav_section_text">{{ 'menu.appInfo' | translate }}</span>\r
+          <span class="material-icons toggle-icon">{{ isExpanded.info ? 'expand_less' : 'expand_more' }}</span>\r
+        </div-->\r
+        <div class="nav_section_body" [class.hidden]="!isExpanded.info">\r
+          <a [routerLink]="['/about-us']" routerLinkActive="active" class="nav_link flex hover:bg-primary-600 border-round">\r
+            <span class="material-icons">web_asset</span>\r
+            <span class="nav_link_text">{{ 'menu.about' | translate }}</span>\r
+          </a>\r
+          <a [href]="'feedback.email' | translate" class="nav_link flex hover:bg-primary-600 border-round">\r
+            <span class="material-icons">feedback</span>\r
+            <span class="nav_link_text">{{ 'menu.feedback' | translate }}</span>\r
+          </a>\r
+        </div>\r
       </div>\r
     </div>\r
-\r
-    <!-- Project Tools -->\r
-    <div class="section">\r
-      <div class="nav_header text-primary-200 hover:text-primary-400 hover:font-bold" (click)="toggleSection('project')">\r
-        <span class="nav_section_text">{{ 'menu.project' | translate }}</span>\r
-        <span class="material-icons toggle-icon">{{ isExpanded.project ? 'expand_less' : 'expand_more' }}</span>\r
-      </div>\r
-      <div class="nav_section_body" [class.hidden]="!isExpanded.project">\r
-        <a [routerLink]="['/inventory-assistant']" routerLinkActive="active"\r
-          class="nav_link flex hover:bg-primary-600 border-round">\r
-          <span class="material-icons">inventory</span>\r
-          <span class="nav_link_text">{{ 'menu.inventory' | translate }}</span>\r
-        </a>\r
-        <a [routerLink]="['/metadata-assistant']" routerLinkActive="active"\r
-          class="nav_link flex hover:bg-primary-600 border-round">\r
-          <span class="material-icons">description</span>\r
-          <span class="nav_link_text">{{ 'menu.metadata' | translate }}</span>\r
-        </a>\r
-      </div>\r
-    </div>\r
-\r
-    <!-- App Info -->\r
-    <div class="section">\r
-      <div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('info')">\r
-        <span class="nav_section_text">{{ 'menu.appInfo' | translate }}</span>\r
-        <span class="material-icons toggle-icon">{{ isExpanded.info ? 'expand_less' : 'expand_more' }}</span>\r
-      </div>\r
-      <div class="nav_section_body" [class.hidden]="!isExpanded.info">\r
-        <a [routerLink]="['/about-us']" routerLinkActive="active" class="nav_link flex hover:bg-primary-600 border-round">\r
-          <span class="material-icons">web_asset</span>\r
-          <span class="nav_link_text">{{ 'menu.about' | translate }}</span>\r
-        </a>\r
-        <a [href]="'feedback.email' | translate" class="nav_link flex hover:bg-primary-600 border-round">\r
-          <span class="material-icons">feedback</span>\r
-          <span class="nav_link_text">{{ 'menu.feedback' | translate }}</span>\r
-        </a>\r
-      </div>\r
-    </div>\r
-\r
   </nav>\r
-</div>\r
-`, styles: ["/* src/app/template/sidebar.component.css */\n.l-navbar a {\n  text-decoration: none;\n}\n.l-navbar {\n  position: fixed;\n  top: 0;\n  left: -30%;\n  width: var(--nav-width);\n  height: 100vh;\n  background-color: var(--p-gray-800);\n  padding: .5rem 1rem 1rem;\n  transition: .3s;\n  z-index: var(--z-fixed);\n}\n.nav {\n  height: 100%;\n  display: contents;\n  flex-direction: column;\n  justify-content: space-between;\n  overflow: hidden;\n}\n.nav_link {\n  display: grid;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: .3rem 0 0 .3rem;\n  position: relative;\n  color: var(--first-color-light);\n  margin-bottom: .8rem;\n  transition: .3s;\n}\n.nav_link:hover {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: 0rem;\n}\n.nav_link.active:hover {\n  color: #fff;\n}\n.nav_link.active {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .3rem;\n  margin-bottom: .1rem;\n}\n.nav_link.active-hide {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.nav_logo {\n  display: flex;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: 0;\n  margin-bottom: 2rem;\n}\n.nav_logo-icon {\n  font-size: 1.25rem;\n}\n.nav_logo-name {\n  color: var(--first-color-light);\n  font-weight: 700;\n}\n.show-n {\n  left: 0;\n}\n.section {\n  padding: .1rem;\n}\n.nav_section_body {\n  padding-left: .7rem;\n}\n.nav_section_body.hidden {\n  display: none;\n}\n.nav_link_text {\n  margin-left: 0rem;\n}\n.nav_header {\n  font-size: 18px;\n  border-radius: .25rem;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 0.5rem 0;\n}\n.nav_header:hover {\n  font-weight: bold;\n  padding-bottom: .5rem;\n}\n.nav_header.active:hover {\n  color: #fff;\n}\n.nav_header.active {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: .1rem;\n}\n.nav_header.active-hide {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.toggle-icon {\n  margin-left: auto;\n}\n.nav_icon,\n.nav_section_text {\n  margin-left: .5rem;\n}\n.nav_section {\n  overflow: hidden;\n  max-width: 100%;\n}\n@media (max-width: 600px) {\n  .section,\n  .nav_section-body,\n  .nav_section_text {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 100%;\n    min-width: 0;\n    display: block;\n  }\n  .nav_header,\n  .nav_link_text {\n    display: none;\n  }\n  .toggle-icon {\n    margin-left: 0;\n    margin-top: 0.5rem;\n    align-self: flex-end;\n  }\n  .logo_text {\n    display: none;\n  }\n}\n.nav_logo a {\n  display: flex;\n  align-items: center;\n  padding: 0;\n  color: var(--first-color-light);\n}\n.nav_logo .material-icons {\n  font-size: 2.2rem;\n  align-self: flex-start;\n  margin-right: 0.5rem;\n  border-radius: 0.25rem;\n}\n.logo_text {\n  font-size: 1.1rem;\n  font-weight: 600;\n  letter-spacing: 0.05em;\n  padding: 0 .5rem;\n  align-self: flex-start;\n}\n@media screen and (min-width: 600px) {\n  .l-navbar {\n    left: 0;\n    padding: 1rem 1rem 0;\n  }\n  .show-n {\n    width: calc(var(--nav-width) + 110px);\n  }\n}\n/*# sourceMappingURL=sidebar.component.css.map */\n"] }]
+</div>`, styles: ["/* src/app/template/sidebar.component.css */\n.l-navbar a {\n  text-decoration: none;\n}\n.l-navbar {\n  position: fixed;\n  top: 0;\n  left: -30%;\n  width: var(--nav-width);\n  height: 100vh;\n  background-color: var(--p-gray-800);\n  padding: .5rem 1rem 1rem;\n  transition: .3s;\n  z-index: var(--z-fixed);\n}\n.nav {\n  height: 100%;\n  display: contents;\n  flex-direction: column;\n  justify-content: space-between;\n  overflow: hidden;\n}\n.nav_link {\n  display: grid;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: .3rem 0 0 .3rem;\n  position: relative;\n  color: var(--first-color-light);\n  margin-bottom: .8rem;\n  transition: .3s;\n}\n.nav_link:hover {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: 0rem;\n}\n.nav_link.active:hover {\n  color: #fff;\n}\n.nav_link.active {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .3rem;\n  margin-bottom: .1rem;\n}\n.nav_link.active-hide {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.nav_logo {\n  display: flex;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: 0;\n  margin-bottom: 2rem;\n}\n.nav_logo-icon {\n  font-size: 1.25rem;\n}\n.nav_logo-name {\n  color: var(--first-color-light);\n  font-weight: 700;\n}\n.show-n {\n  left: 0;\n}\n.section {\n  padding: .1rem;\n}\n.nav_section_body {\n  padding-left: .7rem;\n}\n.nav_section_body.hidden {\n  display: none;\n}\n.nav_link_text {\n  margin-left: 0rem;\n}\n.nav_header {\n  font-size: 18px;\n  border-radius: .25rem;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 0.5rem 0;\n}\n.nav_header:hover {\n  font-weight: bold;\n  padding-bottom: .5rem;\n}\n.nav_header.active:hover {\n  color: #fff;\n}\n.nav_header.active {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: .1rem;\n}\n.nav_header.active-hide {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.toggle-icon {\n  margin-left: auto;\n}\n.nav_icon,\n.nav_section_text {\n  margin-left: .5rem;\n}\n.nav_section {\n  overflow: hidden;\n  max-width: 100%;\n}\n@media (max-width: 600px) {\n  .section,\n  .nav_section-body,\n  .nav_section_text {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 100%;\n    min-width: 0;\n    display: block;\n  }\n  .nav_header,\n  .nav_link_text {\n    display: none;\n  }\n  .toggle-icon {\n    margin-left: 0;\n    margin-top: 0.5rem;\n    align-self: flex-end;\n  }\n  .logo_text {\n    display: none;\n  }\n}\n.nav_logo a {\n  display: flex;\n  align-items: center;\n  padding: 0;\n  color: var(--first-color-light);\n}\n.nav_logo .material-icons {\n  font-size: 2.2rem;\n  align-self: flex-start;\n  margin-right: 0.5rem;\n  border-radius: 0.25rem;\n}\n.logo_text {\n  font-size: 1.1rem;\n  font-weight: 600;\n  letter-spacing: 0.05em;\n  padding: 0 .5rem;\n  align-self: flex-start;\n}\n@media screen and (min-width: 600px) {\n  .l-navbar {\n    left: 0;\n    padding: 1rem 1rem 0;\n  }\n  .show-n {\n    width: calc(var(--nav-width) + 110px);\n  }\n}\n/*# sourceMappingURL=sidebar.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {

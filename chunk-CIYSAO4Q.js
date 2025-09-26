@@ -78589,6 +78589,113 @@ var TableModule = class _TableModule {
   }], null, null);
 })();
 
+// src/app/services/fetch.service.ts
+var FetchService = class _FetchService {
+  //Block unknown hosts
+  prodHost = "www.canada.ca";
+  protoHosts = /* @__PURE__ */ new Set([
+    "cra-design.github.io",
+    //"cra-proto.github.io", //Currently blocked by browser because it looks like a phishing site
+    //"gc-proto.github.io", //CORS error but redirects to test.canada.ca which works
+    "test.canada.ca"
+  ]);
+  getAllowedHosts(mode) {
+    const allowed = /* @__PURE__ */ new Set();
+    if (mode === "prod" || mode === "both")
+      allowed.add(this.prodHost);
+    if (mode === "proto" || mode === "both")
+      this.protoHosts.forEach((host) => allowed.add(host));
+    return allowed;
+  }
+  //Validates URL and checks if it's in the specified allowed host list
+  validateHost(url, hostMode) {
+    url = url.trim().toLowerCase();
+    let hostname;
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.protocol !== "https:" || /\s/.test(url))
+        throw new Error();
+      hostname = parsedUrl.hostname;
+    } catch {
+      throw new Error(`Invalid URL: ${url}`);
+    }
+    if (hostMode !== "none") {
+      const allowedHosts = this.getAllowedHosts(hostMode);
+      if (!allowedHosts.has(hostname)) {
+        throw new Error(`Blocked host: ${hostname} blocked for url ${url}`);
+      }
+    }
+    return url;
+  }
+  //Uses specified fetch method and retries if initial fetch fails (can happen due to intermittent server issues etc.)
+  fetchWithRetry(url, mode = "HEAD", retries = 3, delay = "none") {
+    return __async(this, null, function* () {
+      for (let attempt = 1; attempt <= retries; attempt++) {
+        yield this.simulateDelay(delay);
+        try {
+          const response = mode === "HEAD" ? yield fetch(url, { method: "HEAD", cache: "no-store" }) : yield fetch(url);
+          if (response.ok)
+            return response;
+          else {
+            console.warn(`Fetch attempt #${attempt}. Status: ${response.status}. Method: ${mode}`);
+            if (attempt === retries)
+              throw new Error(`Fetch failed ${attempt} times. Method: ${mode}. Status: ${response.status} for ${url}`);
+            yield this.delay(50);
+          }
+        } catch (error) {
+          if (attempt === retries)
+            throw new Error(error.message);
+        }
+      }
+      throw new Error(`Unexpected error for ${url}`);
+    });
+  }
+  fetchContent(url, hostMode = "both", retries = 3, delay = "none") {
+    return __async(this, null, function* () {
+      url = this.validateHost(url, hostMode);
+      const response = yield this.fetchWithRetry(url, "GET", retries, delay);
+      const html = yield response.text();
+      return new DOMParser().parseFromString(html, "text/html");
+    });
+  }
+  fetchStatus(url, hostMode = "both", retries = 3, delay = "none") {
+    return __async(this, null, function* () {
+      url = this.validateHost(url, hostMode);
+      return this.fetchWithRetry(url, "HEAD", retries, delay);
+    });
+  }
+  //only delays on development build
+  simulateDelay(delay = "none") {
+    return __async(this, null, function* () {
+      if (environment.production || delay === "none")
+        return;
+      if (delay === "random") {
+        yield new Promise((resolve2) => setTimeout(resolve2, 100 + Math.random() * 1500));
+      } else if (typeof delay === "number" && delay > 0) {
+        yield new Promise((resolve2) => setTimeout(resolve2, delay));
+      }
+    });
+  }
+  //adds delay on both dev and prod (useful for adding short delays before retrying a failed fetch, only use this if the delay is required on prod)
+  delay(delay) {
+    return __async(this, null, function* () {
+      yield new Promise((resolve2) => setTimeout(resolve2, delay));
+    });
+  }
+  static \u0275fac = function FetchService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FetchService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _FetchService, factory: _FetchService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FetchService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
 // node_modules/primeng/fesm2022/primeng-organizationchart.mjs
 var _c028 = ["pOrganizationChartNode", ""];
 var _c128 = (a0, a1) => ({
@@ -79639,113 +79746,6 @@ var ApiKeyService = class _ApiKeyService {
   }], () => [{ type: LocalStorageService }], null);
 })();
 
-// src/app/services/fetch.service.ts
-var FetchService = class _FetchService {
-  //Block unknown hosts
-  prodHost = "www.canada.ca";
-  protoHosts = /* @__PURE__ */ new Set([
-    "cra-design.github.io",
-    //"cra-proto.github.io", //Currently blocked by browser because it looks like a phishing site
-    //"gc-proto.github.io", //CORS error but redirects to test.canada.ca which works
-    "test.canada.ca"
-  ]);
-  getAllowedHosts(mode) {
-    const allowed = /* @__PURE__ */ new Set();
-    if (mode === "prod" || mode === "both")
-      allowed.add(this.prodHost);
-    if (mode === "proto" || mode === "both")
-      this.protoHosts.forEach((host) => allowed.add(host));
-    return allowed;
-  }
-  //Validates URL and checks if it's in the specified allowed host list
-  validateHost(url, hostMode) {
-    url = url.trim().toLowerCase();
-    let hostname;
-    try {
-      const parsedUrl = new URL(url);
-      if (parsedUrl.protocol !== "https:" || /\s/.test(url))
-        throw new Error();
-      hostname = parsedUrl.hostname;
-    } catch {
-      throw new Error(`Invalid URL: ${url}`);
-    }
-    if (hostMode !== "none") {
-      const allowedHosts = this.getAllowedHosts(hostMode);
-      if (!allowedHosts.has(hostname)) {
-        throw new Error(`Blocked host: ${hostname} blocked for url ${url}`);
-      }
-    }
-    return url;
-  }
-  //Uses specified fetch method and retries if initial fetch fails (can happen due to intermittent server issues etc.)
-  fetchWithRetry(url, mode = "HEAD", retries = 3, delay = "none") {
-    return __async(this, null, function* () {
-      for (let attempt = 1; attempt <= retries; attempt++) {
-        yield this.simulateDelay(delay);
-        try {
-          const response = mode === "HEAD" ? yield fetch(url, { method: "HEAD", cache: "no-store" }) : yield fetch(url);
-          if (response.ok)
-            return response;
-          else {
-            console.warn(`Fetch attempt #${attempt}. Status: ${response.status}. Method: ${mode}`);
-            if (attempt === retries)
-              throw new Error(`Fetch failed ${attempt} times. Method: ${mode}. Status: ${response.status} for ${url}`);
-            yield this.delay(50);
-          }
-        } catch (error) {
-          if (attempt === retries)
-            throw new Error(error.message);
-        }
-      }
-      throw new Error(`Unexpected error for ${url}`);
-    });
-  }
-  fetchContent(url, hostMode = "both", retries = 3, delay = "none") {
-    return __async(this, null, function* () {
-      url = this.validateHost(url, hostMode);
-      const response = yield this.fetchWithRetry(url, "GET", retries, delay);
-      const html = yield response.text();
-      return new DOMParser().parseFromString(html, "text/html");
-    });
-  }
-  fetchStatus(url, hostMode = "both", retries = 3, delay = "none") {
-    return __async(this, null, function* () {
-      url = this.validateHost(url, hostMode);
-      return this.fetchWithRetry(url, "HEAD", retries, delay);
-    });
-  }
-  //only delays on development build
-  simulateDelay(delay = "none") {
-    return __async(this, null, function* () {
-      if (environment.production || delay === "none")
-        return;
-      if (delay === "random") {
-        yield new Promise((resolve2) => setTimeout(resolve2, 100 + Math.random() * 1500));
-      } else if (typeof delay === "number" && delay > 0) {
-        yield new Promise((resolve2) => setTimeout(resolve2, delay));
-      }
-    });
-  }
-  //adds delay on both dev and prod (useful for adding short delays before retrying a failed fetch, only use this if the delay is required on prod)
-  delay(delay) {
-    return __async(this, null, function* () {
-      yield new Promise((resolve2) => setTimeout(resolve2, delay));
-    });
-  }
-  static \u0275fac = function FetchService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _FetchService)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _FetchService, factory: _FetchService.\u0275fac, providedIn: "root" });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FetchService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
 export {
   DOCUMENT,
   LocationStrategy,
@@ -79975,4 +79975,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-AYDFT5MC.js.map
+//# sourceMappingURL=chunk-CIYSAO4Q.js.map
