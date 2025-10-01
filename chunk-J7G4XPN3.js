@@ -39978,7 +39978,7 @@ var FetchService = class _FetchService {
     return url;
   }
   //Uses specified fetch method and retries if initial fetch fails (can happen due to intermittent server issues etc.)
-  fetchWithRetry(url, mode = "HEAD", retries = 3, delay = "none") {
+  fetchWithRetry(url, mode = "HEAD", retries = 3, delay = "none", suppressErrors = false) {
     return __async(this, null, function* () {
       for (let attempt = 1; attempt <= retries; attempt++) {
         yield this.simulateDelay(delay);
@@ -39987,23 +39987,38 @@ var FetchService = class _FetchService {
           if (response.ok)
             return response;
           else {
-            console.warn(`Fetch attempt #${attempt}. Status: ${response.status}. Method: ${mode}`);
-            if (attempt === retries)
-              throw new Error(`Fetch failed ${attempt} times. Method: ${mode}. Status: ${response.status} for ${url}`);
-            yield this.delay(50);
+            if (!suppressErrors) {
+              console.warn(`Fetch attempt #${attempt}. Status: ${response.status}. Method: ${mode}`);
+            }
+            if (attempt < retries) {
+              yield this.delay(50);
+              continue;
+            }
+            if (suppressErrors)
+              return this.suppressError(url);
+            throw new Error(`Fetch failed ${attempt} times. Method: ${mode}. Status: ${response.status} for ${url}`);
           }
         } catch (error) {
-          if (attempt === retries)
+          if (attempt < retries) {
+            yield this.delay(50);
+            continue;
+          }
+          if (suppressErrors === true)
+            return this.suppressError(url);
+          else if (attempt === retries)
             throw new Error(error.message);
         }
       }
-      throw new Error(`Unexpected error for ${url}`);
+      if (suppressErrors === true)
+        return this.suppressError(url);
+      else
+        throw new Error(`Unexpected error for ${url}`);
     });
   }
-  fetchContent(url, hostMode = "both", retries = 3, delay = "none") {
+  fetchContent(url, hostMode = "both", retries = 3, delay = "none", suppressErrors = false) {
     return __async(this, null, function* () {
       url = this.validateHost(url, hostMode);
-      const response = yield this.fetchWithRetry(url, "GET", retries, delay);
+      const response = yield this.fetchWithRetry(url, "GET", retries, delay, suppressErrors);
       const html = yield response.text();
       return new DOMParser().parseFromString(html, "text/html");
     });
@@ -40032,6 +40047,14 @@ var FetchService = class _FetchService {
       yield new Promise((resolve2) => setTimeout(resolve2, delay));
     });
   }
+  //fake Response for suppressing CORS errors (should only be used when fetching external content, hostMode = "none:")
+  suppressError(url, status = 500, statusText = "Suppressed fetch error") {
+    return new Response(null, {
+      status,
+      statusText,
+      headers: { "X-Suppressed-Error": "true", "X-Source-Url": url }
+    });
+  }
   static \u0275fac = function FetchService_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _FetchService)();
   };
@@ -40050,35 +40073,22 @@ var FetchService = class _FetchService {
 var UrlDataService = class _UrlDataService {
   uploadState = inject(UploadStateService);
   fetchService = inject(FetchService);
-  //Block unknown hosts
-  allowedHosts = /* @__PURE__ */ new Set([
-    "cra-design.github.io",
-    "cra-proto.github.io",
-    "gc-proto.github.io",
-    "test.canada.ca",
-    "www.canada.ca"
-  ]);
-  /** Gets HTML content from a URL and processes it.
-    * Note: remove type later if it isn't needed */
+  /** Gets HTML content from a URL and processes it. **/
   fetchAndProcess(url) {
     return __async(this, null, function* () {
-      const parsedUrl = new URL(url);
-      if (!this.allowedHosts.has(parsedUrl.host)) {
-        throw new Error(`${parsedUrl.host} is blocked`);
-      }
-      const response = yield fetch(`${url}?_=${Date.now()}`);
-      if (!response.ok) {
-        throw new Error(`Fetch failed: HTTP ${response.status}`);
-      }
-      console.warn(`Response code: ${response.status}`);
-      const html = yield response.text();
-      return yield this.extractContent(html);
+      const doc = yield this.fetchService.fetchContent(`${url}?_=${Date.now()}`, "both");
+      return yield this.extractContent(doc);
+    });
+  }
+  process(input2) {
+    return __async(this, null, function* () {
+      const doc = new DOMParser().parseFromString(input2, "text/html");
+      return yield this.extractContent(doc);
     });
   }
   //Runs all clean-up functions (might need to add type for full html document from url vs. snippet from copy/paste)
-  extractContent(html) {
+  extractContent(doc) {
     return __async(this, null, function* () {
-      const doc = new DOMParser().parseFromString(html, "text/html");
       const foundFlags = { hidden: false, modal: false, dynamic: false };
       const metadata = this.getMetadata(doc);
       const breadcrumb = this.getBreadcrumb(doc, "https://www.canada.ca");
@@ -40317,7 +40327,7 @@ var UrlDataService = class _UrlDataService {
   }
   //Remove irrelevent stuff
   cleanupUnnecessaryElements(doc) {
-    const noisySelectors = ["section#chat-bottom-bar", "#gc-pft", ".wb-disable-allow", "header", "footer", "charlie"];
+    const noisySelectors = ["section#chat-bottom-bar", "#gc-pft", ".wb-disable-allow", "body > header", "footer", "charlie"];
     noisySelectors.forEach((selector) => {
       doc.querySelectorAll(selector).forEach((el) => el.remove());
     });
@@ -40343,9 +40353,10 @@ var UrlDataService = class _UrlDataService {
     let found = false;
     const modals = doc.querySelectorAll(".modal-dialog.modal-content");
     modals.forEach((modal) => {
+      console.log([...modal.childNodes]);
       modal.classList.remove("mfp-hide");
       const wrapper = doc.createElement("div");
-      wrapper.setAttribute("style", "border: 2px dashed #666; padding: 8px; border-radius: 4px;");
+      wrapper.setAttribute("style", "border: 2px dashed #666; border-radius: 4px;");
       while (modal.firstChild) {
         wrapper.appendChild(modal.firstChild);
       }
@@ -40486,9 +40497,9 @@ var UrlDataService = class _UrlDataService {
       let modifiedHtml;
       switch (name) {
         case "snippet":
-          original = yield this.extractContent(sampleSnippetO);
+          original = yield this.process(sampleSnippetO);
           originalHtml = original.html;
-          modifiedHtml = (yield this.extractContent(sampleSnippetM)).html;
+          modifiedHtml = (yield this.process(sampleSnippetM)).html;
           break;
         case "word":
           originalHtml = yield this.formatHtml(sampleWordO, "word");
@@ -40496,9 +40507,9 @@ var UrlDataService = class _UrlDataService {
           modifiedHtml = yield this.formatHtml(sampleWordM, "word");
           break;
         default:
-          original = yield this.extractContent(sampleHtmlO);
+          original = yield this.process(sampleHtmlO);
           originalHtml = original.html;
-          modifiedHtml = (yield this.extractContent(sampleHtmlM)).html;
+          modifiedHtml = (yield this.process(sampleHtmlM)).html;
           break;
       }
       this.uploadState.setUploadData({
@@ -46892,7 +46903,7 @@ var UploadPasteComponent = class _UploadPasteComponent {
       this.loading = true;
       this.error = "";
       try {
-        const mainHTML = yield this.urlDataService.extractContent(this.userInput);
+        const mainHTML = yield this.urlDataService.process(this.userInput);
         if (this.mode === "original") {
           this.uploadState.setUploadData({
             originalUrl: "Copy/Paste",
@@ -79770,36 +79781,6 @@ var TableModule = class _TableModule {
   }], null, null);
 })();
 
-// src/app/services/theme.service.ts
-var ThemeService2 = class _ThemeService {
-  darkMode = signal(false);
-  constructor() {
-    const storedTheme = localStorage.getItem("darkMode");
-    this.setDarkMode(storedTheme === "true");
-  }
-  setDarkMode(enabled) {
-    this.darkMode.set(enabled);
-    localStorage.setItem("darkMode", String(enabled));
-    document.documentElement.classList.toggle("dark-mode", enabled);
-    console.log(`Dark mode set to ${enabled}`);
-  }
-  toggle() {
-    this.setDarkMode(!this.darkMode());
-  }
-  static \u0275fac = function ThemeService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ThemeService)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ThemeService, factory: _ThemeService.\u0275fac, providedIn: "root" });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ThemeService2, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [], null);
-})();
-
 // node_modules/primeng/fesm2022/primeng-organizationchart.mjs
 var _c029 = ["pOrganizationChartNode", ""];
 var _c129 = (a0, a1) => ({
@@ -93145,6 +93126,36 @@ var PopoverModule = class _PopoverModule {
   }], null, null);
 })();
 
+// src/app/services/theme.service.ts
+var ThemeService2 = class _ThemeService {
+  darkMode = signal(false);
+  constructor() {
+    const storedTheme = localStorage.getItem("darkMode");
+    this.setDarkMode(storedTheme === "true");
+  }
+  setDarkMode(enabled) {
+    this.darkMode.set(enabled);
+    localStorage.setItem("darkMode", String(enabled));
+    document.documentElement.classList.toggle("dark-mode", enabled);
+    console.log(`Dark mode set to ${enabled}`);
+  }
+  toggle() {
+    this.setDarkMode(!this.darkMode());
+  }
+  static \u0275fac = function ThemeService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ThemeService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ThemeService, factory: _ThemeService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ThemeService2, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [], null);
+})();
+
 // src/app/services/api-key.service.ts
 var ApiKeyService = class _ApiKeyService {
   localStorageService;
@@ -93369,7 +93380,6 @@ export {
   AiModel,
   Toolbar,
   ToolbarModule,
-  ThemeService2 as ThemeService,
   OrganizationChart,
   OrganizationChartModule,
   TreeTable,
@@ -93386,7 +93396,8 @@ export {
   TabPanel,
   TabPanels,
   Tabs,
-  TabsModule
+  TabsModule,
+  ThemeService2 as ThemeService
 };
 /*! Bundled license information:
 
@@ -93411,4 +93422,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-PONWV7BT.js.map
+//# sourceMappingURL=chunk-J7G4XPN3.js.map

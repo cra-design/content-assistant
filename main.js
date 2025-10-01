@@ -158,7 +158,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-PONWV7BT.js";
+} from "./chunk-J7G4XPN3.js";
 import {
   ANIMATION_MODULE_TYPE,
   BehaviorSubject,
@@ -285,6 +285,7 @@ import {
 } from "./chunk-7IV2XZGV.js";
 import {
   __async,
+  __objRest,
   __spreadProps,
   __spreadValues
 } from "./chunk-3MOD5TGX.js";
@@ -25239,6 +25240,1342 @@ var ConfirmPopupModule = class _ConfirmPopupModule {
   }], null, null);
 })();
 
+// src/app/views/ia-assistant/services/ia-state.service.ts
+var IaStateService = class _IaStateService {
+  production = environment.production;
+  //Active step
+  activeStep = signal(1);
+  getActiveStep = computed(() => this.activeStep());
+  setActiveStep(step) {
+    this.activeStep.set(step);
+  }
+  // Step 1: Validate URLs
+  urlData = signal({
+    rawUrls: "",
+    includePrototypeLinks: false,
+    urlTotal: 0,
+    urlChecked: 0,
+    urlPercent: 0,
+    isValidating: false,
+    isValidated: false,
+    isOk: false,
+    urlPairs: []
+  });
+  getUrlData = computed(() => this.urlData());
+  setUrlData(partial) {
+    this.urlData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Step 2: Breadcrumbs
+  breadcrumbData = signal({
+    breadcrumbs: [],
+    rootPages: [],
+    progress: 0,
+    step: "",
+    hasBreakBeforeRoot: false,
+    hasBreakAfterRoot: false
+  });
+  getBreadcrumbData = computed(() => this.breadcrumbData());
+  setBreadcrumbData(partial) {
+    this.breadcrumbData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Step 3: Search criteria
+  searchData = signal({
+    rawTerms: "",
+    terms: []
+  });
+  getSearchData = computed(() => this.searchData());
+  setSearchData(partial) {
+    this.searchData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Parse raw terms into terms array
+  updateTerms() {
+    this.searchData().terms = this.searchData().rawTerms.split(/[\n;\t]+/).map((term) => term.trim()).filter(Boolean).map((term) => {
+      try {
+        if (term.startsWith("regex:")) {
+          const pattern = term.slice(6);
+          return new RegExp(pattern, "smi");
+        } else
+          return term.toLowerCase();
+      } catch (error) {
+        console.error(error);
+        return `invalid ${term}`;
+      }
+    });
+    this.searchData().terms = Array.from(new Set(this.searchData().terms));
+  }
+  // Step 4: IA tree
+  iaData = signal({
+    iaTree: [],
+    brokenLinks: [],
+    searchMatches: []
+  });
+  getIaData = computed(() => this.iaData());
+  setIaData(partial) {
+    this.iaData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Reset
+  resetIaFlow(mode = "all") {
+    const step = this.activeStep();
+    if (step > 1) {
+      this.activeStep.set(step - 1);
+    }
+    if (step === 1) {
+      this.urlData.set({
+        rawUrls: mode === "all" ? "" : this.urlData().rawUrls,
+        includePrototypeLinks: false,
+        urlTotal: 0,
+        urlChecked: 0,
+        urlPercent: 0,
+        isValidating: false,
+        isValidated: false,
+        isOk: false,
+        urlPairs: []
+      });
+    }
+    if (step <= 2) {
+      this.breadcrumbData.set({
+        breadcrumbs: [],
+        rootPages: [],
+        progress: 0,
+        step: "",
+        hasBreakBeforeRoot: false,
+        hasBreakAfterRoot: false
+      });
+    }
+    if (step <= 3) {
+      this.searchData.set({
+        rawTerms: "",
+        terms: []
+      });
+    }
+    if (step <= 4) {
+      this.iaData.set({
+        iaTree: [],
+        brokenLinks: [],
+        searchMatches: []
+      });
+    }
+    this.saveToLocalStorage();
+  }
+  // Get IA state
+  getIaState() {
+    return {
+      version: 0.1,
+      activeStep: this.activeStep(),
+      urlData: this.urlData(),
+      breadcrumbData: this.breadcrumbData(),
+      searchData: this.searchData(),
+      iaData: this.iaData()
+    };
+  }
+  // Save IA state to local storage (browser memory)
+  saveToLocalStorage() {
+    const state2 = this.getIaState();
+    const cleanTree = this.removeParents(state2.iaData.iaTree);
+    const cleanState = __spreadProps(__spreadValues({}, state2), {
+      iaData: __spreadProps(__spreadValues({}, state2.iaData), {
+        iaTree: cleanTree
+      })
+    });
+    console.log("Clean state:", cleanState);
+    localStorage.setItem("iaState", JSON.stringify(cleanState));
+    if (!this.production) {
+      console.groupCollapsed("IA State saved to localStorage");
+      console.log("Active step:", state2.activeStep);
+      console.log("--- URL Data ---");
+      console.table({
+        rawUrls: state2.urlData.rawUrls,
+        includePrototypeLinks: state2.urlData.includePrototypeLinks,
+        isValidating: state2.urlData.isValidating,
+        isValidated: state2.urlData.isValidated,
+        isOk: state2.urlData.isOk
+      });
+      console.log("URL Pairs:", state2.urlData.urlPairs);
+      console.log("--- Breadcrumb Data ---");
+      console.table({
+        breadcrumbProgress: state2.breadcrumbData.progress,
+        hasBreakBeforeRoot: state2.breadcrumbData.hasBreakBeforeRoot,
+        hasBreakAfterRoot: state2.breadcrumbData.hasBreakAfterRoot
+      });
+      console.log("Breadcrumbs:", state2.breadcrumbData.breadcrumbs);
+      console.log("Root Pages:", state2.breadcrumbData.rootPages);
+      console.log("--- Search Data ---");
+      console.log("Terms:", state2.searchData.terms);
+      console.log("--- IA Data ---");
+      console.log("IA Tree:", state2.iaData.iaTree);
+      console.log("Broken Links:", state2.iaData.brokenLinks);
+      console.log("Search Matches:", state2.iaData.searchMatches);
+      console.groupEnd();
+    }
+  }
+  removeParents(nodes) {
+    return nodes.map((node) => {
+      const _a = node, { parent } = _a, rest = __objRest(_a, ["parent"]);
+      return __spreadProps(__spreadValues({}, rest), {
+        children: node.children ? this.removeParents(node.children) : []
+      });
+    });
+  }
+  // Load from local storage (browser memory)
+  loadFromLocalStorage() {
+    const saved = localStorage.getItem("iaState");
+    if (!saved)
+      return;
+    const state2 = JSON.parse(saved);
+    this.activeStep.set(state2.activeStep);
+    this.urlData.set(state2.urlData);
+    this.breadcrumbData.set(state2.breadcrumbData);
+    this.searchData.set(state2.searchData);
+    this.iaData.set(state2.iaData);
+  }
+  // Export as JSON (for sharing with someone else)
+  exportIaState() {
+    const state2 = this.getIaState();
+    const cleanTree = this.removeParents(state2.iaData.iaTree);
+    const exportState = __spreadProps(__spreadValues({}, state2), {
+      searchData: {
+        rawTerms: state2.searchData.rawTerms
+      },
+      iaData: __spreadProps(__spreadValues({}, state2.iaData), {
+        iaTree: cleanTree
+      })
+    });
+    const data = JSON.stringify(exportState, null, 2);
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ia-state.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  // Import JSON
+  importIaState(event) {
+    const file = event.files?.[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const state2 = JSON.parse(reader.result);
+        if (state2.version !== 0.1) {
+          console.warn("Incompatible IA state version. Import skipped.");
+          return;
+        }
+        this.urlData.set(state2.urlData);
+        this.breadcrumbData.set(state2.breadcrumbData);
+        this.searchData.set(state2.searchData);
+        this.updateTerms();
+        this.iaData.set(state2.iaData);
+        this.saveToLocalStorage();
+        console.log("IA state successfully imported");
+      } catch (error) {
+        console.error("Invalid IA state file", error);
+      }
+    };
+    reader.readAsText(file);
+  }
+  // Export TreeNode as CSV
+  exportIaTreeAsCsv() {
+    const iaTree = this.iaData().iaTree;
+    const rows = [];
+    rows.push([
+      "Page Title (h1)",
+      "URL",
+      "Prototype URL",
+      "In scope",
+      "Orphaned",
+      "Parent URL",
+      "Old Parent URL",
+      "Status"
+    ].join(","));
+    const walk = (nodes, parentUrl = null) => {
+      for (const node of nodes) {
+        const data = node.data;
+        if (data.customStyleKey === "template") {
+          if (node.children?.length) {
+            walk(node.children, data.url);
+          }
+          continue;
+        }
+        let customStyle = "";
+        switch (data.customStyleKey) {
+          case "new":
+            customStyle = "New page";
+            break;
+          case "rot":
+            customStyle = "Remove ROT";
+            break;
+          case "move":
+            customStyle = "Page move";
+            break;
+          default:
+            customStyle = "";
+        }
+        if (data.originalParent && data.originalParent !== parentUrl && customStyle === "") {
+          customStyle = "Page move";
+        }
+        let oldParent = "";
+        if (data.originalParent && data.originalParent !== parentUrl) {
+          oldParent = data.originalParent;
+        }
+        rows.push([
+          `"${data.h1 || ""}"`,
+          data.url || "",
+          data.prototype || "",
+          data.isUserAdded ? "Yes" : "No",
+          data.notOrphan ? "No" : "Yes",
+          parentUrl || "",
+          oldParent || "",
+          customStyle || ""
+        ].join(","));
+        if (node.children?.length) {
+          walk(node.children, data.url);
+        }
+      }
+    };
+    walk(iaTree);
+    const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ia-tree.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  static \u0275fac = function IaStateService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _IaStateService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaStateService, factory: _IaStateService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaStateService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// src/app/views/ia-assistant/components/link-list.component.ts
+function LinkListComponent_ng_container_0_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "p", 3);
+    \u0275\u0275text(2, "Only links from the following domains are allowed:");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "ul", 3)(4, "li");
+    \u0275\u0275text(5, "www.canada.ca");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+}
+function LinkListComponent_ng_container_0_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "p", 3);
+    \u0275\u0275text(2, "Only links from the following domains are allowed:");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "ul", 3)(4, "li");
+    \u0275\u0275text(5, "www.canada.ca");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "li");
+    \u0275\u0275text(7, "test.canada.ca");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "li");
+    \u0275\u0275text(9, "gc-proto.github.io");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "li");
+    \u0275\u0275text(11, "cra-proto.github.io");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "li");
+    \u0275\u0275text(13, "cra-design.github.io");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+}
+function LinkListComponent_ng_container_0_div_4_p_iftalabel_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-iftalabel")(1, "input", 9);
+    \u0275\u0275twoWayListener("ngModelChange", function LinkListComponent_ng_container_0_div_4_p_iftalabel_1_Template_input_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const url_r3 = \u0275\u0275nextContext().$implicit;
+      \u0275\u0275twoWayBindingSet(url_r3.originalHref, $event) || (url_r3.originalHref = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "label", 10);
+    \u0275\u0275text(3, "Original URL");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const url_r3 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", url_r3.originalHref);
+  }
+}
+function LinkListComponent_ng_container_0_div_4_p_tag_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "p-tag", 11);
+  }
+}
+function LinkListComponent_ng_container_0_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div");
+    \u0275\u0275template(1, LinkListComponent_ng_container_0_div_4_p_iftalabel_1_Template, 4, 1, "p-iftalabel", 0);
+    \u0275\u0275elementStart(2, "p-inputgroup");
+    \u0275\u0275template(3, LinkListComponent_ng_container_0_div_4_p_tag_3_Template, 1, 0, "p-tag", 4);
+    \u0275\u0275elementStart(4, "p-iftalabel")(5, "input", 5);
+    \u0275\u0275twoWayListener("ngModelChange", function LinkListComponent_ng_container_0_div_4_Template_input_ngModelChange_5_listener($event) {
+      const url_r3 = \u0275\u0275restoreView(_r1).$implicit;
+      \u0275\u0275twoWayBindingSet(url_r3.href, $event) || (url_r3.href = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "label", 6);
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(8, "p-inputgroup-addon")(9, "p-button", 7);
+    \u0275\u0275listener("click", function LinkListComponent_ng_container_0_div_4_Template_p_button_click_9_listener($event) {
+      const url_r3 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r3.approve.emit({ url: url_r3, event: $event }));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "p-inputgroup-addon")(11, "p-button", 8);
+    \u0275\u0275listener("click", function LinkListComponent_ng_container_0_div_4_Template_p_button_click_11_listener() {
+      const url_r3 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r3.remove.emit(url_r3));
+    });
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const url_r3 = ctx.$implicit;
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", url_r3.originalHref);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r3.type === "proto");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("id", ctx_r3.labelKey);
+    \u0275\u0275twoWayProperty("ngModel", url_r3.href);
+    \u0275\u0275advance();
+    \u0275\u0275property("for", ctx_r3.labelKey);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1("", ctx_r3.labelKey, " URL");
+    \u0275\u0275advance(4);
+    \u0275\u0275property("pTooltip", ctx_r3.type === "proto" ? "Remove link" : "Remove item");
+  }
+}
+function LinkListComponent_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 1);
+    \u0275\u0275template(2, LinkListComponent_ng_container_0_ng_container_2_Template, 6, 0, "ng-container", 0)(3, LinkListComponent_ng_container_0_ng_container_3_Template, 14, 0, "ng-container", 0)(4, LinkListComponent_ng_container_0_div_4_Template, 12, 7, "div", 2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r3.labelKey === "Blocked" && ctx_r3.type === "prod");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r3.labelKey === "Blocked" && ctx_r3.type === "proto");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", ctx_r3.links);
+  }
+}
+var LinkListComponent = class _LinkListComponent {
+  labelKey;
+  links;
+  type = "prod";
+  approve = new EventEmitter();
+  remove = new EventEmitter();
+  static \u0275fac = function LinkListComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _LinkListComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkListComponent, selectors: [["ca-link-list"]], inputs: { labelKey: "labelKey", links: "links", type: "type" }, outputs: { approve: "approve", remove: "remove" }, decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "flex", "flex-column", "gap-2"], [4, "ngFor", "ngForOf"], [1, "my-0"], ["icon", "pi pi-github", "value", "Prototype", 4, "ngIf"], ["type", "text", "pInputText", "", "variant", "outlined", "pSize", "small", "fluid", "", 3, "ngModelChange", "id", "ngModel"], [3, "for"], ["icon", "pi pi-check-circle", "pTooltip", "Revalidate", "tooltipPosition", "top", "severity", "success", "variant", "text", 3, "click"], ["icon", "pi pi-times-circle", "tooltipPosition", "top", "severity", "danger", "variant", "text", 3, "click", "pTooltip"], ["type", "text", "id", "original", "pInputText", "", "disabled", "", "pSize", "small", "fluid", "", 1, "ng-invalid", "ng-dirty", "bg-white", 3, "ngModelChange", "ngModel"], ["for", "original"], ["icon", "pi pi-github", "value", "Prototype"]], template: function LinkListComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275template(0, LinkListComponent_ng_container_0_Template, 5, 3, "ng-container", 0);
+    }
+    if (rf & 2) {
+      \u0275\u0275property("ngIf", ctx.links == null ? null : ctx.links.length);
+    }
+  }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, IftaLabelModule, IftaLabel, InputTextModule, InputText, InputGroupModule, InputGroup, InputGroupAddonModule, InputGroupAddon, ButtonModule, Button, Tooltip, TagModule, Tag], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkListComponent, [{
+    type: Component,
+    args: [{ selector: "ca-link-list", imports: [CommonModule, FormsModule, IftaLabelModule, InputTextModule, InputGroupModule, InputGroupAddonModule, ButtonModule, Tooltip, TagModule], template: `
+<ng-container *ngIf="links?.length">
+  <!--h2 class="mb-0">{{ labelKey }} links</h2-->
+  <div class="flex flex-column gap-2">
+    <ng-container *ngIf="labelKey === 'Blocked' && type === 'prod'">
+      <p class="my-0">Only links from the following domains are allowed:</p>
+      <ul class="my-0">
+          <li>www.canada.ca</li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="labelKey === 'Blocked' && type === 'proto'">
+      <p class="my-0">Only links from the following domains are allowed:</p>
+      <ul class="my-0">
+          <li>www.canada.ca</li>
+          <li>test.canada.ca</li>
+          <li>gc-proto.github.io</li>
+          <li>cra-proto.github.io</li>
+          <li>cra-design.github.io</li>
+      </ul>
+    </ng-container>
+    <div *ngFor="let url of links">
+      <p-iftalabel *ngIf="url.originalHref">
+        <input type="text" id="original" pInputText [(ngModel)]="url.originalHref" disabled pSize="small" class="ng-invalid ng-dirty bg-white" fluid/>
+        <label for="original">Original URL</label>
+      </p-iftalabel>
+        <p-inputgroup>
+          <p-tag *ngIf="type === 'proto'" icon="pi pi-github" value="Prototype" />
+          <p-iftalabel>          
+            <input type="text" [id]="labelKey" pInputText variant="outlined" [(ngModel)]="url.href" pSize="small" fluid/>
+            <label [for]="labelKey">{{ labelKey }} URL</label>          
+          </p-iftalabel>
+          <p-inputgroup-addon>
+            <p-button icon="pi pi-check-circle" pTooltip="Revalidate" tooltipPosition="top" severity="success" variant="text" (click)="approve.emit({ url, event: $event })" />
+          </p-inputgroup-addon>
+          <p-inputgroup-addon>
+            <p-button icon="pi pi-times-circle" [pTooltip]="type === 'proto' ? 'Remove link':'Remove item'" tooltipPosition="top" severity="danger" variant="text" (click)="remove.emit(url)" />
+          </p-inputgroup-addon>
+        </p-inputgroup>
+    </div>
+  </div>
+</ng-container>
+  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/link-list.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */\n"] }]
+  }], null, { labelKey: [{
+    type: Input
+  }], links: [{
+    type: Input
+  }], type: [{
+    type: Input
+  }], approve: [{
+    type: Output
+  }], remove: [{
+    type: Output
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkListComponent, { className: "LinkListComponent", filePath: "src/app/views/ia-assistant/components/link-list.component.ts", lineNumber: 65 });
+})();
+
+// src/app/views/ia-assistant/components/validate-urls.component.ts
+function ValidateUrlsComponent_p_table_8_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr")(1, "th");
+    \u0275\u0275text(2, "Production URL");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "th");
+    \u0275\u0275text(4, "Prototype URL");
+    \u0275\u0275elementEnd()();
+  }
+}
+function ValidateUrlsComponent_p_table_8_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr")(1, "td");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "td");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const url_r1 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(url_r1.production.href);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(url_r1.prototype == null ? null : url_r1.prototype.href);
+  }
+}
+function ValidateUrlsComponent_p_table_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-table", 18);
+    \u0275\u0275template(1, ValidateUrlsComponent_p_table_8_ng_template_1_Template, 5, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(3, ValidateUrlsComponent_p_table_8_ng_template_3_Template, 5, 2, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", ctx_r1.iaState.getUrlData().urlPairs)("scrollable", true);
+  }
+}
+function ValidateUrlsComponent_ng_container_10_h2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2");
+    \u0275\u0275text(1, "Validating links");
+    \u0275\u0275elementEnd();
+  }
+}
+function ValidateUrlsComponent_ng_container_10_h2_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2");
+    \u0275\u0275text(1, "Validated links");
+    \u0275\u0275elementEnd();
+  }
+}
+function ValidateUrlsComponent_ng_container_10_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate2("", ctx_r1.iaState.getUrlData().urlChecked, "/", ctx_r1.iaState.getUrlData().urlTotal, "");
+  }
+}
+function ValidateUrlsComponent_ng_container_10_div_6_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "p-chip", 23);
+    \u0275\u0275element(2, "i", 24);
+    \u0275\u0275elementStart(3, "span");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const url_r3 = ctx.$implicit;
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(url_r3.href);
+  }
+}
+function ValidateUrlsComponent_ng_container_10_div_6_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "p-chip", 25);
+    \u0275\u0275element(2, "i", 24);
+    \u0275\u0275elementStart(3, "span");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const url_r4 = ctx.$implicit;
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(url_r4.href);
+  }
+}
+function ValidateUrlsComponent_ng_container_10_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275template(1, ValidateUrlsComponent_ng_container_10_div_6_ng_container_1_Template, 5, 1, "ng-container", 22)(2, ValidateUrlsComponent_ng_container_10_div_6_ng_container_2_Template, 5, 1, "ng-container", 22);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", ctx_r1.urlsChecking);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", ctx_r1.urlsProtoChecking);
+  }
+}
+function ValidateUrlsComponent_ng_container_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, ValidateUrlsComponent_ng_container_10_h2_1_Template, 2, 0, "h2", 9)(2, ValidateUrlsComponent_ng_container_10_h2_2_Template, 2, 0, "h2", 9);
+    \u0275\u0275elementStart(3, "p-progressbar", 19);
+    \u0275\u0275template(4, ValidateUrlsComponent_ng_container_10_ng_template_4_Template, 2, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(6, ValidateUrlsComponent_ng_container_10_div_6_Template, 3, 2, "div", 20);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.urlsChecking.length > 0);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.urlsChecking.length === 0);
+    \u0275\u0275advance();
+    \u0275\u0275property("value", ctx_r1.iaState.getUrlData().urlPercent);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r1.urlsChecking.length > 0 || ctx_r1.urlsProtoChecking.length > 0);
+  }
+}
+function ValidateUrlsComponent_h2_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2", 26);
+    \u0275\u0275text(1, "Broken links");
+    \u0275\u0275elementEnd();
+  }
+}
+function ValidateUrlsComponent_ca_link_list_14_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "ca-link-list", 27);
+    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_14_Template_ca_link_list_approve_0_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "prod"));
+    })("remove", function ValidateUrlsComponent_ca_link_list_14_Template_ca_link_list_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.remove($event, "prod"));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("links", ctx_r1.urlsBad);
+  }
+}
+function ValidateUrlsComponent_ca_link_list_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "ca-link-list", 28);
+    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_15_Template_ca_link_list_approve_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "proto"));
+    })("remove", function ValidateUrlsComponent_ca_link_list_15_Template_ca_link_list_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.remove($event, "proto"));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("links", ctx_r1.urlsProtoBad);
+  }
+}
+function ValidateUrlsComponent_h2_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2", 26);
+    \u0275\u0275text(1, "Redirected links");
+    \u0275\u0275elementEnd();
+  }
+}
+function ValidateUrlsComponent_ca_link_list_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "ca-link-list", 29);
+    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_18_Template_ca_link_list_approve_0_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "prod"));
+    })("remove", function ValidateUrlsComponent_ca_link_list_18_Template_ca_link_list_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.remove($event, "prod"));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("links", ctx_r1.urlsRedirected);
+  }
+}
+function ValidateUrlsComponent_ca_link_list_19_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "ca-link-list", 30);
+    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_19_Template_ca_link_list_approve_0_listener($event) {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "proto"));
+    })("remove", function ValidateUrlsComponent_ca_link_list_19_Template_ca_link_list_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.remove($event, "proto"));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("links", ctx_r1.urlsProtoRedirected);
+  }
+}
+function ValidateUrlsComponent_h2_20_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2", 26);
+    \u0275\u0275text(1, "Blocked links");
+    \u0275\u0275elementEnd();
+  }
+}
+function ValidateUrlsComponent_ca_link_list_22_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "ca-link-list", 31);
+    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_22_Template_ca_link_list_approve_0_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "prod"));
+    })("remove", function ValidateUrlsComponent_ca_link_list_22_Template_ca_link_list_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.remove($event, "prod"));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("links", ctx_r1.urlsBlocked);
+  }
+}
+function ValidateUrlsComponent_ca_link_list_23_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "ca-link-list", 32);
+    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_23_Template_ca_link_list_approve_0_listener($event) {
+      \u0275\u0275restoreView(_r10);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "proto"));
+    })("remove", function ValidateUrlsComponent_ca_link_list_23_Template_ca_link_list_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r10);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.remove($event, "proto"));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("links", ctx_r1.urlsProtoBlocked);
+  }
+}
+function ValidateUrlsComponent_ng_container_24_li_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li");
+    \u0275\u0275element(1, "i", 34);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const url_r11 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(url_r11.href);
+  }
+}
+function ValidateUrlsComponent_ng_container_24_li_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li");
+    \u0275\u0275element(1, "i", 35);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const url_r12 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(url_r12.href);
+  }
+}
+function ValidateUrlsComponent_ng_container_24_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h2", 26);
+    \u0275\u0275text(2, "Valid links");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "ul", 33);
+    \u0275\u0275template(4, ValidateUrlsComponent_ng_container_24_li_4_Template, 3, 1, "li", 22)(5, ValidateUrlsComponent_ng_container_24_li_5_Template, 3, 1, "li", 22);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngForOf", ctx_r1.urlsOk);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", ctx_r1.urlsProtoOk);
+  }
+}
+var ValidateUrlsComponent = class _ValidateUrlsComponent {
+  iaState = inject(IaStateService);
+  fetchService = inject(FetchService);
+  confirmationService = inject(ConfirmationService);
+  ngOnInit() {
+    this.iaState.loadFromLocalStorage();
+  }
+  resetProgress() {
+    const { urlPairs } = this.iaState.getUrlData();
+    const urlTotal = urlPairs.length + urlPairs.filter((p2) => p2.prototype).length;
+    this.iaState.setUrlData({
+      urlTotal,
+      urlChecked: 0,
+      urlPercent: 0
+    });
+  }
+  /*** Advance to step 2 if all URLs are good ***/
+  goToStep2() {
+    if (this.urlsOk.length + this.urlsProtoOk.length === this.iaState.getUrlData().urlTotal && this.urlsOk.length > 0) {
+      this.iaState.saveToLocalStorage();
+      this.iaState.setActiveStep(2);
+    }
+  }
+  /*** Set URL pairs from user input & set boolean if any prototypes were included ***/
+  setUrlPairs() {
+    this.iaState.resetIaFlow("form");
+    const rawUrls = this.iaState.getUrlData().rawUrls;
+    let urlPairs = rawUrls.split(/\r?\n/).map((line) => line.trim().toLowerCase()).filter(Boolean).map((line) => {
+      const [prod, proto] = line.split(/[\t,; ]+/);
+      const production = { href: prod?.trim() || "", status: "checking" };
+      const prototype = proto ? { href: proto.trim(), status: "checking" } : void 0;
+      return { production, prototype };
+    });
+    urlPairs = Array.from(new Map(urlPairs.map((p2) => [p2.production.href, p2])).values());
+    this.iaState.setUrlData({
+      urlPairs,
+      includePrototypeLinks: urlPairs.some((p2) => p2.prototype && p2.prototype.href !== "")
+      //check for any prototype links
+    });
+  }
+  onPasteUrls() {
+    setTimeout(() => this.setUrlPairs(), 0);
+  }
+  /*** Validate a single URL item ***/
+  checkStatus(link) {
+    return __async(this, null, function* () {
+      try {
+        const response = yield this.fetchService.fetchStatus(link.href, "prod", 5, "random");
+        if (!response.ok || response.url.includes("404.html")) {
+          link.status = "bad";
+        } else if (response.url !== link.href) {
+          link.status = "redirect";
+          link.originalHref = link.href;
+          link.href = response.url;
+        } else {
+          link.status = "ok";
+        }
+      } catch (error) {
+        console.error(error);
+        if (error.message.startsWith("Blocked host")) {
+          link.status = "blocked";
+        } else
+          link.status = "bad";
+      }
+    });
+  }
+  /*** Validate a URL item array (half of the URL pair) ***/
+  validateUrlItems(urls) {
+    return __async(this, null, function* () {
+      const urlsToCheck = urls.map((url) => this.checkStatus(url).finally(() => {
+        const { urlChecked: urlChecked2, urlTotal } = this.iaState.getUrlData();
+        this.iaState.setUrlData({
+          urlChecked: urlChecked2 + 1,
+          urlPercent: (urlChecked2 + 1) / urlTotal * 100
+        });
+      }));
+      yield Promise.all(urlsToCheck);
+      const badUrls = urls.filter((url) => url.status === "bad");
+      badUrls.forEach((badUrl) => badUrl.status = "checking");
+      const { urlChecked } = this.iaState.getUrlData();
+      this.iaState.setUrlData({ urlChecked: urlChecked - badUrls.length });
+      const urlsToRecheck = badUrls.map((badUrl) => this.checkStatus(badUrl).finally(() => {
+        const { urlChecked: urlChecked2, urlTotal } = this.iaState.getUrlData();
+        this.iaState.setUrlData({
+          urlChecked: urlChecked2 + 1,
+          urlPercent: (urlChecked2 + 1) / urlTotal * 100
+        });
+      }));
+      yield Promise.all(urlsToRecheck);
+    });
+  }
+  /*** Validate URL pairs ***/
+  validateUrlPairs() {
+    return __async(this, null, function* () {
+      const { urlPairs, includePrototypeLinks } = this.iaState.getUrlData();
+      if (!urlPairs?.length)
+        return;
+      this.resetProgress();
+      this.iaState.setUrlData({ isValidating: true });
+      yield this.validateUrlItems(urlPairs.map((p2) => p2.production));
+      if (includePrototypeLinks) {
+        yield this.validateUrlItems(urlPairs.map((p2) => p2.prototype).filter((p2) => !!p2));
+      }
+      this.iaState.setUrlData({
+        isValidating: false,
+        isValidated: true,
+        isOk: this.iaState.getUrlData().urlPairs.every((p2) => p2.production.status === "ok")
+      });
+      this.goToStep2();
+    });
+  }
+  /*** Filter based on status***/
+  get urlsChecking() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "checking");
+  }
+  get urlsBlocked() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "blocked");
+  }
+  get urlsBad() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "bad");
+  }
+  get urlsRedirected() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "redirect");
+  }
+  get urlsOk() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "ok");
+  }
+  get urlsProtoChecking() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "checking");
+  }
+  get urlsProtoBlocked() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "blocked");
+  }
+  get urlsProtoBad() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "bad");
+  }
+  get urlsProtoRedirected() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "redirect");
+  }
+  get urlsProtoOk() {
+    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "ok");
+  }
+  /*** Remove a bad link pair or just the link for prototypes ***/
+  remove(link, type) {
+    let { urlPairs, urlChecked, urlTotal } = this.iaState.getUrlData();
+    let decrement = 1;
+    if (type === "prod") {
+      const pair = urlPairs.find((p2) => p2.production === link);
+      if (pair?.prototype)
+        decrement += 1;
+      urlPairs = urlPairs.filter((p2) => p2.production !== link);
+    } else {
+      const pair = urlPairs.find((p2) => p2.prototype === link);
+      if (pair) {
+        pair.prototype = void 0;
+      }
+    }
+    this.iaState.setUrlData({
+      urlPairs,
+      urlChecked: urlChecked - decrement,
+      urlTotal: urlTotal - decrement,
+      urlPercent: urlTotal - decrement > 0 ? (urlChecked - decrement) / (urlTotal - decrement) * 100 : 0,
+      isOk: urlPairs.every((p2) => p2.production.status === "ok")
+    });
+    this.goToStep2();
+  }
+  /*** Approve an edited link for revalidation ***/
+  approve(link, $event, type) {
+    link.href = link.href.trim().toLowerCase();
+    const { urlPairs } = this.iaState.getUrlData();
+    const urlsToCheck = type === "prod" ? urlPairs.map((p2) => p2.production) : urlPairs.map((p2) => p2.prototype).filter((p2) => !!p2);
+    if (urlsToCheck.some((u) => u !== link && u.href === link.href)) {
+      if (type === "prod") {
+        this.confirmDuplicate($event, link);
+        return;
+      } else {
+        this.confirmProtoDuplicate($event, link);
+        return;
+      }
+    }
+    this.revalidate(link);
+  }
+  /*** Revalidates a single link rather than the whole array ***/
+  revalidate(link) {
+    const { urlChecked, urlTotal } = this.iaState.getUrlData();
+    link.status = "checking";
+    this.iaState.setUrlData({
+      urlChecked: urlChecked - 1,
+      urlPercent: (urlChecked - 1) / urlTotal * 100
+    });
+    this.checkStatus(link).finally(() => {
+      const { urlChecked: urlChecked2, urlTotal: urlTotal2 } = this.iaState.getUrlData();
+      this.iaState.setUrlData({
+        urlChecked: urlChecked2 + 1,
+        urlPercent: (urlChecked2 + 1) / urlTotal2 * 100,
+        isOk: this.iaState.getUrlData().urlPairs.every((p2) => p2.production.status === "ok")
+      });
+      this.goToStep2();
+    });
+  }
+  /*** Popup message for duplicate production links ***/
+  confirmDuplicate(event, link) {
+    this.confirmationService.confirm({
+      target: event.currentTarget,
+      message: "This URL is already included. Do you want to remove the duplicate link?",
+      icon: "pi pi-exclamation-triangle",
+      rejectButtonProps: {
+        label: "Cancel",
+        severity: "secondary",
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: "Yes",
+        severity: "danger"
+      },
+      accept: () => {
+        this.remove(link, "prod");
+      },
+      reject: () => {
+        console.log("Cancel adding duplicate link");
+      }
+    });
+  }
+  /*** Popup message for duplicate prototype links ***/
+  confirmProtoDuplicate(event, link) {
+    this.confirmationService.confirm({
+      target: event.currentTarget,
+      message: "This prototype URL was already included for another page. Do you want to keep it anyway?",
+      icon: "pi pi-exclamation-triangle",
+      rejectButtonProps: {
+        label: "Cancel",
+        severity: "secondary",
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: "Yes",
+        severity: "success"
+      },
+      accept: () => {
+        this.revalidate(link);
+      },
+      reject: () => {
+        console.log("Cancel adding duplicate link");
+      }
+    });
+  }
+  static \u0275fac = function ValidateUrlsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ValidateUrlsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ValidateUrlsComponent, selectors: [["ca-validate-urls"]], decls: 25, vars: 15, consts: [["header", ""], ["body", ""], ["content", ""], [1, "my-0"], [1, "my-0", "text-color-secondary", "text-xs"], ["id", "urls", "autoResize", "true", "rows", "5", "pTextarea", "", "fluid", "", 3, "ngModelChange", "change", "paste", "ngModel"], ["for", "urls"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", "styleClass", "mb-2", 3, "value", "scrollable", 4, "ngIf"], ["label", "Validate URLs", "icon", "pi pi-check-square", 3, "onClick", "loading", "disabled"], [4, "ngIf"], ["class", "mb-0", 4, "ngIf"], [1, "flex", "flex-column", "gap-2"], ["labelKey", "Broken", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Broken", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", "styleClass", "mb-2", 3, "value", "scrollable"], [3, "value"], ["class", "flex flex-column gap-2 mt-3", 4, "ngIf"], [1, "flex", "flex-column", "gap-2", "mt-3"], [4, "ngFor", "ngForOf"], ["styleClass", "bg-yellow-100 text-black-alpha-90", 1, "max-w-max"], [1, "pi", "pi-spin", "pi-spinner"], ["styleClass", "bg-orange-100 text-black-alpha-90", 1, "max-w-max"], [1, "mb-0"], ["labelKey", "Broken", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Broken", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "proto", 3, "approve", "remove", "links"], [1, "my-0", "list-none"], [1, "pi", "pi-check", "text-green-500", "mr-2"], [1, "pi", "pi-check", "text-blue-500", "mr-2"]], template: function ValidateUrlsComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "h2", 3);
+      \u0275\u0275text(1, "Canada.ca URLs");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p", 4);
+      \u0275\u0275text(3, "Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(4, "p-iftalabel")(5, "textarea", 5);
+      \u0275\u0275twoWayListener("ngModelChange", function ValidateUrlsComponent_Template_textarea_ngModelChange_5_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.iaState.getUrlData().rawUrls, $event) || (ctx.iaState.getUrlData().rawUrls = $event);
+        return $event;
+      });
+      \u0275\u0275listener("change", function ValidateUrlsComponent_Template_textarea_change_5_listener() {
+        return ctx.setUrlPairs();
+      })("paste", function ValidateUrlsComponent_Template_textarea_paste_5_listener() {
+        return ctx.onPasteUrls();
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "label", 6);
+      \u0275\u0275text(7, "URLs");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(8, ValidateUrlsComponent_p_table_8_Template, 5, 2, "p-table", 7);
+      \u0275\u0275elementStart(9, "p-button", 8);
+      \u0275\u0275listener("onClick", function ValidateUrlsComponent_Template_p_button_onClick_9_listener() {
+        return ctx.validateUrlPairs();
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(10, ValidateUrlsComponent_ng_container_10_Template, 7, 4, "ng-container", 9);
+      \u0275\u0275element(11, "p-confirmpopup");
+      \u0275\u0275template(12, ValidateUrlsComponent_h2_12_Template, 2, 0, "h2", 10);
+      \u0275\u0275elementStart(13, "div", 11);
+      \u0275\u0275template(14, ValidateUrlsComponent_ca_link_list_14_Template, 1, 1, "ca-link-list", 12)(15, ValidateUrlsComponent_ca_link_list_15_Template, 1, 1, "ca-link-list", 13);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(16, ValidateUrlsComponent_h2_16_Template, 2, 0, "h2", 10);
+      \u0275\u0275elementStart(17, "div", 11);
+      \u0275\u0275template(18, ValidateUrlsComponent_ca_link_list_18_Template, 1, 1, "ca-link-list", 14)(19, ValidateUrlsComponent_ca_link_list_19_Template, 1, 1, "ca-link-list", 15);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(20, ValidateUrlsComponent_h2_20_Template, 2, 0, "h2", 10);
+      \u0275\u0275elementStart(21, "div", 11);
+      \u0275\u0275template(22, ValidateUrlsComponent_ca_link_list_22_Template, 1, 1, "ca-link-list", 16)(23, ValidateUrlsComponent_ca_link_list_23_Template, 1, 1, "ca-link-list", 17);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(24, ValidateUrlsComponent_ng_container_24_Template, 6, 2, "ng-container", 9);
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(5);
+      \u0275\u0275twoWayProperty("ngModel", ctx.iaState.getUrlData().rawUrls);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", ctx.iaState.getUrlData().includePrototypeLinks);
+      \u0275\u0275advance();
+      \u0275\u0275property("loading", ctx.iaState.getUrlData().isValidating)("disabled", ctx.iaState.getUrlData().rawUrls.length === 0 || ctx.iaState.getUrlData().isValidated);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.iaState.getUrlData().isValidating || ctx.iaState.getUrlData().isValidated);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("ngIf", ctx.urlsBad.length > 0 || ctx.urlsProtoBad.length > 0);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("ngIf", ctx.urlsBad.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.urlsProtoBad.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.urlsRedirected.length > 0 || ctx.urlsProtoRedirected.length > 0);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("ngIf", ctx.urlsRedirected.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.urlsProtoRedirected.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.urlsBlocked.length > 0 || ctx.urlsProtoBlocked.length > 0);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("ngIf", ctx.urlsBlocked.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.urlsProtoBlocked.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.urlsOk.length > 0 || ctx.urlsProtoOk.length > 0);
+    }
+  }, dependencies: [
+    CommonModule,
+    NgForOf,
+    NgIf,
+    FormsModule,
+    DefaultValueAccessor,
+    NgControlStatus,
+    NgModel,
+    TranslateModule,
+    ProgressBarModule,
+    ProgressBar,
+    ConfirmPopupModule,
+    ConfirmPopup,
+    TextareaModule,
+    Textarea,
+    InputTextModule,
+    IftaLabelModule,
+    IftaLabel,
+    InputGroupModule,
+    InputGroupAddonModule,
+    ButtonModule,
+    Button,
+    TooltipModule,
+    TableModule,
+    Table,
+    ChipModule,
+    Chip,
+    LinkListComponent
+  ], encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ValidateUrlsComponent, [{
+    type: Component,
+    args: [{ selector: "ca-validate-urls", imports: [
+      CommonModule,
+      FormsModule,
+      TranslateModule,
+      ProgressBarModule,
+      ConfirmPopupModule,
+      TextareaModule,
+      InputTextModule,
+      IftaLabelModule,
+      InputGroupModule,
+      InputGroupAddonModule,
+      ButtonModule,
+      TooltipModule,
+      TableModule,
+      ChipModule,
+      LinkListComponent
+    ], template: `<!--Enter URLs-->\r
+<h2 class="my-0">Canada.ca URLs</h2>\r
+<p class="my-0 text-color-secondary text-xs">Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.</p>\r
+\r
+<p-iftalabel>\r
+    <textarea id="urls" autoResize="true" rows="5" pTextarea [(ngModel)]="iaState.getUrlData().rawUrls" (change)="setUrlPairs()" (paste)="onPasteUrls()" fluid></textarea>\r
+    <label for="urls">URLs</label>\r
+</p-iftalabel>\r
+\r
+<!--Show url pairs if prototype links were included-->\r
+<p-table [value]="iaState.getUrlData().urlPairs" *ngIf="iaState.getUrlData().includePrototypeLinks" size="small" stripedRows [scrollable]="true" scrollHeight="400px" styleClass="mb-2">\r
+    <ng-template #header>\r
+        <tr>\r
+            <th>Production URL</th>\r
+            <th>Prototype URL</th>\r
+        </tr>\r
+    </ng-template>\r
+    <ng-template #body let-url>\r
+        <tr>\r
+            <td>{{ url.production.href }}</td>\r
+            <td>{{ url.prototype?.href }}</td>\r
+        </tr>\r
+    </ng-template>\r
+</p-table>\r
+\r
+<!--Validate links button-->\r
+<p-button label="Validate URLs" icon="pi pi-check-square" [loading]="iaState.getUrlData().isValidating" (onClick)="validateUrlPairs()" [disabled]="iaState.getUrlData().rawUrls.length === 0 || iaState.getUrlData().isValidated" />\r
+\r
+<!--Show link validation-->\r
+<ng-container *ngIf="iaState.getUrlData().isValidating || iaState.getUrlData().isValidated">\r
+    <h2 *ngIf="urlsChecking.length > 0">Validating links</h2>\r
+    <h2 *ngIf="urlsChecking.length === 0">Validated links</h2>\r
+\r
+    <p-progressbar [value]="iaState.getUrlData().urlPercent">\r
+        <ng-template #content let-value>\r
+            <span>{{iaState.getUrlData().urlChecked}}/{{iaState.getUrlData().urlTotal}}</span>\r
+        </ng-template>\r
+    </p-progressbar>\r
+\r
+    <div class="flex flex-column gap-2 mt-3" *ngIf="urlsChecking.length > 0 || urlsProtoChecking.length > 0">\r
+        <ng-container *ngFor="let url of urlsChecking">\r
+            <p-chip styleClass="bg-yellow-100 text-black-alpha-90" class="max-w-max">\r
+                <i class="pi pi-spin pi-spinner"></i>\r
+                <span>{{ url.href }}</span>\r
+            </p-chip>\r
+        </ng-container>\r
+        <ng-container *ngFor="let url of urlsProtoChecking">\r
+            <p-chip styleClass="bg-orange-100 text-black-alpha-90" class="max-w-max">\r
+                <i class="pi pi-spin pi-spinner"></i>\r
+                <span>{{ url.href }}</span>\r
+            </p-chip>\r
+        </ng-container>\r
+    </div>\r
+</ng-container>\r
+\r
+<p-confirmpopup />\r
+<h2 *ngIf="urlsBad.length > 0 || urlsProtoBad.length > 0" class="mb-0">Broken links</h2>\r
+<div class="flex flex-column gap-2">\r
+    <ca-link-list labelKey="Broken"\r
+                  [links]="urlsBad"\r
+                  type="prod"\r
+                  (approve)="approve($event.url, $event.event, 'prod')"\r
+                  (remove)="remove($event, 'prod')"\r
+                  *ngIf="urlsBad.length > 0">\r
+    </ca-link-list>\r
+    <ca-link-list labelKey="Broken"\r
+                  [links]="urlsProtoBad"\r
+                  type="proto"\r
+                  (approve)="approve($event.url, $event.event, 'proto')"\r
+                  (remove)="remove($event, 'proto')"\r
+                  *ngIf="urlsProtoBad.length > 0">\r
+    </ca-link-list>\r
+</div>\r
+<h2 *ngIf="urlsRedirected.length > 0 || urlsProtoRedirected.length > 0" class="mb-0">Redirected links</h2>\r
+<div class="flex flex-column gap-2">\r
+    <ca-link-list labelKey="Redirected"\r
+                  [links]="urlsRedirected"\r
+                  type="prod"\r
+                  (approve)="approve($event.url, $event.event, 'prod')"\r
+                  (remove)="remove($event, 'prod')"\r
+                  *ngIf="urlsRedirected.length > 0">\r
+    </ca-link-list>\r
+    <ca-link-list labelKey="Redirected"\r
+                  [links]="urlsProtoRedirected"\r
+                  type="proto"\r
+                  (approve)="approve($event.url, $event.event, 'proto')"\r
+                  (remove)="remove($event, 'proto')"\r
+                  *ngIf="urlsProtoRedirected.length > 0">\r
+    </ca-link-list>\r
+</div>\r
+<h2 *ngIf="urlsBlocked.length > 0 || urlsProtoBlocked.length > 0" class="mb-0">Blocked links</h2>\r
+<div class="flex flex-column gap-2">\r
+    <ca-link-list labelKey="Blocked"\r
+                  [links]="urlsBlocked"\r
+                  type="prod"\r
+                  (approve)="approve($event.url, $event.event, 'prod')"\r
+                  (remove)="remove($event, 'prod')"\r
+                  *ngIf="urlsBlocked.length > 0">\r
+    </ca-link-list>\r
+    <ca-link-list labelKey="Blocked"\r
+                  [links]="urlsProtoBlocked"\r
+                  type="proto"\r
+                  (approve)="approve($event.url, $event.event, 'proto')"\r
+                  (remove)="remove($event, 'proto')"\r
+                  *ngIf="urlsProtoBlocked.length > 0">\r
+    </ca-link-list>\r
+</div>\r
+<ng-container *ngIf="urlsOk.length > 0 || urlsProtoOk.length > 0">\r
+    <h2 class="mb-0">Valid links</h2>\r
+    <ul class="my-0 list-none">\r
+        <li *ngFor="let url of urlsOk"><i class="pi pi-check text-green-500 mr-2"></i>{{ url.href }}</li>\r
+        <li *ngFor="let url of urlsProtoOk"><i class="pi pi-check text-blue-500 mr-2"></i>{{ url.href }}</li>\r
+    </ul>\r
+</ng-container>` }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ValidateUrlsComponent, { className: "ValidateUrlsComponent", filePath: "src/app/views/ia-assistant/components/validate-urls.component.ts", lineNumber: 36 });
+})();
+
 // src/app/views/ia-assistant/services/ia-relationship.service.ts
 var IaRelationshipService = class _IaRelationshipService {
   fetchService = inject(FetchService);
@@ -25270,7 +26607,7 @@ var IaRelationshipService = class _IaRelationshipService {
         if (!prodUrl)
           continue;
         try {
-          const doc = yield this.fetchService.fetchContent(prodUrl, "both", 5, "random");
+          const doc = yield this.fetchService.fetchContent(prodUrl, "prod", 5, "random");
           const breadcrumb = this.getBreadcrumb(doc, "https://www.canada.ca");
           const h1Elements = Array.from(doc.querySelectorAll("h1"));
           const h1 = h1Elements.map((e) => e.textContent?.trim()).filter(Boolean).join("<br>");
@@ -25396,7 +26733,7 @@ var IaRelationshipService = class _IaRelationshipService {
             continue;
           }
           try {
-            const doc = yield this.fetchService.fetchContent(parent.url, "both", 5, "random");
+            const doc = yield this.fetchService.fetchContent(parent.url, "prod", 5, "random");
             const links = Array.from(doc.querySelectorAll("a")).map((a) => a.getAttribute("href")).filter((href) => !!href).map((href) => {
               try {
                 return new URL(href, parent.url).href;
@@ -25445,6 +26782,7 @@ var IaRelationshipService = class _IaRelationshipService {
         crumb.isRoot = isRoot;
         crumb.isDescendant = isDescendant;
         crumb.minDepth = depthMap.get(crumb.url);
+        crumb.isBeforeRoot = false;
         if (isRoot) {
           isAfterRoot = true;
           broken = false;
@@ -25464,6 +26802,7 @@ var IaRelationshipService = class _IaRelationshipService {
           }
           crumb.styleClass = this.Colors.gray;
           crumb.linkTooltip = "Page will be shown in IA map for context but no links will be crawled";
+          crumb.isBeforeRoot = true;
         }
         if (isDescendant) {
           crumb.styleClass += ` ${this.Modifiers.bold}`;
@@ -25488,345 +26827,461 @@ var IaRelationshipService = class _IaRelationshipService {
   }], null, null);
 })();
 
-// src/app/views/ia-assistant/services/ia-tree.service.ts
-var IaTreeService = class _IaTreeService {
-  theme = inject(ThemeService);
+// src/app/views/ia-assistant/components/set-roots.component.ts
+function SetRootsComponent_h2_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2");
+    \u0275\u0275text(1, "Validating breadcrumb");
+    \u0275\u0275elementEnd();
+  }
+}
+function SetRootsComponent_h2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2");
+    \u0275\u0275text(1, "Validated breadcrumb");
+    \u0275\u0275elementEnd();
+  }
+}
+function SetRootsComponent_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r0.breadcrumbData().step);
+  }
+}
+function SetRootsComponent_h2_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2", 6);
+    \u0275\u0275text(1, "Root pages");
+    \u0275\u0275elementEnd();
+  }
+}
+function SetRootsComponent_ng_container_7_ul_4_ng_container_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "li");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const page_r2 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(page_r2);
+  }
+}
+function SetRootsComponent_ng_container_7_ul_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "ul")(1, "li");
+    \u0275\u0275text(2, "Crawl depth ");
+    \u0275\u0275elementStart(3, "strong");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(5, " to reach user-added child pages");
+    \u0275\u0275element(6, "br");
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(8, SetRootsComponent_ng_container_7_ul_4_ng_container_8_Template, 3, 1, "ng-container", 5);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const root_r3 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(root_r3.minDepth);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", root_r3.href, " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", root_r3.descendants);
+  }
+}
+function SetRootsComponent_ng_container_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "li")(2, "a", 7);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, SetRootsComponent_ng_container_7_ul_4_Template, 9, 3, "ul", 1);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const root_r3 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", root_r3.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(root_r3.h1);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", root_r3.descendants.length > 0);
+  }
+}
+function SetRootsComponent_h2_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h2", 6);
+    \u0275\u0275text(1, "Breadcrumb branches");
+    \u0275\u0275elementEnd();
+  }
+}
+function SetRootsComponent_ng_container_10_ng_container_3_span_2_i_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 16);
+  }
+}
+function SetRootsComponent_ng_container_10_ng_container_3_span_2_i_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 17);
+    \u0275\u0275pipe(1, "translate");
+    \u0275\u0275pipe(2, "translate");
+  }
+  if (rf & 2) {
+    const crumb_r4 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275classMap(crumb_r4.icon);
+    \u0275\u0275property("pTooltip", \u0275\u0275pipeBind1(1, 4, `${crumb_r4.iconTooltip}`));
+    \u0275\u0275attribute("aria-label", \u0275\u0275pipeBind1(2, 6, `${crumb_r4.iconTooltip}`));
+  }
+}
+function SetRootsComponent_ng_container_10_ng_container_3_span_2_i_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 16);
+  }
+}
+function SetRootsComponent_ng_container_10_ng_container_3_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 13);
+    \u0275\u0275template(1, SetRootsComponent_ng_container_10_ng_container_3_span_2_i_1_Template, 1, 0, "i", 14)(2, SetRootsComponent_ng_container_10_ng_container_3_span_2_i_2_Template, 3, 8, "i", 15)(3, SetRootsComponent_ng_container_10_ng_container_3_span_2_i_3_Template, 1, 0, "i", 14);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const crumb_r4 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", crumb_r4.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", crumb_r4.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", crumb_r4.icon);
+  }
+}
+function SetRootsComponent_ng_container_10_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "span", 10);
+    \u0275\u0275template(2, SetRootsComponent_ng_container_10_ng_container_3_span_2_Template, 4, 3, "span", 11);
+    \u0275\u0275elementStart(3, "a", 12);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const crumb_r4 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", crumb_r4.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("href", crumb_r4.url, \u0275\u0275sanitizeUrl)("ngClass", crumb_r4.styleClass)("pTooltip", \u0275\u0275pipeBind1(4, 5, `${crumb_r4.linkTooltip}`));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(crumb_r4.label);
+  }
+}
+function SetRootsComponent_ng_container_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "li", 8)(2, "div", 9);
+    \u0275\u0275template(3, SetRootsComponent_ng_container_10_ng_container_3_Template, 6, 7, "ng-container", 5);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const breadcrumb_r5 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", breadcrumb_r5);
+  }
+}
+function SetRootsComponent_ng_container_11_p_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 21);
+    \u0275\u0275text(1, "One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.");
+    \u0275\u0275element(2, "br");
+    \u0275\u0275text(3, "To-do: automatically set IA orphans as roots so their child pages are crawled");
+    \u0275\u0275elementEnd();
+  }
+}
+function SetRootsComponent_ng_container_11_p_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 22);
+    \u0275\u0275text(1, "One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won't impact the crawl since they occur before the detected root pages.");
+    \u0275\u0275elementEnd();
+  }
+}
+function SetRootsComponent_ng_container_11_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 23);
+    \u0275\u0275text(1, "There are no problems with your breadcrumb!");
+    \u0275\u0275elementEnd();
+  }
+}
+function SetRootsComponent_ng_container_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, SetRootsComponent_ng_container_11_p_1_Template, 4, 0, "p", 18)(2, SetRootsComponent_ng_container_11_p_2_Template, 2, 0, "p", 19)(3, SetRootsComponent_ng_container_11_p_3_Template, 2, 0, "p", 20);
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "To-do: set up method for user to change which pages to crawl");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.breadcrumbData().hasBreakAfterRoot);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.breadcrumbData().hasBreakBeforeRoot && !ctx_r0.breadcrumbData().hasBreakAfterRoot);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r0.breadcrumbData().hasBreakBeforeRoot && !ctx_r0.breadcrumbData().hasBreakAfterRoot);
+  }
+}
+var SetRootsComponent = class _SetRootsComponent {
+  iaState = inject(IaStateService);
+  iaService = inject(IaRelationshipService);
   fetchService = inject(FetchService);
-  //For tracking progress while building IA chart
-  isChartLoading = false;
-  iaProgress = 0;
-  totalUrls = 0;
-  processedUrls = 0;
-  //Pages to skip children when building IA chart
-  skipFormsAndPubs = /* @__PURE__ */ new Set([
-    "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms.html",
-    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/formulaires.html",
-    "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html",
-    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/publications.html"
-  ]);
-  //Set background color
-  get bgColors() {
-    return this.theme.darkMode() ? this.bgColorsDark : this.bgColorsLight;
-  }
-  bgColorsLight = [
-    "surface-0 hover:bg-primary-50",
-    "bg-primary-50 hover:bg-primary-100",
-    "bg-primary-100 hover:bg-primary-200",
-    "bg-primary-200 hover:bg-primary-300",
-    "bg-primary-300 hover:bg-primary-400",
-    "bg-primary-400 hover:bg-primary-500",
-    "bg-primary-500 hover:bg-primary-600 text-white",
-    "bg-primary-600 hover:bg-primary-700 text-white",
-    "bg-primary-700 hover:bg-primary-800 text-white",
-    "bg-primary-800 hover:bg-primary-900 text-white"
-  ];
-  bgColorsDark = [
-    "surface-0 hover:bg-primary-900",
-    "bg-primary-900 hover:bg-primary-800",
-    "bg-primary-800 hover:bg-primary-700",
-    "bg-primary-700 hover:bg-primary-600",
-    "bg-primary-600 hover:bg-primary-500",
-    "bg-primary-500 hover:bg-primary-400",
-    "bg-primary-400 hover:bg-primary-300  text-black",
-    "bg-primary-300 hover:bg-primary-200 text-black",
-    "bg-primary-200 hover:bg-primary-100 text-black",
-    "bg-primary-100 hover:bg-primary-50 text-black"
-  ];
-  get contextStyles() {
-    return this.theme.darkMode() ? this.contextStylesDark : this.contextStylesLight;
-  }
-  contextStylesLight = {
-    new: "bg-green-200 hover:bg-green-300 text-black",
-    rot: "bg-red-200 hover:bg-red-300 text-black",
-    move: "bg-yellow-200 hover:bg-yellow-300 text-black",
-    template: "surface-200 hover:surface-300 text-black"
-  };
-  contextStylesDark = {
-    new: "bg-green-700 hover:bg-green-600 text-white",
-    rot: "bg-red-700 hover:bg-red-600 text-white",
-    move: "bg-yellow-700 hover:bg-yellow-600 text-black",
-    template: "surface-700 hover:surface-600 text-white"
-  };
-  updateNodeStyles(nodes, level = 0) {
-    if (!nodes)
-      return;
-    for (const node of nodes) {
-      const borderStyle = node.data?.borderStyle || "border-2 border-primary border-round shadow-2";
-      const bgClass = this.bgColors[level % this.bgColors.length];
-      const bgStyle = this.contextStyles[node.data?.customStyleKey] ?? bgClass;
-      node.styleClass = `${borderStyle} ${bgStyle}`;
-      if (node.children && node.children.length > 0) {
-        const nextLevel = node.data.isContainer ? level : level + 1;
-        this.updateNodeStyles(node.children, nextLevel);
-      }
-    }
-  }
-  //Step 2a: Get single page IA data
-  getPageMetaAndLinks(url, searchTerms) {
+  ngOnInit() {
     return __async(this, null, function* () {
-      try {
-        const doc = yield this.fetchService.fetchContent(url, "both", 5);
-        const h1Elements = Array.from(doc.querySelectorAll("h1"));
-        const h1 = h1Elements.map((e) => e.textContent?.trim()).filter(Boolean).join("<br>");
-        const breadcrumb = Array.from(doc.querySelectorAll(".breadcrumb li a")).map((a) => new URL(a.getAttribute("href") || "", url).href);
-        const anchors = Array.from(doc.querySelectorAll("main a[href]"));
-        const baseUrl = new URL(url).origin;
-        const links = Array.from(new Set(
-          //unique set
-          anchors.map((a) => {
-            const u = new URL(a.getAttribute("href") || "", url);
-            u.hash = "";
-            return u.href;
-          }).filter((u) => u.startsWith(baseUrl) && u !== url)
-          // on same domain but not self
-        ));
-        const result = { h1, breadcrumb, links, status: 200 };
-        if (searchTerms && searchTerms.length > 0) {
-          const pageText = doc.body?.textContent?.toLowerCase() ?? "";
-          result.matched = searchTerms.some((term) => pageText.includes(term.toLowerCase()));
-        }
-        return result;
-      } catch (err) {
-        console.error(`Failed to fetch ${url}`, err);
-        return { status: 0 };
-      }
+      yield this.checkBreadcrumbs();
     });
   }
-  //Step 2b: Crawl all child pages for IA data
-  buildIaTree(urls, depth, brokenLinks, parentUrl, level = 0, searchTerms = null, searchMatches) {
+  breadcrumbData = this.iaState.getBreadcrumbData;
+  checkBreadcrumbs() {
     return __async(this, null, function* () {
-      if (depth <= 0)
-        return [];
-      if (!parentUrl && level === 0) {
-        this.isChartLoading = true;
-        this.iaProgress = 5;
-        this.processedUrls = 0;
-        this.totalUrls = urls.length;
+      console.log(this.breadcrumbData().progress);
+      if (this.breadcrumbData().progress >= 100)
+        return;
+      if (this.breadcrumbData().progress < 60) {
+        this.iaState.setBreadcrumbData({ progress: 0, step: "" });
+        this.iaState.setBreadcrumbData({ progress: 20, step: "Getting all breadcrumbs" });
+        const allPages = yield this.iaService.getAllBreadcrumbs(this.iaState.getUrlData().urlPairs);
+        this.iaState.setBreadcrumbData({ progress: 40, step: "Finding root pages" });
+        yield this.fetchService.simulateDelay(2e3);
+        this.breadcrumbData().rootPages = this.iaService.getRoots(allPages);
+        this.iaState.setBreadcrumbData({ progress: 50, step: "Filtering breadcrumbs" });
+        yield this.fetchService.simulateDelay(2e3);
+        this.breadcrumbData().breadcrumbs = this.iaService.filterBreadcrumbs(allPages);
       }
-      const nodes = [];
-      const bgClass = this.bgColors[level % this.bgColors.length];
-      for (const url of urls) {
-        const meta = yield this.getPageMetaAndLinks(url, ["GST", "dental"]);
-        this.processedUrls++;
-        this.iaProgress = Math.round(this.processedUrls / this.totalUrls * 100);
-        if ((!meta || meta.status !== 200) && brokenLinks) {
-          brokenLinks.push({
-            parentUrl,
-            url,
-            status: meta?.status || 0
-          });
-          continue;
-        }
-        if (meta?.matched && searchMatches) {
-          searchMatches.push({
-            url,
-            h1: meta.h1 ?? "Missing H1"
-          });
-        }
-        if (!meta.breadcrumb || !meta.links)
-          continue;
-        if (parentUrl && meta.breadcrumb.at(-1) !== parentUrl) {
-          continue;
-        }
-        let crawled = false;
-        if (depth > 1) {
-          crawled = true;
-        }
-        const node = {
-          label: meta.h1,
-          data: {
-            h1: meta.h1,
-            url,
-            originalParent: parentUrl,
-            editing: null,
-            customStyle: false,
-            customStyleKey: null,
-            borderStyle: "border-2 border-primary border-round shadow-2",
-            isRoot: false,
-            isCrawled: crawled,
-            crawlDepth: 0,
-            isUserAdded: false,
-            notOrphan: true,
-            prototype: null
-          },
-          expanded: true,
-          styleClass: `border-2 border-primary border-round shadow-2 ${bgClass}`,
-          children: []
-        };
-        if (meta.links?.length && depth > 1) {
-          this.totalUrls += meta.links.length;
-          const total = meta.links.length;
-          let limit = total;
-          if (this.skipFormsAndPubs.has(url)) {
-            limit = 5;
-          }
-          const links = meta.links.slice(0, limit);
-          node.children = yield this.buildIaTree(links, depth - 1, brokenLinks, url, level + 1, searchTerms, searchMatches);
-          if (total > limit) {
-            node.children?.push({
-              label: `+ ${total - limit} more...`,
-              data: {
-                h1: `+ ${total - limit} more...`,
-                url: null,
-                originalParent: parentUrl,
-                editing: null,
-                customStyle: true,
-                customStyleKey: "template",
-                borderStyle: "border-2 border-primary border-round shadow-2 border-dashed",
-                isRoot: false,
-                isCrawled: false,
-                crawlDepth: 0,
-                isUserAdded: false,
-                notOrphan: true,
-                prototype: null
-              },
-              expanded: true,
-              styleClass: `border-2 border-primary border-round shadow-2 border-dashed surface-100 hover:surface-200`,
-              children: []
-            });
-          }
-        }
-        nodes.push(node);
+      if (this.breadcrumbData().progress < 90) {
+        this.iaState.saveToLocalStorage();
+        this.iaState.setBreadcrumbData({ progress: 60, step: "Validating breadcrumbs" });
+        this.breadcrumbData().breadcrumbs = yield this.iaService.validateBreadcrumbs(this.breadcrumbData().breadcrumbs);
       }
-      if (!parentUrl && level === 0) {
-        this.iaProgress = 100;
-        setTimeout(() => {
-          this.isChartLoading = false;
-          this.iaProgress = 0;
-        }, 1e3);
-      }
-      if (searchMatches && level === 0) {
-        const uniqueMatches = new Map(searchMatches.map((m) => [m.url, m]));
-        searchMatches.length = 0;
-        searchMatches.push(...uniqueMatches.values());
-      }
-      return nodes;
+      this.iaState.setBreadcrumbData({ progress: 90, step: "Highlighting breadcrumbs" });
+      yield this.fetchService.simulateDelay(2e3);
+      const { breadcrumbs: highlighted, hasBreakAfterRoot, hasBreakBeforeRoot } = this.iaService.highlightBreadcrumbs(this.breadcrumbData().breadcrumbs, this.breadcrumbData().rootPages);
+      this.iaState.setBreadcrumbData({
+        breadcrumbs: highlighted,
+        hasBreakAfterRoot,
+        hasBreakBeforeRoot,
+        progress: 100,
+        step: "Complete"
+      });
+      this.iaState.saveToLocalStorage();
     });
   }
-  //NEEDS TESTING
-  //Build initial context for crawl (i.e. the start of the breadcrumb)
-  setTreeContext(iaTree, breadcrumbs) {
-    const findChildByUrl = (nodes, url) => {
-      if (!nodes || !url)
-        return void 0;
-      return nodes.find((n) => n.data?.url === url);
-    };
-    for (const breadcrumb of breadcrumbs) {
-      let currentLevel = iaTree;
-      let parentUrl = null;
-      for (const crumb of breadcrumb) {
-        let node = findChildByUrl(currentLevel, crumb.url);
-        if (!node) {
-          node = {
-            label: crumb.label,
-            data: {
-              h1: crumb.label,
-              url: crumb.url ?? null,
-              originalParent: parentUrl,
-              editing: null,
-              customStyle: false,
-              customStyleKey: null,
-              borderStyle: "border-2 border-primary border-round shadow-2",
-              isRoot: crumb.isRoot,
-              isCrawled: false,
-              crawlDepth: crumb.minDepth,
-              //todo: double-check the depth we calculated in findRoots is being passed along
-              isUserAdded: crumb.isRoot || crumb.isDescendant,
-              notOrphan: crumb.valid,
-              prototype: crumb.prototype ?? null
-            },
-            expanded: true,
-            styleClass: "border-2 border-primary border-round shadow-2 surface-ground",
-            children: []
-          };
-          currentLevel.push(node);
-        }
-        parentUrl = node.data.url ?? null;
-        currentLevel = node.children;
-      }
-    }
-  }
-  //Find the root pages we need to crawl
-  findCrawlRoots(nodes) {
-    const roots = [];
-    const walk = (list) => {
-      for (const n of list) {
-        if (n.data?.isRoot) {
-          roots.push(n);
-        }
-        if (n.children?.length) {
-          walk(n.children);
-        }
-      }
-    };
-    walk(nodes);
-    return roots;
-  }
-  //Crawl from pages marked as data.isRoot
-  crawlFromRoots(node, brokenLinks, searchTerms = null, searchMatches) {
-    return __async(this, null, function* () {
-      const roots = this.findCrawlRoots(node);
-      let index = 1;
-      const numRoots = roots.length;
-      for (const root of roots) {
-        if (!root.data?.url)
-          continue;
-        console.log(`Crawling from root: ${root.data.url}`);
-        console.log(`Min Depth: ${root.data.crawlDepth}`);
-        const depth = Math.max(root.data.crawlDepth ?? 0, 2);
-        console.log(`Depth: ${depth}`);
-        const children = yield this.buildIaTree([root.data.url], depth, brokenLinks, void 0, 0, searchTerms, searchMatches);
-        if (children.length > 0) {
-          const builtRoot = children[0];
-          root.children = this.mergeChildren(root.children ?? [], builtRoot.children ?? []);
-          root.data.isCrawled = true;
-        }
-        console.log(`Crawl ${index} of ${numRoots} complete`);
-        index++;
-        root.data.isRoot = false;
-      }
-    });
-  }
-  //Merges discovered children with existing user add-added or breadcrumb children
-  mergeChildren(current, crawled) {
-    const map2 = /* @__PURE__ */ new Map();
-    for (const child of current) {
-      if (child.data?.url) {
-        map2.set(child.data.url, child);
-      }
-    }
-    for (const child of crawled) {
-      const url = child.data?.url;
-      if (!url)
-        continue;
-      if (!map2.has(url)) {
-        map2.set(url, child);
-      } else {
-        const existingNode = map2.get(url);
-        if (child.children?.length) {
-          if (existingNode.children?.length) {
-            existingNode.children = this.mergeChildren(existingNode.children ?? [], child.children ?? []);
-          } else {
-            existingNode.children = child.children;
-          }
-        }
-        existingNode.data.isCrawled = existingNode.data.isCrawled || child.data.isCrawled;
-      }
-    }
-    return Array.from(map2.values());
-  }
-  static \u0275fac = function IaTreeService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _IaTreeService)();
+  static \u0275fac = function SetRootsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _SetRootsComponent)();
   };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaTreeService, factory: _IaTreeService.\u0275fac, providedIn: "root" });
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetRootsComponent, selectors: [["ca-set-roots"]], decls: 12, vars: 8, consts: [["content", ""], [4, "ngIf"], [3, "value"], ["class", "mb-0", 4, "ngIf"], [1, "mt-0"], [4, "ngFor", "ngForOf"], [1, "mb-0"], ["target", "_blank", 1, "text-color-secondary", "hover:text-color", "no-underline", "flex-wrap", 3, "href"], [1, "mb-3", "pl-2"], [1, "flex", "flex-row", "flex-wrap", "gap-1"], [1, "flex", "flex-row", "align-items-center", "justify-content-around", "gap-1", "max-w-12rem"], ["class", "flex flex-row", 4, "ngIf"], ["target", "_blank", "tooltipPosition", "top", 1, "no-underline", "flex-wrap", "hover:bg-surface", "p-1", "-mx-1", "border-2", "shadow-2", "border-round-lg", "text-center", 3, "href", "ngClass", "pTooltip"], [1, "flex", "flex-row"], ["class", "pi pi-minus text-gray-300", "aria-hidden", "true", "style", "font-size: 1.25rem", 4, "ngIf"], ["tooltipPosition", "top", "style", "font-size: 1.25rem", 3, "class", "pTooltip", 4, "ngIf"], ["aria-hidden", "true", 1, "pi", "pi-minus", "text-gray-300", 2, "font-size", "1.25rem"], ["tooltipPosition", "top", 2, "font-size", "1.25rem", 3, "pTooltip"], ["class", "text-red-500", 4, "ngIf"], ["class", "text-blue-500", 4, "ngIf"], ["class", "text-green-500", 4, "ngIf"], [1, "text-red-500"], [1, "text-blue-500"], [1, "text-green-500"]], template: function SetRootsComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275template(0, SetRootsComponent_h2_0_Template, 2, 0, "h2", 1)(1, SetRootsComponent_h2_1_Template, 2, 0, "h2", 1);
+      \u0275\u0275elementStart(2, "p-progressbar", 2);
+      \u0275\u0275template(3, SetRootsComponent_ng_template_3_Template, 2, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(5, SetRootsComponent_h2_5_Template, 2, 0, "h2", 3);
+      \u0275\u0275elementStart(6, "ol", 4);
+      \u0275\u0275template(7, SetRootsComponent_ng_container_7_Template, 5, 3, "ng-container", 5);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(8, SetRootsComponent_h2_8_Template, 2, 0, "h2", 3);
+      \u0275\u0275elementStart(9, "ol", 4);
+      \u0275\u0275template(10, SetRootsComponent_ng_container_10_Template, 4, 1, "ng-container", 5);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(11, SetRootsComponent_ng_container_11_Template, 6, 3, "ng-container", 1);
+    }
+    if (rf & 2) {
+      \u0275\u0275property("ngIf", ctx.breadcrumbData().progress < 100);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.breadcrumbData().progress === 100);
+      \u0275\u0275advance();
+      \u0275\u0275property("value", ctx.breadcrumbData().progress);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", ctx.breadcrumbData().rootPages.length > 0);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("ngForOf", ctx.breadcrumbData().rootPages);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.breadcrumbData().breadcrumbs.length > 0);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("ngForOf", ctx.breadcrumbData().breadcrumbs);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.breadcrumbData().progress === 100);
+    }
+  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, FormsModule, TranslateModule, TranslatePipe, ProgressBarModule, ProgressBar, TooltipModule, Tooltip], encapsulation: 2 });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaTreeService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SetRootsComponent, [{
+    type: Component,
+    args: [{ selector: "ca-set-roots", imports: [
+      CommonModule,
+      FormsModule,
+      TranslateModule,
+      ProgressBarModule,
+      TooltipModule
+    ], template: '<h2 *ngIf="breadcrumbData().progress < 100">Validating breadcrumb</h2>\r\n<h2 *ngIf="breadcrumbData().progress === 100">Validated breadcrumb</h2>\r\n<!--Progress bar-->\r\n<p-progressbar [value]="breadcrumbData().progress">\r\n    <ng-template #content let-value>\r\n        <span>{{breadcrumbData().step}}</span>\r\n    </ng-template>\r\n</p-progressbar>\r\n\r\n<!--Display detected root pages-->\r\n<h2 *ngIf="breadcrumbData().rootPages.length > 0" class="mb-0">Root pages</h2>\r\n<ol class="mt-0">\r\n    <ng-container *ngFor="let root of breadcrumbData().rootPages">\r\n        <li><a [href]="root.href" target="_blank" class="text-color-secondary hover:text-color no-underline flex-wrap">{{root.h1}}</a>\r\n            <!--Display user-added children of roots-->\r\n            <ul *ngIf="root.descendants.length > 0">\r\n                <li>Crawl depth <strong>{{root.minDepth}}</strong> to reach user-added child pages<br>\r\n                    {{root.href}}\r\n                </li>\r\n                <ng-container *ngFor="let page of root.descendants">\r\n                    <li>{{page}}</li>\r\n                </ng-container>\r\n            </ul>\r\n        </li>\r\n    </ng-container>\r\n</ol>\r\n\r\n<!--Display detected breadcrumb trails-->\r\n<h2 *ngIf="breadcrumbData().breadcrumbs.length > 0" class="mb-0">Breadcrumb branches</h2>\r\n<ol class="mt-0">\r\n    <ng-container *ngFor="let breadcrumb of breadcrumbData().breadcrumbs">\r\n        <li class="mb-3 pl-2">\r\n            <div class="flex flex-row flex-wrap gap-1">\r\n                <ng-container *ngFor="let crumb of breadcrumb">\r\n                    <span class="flex flex-row align-items-center justify-content-around gap-1 max-w-12rem">\r\n                        <span class="flex flex-row" *ngIf="crumb.icon">\r\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r\n                            <i *ngIf="crumb.icon" [class]="crumb.icon" [pTooltip]="`${crumb.iconTooltip}` | translate" tooltipPosition="top" [attr.aria-label]="`${crumb.iconTooltip}` | translate" style="font-size: 1.25rem"></i>\r\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r\n                        </span>\r\n                        <a [href]="crumb.url" target="_blank" class="no-underline flex-wrap hover:bg-surface p-1 -mx-1 border-2 shadow-2 border-round-lg text-center" [ngClass]="crumb.styleClass" [pTooltip]="`${crumb.linkTooltip}` | translate" tooltipPosition="top">{{crumb.label}}</a>\r\n                    </span>\r\n                </ng-container>\r\n            </div>\r\n        </li>\r\n    </ng-container>\r\n</ol>\r\n<ng-container *ngIf="breadcrumbData().progress === 100">\r\n    <p *ngIf="breadcrumbData().hasBreakAfterRoot" class="text-red-500">One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.<br>To-do: automatically set IA orphans as roots so their child pages are crawled</p>\r\n    <p *ngIf="breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-blue-500">One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won\'t impact the crawl since they occur before the detected root pages.</p>\r\n    <p *ngIf="!breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-green-500">There are no problems with your breadcrumb!</p>\r\n    <p>To-do: set up method for user to change which pages to crawl</p>\r\n</ng-container>' }]
   }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetRootsComponent, { className: "SetRootsComponent", filePath: "src/app/views/ia-assistant/components/set-roots.component.ts", lineNumber: 22 });
+})();
+
+// src/app/views/ia-assistant/components/search-criteria.component.ts
+function SearchCriteriaComponent_p_chip_12_p_badge_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "p-badge", 8);
+  }
+}
+function SearchCriteriaComponent_p_chip_12_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-chip", 6);
+    \u0275\u0275listener("onRemove", function SearchCriteriaComponent_p_chip_12_Template_p_chip_onRemove_0_listener() {
+      const term_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.removeTerm(term_r2));
+    });
+    \u0275\u0275template(1, SearchCriteriaComponent_p_chip_12_p_badge_1_Template, 1, 0, "p-badge", 7);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const term_r2 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("label", term_r2.toString())("styleClass", ctx_r2.getTermColor(term_r2))("removable", true);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.isRegex(term_r2));
+  }
+}
+var SearchCriteriaComponent = class _SearchCriteriaComponent {
+  iaState = inject(IaStateService);
+  ngOnInit() {
+    this.iaState.updateTerms();
+  }
+  searchData = this.iaState.getSearchData;
+  updateRawTerms() {
+    this.searchData().rawTerms = this.searchData().terms.map((term) => {
+      if (term instanceof RegExp) {
+        return `regex:${term.source}`;
+      } else {
+        return term;
+      }
+    }).join("; ");
+  }
+  onKeydownTerm(event) {
+    if (event.key === ";" || event.key === "Enter" || event.key === "Tab") {
+      this.iaState.updateTerms();
+    }
+  }
+  onPasteTerm() {
+    setTimeout(() => this.iaState.updateTerms(), 0);
+  }
+  removeTerm(term) {
+    this.searchData().terms = this.searchData().terms.filter((t2) => t2 !== term);
+    console.log(this.searchData().terms);
+    this.updateRawTerms();
+  }
+  isRegex(term) {
+    return term instanceof RegExp;
+  }
+  getTermColor(term) {
+    if (this.isRegex(term))
+      return "bg-blue-100";
+    else if (typeof term === "string" && term.startsWith("invalid regex"))
+      return "bg-red-100";
+    else
+      return "bg-green-100";
+  }
+  static \u0275fac = function SearchCriteriaComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _SearchCriteriaComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SearchCriteriaComponent, selectors: [["ca-search-criteria"]], decls: 13, vars: 2, consts: [[1, "my-0"], [1, "my-0", "text-color-secondary", "text-xs"], ["id", "search", "autoResize", "true", "rows", "2", "pTextarea", "", "fluid", "", "placeholder", "", 3, "ngModelChange", "blur", "keydown", "paste", "ngModel"], ["for", "search"], [1, "flex", "gap-2", "flex-wrap"], [3, "label", "styleClass", "removable", "onRemove", 4, "ngFor", "ngForOf"], [3, "onRemove", "label", "styleClass", "removable"], ["value", "regex", "severity", "info", 4, "ngIf"], ["value", "regex", "severity", "info"]], template: function SearchCriteriaComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "h2", 0);
+      \u0275\u0275text(1, "Search criteria");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p", 1);
+      \u0275\u0275text(3, "Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is ");
+      \u0275\u0275elementStart(4, "strong");
+      \u0275\u0275text(5, "not");
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(6, ' case-sensitive. Regex patterns should begin with "regex:".');
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "p-iftalabel")(8, "textarea", 2);
+      \u0275\u0275twoWayListener("ngModelChange", function SearchCriteriaComponent_Template_textarea_ngModelChange_8_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.searchData().rawTerms, $event) || (ctx.searchData().rawTerms = $event);
+        return $event;
+      });
+      \u0275\u0275listener("blur", function SearchCriteriaComponent_Template_textarea_blur_8_listener() {
+        ctx.iaState.updateTerms();
+        return ctx.updateRawTerms();
+      })("keydown", function SearchCriteriaComponent_Template_textarea_keydown_8_listener($event) {
+        return ctx.onKeydownTerm($event);
+      })("paste", function SearchCriteriaComponent_Template_textarea_paste_8_listener() {
+        return ctx.onPasteTerm();
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(9, "label", 3);
+      \u0275\u0275text(10, "Search terms (optional)");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(11, "div", 4);
+      \u0275\u0275template(12, SearchCriteriaComponent_p_chip_12_Template, 2, 4, "p-chip", 5);
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(8);
+      \u0275\u0275twoWayProperty("ngModel", ctx.searchData().rawTerms);
+      \u0275\u0275advance(4);
+      \u0275\u0275property("ngForOf", ctx.searchData().terms);
+    }
+  }, dependencies: [
+    CommonModule,
+    NgForOf,
+    NgIf,
+    FormsModule,
+    DefaultValueAccessor,
+    NgControlStatus,
+    NgModel,
+    TranslateModule,
+    TextareaModule,
+    Textarea,
+    IftaLabelModule,
+    IftaLabel,
+    ChipModule,
+    Chip,
+    BadgeModule,
+    Badge
+  ], encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SearchCriteriaComponent, [{
+    type: Component,
+    args: [{ selector: "ca-search-criteria", imports: [
+      CommonModule,
+      FormsModule,
+      TranslateModule,
+      TextareaModule,
+      IftaLabelModule,
+      ChipModule,
+      BadgeModule
+    ], template: '<h2 class="my-0">Search criteria</h2>\r\n<p class="my-0 text-color-secondary text-xs">Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is <strong>not</strong> case-sensitive. Regex patterns should begin with "regex:".</p>\r\n<p-iftalabel>\r\n    <textarea id="search" autoResize="true" rows="2" pTextarea [(ngModel)]="searchData().rawTerms" (blur)="iaState.updateTerms(); updateRawTerms();" (keydown)="onKeydownTerm($event)" (paste)="onPasteTerm()" fluid\r\n              placeholder=""></textarea>\r\n    <label for="search">Search terms (optional)</label>\r\n</p-iftalabel>\r\n\r\n<div class="flex gap-2 flex-wrap">\r\n    <p-chip *ngFor="let term of searchData().terms" [label]="term.toString()" [styleClass]="getTermColor(term)" [removable]="true" (onRemove)="removeTerm(term)"><p-badge *ngIf="isRegex(term)" value="regex" severity="info"></p-badge></p-chip>\r\n</div>' }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SearchCriteriaComponent, { className: "SearchCriteriaComponent", filePath: "src/app/views/ia-assistant/components/search-criteria.component.ts", lineNumber: 18 });
 })();
 
 // node_modules/primeng/fesm2022/primeng-toggleswitch.mjs
@@ -26374,6 +27829,360 @@ var ToggleSwitchModule = class _ToggleSwitchModule {
   }], null, null);
 })();
 
+// src/app/views/ia-assistant/services/ia-tree.service.ts
+var IaTreeService = class _IaTreeService {
+  theme = inject(ThemeService);
+  fetchService = inject(FetchService);
+  iaState = inject(IaStateService);
+  //For tracking progress while building IA chart
+  iaData = this.iaState.getIaData;
+  searchData = this.iaState.getSearchData;
+  isChartLoading = false;
+  iaProgress = 0;
+  totalUrls = 0;
+  processedUrls = 0;
+  //Pages to skip children when building IA chart
+  skipFormsAndPubs = /* @__PURE__ */ new Set([
+    "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms.html",
+    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/formulaires.html",
+    "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html",
+    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/publications.html"
+  ]);
+  //Set background color
+  get bgColors() {
+    return this.theme.darkMode() ? this.bgColorsDark : this.bgColorsLight;
+  }
+  bgColorsLight = [
+    "surface-0 hover:bg-primary-50",
+    "bg-primary-50 hover:bg-primary-100",
+    "bg-primary-100 hover:bg-primary-200",
+    "bg-primary-200 hover:bg-primary-300",
+    "bg-primary-300 hover:bg-primary-400",
+    "bg-primary-400 hover:bg-primary-500",
+    "bg-primary-500 hover:bg-primary-600 text-white",
+    "bg-primary-600 hover:bg-primary-700 text-white",
+    "bg-primary-700 hover:bg-primary-800 text-white",
+    "bg-primary-800 hover:bg-primary-900 text-white"
+  ];
+  bgColorsDark = [
+    "surface-0 hover:bg-primary-900",
+    "bg-primary-900 hover:bg-primary-800",
+    "bg-primary-800 hover:bg-primary-700",
+    "bg-primary-700 hover:bg-primary-600",
+    "bg-primary-600 hover:bg-primary-500",
+    "bg-primary-500 hover:bg-primary-400",
+    "bg-primary-400 hover:bg-primary-300  text-black",
+    "bg-primary-300 hover:bg-primary-200 text-black",
+    "bg-primary-200 hover:bg-primary-100 text-black",
+    "bg-primary-100 hover:bg-primary-50 text-black"
+  ];
+  get contextStyles() {
+    return this.theme.darkMode() ? this.contextStylesDark : this.contextStylesLight;
+  }
+  contextStylesLight = {
+    new: "bg-green-200 hover:bg-green-300 text-black",
+    rot: "bg-red-200 hover:bg-red-300 text-black",
+    move: "bg-yellow-200 hover:bg-yellow-300 text-black",
+    template: "surface-200 hover:surface-300 text-black"
+  };
+  contextStylesDark = {
+    new: "bg-green-700 hover:bg-green-600 text-white",
+    rot: "bg-red-700 hover:bg-red-600 text-white",
+    move: "bg-yellow-700 hover:bg-yellow-600 text-black",
+    template: "surface-200 hover:surface-300 text-white"
+  };
+  updateNodeStyles(nodes, level = 0) {
+    if (!nodes)
+      return;
+    for (const node of nodes) {
+      const borderStyle = node.data?.borderStyle || "border-2 border-primary border-round shadow-2";
+      const bgClass = this.bgColors[level % this.bgColors.length];
+      const bgStyle = this.contextStyles[node.data?.customStyleKey] ?? bgClass;
+      node.styleClass = `${borderStyle} ${bgStyle}`;
+      if (node.children && node.children.length > 0) {
+        const nextLevel = node.data.customStyleKey === "template" ? level : level + 1;
+        this.updateNodeStyles(node.children, nextLevel);
+      }
+    }
+  }
+  //Step 2a: Get single page IA data
+  getPageMetaAndLinks(url) {
+    return __async(this, null, function* () {
+      try {
+        const doc = yield this.fetchService.fetchContent(url, "prod", 5);
+        const h1Elements = Array.from(doc.querySelectorAll("h1"));
+        const h1 = h1Elements.map((e) => e.textContent?.trim()).filter(Boolean).join("<br>");
+        const breadcrumb = Array.from(doc.querySelectorAll(".breadcrumb li a")).map((a) => new URL(a.getAttribute("href") || "", url).href);
+        const anchors = Array.from(doc.querySelectorAll("main a[href]"));
+        const baseUrl = new URL(url).origin;
+        const links = Array.from(new Set(
+          //unique set
+          anchors.map((a) => {
+            const u = new URL(a.getAttribute("href") || "", url);
+            u.hash = "";
+            return u.href;
+          }).filter((u) => u.startsWith(baseUrl) && u !== url)
+          // on same domain but not self
+        ));
+        const result = { h1, breadcrumb, links, status: 200 };
+        if (this.searchData().terms && this.searchData().terms.length > 0) {
+          const pageText = doc.body?.textContent?.toLowerCase() ?? "";
+          const matched = this.searchData().terms.some((term) => {
+            if (typeof term === "string") {
+              return pageText.includes(term);
+            } else {
+              return term.test(pageText);
+            }
+          });
+          if (matched) {
+            this.iaData().searchMatches.push({
+              url,
+              h1: h1 ?? "Missing H1"
+            });
+          }
+        }
+        return result;
+      } catch (err) {
+        console.error(`Failed to fetch ${url}`, err);
+        return { status: 0 };
+      }
+    });
+  }
+  //Step 2b: Crawl all child pages for IA data
+  buildIaTree(urls, depth, parentUrl, level = 0) {
+    return __async(this, null, function* () {
+      if (depth <= 0)
+        return [];
+      if (!parentUrl && level === 0) {
+        this.isChartLoading = true;
+        this.iaProgress = 5;
+        this.processedUrls = 0;
+        this.totalUrls = urls.length;
+      }
+      const nodes = [];
+      const bgClass = this.bgColors[level % this.bgColors.length];
+      for (const url of urls) {
+        const meta = yield this.getPageMetaAndLinks(url);
+        this.processedUrls++;
+        this.iaProgress = Math.round(this.processedUrls / this.totalUrls * 100);
+        if ((!meta || meta.status !== 200) && this.iaData().brokenLinks) {
+          this.iaData().brokenLinks.push({
+            parentUrl,
+            url,
+            status: meta?.status || 0
+          });
+          continue;
+        }
+        if (!meta.breadcrumb || !meta.links)
+          continue;
+        if (parentUrl && meta.breadcrumb.at(-1) !== parentUrl) {
+          continue;
+        }
+        let crawled = false;
+        if (depth > 1) {
+          crawled = true;
+        }
+        const node = {
+          label: meta.h1,
+          data: {
+            h1: meta.h1,
+            url,
+            originalParent: parentUrl,
+            editing: null,
+            customStyle: false,
+            customStyleKey: null,
+            borderStyle: "border-2 border-primary border-round shadow-2",
+            isRoot: false,
+            isCrawled: crawled,
+            crawlDepth: 0,
+            isUserAdded: false,
+            notOrphan: true,
+            prototype: null
+          },
+          expanded: true,
+          styleClass: `border-2 border-primary border-round shadow-2 ${bgClass}`,
+          children: []
+        };
+        if (meta.links?.length && depth > 1) {
+          this.totalUrls += meta.links.length;
+          const total = meta.links.length;
+          let limit = total;
+          if (this.skipFormsAndPubs.has(url)) {
+            limit = 5;
+          }
+          console.log(`Crawling ${total} links from ${url}, depth ${depth}, limit ${limit}`);
+          const links = meta.links.slice(0, limit);
+          node.children = yield this.buildIaTree(links, depth - 1, url, level + 1);
+          if (total > limit) {
+            console.log(`... adding dummy node for ${total - limit} additional links`);
+            node.children?.push({
+              label: `+ ${total - limit} more...`,
+              data: {
+                h1: `+ ${total - limit} more...`,
+                url,
+                originalParent: url,
+                editing: null,
+                customStyle: true,
+                customStyleKey: "template",
+                borderStyle: "border-2 border-primary border-round shadow-2 border-dashed",
+                isRoot: false,
+                isCrawled: true,
+                crawlDepth: 0,
+                isUserAdded: false,
+                notOrphan: true,
+                prototype: null
+              },
+              expanded: true,
+              styleClass: `border-2 border-primary border-round shadow-2 border-dashed surface-100 hover:surface-200`,
+              children: []
+            });
+          }
+        }
+        nodes.push(node);
+      }
+      if (!parentUrl && level === 0) {
+        this.iaProgress = 100;
+        setTimeout(() => {
+          this.isChartLoading = false;
+          this.iaProgress = 0;
+        }, 1e3);
+      }
+      if (this.iaData().searchMatches && level === 0) {
+        const uniqueMatches = new Map(this.iaData().searchMatches.map((m) => [m.url, m]));
+        this.iaData().searchMatches.length = 0;
+        this.iaData().searchMatches.push(...uniqueMatches.values());
+      }
+      return nodes;
+    });
+  }
+  //NEEDS TESTING
+  //Build initial context for crawl (i.e. the start of the breadcrumb)
+  setTreeContext(iaTree, breadcrumbs) {
+    return __async(this, null, function* () {
+      const findChildByUrl = (nodes, url) => {
+        if (!nodes || !url)
+          return void 0;
+        return nodes.find((n) => n.data?.url === url);
+      };
+      for (const breadcrumb of breadcrumbs) {
+        let currentLevel = iaTree;
+        let parentUrl = null;
+        for (const crumb of breadcrumb) {
+          let node = findChildByUrl(currentLevel, crumb.url);
+          if (!node) {
+            node = {
+              label: crumb.label,
+              data: {
+                h1: crumb.label,
+                url: crumb.url ?? null,
+                originalParent: parentUrl,
+                editing: null,
+                customStyle: crumb.isBeforeRoot ?? false,
+                customStyleKey: crumb.isBeforeRoot ? "template" : null,
+                borderStyle: "border-2 border-primary border-round shadow-2",
+                isRoot: crumb.isRoot,
+                isCrawled: false,
+                crawlDepth: crumb.minDepth,
+                //todo: double-check the depth we calculated in findRoots is being passed along
+                isUserAdded: crumb.isRoot || crumb.isDescendant,
+                notOrphan: crumb.valid,
+                prototype: crumb.prototype ?? null
+              },
+              expanded: true,
+              styleClass: "border-2 border-primary border-round shadow-2 surface-ground",
+              children: []
+            };
+            currentLevel.push(node);
+          }
+          parentUrl = node.data.url ?? null;
+          currentLevel = node.children;
+        }
+      }
+    });
+  }
+  //Find the root pages we need to crawl
+  findCrawlRoots(nodes) {
+    const roots = [];
+    const walk = (list) => {
+      for (const n of list) {
+        if (n.data?.isRoot) {
+          roots.push(n);
+        }
+        if (n.children?.length) {
+          walk(n.children);
+        }
+      }
+    };
+    walk(nodes);
+    return roots;
+  }
+  //Crawl from pages marked as data.isRoot
+  crawlFromRoots(node) {
+    return __async(this, null, function* () {
+      const roots = this.findCrawlRoots(node);
+      let index = 1;
+      const numRoots = roots.length;
+      for (const root of roots) {
+        if (!root.data?.url)
+          continue;
+        console.log(`Crawling from root: ${root.data.url}`);
+        console.log(`Min Depth: ${root.data.crawlDepth}`);
+        const depth = Math.max(root.data.crawlDepth ?? 0, 2);
+        console.log(`Depth: ${depth}`);
+        const children = yield this.buildIaTree([root.data.url], depth, void 0, 0);
+        if (children.length > 0) {
+          const builtRoot = children[0];
+          root.children = this.mergeChildren(root.children ?? [], builtRoot.children ?? []);
+          root.data.isCrawled = true;
+        }
+        console.log(`Crawl ${index} of ${numRoots} complete`);
+        index++;
+        root.data.isRoot = false;
+      }
+    });
+  }
+  //Merges discovered children with existing user add-added or breadcrumb children
+  mergeChildren(current, crawled) {
+    const map2 = /* @__PURE__ */ new Map();
+    for (const child of current) {
+      if (child.data?.url) {
+        map2.set(child.data.url, child);
+      }
+    }
+    for (const child of crawled) {
+      const url = child.data?.url;
+      if (!url)
+        continue;
+      if (!map2.has(url)) {
+        map2.set(url, child);
+      } else {
+        const existingNode = map2.get(url);
+        if (child.children?.length) {
+          if (existingNode.children?.length) {
+            existingNode.children = this.mergeChildren(existingNode.children ?? [], child.children ?? []);
+          } else {
+            existingNode.children = child.children;
+          }
+        }
+        existingNode.data.isCrawled = existingNode.data.isCrawled || child.data.isCrawled;
+      }
+    }
+    return Array.from(map2.values());
+  }
+  static \u0275fac = function IaTreeService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _IaTreeService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaTreeService, factory: _IaTreeService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaTreeService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
 // src/app/views/ia-assistant/components/ia-tree.component.ts
 var _c014 = ["chartContainer"];
 var _c115 = ["cm"];
@@ -26543,7 +28352,7 @@ function IaTreeComponent_ng_container_2_p_tabs_4_div_20_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(3);
     \u0275\u0275advance(2);
-    \u0275\u0275property("value", ctx_r1.iaTree);
+    \u0275\u0275property("value", ctx_r1.iaData().iaTree);
   }
 }
 function IaTreeComponent_ng_container_2_p_tabs_4_ng_template_27_i_1_Template(rf, ctx) {
@@ -26686,9 +28495,10 @@ function IaTreeComponent_ng_container_2_p_tabs_4_p_31_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
+    let tmp_5_0;
     const ctx_r1 = \u0275\u0275nextContext(3);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.iaTree[0].children == null ? null : ctx_r1.iaTree[0].children.length);
+    \u0275\u0275property("ngIf", (tmp_5_0 = ctx_r1.iaData().iaTree[0].children) == null ? null : tmp_5_0.length);
   }
 }
 function IaTreeComponent_ng_container_2_p_tabs_4_p_table_32_ng_template_1_Template(rf, ctx) {
@@ -26734,7 +28544,7 @@ function IaTreeComponent_ng_container_2_p_tabs_4_p_table_32_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("value", ctx_r1.brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c26));
+    \u0275\u0275property("value", ctx_r1.iaData().brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c26));
   }
 }
 function IaTreeComponent_ng_container_2_p_tabs_4_p_36_Template(rf, ctx) {
@@ -26837,29 +28647,29 @@ function IaTreeComponent_ng_container_2_p_tabs_4_Template(rf, ctx) {
     const cm_r16 = \u0275\u0275reference(23);
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(6);
-    \u0275\u0275property("ngIf", ctx_r1.brokenLinks.length > 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().brokenLinks.length > 0);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.searchMatches.length > 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().searchMatches.length > 0);
     \u0275\u0275advance(6);
     \u0275\u0275property("icon", ctx_r1.getMainToggleIcon())("label", ctx_r1.getMainToggleLabel());
     \u0275\u0275advance(5);
     \u0275\u0275property("ngForOf", ctx_r1.toggleKeys);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.iaTree.length > 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().iaTree.length > 0);
     \u0275\u0275advance(2);
     \u0275\u0275property("model", ctx_r1.options);
     \u0275\u0275advance(4);
-    \u0275\u0275property("value", ctx_r1.iaTree)("selectionMode", ctx_r1.selectable ? "multiple" : null);
+    \u0275\u0275property("value", ctx_r1.iaData().iaTree)("selectionMode", ctx_r1.selectable ? "multiple" : null);
     \u0275\u0275twoWayProperty("selection", ctx_r1.selectedNode);
     \u0275\u0275property("draggableNodes", ctx_r1.draggable)("droppableNodes", true)("validateDrop", true)("contextMenu", cm_r16);
     \u0275\u0275advance(5);
-    \u0275\u0275property("ngIf", ctx_r1.brokenLinks.length === 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().brokenLinks.length === 0);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.brokenLinks.length > 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().brokenLinks.length > 0);
     \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r1.searchMatches.length === 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().searchMatches.length === 0);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r1.searchMatches);
+    \u0275\u0275property("ngForOf", ctx_r1.iaData().searchMatches);
   }
 }
 function IaTreeComponent_ng_container_2_Template(rf, ctx) {
@@ -26874,33 +28684,37 @@ function IaTreeComponent_ng_container_2_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r1.iaTree.length === 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().iaTree.length === 0);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.iaTree.length > 0);
+    \u0275\u0275property("ngIf", ctx_r1.iaData().iaTree.length > 0);
   }
 }
 var IaTreeComponent = class _IaTreeComponent {
-  iaTree = null;
-  brokenLinks = [];
-  searchMatches = [];
   translate = inject(TranslateService);
   locationStrategy = inject(LocationStrategy);
   theme = inject(ThemeService);
   iaTreeService = inject(IaTreeService);
-  iaService = inject(IaRelationshipService);
   fetchService = inject(FetchService);
+  iaState = inject(IaStateService);
   production = environment.production;
+  iaData = this.iaState.getIaData;
   constructor() {
     effect(() => {
       this.theme.darkMode();
-      this.updateNodeStyles(this.iaTree, 0);
+      this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
     });
   }
   ngOnInit() {
-    this.options = [
-      ...this.baseMenu
-    ];
-    this.baseHref = this.locationStrategy.getBaseHref();
+    return __async(this, null, function* () {
+      this.options = [
+        ...this.baseMenu
+      ];
+      this.baseHref = this.locationStrategy.getBaseHref();
+      this.iaTreeService.setTreeContext(this.iaData().iaTree, this.iaState.getBreadcrumbData().breadcrumbs);
+      yield this.iaTreeService.crawlFromRoots(this.iaData().iaTree);
+      this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
+      this.iaState.saveToLocalStorage();
+    });
   }
   //Toggle visibility of indicators in the tree chart
   toggles = {
@@ -26946,8 +28760,8 @@ var IaTreeComponent = class _IaTreeComponent {
       console.log(node);
       node.data.isRoot = true;
       yield this.fetchService.simulateDelay(2e3);
-      yield this.iaTreeService.crawlFromRoots(this.iaTree, this.brokenLinks);
-      this.iaTreeService.updateNodeStyles(this.iaTree, 0);
+      yield this.iaTreeService.crawlFromRoots(this.iaData().iaTree);
+      this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
     });
   }
   //End of get child pages
@@ -27044,7 +28858,7 @@ var IaTreeComponent = class _IaTreeComponent {
           command: () => {
             this.selectedNode.data.customStyleKey = "new";
             this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-            this.updateNodeStyles(this.iaTree, 0);
+            this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
             this.selectedNode = null;
           }
         },
@@ -27054,7 +28868,7 @@ var IaTreeComponent = class _IaTreeComponent {
           command: () => {
             this.selectedNode.data.customStyleKey = "rot";
             this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-            this.updateNodeStyles(this.iaTree, 0);
+            this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
             this.selectedNode = null;
           }
         },
@@ -27064,7 +28878,7 @@ var IaTreeComponent = class _IaTreeComponent {
           command: () => {
             this.selectedNode.data.customStyleKey = "move";
             this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-            this.updateNodeStyles(this.iaTree, 0);
+            this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
             this.selectedNode = null;
           }
         },
@@ -27078,7 +28892,7 @@ var IaTreeComponent = class _IaTreeComponent {
             this.selectedNode.data.customStyle = false;
             this.selectedNode.data.customStyleKey = null;
             this.selectedNode.data.borderStyle = "border-2 border-primary border-round shadow-2";
-            this.updateNodeStyles(this.iaTree, 0);
+            this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
             this.selectedNode = null;
           }
         }
@@ -27198,7 +29012,7 @@ var IaTreeComponent = class _IaTreeComponent {
     this.selectedNode = newNode;
     this.editNode("label");
     this.updateMenu();
-    this.updateNodeStyles(this.iaTree, 0);
+    this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
   }
   //Will be used to create a container to mark pages for template change
   addParentNode(action) {
@@ -27221,7 +29035,7 @@ var IaTreeComponent = class _IaTreeComponent {
       }
       return null;
     };
-    const location = findParent(this.iaTree || []);
+    const location = findParent(this.iaData().iaTree || []);
     if (!location)
       return;
     const { parentContainer, parentNode } = location;
@@ -27249,14 +29063,14 @@ var IaTreeComponent = class _IaTreeComponent {
     }
     this.selectedNode = newParentNode;
     this.updateMenu();
-    this.updateNodeStyles(this.iaTree, 0);
+    this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
   }
   //TODO: if this was notOrphan, update crawl status of parent node so that this node can be rediscovered on crawl
   deleteNode() {
-    if (!this.iaTree || !this.selectedNode)
+    if (!this.iaData().iaTree || !this.selectedNode)
       return;
     const nodeToDelete = this.selectedNode;
-    const rootIndex = this.iaTree.findIndex((n) => n === nodeToDelete);
+    const rootIndex = this.iaData().iaTree.findIndex((n) => n === nodeToDelete);
     if (rootIndex > -1) {
       console.warn("Cannot delete root node.");
       return;
@@ -27277,7 +29091,7 @@ var IaTreeComponent = class _IaTreeComponent {
       }
       return false;
     };
-    findAndDelete(this.iaTree);
+    findAndDelete(this.iaData().iaTree);
     this.updateMenu();
   }
   restoreNode() {
@@ -27294,7 +29108,7 @@ var IaTreeComponent = class _IaTreeComponent {
     if (!this.selectedNode.data.customStyle) {
       this.selectedNode.data.customStyleKey = "rot";
       this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-      this.updateNodeStyles(this.iaTree, 0);
+      this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
     }
     this.updateMenu();
   }
@@ -27365,21 +29179,7 @@ var IaTreeComponent = class _IaTreeComponent {
       el.classList.remove("p-tree-node-dragover");
     });
     console.log("Drag parent URL", dragNode.data.originalParent);
-    this.updateNodeStyles(this.iaTree, 0);
-  }
-  updateNodeStyles(nodes, level = 0) {
-    if (!nodes)
-      return;
-    for (const node of nodes) {
-      const borderStyle = node.data?.borderStyle || "border-2 border-primary border-round shadow-2";
-      const bgClass = this.iaTreeService.bgColors[level % this.iaTreeService.bgColors.length];
-      const bgStyle = this.iaTreeService.contextStyles[node.data?.customStyleKey] ?? bgClass;
-      node.styleClass = `${borderStyle} ${bgStyle}`;
-      if (node.children && node.children.length > 0) {
-        const nextLevel = node.data.isContainer ? level : level + 1;
-        this.updateNodeStyles(node.children, nextLevel);
-      }
-    }
+    this.iaTreeService.updateNodeStyles(this.iaData().iaTree, 0);
   }
   static \u0275fac = function IaTreeComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _IaTreeComponent)();
@@ -27394,7 +29194,7 @@ var IaTreeComponent = class _IaTreeComponent {
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.chartContainer = _t.first);
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.cm = _t.first);
     }
-  }, inputs: { iaTree: "iaTree", brokenLinks: "brokenLinks", searchMatches: "searchMatches" }, features: [\u0275\u0275ProvidersFeature([TreeDragDropService])], decls: 3, vars: 1, consts: [["togglesPopover", ""], ["cm", ""], ["chartContainer", ""], ["header", ""], ["body", ""], [4, "ngIf"], ["value", "0", 4, "ngIf"], ["value", "0"], ["value", "1"], ["value", "2", 4, "ngIf"], ["value", "3", 4, "ngIf"], [1, "flex", "flex-row", "justify-content-between", "align-items-center", "gap-2", "mb-2"], [1, "max-w-max"], [1, "secondary-outline"], ["severity", "secondary", "text", "", 1, "w-10rem", 3, "click", "icon", "label"], ["icon", "pi pi-chevron-down", "severity", "secondary", "text", "", 3, "click"], [1, "flex", "flex-column", "gap-3"], ["class", "flex flex-row justify-content-between align-items-center gap-2", 4, "ngFor", "ngForOf"], ["label", "Maximize IA chart", "severity", "secondary", "outlined", "", "styleClass", "secondary-outline", "icon", "pi pi-window-maximize", 3, "click"], ["class", "overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container", 4, "ngIf"], [3, "model"], ["styleClass", "w-full md:w-[30rem]", "draggableScope", "self", "droppableScope", "self", 3, "selectionChange", "onNodeDrop", "onNodeContextMenuSelect", "value", "selectionMode", "selection", "draggableNodes", "droppableNodes", "validateDrop", "contextMenu"], ["pTemplate", "default"], ["value", "2"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle", 4, "ngIf"], ["value", "3"], [1, "mt-0"], [4, "ngFor", "ngForOf"], [1, "flex", "flex-row", "justify-content-between", "align-items-center", "gap-2"], [3, "ngModelChange", "ngModel"], [1, "overflow-auto", "max-h-75vh", "surface-ground", "surface-border", "border-1", "py-3", "mb-3", "ia-chart-container"], [3, "value"], ["class", "flex flex-row gap-2 justify-content-between align-items-center -mx-2 -my-3", 4, "ngIf"], ["target", "_blank", 1, "ia-label", 3, "click", "href", "innerHTML"], ["class", "flex flex-row gap-2 justify-content-center align-items-center", 4, "ngIf"], [1, "flex", "flex-row", "gap-2", "justify-content-between", "align-items-center", "-mx-2", "-my-3"], [1, "flex", "gap-2"], ["class", "pi pi-sitemap text-red-500", "pTooltip", "IA orphan", "tooltipPosition", "top", 4, "ngIf"], ["icon", "pi pi-github", "pTooltip", "has prototype", "tooltipPosition", "top", "text", "", "severity", "secondary", "class", "-mr-4 -my-1", 3, "rounded", 4, "ngIf"], ["class", "p-button-rounded p-button-outlined p-button-sm pr-0 -mr-3 -my-1 transparent-toggle", "offIcon", "pi pi-lock", "offLabel", "", "onIcon", "pi pi-lock-open", "onLabel", "", "tooltipPosition", "top", "ariaLabel", "Mark as in-scope", 3, "ngModel", "pTooltip", "ngModelChange", 4, "ngIf"], ["pTooltip", "IA orphan", "tooltipPosition", "top", 1, "pi", "pi-sitemap", "text-red-500"], ["icon", "pi pi-github", "pTooltip", "has prototype", "tooltipPosition", "top", "text", "", "severity", "secondary", 1, "-mr-4", "-my-1", 3, "rounded"], ["offIcon", "pi pi-lock", "offLabel", "", "onIcon", "pi pi-lock-open", "onLabel", "", "tooltipPosition", "top", "ariaLabel", "Mark as in-scope", 1, "p-button-rounded", "p-button-outlined", "p-button-sm", "pr-0", "-mr-3", "-my-1", "transparent-toggle", 3, "ngModelChange", "ngModel", "pTooltip"], [1, "flex", "flex-row", "gap-2", "justify-content-center", "align-items-center"], ["class", "pi pi-spin pi-spinner text-color-secondary -my-3", "pTooltip", "crawling", "tooltipPosition", "top", 4, "ngIf"], ["icon", "pi pi-plus-circle", "pTooltip", "Get child pages?", "tooltipPosition", "top", "text", "", "severity", "primary", "class", "-my-4", 3, "rounded", "click", 4, "ngIf"], ["pTooltip", "crawling", "tooltipPosition", "top", 1, "pi", "pi-spin", "pi-spinner", "text-color-secondary", "-my-3"], ["icon", "pi pi-plus-circle", "pTooltip", "Get child pages?", "tooltipPosition", "top", "text", "", "severity", "primary", 1, "-my-4", 3, "click", "rounded"], [1, "flex", "flex-row", "align-items-center", "gap-2", "w-full"], ["class", "pi pi-folder", 4, "ngIf"], ["class", "pi pi-file", 4, "ngIf"], ["class", "pi pi-arrows-alt cursor-move text-color-secondary", 4, "ngIf"], ["class", "pi pi-pencil text-color-secondary", 4, "ngIf"], [1, "pi", "pi-folder"], [1, "pi", "pi-file"], [1, "pi", "pi-arrows-alt", "cursor-move", "text-color-secondary"], [1, "pi", "pi-pencil", "text-color-secondary"], ["type", "text", "pInputText", "", "pSize", "small", 1, "ia-label", 3, "ngModelChange", "keydown", "ngModel"], ["icon", "pi pi-check", "severity", "secondary", "size", "small", 3, "onClick"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle"], ["target", "_blank", 1, "no-underline", 3, "href"]], template: function IaTreeComponent_Template(rf, ctx) {
+  }, features: [\u0275\u0275ProvidersFeature([TreeDragDropService])], decls: 3, vars: 1, consts: [["togglesPopover", ""], ["cm", ""], ["chartContainer", ""], ["header", ""], ["body", ""], [4, "ngIf"], ["value", "0", 4, "ngIf"], ["value", "0"], ["value", "1"], ["value", "2", 4, "ngIf"], ["value", "3", 4, "ngIf"], [1, "flex", "flex-row", "justify-content-between", "align-items-center", "gap-2", "mb-2"], [1, "max-w-max"], [1, "secondary-outline"], ["severity", "secondary", "text", "", 1, "w-10rem", 3, "click", "icon", "label"], ["icon", "pi pi-chevron-down", "severity", "secondary", "text", "", 3, "click"], [1, "flex", "flex-column", "gap-3"], ["class", "flex flex-row justify-content-between align-items-center gap-2", 4, "ngFor", "ngForOf"], ["label", "Maximize IA chart", "severity", "secondary", "outlined", "", "styleClass", "secondary-outline", "icon", "pi pi-window-maximize", 3, "click"], ["class", "overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container", 4, "ngIf"], [3, "model"], ["styleClass", "w-full md:w-[30rem]", "draggableScope", "self", "droppableScope", "self", 3, "selectionChange", "onNodeDrop", "onNodeContextMenuSelect", "value", "selectionMode", "selection", "draggableNodes", "droppableNodes", "validateDrop", "contextMenu"], ["pTemplate", "default"], ["value", "2"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle", 4, "ngIf"], ["value", "3"], [1, "mt-0"], [4, "ngFor", "ngForOf"], [1, "flex", "flex-row", "justify-content-between", "align-items-center", "gap-2"], [3, "ngModelChange", "ngModel"], [1, "overflow-auto", "max-h-75vh", "surface-ground", "surface-border", "border-1", "py-3", "mb-3", "ia-chart-container"], [3, "value"], ["class", "flex flex-row gap-2 justify-content-between align-items-center -mx-2 -my-3", 4, "ngIf"], ["target", "_blank", 1, "ia-label", 3, "click", "href", "innerHTML"], ["class", "flex flex-row gap-2 justify-content-center align-items-center", 4, "ngIf"], [1, "flex", "flex-row", "gap-2", "justify-content-between", "align-items-center", "-mx-2", "-my-3"], [1, "flex", "gap-2"], ["class", "pi pi-sitemap text-red-500", "pTooltip", "IA orphan", "tooltipPosition", "top", 4, "ngIf"], ["icon", "pi pi-github", "pTooltip", "has prototype", "tooltipPosition", "top", "text", "", "severity", "secondary", "class", "-mr-4 -my-1", 3, "rounded", 4, "ngIf"], ["class", "p-button-rounded p-button-outlined p-button-sm pr-0 -mr-3 -my-1 transparent-toggle", "offIcon", "pi pi-lock", "offLabel", "", "onIcon", "pi pi-lock-open", "onLabel", "", "tooltipPosition", "top", "ariaLabel", "Mark as in-scope", 3, "ngModel", "pTooltip", "ngModelChange", 4, "ngIf"], ["pTooltip", "IA orphan", "tooltipPosition", "top", 1, "pi", "pi-sitemap", "text-red-500"], ["icon", "pi pi-github", "pTooltip", "has prototype", "tooltipPosition", "top", "text", "", "severity", "secondary", 1, "-mr-4", "-my-1", 3, "rounded"], ["offIcon", "pi pi-lock", "offLabel", "", "onIcon", "pi pi-lock-open", "onLabel", "", "tooltipPosition", "top", "ariaLabel", "Mark as in-scope", 1, "p-button-rounded", "p-button-outlined", "p-button-sm", "pr-0", "-mr-3", "-my-1", "transparent-toggle", 3, "ngModelChange", "ngModel", "pTooltip"], [1, "flex", "flex-row", "gap-2", "justify-content-center", "align-items-center"], ["class", "pi pi-spin pi-spinner text-color-secondary -my-3", "pTooltip", "crawling", "tooltipPosition", "top", 4, "ngIf"], ["icon", "pi pi-plus-circle", "pTooltip", "Get child pages?", "tooltipPosition", "top", "text", "", "severity", "primary", "class", "-my-4", 3, "rounded", "click", 4, "ngIf"], ["pTooltip", "crawling", "tooltipPosition", "top", 1, "pi", "pi-spin", "pi-spinner", "text-color-secondary", "-my-3"], ["icon", "pi pi-plus-circle", "pTooltip", "Get child pages?", "tooltipPosition", "top", "text", "", "severity", "primary", 1, "-my-4", 3, "click", "rounded"], [1, "flex", "flex-row", "align-items-center", "gap-2", "w-full"], ["class", "pi pi-folder", 4, "ngIf"], ["class", "pi pi-file", 4, "ngIf"], ["class", "pi pi-arrows-alt cursor-move text-color-secondary", 4, "ngIf"], ["class", "pi pi-pencil text-color-secondary", 4, "ngIf"], [1, "pi", "pi-folder"], [1, "pi", "pi-file"], [1, "pi", "pi-arrows-alt", "cursor-move", "text-color-secondary"], [1, "pi", "pi-pencil", "text-color-secondary"], ["type", "text", "pInputText", "", "pSize", "small", 1, "ia-label", 3, "ngModelChange", "keydown", "ngModel"], ["icon", "pi pi-check", "severity", "secondary", "size", "small", 3, "onClick"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle"], ["target", "_blank", 1, "no-underline", 3, "href"]], template: function IaTreeComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "p");
       \u0275\u0275text(1, "To do: set up crawl for root URLs to complete IA tree, also set up referring link/search term/url structure crawl (for unique links that aren't in the IA tree)");
@@ -27403,7 +29203,7 @@ var IaTreeComponent = class _IaTreeComponent {
     }
     if (rf & 2) {
       \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", ctx.iaTree);
+      \u0275\u0275property("ngIf", ctx.iaData().iaTree);
     }
   }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, TranslateModule, TranslatePipe, TableModule, Table, PrimeTemplate, ButtonModule, Button, OrganizationChartModule, OrganizationChart, ProgressBarModule, InputNumberModule, InputTextModule, InputText, TreeTableModule, Tree, ContextMenuModule, ContextMenu, InputGroupModule, InputGroup, InputGroupAddonModule, InputGroupAddon, TooltipModule, Tooltip, ToggleButtonModule, ToggleButton, PopoverModule, Popover, ToggleSwitchModule, ToggleSwitch, TabsModule, Tabs, TabPanels, TabPanel, TabList, Tab], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n.ia-label[_ngcontent-%COMP%] {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n  .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n  .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n  .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n  .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n  .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n  .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n  .transparent-toggle:hover {\n  background-color: var(--p-primary-50) !important;\n}\n  .transparent-toggle {\n  background-color: unset !important;\n  border: none !important;\n}\n/*# sourceMappingURL=ia-tree.component.css.map */"] });
 };
@@ -27431,17 +29231,17 @@ var IaTreeComponent = class _IaTreeComponent {
       ToggleSwitchModule,
       TabsModule
     ], providers: [TreeDragDropService], template: `<p>To do: set up crawl for root URLs to complete IA tree, also set up referring link/search term/url structure crawl (for unique links that aren't in the IA tree)</p>\r
-<ng-container *ngIf="iaTree">\r
+<ng-container *ngIf="iaData().iaTree">\r
 \r
     <h2>IA structure</h2>\r
-    <p *ngIf="iaTree.length === 0">No child pages found.</p>\r
+    <p *ngIf="iaData().iaTree.length === 0">No child pages found.</p>\r
 \r
-    <p-tabs value="0" *ngIf="iaTree.length > 0">\r
+    <p-tabs value="0" *ngIf="iaData().iaTree.length > 0">\r
         <p-tablist>\r
             <p-tab value="0">Chart</p-tab>\r
             <p-tab value="1">Table</p-tab>\r
-            <p-tab value="2" *ngIf="brokenLinks.length > 0">Broken links</p-tab>\r
-            <p-tab value="3" *ngIf="searchMatches.length > 0">Search matches</p-tab>\r
+            <p-tab value="2" *ngIf="iaData().brokenLinks.length > 0">Broken links</p-tab>\r
+            <p-tab value="3" *ngIf="iaData().searchMatches.length > 0">Search matches</p-tab>\r
         </p-tablist>\r
         <p-tabpanels>\r
             <p-tabpanel value="0">\r
@@ -27472,8 +29272,8 @@ var IaTreeComponent = class _IaTreeComponent {
                     <p-button label="Maximize IA chart" severity="secondary" outlined styleClass="secondary-outline" (click)="maximize(chartContainer)" icon="pi pi-window-maximize" />\r
                 </div>\r
                 <!--CHART-->\r
-                <div #chartContainer *ngIf="iaTree.length > 0" class="overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container">\r
-                    <p-organization-chart [value]="iaTree">\r
+                <div #chartContainer *ngIf="iaData().iaTree.length > 0" class="overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container">\r
+                    <p-organization-chart [value]="iaData().iaTree">\r
                         <ng-template let-node pTemplate="default">\r
                             <!--STATUS ICONS-->\r
                             <div class="flex flex-row gap-2 justify-content-between align-items-center -mx-2 -my-3" *ngIf="!getToggleStates().allFalse">\r
@@ -27506,7 +29306,7 @@ var IaTreeComponent = class _IaTreeComponent {
                 <!--TREE TABLE-->\r
                 <p-contextMenu #cm [model]="options"></p-contextMenu>\r
                 <h2>IA structure tree</h2>\r
-                <p-tree [value]="iaTree" styleClass="w-full md:w-[30rem]"\r
+                <p-tree [value]="iaData().iaTree" styleClass="w-full md:w-[30rem]"\r
                         [selectionMode]="selectable ? 'multiple' : null" [(selection)]="selectedNode"\r
                         [draggableNodes]="draggable" [droppableNodes]="true" draggableScope="self" droppableScope="self" (onNodeDrop)="handleNodeDrop($event)" [validateDrop]="true"\r
                         [contextMenu]="cm" (onNodeContextMenuSelect)="onNodeContextMenu($event)">\r
@@ -27532,8 +29332,8 @@ var IaTreeComponent = class _IaTreeComponent {
             <p-tabpanel value="2">\r
                 <!--BROKEN LINKS-->\r
                 <h2>Broken links</h2>\r
-                <p *ngIf="brokenLinks.length === 0">No broken links found on this page<span *ngIf="iaTree[0].children?.length"> or on any detected child pages</span>.</p>\r
-                <p-table *ngIf="brokenLinks.length > 0" [value]="brokenLinks" size="small" stripedRows [tableStyle]="{ 'min-width': '50rem' }">\r
+                <p *ngIf="iaData().brokenLinks.length === 0">No broken links found on this page<span *ngIf="iaData().iaTree[0].children?.length"> or on any detected child pages</span>.</p>\r
+                <p-table *ngIf="iaData().brokenLinks.length > 0" [value]="iaData().brokenLinks" size="small" stripedRows [tableStyle]="{ 'min-width': '50rem' }">\r
                     <ng-template #header>\r
                         <tr>\r
                             <th>Parent page</th>\r
@@ -27553,9 +29353,9 @@ var IaTreeComponent = class _IaTreeComponent {
             <p-tabpanel value="3">\r
                 <!--Search Matches-->\r
                 <h2>Search matches</h2>\r
-                <p *ngIf="searchMatches.length === 0">No matches found.</p>\r
+                <p *ngIf="iaData().searchMatches.length === 0">No matches found.</p>\r
                 <ol class="mt-0">\r
-                    <ng-container *ngFor="let match of searchMatches">\r
+                    <ng-container *ngFor="let match of iaData().searchMatches">\r
                         <li><a [href]="match.url" target="_blank" class="no-underline">{{match.h1}}</a></li>\r
                     </ng-container>\r
                 </ol>\r
@@ -27563,13 +29363,7 @@ var IaTreeComponent = class _IaTreeComponent {
         </p-tabpanels>\r
     </p-tabs>\r
 </ng-container>`, styles: ["/* angular:styles/component:css;9a93770ea141d081e54eb414c0d33e6ca7cb03d141457e5b29bfd7a65f253928;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/ia-tree.component.ts */\n:host {\n  display: block;\n}\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n::ng-deep .transparent-toggle:hover {\n  background-color: var(--p-primary-50) !important;\n}\n::ng-deep .transparent-toggle {\n  background-color: unset !important;\n  border: none !important;\n}\n/*# sourceMappingURL=ia-tree.component.css.map */\n"] }]
-  }], () => [], { iaTree: [{
-    type: Input
-  }], brokenLinks: [{
-    type: Input
-  }], searchMatches: [{
-    type: Input
-  }], chartContainer: [{
+  }], () => [], { chartContainer: [{
     type: ViewChild,
     args: ["chartContainer"]
   }], cm: [{
@@ -27579,1743 +29373,6 @@ var IaTreeComponent = class _IaTreeComponent {
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaTreeComponent, { className: "IaTreeComponent", filePath: "src/app/views/ia-assistant/components/ia-tree.component.ts", lineNumber: 97 });
-})();
-
-// src/app/views/ia-assistant/services/ia-state.service.ts
-var IaStateService = class _IaStateService {
-  production = environment.production;
-  //Active step
-  activeStep = signal(1);
-  getActiveStep = computed(() => this.activeStep());
-  setActiveStep(step) {
-    this.activeStep.set(step);
-  }
-  // Step 1: Validate URLs
-  urlData = signal({
-    rawUrls: "",
-    includePrototypeLinks: false,
-    urlTotal: 0,
-    urlChecked: 0,
-    urlPercent: 0,
-    isValidating: false,
-    isValidated: false,
-    isOk: false,
-    urlPairs: []
-  });
-  getUrlData = computed(() => this.urlData());
-  setUrlData(partial) {
-    this.urlData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Step 2: Breadcrumbs
-  breadcrumbData = signal({
-    breadcrumbs: [],
-    rootPages: [],
-    progress: 0,
-    step: "",
-    hasBreakBeforeRoot: false,
-    hasBreakAfterRoot: false
-  });
-  getBreadcrumbData = computed(() => this.breadcrumbData());
-  setBreadcrumbData(partial) {
-    this.breadcrumbData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Step 3: Search criteria
-  searchData = signal({
-    rawTerms: "",
-    terms: []
-  });
-  getSearchData = computed(() => this.searchData());
-  setSearchData(partial) {
-    this.searchData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Step 4: IA tree
-  iaData = signal({
-    iaTree: [],
-    brokenLinks: [],
-    searchMatches: []
-  });
-  getIaData = computed(() => this.iaData());
-  setIaData(partial) {
-    this.iaData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Reset
-  resetIaFlow(mode = "all") {
-    const step = this.activeStep();
-    if (step > 1) {
-      this.activeStep.set(step - 1);
-    }
-    if (step === 1) {
-      this.urlData.set({
-        rawUrls: mode === "all" ? "" : this.urlData().rawUrls,
-        includePrototypeLinks: false,
-        urlTotal: 0,
-        urlChecked: 0,
-        urlPercent: 0,
-        isValidating: false,
-        isValidated: false,
-        isOk: false,
-        urlPairs: []
-      });
-    }
-    if (step <= 2) {
-      this.breadcrumbData.set({
-        breadcrumbs: [],
-        rootPages: [],
-        progress: 0,
-        step: "",
-        hasBreakBeforeRoot: false,
-        hasBreakAfterRoot: false
-      });
-    }
-    if (step <= 3) {
-      this.searchData.set({
-        rawTerms: "",
-        terms: []
-      });
-    }
-    if (step <= 4) {
-      this.iaData.set({
-        iaTree: [],
-        brokenLinks: [],
-        searchMatches: []
-      });
-    }
-    this.saveToLocalStorage();
-  }
-  // Get IA state
-  getIaState() {
-    return {
-      activeStep: this.activeStep(),
-      urlData: this.urlData(),
-      breadcrumbData: this.breadcrumbData(),
-      searchData: this.searchData(),
-      iaData: this.iaData()
-    };
-  }
-  // Save IA state to local storage (browser memory)
-  saveToLocalStorage() {
-    const state2 = this.getIaState();
-    localStorage.setItem("iaState", JSON.stringify(state2));
-    if (!this.production) {
-      console.groupCollapsed("IA State saved to localStorage");
-      console.log("Active step:", state2.activeStep);
-      console.log("--- URL Data ---");
-      console.table({
-        rawUrls: state2.urlData.rawUrls,
-        includePrototypeLinks: state2.urlData.includePrototypeLinks,
-        isValidating: state2.urlData.isValidating,
-        isValidated: state2.urlData.isValidated,
-        isOk: state2.urlData.isOk
-      });
-      console.log("URL Pairs:", state2.urlData.urlPairs);
-      console.log("--- Breadcrumb Data ---");
-      console.table({
-        breadcrumbProgress: state2.breadcrumbData.progress,
-        hasBreakBeforeRoot: state2.breadcrumbData.hasBreakBeforeRoot,
-        hasBreakAfterRoot: state2.breadcrumbData.hasBreakAfterRoot
-      });
-      console.log("Breadcrumbs:", state2.breadcrumbData.breadcrumbs);
-      console.log("Root Pages:", state2.breadcrumbData.rootPages);
-      console.log("--- Search Data ---");
-      console.log("Terms:", state2.searchData.terms);
-      console.log("--- IA Data ---");
-      console.log("IA Tree:", state2.iaData.iaTree);
-      console.log("Broken Links:", state2.iaData.brokenLinks);
-      console.log("Search Matches:", state2.iaData.searchMatches);
-      console.groupEnd();
-    }
-  }
-  // Load from local storage (browser memory)
-  loadFromLocalStorage() {
-    const saved = localStorage.getItem("iaState");
-    if (!saved)
-      return;
-    const state2 = JSON.parse(saved);
-    this.activeStep.set(state2.activeStep);
-    this.urlData.set(state2.urlData);
-    this.breadcrumbData.set(state2.breadcrumbData);
-    this.searchData.set(state2.searchData);
-    this.iaData.set(state2.iaData);
-  }
-  // Export as JSON (for sharing with someone else)
-  exportIaState() {
-    const data = JSON.stringify(this.getIaState(), null, 2);
-    const blob = new Blob([data], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "ia-state.json";
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-  // Import JSON
-  importIaState(event) {
-    const file = event.files?.[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const state2 = JSON.parse(reader.result);
-        this.urlData.set(state2.urlData);
-        this.breadcrumbData.set(state2.breadcrumbData);
-        this.searchData.set(state2.searchData);
-        this.iaData.set(state2.iaData);
-        this.saveToLocalStorage();
-        console.log("IA state successfully imported");
-      } catch (error) {
-        console.error("Invalid IA state file", error);
-      }
-    };
-    reader.readAsText(file);
-  }
-  // Export TreeNode as CSV
-  exportIaTreeAsCsv() {
-    const iaTree = this.iaData().iaTree;
-    const rows = [];
-    rows.push([
-      "Page Title (h1)",
-      "URL",
-      "Prototype URL",
-      "In scope",
-      "Orphaned",
-      "Parent URL",
-      "Original Parent URL",
-      "Status"
-    ].join(","));
-    const walk = (nodes, parentUrl = null) => {
-      for (const node of nodes) {
-        const data = node.data;
-        if (data.customStyleKey === "template") {
-          if (node.children?.length) {
-            walk(node.children, data.url);
-          }
-          continue;
-        }
-        let customStyle = "";
-        switch (data.customStyleKey) {
-          case "new":
-            customStyle = "New page";
-            break;
-          case "rot":
-            customStyle = "Remove ROT";
-            break;
-          case "move":
-            customStyle = "Page move";
-            break;
-          default:
-            customStyle = "";
-        }
-        rows.push([
-          `"${data.h1 || ""}"`,
-          data.url || "",
-          data.prototype || "",
-          data.isUserAdded ? "Yes" : "No",
-          data.notOrphan ? "No" : "Yes",
-          parentUrl || "",
-          data.originalParent || "",
-          data.customStyleKey || ""
-        ].join(","));
-        if (node.children?.length) {
-          walk(node.children, data.url);
-        }
-      }
-    };
-    walk(iaTree);
-    const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "ia-tree.csv";
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-  static \u0275fac = function IaStateService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _IaStateService)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaStateService, factory: _IaStateService.\u0275fac, providedIn: "root" });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaStateService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
-// src/app/views/ia-assistant/components/search-criteria.component.ts
-function SearchCriteriaComponent_p_chip_12_p_badge_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "p-badge", 8);
-  }
-}
-function SearchCriteriaComponent_p_chip_12_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-chip", 6);
-    \u0275\u0275listener("onRemove", function SearchCriteriaComponent_p_chip_12_Template_p_chip_onRemove_0_listener() {
-      const term_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.removeTerm(term_r2));
-    });
-    \u0275\u0275template(1, SearchCriteriaComponent_p_chip_12_p_badge_1_Template, 1, 0, "p-badge", 7);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const term_r2 = ctx.$implicit;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275property("label", term_r2.toString())("styleClass", ctx_r2.getTermColor(term_r2))("removable", true);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.isRegex(term_r2));
-  }
-}
-var SearchCriteriaComponent = class _SearchCriteriaComponent {
-  iaState = inject(IaStateService);
-  ngOnInit() {
-    this.updateTerms();
-  }
-  searchData = this.iaState.getSearchData;
-  updateTerms() {
-    this.searchData().terms = this.searchData().rawTerms.split(/[\n;\t]+/).map((term) => term.trim()).filter(Boolean).map((term) => {
-      try {
-        if (term.startsWith("regex:")) {
-          const pattern = term.slice(6);
-          return new RegExp(pattern, "smi");
-        } else
-          return term.toLowerCase();
-      } catch (error) {
-        console.log(error);
-        return `invalid ${term}`;
-      }
-    });
-    this.searchData().terms = Array.from(new Set(this.searchData().terms));
-  }
-  updateRawTerms() {
-    this.searchData().rawTerms = this.searchData().terms.map((term) => {
-      if (term instanceof RegExp) {
-        return `regex:${term.source}`;
-      } else {
-        return term;
-      }
-    }).join("; ");
-  }
-  onKeydownTerm(event) {
-    if (event.key === ";" || event.key === "Enter" || event.key === "Tab") {
-      this.updateTerms();
-    }
-  }
-  onPasteTerm() {
-    setTimeout(() => this.updateTerms(), 0);
-  }
-  removeTerm(term) {
-    this.searchData().terms = this.searchData().terms.filter((t2) => t2 !== term);
-    console.log(this.searchData().terms);
-    this.updateRawTerms();
-  }
-  isRegex(term) {
-    return term instanceof RegExp;
-  }
-  getTermColor(term) {
-    if (this.isRegex(term))
-      return "bg-blue-100";
-    else if (typeof term === "string" && term.startsWith("invalid regex"))
-      return "bg-red-100";
-    else
-      return "bg-green-100";
-  }
-  static \u0275fac = function SearchCriteriaComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _SearchCriteriaComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SearchCriteriaComponent, selectors: [["ca-search-criteria"]], decls: 13, vars: 2, consts: [[1, "my-0"], [1, "my-0", "text-color-secondary", "text-xs"], ["id", "search", "autoResize", "true", "rows", "2", "pTextarea", "", "fluid", "", "placeholder", "", 3, "ngModelChange", "blur", "keydown", "paste", "ngModel"], ["for", "search"], [1, "flex", "gap-2", "flex-wrap"], [3, "label", "styleClass", "removable", "onRemove", 4, "ngFor", "ngForOf"], [3, "onRemove", "label", "styleClass", "removable"], ["value", "regex", "severity", "info", 4, "ngIf"], ["value", "regex", "severity", "info"]], template: function SearchCriteriaComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "h2", 0);
-      \u0275\u0275text(1, "Search criteria");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p", 1);
-      \u0275\u0275text(3, "Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is ");
-      \u0275\u0275elementStart(4, "strong");
-      \u0275\u0275text(5, "not");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(6, ' case-sensitive. Regex patterns should begin with "regex:".');
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(7, "p-iftalabel")(8, "textarea", 2);
-      \u0275\u0275twoWayListener("ngModelChange", function SearchCriteriaComponent_Template_textarea_ngModelChange_8_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.searchData().rawTerms, $event) || (ctx.searchData().rawTerms = $event);
-        return $event;
-      });
-      \u0275\u0275listener("blur", function SearchCriteriaComponent_Template_textarea_blur_8_listener() {
-        ctx.updateTerms();
-        return ctx.updateRawTerms();
-      })("keydown", function SearchCriteriaComponent_Template_textarea_keydown_8_listener($event) {
-        return ctx.onKeydownTerm($event);
-      })("paste", function SearchCriteriaComponent_Template_textarea_paste_8_listener() {
-        return ctx.onPasteTerm();
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "label", 3);
-      \u0275\u0275text(10, "Search terms (optional)");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(11, "div", 4);
-      \u0275\u0275template(12, SearchCriteriaComponent_p_chip_12_Template, 2, 4, "p-chip", 5);
-      \u0275\u0275elementEnd();
-    }
-    if (rf & 2) {
-      \u0275\u0275advance(8);
-      \u0275\u0275twoWayProperty("ngModel", ctx.searchData().rawTerms);
-      \u0275\u0275advance(4);
-      \u0275\u0275property("ngForOf", ctx.searchData().terms);
-    }
-  }, dependencies: [
-    CommonModule,
-    NgForOf,
-    NgIf,
-    FormsModule,
-    DefaultValueAccessor,
-    NgControlStatus,
-    NgModel,
-    TranslateModule,
-    TextareaModule,
-    Textarea,
-    IftaLabelModule,
-    IftaLabel,
-    ChipModule,
-    Chip,
-    BadgeModule,
-    Badge
-  ], encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SearchCriteriaComponent, [{
-    type: Component,
-    args: [{ selector: "ca-search-criteria", imports: [
-      CommonModule,
-      FormsModule,
-      TranslateModule,
-      TextareaModule,
-      IftaLabelModule,
-      ChipModule,
-      BadgeModule
-    ], template: '<h2 class="my-0">Search criteria</h2>\r\n<p class="my-0 text-color-secondary text-xs">Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is <strong>not</strong> case-sensitive. Regex patterns should begin with "regex:".</p>\r\n<p-iftalabel>\r\n    <textarea id="search" autoResize="true" rows="2" pTextarea [(ngModel)]="searchData().rawTerms" (blur)="updateTerms(); updateRawTerms();" (keydown)="onKeydownTerm($event)" (paste)="onPasteTerm()" fluid\r\n              placeholder=""></textarea>\r\n    <label for="search">Search terms (optional)</label>\r\n</p-iftalabel>\r\n\r\n<div class="flex gap-2 flex-wrap">\r\n    <p-chip *ngFor="let term of searchData().terms" [label]="term.toString()" [styleClass]="getTermColor(term)" [removable]="true" (onRemove)="removeTerm(term)"><p-badge *ngIf="isRegex(term)" value="regex" severity="info"></p-badge></p-chip>\r\n</div>' }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SearchCriteriaComponent, { className: "SearchCriteriaComponent", filePath: "src/app/views/ia-assistant/components/search-criteria.component.ts", lineNumber: 18 });
-})();
-
-// src/app/views/ia-assistant/components/link-list.component.ts
-function LinkListComponent_ng_container_0_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p", 3);
-    \u0275\u0275text(2, "Only links from the following domains are allowed:");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "ul", 3)(4, "li");
-    \u0275\u0275text(5, "www.canada.ca");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-}
-function LinkListComponent_ng_container_0_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p", 3);
-    \u0275\u0275text(2, "Only links from the following domains are allowed:");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "ul", 3)(4, "li");
-    \u0275\u0275text(5, "www.canada.ca");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "li");
-    \u0275\u0275text(7, "test.canada.ca");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "li");
-    \u0275\u0275text(9, "gc-proto.github.io");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "li");
-    \u0275\u0275text(11, "cra-proto.github.io");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "li");
-    \u0275\u0275text(13, "cra-design.github.io");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-}
-function LinkListComponent_ng_container_0_div_4_p_iftalabel_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-iftalabel")(1, "input", 9);
-    \u0275\u0275twoWayListener("ngModelChange", function LinkListComponent_ng_container_0_div_4_p_iftalabel_1_Template_input_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const url_r3 = \u0275\u0275nextContext().$implicit;
-      \u0275\u0275twoWayBindingSet(url_r3.originalHref, $event) || (url_r3.originalHref = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "label", 10);
-    \u0275\u0275text(3, "Original URL");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const url_r3 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", url_r3.originalHref);
-  }
-}
-function LinkListComponent_ng_container_0_div_4_p_tag_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "p-tag", 11);
-  }
-}
-function LinkListComponent_ng_container_0_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275template(1, LinkListComponent_ng_container_0_div_4_p_iftalabel_1_Template, 4, 1, "p-iftalabel", 0);
-    \u0275\u0275elementStart(2, "p-inputgroup");
-    \u0275\u0275template(3, LinkListComponent_ng_container_0_div_4_p_tag_3_Template, 1, 0, "p-tag", 4);
-    \u0275\u0275elementStart(4, "p-iftalabel")(5, "input", 5);
-    \u0275\u0275twoWayListener("ngModelChange", function LinkListComponent_ng_container_0_div_4_Template_input_ngModelChange_5_listener($event) {
-      const url_r3 = \u0275\u0275restoreView(_r1).$implicit;
-      \u0275\u0275twoWayBindingSet(url_r3.href, $event) || (url_r3.href = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "label", 6);
-    \u0275\u0275text(7);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(8, "p-inputgroup-addon")(9, "p-button", 7);
-    \u0275\u0275listener("click", function LinkListComponent_ng_container_0_div_4_Template_p_button_click_9_listener($event) {
-      const url_r3 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r3.approve.emit({ url: url_r3, event: $event }));
-    });
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "p-inputgroup-addon")(11, "p-button", 8);
-    \u0275\u0275listener("click", function LinkListComponent_ng_container_0_div_4_Template_p_button_click_11_listener() {
-      const url_r3 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r3.remove.emit(url_r3));
-    });
-    \u0275\u0275elementEnd()()()();
-  }
-  if (rf & 2) {
-    const url_r3 = ctx.$implicit;
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", url_r3.originalHref);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r3.type === "proto");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("id", ctx_r3.labelKey);
-    \u0275\u0275twoWayProperty("ngModel", url_r3.href);
-    \u0275\u0275advance();
-    \u0275\u0275property("for", ctx_r3.labelKey);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1("", ctx_r3.labelKey, " URL");
-    \u0275\u0275advance(4);
-    \u0275\u0275property("pTooltip", ctx_r3.type === "proto" ? "Remove link" : "Remove item");
-  }
-}
-function LinkListComponent_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 1);
-    \u0275\u0275template(2, LinkListComponent_ng_container_0_ng_container_2_Template, 6, 0, "ng-container", 0)(3, LinkListComponent_ng_container_0_ng_container_3_Template, 14, 0, "ng-container", 0)(4, LinkListComponent_ng_container_0_div_4_Template, 12, 7, "div", 2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r3.labelKey === "Blocked" && ctx_r3.type === "prod");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r3.labelKey === "Blocked" && ctx_r3.type === "proto");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r3.links);
-  }
-}
-var LinkListComponent = class _LinkListComponent {
-  labelKey;
-  links;
-  type = "prod";
-  approve = new EventEmitter();
-  remove = new EventEmitter();
-  static \u0275fac = function LinkListComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _LinkListComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkListComponent, selectors: [["ca-link-list"]], inputs: { labelKey: "labelKey", links: "links", type: "type" }, outputs: { approve: "approve", remove: "remove" }, decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "flex", "flex-column", "gap-2"], [4, "ngFor", "ngForOf"], [1, "my-0"], ["icon", "pi pi-github", "value", "Prototype", 4, "ngIf"], ["type", "text", "pInputText", "", "variant", "outlined", "pSize", "small", "fluid", "", 3, "ngModelChange", "id", "ngModel"], [3, "for"], ["icon", "pi pi-check-circle", "pTooltip", "Revalidate", "tooltipPosition", "top", "severity", "success", "variant", "text", 3, "click"], ["icon", "pi pi-times-circle", "tooltipPosition", "top", "severity", "danger", "variant", "text", 3, "click", "pTooltip"], ["type", "text", "id", "original", "pInputText", "", "disabled", "", "pSize", "small", "fluid", "", 1, "ng-invalid", "ng-dirty", "bg-white", 3, "ngModelChange", "ngModel"], ["for", "original"], ["icon", "pi pi-github", "value", "Prototype"]], template: function LinkListComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275template(0, LinkListComponent_ng_container_0_Template, 5, 3, "ng-container", 0);
-    }
-    if (rf & 2) {
-      \u0275\u0275property("ngIf", ctx.links == null ? null : ctx.links.length);
-    }
-  }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, IftaLabelModule, IftaLabel, InputTextModule, InputText, InputGroupModule, InputGroup, InputGroupAddonModule, InputGroupAddon, ButtonModule, Button, Tooltip, TagModule, Tag], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */"] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkListComponent, [{
-    type: Component,
-    args: [{ selector: "ca-link-list", imports: [CommonModule, FormsModule, IftaLabelModule, InputTextModule, InputGroupModule, InputGroupAddonModule, ButtonModule, Tooltip, TagModule], template: `
-<ng-container *ngIf="links?.length">
-  <!--h2 class="mb-0">{{ labelKey }} links</h2-->
-  <div class="flex flex-column gap-2">
-    <ng-container *ngIf="labelKey === 'Blocked' && type === 'prod'">
-      <p class="my-0">Only links from the following domains are allowed:</p>
-      <ul class="my-0">
-          <li>www.canada.ca</li>
-      </ul>
-    </ng-container>
-    <ng-container *ngIf="labelKey === 'Blocked' && type === 'proto'">
-      <p class="my-0">Only links from the following domains are allowed:</p>
-      <ul class="my-0">
-          <li>www.canada.ca</li>
-          <li>test.canada.ca</li>
-          <li>gc-proto.github.io</li>
-          <li>cra-proto.github.io</li>
-          <li>cra-design.github.io</li>
-      </ul>
-    </ng-container>
-    <div *ngFor="let url of links">
-      <p-iftalabel *ngIf="url.originalHref">
-        <input type="text" id="original" pInputText [(ngModel)]="url.originalHref" disabled pSize="small" class="ng-invalid ng-dirty bg-white" fluid/>
-        <label for="original">Original URL</label>
-      </p-iftalabel>
-        <p-inputgroup>
-          <p-tag *ngIf="type === 'proto'" icon="pi pi-github" value="Prototype" />
-          <p-iftalabel>          
-            <input type="text" [id]="labelKey" pInputText variant="outlined" [(ngModel)]="url.href" pSize="small" fluid/>
-            <label [for]="labelKey">{{ labelKey }} URL</label>          
-          </p-iftalabel>
-          <p-inputgroup-addon>
-            <p-button icon="pi pi-check-circle" pTooltip="Revalidate" tooltipPosition="top" severity="success" variant="text" (click)="approve.emit({ url, event: $event })" />
-          </p-inputgroup-addon>
-          <p-inputgroup-addon>
-            <p-button icon="pi pi-times-circle" [pTooltip]="type === 'proto' ? 'Remove link':'Remove item'" tooltipPosition="top" severity="danger" variant="text" (click)="remove.emit(url)" />
-          </p-inputgroup-addon>
-        </p-inputgroup>
-    </div>
-  </div>
-</ng-container>
-  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/link-list.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */\n"] }]
-  }], null, { labelKey: [{
-    type: Input
-  }], links: [{
-    type: Input
-  }], type: [{
-    type: Input
-  }], approve: [{
-    type: Output
-  }], remove: [{
-    type: Output
-  }] });
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkListComponent, { className: "LinkListComponent", filePath: "src/app/views/ia-assistant/components/link-list.component.ts", lineNumber: 65 });
-})();
-
-// src/app/views/ia-assistant/components/validate-urls.component.ts
-function ValidateUrlsComponent_p_table_8_ng_template_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr")(1, "th");
-    \u0275\u0275text(2, "Production URL");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "th");
-    \u0275\u0275text(4, "Prototype URL");
-    \u0275\u0275elementEnd()();
-  }
-}
-function ValidateUrlsComponent_p_table_8_ng_template_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr")(1, "td");
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "td");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const url_r1 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(url_r1.production.href);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(url_r1.prototype == null ? null : url_r1.prototype.href);
-  }
-}
-function ValidateUrlsComponent_p_table_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-table", 17);
-    \u0275\u0275template(1, ValidateUrlsComponent_p_table_8_ng_template_1_Template, 5, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(3, ValidateUrlsComponent_p_table_8_ng_template_3_Template, 5, 2, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", ctx_r1.iaState.getUrlData().urlPairs)("scrollable", true);
-  }
-}
-function ValidateUrlsComponent_ng_container_10_h2_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2");
-    \u0275\u0275text(1, "Validating links");
-    \u0275\u0275elementEnd();
-  }
-}
-function ValidateUrlsComponent_ng_container_10_h2_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2");
-    \u0275\u0275text(1, "Validated links");
-    \u0275\u0275elementEnd();
-  }
-}
-function ValidateUrlsComponent_ng_container_10_ng_template_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2("", ctx_r1.iaState.getUrlData().urlChecked, "/", ctx_r1.iaState.getUrlData().urlTotal, "");
-  }
-}
-function ValidateUrlsComponent_ng_container_10_div_6_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p-chip", 22);
-    \u0275\u0275element(2, "i", 23);
-    \u0275\u0275elementStart(3, "span");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const url_r3 = ctx.$implicit;
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(url_r3.href);
-  }
-}
-function ValidateUrlsComponent_ng_container_10_div_6_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p-chip", 24);
-    \u0275\u0275element(2, "i", 23);
-    \u0275\u0275elementStart(3, "span");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const url_r4 = ctx.$implicit;
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(url_r4.href);
-  }
-}
-function ValidateUrlsComponent_ng_container_10_div_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 20);
-    \u0275\u0275template(1, ValidateUrlsComponent_ng_container_10_div_6_ng_container_1_Template, 5, 1, "ng-container", 21)(2, ValidateUrlsComponent_ng_container_10_div_6_ng_container_2_Template, 5, 1, "ng-container", 21);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.urlsChecking);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.urlsProtoChecking);
-  }
-}
-function ValidateUrlsComponent_ng_container_10_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, ValidateUrlsComponent_ng_container_10_h2_1_Template, 2, 0, "h2", 9)(2, ValidateUrlsComponent_ng_container_10_h2_2_Template, 2, 0, "h2", 9);
-    \u0275\u0275elementStart(3, "p-progressbar", 18);
-    \u0275\u0275template(4, ValidateUrlsComponent_ng_container_10_ng_template_4_Template, 2, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(6, ValidateUrlsComponent_ng_container_10_div_6_Template, 3, 2, "div", 19);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.urlsChecking.length > 0);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.urlsChecking.length === 0);
-    \u0275\u0275advance();
-    \u0275\u0275property("value", ctx_r1.iaState.getUrlData().urlPercent);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r1.urlsChecking.length > 0 || ctx_r1.urlsProtoChecking.length > 0);
-  }
-}
-function ValidateUrlsComponent_h2_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 25);
-    \u0275\u0275text(1, "Broken links");
-    \u0275\u0275elementEnd();
-  }
-}
-function ValidateUrlsComponent_ca_link_list_13_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 26);
-    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_13_Template_ca_link_list_approve_0_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "prod"));
-    })("remove", function ValidateUrlsComponent_ca_link_list_13_Template_ca_link_list_remove_0_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.remove($event, "prod"));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("links", ctx_r1.urlsBad);
-  }
-}
-function ValidateUrlsComponent_ca_link_list_14_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 27);
-    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_14_Template_ca_link_list_approve_0_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "proto"));
-    })("remove", function ValidateUrlsComponent_ca_link_list_14_Template_ca_link_list_remove_0_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.remove($event, "proto"));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("links", ctx_r1.urlsProtoBad);
-  }
-}
-function ValidateUrlsComponent_h2_15_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 25);
-    \u0275\u0275text(1, "Redirected links");
-    \u0275\u0275elementEnd();
-  }
-}
-function ValidateUrlsComponent_ca_link_list_16_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 28);
-    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_16_Template_ca_link_list_approve_0_listener($event) {
-      \u0275\u0275restoreView(_r7);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "prod"));
-    })("remove", function ValidateUrlsComponent_ca_link_list_16_Template_ca_link_list_remove_0_listener($event) {
-      \u0275\u0275restoreView(_r7);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.remove($event, "prod"));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("links", ctx_r1.urlsRedirected);
-  }
-}
-function ValidateUrlsComponent_ca_link_list_17_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 29);
-    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_17_Template_ca_link_list_approve_0_listener($event) {
-      \u0275\u0275restoreView(_r8);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "proto"));
-    })("remove", function ValidateUrlsComponent_ca_link_list_17_Template_ca_link_list_remove_0_listener($event) {
-      \u0275\u0275restoreView(_r8);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.remove($event, "proto"));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("links", ctx_r1.urlsProtoRedirected);
-  }
-}
-function ValidateUrlsComponent_h2_18_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 25);
-    \u0275\u0275text(1, "Blocked links");
-    \u0275\u0275elementEnd();
-  }
-}
-function ValidateUrlsComponent_ca_link_list_19_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 30);
-    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_19_Template_ca_link_list_approve_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "prod"));
-    })("remove", function ValidateUrlsComponent_ca_link_list_19_Template_ca_link_list_remove_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.remove($event, "prod"));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("links", ctx_r1.urlsBlocked);
-  }
-}
-function ValidateUrlsComponent_ca_link_list_20_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r10 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ca-link-list", 31);
-    \u0275\u0275listener("approve", function ValidateUrlsComponent_ca_link_list_20_Template_ca_link_list_approve_0_listener($event) {
-      \u0275\u0275restoreView(_r10);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.approve($event.url, $event.event, "proto"));
-    })("remove", function ValidateUrlsComponent_ca_link_list_20_Template_ca_link_list_remove_0_listener($event) {
-      \u0275\u0275restoreView(_r10);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.remove($event, "proto"));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("links", ctx_r1.urlsProtoBlocked);
-  }
-}
-function ValidateUrlsComponent_ng_container_21_li_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li");
-    \u0275\u0275element(1, "i", 33);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const url_r11 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(url_r11.href);
-  }
-}
-function ValidateUrlsComponent_ng_container_21_li_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li");
-    \u0275\u0275element(1, "i", 34);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const url_r12 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(url_r12.href);
-  }
-}
-function ValidateUrlsComponent_ng_container_21_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "h2", 25);
-    \u0275\u0275text(2, "Valid links");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "ul", 32);
-    \u0275\u0275template(4, ValidateUrlsComponent_ng_container_21_li_4_Template, 3, 1, "li", 21)(5, ValidateUrlsComponent_ng_container_21_li_5_Template, 3, 1, "li", 21);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngForOf", ctx_r1.urlsOk);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.urlsProtoOk);
-  }
-}
-var ValidateUrlsComponent = class _ValidateUrlsComponent {
-  iaState = inject(IaStateService);
-  fetchService = inject(FetchService);
-  confirmationService = inject(ConfirmationService);
-  ngOnInit() {
-    this.iaState.loadFromLocalStorage();
-  }
-  resetProgress() {
-    const { urlPairs } = this.iaState.getUrlData();
-    const urlTotal = urlPairs.length + urlPairs.filter((p2) => p2.prototype).length;
-    this.iaState.setUrlData({
-      urlTotal,
-      urlChecked: 0,
-      urlPercent: 0
-    });
-  }
-  /*** Advance to step 2 if all URLs are good ***/
-  goToStep2() {
-    if (this.urlsOk.length + this.urlsProtoOk.length === this.iaState.getUrlData().urlTotal && this.urlsOk.length > 0) {
-      this.iaState.saveToLocalStorage();
-      this.iaState.setActiveStep(2);
-    }
-  }
-  /*** Set URL pairs from user input & set boolean if any prototypes were included ***/
-  setUrlPairs() {
-    this.iaState.resetIaFlow("form");
-    const rawUrls = this.iaState.getUrlData().rawUrls;
-    let urlPairs = rawUrls.split(/\r?\n/).map((line) => line.trim().toLowerCase()).filter(Boolean).map((line) => {
-      const [prod, proto] = line.split(/[\t,; ]+/);
-      const production = { href: prod?.trim() || "", status: "checking" };
-      const prototype = proto ? { href: proto.trim(), status: "checking" } : void 0;
-      return { production, prototype };
-    });
-    urlPairs = Array.from(new Map(urlPairs.map((p2) => [p2.production.href, p2])).values());
-    this.iaState.setUrlData({
-      urlPairs,
-      includePrototypeLinks: urlPairs.some((p2) => p2.prototype && p2.prototype.href !== "")
-      //check for any prototype links
-    });
-  }
-  onPasteUrls() {
-    setTimeout(() => this.setUrlPairs(), 0);
-  }
-  /*** Validate a single URL item ***/
-  checkStatus(link) {
-    return __async(this, null, function* () {
-      try {
-        const response = yield this.fetchService.fetchStatus(link.href, "both", 5, "random");
-        if (!response.ok || response.url.includes("404.html")) {
-          link.status = "bad";
-        } else if (response.url !== link.href) {
-          link.status = "redirect";
-          link.originalHref = link.href;
-          link.href = response.url;
-        } else {
-          link.status = "ok";
-        }
-      } catch (error) {
-        console.log(error);
-        if (error.message.startsWith("Blocked host")) {
-          link.status = "blocked";
-        } else
-          link.status = "bad";
-      }
-    });
-  }
-  /*** Validate a URL item array (half of the URL pair) ***/
-  validateUrlItems(urls) {
-    return __async(this, null, function* () {
-      const urlsToCheck = urls.map((url) => this.checkStatus(url).finally(() => {
-        const { urlChecked: urlChecked2, urlTotal: urlTotal2 } = this.iaState.getUrlData();
-        this.iaState.setUrlData({
-          urlChecked: urlChecked2 + 1,
-          urlPercent: (urlChecked2 + 1) / urlTotal2 * 100
-        });
-      }));
-      yield Promise.all(urlsToCheck);
-      const badUrls = urls.filter((url) => url.status === "bad");
-      badUrls.forEach((badUrl) => badUrl.status = "checking");
-      const { urlChecked, urlTotal } = this.iaState.getUrlData();
-      this.iaState.setUrlData({ urlChecked: urlChecked - badUrls.length });
-      const urlsToRecheck = badUrls.map((badUrl) => this.checkStatus(badUrl).finally(() => {
-        const { urlChecked: urlChecked2, urlTotal: urlTotal2 } = this.iaState.getUrlData();
-        this.iaState.setUrlData({
-          urlChecked: urlChecked2 + 1,
-          urlPercent: (urlChecked2 + 1) / urlTotal2 * 100
-        });
-      }));
-      yield Promise.all(urlsToRecheck);
-    });
-  }
-  /*** Validate URL pairs ***/
-  validateUrlPairs() {
-    return __async(this, null, function* () {
-      const { urlPairs, includePrototypeLinks } = this.iaState.getUrlData();
-      if (!urlPairs?.length)
-        return;
-      this.resetProgress();
-      this.iaState.setUrlData({ isValidating: true });
-      yield this.validateUrlItems(urlPairs.map((p2) => p2.production));
-      if (includePrototypeLinks) {
-        yield this.validateUrlItems(urlPairs.map((p2) => p2.prototype).filter((p2) => !!p2));
-      }
-      this.iaState.setUrlData({
-        isValidating: false,
-        isValidated: true,
-        isOk: this.iaState.getUrlData().urlPairs.every((p2) => p2.production.status === "ok")
-      });
-      this.goToStep2();
-    });
-  }
-  /*** Filter based on status***/
-  get urlsChecking() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "checking");
-  }
-  get urlsBlocked() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "blocked");
-  }
-  get urlsBad() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "bad");
-  }
-  get urlsRedirected() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "redirect");
-  }
-  get urlsOk() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.production).filter((u) => u.status === "ok");
-  }
-  get urlsProtoChecking() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "checking");
-  }
-  get urlsProtoBlocked() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "blocked");
-  }
-  get urlsProtoBad() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "bad");
-  }
-  get urlsProtoRedirected() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "redirect");
-  }
-  get urlsProtoOk() {
-    return this.iaState.getUrlData().urlPairs.map((p2) => p2.prototype).filter((u) => !!u && u.status === "ok");
-  }
-  /*** Remove a bad link pair or just the link for prototypes ***/
-  remove(link, type) {
-    let { urlPairs, urlChecked, urlTotal, urlPercent } = this.iaState.getUrlData();
-    let decrement = 1;
-    if (type === "prod") {
-      const pair = urlPairs.find((p2) => p2.production === link);
-      if (pair?.prototype)
-        decrement += 1;
-      urlPairs = urlPairs.filter((p2) => p2.production !== link);
-    } else {
-      const pair = urlPairs.find((p2) => p2.prototype === link);
-      if (pair) {
-        pair.prototype = void 0;
-      }
-    }
-    this.iaState.setUrlData({
-      urlPairs,
-      urlChecked: urlChecked - decrement,
-      urlTotal: urlTotal - decrement,
-      urlPercent: urlTotal - decrement > 0 ? (urlChecked - decrement) / (urlTotal - decrement) * 100 : 0,
-      isOk: urlPairs.every((p2) => p2.production.status === "ok")
-    });
-    this.goToStep2();
-  }
-  /*** Approve an edited link for revalidation ***/
-  approve(link, $event, type) {
-    link.href = link.href.trim().toLowerCase();
-    const { urlPairs } = this.iaState.getUrlData();
-    const urlsToCheck = type === "prod" ? urlPairs.map((p2) => p2.production) : urlPairs.map((p2) => p2.prototype).filter((p2) => !!p2);
-    if (urlsToCheck.some((u) => u !== link && u.href === link.href)) {
-      if (type === "prod") {
-        this.confirmDuplicate($event, link);
-        return;
-      } else {
-        this.confirmProtoDuplicate($event, link);
-        return;
-      }
-    }
-    this.revalidate(link);
-  }
-  /*** Revalidates a single link rather than the whole array ***/
-  revalidate(link) {
-    const { urlChecked, urlTotal } = this.iaState.getUrlData();
-    link.status = "checking";
-    this.iaState.setUrlData({
-      urlChecked: urlChecked - 1,
-      urlPercent: (urlChecked - 1) / urlTotal * 100
-    });
-    this.checkStatus(link).finally(() => {
-      const { urlChecked: urlChecked2, urlTotal: urlTotal2 } = this.iaState.getUrlData();
-      this.iaState.setUrlData({
-        urlChecked: urlChecked2 + 1,
-        urlPercent: (urlChecked2 + 1) / urlTotal2 * 100,
-        isOk: this.iaState.getUrlData().urlPairs.every((p2) => p2.production.status === "ok")
-      });
-      this.goToStep2();
-    });
-  }
-  /*** Popup message for duplicate production links ***/
-  confirmDuplicate(event, link) {
-    this.confirmationService.confirm({
-      target: event.currentTarget,
-      message: "This URL is already included. Do you want to remove the duplicate link?",
-      icon: "pi pi-exclamation-triangle",
-      rejectButtonProps: {
-        label: "Cancel",
-        severity: "secondary",
-        outlined: true
-      },
-      acceptButtonProps: {
-        label: "Yes",
-        severity: "danger"
-      },
-      accept: () => {
-        this.remove(link, "prod");
-      },
-      reject: () => {
-        console.log("Cancel adding duplicate link");
-      }
-    });
-  }
-  /*** Popup message for duplicate prototype links ***/
-  confirmProtoDuplicate(event, link) {
-    this.confirmationService.confirm({
-      target: event.currentTarget,
-      message: "This prototype URL was already included for another page. Do you want to keep it anyway?",
-      icon: "pi pi-exclamation-triangle",
-      rejectButtonProps: {
-        label: "Cancel",
-        severity: "secondary",
-        outlined: true
-      },
-      acceptButtonProps: {
-        label: "Yes",
-        severity: "success"
-      },
-      accept: () => {
-        this.revalidate(link);
-      },
-      reject: () => {
-        console.log("Cancel adding duplicate link");
-      }
-    });
-  }
-  static \u0275fac = function ValidateUrlsComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ValidateUrlsComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ValidateUrlsComponent, selectors: [["ca-validate-urls"]], decls: 22, vars: 15, consts: [["header", ""], ["body", ""], ["content", ""], [1, "my-0"], [1, "my-0", "text-color-secondary", "text-xs"], ["id", "urls", "autoResize", "true", "rows", "5", "pTextarea", "", "fluid", "", 3, "ngModelChange", "change", "paste", "ngModel"], ["for", "urls"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", "styleClass", "mb-2", 3, "value", "scrollable", 4, "ngIf"], ["label", "Validate URLs", "icon", "pi pi-check-square", 3, "onClick", "loading", "disabled"], [4, "ngIf"], ["class", "mb-0", 4, "ngIf"], ["labelKey", "Broken", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Broken", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Redirected", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "prod", 3, "links", "approve", "remove", 4, "ngIf"], ["labelKey", "Blocked", "type", "proto", 3, "links", "approve", "remove", 4, "ngIf"], ["size", "small", "stripedRows", "", "scrollHeight", "400px", "styleClass", "mb-2", 3, "value", "scrollable"], [3, "value"], ["class", "flex flex-column gap-2 mt-3", 4, "ngIf"], [1, "flex", "flex-column", "gap-2", "mt-3"], [4, "ngFor", "ngForOf"], ["styleClass", "bg-yellow-100", 1, "max-w-max"], [1, "pi", "pi-spin", "pi-spinner"], ["styleClass", "bg-orange-100", 1, "max-w-max"], [1, "mb-0"], ["labelKey", "Broken", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Broken", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Redirected", "type", "proto", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "prod", 3, "approve", "remove", "links"], ["labelKey", "Blocked", "type", "proto", 3, "approve", "remove", "links"], [1, "my-0", "list-none"], [1, "pi", "pi-check", "text-green-500", "mr-2"], [1, "pi", "pi-check", "text-blue-500", "mr-2"]], template: function ValidateUrlsComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "h2", 3);
-      \u0275\u0275text(1, "Canada.ca URLs");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p", 4);
-      \u0275\u0275text(3, "Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(4, "p-iftalabel")(5, "textarea", 5);
-      \u0275\u0275twoWayListener("ngModelChange", function ValidateUrlsComponent_Template_textarea_ngModelChange_5_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.iaState.getUrlData().rawUrls, $event) || (ctx.iaState.getUrlData().rawUrls = $event);
-        return $event;
-      });
-      \u0275\u0275listener("change", function ValidateUrlsComponent_Template_textarea_change_5_listener() {
-        return ctx.setUrlPairs();
-      })("paste", function ValidateUrlsComponent_Template_textarea_paste_5_listener() {
-        return ctx.onPasteUrls();
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "label", 6);
-      \u0275\u0275text(7, "URLs");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275template(8, ValidateUrlsComponent_p_table_8_Template, 5, 2, "p-table", 7);
-      \u0275\u0275elementStart(9, "p-button", 8);
-      \u0275\u0275listener("onClick", function ValidateUrlsComponent_Template_p_button_onClick_9_listener() {
-        return ctx.validateUrlPairs();
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(10, ValidateUrlsComponent_ng_container_10_Template, 7, 4, "ng-container", 9);
-      \u0275\u0275element(11, "p-confirmpopup");
-      \u0275\u0275template(12, ValidateUrlsComponent_h2_12_Template, 2, 0, "h2", 10)(13, ValidateUrlsComponent_ca_link_list_13_Template, 1, 1, "ca-link-list", 11)(14, ValidateUrlsComponent_ca_link_list_14_Template, 1, 1, "ca-link-list", 12)(15, ValidateUrlsComponent_h2_15_Template, 2, 0, "h2", 10)(16, ValidateUrlsComponent_ca_link_list_16_Template, 1, 1, "ca-link-list", 13)(17, ValidateUrlsComponent_ca_link_list_17_Template, 1, 1, "ca-link-list", 14)(18, ValidateUrlsComponent_h2_18_Template, 2, 0, "h2", 10)(19, ValidateUrlsComponent_ca_link_list_19_Template, 1, 1, "ca-link-list", 15)(20, ValidateUrlsComponent_ca_link_list_20_Template, 1, 1, "ca-link-list", 16)(21, ValidateUrlsComponent_ng_container_21_Template, 6, 2, "ng-container", 9);
-    }
-    if (rf & 2) {
-      \u0275\u0275advance(5);
-      \u0275\u0275twoWayProperty("ngModel", ctx.iaState.getUrlData().rawUrls);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", ctx.iaState.getUrlData().includePrototypeLinks);
-      \u0275\u0275advance();
-      \u0275\u0275property("loading", ctx.iaState.getUrlData().isValidating)("disabled", ctx.iaState.getUrlData().rawUrls.length === 0 || ctx.iaState.getUrlData().isValidated);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.iaState.getUrlData().isValidating || ctx.iaState.getUrlData().isValidated);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", ctx.urlsBad.length > 0 || ctx.urlsProtoBad.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsBad.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsProtoBad.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsRedirected.length > 0 || ctx.urlsProtoRedirected.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsRedirected.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsProtoRedirected.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsBlocked.length > 0 || ctx.urlsProtoBlocked.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsBlocked.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsProtoBlocked.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.urlsOk.length > 0 || ctx.urlsProtoOk.length > 0);
-    }
-  }, dependencies: [
-    CommonModule,
-    NgForOf,
-    NgIf,
-    FormsModule,
-    DefaultValueAccessor,
-    NgControlStatus,
-    NgModel,
-    TranslateModule,
-    ProgressBarModule,
-    ProgressBar,
-    ConfirmPopupModule,
-    ConfirmPopup,
-    TextareaModule,
-    Textarea,
-    InputTextModule,
-    IftaLabelModule,
-    IftaLabel,
-    InputGroupModule,
-    InputGroupAddonModule,
-    ButtonModule,
-    Button,
-    TooltipModule,
-    TableModule,
-    Table,
-    ChipModule,
-    Chip,
-    LinkListComponent
-  ], encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ValidateUrlsComponent, [{
-    type: Component,
-    args: [{ selector: "ca-validate-urls", imports: [
-      CommonModule,
-      FormsModule,
-      TranslateModule,
-      ProgressBarModule,
-      ConfirmPopupModule,
-      TextareaModule,
-      InputTextModule,
-      IftaLabelModule,
-      InputGroupModule,
-      InputGroupAddonModule,
-      ButtonModule,
-      TooltipModule,
-      TableModule,
-      ChipModule,
-      LinkListComponent
-    ], template: `<!--Enter URLs-->\r
-<h2 class="my-0">Canada.ca URLs</h2>\r
-<p class="my-0 text-color-secondary text-xs">Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.</p>\r
-\r
-<p-iftalabel>\r
-    <textarea id="urls" autoResize="true" rows="5" pTextarea [(ngModel)]="iaState.getUrlData().rawUrls" (change)="setUrlPairs()" (paste)="onPasteUrls()" fluid></textarea>\r
-    <label for="urls">URLs</label>\r
-</p-iftalabel>\r
-\r
-<!--Show url pairs if prototype links were included-->\r
-<p-table [value]="iaState.getUrlData().urlPairs" *ngIf="iaState.getUrlData().includePrototypeLinks" size="small" stripedRows [scrollable]="true" scrollHeight="400px" styleClass="mb-2">\r
-    <ng-template #header>\r
-        <tr>\r
-            <th>Production URL</th>\r
-            <th>Prototype URL</th>\r
-        </tr>\r
-    </ng-template>\r
-    <ng-template #body let-url>\r
-        <tr>\r
-            <td>{{ url.production.href }}</td>\r
-            <td>{{ url.prototype?.href }}</td>\r
-        </tr>\r
-    </ng-template>\r
-</p-table>\r
-\r
-<!--Validate links button-->\r
-<p-button label="Validate URLs" icon="pi pi-check-square" [loading]="iaState.getUrlData().isValidating" (onClick)="validateUrlPairs()" [disabled]="iaState.getUrlData().rawUrls.length === 0 || iaState.getUrlData().isValidated" />\r
-\r
-<!--Show link validation-->\r
-<ng-container *ngIf="iaState.getUrlData().isValidating || iaState.getUrlData().isValidated">\r
-    <h2 *ngIf="urlsChecking.length > 0">Validating links</h2>\r
-    <h2 *ngIf="urlsChecking.length === 0">Validated links</h2>\r
-\r
-    <p-progressbar [value]="iaState.getUrlData().urlPercent">\r
-        <ng-template #content let-value>\r
-            <span>{{iaState.getUrlData().urlChecked}}/{{iaState.getUrlData().urlTotal}}</span>\r
-        </ng-template>\r
-    </p-progressbar>\r
-\r
-    <div class="flex flex-column gap-2 mt-3" *ngIf="urlsChecking.length > 0 || urlsProtoChecking.length > 0">\r
-        <ng-container *ngFor="let url of urlsChecking">\r
-            <p-chip styleClass="bg-yellow-100" class="max-w-max">\r
-                <i class="pi pi-spin pi-spinner"></i>\r
-                <span>{{ url.href }}</span>\r
-            </p-chip>\r
-        </ng-container>\r
-        <ng-container *ngFor="let url of urlsProtoChecking">\r
-            <p-chip styleClass="bg-orange-100" class="max-w-max">\r
-                <i class="pi pi-spin pi-spinner"></i>\r
-                <span>{{ url.href }}</span>\r
-            </p-chip>\r
-        </ng-container>\r
-    </div>\r
-</ng-container>\r
-\r
-<p-confirmpopup />\r
-<h2 *ngIf="urlsBad.length > 0 || urlsProtoBad.length > 0" class="mb-0">Broken links</h2>\r
-<ca-link-list labelKey="Broken"\r
-              [links]="urlsBad"\r
-              type="prod"\r
-              (approve)="approve($event.url, $event.event, 'prod')"\r
-              (remove)="remove($event, 'prod')"\r
-              *ngIf="urlsBad.length > 0">\r
-</ca-link-list>\r
-<ca-link-list labelKey="Broken"\r
-              [links]="urlsProtoBad"\r
-              type="proto"\r
-              (approve)="approve($event.url, $event.event, 'proto')"\r
-              (remove)="remove($event, 'proto')"\r
-              *ngIf="urlsProtoBad.length > 0">\r
-</ca-link-list>\r
-<h2 *ngIf="urlsRedirected.length > 0 || urlsProtoRedirected.length > 0" class="mb-0">Redirected links</h2>\r
-<ca-link-list labelKey="Redirected"\r
-              [links]="urlsRedirected"\r
-              type="prod"\r
-              (approve)="approve($event.url, $event.event, 'prod')"\r
-              (remove)="remove($event, 'prod')"\r
-              *ngIf="urlsRedirected.length > 0">\r
-</ca-link-list>\r
-<ca-link-list labelKey="Redirected"\r
-              [links]="urlsProtoRedirected"\r
-              type="proto"\r
-              (approve)="approve($event.url, $event.event, 'proto')"\r
-              (remove)="remove($event, 'proto')"\r
-              *ngIf="urlsProtoRedirected.length > 0">\r
-</ca-link-list>\r
-<h2 *ngIf="urlsBlocked.length > 0 || urlsProtoBlocked.length > 0" class="mb-0">Blocked links</h2>\r
-<ca-link-list labelKey="Blocked"\r
-              [links]="urlsBlocked"\r
-              type="prod"\r
-              (approve)="approve($event.url, $event.event, 'prod')"\r
-              (remove)="remove($event, 'prod')"\r
-              *ngIf="urlsBlocked.length > 0">\r
-</ca-link-list>\r
-<ca-link-list labelKey="Blocked"\r
-              [links]="urlsProtoBlocked"\r
-              type="proto"\r
-              (approve)="approve($event.url, $event.event, 'proto')"\r
-              (remove)="remove($event, 'proto')"\r
-              *ngIf="urlsProtoBlocked.length > 0">\r
-</ca-link-list>\r
-\r
-<ng-container *ngIf="urlsOk.length > 0 || urlsProtoOk.length > 0">\r
-    <h2 class="mb-0">Valid links</h2>\r
-    <ul class="my-0 list-none">\r
-        <li *ngFor="let url of urlsOk"><i class="pi pi-check text-green-500 mr-2"></i>{{ url.href }}</li>\r
-        <li *ngFor="let url of urlsProtoOk"><i class="pi pi-check text-blue-500 mr-2"></i>{{ url.href }}</li>\r
-    </ul>\r
-</ng-container>` }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ValidateUrlsComponent, { className: "ValidateUrlsComponent", filePath: "src/app/views/ia-assistant/components/validate-urls.component.ts", lineNumber: 38 });
-})();
-
-// src/app/views/ia-assistant/components/set-roots.component.ts
-function SetRootsComponent_h2_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2");
-    \u0275\u0275text(1, "Validating breadcrumb");
-    \u0275\u0275elementEnd();
-  }
-}
-function SetRootsComponent_h2_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2");
-    \u0275\u0275text(1, "Validated breadcrumb");
-    \u0275\u0275elementEnd();
-  }
-}
-function SetRootsComponent_ng_template_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r0.breadcrumbData().step);
-  }
-}
-function SetRootsComponent_h2_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 6);
-    \u0275\u0275text(1, "Root pages");
-    \u0275\u0275elementEnd();
-  }
-}
-function SetRootsComponent_ng_container_7_ul_4_ng_container_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "li");
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const page_r2 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(page_r2);
-  }
-}
-function SetRootsComponent_ng_container_7_ul_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul")(1, "li");
-    \u0275\u0275text(2, "Crawl depth ");
-    \u0275\u0275elementStart(3, "strong");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(5, " to reach user-added child pages");
-    \u0275\u0275element(6, "br");
-    \u0275\u0275text(7);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(8, SetRootsComponent_ng_container_7_ul_4_ng_container_8_Template, 3, 1, "ng-container", 5);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const root_r3 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(root_r3.minDepth);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", root_r3.href, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", root_r3.descendants);
-  }
-}
-function SetRootsComponent_ng_container_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "li")(2, "a", 7);
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(4, SetRootsComponent_ng_container_7_ul_4_Template, 9, 3, "ul", 1);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const root_r3 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275property("href", root_r3.href, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(root_r3.h1);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", root_r3.descendants.length > 0);
-  }
-}
-function SetRootsComponent_h2_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 6);
-    \u0275\u0275text(1, "Breadcrumb branches");
-    \u0275\u0275elementEnd();
-  }
-}
-function SetRootsComponent_ng_container_10_ng_container_3_span_2_i_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 16);
-  }
-}
-function SetRootsComponent_ng_container_10_ng_container_3_span_2_i_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 17);
-    \u0275\u0275pipe(1, "translate");
-    \u0275\u0275pipe(2, "translate");
-  }
-  if (rf & 2) {
-    const crumb_r4 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275classMap(crumb_r4.icon);
-    \u0275\u0275property("pTooltip", \u0275\u0275pipeBind1(1, 4, `${crumb_r4.iconTooltip}`));
-    \u0275\u0275attribute("aria-label", \u0275\u0275pipeBind1(2, 6, `${crumb_r4.iconTooltip}`));
-  }
-}
-function SetRootsComponent_ng_container_10_ng_container_3_span_2_i_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 16);
-  }
-}
-function SetRootsComponent_ng_container_10_ng_container_3_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 13);
-    \u0275\u0275template(1, SetRootsComponent_ng_container_10_ng_container_3_span_2_i_1_Template, 1, 0, "i", 14)(2, SetRootsComponent_ng_container_10_ng_container_3_span_2_i_2_Template, 3, 8, "i", 15)(3, SetRootsComponent_ng_container_10_ng_container_3_span_2_i_3_Template, 1, 0, "i", 14);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const crumb_r4 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", crumb_r4.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", crumb_r4.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", crumb_r4.icon);
-  }
-}
-function SetRootsComponent_ng_container_10_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "span", 10);
-    \u0275\u0275template(2, SetRootsComponent_ng_container_10_ng_container_3_span_2_Template, 4, 3, "span", 11);
-    \u0275\u0275elementStart(3, "a", 12);
-    \u0275\u0275pipe(4, "translate");
-    \u0275\u0275text(5);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const crumb_r4 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", crumb_r4.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("href", crumb_r4.url, \u0275\u0275sanitizeUrl)("ngClass", crumb_r4.styleClass)("pTooltip", \u0275\u0275pipeBind1(4, 5, `${crumb_r4.linkTooltip}`));
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(crumb_r4.label);
-  }
-}
-function SetRootsComponent_ng_container_10_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "li", 8)(2, "div", 9);
-    \u0275\u0275template(3, SetRootsComponent_ng_container_10_ng_container_3_Template, 6, 7, "ng-container", 5);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const breadcrumb_r5 = ctx.$implicit;
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", breadcrumb_r5);
-  }
-}
-function SetRootsComponent_ng_container_11_p_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 21);
-    \u0275\u0275text(1, "One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.");
-    \u0275\u0275element(2, "br");
-    \u0275\u0275text(3, "To-do: automatically set IA orphans as roots so their child pages are crawled");
-    \u0275\u0275elementEnd();
-  }
-}
-function SetRootsComponent_ng_container_11_p_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 22);
-    \u0275\u0275text(1, "One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won't impact the crawl since they occur before the detected root pages.");
-    \u0275\u0275elementEnd();
-  }
-}
-function SetRootsComponent_ng_container_11_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 23);
-    \u0275\u0275text(1, "There are no problems with your breadcrumb!");
-    \u0275\u0275elementEnd();
-  }
-}
-function SetRootsComponent_ng_container_11_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, SetRootsComponent_ng_container_11_p_1_Template, 4, 0, "p", 18)(2, SetRootsComponent_ng_container_11_p_2_Template, 2, 0, "p", 19)(3, SetRootsComponent_ng_container_11_p_3_Template, 2, 0, "p", 20);
-    \u0275\u0275elementStart(4, "p");
-    \u0275\u0275text(5, "To-do: set up method for user to change which pages to crawl");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.breadcrumbData().hasBreakAfterRoot);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.breadcrumbData().hasBreakBeforeRoot && !ctx_r0.breadcrumbData().hasBreakAfterRoot);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r0.breadcrumbData().hasBreakBeforeRoot && !ctx_r0.breadcrumbData().hasBreakAfterRoot);
-  }
-}
-var SetRootsComponent = class _SetRootsComponent {
-  iaState = inject(IaStateService);
-  iaService = inject(IaRelationshipService);
-  fetchService = inject(FetchService);
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this.checkBreadcrumbs();
-    });
-  }
-  breadcrumbData = this.iaState.getBreadcrumbData;
-  checkBreadcrumbs() {
-    return __async(this, null, function* () {
-      console.log(this.breadcrumbData().progress);
-      if (this.breadcrumbData().progress >= 100)
-        return;
-      if (this.breadcrumbData().progress < 60) {
-        this.iaState.setBreadcrumbData({ progress: 0, step: "" });
-        this.iaState.setBreadcrumbData({ progress: 20, step: "Getting all breadcrumbs" });
-        const allPages = yield this.iaService.getAllBreadcrumbs(this.iaState.getUrlData().urlPairs);
-        this.iaState.setBreadcrumbData({ progress: 40, step: "Finding root pages" });
-        yield this.fetchService.simulateDelay(2e3);
-        this.breadcrumbData().rootPages = this.iaService.getRoots(allPages);
-        this.iaState.setBreadcrumbData({ progress: 50, step: "Filtering breadcrumbs" });
-        yield this.fetchService.simulateDelay(2e3);
-        this.breadcrumbData().breadcrumbs = this.iaService.filterBreadcrumbs(allPages);
-      }
-      if (this.breadcrumbData().progress < 90) {
-        this.iaState.saveToLocalStorage();
-        this.iaState.setBreadcrumbData({ progress: 60, step: "Validating breadcrumbs" });
-        this.breadcrumbData().breadcrumbs = yield this.iaService.validateBreadcrumbs(this.breadcrumbData().breadcrumbs);
-      }
-      this.iaState.setBreadcrumbData({ progress: 90, step: "Highlighting breadcrumbs" });
-      yield this.fetchService.simulateDelay(2e3);
-      const { breadcrumbs: highlighted, hasBreakAfterRoot, hasBreakBeforeRoot } = this.iaService.highlightBreadcrumbs(this.breadcrumbData().breadcrumbs, this.breadcrumbData().rootPages);
-      this.iaState.setBreadcrumbData({
-        breadcrumbs: highlighted,
-        hasBreakAfterRoot,
-        hasBreakBeforeRoot,
-        progress: 100,
-        step: "Complete"
-      });
-      this.iaState.saveToLocalStorage();
-    });
-  }
-  static \u0275fac = function SetRootsComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _SetRootsComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetRootsComponent, selectors: [["ca-set-roots"]], decls: 12, vars: 8, consts: [["content", ""], [4, "ngIf"], [3, "value"], ["class", "mb-0", 4, "ngIf"], [1, "mt-0"], [4, "ngFor", "ngForOf"], [1, "mb-0"], ["target", "_blank", 1, "text-color-secondary", "hover:text-color", "no-underline", "flex-wrap", 3, "href"], [1, "mb-3", "pl-2"], [1, "flex", "flex-row", "flex-wrap", "gap-1"], [1, "flex", "flex-row", "align-items-center", "justify-content-around", "gap-1", "max-w-12rem"], ["class", "flex flex-row", 4, "ngIf"], ["target", "_blank", "tooltipPosition", "top", 1, "no-underline", "flex-wrap", "hover:bg-surface", "p-1", "-mx-1", "border-2", "shadow-2", "border-round-lg", "text-center", 3, "href", "ngClass", "pTooltip"], [1, "flex", "flex-row"], ["class", "pi pi-minus text-gray-300", "aria-hidden", "true", "style", "font-size: 1.25rem", 4, "ngIf"], ["tooltipPosition", "top", "style", "font-size: 1.25rem", 3, "class", "pTooltip", 4, "ngIf"], ["aria-hidden", "true", 1, "pi", "pi-minus", "text-gray-300", 2, "font-size", "1.25rem"], ["tooltipPosition", "top", 2, "font-size", "1.25rem", 3, "pTooltip"], ["class", "text-red-500", 4, "ngIf"], ["class", "text-blue-500", 4, "ngIf"], ["class", "text-green-500", 4, "ngIf"], [1, "text-red-500"], [1, "text-blue-500"], [1, "text-green-500"]], template: function SetRootsComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275template(0, SetRootsComponent_h2_0_Template, 2, 0, "h2", 1)(1, SetRootsComponent_h2_1_Template, 2, 0, "h2", 1);
-      \u0275\u0275elementStart(2, "p-progressbar", 2);
-      \u0275\u0275template(3, SetRootsComponent_ng_template_3_Template, 2, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(5, SetRootsComponent_h2_5_Template, 2, 0, "h2", 3);
-      \u0275\u0275elementStart(6, "ol", 4);
-      \u0275\u0275template(7, SetRootsComponent_ng_container_7_Template, 5, 3, "ng-container", 5);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(8, SetRootsComponent_h2_8_Template, 2, 0, "h2", 3);
-      \u0275\u0275elementStart(9, "ol", 4);
-      \u0275\u0275template(10, SetRootsComponent_ng_container_10_Template, 4, 1, "ng-container", 5);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(11, SetRootsComponent_ng_container_11_Template, 6, 3, "ng-container", 1);
-    }
-    if (rf & 2) {
-      \u0275\u0275property("ngIf", ctx.breadcrumbData().progress < 100);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.breadcrumbData().progress === 100);
-      \u0275\u0275advance();
-      \u0275\u0275property("value", ctx.breadcrumbData().progress);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", ctx.breadcrumbData().rootPages.length > 0);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("ngForOf", ctx.breadcrumbData().rootPages);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.breadcrumbData().breadcrumbs.length > 0);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("ngForOf", ctx.breadcrumbData().breadcrumbs);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.breadcrumbData().progress === 100);
-    }
-  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, FormsModule, TranslateModule, TranslatePipe, ProgressBarModule, ProgressBar, TooltipModule, Tooltip], encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SetRootsComponent, [{
-    type: Component,
-    args: [{ selector: "ca-set-roots", imports: [
-      CommonModule,
-      FormsModule,
-      TranslateModule,
-      ProgressBarModule,
-      TooltipModule
-    ], template: '<h2 *ngIf="breadcrumbData().progress < 100">Validating breadcrumb</h2>\r\n<h2 *ngIf="breadcrumbData().progress === 100">Validated breadcrumb</h2>\r\n<!--Progress bar-->\r\n<p-progressbar [value]="breadcrumbData().progress">\r\n    <ng-template #content let-value>\r\n        <span>{{breadcrumbData().step}}</span>\r\n    </ng-template>\r\n</p-progressbar>\r\n\r\n<!--Display detected root pages-->\r\n<h2 *ngIf="breadcrumbData().rootPages.length > 0" class="mb-0">Root pages</h2>\r\n<ol class="mt-0">\r\n    <ng-container *ngFor="let root of breadcrumbData().rootPages">\r\n        <li><a [href]="root.href" target="_blank" class="text-color-secondary hover:text-color no-underline flex-wrap">{{root.h1}}</a>\r\n            <!--Display user-added children of roots-->\r\n            <ul *ngIf="root.descendants.length > 0">\r\n                <li>Crawl depth <strong>{{root.minDepth}}</strong> to reach user-added child pages<br>\r\n                    {{root.href}}\r\n                </li>\r\n                <ng-container *ngFor="let page of root.descendants">\r\n                    <li>{{page}}</li>\r\n                </ng-container>\r\n            </ul>\r\n        </li>\r\n    </ng-container>\r\n</ol>\r\n\r\n<!--Display detected breadcrumb trails-->\r\n<h2 *ngIf="breadcrumbData().breadcrumbs.length > 0" class="mb-0">Breadcrumb branches</h2>\r\n<ol class="mt-0">\r\n    <ng-container *ngFor="let breadcrumb of breadcrumbData().breadcrumbs">\r\n        <li class="mb-3 pl-2">\r\n            <div class="flex flex-row flex-wrap gap-1">\r\n                <ng-container *ngFor="let crumb of breadcrumb">\r\n                    <span class="flex flex-row align-items-center justify-content-around gap-1 max-w-12rem">\r\n                        <span class="flex flex-row" *ngIf="crumb.icon">\r\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r\n                            <i *ngIf="crumb.icon" [class]="crumb.icon" [pTooltip]="`${crumb.iconTooltip}` | translate" tooltipPosition="top" [attr.aria-label]="`${crumb.iconTooltip}` | translate" style="font-size: 1.25rem"></i>\r\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r\n                        </span>\r\n                        <a [href]="crumb.url" target="_blank" class="no-underline flex-wrap hover:bg-surface p-1 -mx-1 border-2 shadow-2 border-round-lg text-center" [ngClass]="crumb.styleClass" [pTooltip]="`${crumb.linkTooltip}` | translate" tooltipPosition="top">{{crumb.label}}</a>\r\n                    </span>\r\n                </ng-container>\r\n            </div>\r\n        </li>\r\n    </ng-container>\r\n</ol>\r\n<ng-container *ngIf="breadcrumbData().progress === 100">\r\n    <p *ngIf="breadcrumbData().hasBreakAfterRoot" class="text-red-500">One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.<br>To-do: automatically set IA orphans as roots so their child pages are crawled</p>\r\n    <p *ngIf="breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-blue-500">One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won\'t impact the crawl since they occur before the detected root pages.</p>\r\n    <p *ngIf="!breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-green-500">There are no problems with your breadcrumb!</p>\r\n    <p>To-do: set up method for user to change which pages to crawl</p>\r\n</ng-container>' }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetRootsComponent, { className: "SetRootsComponent", filePath: "src/app/views/ia-assistant/components/set-roots.component.ts", lineNumber: 22 });
 })();
 
 // src/app/views/ia-assistant/ia-assistant.component.ts
@@ -29336,15 +29393,8 @@ function IaAssistantComponent_ng_template_9_Template(rf, ctx) {
       return \u0275\u0275resetView(ctx_r2.iaState.exportIaState());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "p-fileUpload", 15, 4);
-    \u0275\u0275listener("uploadHandler", function IaAssistantComponent_ng_template_9_Template_p_fileUpload_uploadHandler_3_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.iaState.importIaState($event));
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "p-button", 16);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_9_Template_p_button_onClick_5_listener() {
+    \u0275\u0275elementStart(3, "p-button", 15);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_9_Template_p_button_onClick_3_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.iaState.exportIaTreeAsCsv());
@@ -29354,8 +29404,6 @@ function IaAssistantComponent_ng_template_9_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance(3);
-    \u0275\u0275property("customUpload", true);
-    \u0275\u0275advance(2);
     \u0275\u0275property("disabled", ctx_r2.iaState.getIaData().iaTree.length === 0);
   }
 }
@@ -29364,13 +29412,24 @@ function IaAssistantComponent_ng_template_11_Template(rf, ctx) {
 function IaAssistantComponent_ng_template_13_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 12)(1, "p-button", 17);
-    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_13_Template_p_button_onClick_1_listener() {
+    \u0275\u0275elementStart(0, "div", 12)(1, "p-fileUpload", 16, 4);
+    \u0275\u0275listener("uploadHandler", function IaAssistantComponent_ng_template_13_Template_p_fileUpload_uploadHandler_1_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.iaState.importIaState($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p-button", 17);
+    \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_13_Template_p_button_onClick_3_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.iaState.resetIaFlow());
     });
     \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275property("customUpload", true);
   }
 }
 function IaAssistantComponent_ng_template_27_Template(rf, ctx) {
@@ -29420,7 +29479,7 @@ function IaAssistantComponent_ng_template_30_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance(4);
-    \u0275\u0275property("disabled", ctx_r2.breadcrumbData().progress !== 100);
+    \u0275\u0275property("disabled", ctx_r2.iaState.getBreadcrumbData().progress !== 100);
   }
 }
 function IaAssistantComponent_ng_template_33_p_button_4_Template(rf, ctx) {
@@ -29431,8 +29490,8 @@ function IaAssistantComponent_ng_template_33_p_button_4_Template(rf, ctx) {
       \u0275\u0275restoreView(_r11);
       const activateCallback_r10 = \u0275\u0275nextContext().activateCallback;
       const ctx_r2 = \u0275\u0275nextContext();
-      ctx_r2.buildIaTree();
-      return \u0275\u0275resetView(activateCallback_r10(4));
+      activateCallback_r10(4);
+      return \u0275\u0275resetView(ctx_r2.iaState.saveToLocalStorage());
     });
     \u0275\u0275elementEnd();
   }
@@ -29467,71 +29526,31 @@ function IaAssistantComponent_ng_template_33_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r2.iaTree.length === 0);
+    \u0275\u0275property("ngIf", ctx_r2.iaState.getIaData().iaTree.length === 0);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.iaTree.length > 0);
+    \u0275\u0275property("ngIf", ctx_r2.iaState.getIaData().iaTree.length > 0);
   }
 }
 function IaAssistantComponent_ng_template_36_Template(rf, ctx) {
   if (rf & 1) {
     const _r13 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 18);
-    \u0275\u0275element(1, "ca-ia-tree", 28);
+    \u0275\u0275element(1, "ca-ia-tree");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "div", 29)(3, "p-button", 22);
+    \u0275\u0275elementStart(2, "div", 28)(3, "p-button", 22);
     \u0275\u0275listener("onClick", function IaAssistantComponent_ng_template_36_Template_p_button_onClick_3_listener() {
       const activateCallback_r14 = \u0275\u0275restoreView(_r13).activateCallback;
       return \u0275\u0275resetView(activateCallback_r14(3));
     });
     \u0275\u0275elementEnd()();
   }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("iaTree", ctx_r2.iaTree)("brokenLinks", ctx_r2.brokenLinks)("searchMatches", ctx_r2.searchMatches);
-  }
 }
 var IaAssistantComponent = class _IaAssistantComponent {
-  confirmationService = inject(ConfirmationService);
-  iaService = inject(IaRelationshipService);
-  fetchService = inject(FetchService);
-  theme = inject(ThemeService);
-  iaTreeService = inject(IaTreeService);
   iaState = inject(IaStateService);
-  production = environment.production;
-  /******************************************
-   * GET ROOT URLS AND VALIDATE BREADCRUMBS *
-   ******************************************/
-  //breadcrumbs: BreadcrumbNode[][] = [];
-  //rootPages: PageData[] = [];
-  //breadcrumbProgress = 0;
-  //breadcrumbStep = '';
-  //hasBreakBeforeRoot = false;
-  //hasBreakAfterRoot = false;
-  breadcrumbData = this.iaState.getBreadcrumbData;
-  /*****************
-   * SEARCH TERMS  *
-   *****************/
-  terms = [];
-  /**********************
-  *  BUILD THE IA TREE  *
-  ***********************/
-  iaTree = [];
-  brokenLinks = [];
-  searchMatches = [];
-  buildIaTree() {
-    return __async(this, null, function* () {
-      this.iaTreeService.setTreeContext(this.iaTree, this.iaState.getBreadcrumbData().breadcrumbs);
-      yield this.iaTreeService.crawlFromRoots(this.iaTree, this.brokenLinks, this.terms, this.searchMatches);
-      this.iaTreeService.updateNodeStyles(this.iaTree, 0);
-      console.log("Search matches:");
-      console.log(this.searchMatches);
-    });
-  }
   static \u0275fac = function IaAssistantComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _IaAssistantComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaAssistantComponent, selectors: [["ca-ia-assistant"]], decls: 38, vars: 16, consts: [["start", ""], ["center", ""], ["end", ""], ["content", ""], ["fileUploadRef", ""], ["id", "wb-cont"], [1, "border-1", "secondary-outline", "p-3"], [1, "border-y-1", "secondary-outline", "surface-card", "sticky", "top-0", "z-5", "-m-3", "mb-1"], ["styleClass", "p-1"], [3, "valueChange", "value", "linear"], [1, "-mx-4"], [3, "value"], [1, "flex", "gap-1"], ["icon", "pi pi-save", "pTooltip", "Save session", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "secondary", 3, "onClick"], ["icon", "pi pi-file-export", "pTooltip", "Export JSON file", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "secondary", 3, "onClick"], ["name", "iaStateFile", "accept", ".json", "auto", "true", "mode", "basic", "chooseLabel", "Import JSON", "chooseIcon", "pi pi-file-import", "outlined", "", "styleClass", "upload-secondary-outline", "severity", "secondary", "pTooltip", "Import JSON file", "tooltipPosition", "top", 3, "uploadHandler", "customUpload"], ["icon", "pi pi-download", "pTooltip", "Export to CSV", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "secondary", 3, "onClick", "disabled"], ["icon", "pi pi-trash", "pTooltip", "Reset", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "danger", 3, "onClick"], [1, "flex", "flex-column", "gap-2", "p-3", "border-2", "border-dashed", "border-primary"], [1, "flex", "pt-4", "gap-2", "justify-content-between"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 1, "ml-auto", 3, "onClick", "disabled"], [1, "flex", "pt-4", "justify-content-between"], ["label", "Back", "severity", "secondary", "icon", "pi pi-arrow-left", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", "disabled"], ["label", "Build IA Tree", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", 4, "ngIf"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", 4, "ngIf"], ["label", "Build IA Tree", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick"], [3, "iaTree", "brokenLinks", "searchMatches"], [1, "flex", "pt-4", "justify-content-start"]], template: function IaAssistantComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaAssistantComponent, selectors: [["ca-ia-assistant"]], decls: 38, vars: 16, consts: [["start", ""], ["center", ""], ["end", ""], ["content", ""], ["fileUploadRef", ""], ["id", "wb-cont"], [1, "border-1", "secondary-outline", "p-3"], [1, "border-y-1", "secondary-outline", "surface-card", "sticky", "top-0", "z-5", "-m-3", "mb-1"], ["styleClass", "p-1"], [3, "valueChange", "value", "linear"], [1, "-mx-4"], [3, "value"], [1, "flex", "gap-1"], ["icon", "pi pi-save", "pTooltip", "Save session", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "secondary", 3, "onClick"], ["icon", "pi pi-file-export", "pTooltip", "Export JSON file", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "secondary", 3, "onClick"], ["icon", "pi pi-download", "pTooltip", "Download CSV", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "secondary", 3, "onClick", "disabled"], ["name", "iaStateFile", "accept", ".json", "auto", "true", "mode", "basic", "chooseLabel", "Import JSON", "chooseIcon", "pi pi-file-import", "outlined", "", "styleClass", "upload-secondary-outline", "severity", "secondary", "pTooltip", "Import JSON file", "tooltipPosition", "top", 3, "uploadHandler", "customUpload"], ["icon", "pi pi-trash", "pTooltip", "Reset", "tooltipPosition", "top", "outlined", "", "styleClass", "secondary-outline", "severity", "danger", 3, "onClick"], [1, "flex", "flex-column", "gap-2", "p-3", "border-2", "border-dashed", "border-primary"], [1, "flex", "pt-4", "gap-2", "justify-content-between"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 1, "ml-auto", 3, "onClick", "disabled"], [1, "flex", "pt-4", "justify-content-between"], ["label", "Back", "severity", "secondary", "icon", "pi pi-arrow-left", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", "disabled"], ["label", "Build IA Tree", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", 4, "ngIf"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick", 4, "ngIf"], ["label", "Build IA Tree", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick"], ["label", "Next", "icon", "pi pi-arrow-right", "iconPos", "right", 3, "onClick"], [1, "flex", "pt-4", "justify-content-start"]], template: function IaAssistantComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "h1", 5);
@@ -29543,7 +29562,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
       \u0275\u0275pipe(5, "translate");
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(6, "div", 6)(7, "div", 7)(8, "p-toolbar", 8);
-      \u0275\u0275template(9, IaAssistantComponent_ng_template_9_Template, 6, 2, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(11, IaAssistantComponent_ng_template_11_Template, 0, 0, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(13, IaAssistantComponent_ng_template_13_Template, 2, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+      \u0275\u0275template(9, IaAssistantComponent_ng_template_9_Template, 4, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(11, IaAssistantComponent_ng_template_11_Template, 0, 0, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(13, IaAssistantComponent_ng_template_13_Template, 4, 1, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd()();
       \u0275\u0275elementStart(15, "p-stepper", 9);
       \u0275\u0275twoWayListener("valueChange", function IaAssistantComponent_Template_p_stepper_valueChange_15_listener($event) {
@@ -29573,7 +29592,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
       \u0275\u0275template(33, IaAssistantComponent_ng_template_33_Template, 6, 2, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(35, "p-step-panel", 11);
-      \u0275\u0275template(36, IaAssistantComponent_ng_template_36_Template, 4, 3, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+      \u0275\u0275template(36, IaAssistantComponent_ng_template_36_Template, 4, 0, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd()()()();
     }
     if (rf & 2) {
@@ -29639,10 +29658,8 @@ var IaAssistantComponent = class _IaAssistantComponent {
                 <div class="flex gap-1">\r
                     <p-button icon="pi pi-save" pTooltip="Save session" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.saveToLocalStorage()" />\r
                     <p-button icon="pi pi-file-export" pTooltip="Export JSON file" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.exportIaState()" />\r
-                    <p-fileUpload #fileUploadRef name="iaStateFile" accept=".json" auto="true" mode="basic"\r
-                                  [customUpload]="true" (uploadHandler)="iaState.importIaState($event)"\r
-                                  chooseLabel="Import JSON" chooseIcon="pi pi-file-import" outlined styleClass="upload-secondary-outline" severity="secondary" pTooltip="Import JSON file" tooltipPosition="top" />\r
-                    <p-button icon="pi pi-download" pTooltip="Export to CSV" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.exportIaTreeAsCsv()" [disabled]="iaState.getIaData().iaTree.length === 0" />\r
+\r
+                    <p-button icon="pi pi-download" pTooltip="Download CSV" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.exportIaTreeAsCsv()" [disabled]="iaState.getIaData().iaTree.length === 0" />\r
                 </div>\r
             </ng-template>\r
             <ng-template #center>\r
@@ -29650,6 +29667,9 @@ var IaAssistantComponent = class _IaAssistantComponent {
             </ng-template>\r
             <ng-template #end>\r
                 <div class="flex gap-1">\r
+                    <p-fileUpload #fileUploadRef name="iaStateFile" accept=".json" auto="true" mode="basic"\r
+                                  [customUpload]="true" (uploadHandler)="iaState.importIaState($event)"\r
+                                  chooseLabel="Import JSON" chooseIcon="pi pi-file-import" outlined styleClass="upload-secondary-outline" severity="secondary" pTooltip="Import JSON file" tooltipPosition="top" />\r
                     <p-button icon="pi pi-trash" pTooltip="Reset" tooltipPosition="top" outlined styleClass="secondary-outline" severity="danger" (onClick)="iaState.resetIaFlow()" />\r
                 </div>\r
             </ng-template>\r
@@ -29700,7 +29720,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
                     </div>\r
                     <div class="flex pt-4 justify-content-between">\r
                         <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1); iaState.saveToLocalStorage();" />\r
-                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3); iaState.saveToLocalStorage();" [disabled]="breadcrumbData().progress !== 100" />\r
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3); iaState.saveToLocalStorage();" [disabled]="iaState.getBreadcrumbData().progress !== 100" />\r
                     </div>\r
                 </ng-template>\r
             </p-step-panel>\r
@@ -29715,8 +29735,8 @@ var IaAssistantComponent = class _IaAssistantComponent {
                     </div>\r
                     <div class="flex pt-4 justify-content-between">\r
                         <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />\r
-                        <p-button label="Build IA Tree" icon="pi pi-arrow-right" iconPos="right" (onClick)="buildIaTree(); activateCallback(4)" *ngIf="iaTree.length === 0" />\r
-                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4)" *ngIf="iaTree.length > 0"></p-button>\r
+                        <p-button label="Build IA Tree" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4); iaState.saveToLocalStorage();" *ngIf="iaState.getIaData().iaTree.length === 0" />\r
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4)" *ngIf="iaState.getIaData().iaTree.length > 0"></p-button>\r
                     </div>\r
                 </ng-template>\r
             </p-step-panel>\r
@@ -29725,7 +29745,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
                 <ng-template #content let-activateCallback="activateCallback">\r
                     <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">\r
 \r
-                        <ca-ia-tree [iaTree]="iaTree" [brokenLinks]="brokenLinks" [searchMatches]="searchMatches"></ca-ia-tree>\r
+                        <ca-ia-tree></ca-ia-tree>\r
                     </div>\r
                     <div class="flex pt-4 justify-content-start">\r
                         <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(3)" />\r
@@ -29739,7 +29759,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaAssistantComponent, { className: "IaAssistantComponent", filePath: "src/app/views/ia-assistant/ia-assistant.component.ts", lineNumber: 62 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaAssistantComponent, { className: "IaAssistantComponent", filePath: "src/app/views/ia-assistant/ia-assistant.component.ts", lineNumber: 52 });
 })();
 
 // src/app/app.routes.ts
@@ -29761,7 +29781,7 @@ var routes = [
       }
       return true;
     }],
-    loadComponent: () => import("./chunk-33KPCACQ.js").then((m) => m.PageAssistantCompareComponent)
+    loadComponent: () => import("./chunk-CZ5B4D67.js").then((m) => m.PageAssistantCompareComponent)
   },
   {
     path: "page-assistant/share",
