@@ -26178,6 +26178,7 @@ var ValidateUrlsComponent = class _ValidateUrlsComponent {
   /*** Validate URL pairs ***/
   validateUrlPairs() {
     return __async(this, null, function* () {
+      this.setUrlPairs();
       const { urlPairs, includePrototypeLinks } = this.iaState.getUrlData();
       if (!urlPairs?.length)
         return;
@@ -29781,7 +29782,7 @@ var routes = [
       }
       return true;
     }],
-    loadComponent: () => import("./chunk-CZ5B4D67.js").then((m) => m.PageAssistantCompareComponent)
+    loadComponent: () => import("./chunk-I5JFZ6JX.js").then((m) => m.PageAssistantCompareComponent)
   },
   {
     path: "page-assistant/share",

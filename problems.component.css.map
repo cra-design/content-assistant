@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;7f43ff1825ad05d68e14cc46aa4157d1978629e507df9ccdf9f54268a878a284;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems.component.ts"],
+  "sourcesContent": ["\n      :host {\n        display: block;\n      }\n    "],
+  "mappings": ";AACM;AACE,WAAS;AACX;",
+  "names": []
+}

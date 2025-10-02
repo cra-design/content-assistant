@@ -32966,6 +32966,238 @@ var UserInsightsComponent = class _UserInsightsComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserInsightsComponent, { className: "UserInsightsComponent", filePath: "src/app/views/page-assistant/components/tools/user-insights.component.ts", lineNumber: 19 });
 })();
 
+// src/app/views/page-assistant/components/tools/template-conversion.component.ts
+var TemplateConversionComponent = class _TemplateConversionComponent {
+  static \u0275fac = function TemplateConversionComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _TemplateConversionComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TemplateConversionComponent, selectors: [["ca-template-conversion"]], decls: 4, vars: 0, consts: [[1, "m-0"]], template: function TemplateConversionComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "p", 0);
+      \u0275\u0275text(1, "Unfinished. Will add auto-detect page template fxn and option to choose a template to inform GenAI what kind of page it is or should be.");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p");
+      \u0275\u0275text(3, "Should this be part of the heading structure tool?");
+      \u0275\u0275elementEnd();
+    }
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TemplateConversionComponent, [{
+    type: Component,
+    args: [{ selector: "ca-template-conversion", imports: [], template: '<p class="m-0">Unfinished. Will add auto-detect page template fxn and option to choose a template to inform GenAI what kind of page it is or should be.</p>\r\n<p>Should this be part of the heading structure tool?</p>' }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TemplateConversionComponent, { className: "TemplateConversionComponent", filePath: "src/app/views/page-assistant/components/tools/template-conversion.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/tools.component.ts
+function PageToolsComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " View or reorganize your heading structure. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageToolsComponent_p_accordion_panel_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Heading structure");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-heading-structure");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 0);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
+  }
+}
+function PageToolsComponent_p_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Check if your page is an IA orphan and view its current IA diagram. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageToolsComponent_p_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Find guidance on the components used on your page and check for deprecated code or unexpected classes or elements. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageToolsComponent_p_accordion_panel_16_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageToolsComponent_p_accordion_panel_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
+    \u0275\u0275text(2, "SEO");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_16_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-seo");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 3);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
+  }
+}
+function PageToolsComponent_p_accordion_panel_17_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageToolsComponent_p_accordion_panel_17_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
+    \u0275\u0275text(2, "User insights");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_17_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-user-insights");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 4);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(4));
+  }
+}
+function PageToolsComponent_p_accordion_panel_18_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageToolsComponent_p_accordion_panel_18_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Template conversion");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_18_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-template-conversion");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 5);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(6));
+  }
+}
+var PageToolsComponent = class _PageToolsComponent {
+  production = environment.production;
+  activePanels = [];
+  isPanelOpen(panelIndex) {
+    return this.activePanels.includes(panelIndex);
+  }
+  static \u0275fac = function PageToolsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PageToolsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageToolsComponent, selectors: [["ca-page-tools"]], decls: 19, vars: 10, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageToolsComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "p");
+      \u0275\u0275text(1, " Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.\n");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p-accordion", 0);
+      \u0275\u0275twoWayListener("valueChange", function PageToolsComponent_Template_p_accordion_valueChange_2_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
+        return $event;
+      });
+      \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
+      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
+      \u0275\u0275text(6, "IA structure");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(7, PageToolsComponent_p_7_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(8, "p-accordion-content");
+      \u0275\u0275element(9, "ca-ia-structure");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(10, "p-accordion-panel", 4)(11, "p-accordion-header");
+      \u0275\u0275text(12, "Component guidance");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(13, PageToolsComponent_p_13_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(14, "p-accordion-content");
+      \u0275\u0275element(15, "ca-component-guidance");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(16, PageToolsComponent_p_accordion_panel_16_Template, 6, 2, "p-accordion-panel", 5)(17, PageToolsComponent_p_accordion_panel_17_Template, 6, 2, "p-accordion-panel", 5)(18, PageToolsComponent_p_accordion_panel_18_Template, 6, 2, "p-accordion-panel", 1);
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275twoWayProperty("value", ctx.activePanels);
+      \u0275\u0275property("multiple", true);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("value", 1);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(1));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("value", 2);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+    }
+  }, dependencies: [
+    CommonModule,
+    NgIf,
+    TranslateModule,
+    AccordionModule,
+    Accordion,
+    AccordionPanel,
+    AccordionHeader,
+    AccordionContent,
+    TemplateConversionComponent,
+    SeoComponent,
+    UserInsightsComponent,
+    ComponentGuidanceComponent,
+    HeadingStructureComponent,
+    IaStructureComponent
+  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageToolsComponent, [{
+    type: Component,
+    args: [{ selector: "ca-page-tools", imports: [
+      CommonModule,
+      TranslateModule,
+      AccordionModule,
+      TemplateConversionComponent,
+      SeoComponent,
+      UserInsightsComponent,
+      ComponentGuidanceComponent,
+      HeadingStructureComponent,
+      IaStructureComponent
+    ], template: '<p>\r\n  Use these tools to analyze and improve your web page. You can restructure\r\n  headings, generate an IA diagram, find guidance on the components used in your\r\n  page, integrate SEO and user insights into your updates, check your link\r\n  quality, or convert your page to a different template.\r\n</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Heading structure</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      View or reorganize your heading structure.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-heading-structure></ca-heading-structure>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="1"\r\n    class="border-1 border-round-md border-surface"\r\n  >\r\n    <p-accordion-header>IA structure</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(1)">\r\n      Check if your page is an IA orphan and view its current IA diagram.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-ia-structure></ca-ia-structure>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="2"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Component guidance</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Find guidance on the components used on your page and check for deprecated\r\n      code or unexpected classes or elements.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-component-guidance></ca-component-guidance>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="3"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>SEO</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-seo></ca-seo>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="4"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>User insights</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(4)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-user-insights></ca-user-insights>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <!-- <p-accordion-panel [value]="5" class="border-1 border-round-sm border-surface" *ngIf="!production">\r\n        <p-accordion-header>Link report</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(5)">Add doormat text.</p>\r\n        <p-accordion-content>\r\n            <ca-link-report></ca-link-report>\r\n        </p-accordion-content>\r\n    </p-accordion-panel> -->\r\n\r\n  <p-accordion-panel\r\n    [value]="5"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Template conversion</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(6)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-template-conversion></ca-template-conversion>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageToolsComponent, { className: "PageToolsComponent", filePath: "src/app/views/page-assistant/components/tools.component.ts", lineNumber: 40 });
+})();
+
 // src/app/views/page-assistant/services/link-ai.service.ts
 var LinkAiService = class _LinkAiService {
   openRouterApiUrl = "https://openrouter.ai/api/v1/chat/completions";
@@ -33362,7 +33594,7 @@ var _c114 = () => ({ "min-width": "50rem" });
 function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 25);
+    \u0275\u0275elementStart(0, "button", 28);
     \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_4_Template_button_click_0_listener($event) {
       \u0275\u0275restoreView(_r2);
       \u0275\u0275nextContext(3);
@@ -33375,7 +33607,7 @@ function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
 function LinkReportComponent_ng_template_1_th_2_button_5_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 26);
+    \u0275\u0275elementStart(0, "button", 29);
     \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_5_Template_button_click_0_listener($event) {
       \u0275\u0275restoreView(_r4);
       \u0275\u0275nextContext(3);
@@ -33387,10 +33619,10 @@ function LinkReportComponent_ng_template_1_th_2_button_5_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "th")(1, "div", 22)(2, "span");
+    \u0275\u0275elementStart(0, "th")(1, "div", 25)(2, "span");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 23)(5, LinkReportComponent_ng_template_1_th_2_button_5_Template, 1, 0, "button", 24);
+    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 26)(5, LinkReportComponent_ng_template_1_th_2_button_5_Template, 1, 0, "button", 27);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -33406,8 +33638,8 @@ function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
 function LinkReportComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr");
-    \u0275\u0275element(1, "th", 20);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 6, 3, "th", 21);
+    \u0275\u0275element(1, "th", 23);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 6, 3, "th", 24);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -33440,98 +33672,140 @@ function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
     \u0275\u0275textInterpolate(rowData_r8.type);
   }
 }
-function LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_span_2_Template(rf, ctx) {
+function LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1, " \xB7 ");
-    \u0275\u0275elementEnd();
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_span_2_Template, 2, 0, "span", 39);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const v_r9 = ctx.$implicit;
-    const last_r10 = ctx.last;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", v_r9, "");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !last_r10);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(4).$implicit;
-    const ctx_r6 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" , +", ctx_r6.getOtherVariantsExtraCount(rowData_r8), " more ");
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 38);
-    \u0275\u0275text(1, " also: ");
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_2_Template, 3, 2, "ng-container", 21)(3, LinkReportComponent_ng_template_2_td_3_span_4_div_2_ng_container_3_Template, 2, 1, "ng-container", 39);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
-    const ctx_r6 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r6.getOtherVariantsPreview(rowData_r8));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r6.getOtherVariantsExtraCount(rowData_r8) > 0);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_4_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 40);
+    \u0275\u0275elementStart(0, "div", 41);
     \u0275\u0275text(1, " ( ");
-    \u0275\u0275elementStart(2, "a", 41);
+    \u0275\u0275elementStart(2, "a", 42);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
     \u0275\u0275text(4, " ) ");
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
+    const rowData_r8 = \u0275\u0275nextContext(4).$implicit;
     \u0275\u0275advance(2);
     \u0275\u0275property("href", rowData_r8.absUrl || rowData_r8.href, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r8.href, " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r8.absUrl || rowData_r8.href, " ");
   }
 }
-function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
+function LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 35);
+    \u0275\u0275elementContainerStart(0);
     \u0275\u0275text(1);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_div_2_Template, 4, 2, "div", 36)(3, LinkReportComponent_ng_template_2_td_3_span_4_div_3_Template, 5, 2, "div", 37);
-    \u0275\u0275elementEnd();
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_div_2_Template, 5, 2, "div", 40);
+    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r6 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngStyle", ctx_r6.getTextStyle(rowData_r8));
+    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", rowData_r8.text, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.hasTextConflict && ctx_r6.getOtherVariants(rowData_r8).length);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", rowData_r8.href);
   }
 }
+function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_li_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const v_r9 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(v_r9);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 41);
+    \u0275\u0275text(1, " ( ");
+    \u0275\u0275elementStart(2, "a", 42);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(4, " ) ");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const rowData_r8 = \u0275\u0275nextContext(4).$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", rowData_r8.absUrl || rowData_r8.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", rowData_r8.absUrl || rowData_r8.href, " ");
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "ul", 43);
+    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_li_3_Template, 2, 1, "li", 24);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_div_4_Template, 5, 2, "div", 40);
+  }
+  if (rf & 2) {
+    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r6 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(rowData_r8.text);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r6.getOtherVariants(rowData_r8));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.href);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 38);
+    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_Template, 3, 2, "ng-container", 39)(2, LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_Template, 5, 3, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const variantNames_r10 = \u0275\u0275reference(3);
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r6 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngStyle", ctx_r6.getTextStyle(rowData_r8));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !rowData_r8.hasTextConflict)("ngIfElse", variantNames_r10);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_5_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 45);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r6 = \u0275\u0275nextContext();
+    \u0275\u0275property("title", ctx_r6.buildMismatchReason(rowData_r8));
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r6.buildMismatchReason(rowData_r8), " ");
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_5_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275text(0, "\u2014");
+  }
+}
 function LinkReportComponent_ng_template_2_td_3_span_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 42);
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_5_span_1_Template, 2, 2, "span", 44)(2, LinkReportComponent_ng_template_2_td_3_span_5_ng_template_2_Template, 1, 0, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const noExp_r11 = \u0275\u0275reference(3);
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "mismatch")("ngIfElse", noExp_r11);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 46);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -33541,44 +33815,44 @@ function LinkReportComponent_ng_template_2_td_3_span_5_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", rowData_r8.destH1 || "\u2014", " ");
   }
 }
-function LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 49);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template(rf, ctx) {
+function LinkReportComponent_ng_template_2_td_3_span_7_i_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "i", 50);
   }
 }
-function LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template(rf, ctx) {
+function LinkReportComponent_ng_template_2_td_3_span_7_i_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "i", 51);
   }
 }
-function LinkReportComponent_ng_template_2_td_3_span_6_i_4_Template(rf, ctx) {
+function LinkReportComponent_ng_template_2_td_3_span_7_ng_container_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 52);
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275element(1, "i", 52);
+    \u0275\u0275elementContainerEnd();
   }
 }
-function LinkReportComponent_ng_template_2_td_3_span_6_i_5_Template(rf, ctx) {
+function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 53);
+    \u0275\u0275element(0, "i", 56);
   }
 }
-function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
+function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 43);
-    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_6_i_1_Template, 1, 0, "i", 44)(2, LinkReportComponent_ng_template_2_td_3_span_6_i_2_Template, 1, 0, "i", 45)(3, LinkReportComponent_ng_template_2_td_3_span_6_i_3_Template, 1, 0, "i", 46)(4, LinkReportComponent_ng_template_2_td_3_span_6_i_4_Template, 1, 0, "i", 47)(5, LinkReportComponent_ng_template_2_td_3_span_6_i_5_Template, 1, 0, "i", 48);
-    \u0275\u0275elementEnd();
+    \u0275\u0275element(0, "i", 57);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 58);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_0_Template, 1, 0, "i", 53)(1, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_1_Template, 1, 0, "i", 54)(2, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_2_Template, 1, 0, "i", 55);
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.is404);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.anchorMissing);
-    \u0275\u0275advance();
+    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
     \u0275\u0275property("ngIf", rowData_r8.matchStatus === "match");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", rowData_r8.matchStatus === "mismatch");
@@ -33588,35 +33862,54 @@ function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_td_3_span_7_Template(rf, ctx) {
   if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 47);
+    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_7_i_1_Template, 1, 0, "i", 48)(2, LinkReportComponent_ng_template_2_td_3_span_7_i_2_Template, 1, 0, "i", 49)(3, LinkReportComponent_ng_template_2_td_3_span_7_ng_container_3_Template, 2, 0, "ng-container", 39)(4, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_Template, 3, 3, "ng-template", null, 4, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const normalStatus_r12 = \u0275\u0275reference(5);
+    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.is404);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.anchorMissing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", rowData_r8.hasTextConflict)("ngIfElse", normalStatus_r12);
+  }
+}
+function LinkReportComponent_ng_template_2_td_3_span_8_Template(rf, ctx) {
+  if (rf & 1) {
     \u0275\u0275elementStart(0, "span");
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r11 = \u0275\u0275nextContext().$implicit;
+    const col_r13 = \u0275\u0275nextContext().$implicit;
     const rowData_r8 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r8[col_r11.field] || "\u2014");
+    \u0275\u0275textInterpolate(rowData_r8[col_r13.field] || "\u2014");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "td");
-    \u0275\u0275elementContainerStart(1, 29);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 30)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 30)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 4, 4, "span", 31)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 2, 1, "span", 32)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 6, 5, "span", 33)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 2, 1, "span", 34);
+    \u0275\u0275elementContainerStart(1, 32);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 33)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 33)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 4, 3, "span", 34)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 4, 2, "span", 33)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 2, 1, "span", 35)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 6, 4, "span", 36)(8, LinkReportComponent_ng_template_2_td_3_span_8_Template, 2, 1, "span", 37);
     \u0275\u0275elementContainerEnd();
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r11 = ctx.$implicit;
+    const col_r13 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngSwitch", col_r11.field);
+    \u0275\u0275property("ngSwitch", col_r13.field);
     \u0275\u0275advance();
     \u0275\u0275property("ngSwitchCase", "order");
     \u0275\u0275advance();
     \u0275\u0275property("ngSwitchCase", "type");
     \u0275\u0275advance();
     \u0275\u0275property("ngSwitchCase", "text");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngSwitchCase", "explanation");
     \u0275\u0275advance();
     \u0275\u0275property("ngSwitchCase", "destH1");
     \u0275\u0275advance();
@@ -33625,64 +33918,64 @@ function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
 }
 function LinkReportComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr", 27)(1, "td");
-    \u0275\u0275element(2, "span", 28);
+    \u0275\u0275elementStart(0, "tr", 30)(1, "td");
+    \u0275\u0275element(2, "span", 31);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 8, 6, "td", 21);
+    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 9, 7, "td", 24);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     const rowData_r8 = ctx.$implicit;
-    const rowIndex_r12 = ctx.rowIndex;
+    const rowIndex_r14 = ctx.rowIndex;
     const ctx_r6 = \u0275\u0275nextContext();
-    \u0275\u0275property("pReorderableRow", rowIndex_r12)("pSelectableRow", rowData_r8);
+    \u0275\u0275property("pReorderableRow", rowIndex_r14)("pSelectableRow", rowData_r8);
     \u0275\u0275advance(3);
     \u0275\u0275property("ngForOf", ctx_r6.cols);
   }
 }
 function LinkReportComponent_div_12_Template(rf, ctx) {
   if (rf & 1) {
-    const _r13 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 8)(1, "p-checkbox", 54);
+    const _r15 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 11)(1, "p-checkbox", 59);
     \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_div_12_Template_p_checkbox_ngModelChange_1_listener($event) {
-      const t_r14 = \u0275\u0275restoreView(_r13).$implicit;
+      const t_r16 = \u0275\u0275restoreView(_r15).$implicit;
       const ctx_r6 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r6.typeChecks[t_r14], $event) || (ctx_r6.typeChecks[t_r14] = $event);
+      \u0275\u0275twoWayBindingSet(ctx_r6.typeChecks[t_r16], $event) || (ctx_r6.typeChecks[t_r16] = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275listener("onChange", function LinkReportComponent_div_12_Template_p_checkbox_onChange_1_listener() {
-      const t_r14 = \u0275\u0275restoreView(_r13).$implicit;
+      const t_r16 = \u0275\u0275restoreView(_r15).$implicit;
       const ctx_r6 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r6.onTypeToggle(t_r14));
+      return \u0275\u0275resetView(ctx_r6.onTypeToggle(t_r16));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "label", 55);
+    \u0275\u0275elementStart(2, "label", 60);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const t_r14 = ctx.$implicit;
-    const i_r15 = ctx.index;
+    const t_r16 = ctx.$implicit;
+    const i_r17 = ctx.index;
     const ctx_r6 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", ctx_r6.typeChecks[t_r14]);
-    \u0275\u0275property("disabled", ctx_r6.allSelected)("inputId", "type-" + i_r15);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r6.typeChecks[t_r16]);
+    \u0275\u0275property("disabled", ctx_r6.allSelected)("inputId", "type-" + i_r17);
     \u0275\u0275advance();
-    \u0275\u0275attribute("for", "type-" + i_r15);
+    \u0275\u0275attribute("for", "type-" + i_r17);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", t_r14, " ");
+    \u0275\u0275textInterpolate1(" ", t_r16, " ");
   }
 }
 function LinkReportComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 56);
+    \u0275\u0275elementStart(0, "div", 61);
     \u0275\u0275text(1, " All types are currently included. ");
     \u0275\u0275elementEnd();
   }
 }
 function LinkReportComponent_div_31_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 56);
+    \u0275\u0275elementStart(0, "div", 61);
     \u0275\u0275text(1, " All match statuses are currently included. ");
     \u0275\u0275elementEnd();
   }
@@ -33732,7 +34025,12 @@ var LinkReportComponent = class _LinkReportComponent {
   linkAi = inject(LinkAiService);
   extractor = inject(ContentExtractorService);
   fetchService = inject(FetchService);
+  problemsChange = new EventEmitter();
   typePanel;
+  emitProblems() {
+    const hasProblems = this.headings.some((r) => r.hasTextConflict || r.is404 || r.anchorMissing || r.matchStatus === "mismatch");
+    this.problemsChange.emit(hasProblems);
+  }
   // data & selection
   headings = [];
   selectedHeading;
@@ -33743,6 +34041,7 @@ var LinkReportComponent = class _LinkReportComponent {
     { field: "text", header: "Link name on page" },
     { field: "destH1", header: "Destination link content" },
     { field: "matchStatus", header: "Link text health" },
+    { field: "explanation", header: "Explanation" },
     { field: "searchTerm", header: "Search term" },
     { field: "clicks", header: "Clicks" }
   ];
@@ -33889,10 +34188,33 @@ var LinkReportComponent = class _LinkReportComponent {
       return raw.trim().toLowerCase();
     }
     try {
-      const u = new URL(raw);
+      let u = new URL(raw);
+      u.protocol = "https:";
+      u.hostname = u.hostname.toLowerCase().replace(/^canada\.ca$/, "www.canada.ca");
+      u = new URL(canonicalizeCanadaHref(u.toString()));
       u.hash = "";
-      u.hostname = u.hostname.toLowerCase();
-      if (u.pathname.endsWith("/") && u.pathname !== "/") {
+      u.search = "";
+      u.pathname = u.pathname.replace(/\/index\.html?$/i, "/");
+      if (/^\/en\/revenue-agency\//i.test(u.pathname)) {
+        const PT = /* @__PURE__ */ new Set([
+          "ab",
+          "bc",
+          "mb",
+          "nb",
+          "nl",
+          "ns",
+          "nt",
+          "nu",
+          "on",
+          "pe",
+          "qc",
+          "sk",
+          "yt",
+          "c"
+        ]);
+        u.pathname = u.pathname.replace(/\/([^/]+?)-([a-z]{1,3})-e\.html$/i, (_m, base, code) => PT.has(String(code).toLowerCase()) ? `/${base}-e.html` : _m);
+      }
+      if (u.pathname.length > 1 && u.pathname.endsWith("/")) {
         u.pathname = u.pathname.slice(0, -1);
       }
       return u.toString();
@@ -33906,20 +34228,20 @@ var LinkReportComponent = class _LinkReportComponent {
       const key2 = this.destKeyForRow(r) || `row-${r.order}`;
       const g = map.get(key2);
       if (g) {
+        g.count += 1;
         g.names.add(r.text);
       } else {
-        map.set(key2, { rep: __spreadValues({}, r), names: /* @__PURE__ */ new Set([r.text]) });
+        map.set(key2, { rep: __spreadValues({}, r), names: /* @__PURE__ */ new Set([r.text]), count: 1 });
       }
     }
     const out = [];
     let idx = 1;
-    for (const { rep, names } of map.values()) {
+    for (const { rep, names, count } of map.values()) {
       out.push(__spreadProps(__spreadValues({}, rep), {
         order: idx++,
-        // only flag conflicts (different texts → same destination)
+        repeatCount: count,
         hasTextConflict: names.size > 1,
         textVariants: Array.from(names)
-        // repeatCount intentionally omitted
       }));
     }
     return out;
@@ -33974,6 +34296,7 @@ var LinkReportComponent = class _LinkReportComponent {
       });
       this.headings = this.dedupeByDestination(initialRows);
       yield this.enrichWithExtractedContent(doc);
+      this.emitProblems();
     });
   }
   // Match-status filter state
@@ -34118,6 +34441,7 @@ var LinkReportComponent = class _LinkReportComponent {
       yield Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
       this.headings = [...rows];
       this.logSummaryTable();
+      this.emitProblems();
     });
   }
   // ---------- helpers ----------
@@ -34180,6 +34504,21 @@ var LinkReportComponent = class _LinkReportComponent {
     } catch {
       return null;
     }
+  }
+  buildMismatchReason(row) {
+    if (row.aiRationale && row.aiRationale.trim()) {
+      return row.aiRationale.trim();
+    }
+    const parts = [];
+    if (row.hasTextConflict)
+      parts.push("Different link names \u2192 same destination.");
+    if (row.is404)
+      parts.push("Destination not found (404/410).");
+    if (row.anchorMissing)
+      parts.push("Anchor target missing.");
+    if (!parts.length)
+      parts.push("Reason placeholder.");
+    return parts.join(" ");
   }
   /** 6-type classifier; order matters. Canada.ca = apex or www only. */
   classify(href, absUrl, anchorEl) {
@@ -34374,25 +34713,25 @@ var LinkReportComponent = class _LinkReportComponent {
       let _t;
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.typePanel = _t.first);
     }
-  }, decls: 32, vars: 19, consts: [["typePanel", ""], ["statusPanel", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "appendTo", "styleClass"], [1, "filter-panel"], ["pButton", "", "type", "button", "icon", "pi pi-times", "aria-label", "Close filter", 1, "p-button-text", "p-button-sm", "close-btn", 3, "click"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], ["inputId", "allMatch", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allMatch", 1, "filter-label"], ["inputId", "ms-match", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-match", 1, "filter-label"], ["inputId", "ms-mismatch", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-mismatch", 1, "filter-label"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", "aria-hidden", "true", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngStyle"], ["class", "muted variants", 4, "ngIf"], ["class", "muted", 4, "ngIf"], [1, "muted", "variants"], [4, "ngIf"], [1, "muted"], ["target", "_blank", "rel", "noopener", 1, "break-all", 3, "href"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-exclamation-triangle text-bad", "title", "404/410 (Not found)", "style", "margin-right: 0.25rem", 4, "ngIf"], ["class", "pi pi-link", "title", "Anchor target not found on page", "style", "\n                margin-right: 0.25rem;\n                transform: rotate(45deg);\n                opacity: 0.8;\n              ", 4, "ngIf"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "404/410 (Not found)", 1, "pi", "pi-exclamation-triangle", "text-bad", 2, "margin-right", "0.25rem"], ["title", "Anchor target not found on page", 1, "pi", "pi-link", 2, "margin-right", "0.25rem", "transform", "rotate(45deg)", "opacity", "0.8"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
+  }, outputs: { problemsChange: "problemsChange" }, decls: 32, vars: 19, consts: [["typePanel", ""], ["statusPanel", ""], ["variantNames", ""], ["noExp", ""], ["normalStatus", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "appendTo", "styleClass"], [1, "filter-panel"], ["pButton", "", "type", "button", "icon", "pi pi-times", "aria-label", "Close filter", 1, "p-button-text", "p-button-sm", "close-btn", 3, "click"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], ["inputId", "allMatch", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allMatch", 1, "filter-label"], ["inputId", "ms-match", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-match", 1, "filter-label"], ["inputId", "ms-mismatch", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-mismatch", 1, "filter-label"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", "aria-hidden", "true", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngStyle"], [4, "ngIf", "ngIfElse"], ["class", "muted", 4, "ngIf"], [1, "muted"], ["target", "_blank", "rel", "noopener", 3, "href"], [1, "variant-list"], ["class", "exp-badge", "role", "note", 3, "title", 4, "ngIf", "ngIfElse"], ["role", "note", 1, "exp-badge", 3, "title"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-exclamation-triangle text-bad", "title", "404/410 (Not found)", "style", "margin-right: 0.25rem", "aria-hidden", "true", 4, "ngIf"], ["class", "pi pi-link", "title", "Anchor target not found on page", "style", "\n                margin-right: 0.25rem;\n                transform: rotate(45deg);\n                opacity: 0.8;\n              ", "aria-hidden", "true", 4, "ngIf"], ["title", "404/410 (Not found)", "aria-hidden", "true", 1, "pi", "pi-exclamation-triangle", "text-bad", 2, "margin-right", "0.25rem"], ["title", "Anchor target not found on page", "aria-hidden", "true", 1, "pi", "pi-link", 2, "margin-right", "0.25rem", "transform", "rotate(45deg)", "opacity", "0.8"], ["title", "Different link names point to the same destination", 1, "pi", "pi-exclamation-triangle", "text-bad"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275elementStart(0, "p-table", 2);
+      \u0275\u0275elementStart(0, "p-table", 5);
       \u0275\u0275twoWayListener("selectionChange", function LinkReportComponent_Template_p_table_selectionChange_0_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.selectedHeading, $event) || (ctx.selectedHeading = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 3)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 4);
+      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 6)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 7);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "p-popover", 5, 0)(5, "div", 6)(6, "button", 7);
+      \u0275\u0275elementStart(3, "p-popover", 8, 0)(5, "div", 9)(6, "button", 10);
       \u0275\u0275listener("click", function LinkReportComponent_Template_button_click_6_listener() {
         \u0275\u0275restoreView(_r1);
         const typePanel_r3 = \u0275\u0275reference(4);
         return \u0275\u0275resetView(typePanel_r3.hide());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(7, "div", 8)(8, "p-checkbox", 9);
+      \u0275\u0275elementStart(7, "div", 11)(8, "p-checkbox", 12);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_8_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.allSelected, $event) || (ctx.allSelected = $event);
@@ -34403,20 +34742,20 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onAllToggle());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "label", 10);
+      \u0275\u0275elementStart(9, "label", 13);
       \u0275\u0275text(10, "ALL");
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(11, "div", 11);
-      \u0275\u0275template(12, LinkReportComponent_div_12_Template, 4, 5, "div", 12)(13, LinkReportComponent_div_13_Template, 2, 0, "div", 13);
+      \u0275\u0275element(11, "div", 14);
+      \u0275\u0275template(12, LinkReportComponent_div_12_Template, 4, 5, "div", 15)(13, LinkReportComponent_div_13_Template, 2, 0, "div", 16);
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(14, "p-popover", 5, 1)(16, "div", 6)(17, "button", 7);
+      \u0275\u0275elementStart(14, "p-popover", 8, 1)(16, "div", 9)(17, "button", 10);
       \u0275\u0275listener("click", function LinkReportComponent_Template_button_click_17_listener() {
         \u0275\u0275restoreView(_r1);
         const statusPanel_r5 = \u0275\u0275reference(15);
         return \u0275\u0275resetView(statusPanel_r5.hide());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(18, "div", 8)(19, "p-checkbox", 14);
+      \u0275\u0275elementStart(18, "div", 11)(19, "p-checkbox", 17);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_19_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.matchAllSelected, $event) || (ctx.matchAllSelected = $event);
@@ -34427,11 +34766,11 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onMatchAllToggle());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(20, "label", 15);
+      \u0275\u0275elementStart(20, "label", 18);
       \u0275\u0275text(21, "ALL");
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(22, "div", 11);
-      \u0275\u0275elementStart(23, "div", 8)(24, "p-checkbox", 16);
+      \u0275\u0275element(22, "div", 14);
+      \u0275\u0275elementStart(23, "div", 11)(24, "p-checkbox", 19);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_24_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.matchChecks.match, $event) || (ctx.matchChecks.match = $event);
@@ -34442,10 +34781,10 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onMatchToggle("match"));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(25, "label", 17);
+      \u0275\u0275elementStart(25, "label", 20);
       \u0275\u0275text(26, "match");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(27, "div", 8)(28, "p-checkbox", 18);
+      \u0275\u0275elementStart(27, "div", 11)(28, "p-checkbox", 21);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_28_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.matchChecks.mismatch, $event) || (ctx.matchChecks.mismatch = $event);
@@ -34456,10 +34795,10 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onMatchToggle("mismatch"));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(29, "label", 19);
+      \u0275\u0275elementStart(29, "label", 22);
       \u0275\u0275text(30, "mismatch");
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(31, LinkReportComponent_div_31_Template, 2, 0, "div", 13);
+      \u0275\u0275template(31, LinkReportComponent_div_31_Template, 2, 0, "div", 16);
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
@@ -34486,7 +34825,7 @@ var LinkReportComponent = class _LinkReportComponent {
       \u0275\u0275advance(3);
       \u0275\u0275property("ngIf", ctx.matchAllSelected);
     }
-  }, dependencies: [CommonModule, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, PopoverModule, Popover, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
+  }, dependencies: [CommonModule, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, PopoverModule, Popover, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list[_ngcontent-%COMP%] {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list[_ngcontent-%COMP%]    > li[_ngcontent-%COMP%] {\n  margin: 0.05rem 0;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge[_ngcontent-%COMP%] {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkReportComponent, [{
@@ -34559,40 +34898,56 @@ var LinkReportComponent = class _LinkReportComponent {
           <span *ngSwitchCase="'type'">{{ rowData.type }}</span>\r
 \r
           <span *ngSwitchCase="'text'" [ngStyle]="getTextStyle(rowData)">\r
-            {{ rowData.text }}\r
+            <!-- A) DEFAULT (no variants) \u2014 keep your existing look -->\r
+            <ng-container *ngIf="!rowData.hasTextConflict; else variantNames">\r
+              {{ rowData.text }}\r
+              <div class="muted" *ngIf="rowData.href">\r
+                (\r
+                <a\r
+                  [href]="rowData.absUrl || rowData.href"\r
+                  target="_blank"\r
+                  rel="noopener"\r
+                >\r
+                  {{ rowData.absUrl || rowData.href }}\r
+                </a>\r
+                )\r
+              </div>\r
+            </ng-container>\r
 \r
-            <div\r
-              class="muted variants"\r
-              *ngIf="\r
-                rowData.hasTextConflict && getOtherVariants(rowData).length\r
-              "\r
+            <!-- B) VARIANTS (different link names \u2192 same destination) -->\r
+            <ng-template #variantNames>\r
+              <!-- main name first, same font/size -->\r
+              <div>{{ rowData.text }}</div>\r
+\r
+              <!-- then every other variant on its own line, same font/size -->\r
+              <ul class="variant-list">\r
+                <li *ngFor="let v of getOtherVariants(rowData)">{{ v }}</li>\r
+              </ul>\r
+\r
+              <!-- clickable destination URL under the list -->\r
+              <div class="muted" *ngIf="rowData.href">\r
+                (\r
+                <a\r
+                  [href]="rowData.absUrl || rowData.href"\r
+                  target="_blank"\r
+                  rel="noopener"\r
+                >\r
+                  {{ rowData.absUrl || rowData.href }}\r
+                </a>\r
+                )\r
+              </div>\r
+            </ng-template>\r
+          </span>\r
+          <span *ngSwitchCase="'explanation'">\r
+            <span\r
+              *ngIf="rowData.matchStatus === 'mismatch'; else noExp"\r
+              class="exp-badge"\r
+              role="note"\r
+              [title]="buildMismatchReason(rowData)"\r
             >\r
-              also:\r
-              <ng-container\r
-                *ngFor="\r
-                  let v of getOtherVariantsPreview(rowData);\r
-                  let last = last\r
-                "\r
-              >\r
-                {{ v }}<span *ngIf="!last"> \xB7 </span>\r
-              </ng-container>\r
-              <ng-container *ngIf="getOtherVariantsExtraCount(rowData) > 0">\r
-                , +{{ getOtherVariantsExtraCount(rowData) }} more\r
-              </ng-container>\r
-            </div>\r
-\r
-            <div class="muted" *ngIf="rowData.href">\r
-              (\r
-              <a\r
-                [href]="rowData.absUrl || rowData.href"\r
-                target="_blank"\r
-                rel="noopener"\r
-                class="break-all"\r
-              >\r
-                {{ rowData.href }}\r
-              </a>\r
-              )\r
-            </div>\r
+              {{ buildMismatchReason(rowData) }}\r
+            </span>\r
+            <ng-template #noExp>\u2014</ng-template>\r
           </span>\r
 \r
           <span *ngSwitchCase="'destH1'" class="break-all">\r
@@ -34606,6 +34961,7 @@ var LinkReportComponent = class _LinkReportComponent {
               class="pi pi-exclamation-triangle text-bad"\r
               title="404/410 (Not found)"\r
               style="margin-right: 0.25rem"\r
+              aria-hidden="true"\r
             ></i>\r
 \r
             <!-- Missing anchor on same page -->\r
@@ -34618,26 +34974,37 @@ var LinkReportComponent = class _LinkReportComponent {
                 transform: rotate(45deg);\r
                 opacity: 0.8;\r
               "\r
+              aria-hidden="true"\r
             ></i>\r
 \r
-            <i\r
-              *ngIf="rowData.matchStatus === 'match'"\r
-              class="pi pi-check-circle text-ok"\r
-              title="Match"\r
-            ></i>\r
-            <i\r
-              *ngIf="rowData.matchStatus === 'mismatch'"\r
-              class="pi pi-times-circle text-bad"\r
-              title="Mismatch"\r
-            ></i>\r
-            <i\r
-              *ngIf="\r
-                rowData.matchStatus === 'unknown' ||\r
-                rowData.matchStatus === 'na'\r
-              "\r
-              class="pi pi-question-circle text-unk"\r
-              title="Unknown"\r
-            ></i>\r
+            <!-- Duplicates: show ONLY a red exclamation, hide match/mismatch/question -->\r
+            <ng-container *ngIf="rowData.hasTextConflict; else normalStatus">\r
+              <i\r
+                class="pi pi-exclamation-triangle text-bad"\r
+                title="Different link names point to the same destination"\r
+              ></i>\r
+            </ng-container>\r
+\r
+            <ng-template #normalStatus>\r
+              <i\r
+                *ngIf="rowData.matchStatus === 'match'"\r
+                class="pi pi-check-circle text-ok"\r
+                title="Match"\r
+              ></i>\r
+              <i\r
+                *ngIf="rowData.matchStatus === 'mismatch'"\r
+                class="pi pi-times-circle text-bad"\r
+                title="Mismatch"\r
+              ></i>\r
+              <i\r
+                *ngIf="\r
+                  rowData.matchStatus === 'unknown' ||\r
+                  rowData.matchStatus === 'na'\r
+                "\r
+                class="pi pi-question-circle text-unk"\r
+                title="Unknown"\r
+              ></i>\r
+            </ng-template>\r
           </span>\r
 \r
           <span *ngSwitchDefault>{{ rowData[col.field] || "\u2014" }}</span>\r
@@ -34751,236 +35118,70 @@ var LinkReportComponent = class _LinkReportComponent {
     </div>\r
   </div>\r
 </p-popover>\r
-`, styles: ["/* angular:styles/component:css;f867ed4ff822b366cb9432ca0b7c19af5afc1fceac7a7483c72da2155928f42a;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
-  }], null, { typePanel: [{
+`, styles: ["/* angular:styles/component:css;8a83dd044d98027c2645d6b20f9b4e2b48ac6e74e6617d7ca74a50e95c781114;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list > li {\n  margin: 0.05rem 0;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
+  }], null, { problemsChange: [{
+    type: Output
+  }], typePanel: [{
     type: ViewChild,
     args: ["typePanel"]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 253 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 271 });
 })();
 
-// src/app/views/page-assistant/components/tools/template-conversion.component.ts
-var TemplateConversionComponent = class _TemplateConversionComponent {
-  static \u0275fac = function TemplateConversionComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _TemplateConversionComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TemplateConversionComponent, selectors: [["ca-template-conversion"]], decls: 4, vars: 0, consts: [[1, "m-0"]], template: function TemplateConversionComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "p", 0);
-      \u0275\u0275text(1, "Unfinished. Will add auto-detect page template fxn and option to choose a template to inform GenAI what kind of page it is or should be.");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p");
-      \u0275\u0275text(3, "Should this be part of the heading structure tool?");
-      \u0275\u0275elementEnd();
-    }
-  }, encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TemplateConversionComponent, [{
-    type: Component,
-    args: [{ selector: "ca-template-conversion", imports: [], template: '<p class="m-0">Unfinished. Will add auto-detect page template fxn and option to choose a template to inform GenAI what kind of page it is or should be.</p>\r\n<p>Should this be part of the heading structure tool?</p>' }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TemplateConversionComponent, { className: "TemplateConversionComponent", filePath: "src/app/views/page-assistant/components/tools/template-conversion.component.ts", lineNumber: 9 });
-})();
-
-// src/app/views/page-assistant/components/tools.component.ts
-function PageToolsComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
+// src/app/views/page-assistant/components/problems.component.ts
+function ProblemsPanelComponent_p_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, "View or reorganize your heading structure.");
+    \u0275\u0275elementStart(0, "p", 4);
+    \u0275\u0275text(1, " Check link text vs destination content and flag duplicate destinations. ");
     \u0275\u0275elementEnd();
   }
 }
-function PageToolsComponent_p_accordion_panel_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Heading structure");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-heading-structure");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 0);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
-  }
-}
-function PageToolsComponent_p_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, "Check if your page is an IA orphan and view its current IA diagram.");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, "Find guidance on the components used on your page and check for deprecated code or unexpected classes or elements.");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_16_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, "Add doormat text.");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_16_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
-    \u0275\u0275text(2, "SEO");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_16_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-seo");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 3);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
-  }
-}
-function PageToolsComponent_p_accordion_panel_17_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, "Add doormat text.");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_17_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
-    \u0275\u0275text(2, "User insights");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_17_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-user-insights");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 4);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(4));
-  }
-}
-function PageToolsComponent_p_accordion_panel_18_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, "Add doormat text.");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_18_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Link report");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_18_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-link-report");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 5);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(5));
-  }
-}
-function PageToolsComponent_p_accordion_panel_19_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, "Add doormat text.");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_19_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Template conversion");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_19_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-template-conversion");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 6);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(6));
-  }
-}
-var PageToolsComponent = class _PageToolsComponent {
-  production = environment.production;
+var ProblemsPanelComponent = class _ProblemsPanelComponent {
+  summary = new EventEmitter();
+  /** Keep all panels closed by default */
   activePanels = [];
-  isPanelOpen(panelIndex) {
-    return this.activePanels.includes(panelIndex);
+  flags = { linkReport: false };
+  /** Helper for the collapsed preview text (same as Tools panel uses) */
+  isPanelOpen(idx) {
+    return this.activePanels.includes(idx);
   }
-  static \u0275fac = function PageToolsComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _PageToolsComponent)();
+  onLinkReportProblem(has) {
+    this.flags = __spreadProps(__spreadValues({}, this.flags), { linkReport: has });
+    this.summary.emit(this.flags);
+  }
+  static \u0275fac = function ProblemsPanelComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ProblemsPanelComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageToolsComponent, selectors: [["ca-page-tools"]], decls: 20, vars: 11, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageToolsComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProblemsPanelComponent, selectors: [["ca-page-problems"]], outputs: { summary: "summary" }, decls: 9, vars: 4, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [3, "problemsChange"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function ProblemsPanelComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "p");
-      \u0275\u0275text(1, "Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.");
+      \u0275\u0275text(1, " Review issues detected on your page. Each section summarizes problems we found.\n");
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(2, "p-accordion", 0);
-      \u0275\u0275twoWayListener("valueChange", function PageToolsComponent_Template_p_accordion_valueChange_2_listener($event) {
+      \u0275\u0275twoWayListener("valueChange", function ProblemsPanelComponent_Template_p_accordion_valueChange_2_listener($event) {
         \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
         return $event;
       });
-      \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
-      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
-      \u0275\u0275text(6, "IA structure");
+      \u0275\u0275elementStart(3, "p-accordion-panel", 1)(4, "p-accordion-header");
+      \u0275\u0275text(5, "Link report");
       \u0275\u0275elementEnd();
-      \u0275\u0275template(7, PageToolsComponent_p_7_Template, 2, 0, "p", 3);
-      \u0275\u0275elementStart(8, "p-accordion-content");
-      \u0275\u0275element(9, "ca-ia-structure");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(10, "p-accordion-panel", 4)(11, "p-accordion-header");
-      \u0275\u0275text(12, "Component guidance");
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(13, PageToolsComponent_p_13_Template, 2, 0, "p", 3);
-      \u0275\u0275elementStart(14, "p-accordion-content");
-      \u0275\u0275element(15, "ca-component-guidance");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275template(16, PageToolsComponent_p_accordion_panel_16_Template, 6, 2, "p-accordion-panel", 5)(17, PageToolsComponent_p_accordion_panel_17_Template, 6, 2, "p-accordion-panel", 5)(18, PageToolsComponent_p_accordion_panel_18_Template, 6, 2, "p-accordion-panel", 5)(19, PageToolsComponent_p_accordion_panel_19_Template, 6, 2, "p-accordion-panel", 1);
-      \u0275\u0275elementEnd();
+      \u0275\u0275template(6, ProblemsPanelComponent_p_6_Template, 2, 0, "p", 2);
+      \u0275\u0275elementStart(7, "p-accordion-content")(8, "ca-link-report", 3);
+      \u0275\u0275listener("problemsChange", function ProblemsPanelComponent_Template_ca_link_report_problemsChange_8_listener($event) {
+        return ctx.onLinkReportProblem($event);
+      });
+      \u0275\u0275elementEnd()()()();
     }
     if (rf & 2) {
       \u0275\u0275advance(2);
       \u0275\u0275twoWayProperty("value", ctx.activePanels);
       \u0275\u0275property("multiple", true);
       \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("value", 1);
+      \u0275\u0275property("value", 0);
       \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(1));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("value", 2);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(0));
     }
   }, dependencies: [
     CommonModule,
@@ -34991,48 +35192,38 @@ var PageToolsComponent = class _PageToolsComponent {
     AccordionPanel,
     AccordionHeader,
     AccordionContent,
-    TemplateConversionComponent,
-    LinkReportComponent,
-    SeoComponent,
-    UserInsightsComponent,
-    ComponentGuidanceComponent,
-    HeadingStructureComponent,
-    IaStructureComponent
-  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */"] });
+    LinkReportComponent
+  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=problems.component.css.map */"] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageToolsComponent, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProblemsPanelComponent, [{
     type: Component,
-    args: [{ selector: "ca-page-tools", imports: [
+    args: [{ selector: "ca-page-problems", standalone: true, imports: [
       CommonModule,
       TranslateModule,
       AccordionModule,
-      TemplateConversionComponent,
-      LinkReportComponent,
-      SeoComponent,
-      UserInsightsComponent,
-      ComponentGuidanceComponent,
-      HeadingStructureComponent,
-      IaStructureComponent
-    ], template: '<p>Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion [(value)]="activePanels" [multiple]="true" class="flex flex-column gap-3">\r\n\r\n    <p-accordion-panel [value]="0" class="border-1 border-round-md border-surface" *ngIf="!production">\r\n        <p-accordion-header>Heading structure</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">View or reorganize your heading structure.</p>\r\n        <p-accordion-content>\r\n            <ca-heading-structure></ca-heading-structure>\r\n        </p-accordion-content>\r\n    </p-accordion-panel>\r\n\r\n    <p-accordion-panel [value]="1" class="border-1 border-round-md border-surface">\r\n        <p-accordion-header>IA structure</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(1)">Check if your page is an IA orphan and view its current IA diagram.</p>\r\n        <p-accordion-content>\r\n            <ca-ia-structure></ca-ia-structure>\r\n        </p-accordion-content>\r\n    </p-accordion-panel>\r\n\r\n    <p-accordion-panel [value]="2" class="border-1 border-round-sm border-surface">\r\n        <p-accordion-header>Component guidance</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">Find guidance on the components used on your page and check for deprecated code or unexpected classes or elements.</p>\r\n        <p-accordion-content>\r\n            <ca-component-guidance></ca-component-guidance>\r\n        </p-accordion-content>\r\n    </p-accordion-panel>\r\n\r\n    <p-accordion-panel [value]="3" class="border-1 border-round-sm border-surface" *ngIf="!production">\r\n        <p-accordion-header>SEO</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">Add doormat text.</p>\r\n        <p-accordion-content>\r\n            <ca-seo></ca-seo>\r\n        </p-accordion-content>\r\n    </p-accordion-panel>\r\n\r\n    <p-accordion-panel [value]="4" class="border-1 border-round-sm border-surface" *ngIf="!production">\r\n        <p-accordion-header>User insights</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(4)">Add doormat text.</p>\r\n        <p-accordion-content>\r\n            <ca-user-insights></ca-user-insights>\r\n        </p-accordion-content>\r\n    </p-accordion-panel>\r\n\r\n    <p-accordion-panel [value]="5" class="border-1 border-round-sm border-surface" *ngIf="!production">\r\n        <p-accordion-header>Link report</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(5)">Add doormat text.</p>\r\n        <p-accordion-content>\r\n            <ca-link-report></ca-link-report>\r\n        </p-accordion-content>\r\n    </p-accordion-panel>\r\n\r\n    <p-accordion-panel [value]="6" class="border-1 border-round-md border-surface" *ngIf="!production">\r\n        <p-accordion-header>Template conversion</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(6)">Add doormat text.</p>\r\n        <p-accordion-content>\r\n            <ca-template-conversion></ca-template-conversion>\r\n        </p-accordion-content>\r\n    </p-accordion-panel>\r\n\r\n</p-accordion>', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */\n"] }]
-  }], null, null);
+      LinkReportComponent
+    ], template: '<p>\r\n  Review issues detected on your page. Each section summarizes problems we\r\n  found.\r\n</p>\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n  >\r\n    <p-accordion-header>Link report</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Check link text vs destination content and flag duplicate destinations.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-link-report\r\n        (problemsChange)="onLinkReportProblem($event)"\r\n      ></ca-link-report>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;7f43ff1825ad05d68e14cc46aa4157d1978629e507df9ccdf9f54268a878a284;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=problems.component.css.map */\n"] }]
+  }], null, { summary: [{
+    type: Output
+  }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageToolsComponent, { className: "PageToolsComponent", filePath: "src/app/views/page-assistant/components/tools.component.ts", lineNumber: 33 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProblemsPanelComponent, { className: "ProblemsPanelComponent", filePath: "src/app/views/page-assistant/components/problems.component.ts", lineNumber: 36 });
 })();
 
 // src/app/views/page-assistant/page-assistant.component.ts
 var _c012 = ["liveContainer"];
 var _c115 = ["sourceContainer"];
-var _c29 = () => ({ "ariaLabel": "Accept selected changes" });
-var _c39 = () => ({ "ariaLabel": "More accept options" });
-var _c48 = () => ({ "ariaLabel": "Reject selected changes" });
-var _c57 = () => ({ "ariaLabel": "More reject options" });
+var _c29 = () => ({ ariaLabel: "Accept selected changes" });
+var _c39 = () => ({ ariaLabel: "More accept options" });
+var _c48 = () => ({ ariaLabel: "Reject selected changes" });
+var _c57 = () => ({ ariaLabel: "More reject options" });
 var _c66 = (a0, a1) => ({ "background-color": a0, border: a1 });
 function PageAssistantCompareComponent_p_button_11_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-button", 26);
+    \u0275\u0275elementStart(0, "p-button", 34);
     \u0275\u0275listener("onClick", function PageAssistantCompareComponent_p_button_11_Template_p_button_onClick_0_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
@@ -35043,8 +35234,8 @@ function PageAssistantCompareComponent_p_button_11_Template(rf, ctx) {
 }
 function PageAssistantCompareComponent_ng_template_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27);
-    \u0275\u0275element(1, "i", 28)(2, "div", 29);
+    \u0275\u0275elementStart(0, "div", 35);
+    \u0275\u0275element(1, "i", 36)(2, "div", 37);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -35057,16 +35248,28 @@ function PageAssistantCompareComponent_ng_template_15_Template(rf, ctx) {
 }
 function PageAssistantCompareComponent_p_message_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "p-message", 30);
+    \u0275\u0275element(0, "p-message", 38);
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275property("severity", ctx_r2.statusSeverity)("text", ctx_r2.statusMessage);
   }
 }
-function PageAssistantCompareComponent_ng_template_34_ng_container_0_span_9_Template(rf, ctx) {
+function PageAssistantCompareComponent_span_38_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 38);
+    \u0275\u0275elementStart(0, "span", 39);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r2.problemsFeatureCount, " ");
+  }
+}
+function PageAssistantCompareComponent_ng_template_44_ng_container_0_span_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 47);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -35076,12 +35279,12 @@ function PageAssistantCompareComponent_ng_template_34_ng_container_0_span_9_Temp
     \u0275\u0275textInterpolate(ctx_r2.displayNumHighlighted);
   }
 }
-function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 32)(2, "div")(3, "p-button", 33);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template_p_button_onClick_3_listener() {
+    \u0275\u0275elementStart(1, "div", 41)(2, "div")(3, "p-button", 42);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_button_onClick_3_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.prev());
@@ -35090,28 +35293,28 @@ function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template(rf
     \u0275\u0275elementStart(4, "span");
     \u0275\u0275text(5);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "p-button", 34);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template_p_button_onClick_6_listener() {
+    \u0275\u0275elementStart(6, "p-button", 43);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_button_onClick_6_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.next());
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "p-splitbutton", 35);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template_p_splitbutton_onClick_7_listener() {
+    \u0275\u0275elementStart(7, "p-splitbutton", 44);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_splitbutton_onClick_7_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarAccept());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "p-splitbutton", 36);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template_p_splitbutton_onClick_8_listener() {
+    \u0275\u0275elementStart(8, "p-splitbutton", 45);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_splitbutton_onClick_8_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarReject());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275template(9, PageAssistantCompareComponent_ng_template_34_ng_container_0_span_9_Template, 2, 1, "span", 37);
+    \u0275\u0275template(9, PageAssistantCompareComponent_ng_template_44_ng_container_0_span_9_Template, 2, 1, "span", 46);
     \u0275\u0275elementEnd();
     \u0275\u0275elementContainerEnd();
   }
@@ -35127,31 +35330,31 @@ function PageAssistantCompareComponent_ng_template_34_ng_container_0_Template(rf
     \u0275\u0275property("ngIf", ctx_r2.displayNumHighlighted);
   }
 }
-function PageAssistantCompareComponent_ng_template_34_ng_container_1_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p-togglebutton", 39);
-    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_34_ng_container_1_Template_p_togglebutton_ngModelChange_1_listener($event) {
+    \u0275\u0275elementStart(1, "p-togglebutton", 48);
+    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_ngModelChange_1_listener($event) {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r2.toggleEdit, $event) || (ctx_r2.toggleEdit = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_34_ng_container_1_Template_p_togglebutton_onChange_1_listener() {
+    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_onChange_1_listener() {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarToggleEdit(ctx_r2.webSelectedView()));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "p-togglebutton", 40);
-    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_34_ng_container_1_Template_p_togglebutton_ngModelChange_2_listener($event) {
+    \u0275\u0275elementStart(2, "p-togglebutton", 49);
+    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_ngModelChange_2_listener($event) {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r2.toggleCopy, $event) || (ctx_r2.toggleCopy = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_34_ng_container_1_Template_p_togglebutton_onChange_2_listener() {
+    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_onChange_2_listener() {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarToggleCopy(ctx_r2.webSelectedView()));
@@ -35167,9 +35370,9 @@ function PageAssistantCompareComponent_ng_template_34_ng_container_1_Template(rf
     \u0275\u0275twoWayProperty("ngModel", ctx_r2.toggleCopy);
   }
 }
-function PageAssistantCompareComponent_ng_template_34_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_44_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, PageAssistantCompareComponent_ng_template_34_ng_container_0_Template, 10, 12, "ng-container", 31)(1, PageAssistantCompareComponent_ng_template_34_ng_container_1_Template, 3, 2, "ng-container", 31);
+    \u0275\u0275template(0, PageAssistantCompareComponent_ng_template_44_ng_container_0_Template, 10, 12, "ng-container", 40)(1, PageAssistantCompareComponent_ng_template_44_ng_container_1_Template, 3, 2, "ng-container", 40);
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
@@ -35178,13 +35381,13 @@ function PageAssistantCompareComponent_ng_template_34_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r2.webSelectedView() === ctx_r2.WebViewType.Original || ctx_r2.webSelectedView() === ctx_r2.WebViewType.Modified);
   }
 }
-function PageAssistantCompareComponent_ng_template_36_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_46_Template(rf, ctx) {
 }
-function PageAssistantCompareComponent_ng_template_38_div_1_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_48_div_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 43);
-    \u0275\u0275element(1, "div", 44);
-    \u0275\u0275elementStart(2, "span", 45);
+    \u0275\u0275elementStart(0, "div", 52);
+    \u0275\u0275element(1, "div", 53);
+    \u0275\u0275elementStart(2, "span", 54);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
   }
@@ -35196,10 +35399,10 @@ function PageAssistantCompareComponent_ng_template_38_div_1_Template(rf, ctx) {
     \u0275\u0275textInterpolate(item_r7.text);
   }
 }
-function PageAssistantCompareComponent_ng_template_38_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_48_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 41);
-    \u0275\u0275template(1, PageAssistantCompareComponent_ng_template_38_div_1_Template, 4, 5, "div", 42);
+    \u0275\u0275elementStart(0, "div", 50);
+    \u0275\u0275template(1, PageAssistantCompareComponent_ng_template_48_div_1_Template, 4, 5, "div", 51);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -35209,6 +35412,10 @@ function PageAssistantCompareComponent_ng_template_38_Template(rf, ctx) {
   }
 }
 var PageAssistantCompareComponent = class _PageAssistantCompareComponent {
+  problemsFeatureCount = 0;
+  onProblemsSummary(flags) {
+    this.problemsFeatureCount = Object.values(flags).filter(Boolean).length;
+  }
   translate = inject(TranslateService);
   messageService = inject(MessageService);
   confirmationService = inject(ConfirmationService);
@@ -35234,7 +35441,6 @@ var PageAssistantCompareComponent = class _PageAssistantCompareComponent {
         });
         if (this.shadowSelectionHandler) {
           this.shadowSelectionHandler();
-          ;
           console.log("Reset shadow selection handler");
         }
         this.shadowSelectionHandler = this.shadowDomService.handleSelection(shadowRoot);
@@ -35286,8 +35492,18 @@ var PageAssistantCompareComponent = class _PageAssistantCompareComponent {
     { text: "Updated version", colour: "#83d5a8", style: "highlight" },
     { text: "Updated link", colour: "#FFEE8C", style: "highlight" },
     { text: "Hidden content", colour: "#6F9FFF", style: "line" },
-    { text: "Modal content", colour: "#666666", style: "line", lineStyle: "dashed" },
-    { text: "Dynamic content", colour: "#fbc02f", style: "line", lineStyle: "dashed" }
+    {
+      text: "Modal content",
+      colour: "#666666",
+      style: "line",
+      lineStyle: "dashed"
+    },
+    {
+      text: "Dynamic content",
+      colour: "#fbc02f",
+      style: "line",
+      lineStyle: "dashed"
+    }
   ]);
   legendItems = computed(() => {
     const view = this.webSelectedView();
@@ -35328,17 +35544,45 @@ var PageAssistantCompareComponent = class _PageAssistantCompareComponent {
   WebViewType = WebViewType;
   webSelectedView = signal(WebViewType.Diff);
   webViewOptions = [
-    { label: "page.compare.view.original", value: WebViewType.Original, icon: "pi pi-file" },
-    { label: "page.compare.view.modified", value: WebViewType.Modified, icon: "pi pi-file-edit" },
-    { label: "page.compare.view.diff", value: WebViewType.Diff, icon: "pi pi-sort-alt" }
+    {
+      label: "page.compare.view.original",
+      value: WebViewType.Original,
+      icon: "pi pi-file"
+    },
+    {
+      label: "page.compare.view.modified",
+      value: WebViewType.Modified,
+      icon: "pi pi-file-edit"
+    },
+    {
+      label: "page.compare.view.diff",
+      value: WebViewType.Diff,
+      icon: "pi pi-sort-alt"
+    }
   ];
   // Source view options
   sourceSelectedView = signal(SourceViewType.SideBySide);
   sourceViewOptions = [
-    { label: "page.compare.view.original", value: SourceViewType.Original, icon: "pi pi-file" },
-    { label: "page.compare.view.modified", value: SourceViewType.Modified, icon: "pi pi-file-edit" },
-    { label: "page.compare.view.sidebyside", value: SourceViewType.SideBySide, icon: "pi pi-pause" },
-    { label: "page.compare.view.linebyline", value: SourceViewType.LineByLine, icon: "pi pi-equals" }
+    {
+      label: "page.compare.view.original",
+      value: SourceViewType.Original,
+      icon: "pi pi-file"
+    },
+    {
+      label: "page.compare.view.modified",
+      value: SourceViewType.Modified,
+      icon: "pi pi-file-edit"
+    },
+    {
+      label: "page.compare.view.sidebyside",
+      value: SourceViewType.SideBySide,
+      icon: "pi pi-pause"
+    },
+    {
+      label: "page.compare.view.linebyline",
+      value: SourceViewType.LineByLine,
+      icon: "pi pi-equals"
+    }
   ];
   //Change web view
   onWebViewChange(viewType) {
@@ -35448,7 +35692,11 @@ var PageAssistantCompareComponent = class _PageAssistantCompareComponent {
       },
       accept: () => {
         this.uploadState.resetUploadFlow();
-        this.shadowDomService.lastSelection = { count: 1, startId: null, endId: null };
+        this.shadowDomService.lastSelection = {
+          count: 1,
+          startId: null,
+          endId: null
+        };
         this.router.navigate(["page-assistant"]);
         console.log("Reset page comparison");
       },
@@ -35473,7 +35721,9 @@ var PageAssistantCompareComponent = class _PageAssistantCompareComponent {
     if (this.urlDataService.isValidUrl(data.originalUrl) && this.urlDataService.isValidUrl(data.modifiedUrl) && data.originalUrl !== data.modifiedUrl) {
       params["compareUrl"] = data.modifiedUrl;
     }
-    const treeLink = this.router.createUrlTree(["page-assistant/share"], { queryParams: params });
+    const treeLink = this.router.createUrlTree(["page-assistant/share"], {
+      queryParams: params
+    });
     const shareLink = `${window.location.origin}${this.baseHref}${this.router.serializeUrl(treeLink).replace(/^\//, "")}`;
     navigator.clipboard.writeText(shareLink).then(() => {
       this.messageService.add({
@@ -35550,18 +35800,18 @@ ${base}`;
         const model = this.selectedAiModel;
         const url = "https://openrouter.ai/api/v1/chat/completions";
         const headers = {
-          "Authorization": `Bearer ${apiKey}`,
+          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json"
         };
         const payload = {
-          "models": [model, AiModel.Mistral, AiModel.Qwen],
-          "messages": [
-            { "role": "system", "content": prompt },
-            { "role": "user", "content": html }
+          models: [model, AiModel.Mistral, AiModel.Qwen],
+          messages: [
+            { role: "system", content: prompt },
+            { role: "user", content: html }
           ],
-          "temperature": 0,
-          "provider": {
-            "allow_fallbacks": true
+          temperature: 0,
+          provider: {
+            allow_fallbacks: true
             //"data_collection": "deny"
           }
         };
@@ -35678,14 +35928,22 @@ ${base}`;
       return;
     this.currentIndex = (this.currentIndex + 1) % this.elements.length;
     this.focusOnIndex(this.currentIndex);
-    this.shadowDomService.lastSelection = { count: 1, startId: null, endId: null };
+    this.shadowDomService.lastSelection = {
+      count: 1,
+      startId: null,
+      endId: null
+    };
   }
   prev() {
     if (this.elements.length === 0)
       return;
     this.currentIndex = (this.currentIndex - 1 + this.elements.length) % this.elements.length;
     this.focusOnIndex(this.currentIndex);
-    this.shadowDomService.lastSelection = { count: 1, startId: null, endId: null };
+    this.shadowDomService.lastSelection = {
+      count: 1,
+      startId: null,
+      endId: null
+    };
   }
   focusOnIndex(index) {
     const shadowRoot = this.shadowDOM();
@@ -35775,7 +36033,10 @@ ${base}`;
     if (!data?.modifiedHtml || !data?.modifiedUrl)
       return;
     this.uploadState.savePreviousUploadData();
-    this.uploadState.mergeOriginalData({ originalHtml: data.modifiedHtml, originalUrl: data.modifiedUrl });
+    this.uploadState.mergeOriginalData({
+      originalHtml: data.modifiedHtml,
+      originalUrl: data.modifiedUrl
+    });
     this.currentIndex = 0;
   }
   //Reject All
@@ -35785,7 +36046,10 @@ ${base}`;
     if (!data?.originalHtml || !data?.originalUrl)
       return;
     this.uploadState.savePreviousUploadData();
-    this.uploadState.mergeModifiedData({ modifiedHtml: data.originalHtml, modifiedUrl: data.originalUrl });
+    this.uploadState.mergeModifiedData({
+      modifiedHtml: data.originalHtml,
+      modifiedUrl: data.originalUrl
+    });
     this.currentIndex = 0;
   }
   toolbarAccept() {
@@ -35860,7 +36124,11 @@ ${base}`;
         span.replaceWith(link);
       }
     });
-    this.shadowDomService.lastSelection = { count: 1, startId: null, endId: null };
+    this.shadowDomService.lastSelection = {
+      count: 1,
+      startId: null,
+      endId: null
+    };
     const updatedHtml = diffContainer.innerHTML;
     const data = this.uploadState.getUploadData();
     if (!data)
@@ -35901,7 +36169,7 @@ ${base}`;
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.liveContainer = _t.first);
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.sourceContainer = _t.first);
     }
-  }, decls: 48, vars: 19, consts: [["message", ""], ["start", ""], ["center", ""], ["end", ""], ["liveContainer", ""], ["sourceContainer", ""], ["id", "wb-cont"], [1, "flex", "flex-wrap", "justify-content-between", "mb-3"], [1, "flex", "gap-2"], ["label", "Send to GenAI", "severity", "primary", "showDelay", "1000", "hideDelay", "300", 3, "onClick", "icon", "pTooltip", "disabled"], [3, "promptChange", "aiChange", "aiSubmit", "customPrompt", "editPrompt"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick", 4, "ngIf"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick"], ["closable", "", 3, "severity", "text", 4, "ngIf"], ["value", "0", 1, "mt-3"], ["value", "0"], [1, "pi", "pi-eye", "mr-1"], ["value", "1"], [1, "pi", "pi-code", "mr-1"], ["value", "2"], [1, "pi", "pi-wrench", "mr-1"], [1, "shadow-1"], ["label", "page.compare.view", 3, "selectedChange", "name", "options", "selected"], [1, "sticky", "top-0", "z-5", "bg-primary-reverse", "p-0"], [1, "live-container", "p-0", 3, "ngClass"], [1, "source-container", "p-0", 3, "ngClass"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick"], [1, "flex", "flex-row", "align-items-center", "gap-3"], [1, "text-6xl", "text-red-500", 3, "ngClass"], [3, "innerHTML"], ["closable", "", 3, "severity", "text"], [4, "ngIf"], [1, "flex", "flex-row", "align-items-center", "gap-2"], ["icon", "pi pi-chevron-left", "text", "", "severity", "primary", "ariaLabel", "Previous change", "pTooltip", "Previous change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["icon", "pi pi-chevron-right", "text", "", "severity", "primary", "ariaLabel", "Next change", "pTooltip", "Next change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["label", "Accept", "icon", "pi pi-check", "severity", "success", "outlined", "", "size", "small", "pTooltip", "Accept selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["label", "Reject", "icon", "pi pi-times", "severity", "danger", "outlined", "", "size", "small", "pTooltip", "Reject selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["class", "text-color-secondary pl-1", 4, "ngIf"], [1, "text-color-secondary", "pl-1"], ["offLabel", "Edit", "onLabel", "Save", "offIcon", "pi pi-pen-to-square", "onIcon", "pi pi-save", "ariaLabel", "Edit/Save", "styleClass", "font-bold border-none w-6rem", 3, "ngModelChange", "onChange", "ngModel"], ["offLabel", "Copy code", "onLabel", "Copied", "offIcon", "pi pi-clipboard", "onIcon", "", "ariaLabel", "Copy code", "styleClass", "font-bold border-none w-9rem", 3, "ngModelChange", "onChange", "ngModel"], [1, "group-legend"], ["class", "legend-item", 4, "ngFor", "ngForOf"], [1, "legend-item"], [1, "legend-box", 3, "ngStyle"], [1, "legend-text"]], template: function PageAssistantCompareComponent_Template(rf, ctx) {
+  }, decls: 60, vars: 20, consts: [["message", ""], ["start", ""], ["center", ""], ["end", ""], ["liveContainer", ""], ["sourceContainer", ""], ["id", "wb-cont"], [1, "flex", "flex-wrap", "justify-content-between", "mb-3"], [1, "flex", "gap-2"], ["label", "Send to GenAI", "severity", "primary", "showDelay", "1000", "hideDelay", "300", 3, "onClick", "icon", "pTooltip", "disabled"], [3, "promptChange", "aiChange", "aiSubmit", "customPrompt", "editPrompt"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick", 4, "ngIf"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick"], ["closable", "", 3, "severity", "text", 4, "ngIf"], ["value", "0", 1, "mt-3"], ["value", "0"], [1, "pi", "pi-eye", "mr-1"], ["value", "1"], [1, "pi", "pi-code", "mr-1"], ["value", "2"], [1, "pi", "pi-wrench", "mr-1"], ["value", "3"], [1, "pi", "pi-info-circle", "mr-1"], ["value", "4"], [1, "pi", "pi-chart-bar", "mr-1"], ["value", "5"], [1, "pi", "pi-exclamation-triangle", "mr-1"], ["class", "tab-badge", 4, "ngIf"], [1, "shadow-1"], ["label", "page.compare.view", 3, "selectedChange", "name", "options", "selected"], [1, "sticky", "top-0", "z-5", "bg-primary-reverse", "p-0"], [1, "live-container", "p-0", 3, "ngClass"], [1, "source-container", "p-0", 3, "ngClass"], [3, "summary"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick"], [1, "flex", "flex-row", "align-items-center", "gap-3"], [1, "text-6xl", "text-red-500", 3, "ngClass"], [3, "innerHTML"], ["closable", "", 3, "severity", "text"], [1, "tab-badge"], [4, "ngIf"], [1, "flex", "flex-row", "align-items-center", "gap-2"], ["icon", "pi pi-chevron-left", "text", "", "severity", "primary", "ariaLabel", "Previous change", "pTooltip", "Previous change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["icon", "pi pi-chevron-right", "text", "", "severity", "primary", "ariaLabel", "Next change", "pTooltip", "Next change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["label", "Accept", "icon", "pi pi-check", "severity", "success", "outlined", "", "size", "small", "pTooltip", "Accept selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["label", "Reject", "icon", "pi pi-times", "severity", "danger", "outlined", "", "size", "small", "pTooltip", "Reject selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["class", "text-color-secondary pl-1", 4, "ngIf"], [1, "text-color-secondary", "pl-1"], ["offLabel", "Edit", "onLabel", "Save", "offIcon", "pi pi-pen-to-square", "onIcon", "pi pi-save", "ariaLabel", "Edit/Save", "styleClass", "font-bold border-none w-6rem", 3, "ngModelChange", "onChange", "ngModel"], ["offLabel", "Copy code", "onLabel", "Copied", "offIcon", "pi pi-clipboard", "onIcon", "", "ariaLabel", "Copy code", "styleClass", "font-bold border-none w-9rem", 3, "ngModelChange", "onChange", "ngModel"], [1, "group-legend"], ["class", "legend-item", 4, "ngFor", "ngForOf"], [1, "legend-item"], [1, "legend-box", 3, "ngStyle"], [1, "legend-text"]], template: function PageAssistantCompareComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "h1", 6);
@@ -35960,52 +36228,73 @@ ${base}`;
       \u0275\u0275elementStart(26, "p-tab", 19);
       \u0275\u0275element(27, "i", 20);
       \u0275\u0275text(28, "Tools");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(29, "p-tab", 21);
+      \u0275\u0275element(30, "i", 22);
+      \u0275\u0275text(31, "Metadata");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(32, "p-tab", 23);
+      \u0275\u0275element(33, "i", 24);
+      \u0275\u0275text(34, "Data");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(35, "p-tab", 25);
+      \u0275\u0275element(36, "i", 26);
+      \u0275\u0275text(37, " Problems ");
+      \u0275\u0275template(38, PageAssistantCompareComponent_span_38_Template, 2, 1, "span", 27);
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(29, "p-tabpanels", 21)(30, "p-tabpanel", 15)(31, "ca-horizontal-radio-buttons", 22);
-      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_31_listener($event) {
+      \u0275\u0275elementStart(39, "p-tabpanels", 28)(40, "p-tabpanel", 15)(41, "ca-horizontal-radio-buttons", 29);
+      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_41_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.webSelectedView, $event) || (ctx.webSelectedView = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_31_listener($event) {
+      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_41_listener($event) {
         \u0275\u0275restoreView(_r1);
         return \u0275\u0275resetView(ctx.onWebViewChange($event));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(32, "div", 23)(33, "p-toolbar");
-      \u0275\u0275template(34, PageAssistantCompareComponent_ng_template_34_Template, 2, 2, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(36, PageAssistantCompareComponent_ng_template_36_Template, 0, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(38, PageAssistantCompareComponent_ng_template_38_Template, 2, 1, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementStart(42, "div", 30)(43, "p-toolbar");
+      \u0275\u0275template(44, PageAssistantCompareComponent_ng_template_44_Template, 2, 2, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(46, PageAssistantCompareComponent_ng_template_46_Template, 0, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(48, PageAssistantCompareComponent_ng_template_48_Template, 2, 1, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(40, "div", 24, 4);
+      \u0275\u0275element(50, "div", 31, 4);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(42, "p-tabpanel", 17)(43, "ca-horizontal-radio-buttons", 22);
-      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_43_listener($event) {
+      \u0275\u0275elementStart(52, "p-tabpanel", 17)(53, "ca-horizontal-radio-buttons", 29);
+      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_53_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.sourceSelectedView, $event) || (ctx.sourceSelectedView = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_43_listener($event) {
+      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_53_listener($event) {
         \u0275\u0275restoreView(_r1);
         return \u0275\u0275resetView(ctx.onSourceViewChange($event));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275element(44, "div", 25, 5);
+      \u0275\u0275element(54, "div", 32, 5);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(46, "p-tabpanel", 19);
-      \u0275\u0275element(47, "ca-page-tools");
-      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(56, "p-tabpanel", 19);
+      \u0275\u0275element(57, "ca-page-tools");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(58, "p-tabpanel", 25)(59, "ca-page-problems", 33);
+      \u0275\u0275listener("summary", function PageAssistantCompareComponent_Template_ca_page_problems_summary_59_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onProblemsSummary($event));
+      });
+      \u0275\u0275elementEnd()()()();
     }
     if (rf & 2) {
       \u0275\u0275advance();
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 15, "title.page"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 16, "title.page"));
       \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 17, "page.compare.description"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 18, "page.compare.description"));
       \u0275\u0275advance(4);
       \u0275\u0275property("icon", ctx.isLoading ? "pi pi-spinner pi-spin" : "pi pi-comments")("pTooltip", ctx.aiDisabled)("disabled", !(ctx.uploadData == null ? null : ctx.uploadData.originalHtml) || ctx.isLoading || ctx.isDisabled);
       \u0275\u0275advance(3);
       \u0275\u0275property("ngIf", ctx.canShare);
       \u0275\u0275advance(6);
       \u0275\u0275property("ngIf", ctx.statusMessage);
-      \u0275\u0275advance(14);
+      \u0275\u0275advance(21);
+      \u0275\u0275property("ngIf", ctx.problemsFeatureCount > 0);
+      \u0275\u0275advance(3);
       \u0275\u0275property("name", "webView")("options", ctx.webViewOptions);
       \u0275\u0275twoWayProperty("selected", ctx.webSelectedView);
       \u0275\u0275advance(9);
@@ -36016,7 +36305,45 @@ ${base}`;
       \u0275\u0275advance();
       \u0275\u0275property("ngClass", ctx.sourceSelectedView());
     }
-  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgStyle, FormsModule, NgControlStatus, NgModel, TranslateModule, TranslatePipe, ButtonModule, Button, MessageModule, Message, Toast, CardModule, TabsModule, Tabs, TabPanels, TabPanel, TabList, Tab, RadioButtonModule, ToolbarModule, Toolbar, ToggleButtonModule, ToggleButton, TooltipModule, Tooltip, ConfirmDialogModule, ConfirmDialog, SplitButtonModule, SplitButton, AiOptionsComponent, HorizontalRadioButtonsComponent, PageToolsComponent], styles: ['@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";\n\n\n\n@font-face {\n  font-family: "Glyphicons Halflings";\n  src: url(https://www.canada.ca/etc/designs/canada/wet-boew/fonts/glyphicons-halflings-regular.woff2) format("woff2");\n}\n.d2h-file-side-diff[_ngcontent-%COMP%] {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-file-diff[_ngcontent-%COMP%] {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-code-wrapper[_ngcontent-%COMP%] {\n  position: relative;\n}\n.d2h-file-name-wrapper[_ngcontent-%COMP%] {\n  display: none;\n}\n.live-container[_ngcontent-%COMP%] {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.live-container.original[_ngcontent-%COMP%] {\n  border-color: #F3A59D;\n}\n.live-container.modified[_ngcontent-%COMP%] {\n  border-color: #83d5a8;\n}\n.source-container[_ngcontent-%COMP%] {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.source-container.original[_ngcontent-%COMP%] {\n  border-color: #F3A59D;\n}\n.source-container.modified[_ngcontent-%COMP%] {\n  border-color: #83d5a8;\n}\n.slide-content[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.change-text[_ngcontent-%COMP%] {\n  margin: 0;\n  text-align: right;\n  padding: 10px;\n}\n.custom-prev[_ngcontent-%COMP%], \n.custom-next[_ngcontent-%COMP%] {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.5);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n  border-radius: 5px;\n  font-size: 14px;\n}\n.custom-prev[_ngcontent-%COMP%] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.custom-next[_ngcontent-%COMP%] {\n  border-left: none;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.custom-prev[_ngcontent-%COMP%]:hover, \n.custom-next[_ngcontent-%COMP%]:hover {\n  background: rgba(255, 255, 255, 0.5);\n}\n.loading-spinner[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  font-size: 1.2rem;\n  color: #888;\n}\n.group-legend[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  justify-content: flex-end;\n}\n.legend-item[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.legend-box[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.loading-overlay[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 10;\n  color: white;\n}\n.loading-spinner[_ngcontent-%COMP%] {\n  border: 4px solid rgba(255, 255, 255, 0.3);\n  border-top: 4px solid white;\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n  margin-right: 10px;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n.legend-box-modal[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 16px;\n  height: 16px;\n  margin-right: 5px;\n  vertical-align: middle;\n}\n.legend-red-modal[_ngcontent-%COMP%] {\n  background-color: rgb(243, 165, 157);\n}\n.legend-green-modal[_ngcontent-%COMP%] {\n  background-color: rgb(131, 213, 168);\n}\n.legend-yellow-modal[_ngcontent-%COMP%] {\n  background-color: rgb(255, 238, 140);\n}\n.legend-blue-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px solid rgb(111, 159, 255);\n}\n.legend-dashed-popup-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px dashed rgb(102, 102, 102);\n}\n.legend-dashed-dynamic-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px dashed rgb(251, 192, 47);\n}\n.no-bullet-points[_ngcontent-%COMP%] {\n  list-style: none;\n}\n/*# sourceMappingURL=page-assistant.component.css.map */'] });
+  }, dependencies: [
+    CommonModule,
+    NgClass,
+    NgForOf,
+    NgIf,
+    NgStyle,
+    FormsModule,
+    NgControlStatus,
+    NgModel,
+    TranslateModule,
+    TranslatePipe,
+    ButtonModule,
+    Button,
+    MessageModule,
+    Message,
+    Toast,
+    CardModule,
+    TabsModule,
+    Tabs,
+    TabPanels,
+    TabPanel,
+    TabList,
+    Tab,
+    RadioButtonModule,
+    ToolbarModule,
+    Toolbar,
+    ToggleButtonModule,
+    ToggleButton,
+    TooltipModule,
+    Tooltip,
+    ConfirmDialogModule,
+    ConfirmDialog,
+    SplitButtonModule,
+    SplitButton,
+    AiOptionsComponent,
+    HorizontalRadioButtonsComponent,
+    PageToolsComponent,
+    ProblemsPanelComponent
+  ], styles: ['@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";\n\n\n\n@font-face {\n  font-family: "Glyphicons Halflings";\n  src: url(https://www.canada.ca/etc/designs/canada/wet-boew/fonts/glyphicons-halflings-regular.woff2) format("woff2");\n}\n.d2h-file-side-diff[_ngcontent-%COMP%] {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-file-diff[_ngcontent-%COMP%] {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-code-wrapper[_ngcontent-%COMP%] {\n  position: relative;\n}\n.d2h-file-name-wrapper[_ngcontent-%COMP%] {\n  display: none;\n}\n.live-container[_ngcontent-%COMP%] {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.live-container.original[_ngcontent-%COMP%] {\n  border-color: #f3a59d;\n}\n.live-container.modified[_ngcontent-%COMP%] {\n  border-color: #83d5a8;\n}\n.source-container[_ngcontent-%COMP%] {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.source-container.original[_ngcontent-%COMP%] {\n  border-color: #f3a59d;\n}\n.source-container.modified[_ngcontent-%COMP%] {\n  border-color: #83d5a8;\n}\n.slide-content[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.change-text[_ngcontent-%COMP%] {\n  margin: 0;\n  text-align: right;\n  padding: 10px;\n}\n.custom-prev[_ngcontent-%COMP%], \n.custom-next[_ngcontent-%COMP%] {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.5);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n  border-radius: 5px;\n  font-size: 14px;\n}\n.custom-prev[_ngcontent-%COMP%] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.custom-next[_ngcontent-%COMP%] {\n  border-left: none;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.custom-prev[_ngcontent-%COMP%]:hover, \n.custom-next[_ngcontent-%COMP%]:hover {\n  background: rgba(255, 255, 255, 0.5);\n}\n.loading-spinner[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  font-size: 1.2rem;\n  color: #888;\n}\n.group-legend[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  justify-content: flex-end;\n}\n.legend-item[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.legend-box[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.loading-overlay[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 10;\n  color: white;\n}\n.loading-spinner[_ngcontent-%COMP%] {\n  border: 4px solid rgba(255, 255, 255, 0.3);\n  border-top: 4px solid white;\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n  margin-right: 10px;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n.legend-box-modal[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 16px;\n  height: 16px;\n  margin-right: 5px;\n  vertical-align: middle;\n}\n.legend-red-modal[_ngcontent-%COMP%] {\n  background-color: rgb(243, 165, 157);\n}\n.legend-green-modal[_ngcontent-%COMP%] {\n  background-color: rgb(131, 213, 168);\n}\n.legend-yellow-modal[_ngcontent-%COMP%] {\n  background-color: rgb(255, 238, 140);\n}\n.legend-blue-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px solid rgb(111, 159, 255);\n}\n.legend-dashed-popup-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px dashed rgb(102, 102, 102);\n}\n.legend-dashed-dynamic-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px dashed rgb(251, 192, 47);\n}\n.no-bullet-points[_ngcontent-%COMP%] {\n  list-style: none;\n}\n[_nghost-%COMP%]     .p-tabs .p-tablist .p-tab .tab-badge, \n.problems-badge[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 1.25rem;\n  height: 1.25rem;\n  padding: 0 0.35rem;\n  margin-left: 0.5rem;\n  border-radius: 9999px;\n  background: #ef4444 !important;\n  color: #fff !important;\n  font-weight: 700;\n  font-size: 0.75rem;\n  line-height: 1;\n  vertical-align: middle;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);\n}\n[_nghost-%COMP%]     .tab-badge {\n  transform: translateY(-1px);\n}\n[_nghost-%COMP%]     .dark .tab-badge {\n  background: #f43f5e;\n}\n/*# sourceMappingURL=page-assistant.component.css.map */'] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageAssistantCompareComponent, [{
@@ -36038,119 +36365,254 @@ ${base}`;
       SplitButtonModule,
       AiOptionsComponent,
       HorizontalRadioButtonsComponent,
-      PageToolsComponent
-    ], template: `<h1 id="wb-cont">{{ 'title.page' | translate}}</h1>\r
-<p>{{'page.compare.description' | translate }}</p>\r
+      PageToolsComponent,
+      ProblemsPanelComponent
+    ], template: `<h1 id="wb-cont">{{ "title.page" | translate }}</h1>\r
+<p>{{ "page.compare.description" | translate }}</p>\r
 \r
 <!-- Control Buttons -->\r
 <div class="flex flex-wrap justify-content-between mb-3">\r
-    <div class="flex gap-2">\r
-        <p-button label="Send to GenAI" [icon]="isLoading ? 'pi pi-spinner pi-spin' : 'pi pi-comments'" severity="primary"\r
-                  (onClick)="sendToAI()"\r
-                  [pTooltip]="aiDisabled" showDelay="1000" hideDelay="300"\r
-                  [disabled]="!uploadData?.originalHtml || isLoading || isDisabled"></p-button>\r
-        <ca-ai-options (promptChange)="onPromptChange($event)" (aiChange)="onAiChange($event)" (aiSubmit)="sendToAI()" (customPrompt)="onAppendCustom($event)" (editPrompt)="onPrependLevel($event)"></ca-ai-options>\r
-    </div>\r
-    <div class="flex gap-2"><p-button label="Share" icon="pi pi-share-alt" severity="secondary" (onClick)="shareLink()" *ngIf="canShare"></p-button>\r
-        <p-button label="Reset" icon="pi pi-trash" severity="danger" (onClick)="clearAll($event)"></p-button>\r
-    </div>\r
+  <div class="flex gap-2">\r
+    <p-button\r
+      label="Send to GenAI"\r
+      [icon]="isLoading ? 'pi pi-spinner pi-spin' : 'pi pi-comments'"\r
+      severity="primary"\r
+      (onClick)="sendToAI()"\r
+      [pTooltip]="aiDisabled"\r
+      showDelay="1000"\r
+      hideDelay="300"\r
+      [disabled]="!uploadData?.originalHtml || isLoading || isDisabled"\r
+    ></p-button>\r
+    <ca-ai-options\r
+      (promptChange)="onPromptChange($event)"\r
+      (aiChange)="onAiChange($event)"\r
+      (aiSubmit)="sendToAI()"\r
+      (customPrompt)="onAppendCustom($event)"\r
+      (editPrompt)="onPrependLevel($event)"\r
+    ></ca-ai-options>\r
+  </div>\r
+  <div class="flex gap-2">\r
+    <p-button\r
+      label="Share"\r
+      icon="pi pi-share-alt"\r
+      severity="secondary"\r
+      (onClick)="shareLink()"\r
+      *ngIf="canShare"\r
+    ></p-button>\r
+    <p-button\r
+      label="Reset"\r
+      icon="pi pi-trash"\r
+      severity="danger"\r
+      (onClick)="clearAll($event)"\r
+    ></p-button>\r
+  </div>\r
 </div>\r
 <p-toast />\r
 <p-confirmdialog>\r
-    <ng-template #message let-message>\r
-        <div class="flex flex-row align-items-center gap-3">\r
-            <i [ngClass]="message.icon" class="text-6xl text-red-500"></i>\r
-            <div [innerHTML]="message.message"></div>\r
-        </div>\r
-    </ng-template>\r
+  <ng-template #message let-message>\r
+    <div class="flex flex-row align-items-center gap-3">\r
+      <i [ngClass]="message.icon" class="text-6xl text-red-500"></i>\r
+      <div [innerHTML]="message.message"></div>\r
+    </div>\r
+  </ng-template>\r
 </p-confirmdialog>\r
-<p-message *ngIf="statusMessage" [severity]="statusSeverity" [text]="statusMessage" closable></p-message>\r
+<p-message\r
+  *ngIf="statusMessage"\r
+  [severity]="statusSeverity"\r
+  [text]="statusMessage"\r
+  closable\r
+></p-message>\r
 \r
 <!-- Results Section -->\r
 \r
 <p-tabs value="0" class="mt-3">\r
-    <p-tablist>\r
-        <p-tab value="0"><i class="pi pi-eye mr-1"></i>Web page</p-tab>\r
-        <p-tab value="1"><i class="pi pi-code mr-1"></i>Page source</p-tab>\r
-        <p-tab value="2"><i class="pi pi-wrench mr-1"></i>Tools</p-tab>\r
-    </p-tablist>\r
-    <!-- Rendered page -->\r
-    <p-tabpanels class="shadow-1">\r
+  <p-tablist>\r
+    <p-tab value="0"><i class="pi pi-eye mr-1"></i>Web page</p-tab>\r
+    <p-tab value="1"><i class="pi pi-code mr-1"></i>Page source</p-tab>\r
+    <p-tab value="2"><i class="pi pi-wrench mr-1"></i>Tools</p-tab>\r
+    <p-tab value="3"><i class="pi pi-info-circle mr-1"></i>Metadata</p-tab>\r
+    <p-tab value="4"><i class="pi pi-chart-bar mr-1"></i>Data</p-tab>\r
+    <p-tab value="5">\r
+      <i class="pi pi-exclamation-triangle mr-1"></i>\r
+      Problems\r
+      <span class="tab-badge" *ngIf="problemsFeatureCount > 0">\r
+        {{ problemsFeatureCount }}\r
+      </span>\r
+    </p-tab>\r
+  </p-tablist>\r
+  <!-- Rendered page -->\r
+  <p-tabpanels class="shadow-1">\r
+    <p-tabpanel value="0">\r
+      <!--Switch view -->\r
+      <ca-horizontal-radio-buttons\r
+        label="page.compare.view"\r
+        [name]="'webView'"\r
+        [options]="webViewOptions"\r
+        [(selected)]="webSelectedView"\r
+        (selectedChange)="onWebViewChange($event)"\r
+      ></ca-horizontal-radio-buttons>\r
 \r
-        <p-tabpanel value="0">\r
+      <!--Toolbar-->\r
+      <div class="sticky top-0 z-5 bg-primary-reverse p-0">\r
+        <p-toolbar>\r
+          <ng-template #start>\r
+            <ng-container *ngIf="webSelectedView() === WebViewType.Diff">\r
+              <div class="flex flex-row align-items-center gap-2">\r
+                <div>\r
+                  <p-button\r
+                    icon="pi pi-chevron-left"\r
+                    text\r
+                    severity="primary"\r
+                    (onClick)="prev()"\r
+                    ariaLabel="Previous change"\r
+                    pTooltip="Previous change"\r
+                    showDelay="1000"\r
+                    hideDelay="300"\r
+                  />\r
+                  <span>{{ displayCounter }}</span>\r
+                  <p-button\r
+                    icon="pi pi-chevron-right"\r
+                    text\r
+                    severity="primary"\r
+                    (onClick)="next()"\r
+                    ariaLabel="Next change"\r
+                    pTooltip="Next change"\r
+                    showDelay="1000"\r
+                    hideDelay="300"\r
+                  />\r
+                </div>\r
 \r
-            <!--Switch view -->\r
-            <ca-horizontal-radio-buttons label="page.compare.view" [name]="'webView'" [options]="webViewOptions" [(selected)]="webSelectedView" (selectedChange)="onWebViewChange($event)"></ca-horizontal-radio-buttons>\r
+                <p-splitbutton\r
+                  label="Accept"\r
+                  icon="pi pi-check"\r
+                  severity="success"\r
+                  outlined\r
+                  size="small"\r
+                  class="secondary-outline"\r
+                  (onClick)="toolbarAccept()"\r
+                  [model]="acceptItems"\r
+                  [buttonProps]="{ ariaLabel: 'Accept selected changes' }"\r
+                  [menuButtonProps]="{ ariaLabel: 'More accept options' }"\r
+                  pTooltip="Accept selected changes"\r
+                  tooltipPosition="top"\r
+                  showDelay="1000"\r
+                  hideDelay="300"\r
+                />\r
+                <p-splitbutton\r
+                  label="Reject"\r
+                  icon="pi pi-times"\r
+                  severity="danger"\r
+                  outlined\r
+                  size="small"\r
+                  class="secondary-outline"\r
+                  (onClick)="toolbarReject()"\r
+                  [model]="rejectItems"\r
+                  [buttonProps]="{ ariaLabel: 'Reject selected changes' }"\r
+                  [menuButtonProps]="{ ariaLabel: 'More reject options' }"\r
+                  pTooltip="Reject selected changes"\r
+                  tooltipPosition="top"\r
+                  showDelay="1000"\r
+                  hideDelay="300"\r
+                />\r
 \r
-            <!--Toolbar-->\r
-            <div class="sticky top-0 z-5 bg-primary-reverse p-0">\r
-                <p-toolbar>\r
-                    <ng-template #start>\r
-                        <ng-container *ngIf="webSelectedView() === WebViewType.Diff">\r
-                            <div class="flex flex-row align-items-center gap-2">\r
-                                <div>\r
-                                    <p-button icon="pi pi-chevron-left" text severity="primary" (onClick)="prev()" ariaLabel="Previous change"\r
-                                              pTooltip="Previous change" showDelay="1000" hideDelay="300" />\r
-                                    <span>{{ displayCounter}}</span>\r
-                                    <p-button icon="pi pi-chevron-right" text severity="primary" (onClick)="next()" ariaLabel="Next change"\r
-                                              pTooltip="Next change" showDelay="1000" hideDelay="300" />\r
-                                </div>\r
-\r
-                                <p-splitbutton label="Accept" icon="pi pi-check" severity="success" outlined size="small" class="secondary-outline" (onClick)="toolbarAccept()" [model]="acceptItems"\r
-                                               [buttonProps]="{'ariaLabel': 'Accept selected changes'}" [menuButtonProps]="{'ariaLabel': 'More accept options'}"\r
-                                               pTooltip="Accept selected changes" tooltipPosition="top" showDelay="1000" hideDelay="300" />\r
-                                <p-splitbutton label="Reject" icon="pi pi-times" severity="danger" outlined size="small" class="secondary-outline" (onClick)="toolbarReject()" [model]="rejectItems"\r
-                                               [buttonProps]="{'ariaLabel': 'Reject selected changes'}" [menuButtonProps]="{'ariaLabel': 'More reject options'}"\r
-                                               pTooltip="Reject selected changes" tooltipPosition="top" showDelay="1000" hideDelay="300" />\r
-\r
-                                <span *ngIf="displayNumHighlighted" class="text-color-secondary pl-1">{{ displayNumHighlighted }}</span>\r
-                            </div>\r
-                        </ng-container>\r
-                        <ng-container *ngIf="webSelectedView() === WebViewType.Original || webSelectedView() === WebViewType.Modified">\r
-                            <p-togglebutton [(ngModel)]="toggleEdit" offLabel="Edit" onLabel="Save" offIcon="pi pi-pen-to-square" onIcon="pi pi-save" ariaLabel="Edit/Save" styleClass="font-bold border-none w-6rem"\r
-                                            (onChange)="toolbarToggleEdit(webSelectedView())" />\r
-                            <p-togglebutton [(ngModel)]="toggleCopy" offLabel="Copy code" onLabel="Copied" offIcon="pi pi-clipboard" onIcon="" ariaLabel="Copy code" styleClass="font-bold border-none w-9rem"\r
-                                            (onChange)="toolbarToggleCopy(webSelectedView())" />\r
-                        </ng-container>\r
-                    </ng-template>\r
-                    <ng-template #center>\r
-                    </ng-template>\r
-                    <ng-template #end>\r
-                        <!--Legend-->\r
-                        <div class="group-legend">\r
-                            <div *ngFor="let item of legendItems()" class="legend-item">\r
-                                <div class="legend-box" [ngStyle]="{\r
-                            'background-color': item.style === 'highlight' ? item.colour : 'transparent',\r
-                            border: item.style === 'line'\r
-                                ? '2px ' + (item.lineStyle || 'solid') + ' ' + item.colour\r
-                                : 'none', }"></div>\r
-                                <span class="legend-text">{{ item.text }}</span>\r
-                            </div>\r
-                        </div>\r
-                    </ng-template>\r
-                </p-toolbar>\r
+                <span\r
+                  *ngIf="displayNumHighlighted"\r
+                  class="text-color-secondary pl-1"\r
+                  >{{ displayNumHighlighted }}</span\r
+                >\r
+              </div>\r
+            </ng-container>\r
+            <ng-container\r
+              *ngIf="\r
+                webSelectedView() === WebViewType.Original ||\r
+                webSelectedView() === WebViewType.Modified\r
+              "\r
+            >\r
+              <p-togglebutton\r
+                [(ngModel)]="toggleEdit"\r
+                offLabel="Edit"\r
+                onLabel="Save"\r
+                offIcon="pi pi-pen-to-square"\r
+                onIcon="pi pi-save"\r
+                ariaLabel="Edit/Save"\r
+                styleClass="font-bold border-none w-6rem"\r
+                (onChange)="toolbarToggleEdit(webSelectedView())"\r
+              />\r
+              <p-togglebutton\r
+                [(ngModel)]="toggleCopy"\r
+                offLabel="Copy code"\r
+                onLabel="Copied"\r
+                offIcon="pi pi-clipboard"\r
+                onIcon=""\r
+                ariaLabel="Copy code"\r
+                styleClass="font-bold border-none w-9rem"\r
+                (onChange)="toolbarToggleCopy(webSelectedView())"\r
+              />\r
+            </ng-container>\r
+          </ng-template>\r
+          <ng-template #center> </ng-template>\r
+          <ng-template #end>\r
+            <!--Legend-->\r
+            <div class="group-legend">\r
+              <div *ngFor="let item of legendItems()" class="legend-item">\r
+                <div\r
+                  class="legend-box"\r
+                  [ngStyle]="{\r
+                    'background-color':\r
+                      item.style === 'highlight' ? item.colour : 'transparent',\r
+                    border:\r
+                      item.style === 'line'\r
+                        ? '2px ' +\r
+                          (item.lineStyle || 'solid') +\r
+                          ' ' +\r
+                          item.colour\r
+                        : 'none',\r
+                  }"\r
+                ></div>\r
+                <span class="legend-text">{{ item.text }}</span>\r
+              </div>\r
             </div>\r
-            <!--Shadow Dom-->\r
-            <div #liveContainer class="live-container p-0" [ngClass]="webSelectedView()"></div>\r
+          </ng-template>\r
+        </p-toolbar>\r
+      </div>\r
+      <!--Shadow Dom-->\r
+      <div\r
+        #liveContainer\r
+        class="live-container p-0"\r
+        [ngClass]="webSelectedView()"\r
+      ></div>\r
+    </p-tabpanel>\r
+    <!-- Source code -->\r
+    <p-tabpanel value="1">\r
+      <!--Switch view -->\r
+      <ca-horizontal-radio-buttons\r
+        label="page.compare.view"\r
+        [name]="'sourceView'"\r
+        [options]="sourceViewOptions"\r
+        [(selected)]="sourceSelectedView"\r
+        (selectedChange)="onSourceViewChange($event)"\r
+      ></ca-horizontal-radio-buttons>\r
+      <!--Source view-->\r
+      <div\r
+        #sourceContainer\r
+        class="source-container p-0"\r
+        [ngClass]="sourceSelectedView()"\r
+      ></div>\r
+    </p-tabpanel>\r
 \r
-        </p-tabpanel>\r
-        <!-- Source code -->\r
-        <p-tabpanel value="1">\r
+    <!-- Page details (metadata and misc reports) -->\r
+    <p-tabpanel value="2">\r
+      <ca-page-tools></ca-page-tools>\r
+    </p-tabpanel>\r
 \r
-            <!--Switch view -->\r
-            <ca-horizontal-radio-buttons label="page.compare.view" [name]="'sourceView'" [options]="sourceViewOptions" [(selected)]="sourceSelectedView" (selectedChange)="onSourceViewChange($event)"></ca-horizontal-radio-buttons>\r
-            <!--Source view-->\r
-            <div #sourceContainer class="source-container p-0" [ngClass]="sourceSelectedView()"></div>\r
-\r
-        </p-tabpanel>\r
-\r
-        <!-- Page details (metadata and misc reports) -->\r
-        <p-tabpanel value="2">\r
-            <ca-page-tools></ca-page-tools>\r
-        </p-tabpanel>\r
-\r
-    </p-tabpanels>\r
-</p-tabs>`, styles: ['@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";\n\n/* src/app/views/page-assistant/page-assistant.component.css */\n@font-face {\n  font-family: "Glyphicons Halflings";\n  src: url(https://www.canada.ca/etc/designs/canada/wet-boew/fonts/glyphicons-halflings-regular.woff2) format("woff2");\n}\n.d2h-file-side-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-file-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-code-wrapper {\n  position: relative;\n}\n.d2h-file-name-wrapper {\n  display: none;\n}\n.live-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.live-container.original {\n  border-color: #F3A59D;\n}\n.live-container.modified {\n  border-color: #83d5a8;\n}\n.source-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.source-container.original {\n  border-color: #F3A59D;\n}\n.source-container.modified {\n  border-color: #83d5a8;\n}\n.slide-content {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.change-text {\n  margin: 0;\n  text-align: right;\n  padding: 10px;\n}\n.custom-prev,\n.custom-next {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.5);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n  border-radius: 5px;\n  font-size: 14px;\n}\n.custom-prev {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.custom-next {\n  border-left: none;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.custom-prev:hover,\n.custom-next:hover {\n  background: rgba(255, 255, 255, 0.5);\n}\n.loading-spinner {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  font-size: 1.2rem;\n  color: #888;\n}\n.group-legend {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  justify-content: flex-end;\n}\n.legend-item {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.legend-box {\n  width: 16px;\n  height: 16px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.loading-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 10;\n  color: white;\n}\n.loading-spinner {\n  border: 4px solid rgba(255, 255, 255, 0.3);\n  border-top: 4px solid white;\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  animation: spin 1s linear infinite;\n  margin-right: 10px;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n.legend-box-modal {\n  display: inline-block;\n  width: 16px;\n  height: 16px;\n  margin-right: 5px;\n  vertical-align: middle;\n}\n.legend-red-modal {\n  background-color: rgb(243, 165, 157);\n}\n.legend-green-modal {\n  background-color: rgb(131, 213, 168);\n}\n.legend-yellow-modal {\n  background-color: rgb(255, 238, 140);\n}\n.legend-blue-modal {\n  background-color: transparent;\n  border: 2px solid rgb(111, 159, 255);\n}\n.legend-dashed-popup-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(102, 102, 102);\n}\n.legend-dashed-dynamic-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(251, 192, 47);\n}\n.no-bullet-points {\n  list-style: none;\n}\n/*# sourceMappingURL=page-assistant.component.css.map */\n'] }]
+    <p-tabpanel value="5">\r
+      <ca-page-problems\r
+        (summary)="onProblemsSummary($any($event))"\r
+      ></ca-page-problems>\r
+    </p-tabpanel>\r
+  </p-tabpanels>\r
+</p-tabs>\r
+`, styles: ['@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";\n\n/* src/app/views/page-assistant/page-assistant.component.css */\n@font-face {\n  font-family: "Glyphicons Halflings";\n  src: url(https://www.canada.ca/etc/designs/canada/wet-boew/fonts/glyphicons-halflings-regular.woff2) format("woff2");\n}\n.d2h-file-side-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-file-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-code-wrapper {\n  position: relative;\n}\n.d2h-file-name-wrapper {\n  display: none;\n}\n.live-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.live-container.original {\n  border-color: #f3a59d;\n}\n.live-container.modified {\n  border-color: #83d5a8;\n}\n.source-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.source-container.original {\n  border-color: #f3a59d;\n}\n.source-container.modified {\n  border-color: #83d5a8;\n}\n.slide-content {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.change-text {\n  margin: 0;\n  text-align: right;\n  padding: 10px;\n}\n.custom-prev,\n.custom-next {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.5);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n  border-radius: 5px;\n  font-size: 14px;\n}\n.custom-prev {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.custom-next {\n  border-left: none;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.custom-prev:hover,\n.custom-next:hover {\n  background: rgba(255, 255, 255, 0.5);\n}\n.loading-spinner {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  font-size: 1.2rem;\n  color: #888;\n}\n.group-legend {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  justify-content: flex-end;\n}\n.legend-item {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.legend-box {\n  width: 16px;\n  height: 16px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.loading-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 10;\n  color: white;\n}\n.loading-spinner {\n  border: 4px solid rgba(255, 255, 255, 0.3);\n  border-top: 4px solid white;\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  animation: spin 1s linear infinite;\n  margin-right: 10px;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n.legend-box-modal {\n  display: inline-block;\n  width: 16px;\n  height: 16px;\n  margin-right: 5px;\n  vertical-align: middle;\n}\n.legend-red-modal {\n  background-color: rgb(243, 165, 157);\n}\n.legend-green-modal {\n  background-color: rgb(131, 213, 168);\n}\n.legend-yellow-modal {\n  background-color: rgb(255, 238, 140);\n}\n.legend-blue-modal {\n  background-color: transparent;\n  border: 2px solid rgb(111, 159, 255);\n}\n.legend-dashed-popup-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(102, 102, 102);\n}\n.legend-dashed-dynamic-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(251, 192, 47);\n}\n.no-bullet-points {\n  list-style: none;\n}\n:host ::ng-deep .p-tabs .p-tablist .p-tab .tab-badge,\n.problems-badge {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 1.25rem;\n  height: 1.25rem;\n  padding: 0 0.35rem;\n  margin-left: 0.5rem;\n  border-radius: 9999px;\n  background: #ef4444 !important;\n  color: #fff !important;\n  font-weight: 700;\n  font-size: 0.75rem;\n  line-height: 1;\n  vertical-align: middle;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);\n}\n:host ::ng-deep .tab-badge {\n  transform: translateY(-1px);\n}\n:host ::ng-deep .dark .tab-badge {\n  background: #f43f5e;\n}\n/*# sourceMappingURL=page-assistant.component.css.map */\n'] }]
   }], () => [], { liveContainer: [{
     type: ViewChild,
     args: ["liveContainer", { static: false }]
@@ -36160,9 +36622,9 @@ ${base}`;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageAssistantCompareComponent, { className: "PageAssistantCompareComponent", filePath: "src/app/views/page-assistant/page-assistant.component.ts", lineNumber: 51 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageAssistantCompareComponent, { className: "PageAssistantCompareComponent", filePath: "src/app/views/page-assistant/page-assistant.component.ts", lineNumber: 82 });
 })();
 export {
   PageAssistantCompareComponent
 };
-//# sourceMappingURL=chunk-CZ5B4D67.js.map
+//# sourceMappingURL=chunk-I5JFZ6JX.js.map
