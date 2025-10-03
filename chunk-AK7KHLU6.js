@@ -233,7 +233,6 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
-  ɵɵtextInterpolate2,
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
@@ -29524,7 +29523,7 @@ var AiOptionsComponent = class _AiOptionsComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AiOptionsComponent, { className: "AiOptionsComponent", filePath: "src/app/views/page-assistant/components/ai-options.component.ts", lineNumber: 31 });
 })();
 
-// src/app/views/page-assistant/components/tools/heading-structure.component.ts
+// src/app/views/page-assistant/components/problems/heading-structure.component.ts
 var _c08 = () => ({ "min-width": "50rem" });
 function HeadingStructureComponent_ng_template_1_th_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -29738,2214 +29737,7 @@ var HeadingStructureComponent = class _HeadingStructureComponent {
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeadingStructureComponent, { className: "HeadingStructureComponent", filePath: "src/app/views/page-assistant/components/tools/heading-structure.component.ts", lineNumber: 37 });
-})();
-
-// node_modules/primeng/fesm2022/primeng-breadcrumb.mjs
-var _c09 = ["item"];
-var _c110 = ["separator"];
-var _c27 = (a0) => ({
-  "p-breadcrumb-home-item": true,
-  "p-disabled": a0
-});
-var _c37 = () => ({
-  exact: false
-});
-var _c47 = (a0) => ({
-  "p-breadcrumb-item": true,
-  "p-disabled": a0
-});
-var _c56 = (a0) => ({
-  $implicit: a0
-});
-function Breadcrumb_li_2_a_1_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 16);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("ngClass", ctx_r1.home.icon)("ngStyle", ctx_r1.home == null ? null : ctx_r1.home.style);
-  }
-}
-function Breadcrumb_li_2_a_1_HomeIcon_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "HomeIcon", 17);
-  }
-  if (rf & 2) {
-    \u0275\u0275property("styleClass", "p-breadcrumb-item-icon");
-  }
-}
-function Breadcrumb_li_2_a_1_ng_container_3_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 19);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(4);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.home.label);
-  }
-}
-function Breadcrumb_li_2_a_1_ng_container_3_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 20);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(4);
-    \u0275\u0275property("innerHTML", ctx_r1.home.label, \u0275\u0275sanitizeHtml);
-  }
-}
-function Breadcrumb_li_2_a_1_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Breadcrumb_li_2_a_1_ng_container_3_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_li_2_a_1_ng_container_3_ng_template_2_Template, 1, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const htmlHomeLabel_r3 = \u0275\u0275reference(3);
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.home.escape !== false)("ngIfElse", htmlHomeLabel_r3);
-  }
-}
-function Breadcrumb_li_2_a_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "a", 12);
-    \u0275\u0275listener("click", function Breadcrumb_li_2_a_1_Template_a_click_0_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.onClick($event, ctx_r1.home));
-    });
-    \u0275\u0275template(1, Breadcrumb_li_2_a_1_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_li_2_a_1_HomeIcon_2_Template, 1, 1, "HomeIcon", 14)(3, Breadcrumb_li_2_a_1_ng_container_3_Template, 4, 2, "ng-container", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("href", ctx_r1.home.url ? ctx_r1.home.url : null, \u0275\u0275sanitizeUrl)("target", ctx_r1.home.target);
-    \u0275\u0275attribute("aria-label", ctx_r1.homeAriaLabel)("title", ctx_r1.home.title)("tabindex", ctx_r1.home.disabled ? null : "0");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.home.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.home.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.home.label);
-  }
-}
-function Breadcrumb_li_2_a_2_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 16);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("ngClass", ctx_r1.home.icon)("ngStyle", ctx_r1.home.iconStyle);
-  }
-}
-function Breadcrumb_li_2_a_2_HomeIcon_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "HomeIcon", 17);
-  }
-  if (rf & 2) {
-    \u0275\u0275property("styleClass", "p-breadcrumb-item-icon");
-  }
-}
-function Breadcrumb_li_2_a_2_ng_container_3_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 19);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(4);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.home.label);
-  }
-}
-function Breadcrumb_li_2_a_2_ng_container_3_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 20);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(4);
-    \u0275\u0275property("innerHTML", ctx_r1.home.label, \u0275\u0275sanitizeHtml);
-  }
-}
-function Breadcrumb_li_2_a_2_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Breadcrumb_li_2_a_2_ng_container_3_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_li_2_a_2_ng_container_3_ng_template_2_Template, 1, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const htmlHomeRouteLabel_r5 = \u0275\u0275reference(3);
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.home.escape !== false)("ngIfElse", htmlHomeRouteLabel_r5);
-  }
-}
-function Breadcrumb_li_2_a_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "a", 21);
-    \u0275\u0275listener("click", function Breadcrumb_li_2_a_2_Template_a_click_0_listener($event) {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.onClick($event, ctx_r1.home));
-    });
-    \u0275\u0275template(1, Breadcrumb_li_2_a_2_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_li_2_a_2_HomeIcon_2_Template, 1, 1, "HomeIcon", 14)(3, Breadcrumb_li_2_a_2_ng_container_3_Template, 4, 2, "ng-container", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("routerLink", ctx_r1.home.routerLink)("queryParams", ctx_r1.home.queryParams)("routerLinkActiveOptions", ctx_r1.home.routerLinkActiveOptions || \u0275\u0275pureFunction0(16, _c37))("target", ctx_r1.home.target)("fragment", ctx_r1.home.fragment)("queryParamsHandling", ctx_r1.home.queryParamsHandling)("preserveFragment", ctx_r1.home.preserveFragment)("skipLocationChange", ctx_r1.home.skipLocationChange)("replaceUrl", ctx_r1.home.replaceUrl)("state", ctx_r1.home.state);
-    \u0275\u0275attribute("aria-label", ctx_r1.homeAriaLabel)("title", ctx_r1.home.title)("tabindex", ctx_r1.home.disabled ? null : "0");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.home.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.home.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.home.label);
-  }
-}
-function Breadcrumb_li_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 9);
-    \u0275\u0275template(1, Breadcrumb_li_2_a_1_Template, 4, 8, "a", 10)(2, Breadcrumb_li_2_a_2_Template, 4, 17, "a", 11);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(ctx_r1.home.styleClass);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(9, _c27, ctx_r1.home.disabled))("ngStyle", ctx_r1.home.style)("tooltipOptions", ctx_r1.home.tooltipOptions);
-    \u0275\u0275attribute("id", ctx_r1.home.id)("data-pc-section", "home");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.home.routerLink);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.home.routerLink);
-  }
-}
-function Breadcrumb_li_3_ChevronRightIcon_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "ChevronRightIcon");
-  }
-}
-function Breadcrumb_li_3_2_ng_template_0_Template(rf, ctx) {
-}
-function Breadcrumb_li_3_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Breadcrumb_li_3_2_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function Breadcrumb_li_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 22);
-    \u0275\u0275template(1, Breadcrumb_li_3_ChevronRightIcon_1_Template, 1, 0, "ChevronRightIcon", 15)(2, Breadcrumb_li_3_2_Template, 1, 0, null, 23);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275attribute("data-pc-section", "separator");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.separatorTemplate && !ctx_r1._separatorTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.separatorTemplate || ctx_r1._separatorTemplate);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_1_0_ng_template_0_Template(rf, ctx) {
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_1_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Conditional_1_0_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Conditional_1_0_Template, 1, 0, null, 26);
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.itemTemplate || ctx_r1._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c56, menuitem_r6));
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 16);
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
-    \u0275\u0275property("ngClass", menuitem_r6 == null ? null : menuitem_r6.icon)("ngStyle", menuitem_r6 == null ? null : menuitem_r6.iconStyle);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 19);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(6).$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(menuitem_r6 == null ? null : menuitem_r6.label);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 20);
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(6).$implicit;
-    \u0275\u0275property("innerHTML", menuitem_r6 == null ? null : menuitem_r6.label, \u0275\u0275sanitizeHtml);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_ng_template_2_Template, 1, 1, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const htmlLabel_r8 = \u0275\u0275reference(3);
-    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", (menuitem_r6 == null ? null : menuitem_r6.escape) !== false)("ngIfElse", htmlLabel_r8);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_Template, 4, 2, "ng-container", 15);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(4).$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.label);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "a", 28);
-    \u0275\u0275listener("click", function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_Template_a_click_0_listener($event) {
-      \u0275\u0275restoreView(_r7);
-      const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.onClick($event, menuitem_r6));
-    });
-    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_Template, 3, 2, "ng-container", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("target", menuitem_r6 == null ? null : menuitem_r6.target);
-    \u0275\u0275attribute("href", (menuitem_r6 == null ? null : menuitem_r6.url) ? menuitem_r6 == null ? null : menuitem_r6.url : null, \u0275\u0275sanitizeUrl)("title", menuitem_r6 == null ? null : menuitem_r6.title)("tabindex", (menuitem_r6 == null ? null : menuitem_r6.disabled) ? null : "0");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.itemTemplate && !ctx_r1._itemTemplate);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 16);
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(4).$implicit;
-    \u0275\u0275property("ngClass", menuitem_r6 == null ? null : menuitem_r6.icon)("ngStyle", menuitem_r6 == null ? null : menuitem_r6.iconStyle);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 19);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(menuitem_r6 == null ? null : menuitem_r6.label);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 20);
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
-    \u0275\u0275property("innerHTML", menuitem_r6 == null ? null : menuitem_r6.label, \u0275\u0275sanitizeHtml);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_ng_template_2_Template, 1, 1, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const htmlRouteLabel_r10 = \u0275\u0275reference(3);
-    const menuitem_r6 = \u0275\u0275nextContext(4).$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", (menuitem_r6 == null ? null : menuitem_r6.escape) !== false)("ngIfElse", htmlRouteLabel_r10);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "a", 21);
-    \u0275\u0275listener("click", function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_Template_a_click_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.onClick($event, menuitem_r6));
-    });
-    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_Template, 4, 2, "ng-container", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
-    \u0275\u0275property("routerLink", menuitem_r6 == null ? null : menuitem_r6.routerLink)("queryParams", menuitem_r6 == null ? null : menuitem_r6.queryParams)("routerLinkActiveOptions", (menuitem_r6 == null ? null : menuitem_r6.routerLinkActiveOptions) || \u0275\u0275pureFunction0(14, _c37))("target", menuitem_r6 == null ? null : menuitem_r6.target)("fragment", menuitem_r6 == null ? null : menuitem_r6.fragment)("queryParamsHandling", menuitem_r6 == null ? null : menuitem_r6.queryParamsHandling)("preserveFragment", menuitem_r6 == null ? null : menuitem_r6.preserveFragment)("skipLocationChange", menuitem_r6 == null ? null : menuitem_r6.skipLocationChange)("replaceUrl", menuitem_r6 == null ? null : menuitem_r6.replaceUrl)("state", menuitem_r6 == null ? null : menuitem_r6.state);
-    \u0275\u0275attribute("title", menuitem_r6 == null ? null : menuitem_r6.title)("tabindex", (menuitem_r6 == null ? null : menuitem_r6.disabled) ? null : "0");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.icon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.label);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Conditional_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_Template, 2, 5, "a", 27)(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_Template, 3, 15, "a", 11);
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275property("ngIf", !(menuitem_r6 == null ? null : menuitem_r6.routerLink));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.routerLink);
-  }
-}
-function Breadcrumb_ng_template_4_li_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 25);
-    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_1_Template, 1, 4)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_Template, 2, 2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const menuitem_r6 = \u0275\u0275nextContext().$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(menuitem_r6.styleClass);
-    \u0275\u0275property("ngStyle", menuitem_r6.style)("ngClass", \u0275\u0275pureFunction1(8, _c47, menuitem_r6.disabled))("tooltipOptions", menuitem_r6.tooltipOptions);
-    \u0275\u0275attribute("id", menuitem_r6.id)("data-pc-section", "menuitem");
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r1.itemTemplate || ctx_r1._itemTemplate ? 1 : 2);
-  }
-}
-function Breadcrumb_ng_template_4_li_1_ChevronRightIcon_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "ChevronRightIcon");
-  }
-}
-function Breadcrumb_ng_template_4_li_1_2_ng_template_0_Template(rf, ctx) {
-}
-function Breadcrumb_ng_template_4_li_1_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_1_2_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function Breadcrumb_ng_template_4_li_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 22);
-    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_1_ChevronRightIcon_1_Template, 1, 0, "ChevronRightIcon", 15)(2, Breadcrumb_ng_template_4_li_1_2_Template, 1, 0, null, 23);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275attribute("data-pc-section", "separator");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.separatorTemplate && !ctx_r1._separatorTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.separatorTemplate || ctx_r1._separatorTemplate);
-  }
-}
-function Breadcrumb_ng_template_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Template, 3, 10, "li", 24)(1, Breadcrumb_ng_template_4_li_1_Template, 3, 3, "li", 7);
-  }
-  if (rf & 2) {
-    const menuitem_r6 = ctx.$implicit;
-    const end_r11 = ctx.last;
-    \u0275\u0275property("ngIf", menuitem_r6.visible !== false);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !end_r11 && menuitem_r6.visible !== false);
-  }
-}
-var theme7 = ({
-  dt
-}) => `
-.p-breadcrumb {
-    background: ${dt("breadcrumb.background")};
-    padding: ${dt("breadcrumb.padding")};
-    overflow-x: auto;
-}
-
-.p-breadcrumb-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: ${dt("breadcrumb.gap")};
-}
-
-.p-breadcrumb-separator {
-    display: flex;
-    align-items: center;
-    color: ${dt("breadcrumb.separator.color")};
-}
-
-.p-breadcrumb-separator .p-icon:dir(rtl) {
-    transform: rotate(180deg);
-}
-
-.p-breadcrumb::-webkit-scrollbar {
-    display: none;
-}
-
-.p-breadcrumb-item-link {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: ${dt("breadcrumb.item.gap")};
-    transition: background ${dt("breadcrumb.transition.duration")}, color ${dt("breadcrumb.transition.duration")}, outline-color ${dt("breadcrumb.transition.duration")}, box-shadow ${dt("breadcrumb.transition.duration")};
-    border-radius: ${dt("breadcrumb.item.border.radius")};
-    outline-color: transparent;
-    color: ${dt("breadcrumb.item.color")};
-}
-
-.p-breadcrumb-item-link:focus-visible {
-    box-shadow: ${dt("breadcrumb.item.focus.ring.shadow")};
-    outline: ${dt("breadcrumb.item.focus.ring.width")} ${dt("breadcrumb.item.focus.ring.style")} ${dt("breadcrumb.item.focus.ring.color")};
-    outline-offset: ${dt("breadcrumb.item.focus.ring.offset")};
-}
-
-.p-breadcrumb-item-link:hover .p-breadcrumb-item-label {
-    color: ${dt("breadcrumb.item.hover.color")};
-}
-
-.p-breadcrumb-item-label {
-    transition: inherit;
-}
-
-.p-breadcrumb-item-icon {
-    color: ${dt("breadcrumb.item.icon.color")};
-    transition: inherit;
-}
-
-.p-breadcrumb-item-link:hover .p-breadcrumb-item-icon {
-    color: ${dt("breadcrumb.item.icon.hover.color")};
-}
-`;
-var classes7 = {
-  root: "p-breadcrumb p-component",
-  list: "p-breadcrumb-list",
-  homeItem: "p-breadcrumb-home-item",
-  separator: "p-breadcrumb-separator",
-  item: ({
-    instance
-  }) => ["p-breadcrumb-item", {
-    "p-disabled": instance.disabled()
-  }],
-  itemLink: "p-breadcrumb-item-link",
-  itemIcon: "p-breadcrumb-item-icon",
-  itemLabel: "p-breadcrumb-item-label"
-};
-var BreadCrumbStyle = class _BreadCrumbStyle extends BaseStyle {
-  name = "breadcrumb";
-  theme = theme7;
-  classes = classes7;
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275BreadCrumbStyle_BaseFactory;
-    return function BreadCrumbStyle_Factory(__ngFactoryType__) {
-      return (\u0275BreadCrumbStyle_BaseFactory || (\u0275BreadCrumbStyle_BaseFactory = \u0275\u0275getInheritedFactory(_BreadCrumbStyle)))(__ngFactoryType__ || _BreadCrumbStyle);
-    };
-  })();
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _BreadCrumbStyle,
-    factory: _BreadCrumbStyle.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BreadCrumbStyle, [{
-    type: Injectable
-  }], null, null);
-})();
-var BreadcrumbClasses;
-(function(BreadcrumbClasses2) {
-  BreadcrumbClasses2["root"] = "p-breadcrumb";
-  BreadcrumbClasses2["list"] = "p-breadcrumb-list";
-  BreadcrumbClasses2["homeItem"] = "p-breadcrumb-home-item";
-  BreadcrumbClasses2["separator"] = "p-breadcrumb-separator";
-  BreadcrumbClasses2["item"] = "p-breadcrumb-item";
-  BreadcrumbClasses2["itemLink"] = "p-breadcrumb-item-link";
-  BreadcrumbClasses2["itemIcon"] = "p-breadcrumb-item-icon";
-  BreadcrumbClasses2["itemLabel"] = "p-breadcrumb-item-label";
-})(BreadcrumbClasses || (BreadcrumbClasses = {}));
-var Breadcrumb = class _Breadcrumb extends BaseComponent {
-  router;
-  /**
-   * An array of menuitems.
-   * @group Props
-   */
-  model;
-  /**
-   * Inline style of the component.
-   * @group Props
-   */
-  style;
-  /**
-   * Style class of the component.
-   * @group Props
-   */
-  styleClass;
-  /**
-   * MenuItem configuration for the home icon.
-   * @group Props
-   */
-  home;
-  /**
-   * Defines a string that labels the home icon for accessibility.
-   * @group Props
-   */
-  homeAriaLabel;
-  /**
-   * Fired when an item is selected.
-   * @param {BreadcrumbItemClickEvent} event - custom click event.
-   * @group Emits
-   */
-  onItemClick = new EventEmitter();
-  _componentStyle = inject(BreadCrumbStyle);
-  constructor(router) {
-    super();
-    this.router = router;
-  }
-  onClick(event, item) {
-    if (item.disabled) {
-      event.preventDefault();
-      return;
-    }
-    if (!item.url && !item.routerLink) {
-      event.preventDefault();
-    }
-    if (item.command) {
-      item.command({
-        originalEvent: event,
-        item
-      });
-    }
-    this.onItemClick.emit({
-      originalEvent: event,
-      item
-    });
-  }
-  /**
-   * Defines template option for item.
-   * @group Templates
-   */
-  itemTemplate;
-  /**
-   * Defines template option for separator.
-   * @group Templates
-   */
-  separatorTemplate;
-  templates;
-  _separatorTemplate;
-  _itemTemplate;
-  ngAfterContentInit() {
-    this.templates?.forEach((item) => {
-      switch (item.getType()) {
-        case "separator":
-          this._separatorTemplate = item.template;
-          break;
-        case "item":
-          this._itemTemplate = item.template;
-          break;
-        default:
-          this._itemTemplate = item.template;
-          break;
-      }
-    });
-  }
-  static \u0275fac = function Breadcrumb_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _Breadcrumb)(\u0275\u0275directiveInject(Router));
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _Breadcrumb,
-    selectors: [["p-breadcrumb"]],
-    contentQueries: function Breadcrumb_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c09, 5);
-        \u0275\u0275contentQuery(dirIndex, _c110, 5);
-        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.itemTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.separatorTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
-      }
-    },
-    inputs: {
-      model: "model",
-      style: "style",
-      styleClass: "styleClass",
-      home: "home",
-      homeAriaLabel: "homeAriaLabel"
-    },
-    outputs: {
-      onItemClick: "onItemClick"
-    },
-    features: [\u0275\u0275ProvidersFeature([BreadCrumbStyle]), \u0275\u0275InheritDefinitionFeature],
-    decls: 5,
-    vars: 10,
-    consts: [["htmlHomeLabel", ""], ["htmlHomeRouteLabel", ""], ["htmlLabel", ""], ["htmlRouteLabel", ""], [3, "ngStyle", "ngClass"], [1, "p-breadcrumb-list"], ["pTooltip", "", 3, "class", "ngClass", "ngStyle", "tooltipOptions", 4, "ngIf"], ["class", "p-breadcrumb-separator", 4, "ngIf"], ["ngFor", "", 3, "ngForOf"], ["pTooltip", "", 3, "ngClass", "ngStyle", "tooltipOptions"], ["class", "p-breadcrumb-item-link", 3, "href", "target", "click", 4, "ngIf"], ["class", "p-breadcrumb-item-link", 3, "routerLink", "queryParams", "routerLinkActiveOptions", "target", "fragment", "queryParamsHandling", "preserveFragment", "skipLocationChange", "replaceUrl", "state", "click", 4, "ngIf"], [1, "p-breadcrumb-item-link", 3, "click", "href", "target"], ["class", "p-breadcrumb-item-icon", 3, "ngClass", "ngStyle", 4, "ngIf"], [3, "styleClass", 4, "ngIf"], [4, "ngIf"], [1, "p-breadcrumb-item-icon", 3, "ngClass", "ngStyle"], [3, "styleClass"], ["class", "p-breadcrumb-item-label", 4, "ngIf", "ngIfElse"], [1, "p-breadcrumb-item-label"], [1, "p-breadcrumb-item-label", 3, "innerHTML"], [1, "p-breadcrumb-item-link", 3, "click", "routerLink", "queryParams", "routerLinkActiveOptions", "target", "fragment", "queryParamsHandling", "preserveFragment", "skipLocationChange", "replaceUrl", "state"], [1, "p-breadcrumb-separator"], [4, "ngTemplateOutlet"], ["pTooltip", "", 3, "class", "ngStyle", "ngClass", "tooltipOptions", 4, "ngIf"], ["pTooltip", "", 3, "ngStyle", "ngClass", "tooltipOptions"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["class", "p-breadcrumb-item-link", 3, "target", "click", 4, "ngIf"], [1, "p-breadcrumb-item-link", 3, "click", "target"]],
-    template: function Breadcrumb_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "nav", 4)(1, "ol", 5);
-        \u0275\u0275template(2, Breadcrumb_li_2_Template, 3, 11, "li", 6)(3, Breadcrumb_li_3_Template, 3, 3, "li", 7)(4, Breadcrumb_ng_template_4_Template, 2, 2, "ng-template", 8);
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        \u0275\u0275classMap(ctx.styleClass);
-        \u0275\u0275property("ngStyle", ctx.style)("ngClass", "p-breadcrumb p-component");
-        \u0275\u0275attribute("data-pc-name", "breadcrumb")("data-pc-section", "root");
-        \u0275\u0275advance();
-        \u0275\u0275attribute("data-pc-section", "menu");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.home && ctx.home.visible !== false);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.model && ctx.home);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", ctx.model);
-      }
-    },
-    dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgTemplateOutlet, NgStyle, RouterModule, RouterLink, TooltipModule, Tooltip, ChevronRightIcon, HomeIcon, SharedModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Breadcrumb, [{
-    type: Component,
-    args: [{
-      selector: "p-breadcrumb",
-      standalone: true,
-      imports: [CommonModule, RouterModule, TooltipModule, ChevronRightIcon, HomeIcon, SharedModule],
-      template: `
-        <nav [class]="styleClass" [ngStyle]="style" [ngClass]="'p-breadcrumb p-component'" [attr.data-pc-name]="'breadcrumb'" [attr.data-pc-section]="'root'">
-            <ol [attr.data-pc-section]="'menu'" class="p-breadcrumb-list">
-                <li
-                    [class]="home.styleClass"
-                    [attr.id]="home.id"
-                    [ngClass]="{ 'p-breadcrumb-home-item': true, 'p-disabled': home.disabled }"
-                    [ngStyle]="home.style"
-                    *ngIf="home && home.visible !== false"
-                    pTooltip
-                    [tooltipOptions]="home.tooltipOptions"
-                    [attr.data-pc-section]="'home'"
-                >
-                    <a
-                        [href]="home.url ? home.url : null"
-                        *ngIf="!home.routerLink"
-                        [attr.aria-label]="homeAriaLabel"
-                        class="p-breadcrumb-item-link"
-                        (click)="onClick($event, home)"
-                        [target]="home.target"
-                        [attr.title]="home.title"
-                        [attr.tabindex]="home.disabled ? null : '0'"
-                    >
-                        <span *ngIf="home.icon" class="p-breadcrumb-item-icon" [ngClass]="home.icon" [ngStyle]="home?.style"></span>
-                        <HomeIcon *ngIf="!home.icon" [styleClass]="'p-breadcrumb-item-icon'" />
-                        <ng-container *ngIf="home.label">
-                            <span *ngIf="home.escape !== false; else htmlHomeLabel" class="p-breadcrumb-item-label">{{ home.label }}</span>
-                            <ng-template #htmlHomeLabel><span class="p-breadcrumb-item-label" [innerHTML]="home.label"></span></ng-template>
-                        </ng-container>
-                    </a>
-                    <a
-                        *ngIf="home.routerLink"
-                        [routerLink]="home.routerLink"
-                        [attr.aria-label]="homeAriaLabel"
-                        [queryParams]="home.queryParams"
-                        [routerLinkActiveOptions]="home.routerLinkActiveOptions || { exact: false }"
-                        class="p-breadcrumb-item-link"
-                        (click)="onClick($event, home)"
-                        [target]="home.target"
-                        [attr.title]="home.title"
-                        [attr.tabindex]="home.disabled ? null : '0'"
-                        [fragment]="home.fragment"
-                        [queryParamsHandling]="home.queryParamsHandling"
-                        [preserveFragment]="home.preserveFragment"
-                        [skipLocationChange]="home.skipLocationChange"
-                        [replaceUrl]="home.replaceUrl"
-                        [state]="home.state"
-                    >
-                        <span *ngIf="home.icon" class="p-breadcrumb-item-icon" [ngClass]="home.icon" [ngStyle]="home.iconStyle"></span>
-                        <HomeIcon *ngIf="!home.icon" [styleClass]="'p-breadcrumb-item-icon'" />
-                        <ng-container *ngIf="home.label">
-                            <span *ngIf="home.escape !== false; else htmlHomeRouteLabel" class="p-breadcrumb-item-label">{{ home.label }}</span>
-                            <ng-template #htmlHomeRouteLabel><span class="p-breadcrumb-item-label" [innerHTML]="home.label"></span></ng-template>
-                        </ng-container>
-                    </a>
-                </li>
-                <li *ngIf="model && home" class="p-breadcrumb-separator" [attr.data-pc-section]="'separator'">
-                    <ChevronRightIcon *ngIf="!separatorTemplate && !_separatorTemplate" />
-                    <ng-template *ngTemplateOutlet="separatorTemplate || _separatorTemplate"></ng-template>
-                </li>
-                <ng-template ngFor let-menuitem let-end="last" [ngForOf]="model">
-                    <li
-                        *ngIf="menuitem.visible !== false"
-                        [class]="menuitem.styleClass"
-                        [attr.id]="menuitem.id"
-                        [ngStyle]="menuitem.style"
-                        [ngClass]="{ 'p-breadcrumb-item': true, 'p-disabled': menuitem.disabled }"
-                        pTooltip
-                        [tooltipOptions]="menuitem.tooltipOptions"
-                        [attr.data-pc-section]="'menuitem'"
-                    >
-                        @if (itemTemplate || _itemTemplate) {
-                            <ng-template *ngTemplateOutlet="itemTemplate || _itemTemplate; context: { $implicit: menuitem }"></ng-template>
-                        } @else {
-                            <a
-                                *ngIf="!menuitem?.routerLink"
-                                [attr.href]="menuitem?.url ? menuitem?.url : null"
-                                class="p-breadcrumb-item-link"
-                                (click)="onClick($event, menuitem)"
-                                [target]="menuitem?.target"
-                                [attr.title]="menuitem?.title"
-                                [attr.tabindex]="menuitem?.disabled ? null : '0'"
-                            >
-                                <ng-container *ngIf="!itemTemplate && !_itemTemplate">
-                                    <span *ngIf="menuitem?.icon" class="p-breadcrumb-item-icon" [ngClass]="menuitem?.icon" [ngStyle]="menuitem?.iconStyle"></span>
-                                    <ng-container *ngIf="menuitem?.label">
-                                        <span *ngIf="menuitem?.escape !== false; else htmlLabel" class="p-breadcrumb-item-label">{{ menuitem?.label }}</span>
-                                        <ng-template #htmlLabel><span class="p-breadcrumb-item-label" [innerHTML]="menuitem?.label"></span></ng-template>
-                                    </ng-container>
-                                </ng-container>
-                            </a>
-                            <a
-                                *ngIf="menuitem?.routerLink"
-                                [routerLink]="menuitem?.routerLink"
-                                [queryParams]="menuitem?.queryParams"
-                                [routerLinkActiveOptions]="menuitem?.routerLinkActiveOptions || { exact: false }"
-                                class="p-breadcrumb-item-link"
-                                (click)="onClick($event, menuitem)"
-                                [target]="menuitem?.target"
-                                [attr.title]="menuitem?.title"
-                                [attr.tabindex]="menuitem?.disabled ? null : '0'"
-                                [fragment]="menuitem?.fragment"
-                                [queryParamsHandling]="menuitem?.queryParamsHandling"
-                                [preserveFragment]="menuitem?.preserveFragment"
-                                [skipLocationChange]="menuitem?.skipLocationChange"
-                                [replaceUrl]="menuitem?.replaceUrl"
-                                [state]="menuitem?.state"
-                            >
-                                <span *ngIf="menuitem?.icon" class="p-breadcrumb-item-icon" [ngClass]="menuitem?.icon" [ngStyle]="menuitem?.iconStyle"></span>
-                                <ng-container *ngIf="menuitem?.label">
-                                    <span *ngIf="menuitem?.escape !== false; else htmlRouteLabel" class="p-breadcrumb-item-label">{{ menuitem?.label }}</span>
-                                    <ng-template #htmlRouteLabel><span class="p-breadcrumb-item-label" [innerHTML]="menuitem?.label"></span></ng-template>
-                                </ng-container>
-                            </a>
-                        }
-                    </li>
-                    <li *ngIf="!end && menuitem.visible !== false" class="p-breadcrumb-separator" [attr.data-pc-section]="'separator'">
-                        <ChevronRightIcon *ngIf="!separatorTemplate && !_separatorTemplate" />
-                        <ng-template *ngTemplateOutlet="separatorTemplate || _separatorTemplate"></ng-template>
-                    </li>
-                </ng-template>
-            </ol>
-        </nav>
-    `,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      providers: [BreadCrumbStyle]
-    }]
-  }], () => [{
-    type: Router
-  }], {
-    model: [{
-      type: Input
-    }],
-    style: [{
-      type: Input
-    }],
-    styleClass: [{
-      type: Input
-    }],
-    home: [{
-      type: Input
-    }],
-    homeAriaLabel: [{
-      type: Input
-    }],
-    onItemClick: [{
-      type: Output
-    }],
-    itemTemplate: [{
-      type: ContentChild,
-      args: ["item"]
-    }],
-    separatorTemplate: [{
-      type: ContentChild,
-      args: ["separator"]
-    }],
-    templates: [{
-      type: ContentChildren,
-      args: [PrimeTemplate]
-    }]
-  });
-})();
-var BreadcrumbModule = class _BreadcrumbModule {
-  static \u0275fac = function BreadcrumbModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _BreadcrumbModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _BreadcrumbModule,
-    imports: [Breadcrumb, SharedModule],
-    exports: [Breadcrumb, SharedModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [Breadcrumb, SharedModule, SharedModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BreadcrumbModule, [{
-    type: NgModule,
-    args: [{
-      imports: [Breadcrumb, SharedModule],
-      exports: [Breadcrumb, SharedModule]
-    }]
-  }], null, null);
-})();
-
-// src/app/views/page-assistant/components/tools/ia-structure.component.ts
-var _c010 = ["chartContainer"];
-var _c111 = ["cm"];
-var _c28 = () => ({ "height": "1rem" });
-var _c38 = () => ({ "min-width": "50rem" });
-function IaStructureComponent_p_button_6_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-button", 11);
-    \u0275\u0275listener("click", function IaStructureComponent_p_button_6_Template_p_button_click_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.maximize(ctx_r1.chartContainer));
-    });
-    \u0275\u0275elementEnd();
-  }
-}
-function IaStructureComponent_p_progressbar_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "p-progressbar", 12);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275styleMap(\u0275\u0275pureFunction0(4, _c28));
-    \u0275\u0275property("value", ctx_r1.iaProgress)("showValue", false);
-  }
-}
-function IaStructureComponent_ng_container_8_span_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 17);
-    \u0275\u0275element(1, "i", 18);
-    \u0275\u0275text(2, "Link found on parent page");
-    \u0275\u0275elementEnd();
-  }
-}
-function IaStructureComponent_ng_container_8_span_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 19);
-    \u0275\u0275element(1, "i", 20);
-    \u0275\u0275text(2, "IA Orphan");
-    \u0275\u0275elementEnd();
-  }
-}
-function IaStructureComponent_ng_container_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "h2");
-    \u0275\u0275text(2, "Breadcrumb");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 13);
-    \u0275\u0275element(4, "p-breadcrumb", 14);
-    \u0275\u0275template(5, IaStructureComponent_ng_container_8_span_5_Template, 3, 0, "span", 15)(6, IaStructureComponent_ng_container_8_span_6_Template, 3, 0, "span", 16);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275property("model", ctx_r1.breadcrumb);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.urlFound === true);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.urlFound === false);
-  }
-}
-function IaStructureComponent_ng_container_9_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p");
-    \u0275\u0275text(1, "No child pages found.");
-    \u0275\u0275elementEnd();
-  }
-}
-function IaStructureComponent_ng_container_9_div_4_ng_template_3_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p")(1, "a", 25);
-    \u0275\u0275listener("click", function IaStructureComponent_ng_container_9_div_4_ng_template_3_Template_a_click_1_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.onNodeClick($event));
-    });
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const node_r4 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("href", node_r4.data.url, \u0275\u0275sanitizeUrl)("innerHTML", node_r4.label, \u0275\u0275sanitizeHtml);
-  }
-}
-function IaStructureComponent_ng_container_9_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22, 0)(2, "p-organization-chart", 23);
-    \u0275\u0275template(3, IaStructureComponent_ng_container_9_div_4_ng_template_3_Template, 2, 2, "ng-template", 24);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("value", ctx_r1.iaChart);
-  }
-}
-function IaStructureComponent_ng_container_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "h2");
-    \u0275\u0275text(2, "IA structure");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, IaStructureComponent_ng_container_9_p_3_Template, 2, 0, "p", 10)(4, IaStructureComponent_ng_container_9_div_4_Template, 4, 1, "div", 21);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r1.iaChart.length === 0);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.iaChart.length > 0);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_i_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 33);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_i_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 34);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_i_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 35);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_i_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 36);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_ng_container_5_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "a", 25);
-    \u0275\u0275listener("click", function IaStructureComponent_ng_container_10_ng_template_6_ng_container_5_Template_a_click_1_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.onNodeClick($event));
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const node_r7 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("href", node_r7.data.url, \u0275\u0275sanitizeUrl)("innerHTML", node_r7.label, \u0275\u0275sanitizeHtml);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-inputgroup")(1, "input", 37);
-    \u0275\u0275twoWayListener("ngModelChange", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template_input_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r8);
-      const node_r7 = \u0275\u0275nextContext().$implicit;
-      \u0275\u0275twoWayBindingSet(node_r7.label, $event) || (node_r7.label = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275listener("keydown", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template_input_keydown_1_listener($event) {
-      \u0275\u0275restoreView(_r8);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.onInputKeydown($event));
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "p-inputgroup-addon")(3, "p-button", 38);
-    \u0275\u0275listener("onClick", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template_p_button_onClick_3_listener() {
-      \u0275\u0275restoreView(_r8);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.saveNode());
-    });
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const node_r7 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", node_r7.label);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-inputgroup")(1, "input", 37);
-    \u0275\u0275twoWayListener("ngModelChange", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template_input_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const node_r7 = \u0275\u0275nextContext().$implicit;
-      \u0275\u0275twoWayBindingSet(node_r7.data.url, $event) || (node_r7.data.url = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275listener("keydown", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template_input_keydown_1_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.onInputKeydown($event));
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "p-inputgroup-addon")(3, "p-button", 38);
-    \u0275\u0275listener("onClick", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template_p_button_onClick_3_listener() {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.saveNode());
-    });
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const node_r7 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", node_r7.data.url);
-  }
-}
-function IaStructureComponent_ng_container_10_ng_template_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 28);
-    \u0275\u0275template(1, IaStructureComponent_ng_container_10_ng_template_6_i_1_Template, 1, 0, "i", 29)(2, IaStructureComponent_ng_container_10_ng_template_6_i_2_Template, 1, 0, "i", 30)(3, IaStructureComponent_ng_container_10_ng_template_6_i_3_Template, 1, 0, "i", 31)(4, IaStructureComponent_ng_container_10_ng_template_6_i_4_Template, 1, 0, "i", 32)(5, IaStructureComponent_ng_container_10_ng_template_6_ng_container_5_Template, 2, 2, "ng-container", 10)(6, IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template, 4, 1, "p-inputgroup", 10)(7, IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template, 4, 1, "p-inputgroup", 10);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const node_r7 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", node_r7.children.length > 0 && !ctx_r1.draggable && !node_r7.data.editing);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", (node_r7.children.length === 0 || !node_r7.children) && !ctx_r1.draggable && !node_r7.data.editing);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.draggable);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", node_r7.data.editing);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !node_r7.data.editing);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", node_r7.data.editing === "label");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", node_r7.data.editing === "link");
-  }
-}
-function IaStructureComponent_ng_container_10_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "p-contextMenu", 26, 1);
-    \u0275\u0275elementStart(3, "h2");
-    \u0275\u0275text(4, "IA structure tree");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "p-tree", 27);
-    \u0275\u0275twoWayListener("selectionChange", function IaStructureComponent_ng_container_10_Template_p_tree_selectionChange_5_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r1.selectedNode, $event) || (ctx_r1.selectedNode = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275listener("onNodeDrop", function IaStructureComponent_ng_container_10_Template_p_tree_onNodeDrop_5_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.handleNodeDrop($event));
-    })("onNodeContextMenuSelect", function IaStructureComponent_ng_container_10_Template_p_tree_onNodeContextMenuSelect_5_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.onNodeContextMenu($event));
-    });
-    \u0275\u0275template(6, IaStructureComponent_ng_container_10_ng_template_6_Template, 8, 7, "ng-template", 24);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const cm_r10 = \u0275\u0275reference(2);
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("model", ctx_r1.options);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("value", ctx_r1.iaChart)("selectionMode", ctx_r1.selectable ? "multiple" : null);
-    \u0275\u0275twoWayProperty("selection", ctx_r1.selectedNode);
-    \u0275\u0275property("draggableNodes", ctx_r1.draggable)("droppableNodes", true)("validateDrop", true)("contextMenu", cm_r10);
-  }
-}
-function IaStructureComponent_ng_container_11_ng_template_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr")(1, "th");
-    \u0275\u0275text(2, "H1");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "th");
-    \u0275\u0275text(4, "URL");
-    \u0275\u0275elementEnd()();
-  }
-}
-function IaStructureComponent_ng_container_11_ng_template_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr", 40)(1, "td");
-    \u0275\u0275element(2, "p-treetable-toggler", 41)(3, "span", 42);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "td");
-    \u0275\u0275text(5);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const rowNode_r11 = ctx.$implicit;
-    const rowData_r12 = ctx.rowData;
-    \u0275\u0275property("ttRow", rowNode_r11);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("rowNode", rowNode_r11);
-    \u0275\u0275advance();
-    \u0275\u0275property("innerHTML", rowData_r12.h1, \u0275\u0275sanitizeHtml);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(rowData_r12.url);
-  }
-}
-function IaStructureComponent_ng_container_11_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "h2");
-    \u0275\u0275text(2, "IA structure table");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "p-treeTable", 39);
-    \u0275\u0275template(4, IaStructureComponent_ng_container_11_ng_template_4_Template, 5, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(6, IaStructureComponent_ng_container_11_ng_template_6_Template, 6, 4, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275property("value", ctx_r1.iaChart)("scrollable", true);
-  }
-}
-function IaStructureComponent_ng_container_12_p_3_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1, " or on any detected child pages");
-    \u0275\u0275elementEnd();
-  }
-}
-function IaStructureComponent_ng_container_12_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p");
-    \u0275\u0275text(1, "No broken links found on this page");
-    \u0275\u0275template(2, IaStructureComponent_ng_container_12_p_3_span_2_Template, 2, 0, "span", 10);
-    \u0275\u0275text(3, ".");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.iaChart[0].children == null ? null : ctx_r1.iaChart[0].children.length);
-  }
-}
-function IaStructureComponent_ng_container_12_p_table_4_ng_template_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr")(1, "th");
-    \u0275\u0275text(2, "Parent page");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "th");
-    \u0275\u0275text(4, "Broken link");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "th");
-    \u0275\u0275text(6, "Status");
-    \u0275\u0275elementEnd()();
-  }
-}
-function IaStructureComponent_ng_container_12_p_table_4_ng_template_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr")(1, "td");
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "td");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "td");
-    \u0275\u0275text(6);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const rowData_r13 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(rowData_r13.parentUrl);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(rowData_r13.url);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(rowData_r13.status);
-  }
-}
-function IaStructureComponent_ng_container_12_p_table_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-table", 44);
-    \u0275\u0275template(1, IaStructureComponent_ng_container_12_p_table_4_ng_template_1_Template, 7, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(3, IaStructureComponent_ng_container_12_p_table_4_ng_template_3_Template, 7, 3, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("value", ctx_r1.brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c38));
-  }
-}
-function IaStructureComponent_ng_container_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "h2");
-    \u0275\u0275text(2, "Broken links");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, IaStructureComponent_ng_container_12_p_3_Template, 4, 1, "p", 10)(4, IaStructureComponent_ng_container_12_p_table_4_Template, 5, 3, "p-table", 43);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r1.brokenLinks.length === 0);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.brokenLinks.length > 0);
-  }
-}
-var IaStructureComponent = class _IaStructureComponent {
-  uploadState = inject(UploadStateService);
-  translate = inject(TranslateService);
-  locationStrategy = inject(LocationStrategy);
-  theme = inject(ThemeService);
-  production = environment.production;
-  constructor() {
-    effect(() => {
-      this.theme.darkMode();
-      this.updateNodeStyles(this.iaChart, 0);
-    });
-  }
-  ngOnInit() {
-    const data = this.uploadState.getUploadData();
-    this.breadcrumb = data?.breadcrumb || [];
-    this.originalUrl = data?.originalUrl || "";
-    this.options = [
-      ...this.baseMenu
-    ];
-    this.baseHref = this.locationStrategy.getBaseHref();
-  }
-  originalUrl = "";
-  //Breadcrumb & orphan status
-  breadcrumb = [];
-  urlFound = null;
-  //IA chart
-  iaChart = null;
-  brokenLinks = [];
-  depth = 4;
-  //default value
-  //For tracking progress while building IA chart
-  isChartLoading = false;
-  iaProgress = 0;
-  totalUrls = 0;
-  processedUrls = 0;
-  //Pages to skip children when building IA chart
-  skipFormsAndPubs = /* @__PURE__ */ new Set([
-    "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms.html",
-    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/formulaires.html",
-    "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html",
-    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/publications.html"
-  ]);
-  //Button fxn
-  checkIA() {
-    return __async(this, null, function* () {
-      this.urlFound = yield this.checkParentLinks(this.breadcrumb, this.originalUrl);
-      this.iaChart = yield this.buildIaTree([this.originalUrl], this.depth);
-      setTimeout(() => {
-        const firstNode = document.querySelector(".p-organizationchart-node a");
-        if (firstNode)
-          firstNode.focus();
-      });
-    });
-  }
-  //Step 1: Check if breadcrumb orphan via parent page
-  checkParentLinks(breadcrumbs, originalUrl) {
-    return __async(this, null, function* () {
-      if (!breadcrumbs?.length)
-        return false;
-      const lastBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
-      const targetUrl = lastBreadcrumb.url;
-      if (!targetUrl) {
-        console.error("Last breadcrumb has no URL");
-        return false;
-      }
-      try {
-        const response = yield fetch(targetUrl);
-        if (!response.ok) {
-          console.error(`Failed to fetch breadcrumb page: ${response.status}`);
-          return false;
-        }
-        const html = yield response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const links = Array.from(doc.querySelectorAll("a")).map((a) => a.getAttribute("href")).filter((href) => !!href);
-        const absoluteLinks = links.map((href) => {
-          try {
-            return new URL(href, targetUrl).href;
-          } catch {
-            return href;
-          }
-        });
-        const found = absoluteLinks.includes(originalUrl);
-        console.log(`Original URL ${found ? "found" : "NOT found"} in ${targetUrl}`);
-        return found;
-      } catch (err) {
-        console.error("Error checking breadcrumb target:", err);
-        return false;
-      }
-    });
-  }
-  //Set background color
-  get bgColors() {
-    return this.theme.darkMode() ? this.bgColorsDark : this.bgColorsLight;
-  }
-  bgColorsLight = [
-    "surface-0 hover:bg-primary-50",
-    "bg-primary-50 hover:bg-primary-100",
-    "bg-primary-100 hover:bg-primary-200",
-    "bg-primary-200 hover:bg-primary-300",
-    "bg-primary-300 hover:bg-primary-400",
-    "bg-primary-400 hover:bg-primary-500",
-    "bg-primary-500 hover:bg-primary-600 text-white",
-    "bg-primary-600 hover:bg-primary-700 text-white",
-    "bg-primary-700 hover:bg-primary-800 text-white",
-    "bg-primary-800 hover:bg-primary-900 text-white"
-  ];
-  bgColorsDark = [
-    "surface-0 hover:bg-primary-900",
-    "bg-primary-900 hover:bg-primary-800",
-    "bg-primary-800 hover:bg-primary-700",
-    "bg-primary-700 hover:bg-primary-600",
-    "bg-primary-600 hover:bg-primary-500",
-    "bg-primary-500 hover:bg-primary-400",
-    "bg-primary-400 hover:bg-primary-300  text-black",
-    "bg-primary-300 hover:bg-primary-200 text-black",
-    "bg-primary-200 hover:bg-primary-100 text-black",
-    "bg-primary-100 hover:bg-primary-50 text-black"
-  ];
-  get contextStyles() {
-    return this.theme.darkMode() ? this.contextStylesDark : this.contextStylesLight;
-  }
-  contextStylesLight = {
-    new: "bg-green-200 hover:bg-green-300 text-black",
-    rot: "bg-red-200 hover:bg-red-300 text-black",
-    move: "bg-yellow-200 hover:bg-yellow-300 text-black",
-    template: "surface-200 hover:surface-300 text-black"
-  };
-  contextStylesDark = {
-    new: "bg-green-700 hover:bg-green-600 text-white",
-    rot: "bg-red-700 hover:bg-red-600 text-white",
-    move: "bg-yellow-700 hover:bg-yellow-600 text-black",
-    template: "surface-200 hover:surface-300 text-white"
-  };
-  //Step 2a: Get single page IA data
-  getPageMetaAndLinks(url) {
-    return __async(this, null, function* () {
-      try {
-        const res = yield fetch(url);
-        const status = res.status;
-        if (!res.ok)
-          return { status };
-        const html = yield res.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const h1Elements = Array.from(doc.querySelectorAll("h1"));
-        const h1 = h1Elements.map((e) => e.textContent?.trim()).filter(Boolean).join("<br>");
-        const breadcrumb = Array.from(doc.querySelectorAll(".breadcrumb li a")).map((a) => new URL(a.getAttribute("href") || "", url).href);
-        const anchors = Array.from(doc.querySelectorAll("main a[href]"));
-        const baseUrl = new URL(url).origin;
-        const links = Array.from(new Set(
-          //unique set
-          anchors.map((a) => {
-            const u = new URL(a.getAttribute("href") || "", url);
-            u.hash = "";
-            return u.href;
-          }).filter((u) => u.startsWith(baseUrl) && u !== url)
-          // on same domain but not self
-        ));
-        return { h1, breadcrumb, links, status };
-      } catch (err) {
-        console.error(`Failed to fetch ${url}`, err);
-        return { status: 0 };
-      }
-    });
-  }
-  //Step 2b: Crawl all child pages for IA data
-  buildIaTree(urls, depth, parentUrl, level = 0) {
-    return __async(this, null, function* () {
-      if (depth <= 0)
-        return [];
-      if (!parentUrl && level === 0) {
-        this.isChartLoading = true;
-        this.iaProgress = 5;
-        this.processedUrls = 0;
-        this.totalUrls = urls.length;
-      }
-      const nodes = [];
-      const bgClass = this.bgColors[level % this.bgColors.length];
-      for (const url of urls) {
-        const meta = yield this.getPageMetaAndLinks(url);
-        this.processedUrls++;
-        this.iaProgress = Math.round(this.processedUrls / this.totalUrls * 100);
-        if (!meta || meta.status !== 200) {
-          this.brokenLinks.push({
-            parentUrl,
-            url,
-            status: meta?.status || 0
-          });
-          continue;
-        }
-        if (!meta.breadcrumb || !meta.links)
-          continue;
-        if (parentUrl && meta.breadcrumb.at(-1) !== parentUrl) {
-          continue;
-        }
-        const node = {
-          label: meta.h1,
-          data: {
-            h1: meta.h1,
-            url,
-            originalParent: parentUrl,
-            editing: null,
-            customStyle: false,
-            customStyleKey: null,
-            borderStyle: "border-2 border-primary border-round shadow-2"
-          },
-          expanded: true,
-          styleClass: `border-2 border-primary border-round shadow-2 ${bgClass}`,
-          children: []
-        };
-        if (meta.links?.length && depth > 1) {
-          this.totalUrls += meta.links.length;
-          const total = meta.links.length;
-          let limit = total;
-          if (this.skipFormsAndPubs.has(url)) {
-            limit = 5;
-          }
-          const links = meta.links.slice(0, limit);
-          node.children = yield this.buildIaTree(links, depth - 1, url, level + 1);
-          if (total > limit) {
-            node.children?.push({
-              label: `+ ${total - limit} more...`,
-              data: {
-                h1: `+ ${total - limit} more...`,
-                url: null,
-                originalParent: parentUrl,
-                editing: null,
-                customStyle: true,
-                customStyleKey: "template",
-                borderStyle: "border-2 border-primary border-round shadow-2 border-dashed"
-              },
-              expanded: true,
-              styleClass: `border-2 border-primary border-round shadow-2 border-dashed surface-100 hover:surface-200`,
-              children: []
-            });
-          }
-        }
-        nodes.push(node);
-      }
-      if (!parentUrl && level === 0) {
-        this.iaProgress = 100;
-        setTimeout(() => {
-          this.isChartLoading = false;
-          this.iaProgress = 0;
-        }, 1e3);
-      }
-      return nodes;
-    });
-  }
-  //Prevent default click on org chart links <-- Do we want this?? 
-  onNodeClick(event) {
-    if (event.button === 0) {
-      event.preventDefault();
-    }
-  }
-  //Full screen element
-  chartContainer;
-  maximize(elRef) {
-    const element = elRef.nativeElement;
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen();
-    }
-  }
-  //Context menu
-  cm;
-  options = [];
-  //options for editing chart nodes
-  baseMenu = [
-    {
-      label: "Edit label",
-      icon: "pi pi-pen-to-square",
-      command: () => {
-        console.log("Edit ", this.selectedNode);
-        this.editNode("label");
-      }
-    },
-    {
-      label: "Edit url",
-      icon: "pi pi-link",
-      command: () => {
-        console.log("Edit ", this.selectedNode);
-        this.editNode("link");
-      }
-    },
-    {
-      separator: true
-    },
-    {
-      label: "Add child page",
-      icon: "pi pi-plus",
-      command: () => {
-        console.log("Add ", this.selectedNode);
-        this.addChildNode();
-      }
-    },
-    {
-      label: "Delete page",
-      icon: "pi pi-trash",
-      command: () => {
-        console.log("Delete ", this.selectedNode);
-        this.deleteNode();
-      }
-    },
-    {
-      separator: true
-    },
-    {
-      label: "Change template",
-      icon: "pi pi-sync",
-      items: [
-        {
-          label: "Split into subway pattern",
-          icon: "pi pi-sitemap",
-          command: () => {
-            console.log("Change template ", this.selectedNode);
-            this.addParentNode("subway");
-          }
-        },
-        {
-          label: "Combine into single page",
-          icon: "pi pi-file-check",
-          command: () => {
-            console.log("Change template ", this.selectedNode);
-            this.addParentNode("combine");
-          }
-        }
-      ]
-    },
-    {
-      label: "Change style",
-      icon: "pi pi-palette",
-      items: [
-        {
-          label: "New page",
-          icon: "pi pi-file-plus",
-          command: () => {
-            this.selectedNode.data.customStyleKey = "new";
-            this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-            this.updateNodeStyles(this.iaChart, 0);
-            this.selectedNode = null;
-          }
-        },
-        {
-          label: "ROT",
-          icon: "pi pi-trash",
-          command: () => {
-            this.selectedNode.data.customStyleKey = "rot";
-            this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-            this.updateNodeStyles(this.iaChart, 0);
-            this.selectedNode = null;
-          }
-        },
-        {
-          label: "Page move",
-          icon: "pi pi-sitemap",
-          command: () => {
-            this.selectedNode.data.customStyleKey = "move";
-            this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-            this.updateNodeStyles(this.iaChart, 0);
-            this.selectedNode = null;
-          }
-        },
-        {
-          separator: true
-        },
-        {
-          label: "Reset custom style",
-          icon: "pi pi-replay",
-          command: () => {
-            this.selectedNode.data.customStyle = false;
-            this.selectedNode.data.customStyleKey = null;
-            this.selectedNode.data.borderStyle = "border-2 border-primary border-round shadow-2";
-            this.updateNodeStyles(this.iaChart, 0);
-            this.selectedNode = null;
-          }
-        }
-      ]
-    },
-    {
-      separator: true
-    },
-    {
-      label: "Export to CSV",
-      icon: "pi pi-file-export",
-      disabled: true,
-      // TODO: implement export
-      command: () => {
-        console.log("Export ", this.selectedNode);
-        this.exportTable();
-      }
-    },
-    {
-      separator: true
-    },
-    {
-      label: "Open page in new page assistant",
-      icon: "pi pi-sparkles",
-      command: () => {
-        console.log("Open link in page assistant ", this.selectedNode);
-        this.openInPageAssistant();
-      }
-    },
-    {
-      label: "Open page in new tab",
-      icon: "pi pi-external-link",
-      command: () => {
-        console.log("Open link in new tab ", this.selectedNode);
-        this.openNodeUrl();
-      }
-    }
-  ];
-  selectedNode;
-  draggable = true;
-  selectable = true;
-  //For tracking previous states
-  editingNode = null;
-  undoArray = [];
-  //for loading in page assistant
-  baseHref = null;
-  onNodeContextMenu(event) {
-    if (this.editingNode) {
-      this.editingNode.data.editing = null;
-    }
-    this.selectedNode = event.node;
-    const customStyle = this.selectedNode.data.customStyle;
-    this.options.forEach((item) => {
-      if (item.label === "Open page in new page assistant" || item.label === "Open page in new tab") {
-        item.disabled = !this.selectedNode?.data?.url?.trim();
-      }
-      if (item.label === "Change template" || item.label === "Change style") {
-        item.disabled = customStyle;
-      }
-    });
-  }
-  onInputKeydown(event) {
-    if (event.key === "Enter") {
-      this.saveNode();
-      console.log("Saved ", this.selectedNode);
-      event.stopPropagation();
-      event.preventDefault();
-    }
-    if (event.key === " ") {
-      event.stopPropagation();
-    }
-  }
-  editNode(mode = "label") {
-    if (this.selectedNode) {
-      this.selectedNode.data.editing = mode;
-      this.editingNode = this.selectedNode;
-      this.draggable = false;
-      this.selectable = false;
-      setTimeout(() => {
-        const input2 = document.querySelector("input.ia-label");
-        input2?.focus();
-      });
-    }
-  }
-  saveNode() {
-    if (this.selectedNode) {
-      this.selectedNode.data.editing = null;
-    }
-    if (this.selectedNode.data.url === "https://www.canada.ca/") {
-      this.editNode("link");
-      return;
-    }
-    this.draggable = true;
-    this.selectable = false;
-  }
-  addChildNode() {
-    if (!this.selectedNode)
-      return;
-    if (!this.selectedNode.children) {
-      this.selectedNode.children = [];
-    }
-    const newNode = {
-      label: "New page",
-      data: {
-        h1: "New page",
-        url: "https://www.canada.ca/",
-        // default URL
-        editing: false,
-        customStyle: false,
-        customStyleKey: "new",
-        borderStyle: "border-2 border-primary border-round border-dashed shadow-2"
-      },
-      children: []
-    };
-    this.selectedNode.children.push(newNode);
-    this.selectedNode.expanded = true;
-    this.selectedNode = newNode;
-    this.editNode("label");
-    this.updateMenu();
-    this.updateNodeStyles(this.iaChart, 0);
-  }
-  //Will be used to create a container to mark pages for template change
-  addParentNode(action) {
-    if (!this.selectedNode)
-      return;
-    const findParent = (nodes, parentNode2) => {
-      for (const node of nodes) {
-        if (node === this.selectedNode) {
-          return {
-            parentContainer: nodes,
-            // found at this level
-            parentNode: parentNode2 ?? null
-          };
-        }
-        if (node.children) {
-          const searchChildNodes = findParent(node.children, node);
-          if (searchChildNodes)
-            return searchChildNodes;
-        }
-      }
-      return null;
-    };
-    const location = findParent(this.iaChart || []);
-    if (!location)
-      return;
-    const { parentContainer, parentNode } = location;
-    const label = action === "subway" ? "Split into subway pattern" : "Combine into single page";
-    const newParentNode = {
-      label,
-      data: {
-        h1: label,
-        url: "",
-        originalParent: parentNode?.data?.url ?? "",
-        editing: false,
-        customStyle: true,
-        // prevents style changes
-        customStyleKey: "template",
-        isContainer: true,
-        // used to keep child nodes at proper level and prevent drag/drop of these wrappers into each other
-        borderStyle: "border-2 border-primary border-round border-dashed shadow-2"
-      },
-      expanded: true,
-      children: [this.selectedNode]
-    };
-    const index = parentContainer.indexOf(this.selectedNode);
-    if (index !== -1) {
-      parentContainer.splice(index, 1, newParentNode);
-    }
-    this.selectedNode = newParentNode;
-    this.updateMenu();
-    this.updateNodeStyles(this.iaChart, 0);
-  }
-  deleteNode() {
-    if (!this.iaChart || !this.selectedNode)
-      return;
-    const nodeToDelete = this.selectedNode;
-    const rootIndex = this.iaChart.findIndex((n) => n === nodeToDelete);
-    if (rootIndex > -1) {
-      console.warn("Cannot delete root node.");
-      return;
-    }
-    const findAndDelete = (nodes) => {
-      for (const node of nodes) {
-        const children = node.children ?? [];
-        const childIndex = children.findIndex((c) => c === nodeToDelete);
-        if (childIndex > -1) {
-          this.undoArray.push({ node: nodeToDelete, parent: node, index: childIndex });
-          children.splice(childIndex, 1);
-          node.children = children.length ? children : void 0;
-          return true;
-        }
-        if (children.length && findAndDelete(children)) {
-          return true;
-        }
-      }
-      return false;
-    };
-    findAndDelete(this.iaChart);
-    this.updateMenu();
-  }
-  restoreNode() {
-    if (this.undoArray.length === 0)
-      return;
-    const last = this.undoArray.pop();
-    if (last.parent?.children) {
-      last.parent.children.splice(last.index, 0, last.node);
-    } else {
-      console.warn("Cannot restore node: parent missing.");
-      return;
-    }
-    this.selectedNode = last.node;
-    if (!this.selectedNode.data.customStyle) {
-      this.selectedNode.data.customStyleKey = "rot";
-      this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-      this.updateNodeStyles(this.iaChart, 0);
-    }
-    this.updateMenu();
-  }
-  //Add undo option under delete if there is something to restore
-  updateMenu() {
-    this.options = [...this.baseMenu];
-    const deleteIndex = this.options.findIndex((option) => option.label === "Delete page");
-    if (this.undoArray.length > 0 && deleteIndex !== -1) {
-      this.options.splice(deleteIndex + 1, 0, {
-        label: "Restore page",
-        icon: "pi pi-history",
-        command: () => this.restoreNode()
-      });
-    }
-  }
-  //Placeholder for export function
-  exportTable() {
-  }
-  //Open link in new tab
-  openNodeUrl() {
-    window.open(this.selectedNode.data.url, "_blank");
-  }
-  //Make share link a service so it can be used on both share.component.ts and here
-  openInPageAssistant() {
-    const baseUrl = (window.location.origin + this.baseHref).replace(/\/+$/, "");
-    const urlParam = encodeURIComponent(this.selectedNode.data.url);
-    const shareLink = `${baseUrl}/page-assistant/share?url=${urlParam}`;
-    console.log("Open in page assistant: ", shareLink);
-    window.open(shareLink, "_blank");
-  }
-  handleNodeDrop(event) {
-    const dragNode = event.dragNode;
-    const dropNode = event.dropNode;
-    if (!dragNode || !dropNode)
-      return;
-    if ((dropNode.data.isContainer || dropNode.parent?.data?.isContainer) && dragNode.data.isContainer)
-      return;
-    event.accept?.();
-    if (dragNode.data.customStyleKey === "move") {
-      dragNode.data.customStyleKey = "";
-      dragNode.data.borderStyle = "border-2 border-primary border-round shadow-2";
-    }
-    const targetEl = event.originalEvent?.target;
-    const tag = targetEl.tagName.toLowerCase();
-    const droppedOnNode = tag !== "li";
-    const dragParentUrl = dragNode.data.originalParent;
-    const dropUrl = dropNode.data.url;
-    const dropParentUrl = dropNode.parent?.data?.url ?? "";
-    const dropGrandparentUrl = dropNode.parent?.data?.originalParent ?? "";
-    if (droppedOnNode) {
-      console.log("Dropped on node");
-      console.log("Checking if parentUrl matches node Url:\n", dropUrl);
-    } else {
-      console.log("Dropped between nodes");
-      console.log("Checking if parentUrl matches sibling parent Url:\n", dropParentUrl);
-    }
-    const droppedOnParent = droppedOnNode && dragParentUrl === dropUrl;
-    const reorderedSiblings = !droppedOnNode && dragParentUrl === dropParentUrl;
-    const droppedOnContainerSibling = dropNode.data.isContainer && droppedOnNode && dragParentUrl === dropParentUrl;
-    const droppedBetweenContainerSibling = dropNode.parent?.data?.isContainer && !droppedOnNode && dragParentUrl === dropGrandparentUrl;
-    const isCustom = dragNode.data.customStyle;
-    if (!(droppedOnParent || reorderedSiblings || droppedOnContainerSibling || droppedBetweenContainerSibling || isCustom || dragNode.data.customStyleKey === "new")) {
-      dragNode.data.customStyleKey = "move";
-      dragNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
-    }
-    const treeRoot = targetEl.closest(".p-tree");
-    treeRoot?.querySelectorAll(".p-tree-node-dragover").forEach((el) => {
-      el.classList.remove("p-tree-node-dragover");
-    });
-    console.log("Drag parent URL", dragNode.data.originalParent);
-    this.updateNodeStyles(this.iaChart, 0);
-  }
-  updateNodeStyles(nodes, level = 0) {
-    if (!nodes)
-      return;
-    for (const node of nodes) {
-      const borderStyle = node.data?.borderStyle || "border-2 border-primary border-round shadow-2";
-      const bgClass = this.bgColors[level % this.bgColors.length];
-      const bgStyle = this.contextStyles[node.data?.customStyleKey] ?? bgClass;
-      node.styleClass = `${borderStyle} ${bgStyle}`;
-      if (node.children && node.children.length > 0) {
-        const nextLevel = node.data.isContainer ? level : level + 1;
-        this.updateNodeStyles(node.children, nextLevel);
-      }
-    }
-  }
-  static \u0275fac = function IaStructureComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _IaStructureComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaStructureComponent, selectors: [["ca-ia-structure"]], viewQuery: function IaStructureComponent_Query(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275viewQuery(_c010, 5);
-      \u0275\u0275viewQuery(_c111, 5);
-    }
-    if (rf & 2) {
-      let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.chartContainer = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.cm = _t.first);
-    }
-  }, features: [\u0275\u0275ProvidersFeature([TreeDragDropService])], decls: 13, vars: 12, consts: [["chartContainer", ""], ["cm", ""], ["header", ""], ["body", ""], [1, "flex", "flex-row", "flex-wrap", "align-items-center", "gap-3", "mt-0"], ["inputId", "depth", "mode", "decimal", 3, "ngModelChange", "ngModel", "showButtons", "min", "max"], ["for", "depth"], ["label", "Verify IA", "severity", "help", "icon", "pi pi-info-circle", 3, "click", "loading"], ["label", "Maximize IA chart", "severity", "secondary", "icon", "pi pi-window-maximize", 3, "click", 4, "ngIf"], ["styleClass", "mt-3", 3, "value", "showValue", "style", 4, "ngIf"], [4, "ngIf"], ["label", "Maximize IA chart", "severity", "secondary", "icon", "pi pi-window-maximize", 3, "click"], ["styleClass", "mt-3", 3, "value", "showValue"], [1, "flex", "flex-row", "align-items-center", "gap-3"], ["styleClass", "pl-1", 1, "max-w-full", 3, "model"], ["class", "flex align-items-center gap-2 text-green-400", 4, "ngIf"], ["class", "flex align-items-center gap-2 text-red-400", 4, "ngIf"], [1, "flex", "align-items-center", "gap-2", "text-green-400"], [1, "pi", "pi-check-circle"], [1, "flex", "align-items-center", "gap-2", "text-red-400"], [1, "pi", "pi-times-circle"], ["class", "overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container", 4, "ngIf"], [1, "overflow-auto", "max-h-75vh", "surface-ground", "surface-border", "border-1", "py-3", "mb-3", "ia-chart-container"], [3, "value"], ["pTemplate", "default"], ["target", "_blank", 1, "ia-label", 3, "click", "href", "innerHTML"], [3, "model"], ["styleClass", "w-full md:w-[30rem]", "draggableScope", "self", "droppableScope", "self", 3, "selectionChange", "onNodeDrop", "onNodeContextMenuSelect", "value", "selectionMode", "selection", "draggableNodes", "droppableNodes", "validateDrop", "contextMenu"], [1, "flex", "flex-row", "align-items-center", "gap-2", "w-full"], ["class", "pi pi-folder", 4, "ngIf"], ["class", "pi pi-file", 4, "ngIf"], ["class", "pi pi-arrows-alt cursor-move text-color-secondary", 4, "ngIf"], ["class", "pi pi-pencil text-color-secondary", 4, "ngIf"], [1, "pi", "pi-folder"], [1, "pi", "pi-file"], [1, "pi", "pi-arrows-alt", "cursor-move", "text-color-secondary"], [1, "pi", "pi-pencil", "text-color-secondary"], ["type", "text", "pInputText", "", "pSize", "small", 1, "ia-label", 3, "ngModelChange", "keydown", "ngModel"], ["icon", "pi pi-check", "severity", "secondary", "size", "small", 3, "onClick"], ["styleClass", "p-treetable-sm", 3, "value", "scrollable"], [3, "ttRow"], [3, "rowNode"], [1, "ia-label", 3, "innerHTML"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle", 4, "ngIf"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle"]], template: function IaStructureComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 4)(1, "p-iftalabel")(2, "p-inputnumber", 5);
-      \u0275\u0275twoWayListener("ngModelChange", function IaStructureComponent_Template_p_inputnumber_ngModelChange_2_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.depth, $event) || (ctx.depth = $event);
-        return $event;
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "label", 6);
-      \u0275\u0275text(4, "Depth");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(5, "p-button", 7);
-      \u0275\u0275listener("click", function IaStructureComponent_Template_p_button_click_5_listener() {
-        return ctx.checkIA();
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(6, IaStructureComponent_p_button_6_Template, 1, 0, "p-button", 8);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(7, IaStructureComponent_p_progressbar_7_Template, 1, 5, "p-progressbar", 9)(8, IaStructureComponent_ng_container_8_Template, 7, 3, "ng-container", 10)(9, IaStructureComponent_ng_container_9_Template, 5, 2, "ng-container", 10)(10, IaStructureComponent_ng_container_10_Template, 7, 8, "ng-container", 10)(11, IaStructureComponent_ng_container_11_Template, 8, 2, "ng-container", 10)(12, IaStructureComponent_ng_container_12_Template, 5, 2, "ng-container", 10);
-    }
-    if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275twoWayProperty("ngModel", ctx.depth);
-      \u0275\u0275property("showButtons", true)("min", 2)("max", 6);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("loading", ctx.isChartLoading);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.iaChart && ctx.iaChart.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.isChartLoading);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.breadcrumb.length > 0);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.iaChart);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.iaChart);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.iaChart && !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.iaChart);
-    }
-  }, dependencies: [
-    CommonModule,
-    NgIf,
-    FormsModule,
-    DefaultValueAccessor,
-    NgControlStatus,
-    NgModel,
-    TranslateModule,
-    TableModule,
-    Table,
-    PrimeTemplate,
-    ButtonModule,
-    Button,
-    IftaLabel,
-    BreadcrumbModule,
-    Breadcrumb,
-    OrganizationChartModule,
-    OrganizationChart,
-    ProgressBarModule,
-    ProgressBar,
-    InputNumberModule,
-    InputNumber,
-    InputTextModule,
-    InputText,
-    TreeTableModule,
-    TreeTable,
-    TreeTableToggler,
-    TTRow,
-    Tree,
-    ContextMenuModule,
-    ContextMenu,
-    InputGroup,
-    InputGroupAddonModule,
-    InputGroupAddon
-  ], styles: ["\n\n.ia-label[_ngcontent-%COMP%] {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n  .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n  .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n  .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n  .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n  .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n  .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n/*# sourceMappingURL=ia-structure.component.css.map */"] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaStructureComponent, [{
-    type: Component,
-    args: [{ selector: "ca-ia-structure", imports: [
-      CommonModule,
-      FormsModule,
-      TranslateModule,
-      TableModule,
-      ButtonModule,
-      IftaLabel,
-      BreadcrumbModule,
-      OrganizationChartModule,
-      ProgressBarModule,
-      InputNumberModule,
-      InputTextModule,
-      TreeTableModule,
-      Tree,
-      ContextMenuModule,
-      InputGroup,
-      InputGroupAddonModule
-    ], providers: [TreeDragDropService], template: `<!--UI-->\r
-<div class="flex flex-row flex-wrap align-items-center gap-3 mt-0">\r
-    <p-iftalabel>\r
-        <p-inputnumber [(ngModel)]="depth" inputId="depth" mode="decimal" [showButtons]="true" [min]="2" [max]="6" />\r
-        <label for="depth">Depth</label>\r
-    </p-iftalabel>\r
-    <p-button label="Verify IA" severity="help" (click)="checkIA()" [loading]="isChartLoading" icon="pi pi-info-circle" />\r
-    <p-button label="Maximize IA chart" severity="secondary" (click)="maximize(chartContainer)" icon="pi pi-window-maximize" *ngIf="iaChart && iaChart.length > 0" />\r
-</div>\r
-<p-progressbar *ngIf="isChartLoading" [value]="iaProgress" [showValue]="false" [style]="{'height': '1rem'}" styleClass="mt-3" />\r
-\r
-<!--Breadcrumb-->\r
-<ng-container *ngIf="breadcrumb.length > 0">\r
-    <h2>Breadcrumb</h2>\r
-    <div class="flex flex-row align-items-center gap-3">\r
-        <p-breadcrumb class="max-w-full" styleClass="pl-1" [model]="breadcrumb" />\r
-        <span class="flex align-items-center gap-2 text-green-400" *ngIf="urlFound===true"><i class="pi pi-check-circle"></i>Link found on parent page</span>\r
-        <span class="flex align-items-center gap-2 text-red-400" *ngIf="urlFound===false"><i class="pi pi-times-circle"></i>IA Orphan</span>\r
-    </div>\r
-</ng-container>\r
-\r
-<!--IA Chart-->\r
-<ng-container *ngIf="iaChart">\r
-    <h2>IA structure</h2>\r
-    <p *ngIf="iaChart.length === 0">No child pages found.</p>\r
-    <div #chartContainer *ngIf="iaChart.length > 0" class="overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container">\r
-        <p-organization-chart [value]="iaChart">\r
-            <ng-template let-node pTemplate="default">\r
-                <p><a [href]="node.data.url" target="_blank" (click)="onNodeClick($event)" [innerHTML]="node.label" class="ia-label"></a></p>\r
-            </ng-template>\r
-        </p-organization-chart>\r
-    </div>\r
-</ng-container>\r
-\r
-<!--IA Tree-->\r
-\r
-<ng-container *ngIf="iaChart">\r
-    <p-contextMenu #cm [model]="options"></p-contextMenu>\r
-    <h2>IA structure tree</h2>\r
-    <p-tree [value]="iaChart" styleClass="w-full md:w-[30rem]"\r
-            [selectionMode]="selectable ? 'multiple' : null" [(selection)]="selectedNode"\r
-            [draggableNodes]="draggable" [droppableNodes]="true" draggableScope="self" droppableScope="self" (onNodeDrop)="handleNodeDrop($event)" [validateDrop]="true"\r
-            [contextMenu]="cm" (onNodeContextMenuSelect)="onNodeContextMenu($event)">\r
-        <ng-template pTemplate="default" let-node>\r
-            <div class="flex flex-row align-items-center gap-2 w-full">\r
-                <i class="pi pi-folder" *ngIf="node.children.length > 0 && !draggable && !node.data.editing"></i>\r
-                <i class="pi pi-file" *ngIf="(node.children.length === 0 || !node.children) && !draggable && !node.data.editing"></i>\r
-                <i *ngIf="draggable" class="pi pi-arrows-alt cursor-move text-color-secondary"></i>\r
-                <i *ngIf="node.data.editing" class="pi pi-pencil text-color-secondary"></i>\r
-                <ng-container *ngIf="!node.data.editing"><a [href]="node.data.url" target="_blank" (click)="onNodeClick($event)" [innerHTML]="node.label" class="ia-label"></a></ng-container>\r
-                <p-inputgroup *ngIf="node.data.editing === 'label'">\r
-                    <input type="text" pInputText [(ngModel)]="node.label" pSize="small" class="ia-label" (keydown)="onInputKeydown($event)" />\r
-                    <p-inputgroup-addon><p-button icon="pi pi-check" severity="secondary" size="small" (onClick)="saveNode()" /></p-inputgroup-addon>\r
-                </p-inputgroup>\r
-                <p-inputgroup *ngIf="node.data.editing === 'link'">\r
-                    <input type="text" pInputText [(ngModel)]="node.data.url" pSize="small" class="ia-label" (keydown)="onInputKeydown($event)" />\r
-                    <p-inputgroup-addon><p-button icon="pi pi-check" severity="secondary" size="small" (onClick)="saveNode()" /></p-inputgroup-addon>\r
-                </p-inputgroup>\r
-            </div>\r
-        </ng-template>\r
-    </p-tree>\r
-</ng-container>\r
-\r
-<!--IA Table-->\r
-<ng-container *ngIf="iaChart && !production">\r
-    <h2>IA structure table</h2>\r
-    <p-treeTable [value]="iaChart" styleClass="p-treetable-sm" [scrollable]="true">\r
-        <ng-template #header>\r
-            <tr>\r
-                <th>H1</th>\r
-                <th>URL</th>\r
-            </tr>\r
-        </ng-template>\r
-        <ng-template #body let-rowNode let-rowData="rowData">\r
-            <tr [ttRow]="rowNode">\r
-                <td>\r
-                    <p-treetable-toggler [rowNode]="rowNode" />\r
-                    <span [innerHTML]="rowData.h1" class="ia-label"></span>\r
-                </td>\r
-                <td>{{ rowData.url }}</td>\r
-            </tr>\r
-        </ng-template>\r
-    </p-treeTable>\r
-</ng-container>\r
-\r
-<!--Broken Links-->\r
-<ng-container *ngIf="iaChart">\r
-    <h2>Broken links</h2>\r
-    <p *ngIf="brokenLinks.length === 0">No broken links found on this page<span *ngIf="iaChart[0].children?.length"> or on any detected child pages</span>.</p>\r
-    <p-table *ngIf="brokenLinks.length > 0" [value]="brokenLinks" size="small" stripedRows [tableStyle]="{ 'min-width': '50rem' }">\r
-        <ng-template #header>\r
-            <tr>\r
-                <th>Parent page</th>\r
-                <th>Broken link</th>\r
-                <th>Status</th>\r
-            </tr>\r
-        </ng-template>\r
-        <ng-template #body let-rowData>\r
-            <tr>\r
-                <td>{{ rowData.parentUrl }}</td>\r
-                <td>{{ rowData.url }}</td>\r
-                <td>{{ rowData.status }}</td>\r
-            </tr>\r
-        </ng-template>\r
-    </p-table>\r
-</ng-container>`, styles: ["/* angular:styles/component:css;282dc0c926a358c7e7f17f3e75bfd07f4819790983dec331bff836691565b3ef;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/ia-structure.component.ts */\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n/*# sourceMappingURL=ia-structure.component.css.map */\n"] }]
-  }], () => [], { chartContainer: [{
-    type: ViewChild,
-    args: ["chartContainer"]
-  }], cm: [{
-    type: ViewChild,
-    args: ["cm"]
-  }] });
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaStructureComponent, { className: "IaStructureComponent", filePath: "src/app/views/page-assistant/components/tools/ia-structure.component.ts", lineNumber: 79 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeadingStructureComponent, { className: "HeadingStructureComponent", filePath: "src/app/views/page-assistant/components/problems/heading-structure.component.ts", lineNumber: 37 });
 })();
 
 // src/app/views/page-assistant/data/css-list.config.ts
@@ -32485,72 +30277,53 @@ var ValidatorService = class _ValidatorService {
   }], null, null);
 })();
 
-// src/app/views/page-assistant/components/tools/component-guidance.component.ts
-function ComponentGuidanceComponent_li_3_Template(rf, ctx) {
+// src/app/views/page-assistant/components/problems/component-guidance.component.ts
+function ComponentGuidanceComponent_ng_template_1_th_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "li")(1, "a", 3);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
-    \u0275\u0275element(5, "i", 4);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const item_r1 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("href", \u0275\u0275pipeBind1(2, 2, item_r1.url), \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 4, item_r1.name));
-  }
-}
-function ComponentGuidanceComponent_ng_container_4_li_15_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li");
+    \u0275\u0275elementStart(0, "th");
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const v_r4 = ctx.$implicit;
+    const col_r1 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate2(" ", v_r4.type, ": ", v_r4.detail, " ");
+    \u0275\u0275textInterpolate(col_r1.header);
   }
 }
-function ComponentGuidanceComponent_ng_container_4_Template(rf, ctx) {
+function ComponentGuidanceComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p", 5);
-    \u0275\u0275text(2, "Unfinished. Will add fxn to:");
+    \u0275\u0275elementStart(0, "tr");
+    \u0275\u0275template(1, ComponentGuidanceComponent_ng_template_1_th_1_Template, 2, 1, "th", 3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "ul")(4, "li");
-    \u0275\u0275text(5, "detect which components are used on the page and link to relevant UCDG guidance (in progress)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "li");
-    \u0275\u0275text(7, "warn user if they are using a depracated version of a component");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "li");
-    \u0275\u0275text(9, "auto-fix deprecated code w/ option to accept & merge with page");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "p");
-    \u0275\u0275text(11, "This button just checks if you have any classes or elements that aren't in theme.min.css");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "p-button", 6);
-    \u0275\u0275listener("click", function ComponentGuidanceComponent_ng_container_4_Template_p_button_click_12_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.runValidation());
-    });
-    \u0275\u0275text(13, "Check classes and elements");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "ul");
-    \u0275\u0275template(15, ComponentGuidanceComponent_ng_container_4_li_15_Template, 2, 2, "li", 1);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(15);
-    \u0275\u0275property("ngForOf", ctx_r2.violations);
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", ctx_r1.cols);
+  }
+}
+function ComponentGuidanceComponent_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr")(1, "td");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "td");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "td")(6, "a", 4);
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const row_r3 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(row_r3.order);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(row_r3.component);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", row_r3.url, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", row_r3.url, " ");
   }
 }
 var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
@@ -32558,6 +30331,12 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
   translate = inject(TranslateService);
   validator = inject(ValidatorService);
   http = inject(HttpClient);
+  rows = [];
+  cols = [
+    { field: "order", header: "Index" },
+    { field: "component", header: "Component" },
+    { field: "url", header: "UCDG guidance" }
+  ];
   production = environment.production;
   ngOnInit() {
     const data = this.uploadState.getUploadData();
@@ -32565,6 +30344,25 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
       this.guidanceList = this.validator.collectGuidanceUrls(data.originalHtml);
       console.log(this.guidanceList);
     }
+  }
+  get tableRows() {
+    const unique = /* @__PURE__ */ new Map();
+    for (const g of this.guidanceList) {
+      if (!unique.has(g.url))
+        unique.set(g.url, { nameKey: g.name, urlKey: g.url });
+    }
+    const resolved = Array.from(unique.values()).map((it) => ({
+      component: this.translate.instant(it.nameKey) || it.nameKey,
+      url: this.translate.instant(it.urlKey) || it.urlKey
+    }));
+    resolved.sort((a, b) => a.component.localeCompare(b.component, void 0, {
+      sensitivity: "base"
+    }));
+    return resolved.map((r, i) => ({
+      order: i + 1,
+      component: r.component,
+      url: r.url
+    }));
   }
   guidanceList = [];
   violations = [];
@@ -32592,31 +30390,24 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
   static \u0275fac = function ComponentGuidanceComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ComponentGuidanceComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ComponentGuidanceComponent, selectors: [["ca-component-guidance"]], decls: 5, vars: 2, consts: [[1, "mt-0"], [4, "ngFor", "ngForOf"], [4, "ngIf"], ["target", "_blank", "rel", "noopener", 3, "href"], [1, "pi", "pi-external-link", "ml-1", 2, "font-size", ".75rem"], [1, "m-0"], ["severity", "primary", 1, "mt-2", 3, "click"]], template: function ComponentGuidanceComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ComponentGuidanceComponent, selectors: [["ca-component-guidance"]], decls: 3, vars: 1, consts: [["dataKey", "url", "styleClass", "p-datatable-sm", 3, "value"], ["pTemplate", "header"], ["pTemplate", "body"], [4, "ngFor", "ngForOf"], ["target", "_blank", "rel", "noopener", 3, "href"]], template: function ComponentGuidanceComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "h2", 0);
-      \u0275\u0275text(1, "Guidance");
+      \u0275\u0275elementStart(0, "p-table", 0);
+      \u0275\u0275template(1, ComponentGuidanceComponent_ng_template_1_Template, 2, 1, "ng-template", 1)(2, ComponentGuidanceComponent_ng_template_2_Template, 8, 4, "ng-template", 2);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "ul");
-      \u0275\u0275template(3, ComponentGuidanceComponent_li_3_Template, 6, 6, "li", 1);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(4, ComponentGuidanceComponent_ng_container_4_Template, 16, 1, "ng-container", 2);
     }
     if (rf & 2) {
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngForOf", ctx.guidanceList);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275property("value", ctx.tableRows);
     }
   }, dependencies: [
     CommonModule,
     NgForOf,
-    NgIf,
     FormsModule,
+    TableModule,
+    Table,
+    PrimeTemplate,
     TranslateModule,
-    TranslatePipe,
-    ButtonModule,
-    Button
+    ButtonModule
   ], encapsulation: 2 });
 };
 (() => {
@@ -32625,10 +30416,10 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     args: [{ selector: "ca-component-guidance", imports: [
       CommonModule,
       FormsModule,
+      TableModule,
       TranslateModule,
       ButtonModule
-    ], template: `<h2 class="mt-0">Guidance</h2>\r
-<ul>\r
+    ], template: `<!-- <ul>\r
     <li *ngFor="let item of guidanceList">\r
         <a [href]="item.url | translate" target="_blank" rel="noopener">{{ item.name | translate }}<i class="pi pi-external-link ml-1" style="font-size: .75rem"></i></a>\r
     </li>\r
@@ -32647,14 +30438,34 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
             {{v.type}}: {{v.detail}}\r
         </li>\r
     </ul>\r
-</ng-container>` }]
+</ng-container> -->\r
+<p-table [value]="tableRows" dataKey="url" styleClass="p-datatable-sm">\r
+  <ng-template pTemplate="header">\r
+    <tr>\r
+      <th *ngFor="let col of cols">{{ col.header }}</th>\r
+    </tr>\r
+  </ng-template>\r
+\r
+  <ng-template pTemplate="body" let-row>\r
+    <tr>\r
+      <td>{{ row.order }}</td>\r
+      <td>{{ row.component }}</td>\r
+      <td>\r
+        <a [href]="row.url" target="_blank" rel="noopener">\r
+          {{ row.url }}\r
+        </a>\r
+      </td>\r
+    </tr>\r
+  </ng-template>\r
+</p-table>\r
+` }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ComponentGuidanceComponent, { className: "ComponentGuidanceComponent", filePath: "src/app/views/page-assistant/components/tools/component-guidance.component.ts", lineNumber: 25 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ComponentGuidanceComponent, { className: "ComponentGuidanceComponent", filePath: "src/app/views/page-assistant/components/problems/component-guidance.component.ts", lineNumber: 35 });
 })();
 
-// src/app/views/page-assistant/components/tools/seo.component.ts
+// src/app/views/page-assistant/components/problems/seo.component.ts
 function SeoComponent_ng_container_5_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -32848,10 +30659,10 @@ var SeoComponent = class _SeoComponent {
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SeoComponent, { className: "SeoComponent", filePath: "src/app/views/page-assistant/components/tools/seo.component.ts", lineNumber: 22 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SeoComponent, { className: "SeoComponent", filePath: "src/app/views/page-assistant/components/problems/seo.component.ts", lineNumber: 22 });
 })();
 
-// src/app/views/page-assistant/components/tools/user-insights.component.ts
+// src/app/views/page-assistant/components/problems/user-insights.component.ts
 var UserInsightsComponent = class _UserInsightsComponent {
   translate = inject(TranslateService);
   isLoading = false;
@@ -32963,239 +30774,7 @@ var UserInsightsComponent = class _UserInsightsComponent {
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserInsightsComponent, { className: "UserInsightsComponent", filePath: "src/app/views/page-assistant/components/tools/user-insights.component.ts", lineNumber: 19 });
-})();
-
-// src/app/views/page-assistant/components/tools/template-conversion.component.ts
-var TemplateConversionComponent = class _TemplateConversionComponent {
-  static \u0275fac = function TemplateConversionComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _TemplateConversionComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TemplateConversionComponent, selectors: [["ca-template-conversion"]], decls: 4, vars: 0, consts: [[1, "m-0"]], template: function TemplateConversionComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "p", 0);
-      \u0275\u0275text(1, "Unfinished. Will add auto-detect page template fxn and option to choose a template to inform GenAI what kind of page it is or should be.");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p");
-      \u0275\u0275text(3, "Should this be part of the heading structure tool?");
-      \u0275\u0275elementEnd();
-    }
-  }, encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TemplateConversionComponent, [{
-    type: Component,
-    args: [{ selector: "ca-template-conversion", imports: [], template: '<p class="m-0">Unfinished. Will add auto-detect page template fxn and option to choose a template to inform GenAI what kind of page it is or should be.</p>\r\n<p>Should this be part of the heading structure tool?</p>' }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TemplateConversionComponent, { className: "TemplateConversionComponent", filePath: "src/app/views/page-assistant/components/tools/template-conversion.component.ts", lineNumber: 9 });
-})();
-
-// src/app/views/page-assistant/components/tools.component.ts
-function PageToolsComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " View or reorganize your heading structure. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Heading structure");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-heading-structure");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 0);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
-  }
-}
-function PageToolsComponent_p_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Check if your page is an IA orphan and view its current IA diagram. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Find guidance on the components used on your page and check for deprecated code or unexpected classes or elements. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_16_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_16_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
-    \u0275\u0275text(2, "SEO");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_16_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-seo");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 3);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
-  }
-}
-function PageToolsComponent_p_accordion_panel_17_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_17_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
-    \u0275\u0275text(2, "User insights");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_17_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-user-insights");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 4);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(4));
-  }
-}
-function PageToolsComponent_p_accordion_panel_18_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_18_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Template conversion");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_18_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-template-conversion");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 5);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(6));
-  }
-}
-var PageToolsComponent = class _PageToolsComponent {
-  production = environment.production;
-  activePanels = [];
-  isPanelOpen(panelIndex) {
-    return this.activePanels.includes(panelIndex);
-  }
-  static \u0275fac = function PageToolsComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _PageToolsComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageToolsComponent, selectors: [["ca-page-tools"]], decls: 19, vars: 10, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageToolsComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "p");
-      \u0275\u0275text(1, " Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.\n");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p-accordion", 0);
-      \u0275\u0275twoWayListener("valueChange", function PageToolsComponent_Template_p_accordion_valueChange_2_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
-        return $event;
-      });
-      \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
-      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
-      \u0275\u0275text(6, "IA structure");
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(7, PageToolsComponent_p_7_Template, 2, 0, "p", 3);
-      \u0275\u0275elementStart(8, "p-accordion-content");
-      \u0275\u0275element(9, "ca-ia-structure");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(10, "p-accordion-panel", 4)(11, "p-accordion-header");
-      \u0275\u0275text(12, "Component guidance");
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(13, PageToolsComponent_p_13_Template, 2, 0, "p", 3);
-      \u0275\u0275elementStart(14, "p-accordion-content");
-      \u0275\u0275element(15, "ca-component-guidance");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275template(16, PageToolsComponent_p_accordion_panel_16_Template, 6, 2, "p-accordion-panel", 5)(17, PageToolsComponent_p_accordion_panel_17_Template, 6, 2, "p-accordion-panel", 5)(18, PageToolsComponent_p_accordion_panel_18_Template, 6, 2, "p-accordion-panel", 1);
-      \u0275\u0275elementEnd();
-    }
-    if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275twoWayProperty("value", ctx.activePanels);
-      \u0275\u0275property("multiple", true);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("value", 1);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(1));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("value", 2);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-    }
-  }, dependencies: [
-    CommonModule,
-    NgIf,
-    TranslateModule,
-    AccordionModule,
-    Accordion,
-    AccordionPanel,
-    AccordionHeader,
-    AccordionContent,
-    TemplateConversionComponent,
-    SeoComponent,
-    UserInsightsComponent,
-    ComponentGuidanceComponent,
-    HeadingStructureComponent,
-    IaStructureComponent
-  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */"] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageToolsComponent, [{
-    type: Component,
-    args: [{ selector: "ca-page-tools", imports: [
-      CommonModule,
-      TranslateModule,
-      AccordionModule,
-      TemplateConversionComponent,
-      SeoComponent,
-      UserInsightsComponent,
-      ComponentGuidanceComponent,
-      HeadingStructureComponent,
-      IaStructureComponent
-    ], template: '<p>\r\n  Use these tools to analyze and improve your web page. You can restructure\r\n  headings, generate an IA diagram, find guidance on the components used in your\r\n  page, integrate SEO and user insights into your updates, check your link\r\n  quality, or convert your page to a different template.\r\n</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Heading structure</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      View or reorganize your heading structure.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-heading-structure></ca-heading-structure>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="1"\r\n    class="border-1 border-round-md border-surface"\r\n  >\r\n    <p-accordion-header>IA structure</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(1)">\r\n      Check if your page is an IA orphan and view its current IA diagram.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-ia-structure></ca-ia-structure>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="2"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Component guidance</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Find guidance on the components used on your page and check for deprecated\r\n      code or unexpected classes or elements.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-component-guidance></ca-component-guidance>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="3"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>SEO</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-seo></ca-seo>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="4"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>User insights</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(4)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-user-insights></ca-user-insights>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <!-- <p-accordion-panel [value]="5" class="border-1 border-round-sm border-surface" *ngIf="!production">\r\n        <p-accordion-header>Link report</p-accordion-header>\r\n        <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(5)">Add doormat text.</p>\r\n        <p-accordion-content>\r\n            <ca-link-report></ca-link-report>\r\n        </p-accordion-content>\r\n    </p-accordion-panel> -->\r\n\r\n  <p-accordion-panel\r\n    [value]="5"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Template conversion</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(6)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-template-conversion></ca-template-conversion>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */\n"] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageToolsComponent, { className: "PageToolsComponent", filePath: "src/app/views/page-assistant/components/tools.component.ts", lineNumber: 40 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserInsightsComponent, { className: "UserInsightsComponent", filePath: "src/app/views/page-assistant/components/problems/user-insights.component.ts", lineNumber: 19 });
 })();
 
 // src/app/views/page-assistant/services/link-ai.service.ts
@@ -33413,14 +30992,10 @@ var ContentExtractorService = class _ContentExtractorService {
     return [res.title || "", res.intro || ""].filter(Boolean).join(" ").trim();
   }
   // ========== CANADA.CA RULES ==========
+  // replace the H1 selection block inside fromCanadaDoc with this:
   fromCanadaDoc(doc) {
     const main = doc.querySelector("main") || doc.body;
-    let titleSource = void 0;
-    const h1Text = main.querySelector("h1")?.textContent?.trim() || doc.querySelector("h1")?.textContent?.trim() || null;
-    if (main.querySelector("h1"))
-      titleSource = "main>h1";
-    else if (doc.querySelector("h1"))
-      titleSource = "document h1";
+    const { text: h1Text, source: titleSource } = this.getCanadaH1(main, doc);
     let introEl = main.querySelector(".gc-lead, .lead, .pagetagline, p.lead") || null;
     let introSource = null;
     if (introEl) {
@@ -33538,6 +31113,35 @@ var ContentExtractorService = class _ContentExtractorService {
     }
     return null;
   }
+  // add this helper inside ContentExtractorService (near the other private helpers)
+  /** Prefer subway/section H1s, strip visually hidden text (e.g., .wb-inv) */
+  getCanadaH1(main, doc) {
+    const stripHidden = (el) => {
+      if (!el)
+        return null;
+      const clone = el.cloneNode(true);
+      clone.querySelectorAll(".wb-inv, .wb-invisible, .visually-hidden").forEach((n) => n.remove());
+      const t = clone.textContent?.trim() ?? null;
+      const cleaned = this.cleanText(t)?.replace(/^["'“”]+|["'“”]+$/g, "").trim() ?? null;
+      return cleaned;
+    };
+    const nameH1 = main.querySelector('h1[property="name"]') || doc.querySelector('h1[property="name"]');
+    if (nameH1)
+      return { text: stripHidden(nameH1), source: "main>h1" };
+    const thick = main.querySelector("h1.gc-thickline") || doc.querySelector("h1.gc-thickline");
+    if (thick)
+      return { text: stripHidden(thick), source: "main>h1" };
+    const h1Main = main.querySelector("h1");
+    if (h1Main)
+      return { text: stripHidden(h1Main), source: "main>h1" };
+    const h1Doc = doc.querySelector("h1");
+    if (h1Doc)
+      return { text: stripHidden(h1Doc), source: "document h1" };
+    return {
+      text: null,
+      source: void 0
+    };
+  }
   firstParagraphInSection(sectionRoot) {
     let el = sectionRoot.nextElementSibling;
     while (el) {
@@ -33588,9 +31192,9 @@ var ContentExtractorService = class _ContentExtractorService {
   }], null, null);
 })();
 
-// src/app/views/page-assistant/components/tools/link-report.component.ts
-var _c011 = ["typePanel"];
-var _c114 = () => ({ "min-width": "50rem" });
+// src/app/views/page-assistant/components/problems/link-report.component.ts
+var _c09 = ["typePanel"];
+var _c110 = () => ({ "min-width": "50rem" });
 function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -34707,7 +32311,7 @@ var LinkReportComponent = class _LinkReportComponent {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkReportComponent, selectors: [["ca-link-report"]], viewQuery: function LinkReportComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c011, 5);
+      \u0275\u0275viewQuery(_c09, 5);
     }
     if (rf & 2) {
       let _t;
@@ -34802,7 +32406,7 @@ var LinkReportComponent = class _LinkReportComponent {
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(18, _c114));
+      \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(18, _c110));
       \u0275\u0275twoWayProperty("selection", ctx.selectedHeading);
       \u0275\u0275advance(3);
       \u0275\u0275property("dismissable", true)("appendTo", "body")("styleClass", "link-type-popover");
@@ -35118,7 +32722,7 @@ var LinkReportComponent = class _LinkReportComponent {
     </div>\r
   </div>\r
 </p-popover>\r
-`, styles: ["/* angular:styles/component:css;8a83dd044d98027c2645d6b20f9b4e2b48ac6e74e6617d7ca74a50e95c781114;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list > li {\n  margin: 0.05rem 0;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
+`, styles: ["/* angular:styles/component:css;8a83dd044d98027c2645d6b20f9b4e2b48ac6e74e6617d7ca74a50e95c781114;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list > li {\n  margin: 0.05rem 0;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
   }], null, { problemsChange: [{
     type: Output
   }], typePanel: [{
@@ -35127,61 +32731,159 @@ var LinkReportComponent = class _LinkReportComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/tools/link-report.component.ts", lineNumber: 271 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/problems/link-report.component.ts", lineNumber: 271 });
 })();
 
 // src/app/views/page-assistant/components/problems.component.ts
-function ProblemsPanelComponent_p_6_Template(rf, ctx) {
+function PageProblemsComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 4);
-    \u0275\u0275text(1, " Check link text vs destination content and flag duplicate destinations. ");
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " View or reorganize your heading structure. ");
     \u0275\u0275elementEnd();
   }
 }
-var ProblemsPanelComponent = class _ProblemsPanelComponent {
-  summary = new EventEmitter();
-  /** Keep all panels closed by default */
+function PageProblemsComponent_p_accordion_panel_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 5)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Heading structure");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageProblemsComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-heading-structure");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 0);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
+  }
+}
+function PageProblemsComponent_p_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Find guidance on the components used on your page and check for deprecated code or unexpected classes or elements. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_10_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "SEO");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageProblemsComponent_p_accordion_panel_10_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-seo");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 3);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
+  }
+}
+function PageProblemsComponent_p_accordion_panel_11_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "User insights");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageProblemsComponent_p_accordion_panel_11_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-user-insights");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 4);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(4));
+  }
+}
+function PageProblemsComponent_p_accordion_panel_12_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Check link text vs destination content, flag duplicate destinations and 404 page. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Link report");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageProblemsComponent_p_accordion_panel_12_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-link-report");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 5);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
+  }
+}
+var PageProblemsComponent = class _PageProblemsComponent {
+  production = environment.production;
   activePanels = [];
-  flags = { linkReport: false };
-  /** Helper for the collapsed preview text (same as Tools panel uses) */
-  isPanelOpen(idx) {
-    return this.activePanels.includes(idx);
+  isPanelOpen(panelIndex) {
+    return this.activePanels.includes(panelIndex);
   }
-  onLinkReportProblem(has) {
-    this.flags = __spreadProps(__spreadValues({}, this.flags), { linkReport: has });
-    this.summary.emit(this.flags);
-  }
-  static \u0275fac = function ProblemsPanelComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ProblemsPanelComponent)();
+  static \u0275fac = function PageProblemsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PageProblemsComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProblemsPanelComponent, selectors: [["ca-page-problems"]], outputs: { summary: "summary" }, decls: 9, vars: 4, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [3, "problemsChange"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function ProblemsPanelComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageProblemsComponent, selectors: [["ca-page-problems"]], decls: 13, vars: 8, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageProblemsComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "p");
-      \u0275\u0275text(1, " Review issues detected on your page. Each section summarizes problems we found.\n");
+      \u0275\u0275text(1, " Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.\n");
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(2, "p-accordion", 0);
-      \u0275\u0275twoWayListener("valueChange", function ProblemsPanelComponent_Template_p_accordion_valueChange_2_listener($event) {
+      \u0275\u0275twoWayListener("valueChange", function PageProblemsComponent_Template_p_accordion_valueChange_2_listener($event) {
         \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
         return $event;
       });
-      \u0275\u0275elementStart(3, "p-accordion-panel", 1)(4, "p-accordion-header");
-      \u0275\u0275text(5, "Link report");
+      \u0275\u0275template(3, PageProblemsComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
+      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
+      \u0275\u0275text(6, "Component guidance");
       \u0275\u0275elementEnd();
-      \u0275\u0275template(6, ProblemsPanelComponent_p_6_Template, 2, 0, "p", 2);
-      \u0275\u0275elementStart(7, "p-accordion-content")(8, "ca-link-report", 3);
-      \u0275\u0275listener("problemsChange", function ProblemsPanelComponent_Template_ca_link_report_problemsChange_8_listener($event) {
-        return ctx.onLinkReportProblem($event);
-      });
-      \u0275\u0275elementEnd()()()();
+      \u0275\u0275template(7, PageProblemsComponent_p_7_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(8, "p-accordion-content");
+      \u0275\u0275element(9, "ca-component-guidance");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(10, PageProblemsComponent_p_accordion_panel_10_Template, 6, 2, "p-accordion-panel", 4)(11, PageProblemsComponent_p_accordion_panel_11_Template, 6, 2, "p-accordion-panel", 4)(12, PageProblemsComponent_p_accordion_panel_12_Template, 6, 2, "p-accordion-panel", 4);
+      \u0275\u0275elementEnd();
     }
     if (rf & 2) {
       \u0275\u0275advance(2);
       \u0275\u0275twoWayProperty("value", ctx.activePanels);
       \u0275\u0275property("multiple", true);
       \u0275\u0275advance();
-      \u0275\u0275property("value", 0);
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("value", 2);
       \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(0));
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
     }
   }, dependencies: [
     CommonModule,
@@ -35192,24 +32894,2706 @@ var ProblemsPanelComponent = class _ProblemsPanelComponent {
     AccordionPanel,
     AccordionHeader,
     AccordionContent,
-    LinkReportComponent
+    SeoComponent,
+    UserInsightsComponent,
+    LinkReportComponent,
+    ComponentGuidanceComponent,
+    HeadingStructureComponent
   ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=problems.component.css.map */"] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProblemsPanelComponent, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageProblemsComponent, [{
     type: Component,
-    args: [{ selector: "ca-page-problems", standalone: true, imports: [
+    args: [{ selector: "ca-page-problems", imports: [
       CommonModule,
       TranslateModule,
       AccordionModule,
-      LinkReportComponent
-    ], template: '<p>\r\n  Review issues detected on your page. Each section summarizes problems we\r\n  found.\r\n</p>\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n  >\r\n    <p-accordion-header>Link report</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Check link text vs destination content and flag duplicate destinations.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-link-report\r\n        (problemsChange)="onLinkReportProblem($event)"\r\n      ></ca-link-report>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;7f43ff1825ad05d68e14cc46aa4157d1978629e507df9ccdf9f54268a878a284;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=problems.component.css.map */\n"] }]
-  }], null, { summary: [{
-    type: Output
+      SeoComponent,
+      UserInsightsComponent,
+      LinkReportComponent,
+      ComponentGuidanceComponent,
+      HeadingStructureComponent
+    ], template: '<p>\r\n  Use these tools to analyze and improve your web page. You can restructure\r\n  headings, generate an IA diagram, find guidance on the components used in your\r\n  page, integrate SEO and user insights into your updates, check your link\r\n  quality, or convert your page to a different template.\r\n</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Heading structure</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      View or reorganize your heading structure.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-heading-structure></ca-heading-structure>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="2"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Component guidance</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Find guidance on the components used on your page and check for deprecated\r\n      code or unexpected classes or elements.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-component-guidance></ca-component-guidance>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="3"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>SEO</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-seo></ca-seo>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="4"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>User insights</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(4)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-user-insights></ca-user-insights>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="5"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Link report</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Check link text vs destination content, flag duplicate destinations and\r\n      404 page.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-link-report></ca-link-report>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=problems.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageProblemsComponent, { className: "PageProblemsComponent", filePath: "src/app/views/page-assistant/components/problems.component.ts", lineNumber: 37 });
+})();
+
+// src/app/views/page-assistant/components/data/search.component.ts
+var SearchComponent = class _SearchComponent {
+  static \u0275fac = function SearchComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _SearchComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SearchComponent, selectors: [["ca-search"]], decls: 0, vars: 0, template: function SearchComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SearchComponent, [{
+    type: Component,
+    args: [{ selector: "ca-search", imports: [], template: "\r\n" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SearchComponent, { className: "SearchComponent", filePath: "src/app/views/page-assistant/components/data/search.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data/chatLogs.component.ts
+var ChatLogsComponent = class _ChatLogsComponent {
+  static \u0275fac = function ChatLogsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ChatLogsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ChatLogsComponent, selectors: [["ca-chat-logs"]], decls: 0, vars: 0, template: function ChatLogsComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChatLogsComponent, [{
+    type: Component,
+    args: [{ selector: "ca-chat-logs", imports: [], template: "" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ChatLogsComponent, { className: "ChatLogsComponent", filePath: "src/app/views/page-assistant/components/data/chatlogs.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data/feedback.component.ts
+var FeedbackComponent = class _FeedbackComponent {
+  static \u0275fac = function FeedbackComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FeedbackComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FeedbackComponent, selectors: [["ca-feedback"]], decls: 0, vars: 0, template: function FeedbackComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FeedbackComponent, [{
+    type: Component,
+    args: [{ selector: "ca-feedback", imports: [], template: "" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FeedbackComponent, { className: "FeedbackComponent", filePath: "src/app/views/page-assistant/components/data/feedback.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data/uxTesting.component.ts
+var UxTestingComponent = class _UxTestingComponent {
+  static \u0275fac = function UxTestingComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _UxTestingComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UxTestingComponent, selectors: [["ca-ux-testing"]], decls: 0, vars: 0, template: function UxTestingComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UxTestingComponent, [{
+    type: Component,
+    args: [{ selector: "ca-ux-testing", imports: [], template: "" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UxTestingComponent, { className: "UxTestingComponent", filePath: "src/app/views/page-assistant/components/data/uxtesting.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data.component.ts
+function PageDataComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_accordion_panel_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Search");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageDataComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-search");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 0);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
+  }
+}
+function PageDataComponent_p_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_accordion_panel_16_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_accordion_panel_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
+    \u0275\u0275text(2, "UX testing");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageDataComponent_p_accordion_panel_16_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-ux-testing");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 3);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
+  }
+}
+var PageDataComponent = class _PageDataComponent {
+  production = environment.production;
+  activePanels = [];
+  isPanelOpen(panelIndex) {
+    return this.activePanels.includes(panelIndex);
+  }
+  static \u0275fac = function PageDataComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PageDataComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageDataComponent, selectors: [["ca-page-data"]], decls: 17, vars: 8, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageDataComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "p");
+      \u0275\u0275text(1, "Add description here.");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p-accordion", 0);
+      \u0275\u0275twoWayListener("valueChange", function PageDataComponent_Template_p_accordion_valueChange_2_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
+        return $event;
+      });
+      \u0275\u0275template(3, PageDataComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
+      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
+      \u0275\u0275text(6, "Chat logs");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(7, PageDataComponent_p_7_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(8, "p-accordion-content");
+      \u0275\u0275element(9, "ca-chat-logs");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(10, "p-accordion-panel", 4)(11, "p-accordion-header");
+      \u0275\u0275text(12, "Feedback");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(13, PageDataComponent_p_13_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(14, "p-accordion-content");
+      \u0275\u0275element(15, "ca-feedback");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(16, PageDataComponent_p_accordion_panel_16_Template, 6, 2, "p-accordion-panel", 5);
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275twoWayProperty("value", ctx.activePanels);
+      \u0275\u0275property("multiple", true);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("value", 1);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(1));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("value", 2);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.production);
+    }
+  }, dependencies: [
+    CommonModule,
+    NgIf,
+    TranslateModule,
+    AccordionModule,
+    Accordion,
+    AccordionPanel,
+    AccordionHeader,
+    AccordionContent,
+    SearchComponent,
+    ChatLogsComponent,
+    FeedbackComponent,
+    UxTestingComponent
+  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=data.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageDataComponent, [{
+    type: Component,
+    args: [{ selector: "ca-page-data", standalone: true, imports: [
+      CommonModule,
+      TranslateModule,
+      AccordionModule,
+      SearchComponent,
+      ChatLogsComponent,
+      FeedbackComponent,
+      UxTestingComponent
+    ], template: '<p>Add description here.</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Search</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-search></ca-search>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="1"\r\n    class="border-1 border-round-md border-surface"\r\n  >\r\n    <p-accordion-header>Chat logs</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(1)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-chat-logs></ca-chat-logs>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="2"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Feedback</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-feedback></ca-feedback>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="3"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>UX testing</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-ux-testing></ca-ux-testing>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/data.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=data.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageDataComponent, { className: "PageDataComponent", filePath: "src/app/views/page-assistant/components/data.component.ts", lineNumber: 36 });
+})();
+
+// node_modules/primeng/fesm2022/primeng-breadcrumb.mjs
+var _c010 = ["item"];
+var _c111 = ["separator"];
+var _c27 = (a0) => ({
+  "p-breadcrumb-home-item": true,
+  "p-disabled": a0
+});
+var _c37 = () => ({
+  exact: false
+});
+var _c47 = (a0) => ({
+  "p-breadcrumb-item": true,
+  "p-disabled": a0
+});
+var _c56 = (a0) => ({
+  $implicit: a0
+});
+function Breadcrumb_li_2_a_1_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 16);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275property("ngClass", ctx_r1.home.icon)("ngStyle", ctx_r1.home == null ? null : ctx_r1.home.style);
+  }
+}
+function Breadcrumb_li_2_a_1_HomeIcon_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "HomeIcon", 17);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("styleClass", "p-breadcrumb-item-icon");
+  }
+}
+function Breadcrumb_li_2_a_1_ng_container_3_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.home.label);
+  }
+}
+function Breadcrumb_li_2_a_1_ng_container_3_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 20);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275property("innerHTML", ctx_r1.home.label, \u0275\u0275sanitizeHtml);
+  }
+}
+function Breadcrumb_li_2_a_1_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Breadcrumb_li_2_a_1_ng_container_3_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_li_2_a_1_ng_container_3_ng_template_2_Template, 1, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const htmlHomeLabel_r3 = \u0275\u0275reference(3);
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.home.escape !== false)("ngIfElse", htmlHomeLabel_r3);
+  }
+}
+function Breadcrumb_li_2_a_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "a", 12);
+    \u0275\u0275listener("click", function Breadcrumb_li_2_a_1_Template_a_click_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onClick($event, ctx_r1.home));
+    });
+    \u0275\u0275template(1, Breadcrumb_li_2_a_1_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_li_2_a_1_HomeIcon_2_Template, 1, 1, "HomeIcon", 14)(3, Breadcrumb_li_2_a_1_ng_container_3_Template, 4, 2, "ng-container", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("href", ctx_r1.home.url ? ctx_r1.home.url : null, \u0275\u0275sanitizeUrl)("target", ctx_r1.home.target);
+    \u0275\u0275attribute("aria-label", ctx_r1.homeAriaLabel)("title", ctx_r1.home.title)("tabindex", ctx_r1.home.disabled ? null : "0");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.home.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.home.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.home.label);
+  }
+}
+function Breadcrumb_li_2_a_2_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 16);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275property("ngClass", ctx_r1.home.icon)("ngStyle", ctx_r1.home.iconStyle);
+  }
+}
+function Breadcrumb_li_2_a_2_HomeIcon_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "HomeIcon", 17);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("styleClass", "p-breadcrumb-item-icon");
+  }
+}
+function Breadcrumb_li_2_a_2_ng_container_3_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.home.label);
+  }
+}
+function Breadcrumb_li_2_a_2_ng_container_3_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 20);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275property("innerHTML", ctx_r1.home.label, \u0275\u0275sanitizeHtml);
+  }
+}
+function Breadcrumb_li_2_a_2_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Breadcrumb_li_2_a_2_ng_container_3_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_li_2_a_2_ng_container_3_ng_template_2_Template, 1, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const htmlHomeRouteLabel_r5 = \u0275\u0275reference(3);
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.home.escape !== false)("ngIfElse", htmlHomeRouteLabel_r5);
+  }
+}
+function Breadcrumb_li_2_a_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "a", 21);
+    \u0275\u0275listener("click", function Breadcrumb_li_2_a_2_Template_a_click_0_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onClick($event, ctx_r1.home));
+    });
+    \u0275\u0275template(1, Breadcrumb_li_2_a_2_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_li_2_a_2_HomeIcon_2_Template, 1, 1, "HomeIcon", 14)(3, Breadcrumb_li_2_a_2_ng_container_3_Template, 4, 2, "ng-container", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("routerLink", ctx_r1.home.routerLink)("queryParams", ctx_r1.home.queryParams)("routerLinkActiveOptions", ctx_r1.home.routerLinkActiveOptions || \u0275\u0275pureFunction0(16, _c37))("target", ctx_r1.home.target)("fragment", ctx_r1.home.fragment)("queryParamsHandling", ctx_r1.home.queryParamsHandling)("preserveFragment", ctx_r1.home.preserveFragment)("skipLocationChange", ctx_r1.home.skipLocationChange)("replaceUrl", ctx_r1.home.replaceUrl)("state", ctx_r1.home.state);
+    \u0275\u0275attribute("aria-label", ctx_r1.homeAriaLabel)("title", ctx_r1.home.title)("tabindex", ctx_r1.home.disabled ? null : "0");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.home.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.home.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.home.label);
+  }
+}
+function Breadcrumb_li_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 9);
+    \u0275\u0275template(1, Breadcrumb_li_2_a_1_Template, 4, 8, "a", 10)(2, Breadcrumb_li_2_a_2_Template, 4, 17, "a", 11);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r1.home.styleClass);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(9, _c27, ctx_r1.home.disabled))("ngStyle", ctx_r1.home.style)("tooltipOptions", ctx_r1.home.tooltipOptions);
+    \u0275\u0275attribute("id", ctx_r1.home.id)("data-pc-section", "home");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.home.routerLink);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.home.routerLink);
+  }
+}
+function Breadcrumb_li_3_ChevronRightIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "ChevronRightIcon");
+  }
+}
+function Breadcrumb_li_3_2_ng_template_0_Template(rf, ctx) {
+}
+function Breadcrumb_li_3_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Breadcrumb_li_3_2_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Breadcrumb_li_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 22);
+    \u0275\u0275template(1, Breadcrumb_li_3_ChevronRightIcon_1_Template, 1, 0, "ChevronRightIcon", 15)(2, Breadcrumb_li_3_2_Template, 1, 0, null, 23);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275attribute("data-pc-section", "separator");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.separatorTemplate && !ctx_r1._separatorTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.separatorTemplate || ctx_r1._separatorTemplate);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_1_0_ng_template_0_Template(rf, ctx) {
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_1_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Conditional_1_0_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Conditional_1_0_Template, 1, 0, null, 26);
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.itemTemplate || ctx_r1._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c56, menuitem_r6));
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 16);
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
+    \u0275\u0275property("ngClass", menuitem_r6 == null ? null : menuitem_r6.icon)("ngStyle", menuitem_r6 == null ? null : menuitem_r6.iconStyle);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(6).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(menuitem_r6 == null ? null : menuitem_r6.label);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 20);
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(6).$implicit;
+    \u0275\u0275property("innerHTML", menuitem_r6 == null ? null : menuitem_r6.label, \u0275\u0275sanitizeHtml);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_ng_template_2_Template, 1, 1, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const htmlLabel_r8 = \u0275\u0275reference(3);
+    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", (menuitem_r6 == null ? null : menuitem_r6.escape) !== false)("ngIfElse", htmlLabel_r8);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_ng_container_2_Template, 4, 2, "ng-container", 15);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(4).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.label);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "a", 28);
+    \u0275\u0275listener("click", function Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_Template_a_click_0_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onClick($event, menuitem_r6));
+    });
+    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_ng_container_1_Template, 3, 2, "ng-container", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("target", menuitem_r6 == null ? null : menuitem_r6.target);
+    \u0275\u0275attribute("href", (menuitem_r6 == null ? null : menuitem_r6.url) ? menuitem_r6 == null ? null : menuitem_r6.url : null, \u0275\u0275sanitizeUrl)("title", menuitem_r6 == null ? null : menuitem_r6.title)("tabindex", (menuitem_r6 == null ? null : menuitem_r6.disabled) ? null : "0");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.itemTemplate && !ctx_r1._itemTemplate);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 16);
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(4).$implicit;
+    \u0275\u0275property("ngClass", menuitem_r6 == null ? null : menuitem_r6.icon)("ngStyle", menuitem_r6 == null ? null : menuitem_r6.iconStyle);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(menuitem_r6 == null ? null : menuitem_r6.label);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 20);
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(5).$implicit;
+    \u0275\u0275property("innerHTML", menuitem_r6 == null ? null : menuitem_r6.label, \u0275\u0275sanitizeHtml);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_span_1_Template, 2, 1, "span", 18)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_ng_template_2_Template, 1, 1, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const htmlRouteLabel_r10 = \u0275\u0275reference(3);
+    const menuitem_r6 = \u0275\u0275nextContext(4).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", (menuitem_r6 == null ? null : menuitem_r6.escape) !== false)("ngIfElse", htmlRouteLabel_r10);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "a", 21);
+    \u0275\u0275listener("click", function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_Template_a_click_0_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onClick($event, menuitem_r6));
+    });
+    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_span_1_Template, 1, 2, "span", 13)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_ng_container_2_Template, 4, 2, "ng-container", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
+    \u0275\u0275property("routerLink", menuitem_r6 == null ? null : menuitem_r6.routerLink)("queryParams", menuitem_r6 == null ? null : menuitem_r6.queryParams)("routerLinkActiveOptions", (menuitem_r6 == null ? null : menuitem_r6.routerLinkActiveOptions) || \u0275\u0275pureFunction0(14, _c37))("target", menuitem_r6 == null ? null : menuitem_r6.target)("fragment", menuitem_r6 == null ? null : menuitem_r6.fragment)("queryParamsHandling", menuitem_r6 == null ? null : menuitem_r6.queryParamsHandling)("preserveFragment", menuitem_r6 == null ? null : menuitem_r6.preserveFragment)("skipLocationChange", menuitem_r6 == null ? null : menuitem_r6.skipLocationChange)("replaceUrl", menuitem_r6 == null ? null : menuitem_r6.replaceUrl)("state", menuitem_r6 == null ? null : menuitem_r6.state);
+    \u0275\u0275attribute("title", menuitem_r6 == null ? null : menuitem_r6.title)("tabindex", (menuitem_r6 == null ? null : menuitem_r6.disabled) ? null : "0");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.icon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.label);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Conditional_2_a_0_Template, 2, 5, "a", 27)(1, Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_Template, 3, 15, "a", 11);
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275property("ngIf", !(menuitem_r6 == null ? null : menuitem_r6.routerLink));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.routerLink);
+  }
+}
+function Breadcrumb_ng_template_4_li_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 25);
+    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_0_Conditional_1_Template, 1, 4)(2, Breadcrumb_ng_template_4_li_0_Conditional_2_Template, 2, 2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const menuitem_r6 = \u0275\u0275nextContext().$implicit;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(menuitem_r6.styleClass);
+    \u0275\u0275property("ngStyle", menuitem_r6.style)("ngClass", \u0275\u0275pureFunction1(8, _c47, menuitem_r6.disabled))("tooltipOptions", menuitem_r6.tooltipOptions);
+    \u0275\u0275attribute("id", menuitem_r6.id)("data-pc-section", "menuitem");
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r1.itemTemplate || ctx_r1._itemTemplate ? 1 : 2);
+  }
+}
+function Breadcrumb_ng_template_4_li_1_ChevronRightIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "ChevronRightIcon");
+  }
+}
+function Breadcrumb_ng_template_4_li_1_2_ng_template_0_Template(rf, ctx) {
+}
+function Breadcrumb_ng_template_4_li_1_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_1_2_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Breadcrumb_ng_template_4_li_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 22);
+    \u0275\u0275template(1, Breadcrumb_ng_template_4_li_1_ChevronRightIcon_1_Template, 1, 0, "ChevronRightIcon", 15)(2, Breadcrumb_ng_template_4_li_1_2_Template, 1, 0, null, 23);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275attribute("data-pc-section", "separator");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.separatorTemplate && !ctx_r1._separatorTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.separatorTemplate || ctx_r1._separatorTemplate);
+  }
+}
+function Breadcrumb_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Breadcrumb_ng_template_4_li_0_Template, 3, 10, "li", 24)(1, Breadcrumb_ng_template_4_li_1_Template, 3, 3, "li", 7);
+  }
+  if (rf & 2) {
+    const menuitem_r6 = ctx.$implicit;
+    const end_r11 = ctx.last;
+    \u0275\u0275property("ngIf", menuitem_r6.visible !== false);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !end_r11 && menuitem_r6.visible !== false);
+  }
+}
+var theme7 = ({
+  dt
+}) => `
+.p-breadcrumb {
+    background: ${dt("breadcrumb.background")};
+    padding: ${dt("breadcrumb.padding")};
+    overflow-x: auto;
+}
+
+.p-breadcrumb-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: ${dt("breadcrumb.gap")};
+}
+
+.p-breadcrumb-separator {
+    display: flex;
+    align-items: center;
+    color: ${dt("breadcrumb.separator.color")};
+}
+
+.p-breadcrumb-separator .p-icon:dir(rtl) {
+    transform: rotate(180deg);
+}
+
+.p-breadcrumb::-webkit-scrollbar {
+    display: none;
+}
+
+.p-breadcrumb-item-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: ${dt("breadcrumb.item.gap")};
+    transition: background ${dt("breadcrumb.transition.duration")}, color ${dt("breadcrumb.transition.duration")}, outline-color ${dt("breadcrumb.transition.duration")}, box-shadow ${dt("breadcrumb.transition.duration")};
+    border-radius: ${dt("breadcrumb.item.border.radius")};
+    outline-color: transparent;
+    color: ${dt("breadcrumb.item.color")};
+}
+
+.p-breadcrumb-item-link:focus-visible {
+    box-shadow: ${dt("breadcrumb.item.focus.ring.shadow")};
+    outline: ${dt("breadcrumb.item.focus.ring.width")} ${dt("breadcrumb.item.focus.ring.style")} ${dt("breadcrumb.item.focus.ring.color")};
+    outline-offset: ${dt("breadcrumb.item.focus.ring.offset")};
+}
+
+.p-breadcrumb-item-link:hover .p-breadcrumb-item-label {
+    color: ${dt("breadcrumb.item.hover.color")};
+}
+
+.p-breadcrumb-item-label {
+    transition: inherit;
+}
+
+.p-breadcrumb-item-icon {
+    color: ${dt("breadcrumb.item.icon.color")};
+    transition: inherit;
+}
+
+.p-breadcrumb-item-link:hover .p-breadcrumb-item-icon {
+    color: ${dt("breadcrumb.item.icon.hover.color")};
+}
+`;
+var classes7 = {
+  root: "p-breadcrumb p-component",
+  list: "p-breadcrumb-list",
+  homeItem: "p-breadcrumb-home-item",
+  separator: "p-breadcrumb-separator",
+  item: ({
+    instance
+  }) => ["p-breadcrumb-item", {
+    "p-disabled": instance.disabled()
+  }],
+  itemLink: "p-breadcrumb-item-link",
+  itemIcon: "p-breadcrumb-item-icon",
+  itemLabel: "p-breadcrumb-item-label"
+};
+var BreadCrumbStyle = class _BreadCrumbStyle extends BaseStyle {
+  name = "breadcrumb";
+  theme = theme7;
+  classes = classes7;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275BreadCrumbStyle_BaseFactory;
+    return function BreadCrumbStyle_Factory(__ngFactoryType__) {
+      return (\u0275BreadCrumbStyle_BaseFactory || (\u0275BreadCrumbStyle_BaseFactory = \u0275\u0275getInheritedFactory(_BreadCrumbStyle)))(__ngFactoryType__ || _BreadCrumbStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _BreadCrumbStyle,
+    factory: _BreadCrumbStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BreadCrumbStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var BreadcrumbClasses;
+(function(BreadcrumbClasses2) {
+  BreadcrumbClasses2["root"] = "p-breadcrumb";
+  BreadcrumbClasses2["list"] = "p-breadcrumb-list";
+  BreadcrumbClasses2["homeItem"] = "p-breadcrumb-home-item";
+  BreadcrumbClasses2["separator"] = "p-breadcrumb-separator";
+  BreadcrumbClasses2["item"] = "p-breadcrumb-item";
+  BreadcrumbClasses2["itemLink"] = "p-breadcrumb-item-link";
+  BreadcrumbClasses2["itemIcon"] = "p-breadcrumb-item-icon";
+  BreadcrumbClasses2["itemLabel"] = "p-breadcrumb-item-label";
+})(BreadcrumbClasses || (BreadcrumbClasses = {}));
+var Breadcrumb = class _Breadcrumb extends BaseComponent {
+  router;
+  /**
+   * An array of menuitems.
+   * @group Props
+   */
+  model;
+  /**
+   * Inline style of the component.
+   * @group Props
+   */
+  style;
+  /**
+   * Style class of the component.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * MenuItem configuration for the home icon.
+   * @group Props
+   */
+  home;
+  /**
+   * Defines a string that labels the home icon for accessibility.
+   * @group Props
+   */
+  homeAriaLabel;
+  /**
+   * Fired when an item is selected.
+   * @param {BreadcrumbItemClickEvent} event - custom click event.
+   * @group Emits
+   */
+  onItemClick = new EventEmitter();
+  _componentStyle = inject(BreadCrumbStyle);
+  constructor(router) {
+    super();
+    this.router = router;
+  }
+  onClick(event, item) {
+    if (item.disabled) {
+      event.preventDefault();
+      return;
+    }
+    if (!item.url && !item.routerLink) {
+      event.preventDefault();
+    }
+    if (item.command) {
+      item.command({
+        originalEvent: event,
+        item
+      });
+    }
+    this.onItemClick.emit({
+      originalEvent: event,
+      item
+    });
+  }
+  /**
+   * Defines template option for item.
+   * @group Templates
+   */
+  itemTemplate;
+  /**
+   * Defines template option for separator.
+   * @group Templates
+   */
+  separatorTemplate;
+  templates;
+  _separatorTemplate;
+  _itemTemplate;
+  ngAfterContentInit() {
+    this.templates?.forEach((item) => {
+      switch (item.getType()) {
+        case "separator":
+          this._separatorTemplate = item.template;
+          break;
+        case "item":
+          this._itemTemplate = item.template;
+          break;
+        default:
+          this._itemTemplate = item.template;
+          break;
+      }
+    });
+  }
+  static \u0275fac = function Breadcrumb_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _Breadcrumb)(\u0275\u0275directiveInject(Router));
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Breadcrumb,
+    selectors: [["p-breadcrumb"]],
+    contentQueries: function Breadcrumb_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c010, 5);
+        \u0275\u0275contentQuery(dirIndex, _c111, 5);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.itemTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.separatorTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    inputs: {
+      model: "model",
+      style: "style",
+      styleClass: "styleClass",
+      home: "home",
+      homeAriaLabel: "homeAriaLabel"
+    },
+    outputs: {
+      onItemClick: "onItemClick"
+    },
+    features: [\u0275\u0275ProvidersFeature([BreadCrumbStyle]), \u0275\u0275InheritDefinitionFeature],
+    decls: 5,
+    vars: 10,
+    consts: [["htmlHomeLabel", ""], ["htmlHomeRouteLabel", ""], ["htmlLabel", ""], ["htmlRouteLabel", ""], [3, "ngStyle", "ngClass"], [1, "p-breadcrumb-list"], ["pTooltip", "", 3, "class", "ngClass", "ngStyle", "tooltipOptions", 4, "ngIf"], ["class", "p-breadcrumb-separator", 4, "ngIf"], ["ngFor", "", 3, "ngForOf"], ["pTooltip", "", 3, "ngClass", "ngStyle", "tooltipOptions"], ["class", "p-breadcrumb-item-link", 3, "href", "target", "click", 4, "ngIf"], ["class", "p-breadcrumb-item-link", 3, "routerLink", "queryParams", "routerLinkActiveOptions", "target", "fragment", "queryParamsHandling", "preserveFragment", "skipLocationChange", "replaceUrl", "state", "click", 4, "ngIf"], [1, "p-breadcrumb-item-link", 3, "click", "href", "target"], ["class", "p-breadcrumb-item-icon", 3, "ngClass", "ngStyle", 4, "ngIf"], [3, "styleClass", 4, "ngIf"], [4, "ngIf"], [1, "p-breadcrumb-item-icon", 3, "ngClass", "ngStyle"], [3, "styleClass"], ["class", "p-breadcrumb-item-label", 4, "ngIf", "ngIfElse"], [1, "p-breadcrumb-item-label"], [1, "p-breadcrumb-item-label", 3, "innerHTML"], [1, "p-breadcrumb-item-link", 3, "click", "routerLink", "queryParams", "routerLinkActiveOptions", "target", "fragment", "queryParamsHandling", "preserveFragment", "skipLocationChange", "replaceUrl", "state"], [1, "p-breadcrumb-separator"], [4, "ngTemplateOutlet"], ["pTooltip", "", 3, "class", "ngStyle", "ngClass", "tooltipOptions", 4, "ngIf"], ["pTooltip", "", 3, "ngStyle", "ngClass", "tooltipOptions"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["class", "p-breadcrumb-item-link", 3, "target", "click", 4, "ngIf"], [1, "p-breadcrumb-item-link", 3, "click", "target"]],
+    template: function Breadcrumb_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "nav", 4)(1, "ol", 5);
+        \u0275\u0275template(2, Breadcrumb_li_2_Template, 3, 11, "li", 6)(3, Breadcrumb_li_3_Template, 3, 3, "li", 7)(4, Breadcrumb_ng_template_4_Template, 2, 2, "ng-template", 8);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275classMap(ctx.styleClass);
+        \u0275\u0275property("ngStyle", ctx.style)("ngClass", "p-breadcrumb p-component");
+        \u0275\u0275attribute("data-pc-name", "breadcrumb")("data-pc-section", "root");
+        \u0275\u0275advance();
+        \u0275\u0275attribute("data-pc-section", "menu");
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.home && ctx.home.visible !== false);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.model && ctx.home);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngForOf", ctx.model);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgTemplateOutlet, NgStyle, RouterModule, RouterLink, TooltipModule, Tooltip, ChevronRightIcon, HomeIcon, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Breadcrumb, [{
+    type: Component,
+    args: [{
+      selector: "p-breadcrumb",
+      standalone: true,
+      imports: [CommonModule, RouterModule, TooltipModule, ChevronRightIcon, HomeIcon, SharedModule],
+      template: `
+        <nav [class]="styleClass" [ngStyle]="style" [ngClass]="'p-breadcrumb p-component'" [attr.data-pc-name]="'breadcrumb'" [attr.data-pc-section]="'root'">
+            <ol [attr.data-pc-section]="'menu'" class="p-breadcrumb-list">
+                <li
+                    [class]="home.styleClass"
+                    [attr.id]="home.id"
+                    [ngClass]="{ 'p-breadcrumb-home-item': true, 'p-disabled': home.disabled }"
+                    [ngStyle]="home.style"
+                    *ngIf="home && home.visible !== false"
+                    pTooltip
+                    [tooltipOptions]="home.tooltipOptions"
+                    [attr.data-pc-section]="'home'"
+                >
+                    <a
+                        [href]="home.url ? home.url : null"
+                        *ngIf="!home.routerLink"
+                        [attr.aria-label]="homeAriaLabel"
+                        class="p-breadcrumb-item-link"
+                        (click)="onClick($event, home)"
+                        [target]="home.target"
+                        [attr.title]="home.title"
+                        [attr.tabindex]="home.disabled ? null : '0'"
+                    >
+                        <span *ngIf="home.icon" class="p-breadcrumb-item-icon" [ngClass]="home.icon" [ngStyle]="home?.style"></span>
+                        <HomeIcon *ngIf="!home.icon" [styleClass]="'p-breadcrumb-item-icon'" />
+                        <ng-container *ngIf="home.label">
+                            <span *ngIf="home.escape !== false; else htmlHomeLabel" class="p-breadcrumb-item-label">{{ home.label }}</span>
+                            <ng-template #htmlHomeLabel><span class="p-breadcrumb-item-label" [innerHTML]="home.label"></span></ng-template>
+                        </ng-container>
+                    </a>
+                    <a
+                        *ngIf="home.routerLink"
+                        [routerLink]="home.routerLink"
+                        [attr.aria-label]="homeAriaLabel"
+                        [queryParams]="home.queryParams"
+                        [routerLinkActiveOptions]="home.routerLinkActiveOptions || { exact: false }"
+                        class="p-breadcrumb-item-link"
+                        (click)="onClick($event, home)"
+                        [target]="home.target"
+                        [attr.title]="home.title"
+                        [attr.tabindex]="home.disabled ? null : '0'"
+                        [fragment]="home.fragment"
+                        [queryParamsHandling]="home.queryParamsHandling"
+                        [preserveFragment]="home.preserveFragment"
+                        [skipLocationChange]="home.skipLocationChange"
+                        [replaceUrl]="home.replaceUrl"
+                        [state]="home.state"
+                    >
+                        <span *ngIf="home.icon" class="p-breadcrumb-item-icon" [ngClass]="home.icon" [ngStyle]="home.iconStyle"></span>
+                        <HomeIcon *ngIf="!home.icon" [styleClass]="'p-breadcrumb-item-icon'" />
+                        <ng-container *ngIf="home.label">
+                            <span *ngIf="home.escape !== false; else htmlHomeRouteLabel" class="p-breadcrumb-item-label">{{ home.label }}</span>
+                            <ng-template #htmlHomeRouteLabel><span class="p-breadcrumb-item-label" [innerHTML]="home.label"></span></ng-template>
+                        </ng-container>
+                    </a>
+                </li>
+                <li *ngIf="model && home" class="p-breadcrumb-separator" [attr.data-pc-section]="'separator'">
+                    <ChevronRightIcon *ngIf="!separatorTemplate && !_separatorTemplate" />
+                    <ng-template *ngTemplateOutlet="separatorTemplate || _separatorTemplate"></ng-template>
+                </li>
+                <ng-template ngFor let-menuitem let-end="last" [ngForOf]="model">
+                    <li
+                        *ngIf="menuitem.visible !== false"
+                        [class]="menuitem.styleClass"
+                        [attr.id]="menuitem.id"
+                        [ngStyle]="menuitem.style"
+                        [ngClass]="{ 'p-breadcrumb-item': true, 'p-disabled': menuitem.disabled }"
+                        pTooltip
+                        [tooltipOptions]="menuitem.tooltipOptions"
+                        [attr.data-pc-section]="'menuitem'"
+                    >
+                        @if (itemTemplate || _itemTemplate) {
+                            <ng-template *ngTemplateOutlet="itemTemplate || _itemTemplate; context: { $implicit: menuitem }"></ng-template>
+                        } @else {
+                            <a
+                                *ngIf="!menuitem?.routerLink"
+                                [attr.href]="menuitem?.url ? menuitem?.url : null"
+                                class="p-breadcrumb-item-link"
+                                (click)="onClick($event, menuitem)"
+                                [target]="menuitem?.target"
+                                [attr.title]="menuitem?.title"
+                                [attr.tabindex]="menuitem?.disabled ? null : '0'"
+                            >
+                                <ng-container *ngIf="!itemTemplate && !_itemTemplate">
+                                    <span *ngIf="menuitem?.icon" class="p-breadcrumb-item-icon" [ngClass]="menuitem?.icon" [ngStyle]="menuitem?.iconStyle"></span>
+                                    <ng-container *ngIf="menuitem?.label">
+                                        <span *ngIf="menuitem?.escape !== false; else htmlLabel" class="p-breadcrumb-item-label">{{ menuitem?.label }}</span>
+                                        <ng-template #htmlLabel><span class="p-breadcrumb-item-label" [innerHTML]="menuitem?.label"></span></ng-template>
+                                    </ng-container>
+                                </ng-container>
+                            </a>
+                            <a
+                                *ngIf="menuitem?.routerLink"
+                                [routerLink]="menuitem?.routerLink"
+                                [queryParams]="menuitem?.queryParams"
+                                [routerLinkActiveOptions]="menuitem?.routerLinkActiveOptions || { exact: false }"
+                                class="p-breadcrumb-item-link"
+                                (click)="onClick($event, menuitem)"
+                                [target]="menuitem?.target"
+                                [attr.title]="menuitem?.title"
+                                [attr.tabindex]="menuitem?.disabled ? null : '0'"
+                                [fragment]="menuitem?.fragment"
+                                [queryParamsHandling]="menuitem?.queryParamsHandling"
+                                [preserveFragment]="menuitem?.preserveFragment"
+                                [skipLocationChange]="menuitem?.skipLocationChange"
+                                [replaceUrl]="menuitem?.replaceUrl"
+                                [state]="menuitem?.state"
+                            >
+                                <span *ngIf="menuitem?.icon" class="p-breadcrumb-item-icon" [ngClass]="menuitem?.icon" [ngStyle]="menuitem?.iconStyle"></span>
+                                <ng-container *ngIf="menuitem?.label">
+                                    <span *ngIf="menuitem?.escape !== false; else htmlRouteLabel" class="p-breadcrumb-item-label">{{ menuitem?.label }}</span>
+                                    <ng-template #htmlRouteLabel><span class="p-breadcrumb-item-label" [innerHTML]="menuitem?.label"></span></ng-template>
+                                </ng-container>
+                            </a>
+                        }
+                    </li>
+                    <li *ngIf="!end && menuitem.visible !== false" class="p-breadcrumb-separator" [attr.data-pc-section]="'separator'">
+                        <ChevronRightIcon *ngIf="!separatorTemplate && !_separatorTemplate" />
+                        <ng-template *ngTemplateOutlet="separatorTemplate || _separatorTemplate"></ng-template>
+                    </li>
+                </ng-template>
+            </ol>
+        </nav>
+    `,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      providers: [BreadCrumbStyle]
+    }]
+  }], () => [{
+    type: Router
+  }], {
+    model: [{
+      type: Input
+    }],
+    style: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    home: [{
+      type: Input
+    }],
+    homeAriaLabel: [{
+      type: Input
+    }],
+    onItemClick: [{
+      type: Output
+    }],
+    itemTemplate: [{
+      type: ContentChild,
+      args: ["item"]
+    }],
+    separatorTemplate: [{
+      type: ContentChild,
+      args: ["separator"]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var BreadcrumbModule = class _BreadcrumbModule {
+  static \u0275fac = function BreadcrumbModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _BreadcrumbModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _BreadcrumbModule,
+    imports: [Breadcrumb, SharedModule],
+    exports: [Breadcrumb, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [Breadcrumb, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BreadcrumbModule, [{
+    type: NgModule,
+    args: [{
+      imports: [Breadcrumb, SharedModule],
+      exports: [Breadcrumb, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// src/app/views/page-assistant/components/tools/ia-structure.component.ts
+var _c011 = ["chartContainer"];
+var _c114 = ["cm"];
+var _c28 = () => ({ height: "1rem" });
+var _c38 = () => ({ "min-width": "50rem" });
+function IaStructureComponent_p_button_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 11);
+    \u0275\u0275listener("click", function IaStructureComponent_p_button_6_Template_p_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.maximize(ctx_r1.chartContainer));
+    });
+    \u0275\u0275elementEnd();
+  }
+}
+function IaStructureComponent_p_progressbar_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "p-progressbar", 12);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275styleMap(\u0275\u0275pureFunction0(4, _c28));
+    \u0275\u0275property("value", ctx_r1.iaProgress)("showValue", false);
+  }
+}
+function IaStructureComponent_ng_container_8_span_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 17);
+    \u0275\u0275element(1, "i", 18);
+    \u0275\u0275text(2, "Link found on parent page");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaStructureComponent_ng_container_8_span_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275element(1, "i", 20);
+    \u0275\u0275text(2, "IA Orphan");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaStructureComponent_ng_container_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h2");
+    \u0275\u0275text(2, "Breadcrumb");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 13);
+    \u0275\u0275element(4, "p-breadcrumb", 14);
+    \u0275\u0275template(5, IaStructureComponent_ng_container_8_span_5_Template, 3, 0, "span", 15)(6, IaStructureComponent_ng_container_8_span_6_Template, 3, 0, "span", 16);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275property("model", ctx_r1.breadcrumb);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.urlFound === true);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.urlFound === false);
+  }
+}
+function IaStructureComponent_ng_container_9_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p");
+    \u0275\u0275text(1, "No child pages found.");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaStructureComponent_ng_container_9_div_4_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p")(1, "a", 25);
+    \u0275\u0275listener("click", function IaStructureComponent_ng_container_9_div_4_ng_template_3_Template_a_click_1_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.onNodeClick($event));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const node_r4 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("href", node_r4.data.url, \u0275\u0275sanitizeUrl)("innerHTML", node_r4.label, \u0275\u0275sanitizeHtml);
+  }
+}
+function IaStructureComponent_ng_container_9_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 22, 0)(2, "p-organization-chart", 23);
+    \u0275\u0275template(3, IaStructureComponent_ng_container_9_div_4_ng_template_3_Template, 2, 2, "ng-template", 24);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("value", ctx_r1.iaChart);
+  }
+}
+function IaStructureComponent_ng_container_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h2");
+    \u0275\u0275text(2, "IA structure");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, IaStructureComponent_ng_container_9_p_3_Template, 2, 0, "p", 10)(4, IaStructureComponent_ng_container_9_div_4_Template, 4, 1, "div", 21);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r1.iaChart.length === 0);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.iaChart.length > 0);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_i_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 33);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_i_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 34);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_i_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 35);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_i_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 36);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "a", 25);
+    \u0275\u0275listener("click", function IaStructureComponent_ng_container_10_ng_template_6_ng_container_5_Template_a_click_1_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.onNodeClick($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const node_r7 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("href", node_r7.data.url, \u0275\u0275sanitizeUrl)("innerHTML", node_r7.label, \u0275\u0275sanitizeHtml);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-inputgroup")(1, "input", 37);
+    \u0275\u0275twoWayListener("ngModelChange", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template_input_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r8);
+      const node_r7 = \u0275\u0275nextContext().$implicit;
+      \u0275\u0275twoWayBindingSet(node_r7.label, $event) || (node_r7.label = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("keydown", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template_input_keydown_1_listener($event) {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.onInputKeydown($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "p-inputgroup-addon")(3, "p-button", 38);
+    \u0275\u0275listener("onClick", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template_p_button_onClick_3_listener() {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.saveNode());
+    });
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const node_r7 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", node_r7.label);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-inputgroup")(1, "input", 37);
+    \u0275\u0275twoWayListener("ngModelChange", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template_input_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const node_r7 = \u0275\u0275nextContext().$implicit;
+      \u0275\u0275twoWayBindingSet(node_r7.data.url, $event) || (node_r7.data.url = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("keydown", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template_input_keydown_1_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.onInputKeydown($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "p-inputgroup-addon")(3, "p-button", 38);
+    \u0275\u0275listener("onClick", function IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template_p_button_onClick_3_listener() {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.saveNode());
+    });
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const node_r7 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", node_r7.data.url);
+  }
+}
+function IaStructureComponent_ng_container_10_ng_template_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 28);
+    \u0275\u0275template(1, IaStructureComponent_ng_container_10_ng_template_6_i_1_Template, 1, 0, "i", 29)(2, IaStructureComponent_ng_container_10_ng_template_6_i_2_Template, 1, 0, "i", 30)(3, IaStructureComponent_ng_container_10_ng_template_6_i_3_Template, 1, 0, "i", 31)(4, IaStructureComponent_ng_container_10_ng_template_6_i_4_Template, 1, 0, "i", 32)(5, IaStructureComponent_ng_container_10_ng_template_6_ng_container_5_Template, 2, 2, "ng-container", 10)(6, IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_6_Template, 4, 1, "p-inputgroup", 10)(7, IaStructureComponent_ng_container_10_ng_template_6_p_inputgroup_7_Template, 4, 1, "p-inputgroup", 10);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const node_r7 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", node_r7.children.length > 0 && !ctx_r1.draggable && !node_r7.data.editing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", (node_r7.children.length === 0 || !node_r7.children) && !ctx_r1.draggable && !node_r7.data.editing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.draggable);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", node_r7.data.editing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !node_r7.data.editing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", node_r7.data.editing === "label");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", node_r7.data.editing === "link");
+  }
+}
+function IaStructureComponent_ng_container_10_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275element(1, "p-contextMenu", 26, 1);
+    \u0275\u0275elementStart(3, "h2");
+    \u0275\u0275text(4, "IA structure tree");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "p-tree", 27);
+    \u0275\u0275twoWayListener("selectionChange", function IaStructureComponent_ng_container_10_Template_p_tree_selectionChange_5_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.selectedNode, $event) || (ctx_r1.selectedNode = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("onNodeDrop", function IaStructureComponent_ng_container_10_Template_p_tree_onNodeDrop_5_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleNodeDrop($event));
+    })("onNodeContextMenuSelect", function IaStructureComponent_ng_container_10_Template_p_tree_onNodeContextMenuSelect_5_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onNodeContextMenu($event));
+    });
+    \u0275\u0275template(6, IaStructureComponent_ng_container_10_ng_template_6_Template, 8, 7, "ng-template", 24);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const cm_r10 = \u0275\u0275reference(2);
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("model", ctx_r1.options);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("value", ctx_r1.iaChart)("selectionMode", ctx_r1.selectable ? "multiple" : null);
+    \u0275\u0275twoWayProperty("selection", ctx_r1.selectedNode);
+    \u0275\u0275property("draggableNodes", ctx_r1.draggable)("droppableNodes", true)("validateDrop", true)("contextMenu", cm_r10);
+  }
+}
+function IaStructureComponent_ng_container_11_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr")(1, "th");
+    \u0275\u0275text(2, "H1");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "th");
+    \u0275\u0275text(4, "URL");
+    \u0275\u0275elementEnd()();
+  }
+}
+function IaStructureComponent_ng_container_11_ng_template_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr", 40)(1, "td");
+    \u0275\u0275element(2, "p-treetable-toggler", 41)(3, "span", 42);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "td");
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const rowNode_r11 = ctx.$implicit;
+    const rowData_r12 = ctx.rowData;
+    \u0275\u0275property("ttRow", rowNode_r11);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("rowNode", rowNode_r11);
+    \u0275\u0275advance();
+    \u0275\u0275property("innerHTML", rowData_r12.h1, \u0275\u0275sanitizeHtml);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(rowData_r12.url);
+  }
+}
+function IaStructureComponent_ng_container_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h2");
+    \u0275\u0275text(2, "IA structure table");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p-treeTable", 39);
+    \u0275\u0275template(4, IaStructureComponent_ng_container_11_ng_template_4_Template, 5, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(6, IaStructureComponent_ng_container_11_ng_template_6_Template, 6, 4, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("value", ctx_r1.iaChart)("scrollable", true);
+  }
+}
+function IaStructureComponent_ng_container_12_p_3_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1, " or on any detected child pages");
+    \u0275\u0275elementEnd();
+  }
+}
+function IaStructureComponent_ng_container_12_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p");
+    \u0275\u0275text(1, " No broken links found on this page");
+    \u0275\u0275template(2, IaStructureComponent_ng_container_12_p_3_span_2_Template, 2, 0, "span", 10);
+    \u0275\u0275text(3, ". ");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.iaChart[0].children == null ? null : ctx_r1.iaChart[0].children.length);
+  }
+}
+function IaStructureComponent_ng_container_12_p_table_4_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr")(1, "th");
+    \u0275\u0275text(2, "Parent page");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "th");
+    \u0275\u0275text(4, "Broken link");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "th");
+    \u0275\u0275text(6, "Status");
+    \u0275\u0275elementEnd()();
+  }
+}
+function IaStructureComponent_ng_container_12_p_table_4_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr")(1, "td");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "td");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "td");
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const rowData_r13 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(rowData_r13.parentUrl);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(rowData_r13.url);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(rowData_r13.status);
+  }
+}
+function IaStructureComponent_ng_container_12_p_table_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-table", 44);
+    \u0275\u0275template(1, IaStructureComponent_ng_container_12_p_table_4_ng_template_1_Template, 7, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(3, IaStructureComponent_ng_container_12_p_table_4_ng_template_3_Template, 7, 3, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("value", ctx_r1.brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c38));
+  }
+}
+function IaStructureComponent_ng_container_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h2");
+    \u0275\u0275text(2, "Broken links");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, IaStructureComponent_ng_container_12_p_3_Template, 4, 1, "p", 10)(4, IaStructureComponent_ng_container_12_p_table_4_Template, 5, 3, "p-table", 43);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r1.brokenLinks.length === 0);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.brokenLinks.length > 0);
+  }
+}
+var IaStructureComponent = class _IaStructureComponent {
+  uploadState = inject(UploadStateService);
+  translate = inject(TranslateService);
+  locationStrategy = inject(LocationStrategy);
+  theme = inject(ThemeService);
+  production = environment.production;
+  constructor() {
+    effect(() => {
+      this.theme.darkMode();
+      this.updateNodeStyles(this.iaChart, 0);
+    });
+  }
+  ngOnInit() {
+    const data = this.uploadState.getUploadData();
+    this.breadcrumb = data?.breadcrumb || [];
+    this.originalUrl = data?.originalUrl || "";
+    this.options = [...this.baseMenu];
+    this.baseHref = this.locationStrategy.getBaseHref();
+  }
+  originalUrl = "";
+  //Breadcrumb & orphan status
+  breadcrumb = [];
+  urlFound = null;
+  //IA chart
+  iaChart = null;
+  brokenLinks = [];
+  depth = 4;
+  //default value
+  //For tracking progress while building IA chart
+  isChartLoading = false;
+  iaProgress = 0;
+  totalUrls = 0;
+  processedUrls = 0;
+  //Pages to skip children when building IA chart
+  skipFormsAndPubs = /* @__PURE__ */ new Set([
+    "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms.html",
+    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/formulaires.html",
+    "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html",
+    "https://www.canada.ca/fr/agence-revenu/services/formulaires-publications/publications.html"
+  ]);
+  //Button fxn
+  checkIA() {
+    return __async(this, null, function* () {
+      this.urlFound = yield this.checkParentLinks(this.breadcrumb, this.originalUrl);
+      this.iaChart = yield this.buildIaTree([this.originalUrl], this.depth);
+      setTimeout(() => {
+        const firstNode = document.querySelector(".p-organizationchart-node a");
+        if (firstNode)
+          firstNode.focus();
+      });
+    });
+  }
+  //Step 1: Check if breadcrumb orphan via parent page
+  checkParentLinks(breadcrumbs, originalUrl) {
+    return __async(this, null, function* () {
+      if (!breadcrumbs?.length)
+        return false;
+      const lastBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
+      const targetUrl = lastBreadcrumb.url;
+      if (!targetUrl) {
+        console.error("Last breadcrumb has no URL");
+        return false;
+      }
+      try {
+        const response = yield fetch(targetUrl);
+        if (!response.ok) {
+          console.error(`Failed to fetch breadcrumb page: ${response.status}`);
+          return false;
+        }
+        const html = yield response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const links = Array.from(doc.querySelectorAll("a")).map((a) => a.getAttribute("href")).filter((href) => !!href);
+        const absoluteLinks = links.map((href) => {
+          try {
+            return new URL(href, targetUrl).href;
+          } catch {
+            return href;
+          }
+        });
+        const found = absoluteLinks.includes(originalUrl);
+        console.log(`Original URL ${found ? "found" : "NOT found"} in ${targetUrl}`);
+        return found;
+      } catch (err) {
+        console.error("Error checking breadcrumb target:", err);
+        return false;
+      }
+    });
+  }
+  //Set background color
+  get bgColors() {
+    return this.theme.darkMode() ? this.bgColorsDark : this.bgColorsLight;
+  }
+  bgColorsLight = [
+    "surface-0 hover:bg-primary-50",
+    "bg-primary-50 hover:bg-primary-100",
+    "bg-primary-100 hover:bg-primary-200",
+    "bg-primary-200 hover:bg-primary-300",
+    "bg-primary-300 hover:bg-primary-400",
+    "bg-primary-400 hover:bg-primary-500",
+    "bg-primary-500 hover:bg-primary-600 text-white",
+    "bg-primary-600 hover:bg-primary-700 text-white",
+    "bg-primary-700 hover:bg-primary-800 text-white",
+    "bg-primary-800 hover:bg-primary-900 text-white"
+  ];
+  bgColorsDark = [
+    "surface-0 hover:bg-primary-900",
+    "bg-primary-900 hover:bg-primary-800",
+    "bg-primary-800 hover:bg-primary-700",
+    "bg-primary-700 hover:bg-primary-600",
+    "bg-primary-600 hover:bg-primary-500",
+    "bg-primary-500 hover:bg-primary-400",
+    "bg-primary-400 hover:bg-primary-300  text-black",
+    "bg-primary-300 hover:bg-primary-200 text-black",
+    "bg-primary-200 hover:bg-primary-100 text-black",
+    "bg-primary-100 hover:bg-primary-50 text-black"
+  ];
+  get contextStyles() {
+    return this.theme.darkMode() ? this.contextStylesDark : this.contextStylesLight;
+  }
+  contextStylesLight = {
+    new: "bg-green-200 hover:bg-green-300 text-black",
+    rot: "bg-red-200 hover:bg-red-300 text-black",
+    move: "bg-yellow-200 hover:bg-yellow-300 text-black",
+    template: "surface-200 hover:surface-300 text-black"
+  };
+  contextStylesDark = {
+    new: "bg-green-700 hover:bg-green-600 text-white",
+    rot: "bg-red-700 hover:bg-red-600 text-white",
+    move: "bg-yellow-700 hover:bg-yellow-600 text-black",
+    template: "surface-200 hover:surface-300 text-white"
+  };
+  //Step 2a: Get single page IA data
+  getPageMetaAndLinks(url) {
+    return __async(this, null, function* () {
+      try {
+        const res = yield fetch(url);
+        const status = res.status;
+        if (!res.ok)
+          return { status };
+        const html = yield res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const h1Elements = Array.from(doc.querySelectorAll("h1"));
+        const h1 = h1Elements.map((e) => e.textContent?.trim()).filter(Boolean).join("<br>");
+        const breadcrumb = Array.from(doc.querySelectorAll(".breadcrumb li a")).map((a) => new URL(a.getAttribute("href") || "", url).href);
+        const anchors = Array.from(doc.querySelectorAll("main a[href]"));
+        const baseUrl = new URL(url).origin;
+        const links = Array.from(new Set(
+          //unique set
+          anchors.map((a) => {
+            const u = new URL(a.getAttribute("href") || "", url);
+            u.hash = "";
+            return u.href;
+          }).filter((u) => u.startsWith(baseUrl) && u !== url)
+        ));
+        return { h1, breadcrumb, links, status };
+      } catch (err) {
+        console.error(`Failed to fetch ${url}`, err);
+        return { status: 0 };
+      }
+    });
+  }
+  //Step 2b: Crawl all child pages for IA data
+  buildIaTree(urls, depth, parentUrl, level = 0) {
+    return __async(this, null, function* () {
+      if (depth <= 0)
+        return [];
+      if (!parentUrl && level === 0) {
+        this.isChartLoading = true;
+        this.iaProgress = 5;
+        this.processedUrls = 0;
+        this.totalUrls = urls.length;
+      }
+      const nodes = [];
+      const bgClass = this.bgColors[level % this.bgColors.length];
+      for (const url of urls) {
+        const meta = yield this.getPageMetaAndLinks(url);
+        this.processedUrls++;
+        this.iaProgress = Math.round(this.processedUrls / this.totalUrls * 100);
+        if (!meta || meta.status !== 200) {
+          this.brokenLinks.push({
+            parentUrl,
+            url,
+            status: meta?.status || 0
+          });
+          continue;
+        }
+        if (!meta.breadcrumb || !meta.links)
+          continue;
+        if (parentUrl && meta.breadcrumb.at(-1) !== parentUrl) {
+          continue;
+        }
+        const node = {
+          label: meta.h1,
+          data: {
+            h1: meta.h1,
+            url,
+            originalParent: parentUrl,
+            editing: null,
+            customStyle: false,
+            customStyleKey: null,
+            borderStyle: "border-2 border-primary border-round shadow-2"
+          },
+          expanded: true,
+          styleClass: `border-2 border-primary border-round shadow-2 ${bgClass}`,
+          children: []
+        };
+        if (meta.links?.length && depth > 1) {
+          this.totalUrls += meta.links.length;
+          const total = meta.links.length;
+          let limit = total;
+          if (this.skipFormsAndPubs.has(url)) {
+            limit = 5;
+          }
+          const links = meta.links.slice(0, limit);
+          node.children = yield this.buildIaTree(links, depth - 1, url, level + 1);
+          if (total > limit) {
+            node.children?.push({
+              label: `+ ${total - limit} more...`,
+              data: {
+                h1: `+ ${total - limit} more...`,
+                url: null,
+                originalParent: parentUrl,
+                editing: null,
+                customStyle: true,
+                customStyleKey: "template",
+                borderStyle: "border-2 border-primary border-round shadow-2 border-dashed"
+              },
+              expanded: true,
+              styleClass: `border-2 border-primary border-round shadow-2 border-dashed surface-100 hover:surface-200`,
+              children: []
+            });
+          }
+        }
+        nodes.push(node);
+      }
+      if (!parentUrl && level === 0) {
+        this.iaProgress = 100;
+        setTimeout(() => {
+          this.isChartLoading = false;
+          this.iaProgress = 0;
+        }, 1e3);
+      }
+      return nodes;
+    });
+  }
+  //Prevent default click on org chart links <-- Do we want this??
+  onNodeClick(event) {
+    if (event.button === 0) {
+      event.preventDefault();
+    }
+  }
+  //Full screen element
+  chartContainer;
+  maximize(elRef) {
+    const element = elRef.nativeElement;
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  }
+  //Context menu
+  cm;
+  options = [];
+  //options for editing chart nodes
+  baseMenu = [
+    {
+      label: "Edit label",
+      icon: "pi pi-pen-to-square",
+      command: () => {
+        console.log("Edit ", this.selectedNode);
+        this.editNode("label");
+      }
+    },
+    {
+      label: "Edit url",
+      icon: "pi pi-link",
+      command: () => {
+        console.log("Edit ", this.selectedNode);
+        this.editNode("link");
+      }
+    },
+    {
+      separator: true
+    },
+    {
+      label: "Add child page",
+      icon: "pi pi-plus",
+      command: () => {
+        console.log("Add ", this.selectedNode);
+        this.addChildNode();
+      }
+    },
+    {
+      label: "Delete page",
+      icon: "pi pi-trash",
+      command: () => {
+        console.log("Delete ", this.selectedNode);
+        this.deleteNode();
+      }
+    },
+    {
+      separator: true
+    },
+    {
+      label: "Change template",
+      icon: "pi pi-sync",
+      items: [
+        {
+          label: "Split into subway pattern",
+          icon: "pi pi-sitemap",
+          command: () => {
+            console.log("Change template ", this.selectedNode);
+            this.addParentNode("subway");
+          }
+        },
+        {
+          label: "Combine into single page",
+          icon: "pi pi-file-check",
+          command: () => {
+            console.log("Change template ", this.selectedNode);
+            this.addParentNode("combine");
+          }
+        }
+      ]
+    },
+    {
+      label: "Change style",
+      icon: "pi pi-palette",
+      items: [
+        {
+          label: "New page",
+          icon: "pi pi-file-plus",
+          command: () => {
+            this.selectedNode.data.customStyleKey = "new";
+            this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
+            this.updateNodeStyles(this.iaChart, 0);
+            this.selectedNode = null;
+          }
+        },
+        {
+          label: "ROT",
+          icon: "pi pi-trash",
+          command: () => {
+            this.selectedNode.data.customStyleKey = "rot";
+            this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
+            this.updateNodeStyles(this.iaChart, 0);
+            this.selectedNode = null;
+          }
+        },
+        {
+          label: "Page move",
+          icon: "pi pi-sitemap",
+          command: () => {
+            this.selectedNode.data.customStyleKey = "move";
+            this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
+            this.updateNodeStyles(this.iaChart, 0);
+            this.selectedNode = null;
+          }
+        },
+        {
+          separator: true
+        },
+        {
+          label: "Reset custom style",
+          icon: "pi pi-replay",
+          command: () => {
+            this.selectedNode.data.customStyle = false;
+            this.selectedNode.data.customStyleKey = null;
+            this.selectedNode.data.borderStyle = "border-2 border-primary border-round shadow-2";
+            this.updateNodeStyles(this.iaChart, 0);
+            this.selectedNode = null;
+          }
+        }
+      ]
+    },
+    {
+      separator: true
+    },
+    {
+      label: "Export to CSV",
+      icon: "pi pi-file-export",
+      disabled: true,
+      // TODO: implement export
+      command: () => {
+        console.log("Export ", this.selectedNode);
+        this.exportTable();
+      }
+    },
+    {
+      separator: true
+    },
+    {
+      label: "Open page in new page assistant",
+      icon: "pi pi-sparkles",
+      command: () => {
+        console.log("Open link in page assistant ", this.selectedNode);
+        this.openInPageAssistant();
+      }
+    },
+    {
+      label: "Open page in new tab",
+      icon: "pi pi-external-link",
+      command: () => {
+        console.log("Open link in new tab ", this.selectedNode);
+        this.openNodeUrl();
+      }
+    }
+  ];
+  selectedNode;
+  draggable = true;
+  selectable = true;
+  //For tracking previous states
+  editingNode = null;
+  undoArray = [];
+  //for loading in page assistant
+  baseHref = null;
+  onNodeContextMenu(event) {
+    if (this.editingNode) {
+      this.editingNode.data.editing = null;
+    }
+    this.selectedNode = event.node;
+    const customStyle = this.selectedNode.data.customStyle;
+    this.options.forEach((item) => {
+      if (item.label === "Open page in new page assistant" || item.label === "Open page in new tab") {
+        item.disabled = !this.selectedNode?.data?.url?.trim();
+      }
+      if (item.label === "Change template" || item.label === "Change style") {
+        item.disabled = customStyle;
+      }
+    });
+  }
+  onInputKeydown(event) {
+    if (event.key === "Enter") {
+      this.saveNode();
+      console.log("Saved ", this.selectedNode);
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    if (event.key === " ") {
+      event.stopPropagation();
+    }
+  }
+  editNode(mode = "label") {
+    if (this.selectedNode) {
+      this.selectedNode.data.editing = mode;
+      this.editingNode = this.selectedNode;
+      this.draggable = false;
+      this.selectable = false;
+      setTimeout(() => {
+        const input2 = document.querySelector("input.ia-label");
+        input2?.focus();
+      });
+    }
+  }
+  saveNode() {
+    if (this.selectedNode) {
+      this.selectedNode.data.editing = null;
+    }
+    if (this.selectedNode.data.url === "https://www.canada.ca/") {
+      this.editNode("link");
+      return;
+    }
+    this.draggable = true;
+    this.selectable = false;
+  }
+  addChildNode() {
+    if (!this.selectedNode)
+      return;
+    if (!this.selectedNode.children) {
+      this.selectedNode.children = [];
+    }
+    const newNode = {
+      label: "New page",
+      data: {
+        h1: "New page",
+        url: "https://www.canada.ca/",
+        // default URL
+        editing: false,
+        customStyle: false,
+        customStyleKey: "new",
+        borderStyle: "border-2 border-primary border-round border-dashed shadow-2"
+      },
+      children: []
+    };
+    this.selectedNode.children.push(newNode);
+    this.selectedNode.expanded = true;
+    this.selectedNode = newNode;
+    this.editNode("label");
+    this.updateMenu();
+    this.updateNodeStyles(this.iaChart, 0);
+  }
+  //Will be used to create a container to mark pages for template change
+  addParentNode(action) {
+    if (!this.selectedNode)
+      return;
+    const findParent = (nodes, parentNode2) => {
+      for (const node of nodes) {
+        if (node === this.selectedNode) {
+          return {
+            parentContainer: nodes,
+            // found at this level
+            parentNode: parentNode2 ?? null
+          };
+        }
+        if (node.children) {
+          const searchChildNodes = findParent(node.children, node);
+          if (searchChildNodes)
+            return searchChildNodes;
+        }
+      }
+      return null;
+    };
+    const location = findParent(this.iaChart || []);
+    if (!location)
+      return;
+    const { parentContainer, parentNode } = location;
+    const label = action === "subway" ? "Split into subway pattern" : "Combine into single page";
+    const newParentNode = {
+      label,
+      data: {
+        h1: label,
+        url: "",
+        originalParent: parentNode?.data?.url ?? "",
+        editing: false,
+        customStyle: true,
+        // prevents style changes
+        customStyleKey: "template",
+        isContainer: true,
+        // used to keep child nodes at proper level and prevent drag/drop of these wrappers into each other
+        borderStyle: "border-2 border-primary border-round border-dashed shadow-2"
+      },
+      expanded: true,
+      children: [this.selectedNode]
+    };
+    const index = parentContainer.indexOf(this.selectedNode);
+    if (index !== -1) {
+      parentContainer.splice(index, 1, newParentNode);
+    }
+    this.selectedNode = newParentNode;
+    this.updateMenu();
+    this.updateNodeStyles(this.iaChart, 0);
+  }
+  deleteNode() {
+    if (!this.iaChart || !this.selectedNode)
+      return;
+    const nodeToDelete = this.selectedNode;
+    const rootIndex = this.iaChart.findIndex((n) => n === nodeToDelete);
+    if (rootIndex > -1) {
+      console.warn("Cannot delete root node.");
+      return;
+    }
+    const findAndDelete = (nodes) => {
+      for (const node of nodes) {
+        const children = node.children ?? [];
+        const childIndex = children.findIndex((c) => c === nodeToDelete);
+        if (childIndex > -1) {
+          this.undoArray.push({
+            node: nodeToDelete,
+            parent: node,
+            index: childIndex
+          });
+          children.splice(childIndex, 1);
+          node.children = children.length ? children : void 0;
+          return true;
+        }
+        if (children.length && findAndDelete(children)) {
+          return true;
+        }
+      }
+      return false;
+    };
+    findAndDelete(this.iaChart);
+    this.updateMenu();
+  }
+  restoreNode() {
+    if (this.undoArray.length === 0)
+      return;
+    const last = this.undoArray.pop();
+    if (last.parent?.children) {
+      last.parent.children.splice(last.index, 0, last.node);
+    } else {
+      console.warn("Cannot restore node: parent missing.");
+      return;
+    }
+    this.selectedNode = last.node;
+    if (!this.selectedNode.data.customStyle) {
+      this.selectedNode.data.customStyleKey = "rot";
+      this.selectedNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
+      this.updateNodeStyles(this.iaChart, 0);
+    }
+    this.updateMenu();
+  }
+  //Add undo option under delete if there is something to restore
+  updateMenu() {
+    this.options = [...this.baseMenu];
+    const deleteIndex = this.options.findIndex((option) => option.label === "Delete page");
+    if (this.undoArray.length > 0 && deleteIndex !== -1) {
+      this.options.splice(deleteIndex + 1, 0, {
+        label: "Restore page",
+        icon: "pi pi-history",
+        command: () => this.restoreNode()
+      });
+    }
+  }
+  //Placeholder for export function
+  exportTable() {
+  }
+  //Open link in new tab
+  openNodeUrl() {
+    window.open(this.selectedNode.data.url, "_blank");
+  }
+  //Make share link a service so it can be used on both share.component.ts and here
+  openInPageAssistant() {
+    const baseUrl = (window.location.origin + this.baseHref).replace(/\/+$/, "");
+    const urlParam = encodeURIComponent(this.selectedNode.data.url);
+    const shareLink = `${baseUrl}/page-assistant/share?url=${urlParam}`;
+    console.log("Open in page assistant: ", shareLink);
+    window.open(shareLink, "_blank");
+  }
+  handleNodeDrop(event) {
+    const dragNode = event.dragNode;
+    const dropNode = event.dropNode;
+    if (!dragNode || !dropNode)
+      return;
+    if ((dropNode.data.isContainer || dropNode.parent?.data?.isContainer) && dragNode.data.isContainer)
+      return;
+    event.accept?.();
+    if (dragNode.data.customStyleKey === "move") {
+      dragNode.data.customStyleKey = "";
+      dragNode.data.borderStyle = "border-2 border-primary border-round shadow-2";
+    }
+    const targetEl = event.originalEvent?.target;
+    const tag = targetEl.tagName.toLowerCase();
+    const droppedOnNode = tag !== "li";
+    const dragParentUrl = dragNode.data.originalParent;
+    const dropUrl = dropNode.data.url;
+    const dropParentUrl = dropNode.parent?.data?.url ?? "";
+    const dropGrandparentUrl = dropNode.parent?.data?.originalParent ?? "";
+    if (droppedOnNode) {
+      console.log("Dropped on node");
+      console.log("Checking if parentUrl matches node Url:\n", dropUrl);
+    } else {
+      console.log("Dropped between nodes");
+      console.log("Checking if parentUrl matches sibling parent Url:\n", dropParentUrl);
+    }
+    const droppedOnParent = droppedOnNode && dragParentUrl === dropUrl;
+    const reorderedSiblings = !droppedOnNode && dragParentUrl === dropParentUrl;
+    const droppedOnContainerSibling = dropNode.data.isContainer && droppedOnNode && dragParentUrl === dropParentUrl;
+    const droppedBetweenContainerSibling = dropNode.parent?.data?.isContainer && !droppedOnNode && dragParentUrl === dropGrandparentUrl;
+    const isCustom = dragNode.data.customStyle;
+    if (!(droppedOnParent || reorderedSiblings || droppedOnContainerSibling || droppedBetweenContainerSibling || isCustom || dragNode.data.customStyleKey === "new")) {
+      dragNode.data.customStyleKey = "move";
+      dragNode.data.borderStyle = "border-2 border-primary border-round border-dashed shadow-2";
+    }
+    const treeRoot = targetEl.closest(".p-tree");
+    treeRoot?.querySelectorAll(".p-tree-node-dragover").forEach((el) => {
+      el.classList.remove("p-tree-node-dragover");
+    });
+    console.log("Drag parent URL", dragNode.data.originalParent);
+    this.updateNodeStyles(this.iaChart, 0);
+  }
+  updateNodeStyles(nodes, level = 0) {
+    if (!nodes)
+      return;
+    for (const node of nodes) {
+      const borderStyle = node.data?.borderStyle || "border-2 border-primary border-round shadow-2";
+      const bgClass = this.bgColors[level % this.bgColors.length];
+      const bgStyle = this.contextStyles[node.data?.customStyleKey] ?? bgClass;
+      node.styleClass = `${borderStyle} ${bgStyle}`;
+      if (node.children && node.children.length > 0) {
+        const nextLevel = node.data.isContainer ? level : level + 1;
+        this.updateNodeStyles(node.children, nextLevel);
+      }
+    }
+  }
+  static \u0275fac = function IaStructureComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _IaStructureComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaStructureComponent, selectors: [["ca-ia-structure"]], viewQuery: function IaStructureComponent_Query(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275viewQuery(_c011, 5);
+      \u0275\u0275viewQuery(_c114, 5);
+    }
+    if (rf & 2) {
+      let _t;
+      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.chartContainer = _t.first);
+      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.cm = _t.first);
+    }
+  }, features: [\u0275\u0275ProvidersFeature([TreeDragDropService])], decls: 13, vars: 12, consts: [["chartContainer", ""], ["cm", ""], ["header", ""], ["body", ""], [1, "flex", "flex-row", "flex-wrap", "align-items-center", "gap-3", "mt-0"], ["inputId", "depth", "mode", "decimal", 3, "ngModelChange", "ngModel", "showButtons", "min", "max"], ["for", "depth"], ["label", "Verify IA", "severity", "help", "icon", "pi pi-info-circle", 3, "click", "loading"], ["label", "Maximize IA chart", "severity", "secondary", "icon", "pi pi-window-maximize", 3, "click", 4, "ngIf"], ["styleClass", "mt-3", 3, "value", "showValue", "style", 4, "ngIf"], [4, "ngIf"], ["label", "Maximize IA chart", "severity", "secondary", "icon", "pi pi-window-maximize", 3, "click"], ["styleClass", "mt-3", 3, "value", "showValue"], [1, "flex", "flex-row", "align-items-center", "gap-3"], ["styleClass", "pl-1", 1, "max-w-full", 3, "model"], ["class", "flex align-items-center gap-2 text-green-400", 4, "ngIf"], ["class", "flex align-items-center gap-2 text-red-400", 4, "ngIf"], [1, "flex", "align-items-center", "gap-2", "text-green-400"], [1, "pi", "pi-check-circle"], [1, "flex", "align-items-center", "gap-2", "text-red-400"], [1, "pi", "pi-times-circle"], ["class", "overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container", 4, "ngIf"], [1, "overflow-auto", "max-h-75vh", "surface-ground", "surface-border", "border-1", "py-3", "mb-3", "ia-chart-container"], [3, "value"], ["pTemplate", "default"], ["target", "_blank", 1, "ia-label", 3, "click", "href", "innerHTML"], [3, "model"], ["styleClass", "w-full md:w-[30rem]", "draggableScope", "self", "droppableScope", "self", 3, "selectionChange", "onNodeDrop", "onNodeContextMenuSelect", "value", "selectionMode", "selection", "draggableNodes", "droppableNodes", "validateDrop", "contextMenu"], [1, "flex", "flex-row", "align-items-center", "gap-2", "w-full"], ["class", "pi pi-folder", 4, "ngIf"], ["class", "pi pi-file", 4, "ngIf"], ["class", "pi pi-arrows-alt cursor-move text-color-secondary", 4, "ngIf"], ["class", "pi pi-pencil text-color-secondary", 4, "ngIf"], [1, "pi", "pi-folder"], [1, "pi", "pi-file"], [1, "pi", "pi-arrows-alt", "cursor-move", "text-color-secondary"], [1, "pi", "pi-pencil", "text-color-secondary"], ["type", "text", "pInputText", "", "pSize", "small", 1, "ia-label", 3, "ngModelChange", "keydown", "ngModel"], ["icon", "pi pi-check", "severity", "secondary", "size", "small", 3, "onClick"], ["styleClass", "p-treetable-sm", 3, "value", "scrollable"], [3, "ttRow"], [3, "rowNode"], [1, "ia-label", 3, "innerHTML"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle", 4, "ngIf"], ["size", "small", "stripedRows", "", 3, "value", "tableStyle"]], template: function IaStructureComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "div", 4)(1, "p-iftalabel")(2, "p-inputnumber", 5);
+      \u0275\u0275twoWayListener("ngModelChange", function IaStructureComponent_Template_p_inputnumber_ngModelChange_2_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.depth, $event) || (ctx.depth = $event);
+        return $event;
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(3, "label", 6);
+      \u0275\u0275text(4, "Depth");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(5, "p-button", 7);
+      \u0275\u0275listener("click", function IaStructureComponent_Template_p_button_click_5_listener() {
+        return ctx.checkIA();
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(6, IaStructureComponent_p_button_6_Template, 1, 0, "p-button", 8);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(7, IaStructureComponent_p_progressbar_7_Template, 1, 5, "p-progressbar", 9)(8, IaStructureComponent_ng_container_8_Template, 7, 3, "ng-container", 10)(9, IaStructureComponent_ng_container_9_Template, 5, 2, "ng-container", 10)(10, IaStructureComponent_ng_container_10_Template, 7, 8, "ng-container", 10)(11, IaStructureComponent_ng_container_11_Template, 8, 2, "ng-container", 10)(12, IaStructureComponent_ng_container_12_Template, 5, 2, "ng-container", 10);
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275twoWayProperty("ngModel", ctx.depth);
+      \u0275\u0275property("showButtons", true)("min", 2)("max", 6);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("loading", ctx.isChartLoading);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.iaChart && ctx.iaChart.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.isChartLoading);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.breadcrumb.length > 0);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.iaChart);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.iaChart);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.iaChart && !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.iaChart);
+    }
+  }, dependencies: [
+    CommonModule,
+    NgIf,
+    FormsModule,
+    DefaultValueAccessor,
+    NgControlStatus,
+    NgModel,
+    TranslateModule,
+    TableModule,
+    Table,
+    PrimeTemplate,
+    ButtonModule,
+    Button,
+    IftaLabel,
+    BreadcrumbModule,
+    Breadcrumb,
+    OrganizationChartModule,
+    OrganizationChart,
+    ProgressBarModule,
+    ProgressBar,
+    InputNumberModule,
+    InputNumber,
+    InputTextModule,
+    InputText,
+    TreeTableModule,
+    TreeTable,
+    TreeTableToggler,
+    TTRow,
+    Tree,
+    ContextMenuModule,
+    ContextMenu,
+    InputGroup,
+    InputGroupAddonModule,
+    InputGroupAddon
+  ], styles: ["\n\n.ia-label[_ngcontent-%COMP%] {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n  .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n  .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n  .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n  .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n  .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n  .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n/*# sourceMappingURL=ia-structure.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaStructureComponent, [{
+    type: Component,
+    args: [{ selector: "ca-ia-structure", imports: [
+      CommonModule,
+      FormsModule,
+      TranslateModule,
+      TableModule,
+      ButtonModule,
+      IftaLabel,
+      BreadcrumbModule,
+      OrganizationChartModule,
+      ProgressBarModule,
+      InputNumberModule,
+      InputTextModule,
+      TreeTableModule,
+      Tree,
+      ContextMenuModule,
+      InputGroup,
+      InputGroupAddonModule
+    ], providers: [TreeDragDropService], template: `<!--UI-->\r
+<div class="flex flex-row flex-wrap align-items-center gap-3 mt-0">\r
+  <p-iftalabel>\r
+    <p-inputnumber\r
+      [(ngModel)]="depth"\r
+      inputId="depth"\r
+      mode="decimal"\r
+      [showButtons]="true"\r
+      [min]="2"\r
+      [max]="6"\r
+    />\r
+    <label for="depth">Depth</label>\r
+  </p-iftalabel>\r
+  <p-button\r
+    label="Verify IA"\r
+    severity="help"\r
+    (click)="checkIA()"\r
+    [loading]="isChartLoading"\r
+    icon="pi pi-info-circle"\r
+  />\r
+  <p-button\r
+    label="Maximize IA chart"\r
+    severity="secondary"\r
+    (click)="maximize(chartContainer)"\r
+    icon="pi pi-window-maximize"\r
+    *ngIf="iaChart && iaChart.length > 0"\r
+  />\r
+</div>\r
+<p-progressbar\r
+  *ngIf="isChartLoading"\r
+  [value]="iaProgress"\r
+  [showValue]="false"\r
+  [style]="{ height: '1rem' }"\r
+  styleClass="mt-3"\r
+/>\r
+\r
+<!--Breadcrumb-->\r
+<ng-container *ngIf="breadcrumb.length > 0">\r
+  <h2>Breadcrumb</h2>\r
+  <div class="flex flex-row align-items-center gap-3">\r
+    <p-breadcrumb class="max-w-full" styleClass="pl-1" [model]="breadcrumb" />\r
+    <span\r
+      class="flex align-items-center gap-2 text-green-400"\r
+      *ngIf="urlFound === true"\r
+      ><i class="pi pi-check-circle"></i>Link found on parent page</span\r
+    >\r
+    <span\r
+      class="flex align-items-center gap-2 text-red-400"\r
+      *ngIf="urlFound === false"\r
+      ><i class="pi pi-times-circle"></i>IA Orphan</span\r
+    >\r
+  </div>\r
+</ng-container>\r
+\r
+<!--IA Chart-->\r
+<ng-container *ngIf="iaChart">\r
+  <h2>IA structure</h2>\r
+  <p *ngIf="iaChart.length === 0">No child pages found.</p>\r
+  <div\r
+    #chartContainer\r
+    *ngIf="iaChart.length > 0"\r
+    class="overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container"\r
+  >\r
+    <p-organization-chart [value]="iaChart">\r
+      <ng-template let-node pTemplate="default">\r
+        <p>\r
+          <a\r
+            [href]="node.data.url"\r
+            target="_blank"\r
+            (click)="onNodeClick($event)"\r
+            [innerHTML]="node.label"\r
+            class="ia-label"\r
+          ></a>\r
+        </p>\r
+      </ng-template>\r
+    </p-organization-chart>\r
+  </div>\r
+</ng-container>\r
+\r
+<!--IA Tree-->\r
+\r
+<ng-container *ngIf="iaChart">\r
+  <p-contextMenu #cm [model]="options"></p-contextMenu>\r
+  <h2>IA structure tree</h2>\r
+  <p-tree\r
+    [value]="iaChart"\r
+    styleClass="w-full md:w-[30rem]"\r
+    [selectionMode]="selectable ? 'multiple' : null"\r
+    [(selection)]="selectedNode"\r
+    [draggableNodes]="draggable"\r
+    [droppableNodes]="true"\r
+    draggableScope="self"\r
+    droppableScope="self"\r
+    (onNodeDrop)="handleNodeDrop($event)"\r
+    [validateDrop]="true"\r
+    [contextMenu]="cm"\r
+    (onNodeContextMenuSelect)="onNodeContextMenu($event)"\r
+  >\r
+    <ng-template pTemplate="default" let-node>\r
+      <div class="flex flex-row align-items-center gap-2 w-full">\r
+        <i\r
+          class="pi pi-folder"\r
+          *ngIf="node.children.length > 0 && !draggable && !node.data.editing"\r
+        ></i>\r
+        <i\r
+          class="pi pi-file"\r
+          *ngIf="\r
+            (node.children.length === 0 || !node.children) &&\r
+            !draggable &&\r
+            !node.data.editing\r
+          "\r
+        ></i>\r
+        <i\r
+          *ngIf="draggable"\r
+          class="pi pi-arrows-alt cursor-move text-color-secondary"\r
+        ></i>\r
+        <i\r
+          *ngIf="node.data.editing"\r
+          class="pi pi-pencil text-color-secondary"\r
+        ></i>\r
+        <ng-container *ngIf="!node.data.editing"\r
+          ><a\r
+            [href]="node.data.url"\r
+            target="_blank"\r
+            (click)="onNodeClick($event)"\r
+            [innerHTML]="node.label"\r
+            class="ia-label"\r
+          ></a\r
+        ></ng-container>\r
+        <p-inputgroup *ngIf="node.data.editing === 'label'">\r
+          <input\r
+            type="text"\r
+            pInputText\r
+            [(ngModel)]="node.label"\r
+            pSize="small"\r
+            class="ia-label"\r
+            (keydown)="onInputKeydown($event)"\r
+          />\r
+          <p-inputgroup-addon\r
+            ><p-button\r
+              icon="pi pi-check"\r
+              severity="secondary"\r
+              size="small"\r
+              (onClick)="saveNode()"\r
+          /></p-inputgroup-addon>\r
+        </p-inputgroup>\r
+        <p-inputgroup *ngIf="node.data.editing === 'link'">\r
+          <input\r
+            type="text"\r
+            pInputText\r
+            [(ngModel)]="node.data.url"\r
+            pSize="small"\r
+            class="ia-label"\r
+            (keydown)="onInputKeydown($event)"\r
+          />\r
+          <p-inputgroup-addon\r
+            ><p-button\r
+              icon="pi pi-check"\r
+              severity="secondary"\r
+              size="small"\r
+              (onClick)="saveNode()"\r
+          /></p-inputgroup-addon>\r
+        </p-inputgroup>\r
+      </div>\r
+    </ng-template>\r
+  </p-tree>\r
+</ng-container>\r
+\r
+<!--IA Table-->\r
+<ng-container *ngIf="iaChart && !production">\r
+  <h2>IA structure table</h2>\r
+  <p-treeTable\r
+    [value]="iaChart"\r
+    styleClass="p-treetable-sm"\r
+    [scrollable]="true"\r
+  >\r
+    <ng-template #header>\r
+      <tr>\r
+        <th>H1</th>\r
+        <th>URL</th>\r
+      </tr>\r
+    </ng-template>\r
+    <ng-template #body let-rowNode let-rowData="rowData">\r
+      <tr [ttRow]="rowNode">\r
+        <td>\r
+          <p-treetable-toggler [rowNode]="rowNode" />\r
+          <span [innerHTML]="rowData.h1" class="ia-label"></span>\r
+        </td>\r
+        <td>{{ rowData.url }}</td>\r
+      </tr>\r
+    </ng-template>\r
+  </p-treeTable>\r
+</ng-container>\r
+\r
+<!--Broken Links-->\r
+<ng-container *ngIf="iaChart">\r
+  <h2>Broken links</h2>\r
+  <p *ngIf="brokenLinks.length === 0">\r
+    No broken links found on this page<span *ngIf="iaChart[0].children?.length">\r
+      or on any detected child pages</span\r
+    >.\r
+  </p>\r
+  <p-table\r
+    *ngIf="brokenLinks.length > 0"\r
+    [value]="brokenLinks"\r
+    size="small"\r
+    stripedRows\r
+    [tableStyle]="{ 'min-width': '50rem' }"\r
+  >\r
+    <ng-template #header>\r
+      <tr>\r
+        <th>Parent page</th>\r
+        <th>Broken link</th>\r
+        <th>Status</th>\r
+      </tr>\r
+    </ng-template>\r
+    <ng-template #body let-rowData>\r
+      <tr>\r
+        <td>{{ rowData.parentUrl }}</td>\r
+        <td>{{ rowData.url }}</td>\r
+        <td>{{ rowData.status }}</td>\r
+      </tr>\r
+    </ng-template>\r
+  </p-table>\r
+</ng-container>\r
+`, styles: ["/* angular:styles/component:css;bdfdbdfe91275a57484d194f9b85e530ebd36ad6ccbe8fc911102dbac7cda77f;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/ia-structure.component.ts */\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n/*# sourceMappingURL=ia-structure.component.css.map */\n"] }]
+  }], () => [], { chartContainer: [{
+    type: ViewChild,
+    args: ["chartContainer"]
+  }], cm: [{
+    type: ViewChild,
+    args: ["cm"]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProblemsPanelComponent, { className: "ProblemsPanelComponent", filePath: "src/app/views/page-assistant/components/problems.component.ts", lineNumber: 36 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaStructureComponent, { className: "IaStructureComponent", filePath: "src/app/views/page-assistant/components/tools/ia-structure.component.ts", lineNumber: 104 });
+})();
+
+// src/app/views/page-assistant/components/tools/template-conversion.component.ts
+var TemplateConversionComponent = class _TemplateConversionComponent {
+  static \u0275fac = function TemplateConversionComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _TemplateConversionComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TemplateConversionComponent, selectors: [["ca-template-conversion"]], decls: 4, vars: 0, consts: [[1, "m-0"]], template: function TemplateConversionComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "p", 0);
+      \u0275\u0275text(1, " Unfinished. Will add auto-detect page template fxn and option to choose a template to inform GenAI what kind of page it is or should be.\n");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p");
+      \u0275\u0275text(3, "Should this be part of the heading structure tool?");
+      \u0275\u0275elementEnd();
+    }
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TemplateConversionComponent, [{
+    type: Component,
+    args: [{ selector: "ca-template-conversion", imports: [], template: '<p class="m-0">\r\n  Unfinished. Will add auto-detect page template fxn and option to choose a\r\n  template to inform GenAI what kind of page it is or should be.\r\n</p>\r\n<p>Should this be part of the heading structure tool?</p>\r\n' }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TemplateConversionComponent, { className: "TemplateConversionComponent", filePath: "src/app/views/page-assistant/components/tools/template-conversion.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/tools.component.ts
+function PageToolsComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 5);
+    \u0275\u0275text(1, " Check if your page is an IA orphan and view its current IA diagram. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageToolsComponent_p_accordion_panel_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
+    \u0275\u0275text(2, "IA structure");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-ia-structure");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 0);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
+  }
+}
+function PageToolsComponent_p_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 5);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+var PageToolsComponent = class _PageToolsComponent {
+  production = environment.production;
+  activePanels = [];
+  isPanelOpen(panelIndex) {
+    return this.activePanels.includes(panelIndex);
+  }
+  static \u0275fac = function PageToolsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PageToolsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageToolsComponent, selectors: [["ca-page-tools"]], decls: 10, vars: 5, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageToolsComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "p");
+      \u0275\u0275text(1, " Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.\n");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p-accordion", 0);
+      \u0275\u0275twoWayListener("valueChange", function PageToolsComponent_Template_p_accordion_valueChange_2_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
+        return $event;
+      });
+      \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
+      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
+      \u0275\u0275text(6, "Template conversion");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(7, PageToolsComponent_p_7_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(8, "p-accordion-content");
+      \u0275\u0275element(9, "ca-template-conversion");
+      \u0275\u0275elementEnd()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275twoWayProperty("value", ctx.activePanels);
+      \u0275\u0275property("multiple", true);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("value", 1);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
+    }
+  }, dependencies: [
+    CommonModule,
+    NgIf,
+    TranslateModule,
+    AccordionModule,
+    Accordion,
+    AccordionPanel,
+    AccordionHeader,
+    AccordionContent,
+    IaStructureComponent,
+    TemplateConversionComponent
+  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageToolsComponent, [{
+    type: Component,
+    args: [{ selector: "ca-page-tools", standalone: true, imports: [
+      CommonModule,
+      TranslateModule,
+      AccordionModule,
+      IaStructureComponent,
+      TemplateConversionComponent
+    ], template: '<p>\r\n  Use these tools to analyze and improve your web page. You can restructure\r\n  headings, generate an IA diagram, find guidance on the components used in your\r\n  page, integrate SEO and user insights into your updates, check your link\r\n  quality, or convert your page to a different template.\r\n</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>IA structure</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Check if your page is an IA orphan and view its current IA diagram.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-ia-structure></ca-ia-structure>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="1"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Template conversion</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-template-conversion></ca-template-conversion>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageToolsComponent, { className: "PageToolsComponent", filePath: "src/app/views/page-assistant/components/tools.component.ts", lineNumber: 32 });
 })();
 
 // src/app/views/page-assistant/page-assistant.component.ts
@@ -35223,7 +35607,7 @@ var _c66 = (a0, a1) => ({ "background-color": a0, border: a1 });
 function PageAssistantCompareComponent_p_button_11_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-button", 34);
+    \u0275\u0275elementStart(0, "p-button", 31);
     \u0275\u0275listener("onClick", function PageAssistantCompareComponent_p_button_11_Template_p_button_onClick_0_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r2 = \u0275\u0275nextContext();
@@ -35234,8 +35618,8 @@ function PageAssistantCompareComponent_p_button_11_Template(rf, ctx) {
 }
 function PageAssistantCompareComponent_ng_template_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 35);
-    \u0275\u0275element(1, "i", 36)(2, "div", 37);
+    \u0275\u0275elementStart(0, "div", 32);
+    \u0275\u0275element(1, "i", 33)(2, "div", 34);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -35248,16 +35632,16 @@ function PageAssistantCompareComponent_ng_template_15_Template(rf, ctx) {
 }
 function PageAssistantCompareComponent_p_message_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "p-message", 38);
+    \u0275\u0275element(0, "p-message", 35);
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275property("severity", ctx_r2.statusSeverity)("text", ctx_r2.statusMessage);
   }
 }
-function PageAssistantCompareComponent_span_38_Template(rf, ctx) {
+function PageAssistantCompareComponent_span_29_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 39);
+    \u0275\u0275elementStart(0, "span", 36);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -35267,9 +35651,9 @@ function PageAssistantCompareComponent_span_38_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r2.problemsFeatureCount, " ");
   }
 }
-function PageAssistantCompareComponent_ng_template_44_ng_container_0_span_9_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_41_ng_container_0_span_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 47);
+    \u0275\u0275elementStart(0, "span", 44);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -35279,12 +35663,12 @@ function PageAssistantCompareComponent_ng_template_44_ng_container_0_span_9_Temp
     \u0275\u0275textInterpolate(ctx_r2.displayNumHighlighted);
   }
 }
-function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_41_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 41)(2, "div")(3, "p-button", 42);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_button_onClick_3_listener() {
+    \u0275\u0275elementStart(1, "div", 38)(2, "div")(3, "p-button", 39);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_41_ng_container_0_Template_p_button_onClick_3_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.prev());
@@ -35293,28 +35677,28 @@ function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template(rf
     \u0275\u0275elementStart(4, "span");
     \u0275\u0275text(5);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "p-button", 43);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_button_onClick_6_listener() {
+    \u0275\u0275elementStart(6, "p-button", 40);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_41_ng_container_0_Template_p_button_onClick_6_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.next());
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "p-splitbutton", 44);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_splitbutton_onClick_7_listener() {
+    \u0275\u0275elementStart(7, "p-splitbutton", 41);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_41_ng_container_0_Template_p_splitbutton_onClick_7_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarAccept());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "p-splitbutton", 45);
-    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template_p_splitbutton_onClick_8_listener() {
+    \u0275\u0275elementStart(8, "p-splitbutton", 42);
+    \u0275\u0275listener("onClick", function PageAssistantCompareComponent_ng_template_41_ng_container_0_Template_p_splitbutton_onClick_8_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarReject());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275template(9, PageAssistantCompareComponent_ng_template_44_ng_container_0_span_9_Template, 2, 1, "span", 46);
+    \u0275\u0275template(9, PageAssistantCompareComponent_ng_template_41_ng_container_0_span_9_Template, 2, 1, "span", 43);
     \u0275\u0275elementEnd();
     \u0275\u0275elementContainerEnd();
   }
@@ -35330,31 +35714,31 @@ function PageAssistantCompareComponent_ng_template_44_ng_container_0_Template(rf
     \u0275\u0275property("ngIf", ctx_r2.displayNumHighlighted);
   }
 }
-function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_41_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "p-togglebutton", 48);
-    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_ngModelChange_1_listener($event) {
+    \u0275\u0275elementStart(1, "p-togglebutton", 45);
+    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_41_ng_container_1_Template_p_togglebutton_ngModelChange_1_listener($event) {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r2.toggleEdit, $event) || (ctx_r2.toggleEdit = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_onChange_1_listener() {
+    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_41_ng_container_1_Template_p_togglebutton_onChange_1_listener() {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarToggleEdit(ctx_r2.webSelectedView()));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "p-togglebutton", 49);
-    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_ngModelChange_2_listener($event) {
+    \u0275\u0275elementStart(2, "p-togglebutton", 46);
+    \u0275\u0275twoWayListener("ngModelChange", function PageAssistantCompareComponent_ng_template_41_ng_container_1_Template_p_togglebutton_ngModelChange_2_listener($event) {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r2.toggleCopy, $event) || (ctx_r2.toggleCopy = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template_p_togglebutton_onChange_2_listener() {
+    \u0275\u0275listener("onChange", function PageAssistantCompareComponent_ng_template_41_ng_container_1_Template_p_togglebutton_onChange_2_listener() {
       \u0275\u0275restoreView(_r6);
       const ctx_r2 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r2.toolbarToggleCopy(ctx_r2.webSelectedView()));
@@ -35370,9 +35754,9 @@ function PageAssistantCompareComponent_ng_template_44_ng_container_1_Template(rf
     \u0275\u0275twoWayProperty("ngModel", ctx_r2.toggleCopy);
   }
 }
-function PageAssistantCompareComponent_ng_template_44_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_41_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, PageAssistantCompareComponent_ng_template_44_ng_container_0_Template, 10, 12, "ng-container", 40)(1, PageAssistantCompareComponent_ng_template_44_ng_container_1_Template, 3, 2, "ng-container", 40);
+    \u0275\u0275template(0, PageAssistantCompareComponent_ng_template_41_ng_container_0_Template, 10, 12, "ng-container", 37)(1, PageAssistantCompareComponent_ng_template_41_ng_container_1_Template, 3, 2, "ng-container", 37);
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
@@ -35381,13 +35765,13 @@ function PageAssistantCompareComponent_ng_template_44_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r2.webSelectedView() === ctx_r2.WebViewType.Original || ctx_r2.webSelectedView() === ctx_r2.WebViewType.Modified);
   }
 }
-function PageAssistantCompareComponent_ng_template_46_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_43_Template(rf, ctx) {
 }
-function PageAssistantCompareComponent_ng_template_48_div_1_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_45_div_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 52);
-    \u0275\u0275element(1, "div", 53);
-    \u0275\u0275elementStart(2, "span", 54);
+    \u0275\u0275elementStart(0, "div", 49);
+    \u0275\u0275element(1, "div", 50);
+    \u0275\u0275elementStart(2, "span", 51);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
   }
@@ -35399,10 +35783,10 @@ function PageAssistantCompareComponent_ng_template_48_div_1_Template(rf, ctx) {
     \u0275\u0275textInterpolate(item_r7.text);
   }
 }
-function PageAssistantCompareComponent_ng_template_48_Template(rf, ctx) {
+function PageAssistantCompareComponent_ng_template_45_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 50);
-    \u0275\u0275template(1, PageAssistantCompareComponent_ng_template_48_div_1_Template, 4, 5, "div", 51);
+    \u0275\u0275elementStart(0, "div", 47);
+    \u0275\u0275template(1, PageAssistantCompareComponent_ng_template_45_div_1_Template, 4, 5, "div", 48);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -36169,7 +36553,7 @@ ${base}`;
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.liveContainer = _t.first);
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.sourceContainer = _t.first);
     }
-  }, decls: 60, vars: 20, consts: [["message", ""], ["start", ""], ["center", ""], ["end", ""], ["liveContainer", ""], ["sourceContainer", ""], ["id", "wb-cont"], [1, "flex", "flex-wrap", "justify-content-between", "mb-3"], [1, "flex", "gap-2"], ["label", "Send to GenAI", "severity", "primary", "showDelay", "1000", "hideDelay", "300", 3, "onClick", "icon", "pTooltip", "disabled"], [3, "promptChange", "aiChange", "aiSubmit", "customPrompt", "editPrompt"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick", 4, "ngIf"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick"], ["closable", "", 3, "severity", "text", 4, "ngIf"], ["value", "0", 1, "mt-3"], ["value", "0"], [1, "pi", "pi-eye", "mr-1"], ["value", "1"], [1, "pi", "pi-code", "mr-1"], ["value", "2"], [1, "pi", "pi-wrench", "mr-1"], ["value", "3"], [1, "pi", "pi-info-circle", "mr-1"], ["value", "4"], [1, "pi", "pi-chart-bar", "mr-1"], ["value", "5"], [1, "pi", "pi-exclamation-triangle", "mr-1"], ["class", "tab-badge", 4, "ngIf"], [1, "shadow-1"], ["label", "page.compare.view", 3, "selectedChange", "name", "options", "selected"], [1, "sticky", "top-0", "z-5", "bg-primary-reverse", "p-0"], [1, "live-container", "p-0", 3, "ngClass"], [1, "source-container", "p-0", 3, "ngClass"], [3, "summary"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick"], [1, "flex", "flex-row", "align-items-center", "gap-3"], [1, "text-6xl", "text-red-500", 3, "ngClass"], [3, "innerHTML"], ["closable", "", 3, "severity", "text"], [1, "tab-badge"], [4, "ngIf"], [1, "flex", "flex-row", "align-items-center", "gap-2"], ["icon", "pi pi-chevron-left", "text", "", "severity", "primary", "ariaLabel", "Previous change", "pTooltip", "Previous change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["icon", "pi pi-chevron-right", "text", "", "severity", "primary", "ariaLabel", "Next change", "pTooltip", "Next change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["label", "Accept", "icon", "pi pi-check", "severity", "success", "outlined", "", "size", "small", "pTooltip", "Accept selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["label", "Reject", "icon", "pi pi-times", "severity", "danger", "outlined", "", "size", "small", "pTooltip", "Reject selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["class", "text-color-secondary pl-1", 4, "ngIf"], [1, "text-color-secondary", "pl-1"], ["offLabel", "Edit", "onLabel", "Save", "offIcon", "pi pi-pen-to-square", "onIcon", "pi pi-save", "ariaLabel", "Edit/Save", "styleClass", "font-bold border-none w-6rem", 3, "ngModelChange", "onChange", "ngModel"], ["offLabel", "Copy code", "onLabel", "Copied", "offIcon", "pi pi-clipboard", "onIcon", "", "ariaLabel", "Copy code", "styleClass", "font-bold border-none w-9rem", 3, "ngModelChange", "onChange", "ngModel"], [1, "group-legend"], ["class", "legend-item", 4, "ngFor", "ngForOf"], [1, "legend-item"], [1, "legend-box", 3, "ngStyle"], [1, "legend-text"]], template: function PageAssistantCompareComponent_Template(rf, ctx) {
+  }, decls: 59, vars: 20, consts: [["message", ""], ["start", ""], ["center", ""], ["end", ""], ["liveContainer", ""], ["sourceContainer", ""], ["id", "wb-cont"], [1, "flex", "flex-wrap", "justify-content-between", "mb-3"], [1, "flex", "gap-2"], ["label", "Send to GenAI", "severity", "primary", "showDelay", "1000", "hideDelay", "300", 3, "onClick", "icon", "pTooltip", "disabled"], [3, "promptChange", "aiChange", "aiSubmit", "customPrompt", "editPrompt"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick", 4, "ngIf"], ["label", "Reset", "icon", "pi pi-trash", "severity", "danger", 3, "onClick"], ["closable", "", 3, "severity", "text", 4, "ngIf"], ["value", "0", 1, "mt-3"], ["value", "0"], [1, "pi", "pi-eye", "mr-1"], ["value", "1"], [1, "pi", "pi-code", "mr-1"], ["value", "2"], [1, "pi", "pi-exclamation-triangle", "mr-1"], ["class", "tab-badge", 4, "ngIf"], ["value", "3"], [1, "pi", "pi-chart-bar", "mr-1"], ["value", "4"], [1, "pi", "pi-chart-wrench", "mr-1"], [1, "shadow-1"], ["label", "page.compare.view", 3, "selectedChange", "name", "options", "selected"], [1, "sticky", "top-0", "z-5", "bg-primary-reverse", "p-0"], [1, "live-container", "p-0", 3, "ngClass"], [1, "source-container", "p-0", 3, "ngClass"], ["label", "Share", "icon", "pi pi-share-alt", "severity", "secondary", 3, "onClick"], [1, "flex", "flex-row", "align-items-center", "gap-3"], [1, "text-6xl", "text-red-500", 3, "ngClass"], [3, "innerHTML"], ["closable", "", 3, "severity", "text"], [1, "tab-badge"], [4, "ngIf"], [1, "flex", "flex-row", "align-items-center", "gap-2"], ["icon", "pi pi-chevron-left", "text", "", "severity", "primary", "ariaLabel", "Previous change", "pTooltip", "Previous change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["icon", "pi pi-chevron-right", "text", "", "severity", "primary", "ariaLabel", "Next change", "pTooltip", "Next change", "showDelay", "1000", "hideDelay", "300", 3, "onClick"], ["label", "Accept", "icon", "pi pi-check", "severity", "success", "outlined", "", "size", "small", "pTooltip", "Accept selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["label", "Reject", "icon", "pi pi-times", "severity", "danger", "outlined", "", "size", "small", "pTooltip", "Reject selected changes", "tooltipPosition", "top", "showDelay", "1000", "hideDelay", "300", 1, "secondary-outline", 3, "onClick", "model", "buttonProps", "menuButtonProps"], ["class", "text-color-secondary pl-1", 4, "ngIf"], [1, "text-color-secondary", "pl-1"], ["offLabel", "Edit", "onLabel", "Save", "offIcon", "pi pi-pen-to-square", "onIcon", "pi pi-save", "ariaLabel", "Edit/Save", "styleClass", "font-bold border-none w-6rem", 3, "ngModelChange", "onChange", "ngModel"], ["offLabel", "Copy code", "onLabel", "Copied", "offIcon", "pi pi-clipboard", "onIcon", "", "ariaLabel", "Copy code", "styleClass", "font-bold border-none w-9rem", 3, "ngModelChange", "onChange", "ngModel"], [1, "group-legend"], ["class", "legend-item", 4, "ngFor", "ngForOf"], [1, "legend-item"], [1, "legend-box", 3, "ngStyle"], [1, "legend-text"]], template: function PageAssistantCompareComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "h1", 6);
@@ -36227,59 +36611,55 @@ ${base}`;
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(26, "p-tab", 19);
       \u0275\u0275element(27, "i", 20);
-      \u0275\u0275text(28, "Tools");
+      \u0275\u0275text(28, " Problems ");
+      \u0275\u0275template(29, PageAssistantCompareComponent_span_29_Template, 2, 1, "span", 21);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(29, "p-tab", 21);
-      \u0275\u0275element(30, "i", 22);
-      \u0275\u0275text(31, "Metadata");
+      \u0275\u0275elementStart(30, "p-tab", 22);
+      \u0275\u0275element(31, "i", 23);
+      \u0275\u0275text(32, "Data");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(32, "p-tab", 23);
-      \u0275\u0275element(33, "i", 24);
-      \u0275\u0275text(34, "Data");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(35, "p-tab", 25);
-      \u0275\u0275element(36, "i", 26);
-      \u0275\u0275text(37, " Problems ");
-      \u0275\u0275template(38, PageAssistantCompareComponent_span_38_Template, 2, 1, "span", 27);
+      \u0275\u0275elementStart(33, "p-tab", 24);
+      \u0275\u0275element(34, "i", 25);
+      \u0275\u0275text(35, "Tools");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(39, "p-tabpanels", 28)(40, "p-tabpanel", 15)(41, "ca-horizontal-radio-buttons", 29);
-      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_41_listener($event) {
+      \u0275\u0275elementStart(36, "p-tabpanels", 26)(37, "p-tabpanel", 15)(38, "ca-horizontal-radio-buttons", 27);
+      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_38_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.webSelectedView, $event) || (ctx.webSelectedView = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_41_listener($event) {
+      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_38_listener($event) {
         \u0275\u0275restoreView(_r1);
         return \u0275\u0275resetView(ctx.onWebViewChange($event));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(42, "div", 30)(43, "p-toolbar");
-      \u0275\u0275template(44, PageAssistantCompareComponent_ng_template_44_Template, 2, 2, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(46, PageAssistantCompareComponent_ng_template_46_Template, 0, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(48, PageAssistantCompareComponent_ng_template_48_Template, 2, 1, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementStart(39, "div", 28)(40, "p-toolbar");
+      \u0275\u0275template(41, PageAssistantCompareComponent_ng_template_41_Template, 2, 2, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(43, PageAssistantCompareComponent_ng_template_43_Template, 0, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(45, PageAssistantCompareComponent_ng_template_45_Template, 2, 1, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(50, "div", 31, 4);
+      \u0275\u0275element(47, "div", 29, 4);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(52, "p-tabpanel", 17)(53, "ca-horizontal-radio-buttons", 29);
-      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_53_listener($event) {
+      \u0275\u0275elementStart(49, "p-tabpanel", 17)(50, "ca-horizontal-radio-buttons", 27);
+      \u0275\u0275twoWayListener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_50_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.sourceSelectedView, $event) || (ctx.sourceSelectedView = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_53_listener($event) {
+      \u0275\u0275listener("selectedChange", function PageAssistantCompareComponent_Template_ca_horizontal_radio_buttons_selectedChange_50_listener($event) {
         \u0275\u0275restoreView(_r1);
         return \u0275\u0275resetView(ctx.onSourceViewChange($event));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275element(54, "div", 32, 5);
+      \u0275\u0275element(51, "div", 30, 5);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(56, "p-tabpanel", 19);
-      \u0275\u0275element(57, "ca-page-tools");
+      \u0275\u0275elementStart(53, "p-tabpanel", 19);
+      \u0275\u0275element(54, "ca-page-problems");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(58, "p-tabpanel", 25)(59, "ca-page-problems", 33);
-      \u0275\u0275listener("summary", function PageAssistantCompareComponent_Template_ca_page_problems_summary_59_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.onProblemsSummary($event));
-      });
-      \u0275\u0275elementEnd()()()();
+      \u0275\u0275elementStart(55, "p-tabpanel", 22);
+      \u0275\u0275element(56, "ca-page-data");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(57, "p-tabpanel", 24);
+      \u0275\u0275element(58, "ca-page-tools");
+      \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
       \u0275\u0275advance();
@@ -36292,9 +36672,9 @@ ${base}`;
       \u0275\u0275property("ngIf", ctx.canShare);
       \u0275\u0275advance(6);
       \u0275\u0275property("ngIf", ctx.statusMessage);
-      \u0275\u0275advance(21);
+      \u0275\u0275advance(12);
       \u0275\u0275property("ngIf", ctx.problemsFeatureCount > 0);
-      \u0275\u0275advance(3);
+      \u0275\u0275advance(9);
       \u0275\u0275property("name", "webView")("options", ctx.webViewOptions);
       \u0275\u0275twoWayProperty("selected", ctx.webSelectedView);
       \u0275\u0275advance(9);
@@ -36337,12 +36717,13 @@ ${base}`;
     Tooltip,
     ConfirmDialogModule,
     ConfirmDialog,
+    PageToolsComponent,
     SplitButtonModule,
     SplitButton,
     AiOptionsComponent,
     HorizontalRadioButtonsComponent,
-    PageToolsComponent,
-    ProblemsPanelComponent
+    PageProblemsComponent,
+    PageDataComponent
   ], styles: ['@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";\n\n\n\n@font-face {\n  font-family: "Glyphicons Halflings";\n  src: url(https://www.canada.ca/etc/designs/canada/wet-boew/fonts/glyphicons-halflings-regular.woff2) format("woff2");\n}\n.d2h-file-side-diff[_ngcontent-%COMP%] {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-file-diff[_ngcontent-%COMP%] {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-code-wrapper[_ngcontent-%COMP%] {\n  position: relative;\n}\n.d2h-file-name-wrapper[_ngcontent-%COMP%] {\n  display: none;\n}\n.live-container[_ngcontent-%COMP%] {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.live-container.original[_ngcontent-%COMP%] {\n  border-color: #f3a59d;\n}\n.live-container.modified[_ngcontent-%COMP%] {\n  border-color: #83d5a8;\n}\n.source-container[_ngcontent-%COMP%] {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.source-container.original[_ngcontent-%COMP%] {\n  border-color: #f3a59d;\n}\n.source-container.modified[_ngcontent-%COMP%] {\n  border-color: #83d5a8;\n}\n.slide-content[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.change-text[_ngcontent-%COMP%] {\n  margin: 0;\n  text-align: right;\n  padding: 10px;\n}\n.custom-prev[_ngcontent-%COMP%], \n.custom-next[_ngcontent-%COMP%] {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.5);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n  border-radius: 5px;\n  font-size: 14px;\n}\n.custom-prev[_ngcontent-%COMP%] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.custom-next[_ngcontent-%COMP%] {\n  border-left: none;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.custom-prev[_ngcontent-%COMP%]:hover, \n.custom-next[_ngcontent-%COMP%]:hover {\n  background: rgba(255, 255, 255, 0.5);\n}\n.loading-spinner[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  font-size: 1.2rem;\n  color: #888;\n}\n.group-legend[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  justify-content: flex-end;\n}\n.legend-item[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.legend-box[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.loading-overlay[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 10;\n  color: white;\n}\n.loading-spinner[_ngcontent-%COMP%] {\n  border: 4px solid rgba(255, 255, 255, 0.3);\n  border-top: 4px solid white;\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n  margin-right: 10px;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n.legend-box-modal[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 16px;\n  height: 16px;\n  margin-right: 5px;\n  vertical-align: middle;\n}\n.legend-red-modal[_ngcontent-%COMP%] {\n  background-color: rgb(243, 165, 157);\n}\n.legend-green-modal[_ngcontent-%COMP%] {\n  background-color: rgb(131, 213, 168);\n}\n.legend-yellow-modal[_ngcontent-%COMP%] {\n  background-color: rgb(255, 238, 140);\n}\n.legend-blue-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px solid rgb(111, 159, 255);\n}\n.legend-dashed-popup-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px dashed rgb(102, 102, 102);\n}\n.legend-dashed-dynamic-modal[_ngcontent-%COMP%] {\n  background-color: transparent;\n  border: 2px dashed rgb(251, 192, 47);\n}\n.no-bullet-points[_ngcontent-%COMP%] {\n  list-style: none;\n}\n[_nghost-%COMP%]     .p-tabs .p-tablist .p-tab .tab-badge, \n.problems-badge[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 1.25rem;\n  height: 1.25rem;\n  padding: 0 0.35rem;\n  margin-left: 0.5rem;\n  border-radius: 9999px;\n  background: #ef4444 !important;\n  color: #fff !important;\n  font-weight: 700;\n  font-size: 0.75rem;\n  line-height: 1;\n  vertical-align: middle;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);\n}\n[_nghost-%COMP%]     .tab-badge {\n  transform: translateY(-1px);\n}\n[_nghost-%COMP%]     .dark .tab-badge {\n  background: #f43f5e;\n}\n/*# sourceMappingURL=page-assistant.component.css.map */'] });
 };
 (() => {
@@ -36362,11 +36743,12 @@ ${base}`;
       ToggleButtonModule,
       TooltipModule,
       ConfirmDialogModule,
+      PageToolsComponent,
       SplitButtonModule,
       AiOptionsComponent,
       HorizontalRadioButtonsComponent,
-      PageToolsComponent,
-      ProblemsPanelComponent
+      PageProblemsComponent,
+      PageDataComponent
     ], template: `<h1 id="wb-cont">{{ "title.page" | translate }}</h1>\r
 <p>{{ "page.compare.description" | translate }}</p>\r
 \r
@@ -36429,16 +36811,15 @@ ${base}`;
   <p-tablist>\r
     <p-tab value="0"><i class="pi pi-eye mr-1"></i>Web page</p-tab>\r
     <p-tab value="1"><i class="pi pi-code mr-1"></i>Page source</p-tab>\r
-    <p-tab value="2"><i class="pi pi-wrench mr-1"></i>Tools</p-tab>\r
-    <p-tab value="3"><i class="pi pi-info-circle mr-1"></i>Metadata</p-tab>\r
-    <p-tab value="4"><i class="pi pi-chart-bar mr-1"></i>Data</p-tab>\r
-    <p-tab value="5">\r
+    <p-tab value="2">\r
       <i class="pi pi-exclamation-triangle mr-1"></i>\r
       Problems\r
       <span class="tab-badge" *ngIf="problemsFeatureCount > 0">\r
         {{ problemsFeatureCount }}\r
       </span>\r
     </p-tab>\r
+    <p-tab value="3"><i class="pi pi-chart-bar mr-1"></i>Data</p-tab>\r
+    <p-tab value="4"><i class="pi pi-chart-wrench mr-1"></i>Tools</p-tab>\r
   </p-tablist>\r
   <!-- Rendered page -->\r
   <p-tabpanels class="shadow-1">\r
@@ -36600,17 +36981,20 @@ ${base}`;
       ></div>\r
     </p-tabpanel>\r
 \r
-    <!-- Page details (metadata and misc reports) -->\r
     <p-tabpanel value="2">\r
-      <ca-page-tools></ca-page-tools>\r
+      <ca-page-problems></ca-page-problems>\r
     </p-tabpanel>\r
 \r
-    <p-tabpanel value="5">\r
-      <ca-page-problems\r
-        (summary)="onProblemsSummary($any($event))"\r
-      ></ca-page-problems>\r
+    <!-- Data tabpanel -->\r
+    <p-tabpanel value="3">\r
+      <ca-page-data></ca-page-data>\r
     </p-tabpanel>\r
   </p-tabpanels>\r
+\r
+  <!-- Tool tabpanel -->\r
+  <p-tabpanel value="4">\r
+    <ca-page-tools></ca-page-tools>\r
+  </p-tabpanel>\r
 </p-tabs>\r
 `, styles: ['@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";\n\n/* src/app/views/page-assistant/page-assistant.component.css */\n@font-face {\n  font-family: "Glyphicons Halflings";\n  src: url(https://www.canada.ca/etc/designs/canada/wet-boew/fonts/glyphicons-halflings-regular.woff2) format("woff2");\n}\n.d2h-file-side-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-file-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-code-wrapper {\n  position: relative;\n}\n.d2h-file-name-wrapper {\n  display: none;\n}\n.live-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.live-container.original {\n  border-color: #f3a59d;\n}\n.live-container.modified {\n  border-color: #83d5a8;\n}\n.source-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.source-container.original {\n  border-color: #f3a59d;\n}\n.source-container.modified {\n  border-color: #83d5a8;\n}\n.slide-content {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.change-text {\n  margin: 0;\n  text-align: right;\n  padding: 10px;\n}\n.custom-prev,\n.custom-next {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.5);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n  border-radius: 5px;\n  font-size: 14px;\n}\n.custom-prev {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.custom-next {\n  border-left: none;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.custom-prev:hover,\n.custom-next:hover {\n  background: rgba(255, 255, 255, 0.5);\n}\n.loading-spinner {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  font-size: 1.2rem;\n  color: #888;\n}\n.group-legend {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  justify-content: flex-end;\n}\n.legend-item {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.legend-box {\n  width: 16px;\n  height: 16px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.loading-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 10;\n  color: white;\n}\n.loading-spinner {\n  border: 4px solid rgba(255, 255, 255, 0.3);\n  border-top: 4px solid white;\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  animation: spin 1s linear infinite;\n  margin-right: 10px;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n.legend-box-modal {\n  display: inline-block;\n  width: 16px;\n  height: 16px;\n  margin-right: 5px;\n  vertical-align: middle;\n}\n.legend-red-modal {\n  background-color: rgb(243, 165, 157);\n}\n.legend-green-modal {\n  background-color: rgb(131, 213, 168);\n}\n.legend-yellow-modal {\n  background-color: rgb(255, 238, 140);\n}\n.legend-blue-modal {\n  background-color: transparent;\n  border: 2px solid rgb(111, 159, 255);\n}\n.legend-dashed-popup-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(102, 102, 102);\n}\n.legend-dashed-dynamic-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(251, 192, 47);\n}\n.no-bullet-points {\n  list-style: none;\n}\n:host ::ng-deep .p-tabs .p-tablist .p-tab .tab-badge,\n.problems-badge {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 1.25rem;\n  height: 1.25rem;\n  padding: 0 0.35rem;\n  margin-left: 0.5rem;\n  border-radius: 9999px;\n  background: #ef4444 !important;\n  color: #fff !important;\n  font-weight: 700;\n  font-size: 0.75rem;\n  line-height: 1;\n  vertical-align: middle;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);\n}\n:host ::ng-deep .tab-badge {\n  transform: translateY(-1px);\n}\n:host ::ng-deep .dark .tab-badge {\n  background: #f43f5e;\n}\n/*# sourceMappingURL=page-assistant.component.css.map */\n'] }]
   }], () => [], { liveContainer: [{
@@ -36622,9 +37006,9 @@ ${base}`;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageAssistantCompareComponent, { className: "PageAssistantCompareComponent", filePath: "src/app/views/page-assistant/page-assistant.component.ts", lineNumber: 82 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageAssistantCompareComponent, { className: "PageAssistantCompareComponent", filePath: "src/app/views/page-assistant/page-assistant.component.ts", lineNumber: 84 });
 })();
 export {
   PageAssistantCompareComponent
 };
-//# sourceMappingURL=chunk-I5JFZ6JX.js.map
+//# sourceMappingURL=chunk-AK7KHLU6.js.map
