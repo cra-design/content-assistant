@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/views/inventory-assistant/inventory-assistant.component.css"],
+  "sourcesContent": ["table {\n  width: 100%;\n  border-collapse: collapse;\n}\n\ntd,\nth {\n  padding: 8px;\n  text-align: left;\n}\n\ntbody tr {\n  border-bottom: 1px solid #ccc;\n}\n\nthead tr {\n  border-bottom: 2px solid #444;\n}\n\n.p-field-radiobutton label {\n  margin-left: 0.75rem;\n}\n\n.p-field-radiobutton {\n  margin-bottom: 1rem;\n}\n\n.p-field-last-radiobutton label {\n  margin-left: 0.75rem;\n}\n\n.p-last-field-radiobutton {\n  margin-bottom: 1rem;\n}"],
+  "mappings": ";AAAA;AACE,SAAO;AACP,mBAAiB;AACnB;AAEA;AACA;AACE,WAAS;AACT,cAAY;AACd;AAEA,MAAM;AACJ,iBAAe,IAAI,MAAM;AAC3B;AAEA,MAAM;AACJ,iBAAe,IAAI,MAAM;AAC3B;AAEA,CAAC,oBAAoB;AACnB,eAAa;AACf;AAEA,CAJC;AAKC,iBAAe;AACjB;AAEA,CAAC,yBAAyB;AACxB,eAAa;AACf;AAEA,CAAC;AACC,iBAAe;AACjB;",
+  "names": []
+}
