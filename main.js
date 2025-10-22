@@ -170,7 +170,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-EAEJIT6Z.js";
+} from "./chunk-KYBXMQFX.js";
 import {
   ANIMATION_MODULE_TYPE,
   BehaviorSubject,
@@ -297,7 +297,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-RKAZV3NI.js";
+} from "./chunk-7IV2XZGV.js";
 import {
   __async,
   __objRest,
@@ -410,7 +410,7 @@ var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
    * @internal
    */
   loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-2UCOXLIO.js").then((m) => m);
+    const loadFn = () => this.moduleImpl ?? import("./chunk-YQNFOA3U.js").then((m) => m);
     let moduleImplPromise;
     if (this.loadingSchedulerFn) {
       moduleImplPromise = this.loadingSchedulerFn(loadFn);
@@ -7503,45 +7503,45 @@ var PageUploadComponent = class _PageUploadComponent {
       UploadUrlComponent,
       UploadPasteComponent,
       UploadWordComponent
-    ], template: `<h1 id="wb-cont">{{ 'title.page' | translate}}</h1>
-<p>{{'page.upload.description' | translate }}</p>
-<div class="flex flex-wrap">
-    <!--SELECT UPLOAD TYPE-->
-    <div class="flex mr-4 mb-4">
-        <fieldset class="border-none p-0 m-0">
-            <legend class="font-bold mb-3">Choose upload type:</legend>
-
-            <div class="flex flex-column gap-3">
-                <label for="url" class="flex align-items-center">
-                    <p-radioButton id="url" name="uploadType" value="url" (onClick)="onUploadTypeChange('url')"
-                                   [(ngModel)]="selectedUploadType"></p-radioButton>
-                    <span class="ml-2">URL</span>
-                </label>
-
-                <label for="paste" class="flex align-items-center">
-                    <p-radioButton id="paste" name="uploadType" value="paste" (onClick)="onUploadTypeChange('paste')"
-                                   [(ngModel)]="selectedUploadType"></p-radioButton>
-                    <span class="ml-2">Copy & Paste</span>
-                </label>
-
-                <label for="word" class="flex align-items-center">
-                    <p-radioButton id="word" name="uploadType" value="word" (onClick)="onUploadTypeChange('word')"
-                                   [(ngModel)]="selectedUploadType"></p-radioButton>
-                    <span class="ml-2">Word doc (converts to HTML)</span>
-                </label>
-            </div>
-        </fieldset>
-    </div>
-    <!--UPLOAD FILE-->
-    <div class="flex">
-        <ng-container [ngSwitch]="selectedUploadType">
-
-            <ca-upload-url *ngSwitchCase="'url'" (uploadComplete)="goToCompare()"></ca-upload-url>
-            <ca-upload-paste *ngSwitchCase="'paste'" (uploadComplete)="goToCompare()"></ca-upload-paste>
-            <ca-upload-word *ngSwitchCase="'word'" (uploadComplete)="goToCompare()"></ca-upload-word>
-
-        </ng-container>
-    </div>
+    ], template: `<h1 id="wb-cont">{{ 'title.page' | translate}}</h1>\r
+<p>{{'page.upload.description' | translate }}</p>\r
+<div class="flex flex-wrap">\r
+    <!--SELECT UPLOAD TYPE-->\r
+    <div class="flex mr-4 mb-4">\r
+        <fieldset class="border-none p-0 m-0">\r
+            <legend class="font-bold mb-3">Choose upload type:</legend>\r
+\r
+            <div class="flex flex-column gap-3">\r
+                <label for="url" class="flex align-items-center">\r
+                    <p-radioButton id="url" name="uploadType" value="url" (onClick)="onUploadTypeChange('url')"\r
+                                   [(ngModel)]="selectedUploadType"></p-radioButton>\r
+                    <span class="ml-2">URL</span>\r
+                </label>\r
+\r
+                <label for="paste" class="flex align-items-center">\r
+                    <p-radioButton id="paste" name="uploadType" value="paste" (onClick)="onUploadTypeChange('paste')"\r
+                                   [(ngModel)]="selectedUploadType"></p-radioButton>\r
+                    <span class="ml-2">Copy & Paste</span>\r
+                </label>\r
+\r
+                <label for="word" class="flex align-items-center">\r
+                    <p-radioButton id="word" name="uploadType" value="word" (onClick)="onUploadTypeChange('word')"\r
+                                   [(ngModel)]="selectedUploadType"></p-radioButton>\r
+                    <span class="ml-2">Word doc (converts to HTML)</span>\r
+                </label>\r
+            </div>\r
+        </fieldset>\r
+    </div>\r
+    <!--UPLOAD FILE-->\r
+    <div class="flex">\r
+        <ng-container [ngSwitch]="selectedUploadType">\r
+\r
+            <ca-upload-url *ngSwitchCase="'url'" (uploadComplete)="goToCompare()"></ca-upload-url>\r
+            <ca-upload-paste *ngSwitchCase="'paste'" (uploadComplete)="goToCompare()"></ca-upload-paste>\r
+            <ca-upload-word *ngSwitchCase="'word'" (uploadComplete)="goToCompare()"></ca-upload-word>\r
+\r
+        </ng-container>\r
+    </div>\r
 </div>` }]
   }], null, null);
 })();
@@ -7984,27 +7984,24 @@ var ShareComponent = class _ShareComponent {
 
 // src/app/services/image-processor.ts
 var ImageProcessorService = class _ImageProcessorService {
-  http;
-  apiKeyService;
   MAX_IMAGE_SIZE = 1024;
   // Max width/height for resizing
   OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
   // --- UPDATED: New Translation Model and specific prompt ---
   TRANSLATION_MODEL_FOR_CRA = "mistralai/mistral-small-3.2-24b-instruct:free";
   // Using Mistral Small for reliable free translation
-  constructor(http, apiKeyService) {
-    this.http = http;
-    this.apiKeyService = apiKeyService;
-  }
+  http = inject(HttpClient);
+  apiKeyService = inject(ApiKeyService);
   /**
-   * Main method to analyze an image file using OpenRouter's vision API.
+   * Main method to analyze an image file using OpenRouter's vision API with fallback support.
    * @param file The image file to analyze.
    * @param selectedVisionModel The OpenRouter vision model ID (e.g., 'qwen/qwen2.5-vl-32b-instruct:free').
    * @param identifier A unique identifier for logging (e.g., file name).
    * @param isPdfPage Whether this image is from a PDF page (for different prompting).
+   * @param fallbackModels Optional array of fallback model IDs to try if primary fails.
    * @returns An Observable emitting the analysis result.
    */
-  analyzeImage(file, selectedVisionModel, identifier, isPdfPage = false) {
+  analyzeImage(file, selectedVisionModel, identifier, isPdfPage = false, fallbackModels = []) {
     console.log("ImageProcessorService.analyzeImage called with:", file.name, selectedVisionModel);
     const apiKey = this.apiKeyService.getCurrentKey();
     if (!apiKey) {
@@ -8014,8 +8011,8 @@ var ImageProcessorService = class _ImageProcessorService {
     console.log("API key found, loading image...");
     return this.loadImage(file).pipe(map((img) => {
       const base64Data = this.resizeAndConvertToBase64(img, this.MAX_IMAGE_SIZE);
-      return { img, base64Data };
-    }), switchMap(({ img, base64Data }) => this.getVisionAnalysis(base64Data, selectedVisionModel, apiKey, identifier, isPdfPage).pipe(map((visionResult) => {
+      return { base64Data };
+    }), switchMap(({ base64Data }) => this.getVisionAnalysisWithFallback(base64Data, selectedVisionModel, apiKey, identifier, isPdfPage, fallbackModels).pipe(map((visionResult) => {
       if (visionResult.error) {
         throw new Error(visionResult.error);
       }
@@ -8067,12 +8064,12 @@ var ImageProcessorService = class _ImageProcessorService {
           observer.next(img);
           observer.complete();
         };
-        img.onerror = (err) => {
+        img.onerror = () => {
           observer.error(new Error(`Failed to load image '${file.name}'.`));
         };
         img.src = e.target?.result;
       };
-      reader.onerror = (err) => {
+      reader.onerror = () => {
         observer.error(new Error(`Failed to read file '${file.name}'.`));
       };
       reader.readAsDataURL(file);
@@ -8099,6 +8096,45 @@ var ImageProcessorService = class _ImageProcessorService {
     }
     ctx.drawImage(img, 0, 0, width, height);
     return canvas.toDataURL("image/png");
+  }
+  getVisionAnalysisWithFallback(base64Data, selectedVisionModel, apiKey, identifier, isPdfPage = false, fallbackModels = []) {
+    const modelsToTry = [selectedVisionModel, ...fallbackModels.filter((m) => m !== selectedVisionModel)];
+    return this.tryVisionModelsInSequence(base64Data, modelsToTry, apiKey, identifier, isPdfPage, 0, selectedVisionModel);
+  }
+  tryVisionModelsInSequence(base64Data, models, apiKey, identifier, isPdfPage, attemptIndex, primaryModel) {
+    if (attemptIndex >= models.length) {
+      return from([{
+        english: null,
+        french: null,
+        error: "All vision models failed due to rate limits or errors"
+      }]);
+    }
+    const currentModel = models[attemptIndex];
+    console.log(`Attempting vision analysis with model: ${currentModel} (attempt ${attemptIndex + 1}/${models.length})`);
+    return this.getVisionAnalysis(base64Data, currentModel, apiKey, identifier, isPdfPage).pipe(catchError((error) => {
+      console.warn(`Vision model ${currentModel} failed:`, error);
+      if (this.isRateLimitError(error)) {
+        console.log(`Rate limit detected for ${currentModel}, trying next model...`);
+        return this.tryVisionModelsInSequence(base64Data, models, apiKey, identifier, isPdfPage, attemptIndex + 1, primaryModel);
+      }
+      if (attemptIndex < models.length - 1) {
+        console.log(`Error with ${currentModel}, trying next model...`);
+        return this.tryVisionModelsInSequence(base64Data, models, apiKey, identifier, isPdfPage, attemptIndex + 1, primaryModel);
+      }
+      return from([{
+        english: null,
+        french: null,
+        error: error.error || error.message || "All vision models failed"
+      }]);
+    }));
+  }
+  isRateLimitError(error) {
+    if (!error)
+      return false;
+    const errorAny = error;
+    const errorMessage = errorAny.error || errorAny.message || "";
+    const errorLower = typeof errorMessage === "string" ? errorMessage.toLowerCase() : "";
+    return errorLower.includes("rate limit") || errorLower.includes("quota exceeded") || errorLower.includes("too many requests") || errorLower.includes("429") || errorLower.includes("key limit exceeded") || errorAny.status === 403 || errorAny.status === 429;
   }
   getVisionAnalysis(base64Data, selectedVisionModel, apiKey, identifier, isPdfPage = false) {
     console.log("getVisionAnalysis called for:", identifier, "model:", selectedVisionModel, "isPdfPage:", isPdfPage);
@@ -8254,7 +8290,7 @@ var ImageProcessorService = class _ImageProcessorService {
     return formatted.trim();
   }
   static \u0275fac = function ImageProcessorService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ImageProcessorService)(\u0275\u0275inject(HttpClient), \u0275\u0275inject(ApiKeyService));
+    return new (__ngFactoryType__ || _ImageProcessorService)();
   };
   static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ImageProcessorService, factory: _ImageProcessorService.\u0275fac, providedIn: "root" });
 };
@@ -8264,7 +8300,7 @@ var ImageProcessorService = class _ImageProcessorService {
     args: [{
       providedIn: "root"
     }]
-  }], () => [{ type: HttpClient }, { type: ApiKeyService }], null);
+  }], null, null);
 })();
 
 // src/app/services/image-assistant-state.service.ts
@@ -8277,8 +8313,6 @@ var ImageAssistantStateService = class _ImageAssistantStateService {
     showProgressArea: false
   });
   state$ = this.stateSubject.asObservable();
-  constructor() {
-  }
   getCurrentState() {
     return this.stateSubject.value;
   }
@@ -8323,15 +8357,13 @@ var ImageAssistantStateService = class _ImageAssistantStateService {
     args: [{
       providedIn: "root"
     }]
-  }], () => [], null);
+  }], null, null);
 })();
 
 // src/app/services/pdf-converter.service.ts
 var PdfConverterService = class _PdfConverterService {
-  pdfjsLib;
+  pdfjsLib = null;
   isInitialized = false;
-  constructor() {
-  }
   /**
    * Lazy load and initialize pdfjs-dist
    */
@@ -8340,9 +8372,9 @@ var PdfConverterService = class _PdfConverterService {
       if (this.isInitialized) {
         return;
       }
-      const pdfjs = yield import("./chunk-5ZSE7KCM.js");
+      const pdfjs = yield import("./chunk-XCH5NBXG.js");
       this.pdfjsLib = pdfjs;
-      const { GlobalWorkerOptions } = yield import("./chunk-5ZSE7KCM.js");
+      const { GlobalWorkerOptions } = yield import("./chunk-XCH5NBXG.js");
       const baseElement = document.querySelector("base");
       const baseHref = baseElement?.getAttribute("href") || "/";
       GlobalWorkerOptions.workerSrc = `${baseHref}pdfjs/pdf.worker.min.mjs`.replace(/\/+/g, "/");
@@ -8357,6 +8389,9 @@ var PdfConverterService = class _PdfConverterService {
   convertPdfToImages(file) {
     return __async(this, null, function* () {
       yield this.initializePdfJs();
+      if (!this.pdfjsLib) {
+        throw new Error("PDF.js library failed to initialize");
+      }
       const arrayBuffer = yield file.arrayBuffer();
       const pdf = yield this.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
       const images = [];
@@ -8372,7 +8407,8 @@ var PdfConverterService = class _PdfConverterService {
         canvas.width = viewport.width;
         const renderContext = {
           canvasContext: context,
-          viewport
+          viewport,
+          canvas
         };
         yield page.render(renderContext).promise;
         const imageDataUrl = canvas.toDataURL("image/png");
@@ -8409,147 +8445,141 @@ var PdfConverterService = class _PdfConverterService {
     args: [{
       providedIn: "root"
     }]
-  }], () => [], null);
+  }], null, null);
 })();
 
 // src/app/views/image-assistant/components/file-upload/file-upload.component.ts
+var _c0 = ["fileUpload"];
+function FileUploadComponent_ng_template_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3);
+    \u0275\u0275element(1, "i", 4);
+    \u0275\u0275elementStart(2, "p", 5)(3, "strong");
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "p", 6);
+    \u0275\u0275text(7);
+    \u0275\u0275pipe(8, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "p", 7);
+    \u0275\u0275text(10);
+    \u0275\u0275pipe(11, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 3, "image.upload.title"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 5, "image.upload.dragDropOrClick"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 7, "image.upload.accept"), " ");
+  }
+}
 var FileUploadComponent = class _FileUploadComponent {
   filesSelected = new EventEmitter();
-  isDragOver = false;
-  onFileSelected(event) {
-    const input2 = event.target;
-    if (input2.files && input2.files.length > 0) {
-      this.filesSelected.emit(input2.files);
+  fileUpload;
+  onSelect(event) {
+    const files = event.files;
+    if (files && files.length > 0) {
+      const filesArray = Array.from(files);
+      const fileList = this.createFileList(filesArray);
+      this.filesSelected.emit(fileList);
+      if (this.fileUpload) {
+        this.fileUpload.clear();
+      }
     }
   }
-  onDragOver(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isDragOver = true;
-  }
-  onDragLeave(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isDragOver = false;
-  }
-  onDrop(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.isDragOver = false;
-    if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
-      this.filesSelected.emit(event.dataTransfer.files);
+  createFileList(files) {
+    const dataTransfer = new DataTransfer();
+    for (const file of files) {
+      dataTransfer.items.add(file);
     }
-  }
-  triggerFileInput() {
-    const fileInput = document.getElementById("file-input");
-    if (fileInput) {
-      fileInput.value = "";
-      fileInput.click();
-    }
+    return dataTransfer.files;
   }
   static \u0275fac = function FileUploadComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _FileUploadComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FileUploadComponent, selectors: [["ca-file-upload"]], outputs: { filesSelected: "filesSelected" }, decls: 16, vars: 14, consts: [["tabindex", "0", "role", "button", 1, "file-upload-container", 3, "click", "keydown.enter", "keydown.space", "dragover", "dragleave", "drop"], [1, "upload-icon"], [1, "pi", "pi-upload"], [1, "mb-2"], [1, "text-color-secondary", "text-sm"], ["type", "file", "id", "file-input", "name", "files", "multiple", "", "accept", ".png,.jpg,.jpeg,.pdf", 3, "change"]], template: function FileUploadComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FileUploadComponent, selectors: [["ca-file-upload"]], viewQuery: function FileUploadComponent_Query(rf, ctx) {
     if (rf & 1) {
+      \u0275\u0275viewQuery(_c0, 5);
+    }
+    if (rf & 2) {
+      let _t;
+      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.fileUpload = _t.first);
+    }
+  }, outputs: { filesSelected: "filesSelected" }, decls: 8, vars: 11, consts: [["fileUpload", ""], ["name", "files[]", "accept", "image/png,image/jpeg,image/jpg,application/pdf", 3, "onSelect", "multiple", "auto", "customUpload", "showUploadButton", "showCancelButton", "chooseLabel"], ["pTemplate", "content"], [1, "upload-content"], [1, "pi", "pi-cloud-upload", "upload-icon"], [1, "upload-title"], [1, "upload-description"], [1, "upload-formats"]], template: function FileUploadComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "fieldset")(1, "legend");
       \u0275\u0275text(2);
       \u0275\u0275pipe(3, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(4, "div", 0);
-      \u0275\u0275pipe(5, "translate");
-      \u0275\u0275listener("click", function FileUploadComponent_Template_div_click_4_listener() {
-        return ctx.triggerFileInput();
-      })("keydown.enter", function FileUploadComponent_Template_div_keydown_enter_4_listener() {
-        return ctx.triggerFileInput();
-      })("keydown.space", function FileUploadComponent_Template_div_keydown_space_4_listener() {
-        return ctx.triggerFileInput();
-      })("dragover", function FileUploadComponent_Template_div_dragover_4_listener($event) {
-        return ctx.onDragOver($event);
-      })("dragleave", function FileUploadComponent_Template_div_dragleave_4_listener($event) {
-        return ctx.onDragLeave($event);
-      })("drop", function FileUploadComponent_Template_div_drop_4_listener($event) {
-        return ctx.onDrop($event);
+      \u0275\u0275elementStart(4, "p-fileupload", 1, 0);
+      \u0275\u0275pipe(6, "translate");
+      \u0275\u0275listener("onSelect", function FileUploadComponent_Template_p_fileupload_onSelect_4_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onSelect($event));
       });
-      \u0275\u0275elementStart(6, "div", 1);
-      \u0275\u0275element(7, "i", 2);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(8, "p", 3)(9, "strong");
-      \u0275\u0275text(10);
-      \u0275\u0275pipe(11, "translate");
+      \u0275\u0275template(7, FileUploadComponent_ng_template_7_Template, 12, 9, "ng-template", 2);
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(12, "p", 4);
-      \u0275\u0275text(13);
-      \u0275\u0275pipe(14, "translate");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(15, "input", 5);
-      \u0275\u0275listener("change", function FileUploadComponent_Template_input_change_15_listener($event) {
-        return ctx.onFileSelected($event);
-      });
-      \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
       \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 6, "image.upload.legend"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 7, "image.upload.legend"));
       \u0275\u0275advance(2);
-      \u0275\u0275classProp("dragover", ctx.isDragOver);
-      \u0275\u0275attribute("aria-label", \u0275\u0275pipeBind1(5, 8, "image.upload.title"));
-      \u0275\u0275advance(6);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(11, 10, "image.upload.title"));
-      \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(14, 12, "image.upload.accept"), " ");
+      \u0275\u0275property("multiple", true)("auto", false)("customUpload", true)("showUploadButton", false)("showCancelButton", false)("chooseLabel", \u0275\u0275pipeBind1(6, 9, "image.upload.chooseLabel"));
     }
-  }, dependencies: [CommonModule, TranslateModule, TranslatePipe], styles: ["\n\n.file-upload-container[_ngcontent-%COMP%] {\n  border: 2px dashed #ccc;\n  border-radius: 8px;\n  padding: 2rem;\n  text-align: center;\n  cursor: pointer;\n  transition: all 0.3s ease;\n  margin-top: 1rem;\n}\n.file-upload-container[_ngcontent-%COMP%]:hover {\n  border-color: #a7a72e;\n  background-color: #f5f5f5;\n}\n.file-upload-container.dragover[_ngcontent-%COMP%] {\n  border-color: #a7a72e;\n  background-color: #f0f0f0;\n}\ninput[type=file][_ngcontent-%COMP%] {\n  display: none;\n}\n.upload-icon[_ngcontent-%COMP%] {\n  font-size: 3rem;\n  color: #a7a72e;\n  margin-bottom: 1rem;\n}\nfieldset[_ngcontent-%COMP%] {\n  border: none;\n  padding: 0;\n  margin: 0;\n}\nlegend[_ngcontent-%COMP%] {\n  font-weight: bold;\n  margin-bottom: 0.5rem;\n}\n/*# sourceMappingURL=file-upload.component.css.map */"] });
+  }, dependencies: [CommonModule, TranslateModule, TranslatePipe, FileUploadModule, FileUpload, PrimeTemplate, CardModule], styles: ["\n\nfieldset[_ngcontent-%COMP%] {\n  border: none;\n  padding: 0;\n  margin: 0;\n}\nlegend[_ngcontent-%COMP%] {\n  font-weight: 600;\n  margin-bottom: 0.5rem;\n  color: var(--text-color);\n}\n[_nghost-%COMP%]     .p-fileupload {\n  margin-top: 1rem;\n}\n[_nghost-%COMP%]     .p-fileupload-content {\n  border: 2px dashed var(--surface-border);\n  border-radius: var(--border-radius);\n  padding: 3rem 2rem;\n  text-align: center;\n  background: var(--surface-card);\n  transition: all 0.3s ease;\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n[_nghost-%COMP%]     .p-fileupload-content:hover {\n  border-color: var(--primary-color);\n  background-color: var(--surface-50);\n}\n[_nghost-%COMP%]     .p-fileupload-buttonbar {\n  display: none;\n}\n.upload-content[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.upload-icon[_ngcontent-%COMP%] {\n  font-size: 3rem;\n  color: var(--primary-color);\n  margin-bottom: 1rem;\n  display: block;\n}\n.upload-title[_ngcontent-%COMP%] {\n  margin-bottom: 0.5rem;\n  font-size: 1.1rem;\n}\n.upload-description[_ngcontent-%COMP%] {\n  color: var(--text-color-secondary);\n  margin-bottom: 0.5rem;\n}\n.upload-formats[_ngcontent-%COMP%] {\n  font-size: 0.875rem;\n  color: var(--text-color-secondary);\n}\n/*# sourceMappingURL=file-upload.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FileUploadComponent, [{
     type: Component,
-    args: [{ selector: "ca-file-upload", standalone: true, imports: [CommonModule, TranslateModule], template: `<fieldset>
-  <legend>{{ 'image.upload.legend' | translate }}</legend>
-  <div 
-    class="file-upload-container" 
-    [class.dragover]="isDragOver"
-    tabindex="0"
-    role="button"
-    [attr.aria-label]="'image.upload.title' | translate"
-    (click)="triggerFileInput()"
-    (keydown.enter)="triggerFileInput()"
-    (keydown.space)="triggerFileInput()"
-    (dragover)="onDragOver($event)"
-    (dragleave)="onDragLeave($event)"
-    (drop)="onDrop($event)">
-    
-    <div class="upload-icon">
-      <i class="pi pi-upload"></i>
-    </div>
-    
-    <p class="mb-2">
-      <strong>{{ 'image.upload.title' | translate }}</strong>
-    </p>
-    
-    <p class="text-color-secondary text-sm">
-      {{ 'image.upload.accept' | translate }}
-    </p>
-    
-    <input 
-      type="file" 
-      id="file-input"
-      name="files" 
-      multiple 
-      accept=".png,.jpg,.jpeg,.pdf"
-      (change)="onFileSelected($event)">
-  </div>
-</fieldset>`, styles: ["/* angular:styles/component:css;49a6573b5384514cd7691e34ae77690c7832d93287784bea6bcab8477465a06c;/home/naomi/content-assistant/src/app/views/image-assistant/components/file-upload/file-upload.component.ts */\n.file-upload-container {\n  border: 2px dashed #ccc;\n  border-radius: 8px;\n  padding: 2rem;\n  text-align: center;\n  cursor: pointer;\n  transition: all 0.3s ease;\n  margin-top: 1rem;\n}\n.file-upload-container:hover {\n  border-color: #a7a72e;\n  background-color: #f5f5f5;\n}\n.file-upload-container.dragover {\n  border-color: #a7a72e;\n  background-color: #f0f0f0;\n}\ninput[type=file] {\n  display: none;\n}\n.upload-icon {\n  font-size: 3rem;\n  color: #a7a72e;\n  margin-bottom: 1rem;\n}\nfieldset {\n  border: none;\n  padding: 0;\n  margin: 0;\n}\nlegend {\n  font-weight: bold;\n  margin-bottom: 0.5rem;\n}\n/*# sourceMappingURL=file-upload.component.css.map */\n"] }]
+    args: [{ selector: "ca-file-upload", standalone: true, imports: [CommonModule, TranslateModule, FileUploadModule, CardModule], template: `<fieldset>\r
+  <legend>{{ 'image.upload.legend' | translate }}</legend>\r
+\r
+  <p-fileupload\r
+    #fileUpload\r
+    name="files[]"\r
+    [multiple]="true"\r
+    [auto]="false"\r
+    [customUpload]="true"\r
+    [showUploadButton]="false"\r
+    [showCancelButton]="false"\r
+    accept="image/png,image/jpeg,image/jpg,application/pdf"\r
+    (onSelect)="onSelect($event)"\r
+    [chooseLabel]="'image.upload.chooseLabel' | translate">\r
+\r
+    <ng-template pTemplate="content">\r
+      <div class="upload-content">\r
+        <i class="pi pi-cloud-upload upload-icon"></i>\r
+        <p class="upload-title">\r
+          <strong>{{ 'image.upload.title' | translate }}</strong>\r
+        </p>\r
+        <p class="upload-description">\r
+          {{ 'image.upload.dragDropOrClick' | translate }}\r
+        </p>\r
+        <p class="upload-formats">\r
+          {{ 'image.upload.accept' | translate }}\r
+        </p>\r
+      </div>\r
+    </ng-template>\r
+  </p-fileupload>\r
+</fieldset>\r
+`, styles: ["/* src/app/views/image-assistant/components/file-upload/file-upload.component.css */\nfieldset {\n  border: none;\n  padding: 0;\n  margin: 0;\n}\nlegend {\n  font-weight: 600;\n  margin-bottom: 0.5rem;\n  color: var(--text-color);\n}\n:host ::ng-deep .p-fileupload {\n  margin-top: 1rem;\n}\n:host ::ng-deep .p-fileupload-content {\n  border: 2px dashed var(--surface-border);\n  border-radius: var(--border-radius);\n  padding: 3rem 2rem;\n  text-align: center;\n  background: var(--surface-card);\n  transition: all 0.3s ease;\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n:host ::ng-deep .p-fileupload-content:hover {\n  border-color: var(--primary-color);\n  background-color: var(--surface-50);\n}\n:host ::ng-deep .p-fileupload-buttonbar {\n  display: none;\n}\n.upload-content {\n  width: 100%;\n}\n.upload-icon {\n  font-size: 3rem;\n  color: var(--primary-color);\n  margin-bottom: 1rem;\n  display: block;\n}\n.upload-title {\n  margin-bottom: 0.5rem;\n  font-size: 1.1rem;\n}\n.upload-description {\n  color: var(--text-color-secondary);\n  margin-bottom: 0.5rem;\n}\n.upload-formats {\n  font-size: 0.875rem;\n  color: var(--text-color-secondary);\n}\n/*# sourceMappingURL=file-upload.component.css.map */\n"] }]
   }], null, { filesSelected: [{
     type: Output
+  }], fileUpload: [{
+    type: ViewChild,
+    args: ["fileUpload"]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FileUploadComponent, { className: "FileUploadComponent", filePath: "src/app/views/image-assistant/components/file-upload/file-upload.component.ts", lineNumber: 53 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FileUploadComponent, { className: "FileUploadComponent", filePath: "src/app/views/image-assistant/components/file-upload/file-upload.component.ts", lineNumber: 14 });
 })();
 
 // node_modules/primeng/fesm2022/primeng-dropdown.mjs
-var _c0 = (a0) => ({
+var _c02 = (a0) => ({
   height: a0
 });
 var _c1 = (a0, a1, a2) => ({
@@ -9063,7 +9093,7 @@ function Dropdown_ng_template_9_p_scroller_6_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275styleMap(\u0275\u0275pureFunction1(8, _c0, ctx_r2.scrollHeight));
+    \u0275\u0275styleMap(\u0275\u0275pureFunction1(8, _c02, ctx_r2.scrollHeight));
     \u0275\u0275property("items", ctx_r2.visibleOptions())("itemSize", ctx_r2.virtualScrollItemSize || ctx_r2._itemSize)("autoSize", true)("lazy", ctx_r2.lazy)("options", ctx_r2.virtualScrollOptions);
     \u0275\u0275advance(4);
     \u0275\u0275property("ngIf", ctx_r2.loaderTemplate);
@@ -9121,7 +9151,7 @@ function Dropdown_ng_template_9_ng_template_8_ng_template_2_ng_container_0_Templ
     const scrollerOptions_r20 = \u0275\u0275nextContext().options;
     const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(5, _c0, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(5, _c02, scrollerOptions_r20.itemSize + "px"));
     \u0275\u0275attribute("id", ctx_r2.id + "_" + ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r2.groupTemplate);
@@ -9203,7 +9233,7 @@ function Dropdown_ng_template_9_ng_template_8_li_3_Template(rf, ctx) {
   if (rf & 2) {
     const scrollerOptions_r20 = \u0275\u0275nextContext().options;
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c0, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c02, scrollerOptions_r20.itemSize + "px"));
     \u0275\u0275advance();
     \u0275\u0275conditional(!ctx_r2.emptyFilterTemplate && !ctx_r2.emptyTemplate ? 1 : 2);
   }
@@ -9240,7 +9270,7 @@ function Dropdown_ng_template_9_ng_template_8_li_4_Template(rf, ctx) {
   if (rf & 2) {
     const scrollerOptions_r20 = \u0275\u0275nextContext().options;
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c0, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c02, scrollerOptions_r20.itemSize + "px"));
     \u0275\u0275advance();
     \u0275\u0275conditional(!ctx_r2.emptyTemplate ? 1 : 2);
   }
@@ -9660,7 +9690,7 @@ var DropdownItem = class _DropdownItem extends BaseComponent {
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
-        \u0275\u0275property("id", ctx.id)("ngStyle", \u0275\u0275pureFunction1(14, _c0, ctx.itemSize + "px"))("ngClass", \u0275\u0275pureFunction3(16, _c1, ctx.selected, ctx.disabled, ctx.focused));
+        \u0275\u0275property("id", ctx.id)("ngStyle", \u0275\u0275pureFunction1(14, _c02, ctx.itemSize + "px"))("ngClass", \u0275\u0275pureFunction3(16, _c1, ctx.selected, ctx.disabled, ctx.focused));
         \u0275\u0275attribute("aria-label", ctx.label)("aria-setsize", ctx.ariaSetSize)("aria-posinset", ctx.ariaPosInset)("aria-selected", ctx.selected)("data-p-focused", ctx.focused)("data-p-highlight", ctx.selected)("data-p-disabled", ctx.disabled);
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.checkmark);
@@ -12084,63 +12114,63 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
       DropdownModule,
       CardModule,
       CheckboxModule
-    ], template: `<div class="model-selector-container">
-  <p-card *ngIf="showCard">
-    <ng-template pTemplate="header">
-      <div class="flex align-items-center p-3">
-        <i class="pi pi-cog mr-2"></i>
-        <h3 class="m-0">{{ cardTitle | translate }}</h3>
-      </div>
-    </ng-template>
-    
-    <ng-container *ngTemplateOutlet="selectorContent"></ng-container>
-  </p-card>
-  
-  <div *ngIf="!showCard">
-    <ng-container *ngTemplateOutlet="selectorContent"></ng-container>
-  </div>
-</div>
-
-<ng-template #selectorContent>
-  <div class="model-selector-content">
-    <div class="field">
-      <label for="model" class="block mb-2 font-semibold">
-        {{ label | translate }}
-      </label>
-      <p-dropdown 
-        [options]="localModels" 
-        [(ngModel)]="selectedModel"
-        (ngModelChange)="onModelChange($event)"
-        optionLabel="name" 
-        optionValue="value"
-        [disabled]="disabled"
-        styleClass="w-full"
-        [placeholder]="'common.modelSelector.placeholder' | translate">
-      </p-dropdown>
-      <small class="block mt-2 text-500" *ngIf="getModelDescription()">
-        {{ getModelDescription() }}
-      </small>
-    </div>
-
-    <!-- Translation option for metadata assistant -->
-    <div class="field mt-4" *ngIf="showTranslateOption">
-      <div class="flex align-items-center">
-        <p-checkbox 
-          [(ngModel)]="translateToFrench"
-          (ngModelChange)="onTranslateChange($event)"
-          [disabled]="disabled"
-          [binary]="true"
-          inputId="translateToFrench">
-        </p-checkbox>
-        <label for="translateToFrench" class="ml-2 cursor-pointer">
-          {{ 'metadata.modelSelector.translateToFrench' | translate }}
-        </label>
-      </div>
-      <small class="block mt-2 ml-4 text-500">
-        {{ 'metadata.modelSelector.translateDescription' | translate }}
-      </small>
-    </div>
-  </div>
+    ], template: `<div class="model-selector-container">\r
+  <p-card *ngIf="showCard">\r
+    <ng-template pTemplate="header">\r
+      <div class="flex align-items-center p-3">\r
+        <i class="pi pi-cog mr-2"></i>\r
+        <h3 class="m-0">{{ cardTitle | translate }}</h3>\r
+      </div>\r
+    </ng-template>\r
+    \r
+    <ng-container *ngTemplateOutlet="selectorContent"></ng-container>\r
+  </p-card>\r
+  \r
+  <div *ngIf="!showCard">\r
+    <ng-container *ngTemplateOutlet="selectorContent"></ng-container>\r
+  </div>\r
+</div>\r
+\r
+<ng-template #selectorContent>\r
+  <div class="model-selector-content">\r
+    <div class="field">\r
+      <label for="model" class="block mb-2 font-semibold">\r
+        {{ label | translate }}\r
+      </label>\r
+      <p-dropdown \r
+        [options]="localModels" \r
+        [(ngModel)]="selectedModel"\r
+        (ngModelChange)="onModelChange($event)"\r
+        optionLabel="name" \r
+        optionValue="value"\r
+        [disabled]="disabled"\r
+        styleClass="w-full"\r
+        [placeholder]="'common.modelSelector.placeholder' | translate">\r
+      </p-dropdown>\r
+      <small class="block mt-2 text-500" *ngIf="getModelDescription()">\r
+        {{ getModelDescription() }}\r
+      </small>\r
+    </div>\r
+\r
+    <!-- Translation option for metadata assistant -->\r
+    <div class="field mt-4" *ngIf="showTranslateOption">\r
+      <div class="flex align-items-center">\r
+        <p-checkbox \r
+          [(ngModel)]="translateToFrench"\r
+          (ngModelChange)="onTranslateChange($event)"\r
+          [disabled]="disabled"\r
+          [binary]="true"\r
+          inputId="translateToFrench">\r
+        </p-checkbox>\r
+        <label for="translateToFrench" class="ml-2 cursor-pointer">\r
+          {{ 'metadata.modelSelector.translateToFrench' | translate }}\r
+        </label>\r
+      </div>\r
+      <small class="block mt-2 ml-4 text-500">\r
+        {{ 'metadata.modelSelector.translateDescription' | translate }}\r
+      </small>\r
+    </div>\r
+  </div>\r
 </ng-template>`, styles: ["/* src/app/components/model-selector/model-selector.component.css */\n.model-selector-container {\n  width: 100%;\n}\n.model-selector-content {\n  padding: 0;\n}\n.field label {\n  color: var(--text-color);\n}\n:host ::ng-deep .p-dropdown {\n  width: 100%;\n  min-width: 300px;\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.text-500 {\n  color: var(--text-color-secondary);\n}\n/*# sourceMappingURL=model-selector.component.css.map */\n"] }]
   }], () => [{ type: TranslateService }], { selectedModel: [{
     type: Input
@@ -12220,7 +12250,7 @@ var ProgressIndicatorComponent = class _ProgressIndicatorComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProgressIndicatorComponent, [{
     type: Component,
-    args: [{ selector: "ca-progress-indicator", standalone: true, imports: [CommonModule, ProgressBarModule], template: '<div class="progress-container" *ngIf="showProgress">\n  <div class="progress-text">\n    <div class="spinner" *ngIf="showSpinner"></div>\n    <span>{{ progressText }}</span>\n  </div>\n  <p-progressBar [value]="progressValue" [showValue]="true"></p-progressBar>\n</div>', styles: ["/* angular:styles/component:css;3626b4fd80763a0a8c7fd3ac85e8e2b1a9ea83f9e1ae2febc71f6ef0fd0f4baa;/home/naomi/content-assistant/src/app/components/progress-indicator/progress-indicator.component.ts */\n.progress-container {\n  margin-top: 1.5rem;\n  padding: 1rem;\n  background-color: #f8f9fa;\n  border-radius: 8px;\n}\n.progress-text {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  margin-bottom: 1rem;\n}\n.spinner {\n  width: 24px;\n  height: 24px;\n  border: 4px solid #ccc;\n  border-top-color: #a7a72e;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */\n"] }]
+    args: [{ selector: "ca-progress-indicator", standalone: true, imports: [CommonModule, ProgressBarModule], template: '<div class="progress-container" *ngIf="showProgress">\r\n  <div class="progress-text">\r\n    <div class="spinner" *ngIf="showSpinner"></div>\r\n    <span>{{ progressText }}</span>\r\n  </div>\r\n  <p-progressBar [value]="progressValue" [showValue]="true"></p-progressBar>\r\n</div>', styles: ["/* angular:styles/component:css;3626b4fd80763a0a8c7fd3ac85e8e2b1a9ea83f9e1ae2febc71f6ef0fd0f4baa;C:/AmberDev/main-repo/content-assistant/src/app/components/progress-indicator/progress-indicator.component.ts */\n.progress-container {\n  margin-top: 1.5rem;\n  padding: 1rem;\n  background-color: #f8f9fa;\n  border-radius: 8px;\n}\n.progress-text {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  margin-bottom: 1rem;\n}\n.spinner {\n  width: 24px;\n  height: 24px;\n  border: 4px solid #ccc;\n  border-top-color: #a7a72e;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */\n"] }]
   }], null, { progressText: [{
     type: Input
   }], processedCount: [{
@@ -12238,7 +12268,7 @@ var ProgressIndicatorComponent = class _ProgressIndicatorComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-divider.mjs
-var _c02 = ["*"];
+var _c03 = ["*"];
 var theme3 = ({
   dt
 }) => `
@@ -12431,7 +12461,7 @@ var Divider = class _Divider extends BaseComponent {
       align: "align"
     },
     features: [\u0275\u0275ProvidersFeature([DividerStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c02,
+    ngContentSelectors: _c03,
     decls: 2,
     vars: 0,
     consts: [[1, "p-divider-content"]],
@@ -12529,7 +12559,7 @@ var DividerModule = class _DividerModule {
 })();
 
 // src/app/views/image-assistant/components/image-result/image-result.component.ts
-var _c03 = (a0) => ({ fileName: a0 });
+var _c04 = (a0) => ({ fileName: a0 });
 var _c17 = () => ({ width: "30px", height: "30px" });
 function ImageResultComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -12541,7 +12571,7 @@ function ImageResultComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(2, 1, "image.result.title", \u0275\u0275pureFunction1(4, _c03, ctx_r0.result.fileName)));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(2, 1, "image.result.title", \u0275\u0275pureFunction1(4, _c04, ctx_r0.result.fileName)));
   }
 }
 function ImageResultComponent_ng_template_3_p_message_0_Template(rf, ctx) {
@@ -12573,10 +12603,11 @@ function ImageResultComponent_ng_template_3_div_1_Template(rf, ctx) {
 function ImageResultComponent_ng_template_3_div_2_img_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "img", 16);
+    \u0275\u0275pipe(1, "translate");
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("src", ctx_r0.result.data.imageBase64, \u0275\u0275sanitizeUrl)("alt", "Preview for " + ctx_r0.result.fileName);
+    \u0275\u0275property("src", ctx_r0.result.data.imageBase64, \u0275\u0275sanitizeUrl)("alt", \u0275\u0275pipeBind2(1, 2, "image.result.previewFor", \u0275\u0275pureFunction1(5, _c04, ctx_r0.result.fileName)));
   }
 }
 function ImageResultComponent_ng_template_3_div_2_div_8_span_2_Template(rf, ctx) {
@@ -12710,7 +12741,7 @@ function ImageResultComponent_ng_template_3_div_2_p_button_20_Template(rf, ctx) 
 function ImageResultComponent_ng_template_3_div_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div");
-    \u0275\u0275template(1, ImageResultComponent_ng_template_3_div_2_img_1_Template, 1, 2, "img", 9);
+    \u0275\u0275template(1, ImageResultComponent_ng_template_3_div_2_img_1_Template, 2, 7, "img", 9);
     \u0275\u0275elementStart(2, "div", 10)(3, "div", 11)(4, "strong");
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
@@ -12828,7 +12859,7 @@ var ImageResultComponent = class _ImageResultComponent {
     Message,
     ProgressSpinnerModule,
     ProgressSpinner
-  ], styles: ["\n\n.result-container[_ngcontent-%COMP%] {\n  margin-bottom: 2rem;\n}\n.result-image[_ngcontent-%COMP%] {\n  max-height: 200px;\n  width: auto;\n  border: 1px solid #eee;\n  margin-bottom: 1rem;\n  display: block;\n  border-radius: 4px;\n}\n.result-columns[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n@media (max-width: 768px) {\n  .result-columns[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n    gap: 1rem;\n  }\n}\n.result-column[_ngcontent-%COMP%] {\n  background-color: #f8f9fa;\n  padding: 1rem;\n  border-radius: 8px;\n}\n.collapsible-container[_ngcontent-%COMP%] {\n  margin: 0.5rem 0;\n}\n.processing-message[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n}\n.copy-button[_ngcontent-%COMP%] {\n  margin-top: 0.5rem;\n}\n/*# sourceMappingURL=image-result.component.css.map */"] });
+  ], styles: ["\n\n.result-container[_ngcontent-%COMP%] {\n  margin-bottom: 2rem;\n}\n.result-image[_ngcontent-%COMP%] {\n  max-height: 200px;\n  width: auto;\n  border: 1px solid var(--surface-border);\n  margin-bottom: 1rem;\n  display: block;\n  border-radius: var(--border-radius);\n}\n.result-columns[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n@media (max-width: 768px) {\n  .result-columns[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n    gap: 1rem;\n  }\n}\n.result-column[_ngcontent-%COMP%] {\n  background-color: var(--surface-50);\n  padding: 1rem;\n  border-radius: var(--border-radius);\n}\n.collapsible-container[_ngcontent-%COMP%] {\n  margin: 0.5rem 0;\n}\n.processing-message[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n}\n.copy-button[_ngcontent-%COMP%] {\n  margin-top: 0.5rem;\n}\n/*# sourceMappingURL=image-result.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ImageResultComponent, [{
@@ -12841,103 +12872,103 @@ var ImageResultComponent = class _ImageResultComponent {
       DividerModule,
       MessageModule,
       ProgressSpinnerModule
-    ], template: `<div class="result-container">
-  <p-card>
-    <ng-template pTemplate="header">
-      <h4>{{ 'image.result.title' | translate: { fileName: result.fileName } }}</h4>
-    </ng-template>
-    
-    <ng-template pTemplate="content">
-      <!-- Error state -->
-      <p-message 
-        *ngIf="result.status === 'error' && result.data.error" 
-        severity="error" 
-        [text]="('image.result.error' | translate) + ' ' + result.data.error">
-      </p-message>
-      
-      <!-- Processing state -->
-      <div *ngIf="result.status === 'processing'" class="processing-message">
-        <p-progressSpinner 
-          [style]="{width: '30px', height: '30px'}" 
-          strokeWidth="4">
-        </p-progressSpinner>
-        <span>{{ 'image.result.processing' | translate }}</span>
-      </div>
-      
-      <!-- Completed state -->
-      <div *ngIf="result.status === 'completed'">
-        <!-- Image preview -->
-        <img 
-          *ngIf="result.data.imageBase64" 
-          [src]="result.data.imageBase64"
-          [alt]="'Preview for ' + result.fileName" 
-          class="result-image">
-        
-        <div class="result-columns">
-          <!-- English Alt Text -->
-          <div class="result-column">
-            <strong>{{ 'image.result.english' | translate }}</strong>
-            <div class="collapsible-container">
-              <div *ngIf="!result.showFullText">
-                {{ getTruncatedText(result.data.english) }}
-                <span *ngIf="shouldShowToggle(result.data.english)">...</span>
-              </div>
-              <div *ngIf="result.showFullText" [innerHTML]="formatDescription(result.data.english)"></div>
-              
-              <p-button 
-                *ngIf="shouldShowToggle(result.data.english)"
-                [label]="(result.showFullText ? 'image.result.showLess' : 'image.result.showMore') | translate"
-                (click)="toggleFullText()"
-                styleClass="p-button-text p-button-sm">
-              </p-button>
-            </div>
-            
-            <p-button 
-              *ngIf="result.data.english"
-              [label]="'image.result.copy' | translate"
-              (click)="copyText(result.data.english, $event)"
-              icon="pi pi-copy"
-              styleClass="p-button-secondary p-button-sm copy-button">
-            </p-button>
-          </div>
-          
-          <!-- French Alt Text -->
-          <div class="result-column">
-            <strong>{{ 'image.result.french' | translate }}</strong>
-            <div class="collapsible-container">
-              <div *ngIf="!result.showFullText">
-                {{ getTruncatedText(result.data.french) }}
-                <span *ngIf="shouldShowToggle(result.data.french)">...</span>
-              </div>
-              <div *ngIf="result.showFullText" [innerHTML]="formatDescription(result.data.french)"></div>
-              
-              <p-button 
-                *ngIf="shouldShowToggle(result.data.french)"
-                [label]="(result.showFullText ? 'image.result.showLess' : 'image.result.showMore') | translate"
-                (click)="toggleFullText()"
-                styleClass="p-button-text p-button-sm">
-              </p-button>
-            </div>
-            
-            <p-button 
-              *ngIf="result.data.french"
-              [label]="'image.result.copy' | translate"
-              (click)="copyText(result.data.french, $event)"
-              icon="pi pi-copy"
-              styleClass="p-button-secondary p-button-sm copy-button">
-            </p-button>
-          </div>
-        </div>
-      </div>
-    </ng-template>
-  </p-card>
-</div>`, styles: ["/* angular:styles/component:css;1645e8db0489e01d241bf83ede0fef27d6588e9d7870f9c030b5919ea8047f7f;/home/naomi/content-assistant/src/app/views/image-assistant/components/image-result/image-result.component.ts */\n.result-container {\n  margin-bottom: 2rem;\n}\n.result-image {\n  max-height: 200px;\n  width: auto;\n  border: 1px solid #eee;\n  margin-bottom: 1rem;\n  display: block;\n  border-radius: 4px;\n}\n.result-columns {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n@media (max-width: 768px) {\n  .result-columns {\n    grid-template-columns: 1fr;\n    gap: 1rem;\n  }\n}\n.result-column {\n  background-color: #f8f9fa;\n  padding: 1rem;\n  border-radius: 8px;\n}\n.collapsible-container {\n  margin: 0.5rem 0;\n}\n.processing-message {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n}\n.copy-button {\n  margin-top: 0.5rem;\n}\n/*# sourceMappingURL=image-result.component.css.map */\n"] }]
+    ], template: `<div class="result-container">\r
+  <p-card>\r
+    <ng-template pTemplate="header">\r
+      <h4>{{ 'image.result.title' | translate: { fileName: result.fileName } }}</h4>\r
+    </ng-template>\r
+    \r
+    <ng-template pTemplate="content">\r
+      <!-- Error state -->\r
+      <p-message \r
+        *ngIf="result.status === 'error' && result.data.error" \r
+        severity="error" \r
+        [text]="('image.result.error' | translate) + ' ' + result.data.error">\r
+      </p-message>\r
+      \r
+      <!-- Processing state -->\r
+      <div *ngIf="result.status === 'processing'" class="processing-message">\r
+        <p-progressSpinner \r
+          [style]="{width: '30px', height: '30px'}" \r
+          strokeWidth="4">\r
+        </p-progressSpinner>\r
+        <span>{{ 'image.result.processing' | translate }}</span>\r
+      </div>\r
+      \r
+      <!-- Completed state -->\r
+      <div *ngIf="result.status === 'completed'">\r
+        <!-- Image preview -->\r
+        <img\r
+          *ngIf="result.data.imageBase64"\r
+          [src]="result.data.imageBase64"\r
+          [alt]="'image.result.previewFor' | translate: { fileName: result.fileName }"\r
+          class="result-image">\r
+        \r
+        <div class="result-columns">\r
+          <!-- English Alt Text -->\r
+          <div class="result-column">\r
+            <strong>{{ 'image.result.english' | translate }}</strong>\r
+            <div class="collapsible-container">\r
+              <div *ngIf="!result.showFullText">\r
+                {{ getTruncatedText(result.data.english) }}\r
+                <span *ngIf="shouldShowToggle(result.data.english)">...</span>\r
+              </div>\r
+              <div *ngIf="result.showFullText" [innerHTML]="formatDescription(result.data.english)"></div>\r
+              \r
+              <p-button \r
+                *ngIf="shouldShowToggle(result.data.english)"\r
+                [label]="(result.showFullText ? 'image.result.showLess' : 'image.result.showMore') | translate"\r
+                (click)="toggleFullText()"\r
+                styleClass="p-button-text p-button-sm">\r
+              </p-button>\r
+            </div>\r
+            \r
+            <p-button \r
+              *ngIf="result.data.english"\r
+              [label]="'image.result.copy' | translate"\r
+              (click)="copyText(result.data.english, $event)"\r
+              icon="pi pi-copy"\r
+              styleClass="p-button-secondary p-button-sm copy-button">\r
+            </p-button>\r
+          </div>\r
+          \r
+          <!-- French Alt Text -->\r
+          <div class="result-column">\r
+            <strong>{{ 'image.result.french' | translate }}</strong>\r
+            <div class="collapsible-container">\r
+              <div *ngIf="!result.showFullText">\r
+                {{ getTruncatedText(result.data.french) }}\r
+                <span *ngIf="shouldShowToggle(result.data.french)">...</span>\r
+              </div>\r
+              <div *ngIf="result.showFullText" [innerHTML]="formatDescription(result.data.french)"></div>\r
+              \r
+              <p-button \r
+                *ngIf="shouldShowToggle(result.data.french)"\r
+                [label]="(result.showFullText ? 'image.result.showLess' : 'image.result.showMore') | translate"\r
+                (click)="toggleFullText()"\r
+                styleClass="p-button-text p-button-sm">\r
+              </p-button>\r
+            </div>\r
+            \r
+            <p-button \r
+              *ngIf="result.data.french"\r
+              [label]="'image.result.copy' | translate"\r
+              (click)="copyText(result.data.french, $event)"\r
+              icon="pi pi-copy"\r
+              styleClass="p-button-secondary p-button-sm copy-button">\r
+            </p-button>\r
+          </div>\r
+        </div>\r
+      </div>\r
+    </ng-template>\r
+  </p-card>\r
+</div>`, styles: ["/* src/app/views/image-assistant/components/image-result/image-result.component.css */\n.result-container {\n  margin-bottom: 2rem;\n}\n.result-image {\n  max-height: 200px;\n  width: auto;\n  border: 1px solid var(--surface-border);\n  margin-bottom: 1rem;\n  display: block;\n  border-radius: var(--border-radius);\n}\n.result-columns {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n@media (max-width: 768px) {\n  .result-columns {\n    grid-template-columns: 1fr;\n    gap: 1rem;\n  }\n}\n.result-column {\n  background-color: var(--surface-50);\n  padding: 1rem;\n  border-radius: var(--border-radius);\n}\n.collapsible-container {\n  margin: 0.5rem 0;\n}\n.processing-message {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n}\n.copy-button {\n  margin-top: 0.5rem;\n}\n/*# sourceMappingURL=image-result.component.css.map */\n"] }]
   }], null, { result: [{
     type: Input
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageResultComponent, { className: "ImageResultComponent", filePath: "src/app/views/image-assistant/components/image-result/image-result.component.ts", lineNumber: 73 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageResultComponent, { className: "ImageResultComponent", filePath: "src/app/views/image-assistant/components/image-result/image-result.component.ts", lineNumber: 27 });
 })();
 
 // src/app/views/image-assistant/components/csv-download/csv-download.component.ts
@@ -12980,7 +13011,7 @@ function CsvDownloadComponent_div_0_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.hasCompletedResults());
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.hasCompletedResults());
+    \u0275\u0275property("ngIf", ctx_r1.shouldShowNoDataMessage());
   }
 }
 var CsvDownloadComponent = class _CsvDownloadComponent {
@@ -12991,6 +13022,13 @@ var CsvDownloadComponent = class _CsvDownloadComponent {
   }
   hasCompletedResults() {
     return Object.values(this.results).some((result) => result.status === "completed");
+  }
+  isProcessingFinished() {
+    const allResults = Object.values(this.results);
+    return allResults.length > 0 && !allResults.some((result) => result.status === "pending" || result.status === "processing");
+  }
+  shouldShowNoDataMessage() {
+    return this.isProcessingFinished() && !this.hasCompletedResults();
   }
   downloadCsv() {
     let csvContent = this.translate.instant("image.csv.header") + "\n";
@@ -13029,19 +13067,19 @@ var CsvDownloadComponent = class _CsvDownloadComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CsvDownloadComponent, [{
     type: Component,
-    args: [{ selector: "ca-csv-download", standalone: true, imports: [CommonModule, TranslateModule, ButtonModule], template: `<div class="csv-download-container" *ngIf="hasResults()">
-  <p-button 
-    *ngIf="hasCompletedResults()"
-    (onClick)="downloadCsv()"
-    [label]="'image.csv.download' | translate"
-    icon="pi pi-download"
-    styleClass="my-2">
-  </p-button>
-  
-  <p *ngIf="!hasCompletedResults()">
-    {{ 'image.csv.noData' | translate }}
-  </p>
-</div>`, styles: ["/* angular:styles/component:css;1c997a74d74a98c53de94cd1b23dcec12d9454b472a147986b6d5799e58fa7ae;/home/naomi/content-assistant/src/app/views/image-assistant/components/csv-download/csv-download.component.ts */\n.csv-download-container {\n  margin-top: 2rem;\n  padding: 1rem;\n  background-color: var(--surface-100);\n  border-radius: 8px;\n}\n/*# sourceMappingURL=csv-download.component.css.map */\n"] }]
+    args: [{ selector: "ca-csv-download", standalone: true, imports: [CommonModule, TranslateModule, ButtonModule], template: `<div class="csv-download-container" *ngIf="hasResults()">\r
+  <p-button \r
+    *ngIf="hasCompletedResults()"\r
+    (onClick)="downloadCsv()"\r
+    [label]="'image.csv.download' | translate"\r
+    icon="pi pi-download"\r
+    styleClass="my-2">\r
+  </p-button>\r
+  \r
+  <p *ngIf="shouldShowNoDataMessage()">\r
+    {{ 'image.csv.noData' | translate }}\r
+  </p>\r
+</div>`, styles: ["/* angular:styles/component:css;1c997a74d74a98c53de94cd1b23dcec12d9454b472a147986b6d5799e58fa7ae;C:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/components/csv-download/csv-download.component.ts */\n.csv-download-container {\n  margin-top: 2rem;\n  padding: 1rem;\n  background-color: var(--surface-100);\n  border-radius: 8px;\n}\n/*# sourceMappingURL=csv-download.component.css.map */\n"] }]
   }], null, { results: [{
     type: Input
   }] });
@@ -13139,14 +13177,24 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
   // Model options for the shared selector
   visionModels = [
     {
-      name: "image.model.qwen",
+      name: "image.model.qwen32",
       value: "qwen/qwen2.5-vl-32b-instruct:free",
-      description: "image.model.qwenDescription"
+      description: "image.model.qwen32Description"
+    },
+    {
+      name: "image.model.qwen72",
+      value: "qwen/qwen2.5-vl-72b-instruct:free",
+      description: "image.model.qwen72Description"
     },
     {
       name: "image.model.gemma",
       value: "google/gemma-3-27b-it:free",
       description: "image.model.gemmaDescription"
+    },
+    {
+      name: "image.model.llama",
+      value: "meta-llama/llama-3.2-11b-vision-instruct",
+      description: "image.model.llamaDescription"
     }
   ];
   subscriptions = [];
@@ -13199,7 +13247,12 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
   }
   onModelChange(model2) {
     this.selectedVisionModel = model2;
-    alert(this.translate.instant("image.model.changeAlert"));
+    this.messageService.add({
+      severity: "warn",
+      summary: this.translate.instant("image.model.changeWarning"),
+      detail: this.translate.instant("image.model.changeAlert"),
+      life: 5e3
+    });
     this.stateService.resetState();
   }
   processNextFile() {
@@ -13253,7 +13306,8 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
             throw new Error(this.translate.instant("image.error.pdfNoPages"));
           }
         } else if (file.type.startsWith("image/")) {
-          this.imageProcessorService.analyzeImage(file, this.selectedVisionModel, displayName, isPdfPage).subscribe({
+          const fallbackModels = this.visionModels.map((m) => m.value).filter((m) => m !== this.selectedVisionModel);
+          this.imageProcessorService.analyzeImage(file, this.selectedVisionModel, displayName, isPdfPage, fallbackModels).subscribe({
             next: (result) => {
               let errorMessage = result.error;
               if (errorMessage === "KEY_LIMIT_EXCEEDED") {
@@ -13439,76 +13493,76 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
       ProgressIndicatorComponent,
       ImageResultComponent,
       CsvDownloadComponent
-    ], providers: [MessageService], template: `<p-toast></p-toast>
-
-<h1 id="wb-cont">{{ 'title.image' | translate }}</h1>
-<p>{{ 'image.description' | translate }}</p>
-
-<!-- API Key Status -->
-<section class="api-key-status mb-4">
-  <div>
-    <strong>{{ 'page.apiKey.status' | translate }}</strong>
-    <span *ngIf="apiKeyService.hasApiKey$ | async" class="text-green-600">
-      <i class="pi pi-check-circle"></i> {{ 'page.apiKey.active' | translate }}
-    </span>
-    <span *ngIf="(apiKeyService.hasApiKey$ | async) === false" class="text-orange-600">
-      <i class="pi pi-exclamation-circle"></i> {{ 'page.apiKey.notSet' | translate }}
-    </span>
-  </div>
-</section>
-
-<!-- Main Tool Area -->
-<section>
-  <!-- Model Selector -->
-  <ca-shared-model-selector
-    [selectedModel]="selectedVisionModel"
-    [models]="visionModels"
-    [label]="'image.model.label'"
-    [cardTitle]="'image.model.title'"
-    [showCard]="true"
-    [showTranslateOption]="false"
-    (modelChange)="onModelChange($event)">
-  </ca-shared-model-selector>
-  
-  <!-- File Upload -->
-  <ca-file-upload
-    (filesSelected)="onFilesSelected($event)">
-  </ca-file-upload>
-  
-  <!-- Progress Indicator -->
-  <ng-container *ngIf="state$ | async as state">
-    <ca-progress-indicator
-      [progressText]="state.progressText"
-      [processedCount]="state.processedCount"
-      [totalFiles]="state.filesInProgress"
-      [showProgress]="state.showProgressArea">
-    </ca-progress-indicator>
-    
-    <!-- Results Display -->
-    <div class="results-section" *ngIf="getResultsArray(state.results).length > 0">
-      <ca-image-result 
-        *ngFor="let result of getResultsArray(state.results)"
-        [result]="result">
-      </ca-image-result>
-      
-      <!-- CSV Download -->
-      <ca-csv-download
-        [results]="state.results">
-      </ca-csv-download>
-      
-      <!-- Reset Button -->
-      <div class="mt-3">
-        <p-button 
-          (click)="resetTool()"
-          [label]="'image.reset.label' | translate"
-          icon="pi pi-refresh"
-          severity="secondary"
-          [pTooltip]="'image.reset.tooltip' | translate">
-        </p-button>
-      </div>
-    </div>
-  </ng-container>
-</section>`, styles: ["/* angular:styles/component:css;09dc9166e46b9e7aabdb069b1dc488d36e7e0913816855e9dc9912d983b17aa9;/home/naomi/content-assistant/src/app/views/image-assistant/image-assistant.component.ts */\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=image-assistant.component.css.map */\n"] }]
+    ], providers: [MessageService], template: `<p-toast></p-toast>\r
+\r
+<h1 id="wb-cont">{{ 'title.image' | translate }}</h1>\r
+<p>{{ 'image.description' | translate }}</p>\r
+\r
+<!-- API Key Status -->\r
+<section class="api-key-status mb-4">\r
+  <div>\r
+    <strong>{{ 'page.apiKey.status' | translate }}</strong>\r
+    <span *ngIf="apiKeyService.hasApiKey$ | async" class="text-green-600">\r
+      <i class="pi pi-check-circle"></i> {{ 'page.apiKey.active' | translate }}\r
+    </span>\r
+    <span *ngIf="(apiKeyService.hasApiKey$ | async) === false" class="text-orange-600">\r
+      <i class="pi pi-exclamation-circle"></i> {{ 'page.apiKey.notSet' | translate }}\r
+    </span>\r
+  </div>\r
+</section>\r
+\r
+<!-- Main Tool Area -->\r
+<section>\r
+  <!-- Model Selector -->\r
+  <ca-shared-model-selector\r
+    [selectedModel]="selectedVisionModel"\r
+    [models]="visionModels"\r
+    [label]="'image.model.label'"\r
+    [cardTitle]="'image.model.title'"\r
+    [showCard]="true"\r
+    [showTranslateOption]="false"\r
+    (modelChange)="onModelChange($event)">\r
+  </ca-shared-model-selector>\r
+  \r
+  <!-- File Upload -->\r
+  <ca-file-upload\r
+    (filesSelected)="onFilesSelected($event)">\r
+  </ca-file-upload>\r
+  \r
+  <!-- Progress Indicator -->\r
+  <ng-container *ngIf="state$ | async as state">\r
+    <ca-progress-indicator\r
+      [progressText]="state.progressText"\r
+      [processedCount]="state.processedCount"\r
+      [totalFiles]="state.filesInProgress"\r
+      [showProgress]="state.showProgressArea">\r
+    </ca-progress-indicator>\r
+    \r
+    <!-- Results Display -->\r
+    <div class="results-section" *ngIf="getResultsArray(state.results).length > 0">\r
+      <ca-image-result \r
+        *ngFor="let result of getResultsArray(state.results)"\r
+        [result]="result">\r
+      </ca-image-result>\r
+      \r
+      <!-- CSV Download -->\r
+      <ca-csv-download\r
+        [results]="state.results">\r
+      </ca-csv-download>\r
+      \r
+      <!-- Reset Button -->\r
+      <div class="mt-3">\r
+        <p-button \r
+          (click)="resetTool()"\r
+          [label]="'image.reset.label' | translate"\r
+          icon="pi pi-refresh"\r
+          severity="secondary"\r
+          [pTooltip]="'image.reset.tooltip' | translate">\r
+        </p-button>\r
+      </div>\r
+    </div>\r
+  </ng-container>\r
+</section>`, styles: ["/* angular:styles/component:css;09dc9166e46b9e7aabdb069b1dc488d36e7e0913816855e9dc9912d983b17aa9;C:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/image-assistant.component.ts */\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=image-assistant.component.css.map */\n"] }]
   }], () => [], null);
 })();
 (() => {
@@ -13516,7 +13570,7 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-panel.mjs
-var _c04 = ["header"];
+var _c05 = ["header"];
 var _c18 = ["icons"];
 var _c22 = ["content"];
 var _c32 = ["footer"];
@@ -14076,7 +14130,7 @@ var Panel = class _Panel extends BaseComponent {
     contentQueries: function Panel_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
         \u0275\u0275contentQuery(dirIndex, Footer, 5);
-        \u0275\u0275contentQuery(dirIndex, _c04, 4);
+        \u0275\u0275contentQuery(dirIndex, _c05, 4);
         \u0275\u0275contentQuery(dirIndex, _c18, 4);
         \u0275\u0275contentQuery(dirIndex, _c22, 4);
         \u0275\u0275contentQuery(dirIndex, _c32, 4);
@@ -17225,7 +17279,7 @@ var text = api.text;
 var counter = api.counter;
 
 // node_modules/@fortawesome/angular-fontawesome/fesm2022/angular-fontawesome.mjs
-var _c05 = ["*"];
+var _c06 = ["*"];
 var faWarnIfIconDefinitionMissing = (iconSpec) => {
   throw new Error(`Could not find icon with iconName=${iconSpec.iconName} and prefix=${iconSpec.prefix} in the icon library.`);
 };
@@ -17472,7 +17526,7 @@ var FaStackComponent = class _FaStackComponent {
         size: "size"
       },
       features: [\u0275\u0275NgOnChangesFeature],
-      ngContentSelectors: _c05,
+      ngContentSelectors: _c06,
       decls: 1,
       vars: 0,
       template: function FaStackComponent_Template(rf, ctx) {
@@ -17833,7 +17887,7 @@ var FaLayersComponent = class _FaLayersComponent {
         fixedWidth: "fixedWidth"
       },
       features: [\u0275\u0275NgOnChangesFeature],
-      ngContentSelectors: _c05,
+      ngContentSelectors: _c06,
       decls: 1,
       vars: 0,
       template: function FaLayersComponent_Template(rf, ctx) {
@@ -18383,7 +18437,7 @@ Return the French document in HTML format that exactly follows the structure of 
 })();
 
 // src/app/views/translation-assistant/translation-assistant.component.ts
-var _c06 = (a0, a1) => ({ "pi-plus": a0, "pi-minus": a1 });
+var _c07 = (a0, a1) => ({ "pi-plus": a0, "pi-minus": a1 });
 function TranslationAssistantComponent_ng_container_12_i_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "i", 18);
@@ -18477,7 +18531,7 @@ function TranslationAssistantComponent_div_18_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275attribute("aria-expanded", ctx_r2.isExpanded);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(3, _c06, !ctx_r2.isExpanded, ctx_r2.isExpanded));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(3, _c07, !ctx_r2.isExpanded, ctx_r2.isExpanded));
     \u0275\u0275advance(7);
     \u0275\u0275property("ngIf", ctx_r2.isExpanded);
   }
@@ -18993,236 +19047,236 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
       FormsModule,
       ProgressSpinnerModule,
       FontAwesomeModule
-    ], template: `<div class="p-mb-3">
-  <h1 class="p-text-bold">Translation Assistant</h1>
-</div>
-
-<div class="surface-100 border-round shadow-3 p-4 max-w-3xl mx-auto">
-  <p-card class="p-mb-4">
-    <h2 class="p-m-0 p-text-bold p-text-2xl" style="color: black">
-      Upload source language file
-    </h2>
-
-    <p>
-      Please upload a Word (.docx) or PowerPoint (.pptx) file containing your
-      source language content.
-    </p>
-
-    <!-- Upload Section -->
-    <div
-      class="flex flex-column align-items-center justify-content-center p-3 border-dashed border-round border-200 surface-100 hover:surface-200 hover:border-primary-400 transition-colors transition-duration-300 cursor-pointer w-full max-w-30rem min-h-12rem"
-      role="button"
-      tabindex="0"
-      aria-label="Select a source .docx or .pptx file"
-      (click)="fileInput.click()"
-      (keyup.enter)="fileInput.click()"
-      (keyup.space)="fileInput.click()"
-      (dragover)="onDragOver($event)"
-      (dragleave)="onDragLeave($event)"
-      (drop)="onDrop($event)"
-    >
-      <input
-        type="file"
-        accept=".docx,.pptx"
-        #fileInput
-        style="display: none"
-        (change)="onFileSelected($event)"
-      />
-      <ng-container *ngIf="selectedFile; else dragArea">
-        <p class="text-xl text-center">
-          <i
-            *ngIf="isDocx(selectedFile)"
-            class="pi pi-file-word text-blue-500 text-2xl mr-1"
-            aria-hidden="true"
-          ></i>
-          <fa-icon
-            *ngIf="isPptx(selectedFile)"
-            [icon]="faFilePowerpoint"
-            class="text-orange-500 text-2xl mr-1"
-            aria-hidden="true"
-          ></fa-icon>
-
-          {{ selectedFile.name }}
-        </p>
-      </ng-container>
-      <ng-template #dragArea>
-        <i
-          class="pi pi-upload border-2 border-circle border-300 p-3 text-3xl text-color-secondary mb-2 hover:bg-primary hover:text-white transition-colors transition-duration-300"
-          aria-hidden="true"
-        ></i>
-        <p class="m-0 text-center text-sm">
-          Drag and drop .docx or .pptx source language file here.
-        </p>
-      </ng-template>
-    </div>
-
-    <div class="flex gap-2 mt-3">
-      <button
-        pButton
-        type="button"
-        icon="pi pi-upload"
-        class="p-button p-component p-button-primary"
-        [disabled]="!selectedFile"
-        (click)="previewSource()"
-      >
-        Upload file
-      </button>
-    </div>
-
-    <!-- Preview Panel -->
-    <div *ngIf="previewText" class="mt-3">
-      <div
-        class="p-panel p-component border-1 border-round surface-100"
-        style="
-          border-color: #00000023;
-          font-size: 1rem;
-          font-family: &quot;Segoe UI&quot;, Roboto, sans-serif;
-        "
-      >
-        <div
-          class="p-panel-header d-flex justify-content-between align-items-center cursor-pointer"
-          style="
-            height: 4rem;
-            padding: 0 1rem;
-            display: flex;
-            font-size: 1rem;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
-            gap: 0.5rem;
-            width: 100%;
-          "
-          role="button"
-          tabindex="0"
-          (click)="isExpanded = !isExpanded"
-          (keyup.enter)="isExpanded = !isExpanded"
-          (keyup.space)="isExpanded = !isExpanded"
-          [attr.aria-expanded]="isExpanded"
-          aria-controls="preview-panel-content"
-        >
-          <div class="d-flex align-items-center">
-            <i
-              class="pi"
-              [ngClass]="{
-                'pi-plus': !isExpanded,
-                'pi-minus': isExpanded,
-              }"
-              style="margin-right: 0.5rem"
-              aria-hidden="true"
-            ></i>
-            <span class="p-panel-title font-semibold" style="color: black">
-              Preview source language file
-            </span>
-          </div>
-
-          <button
-            pButton
-            type="button"
-            class="p-button-text p-button-icon-only flex-shrink-0"
-            title="Copy All"
-            aria-label="Copy all preview text"
-            (click)="copyAll($event)"
-            style="width: 3rem; height: 3rem"
-          >
-            <span
-              class="pi pi-copy"
-              style="font-size: 1.4rem"
-              aria-hidden="true"
-            ></span>
-            <span class="sr-only">Copy All</span>
-          </button>
-        </div>
-
-        <div
-          *ngIf="isExpanded"
-          id="preview-panel-content"
-          class="p-panel-content p-mt-2"
-          style="
-            background-color: white;
-            padding: 1rem;
-            border-top: 1px solid #ccc;
-          "
-        >
-          <span>{{ previewText }}</span>
-        </div>
-      </div>
-    </div>
-  </p-card>
-</div>
-
-<!-- Target Language Content Card -->
-<div
-  *ngIf="showSecondUpload"
-  class="surface-100 border-round shadow-3"
-  style="border: 2px solid #00000000; padding: 1rem"
->
-  <p-card>
-    <h2 class="p-mb-3" style="color: black">Paste target language content</h2>
-    <p>
-      Paste the full translation of the uploaded source content into the box
-      below.
-    </p>
-    <textarea
-      pInputTextarea
-      rows="15"
-      cols="70"
-      placeholder=""
-      class="p-inputtext p-mb-3 w-full"
-      style="
-        border-color: #00000052;
-        min-height: 10rem;
-        resize: vertical text;
-        font-family: &quot;Segoe UI&quot;, Roboto, sans-serif;
-        font-size: 1rem;
-        color: #000000be;
-      "
-      [(ngModel)]="frenchText"
-    ></textarea>
-
-    <div class="flex gap-2 mt-3">
-      <button
-        pButton
-        type="button"
-        icon="pi pi-align-left"
-        class="p-button-primary"
-        (click)="onFormatTargetLanguageContent()"
-      >
-        Format target language content
-      </button>
-    </div>
-  </p-card>
-</div>
-
-<!-- Spinner and Generating Files Message -->
-<div *ngIf="isProcessing" class="p-mt-4 text-center">
-  <p-progressSpinner styleClass="p-mt-3"></p-progressSpinner>
-  <p class="p-mt-2 font-bold">Generating files...</p>
-</div>
-
-<div
-  *ngIf="showDownloadSection"
-  class="surface-100 border-round shadow-3"
-  style="border: 2px solid #00000000; padding: 1rem"
->
-  <p-card>
-    <h2 class="p-mb-3" style="color: black">Formatting complete</h2>
-    <p>
-      The translated file has been formatted to match the original layout and is
-      ready for download.
-    </p>
-    <div class="flex gap-2 mt-3">
-      <button
-        pButton
-        type="button"
-        icon="pi pi-download"
-        class="p-button-primary"
-        (click)="onDownloadFile()"
-      >
-        Download file
-      </button>
-    </div>
-  </p-card>
-</div>
+    ], template: `<div class="p-mb-3">\r
+  <h1 class="p-text-bold">Translation Assistant</h1>\r
+</div>\r
+\r
+<div class="surface-100 border-round shadow-3 p-4 max-w-3xl mx-auto">\r
+  <p-card class="p-mb-4">\r
+    <h2 class="p-m-0 p-text-bold p-text-2xl" style="color: black">\r
+      Upload source language file\r
+    </h2>\r
+\r
+    <p>\r
+      Please upload a Word (.docx) or PowerPoint (.pptx) file containing your\r
+      source language content.\r
+    </p>\r
+\r
+    <!-- Upload Section -->\r
+    <div\r
+      class="flex flex-column align-items-center justify-content-center p-3 border-dashed border-round border-200 surface-100 hover:surface-200 hover:border-primary-400 transition-colors transition-duration-300 cursor-pointer w-full max-w-30rem min-h-12rem"\r
+      role="button"\r
+      tabindex="0"\r
+      aria-label="Select a source .docx or .pptx file"\r
+      (click)="fileInput.click()"\r
+      (keyup.enter)="fileInput.click()"\r
+      (keyup.space)="fileInput.click()"\r
+      (dragover)="onDragOver($event)"\r
+      (dragleave)="onDragLeave($event)"\r
+      (drop)="onDrop($event)"\r
+    >\r
+      <input\r
+        type="file"\r
+        accept=".docx,.pptx"\r
+        #fileInput\r
+        style="display: none"\r
+        (change)="onFileSelected($event)"\r
+      />\r
+      <ng-container *ngIf="selectedFile; else dragArea">\r
+        <p class="text-xl text-center">\r
+          <i\r
+            *ngIf="isDocx(selectedFile)"\r
+            class="pi pi-file-word text-blue-500 text-2xl mr-1"\r
+            aria-hidden="true"\r
+          ></i>\r
+          <fa-icon\r
+            *ngIf="isPptx(selectedFile)"\r
+            [icon]="faFilePowerpoint"\r
+            class="text-orange-500 text-2xl mr-1"\r
+            aria-hidden="true"\r
+          ></fa-icon>\r
+\r
+          {{ selectedFile.name }}\r
+        </p>\r
+      </ng-container>\r
+      <ng-template #dragArea>\r
+        <i\r
+          class="pi pi-upload border-2 border-circle border-300 p-3 text-3xl text-color-secondary mb-2 hover:bg-primary hover:text-white transition-colors transition-duration-300"\r
+          aria-hidden="true"\r
+        ></i>\r
+        <p class="m-0 text-center text-sm">\r
+          Drag and drop .docx or .pptx source language file here.\r
+        </p>\r
+      </ng-template>\r
+    </div>\r
+\r
+    <div class="flex gap-2 mt-3">\r
+      <button\r
+        pButton\r
+        type="button"\r
+        icon="pi pi-upload"\r
+        class="p-button p-component p-button-primary"\r
+        [disabled]="!selectedFile"\r
+        (click)="previewSource()"\r
+      >\r
+        Upload file\r
+      </button>\r
+    </div>\r
+\r
+    <!-- Preview Panel -->\r
+    <div *ngIf="previewText" class="mt-3">\r
+      <div\r
+        class="p-panel p-component border-1 border-round surface-100"\r
+        style="\r
+          border-color: #00000023;\r
+          font-size: 1rem;\r
+          font-family: &quot;Segoe UI&quot;, Roboto, sans-serif;\r
+        "\r
+      >\r
+        <div\r
+          class="p-panel-header d-flex justify-content-between align-items-center cursor-pointer"\r
+          style="\r
+            height: 4rem;\r
+            padding: 0 1rem;\r
+            display: flex;\r
+            font-size: 1rem;\r
+            justify-content: space-between;\r
+            align-items: center;\r
+            flex-wrap: nowrap;\r
+            gap: 0.5rem;\r
+            width: 100%;\r
+          "\r
+          role="button"\r
+          tabindex="0"\r
+          (click)="isExpanded = !isExpanded"\r
+          (keyup.enter)="isExpanded = !isExpanded"\r
+          (keyup.space)="isExpanded = !isExpanded"\r
+          [attr.aria-expanded]="isExpanded"\r
+          aria-controls="preview-panel-content"\r
+        >\r
+          <div class="d-flex align-items-center">\r
+            <i\r
+              class="pi"\r
+              [ngClass]="{\r
+                'pi-plus': !isExpanded,\r
+                'pi-minus': isExpanded,\r
+              }"\r
+              style="margin-right: 0.5rem"\r
+              aria-hidden="true"\r
+            ></i>\r
+            <span class="p-panel-title font-semibold" style="color: black">\r
+              Preview source language file\r
+            </span>\r
+          </div>\r
+\r
+          <button\r
+            pButton\r
+            type="button"\r
+            class="p-button-text p-button-icon-only flex-shrink-0"\r
+            title="Copy All"\r
+            aria-label="Copy all preview text"\r
+            (click)="copyAll($event)"\r
+            style="width: 3rem; height: 3rem"\r
+          >\r
+            <span\r
+              class="pi pi-copy"\r
+              style="font-size: 1.4rem"\r
+              aria-hidden="true"\r
+            ></span>\r
+            <span class="sr-only">Copy All</span>\r
+          </button>\r
+        </div>\r
+\r
+        <div\r
+          *ngIf="isExpanded"\r
+          id="preview-panel-content"\r
+          class="p-panel-content p-mt-2"\r
+          style="\r
+            background-color: white;\r
+            padding: 1rem;\r
+            border-top: 1px solid #ccc;\r
+          "\r
+        >\r
+          <span>{{ previewText }}</span>\r
+        </div>\r
+      </div>\r
+    </div>\r
+  </p-card>\r
+</div>\r
+\r
+<!-- Target Language Content Card -->\r
+<div\r
+  *ngIf="showSecondUpload"\r
+  class="surface-100 border-round shadow-3"\r
+  style="border: 2px solid #00000000; padding: 1rem"\r
+>\r
+  <p-card>\r
+    <h2 class="p-mb-3" style="color: black">Paste target language content</h2>\r
+    <p>\r
+      Paste the full translation of the uploaded source content into the box\r
+      below.\r
+    </p>\r
+    <textarea\r
+      pInputTextarea\r
+      rows="15"\r
+      cols="70"\r
+      placeholder=""\r
+      class="p-inputtext p-mb-3 w-full"\r
+      style="\r
+        border-color: #00000052;\r
+        min-height: 10rem;\r
+        resize: vertical text;\r
+        font-family: &quot;Segoe UI&quot;, Roboto, sans-serif;\r
+        font-size: 1rem;\r
+        color: #000000be;\r
+      "\r
+      [(ngModel)]="frenchText"\r
+    ></textarea>\r
+\r
+    <div class="flex gap-2 mt-3">\r
+      <button\r
+        pButton\r
+        type="button"\r
+        icon="pi pi-align-left"\r
+        class="p-button-primary"\r
+        (click)="onFormatTargetLanguageContent()"\r
+      >\r
+        Format target language content\r
+      </button>\r
+    </div>\r
+  </p-card>\r
+</div>\r
+\r
+<!-- Spinner and Generating Files Message -->\r
+<div *ngIf="isProcessing" class="p-mt-4 text-center">\r
+  <p-progressSpinner styleClass="p-mt-3"></p-progressSpinner>\r
+  <p class="p-mt-2 font-bold">Generating files...</p>\r
+</div>\r
+\r
+<div\r
+  *ngIf="showDownloadSection"\r
+  class="surface-100 border-round shadow-3"\r
+  style="border: 2px solid #00000000; padding: 1rem"\r
+>\r
+  <p-card>\r
+    <h2 class="p-mb-3" style="color: black">Formatting complete</h2>\r
+    <p>\r
+      The translated file has been formatted to match the original layout and is\r
+      ready for download.\r
+    </p>\r
+    <div class="flex gap-2 mt-3">\r
+      <button\r
+        pButton\r
+        type="button"\r
+        icon="pi pi-download"\r
+        class="p-button-primary"\r
+        (click)="onDownloadFile()"\r
+      >\r
+        Download file\r
+      </button>\r
+    </div>\r
+  </p-card>\r
+</div>\r
 ` }]
   }], null, null);
 })();
@@ -19231,7 +19285,7 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
 })();
 
 // src/app/views/project-assistant/project-assistant.component.ts
-var _c07 = () => ["/metadata-assistant"];
+var _c08 = () => ["/metadata-assistant"];
 function ProjectAssistantComponent_ng_template_9_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 7)(1, "h3", 8);
@@ -19253,7 +19307,7 @@ function ProjectAssistantComponent_ng_template_13_Template(rf, ctx) {
   }
   if (rf & 2) {
     \u0275\u0275advance();
-    \u0275\u0275property("label", \u0275\u0275pipeBind1(2, 2, "common.goTo"))("routerLink", \u0275\u0275pureFunction0(4, _c07));
+    \u0275\u0275property("label", \u0275\u0275pipeBind1(2, 2, "common.goTo"))("routerLink", \u0275\u0275pureFunction0(4, _c08));
   }
 }
 var ProjectAssistantComponent = class _ProjectAssistantComponent {
@@ -19292,31 +19346,31 @@ var ProjectAssistantComponent = class _ProjectAssistantComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProjectAssistantComponent, [{
     type: Component,
-    args: [{ selector: "ca-project-assistant", standalone: true, imports: [TranslateModule, CommonModule, RouterModule, CardModule, ButtonModule], template: `<div class="container mx-auto px-4 py-6">
-  <h1 id="wb-cont" class="text-4xl font-bold mb-4">{{ 'title.project' | translate}}</h1>
-  <p class="mb-6">{{'project.content' | translate }}</p>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <p-card>
-      <ng-template pTemplate="header">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold">{{ 'metadata.title' | translate }}</h3>
-        </div>
-      </ng-template>
-      <p class="mb-4">{{ 'metadata.cardDescription' | translate }}</p>
-      <ng-template pTemplate="footer">
-        <div class="flex justify-end">
-          <p-button 
-            [label]="'common.goTo' | translate" 
-            icon="pi pi-arrow-right" 
-            iconPos="right"
-            [routerLink]="['/metadata-assistant']">
-          </p-button>
-        </div>
-      </ng-template>
-    </p-card>
-  </div>
-</div>
+    args: [{ selector: "ca-project-assistant", standalone: true, imports: [TranslateModule, CommonModule, RouterModule, CardModule, ButtonModule], template: `<div class="container mx-auto px-4 py-6">\r
+  <h1 id="wb-cont" class="text-4xl font-bold mb-4">{{ 'title.project' | translate}}</h1>\r
+  <p class="mb-6">{{'project.content' | translate }}</p>\r
+  \r
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">\r
+    <p-card>\r
+      <ng-template pTemplate="header">\r
+        <div class="p-4">\r
+          <h3 class="text-xl font-semibold">{{ 'metadata.title' | translate }}</h3>\r
+        </div>\r
+      </ng-template>\r
+      <p class="mb-4">{{ 'metadata.cardDescription' | translate }}</p>\r
+      <ng-template pTemplate="footer">\r
+        <div class="flex justify-end">\r
+          <p-button \r
+            [label]="'common.goTo' | translate" \r
+            icon="pi pi-arrow-right" \r
+            iconPos="right"\r
+            [routerLink]="['/metadata-assistant']">\r
+          </p-button>\r
+        </div>\r
+      </ng-template>\r
+    </p-card>\r
+  </div>\r
+</div>\r
 ` }]
   }], null, null);
 })();
@@ -19797,74 +19851,74 @@ var InventoryAssistantComponent = class _InventoryAssistantComponent {
     }]
   }, {
     type: Component,
-    args: [{ selector: "ca-inventory-assistant", imports: [TranslateModule, ButtonModule, FormsModule, CommonModule, Textarea, TableModule, RadioButtonModule], template: `<h1 id="wb-cont">{{ 'title.inventory' | translate }}</h1>
-<p>{{ 'inventory.intro' | translate }}</p>
-
-<!-- PrimeNG Radio Buttons -->
-<div class="p-formgroup-inline">
-  <div class="p-field-radiobutton">
-    <p-radioButton name="sourceOption" value="canadaOrGithub" [(ngModel)]="selectedSourceOption"
-      inputId="canadaGithubOption" (onClick)="onSourceChange()">
-    </p-radioButton>
-    <label for="canadaGithubOption">{{ 'inventory.meta.radioLabel1' | translate }}</label>
-  </div>
-
-  <div class="p-field-last-radiobutton">
-    <p-radioButton name="sourceOption" value="preview" [(ngModel)]="selectedSourceOption" inputId="previewOption"
-      (onClick)="onSourceChange()">
-    </p-radioButton>
-    <label for="previewOption">{{ 'inventory.meta.radioLabel2' | translate }}</label>
-  </div>
-</div>
-
-<br />
-
-<!-- Input for Canada.ca or GitHub -->
-<div *ngIf="selectedSourceOption === 'canadaOrGithub'">
-  <p [innerHTML]="'inventory.meta.instructions' | translate"></p>
-  <textarea pTextarea id="prjct_pgs" [(ngModel)]="urlsInput" rows="5" style="width: 100%;"
-    placeholder="{{ 'inventory.meta.watermark' | translate }}">
-  </textarea>
-  <br /><br />
-  <button pButton type="button" label="{{ 'inventory.meta.fetch-button' | translate }}"
-    (click)="fetchMetadata(urlsInput)">
-  </button>
-</div>
-
-<!-- Input for Preview -->
-<div *ngIf="selectedSourceOption === 'preview'">
-  <p [innerHTML]="'inventory.meta-prvw.instructions' | translate"></p>
-  <textarea pTextarea id="preview_pgs" [(ngModel)]="previewInput" rows="5" style="width: 100%;"
-    placeholder="{{ 'inventory.meta.watermark' | translate }}">
-      </textarea>
-  <br /><br />
-  <button pButton type="button" label="Fetch Preview Metadata" (click)="fetchPreviewMetadata(previewInput)">
-  </button>
-  </div>
-
-<!-- Loading Indicator -->
-<div *ngIf="loading">Loading...</div>
-<br /><br />
-
-<!-- Results Table -->
-<p-table [value]="results" *ngIf="results.length > 0">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Page (h1)</th>
-      <th>Source</th>
-      <th>Description</th>
-      <th>{{ 'inventory.meta.keywords' | translate }}</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-row>
-    <tr>
-      <td><a [href]="row.url" target="_blank">{{ row.title }}</a></td>
-      <td>{{ row.source }}</td>
-      <td>{{ row.description }}</td>
-      <td>{{ row.keywords }}</td>
-    </tr>
-  </ng-template>
-</p-table>
+    args: [{ selector: "ca-inventory-assistant", imports: [TranslateModule, ButtonModule, FormsModule, CommonModule, Textarea, TableModule, RadioButtonModule], template: `<h1 id="wb-cont">{{ 'title.inventory' | translate }}</h1>\r
+<p>{{ 'inventory.intro' | translate }}</p>\r
+\r
+<!-- PrimeNG Radio Buttons -->\r
+<div class="p-formgroup-inline">\r
+  <div class="p-field-radiobutton">\r
+    <p-radioButton name="sourceOption" value="canadaOrGithub" [(ngModel)]="selectedSourceOption"\r
+      inputId="canadaGithubOption" (onClick)="onSourceChange()">\r
+    </p-radioButton>\r
+    <label for="canadaGithubOption">{{ 'inventory.meta.radioLabel1' | translate }}</label>\r
+  </div>\r
+\r
+  <div class="p-field-last-radiobutton">\r
+    <p-radioButton name="sourceOption" value="preview" [(ngModel)]="selectedSourceOption" inputId="previewOption"\r
+      (onClick)="onSourceChange()">\r
+    </p-radioButton>\r
+    <label for="previewOption">{{ 'inventory.meta.radioLabel2' | translate }}</label>\r
+  </div>\r
+</div>\r
+\r
+<br />\r
+\r
+<!-- Input for Canada.ca or GitHub -->\r
+<div *ngIf="selectedSourceOption === 'canadaOrGithub'">\r
+  <p [innerHTML]="'inventory.meta.instructions' | translate"></p>\r
+  <textarea pTextarea id="prjct_pgs" [(ngModel)]="urlsInput" rows="5" style="width: 100%;"\r
+    placeholder="{{ 'inventory.meta.watermark' | translate }}">\r
+  </textarea>\r
+  <br /><br />\r
+  <button pButton type="button" label="{{ 'inventory.meta.fetch-button' | translate }}"\r
+    (click)="fetchMetadata(urlsInput)">\r
+  </button>\r
+</div>\r
+\r
+<!-- Input for Preview -->\r
+<div *ngIf="selectedSourceOption === 'preview'">\r
+  <p [innerHTML]="'inventory.meta-prvw.instructions' | translate"></p>\r
+  <textarea pTextarea id="preview_pgs" [(ngModel)]="previewInput" rows="5" style="width: 100%;"\r
+    placeholder="{{ 'inventory.meta.watermark' | translate }}">\r
+      </textarea>\r
+  <br /><br />\r
+  <button pButton type="button" label="Fetch Preview Metadata" (click)="fetchPreviewMetadata(previewInput)">\r
+  </button>\r
+  </div>\r
+\r
+<!-- Loading Indicator -->\r
+<div *ngIf="loading">Loading...</div>\r
+<br /><br />\r
+\r
+<!-- Results Table -->\r
+<p-table [value]="results" *ngIf="results.length > 0">\r
+  <ng-template pTemplate="header">\r
+    <tr>\r
+      <th>Page (h1)</th>\r
+      <th>Source</th>\r
+      <th>Description</th>\r
+      <th>{{ 'inventory.meta.keywords' | translate }}</th>\r
+    </tr>\r
+  </ng-template>\r
+  <ng-template pTemplate="body" let-row>\r
+    <tr>\r
+      <td><a [href]="row.url" target="_blank">{{ row.title }}</a></td>\r
+      <td>{{ row.source }}</td>\r
+      <td>{{ row.description }}</td>\r
+      <td>{{ row.keywords }}</td>\r
+    </tr>\r
+  </ng-template>\r
+</p-table>\r
 `, styles: ["/* src/app/views/inventory-assistant/inventory-assistant.component.css */\ntable {\n  width: 100%;\n  border-collapse: collapse;\n}\ntd,\nth {\n  padding: 8px;\n  text-align: left;\n}\ntbody tr {\n  border-bottom: 1px solid #ccc;\n}\nthead tr {\n  border-bottom: 2px solid #444;\n}\n.p-field-radiobutton label {\n  margin-left: 0.75rem;\n}\n.p-field-radiobutton {\n  margin-bottom: 1rem;\n}\n.p-field-last-radiobutton label {\n  margin-left: 0.75rem;\n}\n.p-last-field-radiobutton {\n  margin-bottom: 1rem;\n}\n/*# sourceMappingURL=inventory-assistant.component.css.map */\n"] }]
   }], null, null);
 })();
@@ -20324,6 +20378,46 @@ French keywords (comma-separated):`;
         return throwError(() => new Error("Document content too short or invalid for processing"));
       }
       return this.generateMetadataFromDocument(content);
+    }));
+  }
+  // New method for document tab - extracts text, detects language, generates metadata
+  processDocumentForMetadata(file, model2) {
+    return from(this.extractDocumentText(file)).pipe(switchMap((content) => {
+      if (!content || content.length < 50) {
+        return throwError(() => new Error("Document content too short or invalid for processing"));
+      }
+      const language = this.detectLanguage(content);
+      if (language === "fr") {
+        return this.generateMetadataFromDocument(content).pipe(map((metadata) => ({
+          language,
+          text: content,
+          metadata: {
+            url: file.name,
+            scrapedContent: content.substring(0, 500) + "...",
+            // Show preview
+            metaDescription: metadata.description,
+            metaKeywords: metadata.keywords,
+            language: "fr",
+            modelUsed: "mistralai/mistral-small-3.2-24b-instruct:free",
+            fallbackUsed: false
+          }
+        })));
+      } else {
+        return this.generateMetadata(content, model2, language).pipe(map((metadata) => ({
+          language,
+          text: content,
+          metadata: {
+            url: file.name,
+            scrapedContent: content.substring(0, 500) + "...",
+            // Show preview
+            metaDescription: metadata.description,
+            metaKeywords: metadata.keywords,
+            language: "en",
+            modelUsed: model2,
+            fallbackUsed: false
+          }
+        })));
+      }
     }));
   }
   extractDocumentText(file) {
@@ -20851,7 +20945,7 @@ var Textarea2 = class _Textarea {
 })();
 
 // node_modules/primeng/fesm2022/primeng-chip.mjs
-var _c08 = ["removeicon"];
+var _c09 = ["removeicon"];
 var _c19 = ["*"];
 function Chip_img_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -21240,7 +21334,7 @@ var Chip = class _Chip extends BaseComponent {
     selectors: [["p-chip"]],
     contentQueries: function Chip_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c08, 4);
+        \u0275\u0275contentQuery(dirIndex, _c09, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -21670,88 +21764,88 @@ var UrlInputComponent = class _UrlInputComponent {
       CardModule,
       ChipModule,
       MessageModule
-    ], template: `<div class="url-input-container">
-  <p-card>
-    <ng-template pTemplate="header">
-      <div class="flex align-items-center justify-content-between p-3">
-        <h3 class="m-0">{{ 'metadata.urlInput.title' | translate }}</h3>
-        <div class="flex gap-2">
-          <p-button 
-            [label]="'metadata.urlInput.clear' | translate"
-            icon="pi pi-times"
-            severity="secondary"
-            [text]="true"
-            (onClick)="clearInput()"
-            [disabled]="disabled">
-          </p-button>
-        </div>
-      </div>
-    </ng-template>
-
-    <div class="url-input-content">
-      <div class="field">
-        <label for="urls" class="block mb-2">
-          {{ 'metadata.urlInput.label' | translate }}
-        </label>
-        <textarea 
-          pInputTextarea 
-          id="urls"
-          [(ngModel)]="urlText"
-          (ngModelChange)="onTextChange()"
-          [disabled]="disabled"
-          [rows]="8"
-          [placeholder]="'metadata.urlInput.placeholder' | translate"
-          class="w-full">
-        </textarea>
-        <small class="block mt-1 text-500">
-          {{ 'metadata.urlInput.help' | translate }}
-        </small>
-        <small class="block mt-1 text-400">
-          <i class="pi pi-info-circle mr-1"></i>
-          {{ 'metadata.urlInput.allowedDomains' | translate }}: {{ getAllowedDomainsText() }}
-        </small>
-      </div>
-
-      <div class="url-validation mt-3">
-        <div *ngIf="validUrls.length > 0" class="mb-2">
-          <div class="flex align-items-center gap-2 mb-2">
-            <i class="pi pi-check-circle text-green-500"></i>
-            <span class="font-semibold">
-              {{ 'metadata.urlInput.validUrls' | translate }} ({{ validUrls.length }})
-            </span>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <p-chip 
-              *ngFor="let url of validUrls.slice(0, 3)" 
-              [label]="url.length > 50 ? url.substring(0, 50) + '...' : url"
-              styleClass="text-xs">
-            </p-chip>
-            <p-chip 
-              *ngIf="validUrls.length > 3"
-              [label]="'+' + (validUrls.length - 3) + ' ' + ('metadata.urlInput.more' | translate)"
-              styleClass="text-xs surface-200">
-            </p-chip>
-          </div>
-        </div>
-
-        <div *ngIf="invalidUrls.length > 0">
-          <p-message 
-            severity="warn" 
-            [text]="'metadata.urlInput.invalidUrls' | translate"
-            styleClass="w-full">
-          </p-message>
-          <div class="mt-2 text-orange-600">
-            <ul class="m-0 pl-3">
-              <li *ngFor="let url of invalidUrls" class="text-sm">
-                {{ url }}
-                <span class="text-xs text-gray-500 ml-2">({{ getInvalidReason(url) }})</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </p-card>
+    ], template: `<div class="url-input-container">\r
+  <p-card>\r
+    <ng-template pTemplate="header">\r
+      <div class="flex align-items-center justify-content-between p-3">\r
+        <h3 class="m-0">{{ 'metadata.urlInput.title' | translate }}</h3>\r
+        <div class="flex gap-2">\r
+          <p-button \r
+            [label]="'metadata.urlInput.clear' | translate"\r
+            icon="pi pi-times"\r
+            severity="secondary"\r
+            [text]="true"\r
+            (onClick)="clearInput()"\r
+            [disabled]="disabled">\r
+          </p-button>\r
+        </div>\r
+      </div>\r
+    </ng-template>\r
+\r
+    <div class="url-input-content">\r
+      <div class="field">\r
+        <label for="urls" class="block mb-2">\r
+          {{ 'metadata.urlInput.label' | translate }}\r
+        </label>\r
+        <textarea \r
+          pInputTextarea \r
+          id="urls"\r
+          [(ngModel)]="urlText"\r
+          (ngModelChange)="onTextChange()"\r
+          [disabled]="disabled"\r
+          [rows]="8"\r
+          [placeholder]="'metadata.urlInput.placeholder' | translate"\r
+          class="w-full">\r
+        </textarea>\r
+        <small class="block mt-1 text-500">\r
+          {{ 'metadata.urlInput.help' | translate }}\r
+        </small>\r
+        <small class="block mt-1 text-400">\r
+          <i class="pi pi-info-circle mr-1"></i>\r
+          {{ 'metadata.urlInput.allowedDomains' | translate }}: {{ getAllowedDomainsText() }}\r
+        </small>\r
+      </div>\r
+\r
+      <div class="url-validation mt-3">\r
+        <div *ngIf="validUrls.length > 0" class="mb-2">\r
+          <div class="flex align-items-center gap-2 mb-2">\r
+            <i class="pi pi-check-circle text-green-500"></i>\r
+            <span class="font-semibold">\r
+              {{ 'metadata.urlInput.validUrls' | translate }} ({{ validUrls.length }})\r
+            </span>\r
+          </div>\r
+          <div class="flex flex-wrap gap-2">\r
+            <p-chip \r
+              *ngFor="let url of validUrls.slice(0, 3)" \r
+              [label]="url.length > 50 ? url.substring(0, 50) + '...' : url"\r
+              styleClass="text-xs">\r
+            </p-chip>\r
+            <p-chip \r
+              *ngIf="validUrls.length > 3"\r
+              [label]="'+' + (validUrls.length - 3) + ' ' + ('metadata.urlInput.more' | translate)"\r
+              styleClass="text-xs surface-200">\r
+            </p-chip>\r
+          </div>\r
+        </div>\r
+\r
+        <div *ngIf="invalidUrls.length > 0">\r
+          <p-message \r
+            severity="warn" \r
+            [text]="'metadata.urlInput.invalidUrls' | translate"\r
+            styleClass="w-full">\r
+          </p-message>\r
+          <div class="mt-2 text-orange-600">\r
+            <ul class="m-0 pl-3">\r
+              <li *ngFor="let url of invalidUrls" class="text-sm">\r
+                {{ url }}\r
+                <span class="text-xs text-gray-500 ml-2">({{ getInvalidReason(url) }})</span>\r
+              </li>\r
+            </ul>\r
+          </div>\r
+        </div>\r
+      </div>\r
+    </div>\r
+  </p-card>\r
 </div>`, styles: ["/* src/app/views/metadata-assistant/components/url-input/url-input.component.css */\n.url-input-container {\n  width: 100%;\n}\n.url-input-content {\n  padding: 0;\n}\n.field label {\n  font-weight: 600;\n  color: var(--text-color);\n}\ntextarea {\n  font-family: monospace;\n  font-size: 0.9rem;\n  line-height: 1.5;\n}\n.url-validation {\n  padding: 1rem;\n  background-color: var(--surface-50);\n  border-radius: var(--border-radius);\n}\n:host ::ng-deep .p-chip {\n  font-size: 0.85rem;\n  padding: 0.25rem 0.5rem;\n}\n:host ::ng-deep .p-message {\n  margin: 0;\n}\n.text-400 {\n  color: #9ca3af;\n  font-size: 0.875rem;\n}\n.text-gray-500 {\n  color: #6b7280;\n}\n.text-orange-600 {\n  color: #ea580c;\n}\n/*# sourceMappingURL=url-input.component.css.map */\n"] }]
   }], null, { disabled: [{
     type: Input
@@ -21766,7 +21860,7 @@ var UrlInputComponent = class _UrlInputComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-tag.mjs
-var _c09 = ["icon"];
+var _c010 = ["icon"];
 var _c110 = ["*"];
 function Tag_ng_container_1_span_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -21980,7 +22074,7 @@ var Tag = class _Tag extends BaseComponent {
     selectors: [["p-tag"]],
     contentQueries: function Tag_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c09, 4);
+        \u0275\u0275contentQuery(dirIndex, _c010, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -22285,57 +22379,57 @@ var DocumentUploadComponent = class _DocumentUploadComponent {
       TranslateModule,
       CardModule,
       ButtonModule
-    ], template: `<p-card>
-  <ng-template pTemplate="header">
-    <div class="flex align-items-center p-3">
-      <i class="pi pi-file-word mr-2"></i>
-      <h4 class="m-0">{{ 'metadata.document.title' | translate }}</h4>
-    </div>
-  </ng-template>
-
-  <p class="mb-3">{{ 'metadata.document.description' | translate }}</p>
-
-  <!-- Upload Section -->
-  <div
-    class="flex flex-column align-items-center justify-content-center p-3 border-dashed border-round border-200 surface-100 hover:surface-200 hover:border-primary-400 transition-colors transition-duration-300 cursor-pointer w-full min-h-12rem"
-    [class.border-primary-400]="isDragging"
-    role="button"
-    tabindex="0"
-    (click)="fileInput.click()"
-    (keydown.enter)="fileInput.click()"
-    (keydown.space)="fileInput.click(); $event.preventDefault()"
-    (dragover)="onDragOver($event)"
-    (dragleave)="onDragLeave($event)"
-    (drop)="onDrop($event)">
-
-    <input
-      type="file"
-      accept=".docx"
-      #fileInput
-      style="display: none"
-      [disabled]="disabled"
-      (click)="onFileInputClick($event)"
-      (change)="onFileSelected($event)" />
-
-    <ng-container *ngIf="selectedFile; else dragArea">
-      <i class="pi pi-file-word text-blue-500 text-4xl mb-2"></i>
-      <p class="text-xl text-center mb-2">{{ selectedFile.name }}</p>
-      <p-button
-        [label]="'metadata.document.clearFile' | translate"
-        icon="pi pi-times"
-        severity="secondary"
-        [outlined]="true"
-        size="small"
-        (onClick)="clearFile(); $event.stopPropagation()">
-      </p-button>
-    </ng-container>
-
-    <ng-template #dragArea>
-      <i class="pi pi-upload border-2 border-circle border-300 p-3 text-3xl text-color-secondary mb-2"></i>
-      <p class="m-0 text-center text-sm">{{ 'metadata.document.dragDrop' | translate }}</p>
-    </ng-template>
-  </div>
-</p-card>
+    ], template: `<p-card>\r
+  <ng-template pTemplate="header">\r
+    <div class="flex align-items-center p-3">\r
+      <i class="pi pi-file-word mr-2"></i>\r
+      <h4 class="m-0">{{ 'metadata.document.title' | translate }}</h4>\r
+    </div>\r
+  </ng-template>\r
+\r
+  <p class="mb-3">{{ 'metadata.document.description' | translate }}</p>\r
+\r
+  <!-- Upload Section -->\r
+  <div\r
+    class="flex flex-column align-items-center justify-content-center p-3 border-dashed border-round border-200 surface-100 hover:surface-200 hover:border-primary-400 transition-colors transition-duration-300 cursor-pointer w-full min-h-12rem"\r
+    [class.border-primary-400]="isDragging"\r
+    role="button"\r
+    tabindex="0"\r
+    (click)="fileInput.click()"\r
+    (keydown.enter)="fileInput.click()"\r
+    (keydown.space)="fileInput.click(); $event.preventDefault()"\r
+    (dragover)="onDragOver($event)"\r
+    (dragleave)="onDragLeave($event)"\r
+    (drop)="onDrop($event)">\r
+\r
+    <input\r
+      type="file"\r
+      accept=".docx"\r
+      #fileInput\r
+      style="display: none"\r
+      [disabled]="disabled"\r
+      (click)="onFileInputClick($event)"\r
+      (change)="onFileSelected($event)" />\r
+\r
+    <ng-container *ngIf="selectedFile; else dragArea">\r
+      <i class="pi pi-file-word text-blue-500 text-4xl mb-2"></i>\r
+      <p class="text-xl text-center mb-2">{{ selectedFile.name }}</p>\r
+      <p-button\r
+        [label]="'metadata.document.clearFile' | translate"\r
+        icon="pi pi-times"\r
+        severity="secondary"\r
+        [outlined]="true"\r
+        size="small"\r
+        (onClick)="clearFile(); $event.stopPropagation()">\r
+      </p-button>\r
+    </ng-container>\r
+\r
+    <ng-template #dragArea>\r
+      <i class="pi pi-upload border-2 border-circle border-300 p-3 text-3xl text-color-secondary mb-2"></i>\r
+      <p class="m-0 text-center text-sm">{{ 'metadata.document.dragDrop' | translate }}</p>\r
+    </ng-template>\r
+  </div>\r
+</p-card>\r
 `, styles: ["/* src/app/views/metadata-assistant/components/document-upload/document-upload.component.css */\n/*# sourceMappingURL=document-upload.component.css.map */\n"] }]
   }], null, { disabled: [{
     type: Input
@@ -22348,7 +22442,7 @@ var DocumentUploadComponent = class _DocumentUploadComponent {
 })();
 
 // src/app/views/metadata-assistant/components/metadata-result/metadata-result.component.ts
-var _c010 = () => ({ "font-size": "0.75rem" });
+var _c011 = () => ({ "font-size": "0.75rem" });
 function MetadataResultComponent_div_0_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 6)(1, "div", 7);
@@ -22385,7 +22479,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_ng_template_1_Template(r
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(ctx_r0.getDomainFromUrl(result_r3.url));
     \u0275\u0275advance();
-    \u0275\u0275styleMap(\u0275\u0275pureFunction0(9, _c010));
+    \u0275\u0275styleMap(\u0275\u0275pureFunction0(9, _c011));
     \u0275\u0275property("value", result_r3.language === "en" ? \u0275\u0275pipeBind1(5, 5, "common.language.english") : \u0275\u0275pipeBind1(6, 7, "common.language.french"))("severity", result_r3.language === "en" ? "success" : "info");
   }
 }
@@ -22397,7 +22491,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_36_Template(rf, ctx)
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "label", 14);
+    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "span", 14);
     \u0275\u0275text(8);
     \u0275\u0275pipe(9, "translate");
     \u0275\u0275elementStart(10, "span", 19);
@@ -22415,7 +22509,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_36_Template(rf, ctx)
     \u0275\u0275elementStart(14, "div", 21)(15, "code", 22);
     \u0275\u0275text(16);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(17, "div", 34)(18, "div", 18)(19, "label", 14);
+    \u0275\u0275elementStart(17, "div", 34)(18, "div", 18)(19, "span", 14);
     \u0275\u0275text(20);
     \u0275\u0275pipe(21, "translate");
     \u0275\u0275elementStart(22, "span", 19);
@@ -22483,7 +22577,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template(rf, ctx)
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "label", 14);
+    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "span", 14);
     \u0275\u0275text(8);
     \u0275\u0275pipe(9, "translate");
     \u0275\u0275elementStart(10, "span", 19);
@@ -22501,7 +22595,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template(rf, ctx)
     \u0275\u0275elementStart(14, "div", 21)(15, "code", 22);
     \u0275\u0275text(16);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(17, "div", 34)(18, "div", 18)(19, "label", 14);
+    \u0275\u0275elementStart(17, "div", 34)(18, "div", 18)(19, "span", 14);
     \u0275\u0275text(20);
     \u0275\u0275pipe(21, "translate");
     \u0275\u0275elementStart(22, "span", 19);
@@ -22550,7 +22644,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template(rf, ctx)
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "label", 41);
+    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "span", 41);
     \u0275\u0275text(8);
     \u0275\u0275pipe(9, "translate");
     \u0275\u0275elementStart(10, "span", 42);
@@ -22568,7 +22662,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template(rf, ctx)
     \u0275\u0275elementStart(14, "div", 44)(15, "code", 22);
     \u0275\u0275text(16);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(17, "div", 13)(18, "div", 18)(19, "label", 41);
+    \u0275\u0275elementStart(17, "div", 13)(18, "div", 18)(19, "span", 41);
     \u0275\u0275text(20);
     \u0275\u0275pipe(21, "translate");
     \u0275\u0275elementStart(22, "span", 42);
@@ -22586,7 +22680,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template(rf, ctx)
     \u0275\u0275elementStart(26, "div", 44)(27, "code", 22);
     \u0275\u0275text(28);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(29, "div", 34)(30, "label", 45);
+    \u0275\u0275elementStart(29, "div", 34)(30, "span", 45);
     \u0275\u0275text(31);
     \u0275\u0275pipe(32, "translate");
     \u0275\u0275elementEnd();
@@ -22625,7 +22719,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_Template(rf, ctx) {
     const _r2 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "p-accordionTab", 11);
     \u0275\u0275template(1, MetadataResultComponent_div_0_p_accordionTab_5_ng_template_1_Template, 7, 10, "ng-template", 2);
-    \u0275\u0275elementStart(2, "div", 12)(3, "div", 13)(4, "label", 14);
+    \u0275\u0275elementStart(2, "div", 12)(3, "div", 13)(4, "span", 14);
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
@@ -22640,7 +22734,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_Template(rf, ctx) {
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.url));
     });
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(12, "div", 13)(13, "div", 18)(14, "label", 14);
+    \u0275\u0275elementStart(12, "div", 13)(13, "div", 18)(14, "span", 14);
     \u0275\u0275text(15);
     \u0275\u0275pipe(16, "translate");
     \u0275\u0275elementStart(17, "span", 19);
@@ -22657,7 +22751,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_Template(rf, ctx) {
     \u0275\u0275elementStart(21, "div", 21)(22, "code", 22);
     \u0275\u0275text(23);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(24, "div", 13)(25, "div", 18)(26, "label", 14);
+    \u0275\u0275elementStart(24, "div", 13)(25, "div", 18)(26, "span", 14);
     \u0275\u0275text(27);
     \u0275\u0275pipe(28, "translate");
     \u0275\u0275elementStart(29, "span", 19);
@@ -22819,269 +22913,269 @@ var MetadataResultComponent = class _MetadataResultComponent {
       TagModule,
       TooltipModule,
       DocumentUploadComponent
-    ], template: `<div class="metadata-results-container" *ngIf="results && results.length > 0">
-  <p-card>
-    <ng-template pTemplate="header">
-      <div class="flex align-items-center justify-content-between p-3">
-        <div class="flex align-items-center">
-          <i class="pi pi-list mr-2"></i>
-          <h3 class="m-0">{{ 'metadata.results.title' | translate }}</h3>
-        </div>
-        <p-tag [value]="results.length + ' ' + ('metadata.results.items' | translate)" severity="info"></p-tag>
-      </div>
-    </ng-template>
-
-    <div class="results-content">
-      <p-accordion [multiple]="true">
-        <p-accordionTab *ngFor="let result of results; let i = index" [selected]="i === 0">
-          <ng-template pTemplate="header">
-            <div class="flex align-items-center justify-content-between w-full pr-2">
-              <div class="flex align-items-center gap-2">
-                <span class="font-semibold">{{ getDomainFromUrl(result.url) }}</span>
-                <p-tag
-                  [value]="result.language === 'en' ? ('common.language.english' | translate) : ('common.language.french' | translate)"
-                  [severity]="result.language === 'en' ? 'success' : 'info'"
-                  [style]="{'font-size': '0.75rem'}">
-                </p-tag>
-              </div>
-            </div>
-          </ng-template>
-
-          <div class="result-content p-3">
-            <!-- URL -->
-            <div class="field mb-3">
-              <label class="font-semibold text-500 text-sm">{{ 'metadata.results.url' | translate }}</label>
-              <div class="flex align-items-center gap-2 mt-1">
-                <a [href]="result.url" target="_blank" class="text-primary hover:underline text-sm">
-                  {{ result.url }}
-                </a>
-                <p-button 
-                  icon="pi pi-external-link" 
-                  [text]="true" 
-                  [rounded]="true"
-                  size="small"
-                  (onClick)="copyToClipboard(result.url)"
-                  [pTooltip]="'metadata.results.openInNewTab' | translate">
-                </p-button>
-              </div>
-            </div>
-
-            <!-- Meta Description -->
-            <div class="field mb-3">
-              <div class="flex align-items-center justify-content-between mb-1">
-                <label class="font-semibold text-500 text-sm">
-                  {{ 'metadata.results.metaDescription' | translate }}
-                  <span class="text-xs text-400 ml-1">({{ result.metaDescription.length }} chars)</span>
-                </label>
-                <p-button 
-                  icon="pi pi-copy" 
-                  [text]="true"
-                  [rounded]="true"
-                  size="small"
-                  (onClick)="copyToClipboard(result.metaDescription)"
-                  [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                </p-button>
-              </div>
-              <div class="meta-content p-2 surface-50 border-round">
-                <code class="text-sm">{{ result.metaDescription }}</code>
-              </div>
-            </div>
-
-            <!-- Meta Keywords -->
-            <div class="field mb-3">
-              <div class="flex align-items-center justify-content-between mb-1">
-                <label class="font-semibold text-500 text-sm">
-                  {{ 'metadata.results.metaKeywords' | translate }}
-                  <span class="text-xs text-400 ml-1">({{ result.metaKeywords.length }} chars)</span>
-                </label>
-                <p-button 
-                  icon="pi pi-copy" 
-                  [text]="true"
-                  [rounded]="true"
-                  size="small"
-                  (onClick)="copyToClipboard(result.metaKeywords)"
-                  [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                </p-button>
-              </div>
-              <div class="meta-content p-2 surface-50 border-round">
-                <code class="text-sm">{{ result.metaKeywords }}</code>
-              </div>
-            </div>
-
-            <!-- French Translations (if available) -->
-            <div *ngIf="showTranslations && result.frenchTranslatedDescription" class="translation-section mt-4 p-3 surface-100 border-round">
-              <h4 class="flex align-items-center gap-2 mb-3">
-                <i class="pi pi-language"></i>
-                {{ 'metadata.results.frenchTranslation' | translate }}
-              </h4>
-
-              <!-- Translated Description -->
-              <div class="field mb-3">
-                <div class="flex align-items-center justify-content-between mb-1">
-                  <label class="font-semibold text-500 text-sm">
-                    {{ 'metadata.results.translatedDescription' | translate }}
-                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedDescription.length }} chars)</span>
-                  </label>
-                  <p-button
-                    icon="pi pi-copy"
-                    [text]="true"
-                    [rounded]="true"
-                    size="small"
-                    (onClick)="copyToClipboard(result.frenchTranslatedDescription!)"
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                  </p-button>
-                </div>
-                <div class="meta-content p-2 surface-50 border-round">
-                  <code class="text-sm">{{ result.frenchTranslatedDescription }}</code>
-                </div>
-              </div>
-
-              <!-- Translated Keywords -->
-              <div class="field">
-                <div class="flex align-items-center justify-content-between mb-1">
-                  <label class="font-semibold text-500 text-sm">
-                    {{ 'metadata.results.translatedKeywords' | translate }}
-                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedKeywords!.length }} chars)</span>
-                  </label>
-                  <p-button
-                    icon="pi pi-copy"
-                    [text]="true"
-                    [rounded]="true"
-                    size="small"
-                    (onClick)="copyToClipboard(result.frenchTranslatedKeywords!)"
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                  </p-button>
-                </div>
-                <div class="meta-content p-2 surface-50 border-round">
-                  <code class="text-sm">{{ result.frenchTranslatedKeywords }}</code>
-                </div>
-              </div>
-            </div>
-
-            <!-- Document Upload Section -->
-            <div *ngIf="canUploadDocument(result)" class="document-upload-section mt-4">
-              <ca-document-upload
-                [disabled]="isProcessingDocument(i)"
-                (fileSelected)="onDocumentFileSelected($event, i)">
-              </ca-document-upload>
-            </div>
-
-            <!-- Document Metadata (if available) -->
-            <div *ngIf="result.documentMetadata" class="document-metadata-section mt-4 p-3 surface-100 border-round">
-              <h4 class="flex align-items-center gap-2 mb-3">
-                <i class="pi pi-file-word"></i>
-                {{ 'metadata.results.documentMetadata' | translate }}
-              </h4>
-
-              <!-- Document Description -->
-              <div class="field mb-3">
-                <div class="flex align-items-center justify-content-between mb-1">
-                  <label class="font-semibold text-500 text-sm">
-                    {{ 'metadata.results.documentDescription' | translate }}
-                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.description.length }} chars)</span>
-                  </label>
-                  <p-button
-                    icon="pi pi-copy"
-                    [text]="true"
-                    [rounded]="true"
-                    size="small"
-                    (onClick)="copyToClipboard(result.documentMetadata.description)"
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                  </p-button>
-                </div>
-                <div class="meta-content p-2 surface-50 border-round">
-                  <code class="text-sm">{{ result.documentMetadata.description }}</code>
-                </div>
-              </div>
-
-              <!-- Document Keywords -->
-              <div class="field">
-                <div class="flex align-items-center justify-content-between mb-1">
-                  <label class="font-semibold text-500 text-sm">
-                    {{ 'metadata.results.documentKeywords' | translate }}
-                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.keywords.length }} chars)</span>
-                  </label>
-                  <p-button
-                    icon="pi pi-copy"
-                    [text]="true"
-                    [rounded]="true"
-                    size="small"
-                    (onClick)="copyToClipboard(result.documentMetadata.keywords)"
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                  </p-button>
-                </div>
-                <div class="meta-content p-2 surface-50 border-round">
-                  <code class="text-sm">{{ result.documentMetadata.keywords }}</code>
-                </div>
-              </div>
-            </div>
-
-            <!-- Evaluation Results (if available) -->
-            <div *ngIf="result.evaluationResult" class="evaluation-section mt-4 p-3 border-round" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-              <h4 class="flex align-items-center gap-2 mb-3">
-                <i class="pi pi-check-circle"></i>
-                {{ 'metadata.results.evaluation' | translate }}
-              </h4>
-
-              <!-- Suggested Description -->
-              <div class="field mb-3">
-                <div class="flex align-items-center justify-content-between mb-1">
-                  <label class="font-semibold text-sm">
-                    {{ 'metadata.results.suggestedDescription' | translate }}
-                    <span class="text-xs ml-1 opacity-80">({{ result.evaluationResult.suggestedDescription.length }} chars)</span>
-                  </label>
-                  <p-button
-                    icon="pi pi-copy"
-                    [text]="true"
-                    [rounded]="true"
-                    size="small"
-                    styleClass="text-white"
-                    (onClick)="copyToClipboard(result.evaluationResult.suggestedDescription)"
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                  </p-button>
-                </div>
-                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">
-                  <code class="text-sm">{{ result.evaluationResult.suggestedDescription }}</code>
-                </div>
-              </div>
-
-              <!-- Suggested Keywords -->
-              <div class="field mb-3">
-                <div class="flex align-items-center justify-content-between mb-1">
-                  <label class="font-semibold text-sm">
-                    {{ 'metadata.results.suggestedKeywords' | translate }}
-                    <span class="text-xs ml-1 opacity-80">({{ result.evaluationResult.suggestedKeywords.length }} chars)</span>
-                  </label>
-                  <p-button
-                    icon="pi pi-copy"
-                    [text]="true"
-                    [rounded]="true"
-                    size="small"
-                    styleClass="text-white"
-                    (onClick)="copyToClipboard(result.evaluationResult.suggestedKeywords)"
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">
-                  </p-button>
-                </div>
-                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">
-                  <code class="text-sm">{{ result.evaluationResult.suggestedKeywords }}</code>
-                </div>
-              </div>
-
-              <!-- Rationale -->
-              <div class="field">
-                <label class="font-semibold text-sm mb-1 block">
-                  {{ 'metadata.results.rationale' | translate }}
-                </label>
-                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">
-                  <p class="text-sm m-0">{{ result.evaluationResult.rationale }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </p-accordionTab>
-      </p-accordion>
-    </div>
-  </p-card>
+    ], template: `<div class="metadata-results-container" *ngIf="results && results.length > 0">\r
+  <p-card>\r
+    <ng-template pTemplate="header">\r
+      <div class="flex align-items-center justify-content-between p-3">\r
+        <div class="flex align-items-center">\r
+          <i class="pi pi-list mr-2"></i>\r
+          <h3 class="m-0">{{ 'metadata.results.title' | translate }}</h3>\r
+        </div>\r
+        <p-tag [value]="results.length + ' ' + ('metadata.results.items' | translate)" severity="info"></p-tag>\r
+      </div>\r
+    </ng-template>\r
+\r
+    <div class="results-content">\r
+      <p-accordion [multiple]="true">\r
+        <p-accordionTab *ngFor="let result of results; let i = index" [selected]="i === 0">\r
+          <ng-template pTemplate="header">\r
+            <div class="flex align-items-center justify-content-between w-full pr-2">\r
+              <div class="flex align-items-center gap-2">\r
+                <span class="font-semibold">{{ getDomainFromUrl(result.url) }}</span>\r
+                <p-tag\r
+                  [value]="result.language === 'en' ? ('common.language.english' | translate) : ('common.language.french' | translate)"\r
+                  [severity]="result.language === 'en' ? 'success' : 'info'"\r
+                  [style]="{'font-size': '0.75rem'}">\r
+                </p-tag>\r
+              </div>\r
+            </div>\r
+          </ng-template>\r
+\r
+          <div class="result-content p-3">\r
+            <!-- URL -->\r
+            <div class="field mb-3">\r
+              <span class="font-semibold text-500 text-sm">{{ 'metadata.results.url' | translate }}</span>\r
+              <div class="flex align-items-center gap-2 mt-1">\r
+                <a [href]="result.url" target="_blank" class="text-primary hover:underline text-sm">\r
+                  {{ result.url }}\r
+                </a>\r
+                <p-button \r
+                  icon="pi pi-external-link" \r
+                  [text]="true" \r
+                  [rounded]="true"\r
+                  size="small"\r
+                  (onClick)="copyToClipboard(result.url)"\r
+                  [pTooltip]="'metadata.results.openInNewTab' | translate">\r
+                </p-button>\r
+              </div>\r
+            </div>\r
+\r
+            <!-- Meta Description -->\r
+            <div class="field mb-3">\r
+              <div class="flex align-items-center justify-content-between mb-1">\r
+                <span class="font-semibold text-500 text-sm">\r
+                  {{ 'metadata.results.metaDescription' | translate }}\r
+                  <span class="text-xs text-400 ml-1">({{ result.metaDescription.length }} chars)</span>\r
+                </span>\r
+                <p-button \r
+                  icon="pi pi-copy" \r
+                  [text]="true"\r
+                  [rounded]="true"\r
+                  size="small"\r
+                  (onClick)="copyToClipboard(result.metaDescription)"\r
+                  [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                </p-button>\r
+              </div>\r
+              <div class="meta-content p-2 surface-50 border-round">\r
+                <code class="text-sm">{{ result.metaDescription }}</code>\r
+              </div>\r
+            </div>\r
+\r
+            <!-- Meta Keywords -->\r
+            <div class="field mb-3">\r
+              <div class="flex align-items-center justify-content-between mb-1">\r
+                <span class="font-semibold text-500 text-sm">\r
+                  {{ 'metadata.results.metaKeywords' | translate }}\r
+                  <span class="text-xs text-400 ml-1">({{ result.metaKeywords.length }} chars)</span>\r
+                </span>\r
+                <p-button \r
+                  icon="pi pi-copy" \r
+                  [text]="true"\r
+                  [rounded]="true"\r
+                  size="small"\r
+                  (onClick)="copyToClipboard(result.metaKeywords)"\r
+                  [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                </p-button>\r
+              </div>\r
+              <div class="meta-content p-2 surface-50 border-round">\r
+                <code class="text-sm">{{ result.metaKeywords }}</code>\r
+              </div>\r
+            </div>\r
+\r
+            <!-- French Translations (if available) -->\r
+            <div *ngIf="showTranslations && result.frenchTranslatedDescription" class="translation-section mt-4 p-3 surface-100 border-round">\r
+              <h4 class="flex align-items-center gap-2 mb-3">\r
+                <i class="pi pi-language"></i>\r
+                {{ 'metadata.results.frenchTranslation' | translate }}\r
+              </h4>\r
+\r
+              <!-- Translated Description -->\r
+              <div class="field mb-3">\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-500 text-sm">\r
+                    {{ 'metadata.results.translatedDescription' | translate }}\r
+                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedDescription.length }} chars)</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    (onClick)="copyToClipboard(result.frenchTranslatedDescription!)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="meta-content p-2 surface-50 border-round">\r
+                  <code class="text-sm">{{ result.frenchTranslatedDescription }}</code>\r
+                </div>\r
+              </div>\r
+\r
+              <!-- Translated Keywords -->\r
+              <div class="field">\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-500 text-sm">\r
+                    {{ 'metadata.results.translatedKeywords' | translate }}\r
+                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedKeywords!.length }} chars)</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    (onClick)="copyToClipboard(result.frenchTranslatedKeywords!)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="meta-content p-2 surface-50 border-round">\r
+                  <code class="text-sm">{{ result.frenchTranslatedKeywords }}</code>\r
+                </div>\r
+              </div>\r
+            </div>\r
+\r
+            <!-- Document Upload Section -->\r
+            <div *ngIf="canUploadDocument(result)" class="document-upload-section mt-4">\r
+              <ca-document-upload\r
+                [disabled]="isProcessingDocument(i)"\r
+                (fileSelected)="onDocumentFileSelected($event, i)">\r
+              </ca-document-upload>\r
+            </div>\r
+\r
+            <!-- Document Metadata (if available) -->\r
+            <div *ngIf="result.documentMetadata" class="document-metadata-section mt-4 p-3 surface-100 border-round">\r
+              <h4 class="flex align-items-center gap-2 mb-3">\r
+                <i class="pi pi-file-word"></i>\r
+                {{ 'metadata.results.documentMetadata' | translate }}\r
+              </h4>\r
+\r
+              <!-- Document Description -->\r
+              <div class="field mb-3">\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-500 text-sm">\r
+                    {{ 'metadata.results.documentDescription' | translate }}\r
+                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.description.length }} chars)</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    (onClick)="copyToClipboard(result.documentMetadata.description)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="meta-content p-2 surface-50 border-round">\r
+                  <code class="text-sm">{{ result.documentMetadata.description }}</code>\r
+                </div>\r
+              </div>\r
+\r
+              <!-- Document Keywords -->\r
+              <div class="field">\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-500 text-sm">\r
+                    {{ 'metadata.results.documentKeywords' | translate }}\r
+                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.keywords.length }} chars)</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    (onClick)="copyToClipboard(result.documentMetadata.keywords)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="meta-content p-2 surface-50 border-round">\r
+                  <code class="text-sm">{{ result.documentMetadata.keywords }}</code>\r
+                </div>\r
+              </div>\r
+            </div>\r
+\r
+            <!-- Evaluation Results (if available) -->\r
+            <div *ngIf="result.evaluationResult" class="evaluation-section mt-4 p-3 border-round" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">\r
+              <h4 class="flex align-items-center gap-2 mb-3">\r
+                <i class="pi pi-check-circle"></i>\r
+                {{ 'metadata.results.evaluation' | translate }}\r
+              </h4>\r
+\r
+              <!-- Suggested Description -->\r
+              <div class="field mb-3">\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-sm">\r
+                    {{ 'metadata.results.suggestedDescription' | translate }}\r
+                    <span class="text-xs ml-1 opacity-80">({{ result.evaluationResult.suggestedDescription.length }} chars)</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    styleClass="text-white"\r
+                    (onClick)="copyToClipboard(result.evaluationResult.suggestedDescription)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">\r
+                  <code class="text-sm">{{ result.evaluationResult.suggestedDescription }}</code>\r
+                </div>\r
+              </div>\r
+\r
+              <!-- Suggested Keywords -->\r
+              <div class="field mb-3">\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-sm">\r
+                    {{ 'metadata.results.suggestedKeywords' | translate }}\r
+                    <span class="text-xs ml-1 opacity-80">({{ result.evaluationResult.suggestedKeywords.length }} chars)</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    styleClass="text-white"\r
+                    (onClick)="copyToClipboard(result.evaluationResult.suggestedKeywords)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">\r
+                  <code class="text-sm">{{ result.evaluationResult.suggestedKeywords }}</code>\r
+                </div>\r
+              </div>\r
+\r
+              <!-- Rationale -->\r
+              <div class="field">\r
+                <span class="font-semibold text-sm mb-1 block">\r
+                  {{ 'metadata.results.rationale' | translate }}\r
+                </span>\r
+                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">\r
+                  <p class="text-sm m-0">{{ result.evaluationResult.rationale }}</p>\r
+                </div>\r
+              </div>\r
+            </div>\r
+          </div>\r
+        </p-accordionTab>\r
+      </p-accordion>\r
+    </div>\r
+  </p-card>\r
 </div>`, styles: ['/* src/app/views/metadata-assistant/components/metadata-result/metadata-result.component.css */\n.metadata-results-container {\n  width: 100%;\n  margin-top: 1.5rem;\n}\n.results-content {\n  padding: 0;\n}\n.result-content {\n  padding: 1rem;\n}\n.field {\n  margin-bottom: 1rem;\n}\n.field label {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n.content-preview {\n  max-height: 400px;\n  overflow-y: auto;\n  font-family:\n    system-ui,\n    -apple-system,\n    sans-serif;\n  line-height: 1.6;\n}\n.meta-content {\n  font-family:\n    "Monaco",\n    "Courier New",\n    monospace;\n  word-break: break-word;\n}\n.keywords-container {\n  padding: 0.5rem;\n  background-color: var(--surface-50);\n  border-radius: var(--border-radius);\n}\n.translation-section {\n  border-left: 3px solid var(--primary-300);\n}\n.text-primary {\n  color: var(--primary-color);\n}\n.hover\\:underline:hover {\n  text-decoration: underline;\n}\n.text-400 {\n  color: var(--text-color-secondary);\n}\n.text-500 {\n  color: var(--text-color);\n}\n:host ::ng-deep .p-accordion .p-accordion-header-link {\n  padding: 1rem;\n  background: var(--surface-50);\n  border: 1px solid var(--surface-200);\n  transition: all 0.2s;\n}\n:host ::ng-deep .p-accordion .p-accordion-header-link:hover {\n  background: var(--surface-100);\n}\n:host ::ng-deep .p-accordion .p-accordion-content {\n  padding: 0;\n  border: 1px solid var(--surface-200);\n  border-top: none;\n}\n:host ::ng-deep .p-chip {\n  background: var(--primary-100);\n  color: var(--primary-700);\n  font-size: 0.85rem;\n  padding: 0.25rem 0.5rem;\n}\n/*# sourceMappingURL=metadata-result.component.css.map */\n'] }]
   }], null, { results: [{
     type: Input
@@ -23243,7 +23337,8 @@ var CsvExportComponent = class _CsvExportComponent {
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     const timestamp = (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-").slice(0, -5);
-    const filename = this.includeTranslations ? `metadata-with-translations-${timestamp}.csv` : `metadata-results-${timestamp}.csv`;
+    const baseFilename = this.includeTranslations ? this.translate.instant("metadata.csv.fileNameWithTranslations") : this.translate.instant("metadata.csv.fileNameResults");
+    const filename = `${baseFilename}-${timestamp}.csv`;
     link.setAttribute("href", url);
     link.setAttribute("download", filename);
     link.style.visibility = "hidden";
@@ -23277,52 +23372,52 @@ var CsvExportComponent = class _CsvExportComponent {
       ButtonModule,
       CardModule,
       TooltipModule
-    ], template: `<div class="csv-export-container" *ngIf="results && results.length > 0">
-  <p-card>
-    <ng-template pTemplate="header">
-      <div class="flex align-items-center p-3">
-        <i class="pi pi-download mr-2"></i>
-        <h3 class="m-0">{{ 'metadata.csv.title' | translate }}</h3>
-      </div>
-    </ng-template>
-
-    <div class="export-content">
-      <div class="export-info mb-3">
-        <p class="text-sm text-500 m-0">
-          {{ 'metadata.csv.description' | translate }}
-        </p>
-      </div>
-
-      <div class="export-stats mb-3 p-3 surface-100 border-round">
-        <div class="flex align-items-center justify-content-between">
-          <div class="stat-item">
-            <span class="text-xs text-500 block mb-1">{{ 'metadata.csv.totalUrls' | translate }}</span>
-            <span class="text-xl font-bold text-primary">{{ results.length }}</span>
-          </div>
-          <div class="stat-item" *ngIf="includeTranslations">
-            <span class="text-xs text-500 block mb-1">{{ 'metadata.csv.withTranslations' | translate }}</span>
-            <span class="text-xl font-bold text-primary">{{ getTranslatedResultsCount() }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="export-actions flex gap-2">
-        <p-button 
-          [label]="getExportButtonLabel()"
-          icon="pi pi-file-export"
-          severity="primary"
-          (onClick)="exportToCsv()">
-        </p-button>
-      </div>
-
-      <div class="export-note mt-3">
-        <small class="text-xs text-500">
-          <i class="pi pi-info-circle mr-1"></i>
-          {{ 'metadata.csv.note' | translate }}
-        </small>
-      </div>
-    </div>
-  </p-card>
+    ], template: `<div class="csv-export-container" *ngIf="results && results.length > 0">\r
+  <p-card>\r
+    <ng-template pTemplate="header">\r
+      <div class="flex align-items-center p-3">\r
+        <i class="pi pi-download mr-2"></i>\r
+        <h3 class="m-0">{{ 'metadata.csv.title' | translate }}</h3>\r
+      </div>\r
+    </ng-template>\r
+\r
+    <div class="export-content">\r
+      <div class="export-info mb-3">\r
+        <p class="text-sm text-500 m-0">\r
+          {{ 'metadata.csv.description' | translate }}\r
+        </p>\r
+      </div>\r
+\r
+      <div class="export-stats mb-3 p-3 surface-100 border-round">\r
+        <div class="flex align-items-center justify-content-between">\r
+          <div class="stat-item">\r
+            <span class="text-xs text-500 block mb-1">{{ 'metadata.csv.totalUrls' | translate }}</span>\r
+            <span class="text-xl font-bold text-primary">{{ results.length }}</span>\r
+          </div>\r
+          <div class="stat-item" *ngIf="includeTranslations">\r
+            <span class="text-xs text-500 block mb-1">{{ 'metadata.csv.withTranslations' | translate }}</span>\r
+            <span class="text-xl font-bold text-primary">{{ getTranslatedResultsCount() }}</span>\r
+          </div>\r
+        </div>\r
+      </div>\r
+\r
+      <div class="export-actions flex gap-2">\r
+        <p-button \r
+          [label]="getExportButtonLabel()"\r
+          icon="pi pi-file-export"\r
+          severity="primary"\r
+          (onClick)="exportToCsv()">\r
+        </p-button>\r
+      </div>\r
+\r
+      <div class="export-note mt-3">\r
+        <small class="text-xs text-500">\r
+          <i class="pi pi-info-circle mr-1"></i>\r
+          {{ 'metadata.csv.note' | translate }}\r
+        </small>\r
+      </div>\r
+    </div>\r
+  </p-card>\r
 </div>`, styles: ["/* src/app/views/metadata-assistant/components/csv-export/csv-export.component.css */\n.csv-export-container {\n  width: 100%;\n  margin-top: 1.5rem;\n}\n.export-content {\n  padding: 0;\n}\n.export-stats {\n  background: var(--surface-100);\n}\n.stat-item {\n  text-align: center;\n}\n.preview-table {\n  overflow-x: auto;\n}\n.preview-table table {\n  font-size: 0.75rem;\n  table-layout: fixed;\n}\n.preview-table th {\n  font-weight: 600;\n  color: var(--text-color);\n  background: var(--surface-100);\n}\n.preview-table td {\n  color: var(--text-color-secondary);\n}\n.text-overflow-ellipsis {\n  text-overflow: ellipsis;\n}\n.white-space-nowrap {\n  white-space: nowrap;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.export-actions {\n  display: flex;\n  gap: 0.5rem;\n}\n.export-note {\n  padding-top: 0.5rem;\n  border-top: 1px solid var(--surface-200);\n}\n.text-primary {\n  color: var(--primary-color);\n}\n.border-bottom-1 {\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n}\n.surface-border {\n  border-color: var(--surface-border);\n}\n/*# sourceMappingURL=csv-export.component.css.map */\n"] }]
   }], null, { results: [{
     type: Input
@@ -23335,7 +23430,7 @@ var CsvExportComponent = class _CsvExportComponent {
 })();
 
 // src/app/views/metadata-assistant/metadata-assistant.component.ts
-function MetadataAssistantComponent_span_13_Template(rf, ctx) {
+function MetadataAssistantComponent_span_12_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 7);
     \u0275\u0275element(1, "i", 8);
@@ -23348,7 +23443,7 @@ function MetadataAssistantComponent_span_13_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "page.apiKey.active"), " ");
   }
 }
-function MetadataAssistantComponent_span_15_Template(rf, ctx) {
+function MetadataAssistantComponent_span_14_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 9);
     \u0275\u0275element(1, "i", 10);
@@ -23361,12 +23456,12 @@ function MetadataAssistantComponent_span_15_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "page.apiKey.notSet"), " ");
   }
 }
-function MetadataAssistantComponent_section_17_div_10_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_22_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 20)(1, "p-button", 21);
+    \u0275\u0275elementStart(0, "div", 28)(1, "p-button", 29);
     \u0275\u0275pipe(2, "translate");
-    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_17_div_10_Template_p_button_onClick_1_listener() {
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_div_22_Template_p_button_onClick_1_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.reset());
@@ -23378,10 +23473,10 @@ function MetadataAssistantComponent_section_17_div_10_Template(rf, ctx) {
     \u0275\u0275property("label", \u0275\u0275pipeBind1(2, 2, "metadata.button.reset"))("outlined", true);
   }
 }
-function MetadataAssistantComponent_section_17_div_12_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_24_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div");
-    \u0275\u0275element(1, "ca-progress-indicator", 22);
+    \u0275\u0275element(1, "ca-progress-indicator", 30);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -23390,10 +23485,10 @@ function MetadataAssistantComponent_section_17_div_12_Template(rf, ctx) {
     \u0275\u0275property("progressText", ctx_r1.getProgressText())("processedCount", ctx_r1.state.processedUrls)("totalFiles", ctx_r1.state.totalUrls)("showProgress", true)("showSpinner", ctx_r1.state.isProcessing);
   }
 }
-function MetadataAssistantComponent_section_17_div_13_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_25_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14);
-    \u0275\u0275element(1, "p-message", 23);
+    \u0275\u0275elementStart(0, "div", 19);
+    \u0275\u0275element(1, "p-message", 31);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -23402,17 +23497,17 @@ function MetadataAssistantComponent_section_17_div_13_Template(rf, ctx) {
     \u0275\u0275property("text", ctx_r1.state.error);
   }
 }
-function MetadataAssistantComponent_section_17_div_14_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_26_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 24)(1, "ca-metadata-result", 25);
-    \u0275\u0275listener("documentSelected", function MetadataAssistantComponent_section_17_div_14_Template_ca_metadata_result_documentSelected_1_listener($event) {
+    \u0275\u0275elementStart(0, "div", 32)(1, "ca-metadata-result", 33);
+    \u0275\u0275listener("documentSelected", function MetadataAssistantComponent_section_16_div_26_Template_ca_metadata_result_documentSelected_1_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.onDocumentSelected($event.file, $event.index));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275element(2, "ca-metadata-csv-export", 26);
+    \u0275\u0275element(2, "ca-metadata-csv-export", 34);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -23423,56 +23518,184 @@ function MetadataAssistantComponent_section_17_div_14_Template(rf, ctx) {
     \u0275\u0275property("results", ctx_r1.state.results)("includeTranslations", ctx_r1.state.translateToFrench);
   }
 }
-function MetadataAssistantComponent_section_17_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_40_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 28)(1, "p-button", 29);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_div_40_Template_p_button_onClick_1_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.resetDocumentTab());
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275property("label", \u0275\u0275pipeBind1(2, 2, "metadata.button.reset"))("outlined", true);
+  }
+}
+function MetadataAssistantComponent_section_16_div_42_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div");
+    \u0275\u0275element(1, "ca-progress-indicator", 30);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("progressText", ctx_r1.getProgressText())("processedCount", ctx_r1.state.processedUrls)("totalFiles", ctx_r1.state.totalUrls)("showProgress", true)("showSpinner", ctx_r1.state.isProcessing);
+  }
+}
+function MetadataAssistantComponent_section_16_div_43_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 19);
+    \u0275\u0275element(1, "p-message", 31);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("text", ctx_r1.state.error);
+  }
+}
+function MetadataAssistantComponent_section_16_div_44_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "strong");
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275pipe(5, "translate");
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(2, 2, "metadata.document.languageDetected"), ":");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", ctx_r1.documentLanguage === "en" ? \u0275\u0275pipeBind1(4, 4, "common.language.english") : \u0275\u0275pipeBind1(5, 6, "common.language.french"), " ");
+  }
+}
+function MetadataAssistantComponent_section_16_div_44_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 19)(1, "p-message", 35);
+    \u0275\u0275template(2, MetadataAssistantComponent_section_16_div_44_ng_template_2_Template, 6, 8, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd()();
+  }
+}
+function MetadataAssistantComponent_section_16_div_45_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 32);
+    \u0275\u0275element(1, "ca-metadata-result", 36)(2, "ca-metadata-csv-export", 34);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("results", ctx_r1.documentResults)("showTranslations", false)("isProcessing", ctx_r1.state.isProcessing)("processingIndex", null);
+    \u0275\u0275advance();
+    \u0275\u0275property("results", ctx_r1.documentResults)("includeTranslations", false);
+  }
+}
+function MetadataAssistantComponent_section_16_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "section")(1, "div", 11)(2, "div", 12)(3, "ca-url-input", 13);
-    \u0275\u0275listener("urlsChange", function MetadataAssistantComponent_section_17_Template_ca_url_input_urlsChange_3_listener($event) {
+    \u0275\u0275elementStart(0, "section")(1, "p-tabs", 11)(2, "p-tablist")(3, "p-tab", 12);
+    \u0275\u0275element(4, "i", 13);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "p-tab", 14);
+    \u0275\u0275element(8, "i", 15);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(11, "p-tabpanels")(12, "p-tabpanel", 12)(13, "div", 16)(14, "div", 17)(15, "ca-url-input", 18);
+    \u0275\u0275listener("urlsChange", function MetadataAssistantComponent_section_16_Template_ca_url_input_urlsChange_15_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onUrlsChange($event));
-    })("urlInputChange", function MetadataAssistantComponent_section_17_Template_ca_url_input_urlInputChange_3_listener($event) {
+    })("urlInputChange", function MetadataAssistantComponent_section_16_Template_ca_url_input_urlInputChange_15_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onUrlInputChange($event));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 14)(5, "ca-shared-model-selector", 15);
-    \u0275\u0275listener("modelChange", function MetadataAssistantComponent_section_17_Template_ca_shared_model_selector_modelChange_5_listener($event) {
+    \u0275\u0275elementStart(16, "div", 19)(17, "ca-shared-model-selector", 20);
+    \u0275\u0275listener("modelChange", function MetadataAssistantComponent_section_16_Template_ca_shared_model_selector_modelChange_17_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onModelChange($event));
-    })("translateChange", function MetadataAssistantComponent_section_17_Template_ca_shared_model_selector_translateChange_5_listener($event) {
+    })("translateChange", function MetadataAssistantComponent_section_16_Template_ca_shared_model_selector_translateChange_17_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onTranslateToggle($event));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(6, "div", 14)(7, "p-button", 16);
-    \u0275\u0275pipe(8, "translate");
-    \u0275\u0275pipe(9, "translate");
-    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_17_Template_p_button_onClick_7_listener() {
+    \u0275\u0275elementStart(18, "div", 19)(19, "p-button", 21);
+    \u0275\u0275pipe(20, "translate");
+    \u0275\u0275pipe(21, "translate");
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_Template_p_button_onClick_19_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.startProcessing());
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(10, MetadataAssistantComponent_section_17_div_10_Template, 3, 4, "div", 17);
+    \u0275\u0275template(22, MetadataAssistantComponent_section_16_div_22_Template, 3, 4, "div", 22);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "div", 12);
-    \u0275\u0275template(12, MetadataAssistantComponent_section_17_div_12_Template, 2, 5, "div", 5)(13, MetadataAssistantComponent_section_17_div_13_Template, 2, 1, "div", 18);
+    \u0275\u0275elementStart(23, "div", 17);
+    \u0275\u0275template(24, MetadataAssistantComponent_section_16_div_24_Template, 2, 5, "div", 5)(25, MetadataAssistantComponent_section_16_div_25_Template, 2, 1, "div", 23);
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(14, MetadataAssistantComponent_section_17_div_14_Template, 3, 6, "div", 19);
+    \u0275\u0275template(26, MetadataAssistantComponent_section_16_div_26_Template, 3, 6, "div", 24);
     \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(27, "p-tabpanel", 14)(28, "div", 16)(29, "div", 17)(30, "ca-document-upload", 25);
+    \u0275\u0275listener("fileSelected", function MetadataAssistantComponent_section_16_Template_ca_document_upload_fileSelected_30_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onDocumentFileSelected($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(31, "div", 19)(32, "ca-shared-model-selector", 26);
+    \u0275\u0275listener("modelChange", function MetadataAssistantComponent_section_16_Template_ca_shared_model_selector_modelChange_32_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onModelChange($event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(33, "div", 19);
+    \u0275\u0275element(34, "p-message", 27);
+    \u0275\u0275pipe(35, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(36, "div", 19)(37, "p-button", 21);
+    \u0275\u0275pipe(38, "translate");
+    \u0275\u0275pipe(39, "translate");
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_Template_p_button_onClick_37_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.startDocumentProcessing());
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(40, MetadataAssistantComponent_section_16_div_40_Template, 3, 4, "div", 22);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(41, "div", 17);
+    \u0275\u0275template(42, MetadataAssistantComponent_section_16_div_42_Template, 2, 5, "div", 5)(43, MetadataAssistantComponent_section_16_div_43_Template, 2, 1, "div", 23)(44, MetadataAssistantComponent_section_16_div_44_Template, 4, 0, "div", 23);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(45, MetadataAssistantComponent_section_16_div_45_Template, 3, 6, "div", 24);
+    \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(6, 35, "metadata.tabs.scrapedContent"), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(10, 37, "metadata.tabs.documentUpload"), " ");
+    \u0275\u0275advance(6);
     \u0275\u0275property("disabled", ctx_r1.state.isProcessing);
     \u0275\u0275advance(2);
     \u0275\u0275property("selectedModel", ctx_r1.state.selectedModel)("models", ctx_r1.models)("label", "metadata.modelSelector.modelLabel")("cardTitle", "metadata.modelSelector.title")("showCard", true)("showTranslateOption", true)("translateToFrench", ctx_r1.state.translateToFrench)("disabled", ctx_r1.state.isProcessing);
     \u0275\u0275advance(2);
-    \u0275\u0275property("label", ctx_r1.state.isProcessing ? \u0275\u0275pipeBind1(8, 16, "metadata.button.processing") : \u0275\u0275pipeBind1(9, 18, "metadata.button.process"))("disabled", !ctx_r1.canProcess())("loading", ctx_r1.state.isProcessing);
+    \u0275\u0275property("label", ctx_r1.state.isProcessing ? \u0275\u0275pipeBind1(20, 39, "metadata.button.processing") : \u0275\u0275pipeBind1(21, 41, "metadata.button.process"))("disabled", !ctx_r1.canProcess())("loading", ctx_r1.state.isProcessing);
     \u0275\u0275advance(3);
     \u0275\u0275property("ngIf", ctx_r1.state.results.length > 0 && !ctx_r1.state.isProcessing);
     \u0275\u0275advance(2);
@@ -23481,12 +23704,30 @@ function MetadataAssistantComponent_section_17_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.state.error);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.state.results.length > 0);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("disabled", ctx_r1.state.isProcessing);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("selectedModel", ctx_r1.state.selectedModel)("models", ctx_r1.models)("label", "metadata.modelSelector.modelLabel")("cardTitle", "metadata.modelSelector.title")("showCard", true)("showTranslateOption", false)("disabled", ctx_r1.state.isProcessing);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", \u0275\u0275pipeBind1(35, 43, "metadata.document.help"));
+    \u0275\u0275advance(3);
+    \u0275\u0275property("label", ctx_r1.state.isProcessing ? \u0275\u0275pipeBind1(38, 45, "metadata.button.processing") : \u0275\u0275pipeBind1(39, 47, "metadata.button.process"))("disabled", !ctx_r1.canProcessDocument())("loading", ctx_r1.state.isProcessing);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r1.documentResults.length > 0 && !ctx_r1.state.isProcessing);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.state.isProcessing || ctx_r1.state.currentStep === "complete");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.state.error);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.documentLanguage && !ctx_r1.state.isProcessing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.documentResults.length > 0);
   }
 }
-function MetadataAssistantComponent_div_19_Template(rf, ctx) {
+function MetadataAssistantComponent_div_18_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27);
-    \u0275\u0275element(1, "p-message", 28);
+    \u0275\u0275elementStart(0, "div", 37);
+    \u0275\u0275element(1, "p-message", 38);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
   }
@@ -23517,6 +23758,11 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
   };
   urlInput = "";
   urls = [];
+  // Document tab properties
+  selectedDocument = null;
+  documentLanguage = null;
+  documentText = "";
+  documentResults = [];
   models = [
     {
       name: "Mistral Small 3.2 24B",
@@ -23532,6 +23778,11 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       name: "Google Gemma 3 27B",
       value: "google/gemma-3-27b-it:free",
       description: "metadata.models.gemmaDescription"
+    },
+    {
+      name: "Tencent Hunyuan A13B",
+      value: "tencent/hunyuan-a13b-instruct:free",
+      description: "metadata.models.hunyuanDescription"
     }
   ];
   ngOnInit() {
@@ -23629,7 +23880,6 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
     const model2 = this.models.find((m) => m.value === modelValue);
     return model2 ? model2.name : modelValue;
   }
-  // Document processing methods
   onDocumentSelected(file, resultIndex) {
     if (!this.apiKeyService.hasApiKey$.value) {
       this.stateService.setError(this.translate.instant("metadata.errors.noApiKey"));
@@ -23705,51 +23955,116 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       }
     });
   }
+  onDocumentFileSelected(file) {
+    this.selectedDocument = file;
+    this.documentLanguage = null;
+    this.documentText = "";
+  }
+  startDocumentProcessing() {
+    if (!this.apiKeyService.hasApiKey$.value) {
+      this.stateService.setError(this.translate.instant("metadata.errors.noApiKey"));
+      return;
+    }
+    if (!this.selectedDocument) {
+      this.stateService.setError(this.translate.instant("metadata.document.errors.processingFailed"));
+      return;
+    }
+    this.stateService.updateState({
+      isProcessing: true,
+      currentStep: "extracting-text",
+      totalUrls: 1,
+      processedUrls: 0,
+      currentUrl: this.selectedDocument.name
+    });
+    this.metadataService.processDocumentForMetadata(this.selectedDocument, this.state.selectedModel).pipe(takeUntil(this.destroy$)).subscribe({
+      next: (result) => {
+        this.documentLanguage = result.language;
+        this.documentText = result.text;
+        this.documentResults = [result.metadata];
+        this.stateService.updateState({
+          isProcessing: false,
+          currentStep: "complete",
+          processedUrls: 1
+        });
+        this.messageService.add({
+          severity: "success",
+          summary: this.translate.instant("metadata.progress.completeTitle"),
+          detail: this.translate.instant("metadata.document.languageDetected") + ": " + this.translate.instant(result.language === "en" ? "common.language.english" : "common.language.french"),
+          life: 4e3
+        });
+      },
+      error: (error) => {
+        console.error("Document processing error:", error);
+        this.stateService.updateState({
+          isProcessing: false,
+          currentStep: "idle"
+        });
+        this.messageService.add({
+          severity: "error",
+          summary: this.translate.instant("metadata.document.errors.processingFailed"),
+          detail: error.message,
+          life: 5e3
+        });
+      }
+    });
+  }
+  resetDocumentTab() {
+    this.selectedDocument = null;
+    this.documentLanguage = null;
+    this.documentText = "";
+    this.documentResults = [];
+    this.stateService.updateState({
+      isProcessing: false,
+      currentStep: "idle",
+      error: null
+    });
+  }
+  canProcessDocument() {
+    return this.apiKeyService.hasApiKey$.value && this.selectedDocument !== null && !this.state.isProcessing;
+  }
   static \u0275fac = function MetadataAssistantComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MetadataAssistantComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MetadataAssistantComponent, selectors: [["ca-metadata-assistant"]], features: [\u0275\u0275ProvidersFeature([MessageService])], decls: 21, vars: 21, consts: [[1, "metadata-assistant-container"], ["id", "wb-cont"], [1, "api-key-status", "mb-4"], ["class", "text-green-600", 4, "ngIf"], ["class", "text-orange-600", 4, "ngIf"], [4, "ngIf"], ["class", "mt-4", 4, "ngIf"], [1, "text-green-600"], [1, "pi", "pi-check-circle"], [1, "text-orange-600"], [1, "pi", "pi-exclamation-circle"], [1, "grid"], [1, "col-12", "lg:col-6"], [3, "urlsChange", "urlInputChange", "disabled"], [1, "mt-3"], [3, "modelChange", "translateChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption", "translateToFrench", "disabled"], ["icon", "pi pi-sparkles", "severity", "primary", "styleClass", "w-full", 3, "onClick", "label", "disabled", "loading"], ["class", "mt-2", 4, "ngIf"], ["class", "mt-3", 4, "ngIf"], ["class", "results-section mt-4", 4, "ngIf"], [1, "mt-2"], ["icon", "pi pi-refresh", "severity", "secondary", "styleClass", "w-full", 3, "onClick", "label", "outlined"], [3, "progressText", "processedCount", "totalFiles", "showProgress", "showSpinner"], ["severity", "error", "styleClass", "w-full", 3, "text"], [1, "results-section", "mt-4"], [3, "documentSelected", "results", "showTranslations", "isProcessing", "processingIndex"], [3, "results", "includeTranslations"], [1, "mt-4"], ["severity", "warn", "styleClass", "w-full", 3, "text"]], template: function MetadataAssistantComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MetadataAssistantComponent, selectors: [["ca-metadata-assistant"]], features: [\u0275\u0275ProvidersFeature([MessageService])], decls: 20, vars: 21, consts: [["default", ""], ["id", "wb-cont"], [1, "api-key-status", "mb-4"], ["class", "text-green-600", 4, "ngIf"], ["class", "text-orange-600", 4, "ngIf"], [4, "ngIf"], ["class", "mt-4", 4, "ngIf"], [1, "text-green-600"], [1, "pi", "pi-check-circle"], [1, "text-orange-600"], [1, "pi", "pi-exclamation-circle"], ["value", "0", 1, "mt-3"], ["value", "0"], [1, "pi", "pi-globe", "mr-1"], ["value", "1"], [1, "pi", "pi-file", "mr-1"], [1, "grid"], [1, "col-12", "lg:col-6"], [3, "urlsChange", "urlInputChange", "disabled"], [1, "mt-3"], [3, "modelChange", "translateChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption", "translateToFrench", "disabled"], ["icon", "pi pi-sparkles", "severity", "primary", "styleClass", "w-full", 3, "onClick", "label", "disabled", "loading"], ["class", "mt-2", 4, "ngIf"], ["class", "mt-3", 4, "ngIf"], ["class", "results-section mt-4", 4, "ngIf"], [3, "fileSelected", "disabled"], [3, "modelChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption", "disabled"], ["severity", "info", "styleClass", "w-full", 3, "text"], [1, "mt-2"], ["icon", "pi pi-refresh", "severity", "secondary", "styleClass", "w-full", 3, "onClick", "label", "outlined"], [3, "progressText", "processedCount", "totalFiles", "showProgress", "showSpinner"], ["severity", "error", "styleClass", "w-full", 3, "text"], [1, "results-section", "mt-4"], [3, "documentSelected", "results", "showTranslations", "isProcessing", "processingIndex"], [3, "results", "includeTranslations"], ["severity", "success", "styleClass", "w-full"], [3, "results", "showTranslations", "isProcessing", "processingIndex"], [1, "mt-4"], ["severity", "warn", "styleClass", "w-full", 3, "text"]], template: function MetadataAssistantComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0);
-      \u0275\u0275element(1, "p-toast");
-      \u0275\u0275elementStart(2, "h1", 1);
-      \u0275\u0275text(3);
-      \u0275\u0275pipe(4, "translate");
+      \u0275\u0275element(0, "p-toast");
+      \u0275\u0275elementStart(1, "h1", 1);
+      \u0275\u0275text(2);
+      \u0275\u0275pipe(3, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "p");
-      \u0275\u0275text(6);
-      \u0275\u0275pipe(7, "translate");
+      \u0275\u0275elementStart(4, "p");
+      \u0275\u0275text(5);
+      \u0275\u0275pipe(6, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(8, "section", 2)(9, "div")(10, "strong");
-      \u0275\u0275text(11);
-      \u0275\u0275pipe(12, "translate");
+      \u0275\u0275elementStart(7, "section", 2)(8, "div")(9, "strong");
+      \u0275\u0275text(10);
+      \u0275\u0275pipe(11, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275template(13, MetadataAssistantComponent_span_13_Template, 4, 3, "span", 3);
-      \u0275\u0275pipe(14, "async");
-      \u0275\u0275template(15, MetadataAssistantComponent_span_15_Template, 4, 3, "span", 4);
-      \u0275\u0275pipe(16, "async");
+      \u0275\u0275template(12, MetadataAssistantComponent_span_12_Template, 4, 3, "span", 3);
+      \u0275\u0275pipe(13, "async");
+      \u0275\u0275template(14, MetadataAssistantComponent_span_14_Template, 4, 3, "span", 4);
+      \u0275\u0275pipe(15, "async");
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(17, MetadataAssistantComponent_section_17_Template, 15, 20, "section", 5);
-      \u0275\u0275pipe(18, "async");
-      \u0275\u0275template(19, MetadataAssistantComponent_div_19_Template, 3, 3, "div", 6);
-      \u0275\u0275pipe(20, "async");
-      \u0275\u0275elementEnd();
+      \u0275\u0275template(16, MetadataAssistantComponent_section_16_Template, 46, 49, "section", 5);
+      \u0275\u0275pipe(17, "async");
+      \u0275\u0275template(18, MetadataAssistantComponent_div_18_Template, 3, 3, "div", 6);
+      \u0275\u0275pipe(19, "async");
     }
     if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 7, "metadata.title"));
       \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 7, "metadata.title"));
-      \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 9, "metadata.description"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 9, "metadata.description"));
       \u0275\u0275advance(5);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(12, 11, "page.apiKey.status"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(11, 11, "page.apiKey.status"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(14, 13, ctx.apiKeyService.hasApiKey$));
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(13, 13, ctx.apiKeyService.hasApiKey$));
       \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(16, 15, ctx.apiKeyService.hasApiKey$));
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(15, 15, ctx.apiKeyService.hasApiKey$) === false);
       \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(18, 17, ctx.apiKeyService.hasApiKey$));
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(17, 17, ctx.apiKeyService.hasApiKey$));
       \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(20, 19, ctx.apiKeyService.hasApiKey$));
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(19, 19, ctx.apiKeyService.hasApiKey$) === false);
     }
   }, dependencies: [
     CommonModule,
@@ -23765,12 +24080,19 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
     Message,
     ToastModule,
     Toast,
+    TabsModule,
+    Tabs,
+    TabPanels,
+    TabPanel,
+    TabList,
+    Tab,
     SharedModelSelectorComponent,
     ProgressIndicatorComponent,
     UrlInputComponent,
     MetadataResultComponent,
-    CsvExportComponent
-  ], styles: ["\n\n.metadata-assistant-container[_ngcontent-%COMP%] {\n  padding: 1rem;\n}\n.api-key-status[_ngcontent-%COMP%] {\n  margin-bottom: 1.5rem;\n}\n.results-section[_ngcontent-%COMP%] {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=metadata-assistant.component.css.map */"] });
+    CsvExportComponent,
+    DocumentUploadComponent
+  ], styles: ["\n\n.api-key-status[_ngcontent-%COMP%] {\n  margin-bottom: 1.5rem;\n}\n.results-section[_ngcontent-%COMP%] {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=metadata-assistant.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MetadataAssistantComponent, [{
@@ -23783,139 +24105,307 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       CardModule,
       MessageModule,
       ToastModule,
+      TabsModule,
       SharedModelSelectorComponent,
       ProgressIndicatorComponent,
       UrlInputComponent,
       MetadataResultComponent,
-      CsvExportComponent
-    ], providers: [MessageService], template: `<div class="metadata-assistant-container">
-  <p-toast></p-toast>
-  <h1 id="wb-cont">{{ 'metadata.title' | translate }}</h1>
-  <p>{{ 'metadata.description' | translate }}</p>
-
-  <!-- API Key Status -->
-  <section class="api-key-status mb-4">
-    <div>
-      <strong>{{ 'page.apiKey.status' | translate }}</strong>
-      <span *ngIf="apiKeyService.hasApiKey$ | async" class="text-green-600">
-        <i class="pi pi-check-circle"></i> {{ 'page.apiKey.active' | translate }}
-      </span>
-      <span *ngIf="!(apiKeyService.hasApiKey$ | async)" class="text-orange-600">
-        <i class="pi pi-exclamation-circle"></i> {{ 'page.apiKey.notSet' | translate }}
-      </span>
-    </div>
-  </section>
-
-  <!-- Main Content Area -->
-  <section *ngIf="apiKeyService.hasApiKey$ | async">
-    <div class="grid">
-      <!-- Left Column: Input & Settings -->
-      <div class="col-12 lg:col-6">
-        <!-- URL Input -->
-        <ca-url-input
-          [disabled]="state.isProcessing"
-          (urlsChange)="onUrlsChange($event)"
-          (urlInputChange)="onUrlInputChange($event)">
-        </ca-url-input>
-
-        <!-- Model Selector with Translation Option -->
-        <div class="mt-3">
-          <ca-shared-model-selector
-            [selectedModel]="state.selectedModel"
-            [models]="models"
-            [label]="'metadata.modelSelector.modelLabel'"
-            [cardTitle]="'metadata.modelSelector.title'"
-            [showCard]="true"
-            [showTranslateOption]="true"
-            [translateToFrench]="state.translateToFrench"
-            [disabled]="state.isProcessing"
-            (modelChange)="onModelChange($event)"
-            (translateChange)="onTranslateToggle($event)">
-          </ca-shared-model-selector>
-        </div>
-
-        <!-- Process Button -->
-        <div class="mt-3">
-          <p-button 
-            [label]="state.isProcessing ? ('metadata.button.processing' | translate) : ('metadata.button.process' | translate)"
-            icon="pi pi-sparkles"
-            [disabled]="!canProcess()"
-            [loading]="state.isProcessing"
-            severity="primary"
-            styleClass="w-full"
-            (onClick)="startProcessing()">
-          </p-button>
-        </div>
-
-        <!-- Reset Button -->
-        <div class="mt-2" *ngIf="state.results.length > 0 && !state.isProcessing">
-          <p-button 
-            [label]="'metadata.button.reset' | translate"
-            icon="pi pi-refresh"
-            severity="secondary"
-            [outlined]="true"
-            styleClass="w-full"
-            (onClick)="reset()">
-          </p-button>
-        </div>
-      </div>
-
-      <!-- Right Column: Progress & Error Messages -->
-      <div class="col-12 lg:col-6">
-        <!-- Progress Indicator -->
-        <div *ngIf="state.isProcessing || state.currentStep === 'complete'">
-          <ca-progress-indicator
-            [progressText]="getProgressText()"
-            [processedCount]="state.processedUrls"
-            [totalFiles]="state.totalUrls"
-            [showProgress]="true"
-            [showSpinner]="state.isProcessing">
-          </ca-progress-indicator>
-        </div>
-
-        <!-- Error Message -->
-        <div *ngIf="state.error" class="mt-3">
-          <p-message 
-            severity="error" 
-            [text]="state.error"
-            styleClass="w-full">
-          </p-message>
-        </div>
-      </div>
-    </div>
-
-    <!-- Results Section -->
-    <div class="results-section mt-4" *ngIf="state.results.length > 0">
-      <!-- Metadata Results -->
-      <ca-metadata-result
-        [results]="state.results"
-        [showTranslations]="state.translateToFrench"
-        [isProcessing]="state.isProcessing"
-        [processingIndex]="state.documentProcessingIndex"
-        (documentSelected)="onDocumentSelected($event.file, $event.index)">
-      </ca-metadata-result>
-
-      <!-- CSV Export -->
-      <ca-metadata-csv-export
-        [results]="state.results"
-        [includeTranslations]="state.translateToFrench">
-      </ca-metadata-csv-export>
-    </div>
-  </section>
-
-  <!-- No API Key Message -->
-  <div *ngIf="!(apiKeyService.hasApiKey$ | async)" class="mt-4">
-    <p-message 
-      severity="warn" 
-      [text]="'metadata.errors.noApiKey' | translate"
-      styleClass="w-full">
-    </p-message>
-  </div>
-</div>`, styles: ["/* src/app/views/metadata-assistant/metadata-assistant.component.css */\n.metadata-assistant-container {\n  padding: 1rem;\n}\n.api-key-status {\n  margin-bottom: 1.5rem;\n}\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=metadata-assistant.component.css.map */\n"] }]
+      CsvExportComponent,
+      DocumentUploadComponent
+    ], providers: [MessageService], template: `<p-toast></p-toast>\r
+\r
+<h1 id="wb-cont">{{ 'metadata.title' | translate }}</h1>\r
+<p>{{ 'metadata.description' | translate }}</p>\r
+\r
+<!-- API Key Status -->\r
+<section class="api-key-status mb-4">\r
+  <div>\r
+    <strong>{{ 'page.apiKey.status' | translate }}</strong>\r
+    <span *ngIf="apiKeyService.hasApiKey$ | async" class="text-green-600">\r
+      <i class="pi pi-check-circle"></i> {{ 'page.apiKey.active' | translate }}\r
+    </span>\r
+    <span *ngIf="(apiKeyService.hasApiKey$ | async) === false" class="text-orange-600">\r
+      <i class="pi pi-exclamation-circle"></i> {{ 'page.apiKey.notSet' | translate }}\r
+    </span>\r
+  </div>\r
+</section>\r
+\r
+<!-- Tabs -->\r
+<section *ngIf="apiKeyService.hasApiKey$ | async">\r
+  <p-tabs value="0" class="mt-3">\r
+    <p-tablist>\r
+      <p-tab value="0">\r
+        <i class="pi pi-globe mr-1"></i>{{ 'metadata.tabs.scrapedContent' | translate }}\r
+      </p-tab>\r
+      <p-tab value="1">\r
+        <i class="pi pi-file mr-1"></i>{{ 'metadata.tabs.documentUpload' | translate }}\r
+      </p-tab>\r
+    </p-tablist>\r
+\r
+    <p-tabpanels>\r
+      <!-- Tab 1: Metadata from Scraped Content -->\r
+      <p-tabpanel value="0">\r
+        <div class="grid">\r
+          <!-- Left Column: Input & Settings -->\r
+          <div class="col-12 lg:col-6">\r
+            <!-- URL Input -->\r
+            <ca-url-input\r
+              [disabled]="state.isProcessing"\r
+              (urlsChange)="onUrlsChange($event)"\r
+              (urlInputChange)="onUrlInputChange($event)">\r
+            </ca-url-input>\r
+\r
+            <!-- Model Selector with Translation Option -->\r
+            <div class="mt-3">\r
+              <ca-shared-model-selector\r
+                [selectedModel]="state.selectedModel"\r
+                [models]="models"\r
+                [label]="'metadata.modelSelector.modelLabel'"\r
+                [cardTitle]="'metadata.modelSelector.title'"\r
+                [showCard]="true"\r
+                [showTranslateOption]="true"\r
+                [translateToFrench]="state.translateToFrench"\r
+                [disabled]="state.isProcessing"\r
+                (modelChange)="onModelChange($event)"\r
+                (translateChange)="onTranslateToggle($event)">\r
+              </ca-shared-model-selector>\r
+            </div>\r
+\r
+            <!-- Process Button -->\r
+            <div class="mt-3">\r
+              <p-button\r
+                [label]="state.isProcessing ? ('metadata.button.processing' | translate) : ('metadata.button.process' | translate)"\r
+                icon="pi pi-sparkles"\r
+                [disabled]="!canProcess()"\r
+                [loading]="state.isProcessing"\r
+                severity="primary"\r
+                styleClass="w-full"\r
+                (onClick)="startProcessing()">\r
+              </p-button>\r
+            </div>\r
+\r
+            <!-- Reset Button -->\r
+            <div class="mt-2" *ngIf="state.results.length > 0 && !state.isProcessing">\r
+              <p-button\r
+                [label]="'metadata.button.reset' | translate"\r
+                icon="pi pi-refresh"\r
+                severity="secondary"\r
+                [outlined]="true"\r
+                styleClass="w-full"\r
+                (onClick)="reset()">\r
+              </p-button>\r
+            </div>\r
+          </div>\r
+\r
+          <!-- Right Column: Progress & Error Messages -->\r
+          <div class="col-12 lg:col-6">\r
+            <!-- Progress Indicator -->\r
+            <div *ngIf="state.isProcessing || state.currentStep === 'complete'">\r
+              <ca-progress-indicator\r
+                [progressText]="getProgressText()"\r
+                [processedCount]="state.processedUrls"\r
+                [totalFiles]="state.totalUrls"\r
+                [showProgress]="true"\r
+                [showSpinner]="state.isProcessing">\r
+              </ca-progress-indicator>\r
+            </div>\r
+\r
+            <!-- Error Message -->\r
+            <div *ngIf="state.error" class="mt-3">\r
+              <p-message\r
+                severity="error"\r
+                [text]="state.error"\r
+                styleClass="w-full">\r
+              </p-message>\r
+            </div>\r
+          </div>\r
+        </div>\r
+\r
+        <!-- Results Section -->\r
+        <div class="results-section mt-4" *ngIf="state.results.length > 0">\r
+          <!-- Metadata Results -->\r
+          <ca-metadata-result\r
+            [results]="state.results"\r
+            [showTranslations]="state.translateToFrench"\r
+            [isProcessing]="state.isProcessing"\r
+            [processingIndex]="state.documentProcessingIndex"\r
+            (documentSelected)="onDocumentSelected($event.file, $event.index)">\r
+          </ca-metadata-result>\r
+\r
+          <!-- CSV Export -->\r
+          <ca-metadata-csv-export\r
+            [results]="state.results"\r
+            [includeTranslations]="state.translateToFrench">\r
+          </ca-metadata-csv-export>\r
+        </div>\r
+      </p-tabpanel>\r
+\r
+      <!-- Tab 2: Metadata from Document Upload -->\r
+      <p-tabpanel value="1">\r
+        <div class="grid">\r
+          <!-- Left Column: Document Upload & Settings -->\r
+          <div class="col-12 lg:col-6">\r
+            <!-- Document Upload -->\r
+            <ca-document-upload\r
+              [disabled]="state.isProcessing"\r
+              (fileSelected)="onDocumentFileSelected($event)">\r
+            </ca-document-upload>\r
+\r
+            <!-- Model Selector -->\r
+            <div class="mt-3">\r
+              <ca-shared-model-selector\r
+                [selectedModel]="state.selectedModel"\r
+                [models]="models"\r
+                [label]="'metadata.modelSelector.modelLabel'"\r
+                [cardTitle]="'metadata.modelSelector.title'"\r
+                [showCard]="true"\r
+                [showTranslateOption]="false"\r
+                [disabled]="state.isProcessing"\r
+                (modelChange)="onModelChange($event)">\r
+              </ca-shared-model-selector>\r
+            </div>\r
+\r
+            <!-- Help Message -->\r
+            <div class="mt-3">\r
+              <p-message\r
+                severity="info"\r
+                [text]="'metadata.document.help' | translate"\r
+                styleClass="w-full">\r
+              </p-message>\r
+            </div>\r
+\r
+            <!-- Process Button -->\r
+            <div class="mt-3">\r
+              <p-button\r
+                [label]="state.isProcessing ? ('metadata.button.processing' | translate) : ('metadata.button.process' | translate)"\r
+                icon="pi pi-sparkles"\r
+                [disabled]="!canProcessDocument()"\r
+                [loading]="state.isProcessing"\r
+                severity="primary"\r
+                styleClass="w-full"\r
+                (onClick)="startDocumentProcessing()">\r
+              </p-button>\r
+            </div>\r
+\r
+            <!-- Reset Button -->\r
+            <div class="mt-2" *ngIf="documentResults.length > 0 && !state.isProcessing">\r
+              <p-button\r
+                [label]="'metadata.button.reset' | translate"\r
+                icon="pi pi-refresh"\r
+                severity="secondary"\r
+                [outlined]="true"\r
+                styleClass="w-full"\r
+                (onClick)="resetDocumentTab()">\r
+              </p-button>\r
+            </div>\r
+          </div>\r
+\r
+          <!-- Right Column: Progress & Error Messages -->\r
+          <div class="col-12 lg:col-6">\r
+            <!-- Progress Indicator -->\r
+            <div *ngIf="state.isProcessing || state.currentStep === 'complete'">\r
+              <ca-progress-indicator\r
+                [progressText]="getProgressText()"\r
+                [processedCount]="state.processedUrls"\r
+                [totalFiles]="state.totalUrls"\r
+                [showProgress]="true"\r
+                [showSpinner]="state.isProcessing">\r
+              </ca-progress-indicator>\r
+            </div>\r
+\r
+            <!-- Error Message -->\r
+            <div *ngIf="state.error" class="mt-3">\r
+              <p-message\r
+                severity="error"\r
+                [text]="state.error"\r
+                styleClass="w-full">\r
+              </p-message>\r
+            </div>\r
+\r
+            <!-- Language Detection Result -->\r
+            <div *ngIf="documentLanguage && !state.isProcessing" class="mt-3">\r
+              <p-message\r
+                severity="success"\r
+                styleClass="w-full">\r
+                <ng-template #default>\r
+                  <strong>{{ 'metadata.document.languageDetected' | translate }}:</strong>\r
+                  {{ documentLanguage === 'en' ? ('common.language.english' | translate) : ('common.language.french' | translate) }}\r
+                </ng-template>\r
+              </p-message>\r
+            </div>\r
+          </div>\r
+        </div>\r
+\r
+        <!-- Results Section for Documents -->\r
+        <div class="results-section mt-4" *ngIf="documentResults.length > 0">\r
+          <ca-metadata-result\r
+            [results]="documentResults"\r
+            [showTranslations]="false"\r
+            [isProcessing]="state.isProcessing"\r
+            [processingIndex]="null">\r
+          </ca-metadata-result>\r
+\r
+          <!-- CSV Export -->\r
+          <ca-metadata-csv-export\r
+            [results]="documentResults"\r
+            [includeTranslations]="false">\r
+          </ca-metadata-csv-export>\r
+        </div>\r
+      </p-tabpanel>\r
+    </p-tabpanels>\r
+  </p-tabs>\r
+</section>\r
+\r
+<!-- No API Key Message -->\r
+<div *ngIf="(apiKeyService.hasApiKey$ | async) === false" class="mt-4">\r
+  <p-message\r
+    severity="warn"\r
+    [text]="'metadata.errors.noApiKey' | translate"\r
+    styleClass="w-full">\r
+  </p-message>\r
+</div>\r
+`, styles: ["/* src/app/views/metadata-assistant/metadata-assistant.component.css */\n.api-key-status {\n  margin-bottom: 1.5rem;\n}\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=metadata-assistant.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MetadataAssistantComponent, { className: "MetadataAssistantComponent", filePath: "src/app/views/metadata-assistant/metadata-assistant.component.ts", lineNumber: 41 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MetadataAssistantComponent, { className: "MetadataAssistantComponent", filePath: "src/app/views/metadata-assistant/metadata-assistant.component.ts", lineNumber: 45 });
+})();
+
+// src/app/views/llm-evaluation/llm-evaluation.component.ts
+var LlmEvaluationComponent = class _LlmEvaluationComponent {
+  static \u0275fac = function LlmEvaluationComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _LlmEvaluationComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LlmEvaluationComponent, selectors: [["ca-llm-evaluation"]], decls: 6, vars: 6, consts: [["id", "wb-cont"]], template: function LlmEvaluationComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "h1", 0);
+      \u0275\u0275text(1);
+      \u0275\u0275pipe(2, "translate");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(3, "p");
+      \u0275\u0275text(4);
+      \u0275\u0275pipe(5, "translate");
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance();
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 2, "title.llmEvaluation"));
+      \u0275\u0275advance(3);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 4, "llmEvaluation.content"));
+    }
+  }, dependencies: [CommonModule, TranslateModule, TranslatePipe], encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LlmEvaluationComponent, [{
+    type: Component,
+    args: [{ selector: "ca-llm-evaluation", imports: [CommonModule, TranslateModule], template: `
+    <h1 id="wb-cont">{{ 'title.llmEvaluation' | translate }}</h1>
+    <p>{{ 'llmEvaluation.content' | translate }}</p>
+  ` }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LlmEvaluationComponent, { className: "LlmEvaluationComponent", filePath: "src/app/views/llm-evaluation/llm-evaluation.component.ts", lineNumber: 14 });
 })();
 
 // src/app/views/static/about.component.ts
@@ -24159,57 +24649,57 @@ var TestComponent = class _TestComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TestComponent, [{
     type: Component,
-    args: [{ selector: "ca-test", imports: [TranslateModule, HorizontalRadioButtonsComponent, TableModule, Button], template: `<!--Create a copy of this component called "my-test" to use as your personal testing space. You can access it locally at http://localhost:4200/test-->
-<!--Any changes made to the my-test folder will NOT be tracked or uploaded to GitHub-->
-<h1 id="wb-cont">{{ 'title.test' | translate}}</h1>
-<p>{{'test.text' | translate }}</p>
-<p [innerHTML]="'test.html' | translate"></p>
-<div class="flex flex-row gap-2">
-  <p-button label="Primary" />
-  <p-button label="Secondary" severity="secondary" />
-  <p-button label="Help" severity="help" />
-  <p-button label="Info" severity="info" />
-  <p-button label="Success" severity="success" />
-  <p-button label="Danger" severity="danger" />
-  <p-button label="Warn" severity="warn" />
-  <p-button label="Contrast" severity="contrast" />
-</div>
-<h2>Table of links that drop you into page compare tool</h2>
-<p-table [value]="links">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Title</th>
-      <th>Link</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-link>
-    <tr>
-      <td>{{ link.title }}</td>
-      <td>
-        <p-button
-                  variant="text" severity="info"
-                  (onClick)="fetchAndGoToCompare(link.url)">
-          {{ link.url }}
-        </p-button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
-<h2>Horizontal radio button component</h2>
-<p>This component accepts:</p>
-<ul>
-  <li>label="your.translation.key" to set the label above the buttons</li>
-  <li>name="unique-name" in case you use it more than once on a page</li>
-  <li>[options]="yourArray" with your array of radio button labels, values, and icons
-  </li>
-  <li>[(selected)]="yourSelectedButton" to define which button is currently selected</li>
-  <li>(selectedChange)="yourFunction($event) to define what happens when the buttons are clicked</li>
-</ul>
-<p>The component emits the value of the selected radio button.</p>
-<ca-horizontal-radio-buttons label="your.translation.key" name="unique-name" [options]="yourArray"
-                             [(selected)]="yourSelectedButton" (selectedChange)="yourFunction($event)">
-</ca-horizontal-radio-buttons>
-<h2>Fetch service example (check console log)</h2>
+    args: [{ selector: "ca-test", imports: [TranslateModule, HorizontalRadioButtonsComponent, TableModule, Button], template: `<!--Create a copy of this component called "my-test" to use as your personal testing space. You can access it locally at http://localhost:4200/test-->\r
+<!--Any changes made to the my-test folder will NOT be tracked or uploaded to GitHub-->\r
+<h1 id="wb-cont">{{ 'title.test' | translate}}</h1>\r
+<p>{{'test.text' | translate }}</p>\r
+<p [innerHTML]="'test.html' | translate"></p>\r
+<div class="flex flex-row gap-2">\r
+  <p-button label="Primary" />\r
+  <p-button label="Secondary" severity="secondary" />\r
+  <p-button label="Help" severity="help" />\r
+  <p-button label="Info" severity="info" />\r
+  <p-button label="Success" severity="success" />\r
+  <p-button label="Danger" severity="danger" />\r
+  <p-button label="Warn" severity="warn" />\r
+  <p-button label="Contrast" severity="contrast" />\r
+</div>\r
+<h2>Table of links that drop you into page compare tool</h2>\r
+<p-table [value]="links">\r
+  <ng-template pTemplate="header">\r
+    <tr>\r
+      <th>Title</th>\r
+      <th>Link</th>\r
+    </tr>\r
+  </ng-template>\r
+  <ng-template pTemplate="body" let-link>\r
+    <tr>\r
+      <td>{{ link.title }}</td>\r
+      <td>\r
+        <p-button\r
+                  variant="text" severity="info"\r
+                  (onClick)="fetchAndGoToCompare(link.url)">\r
+          {{ link.url }}\r
+        </p-button>\r
+      </td>\r
+    </tr>\r
+  </ng-template>\r
+</p-table>\r
+<h2>Horizontal radio button component</h2>\r
+<p>This component accepts:</p>\r
+<ul>\r
+  <li>label="your.translation.key" to set the label above the buttons</li>\r
+  <li>name="unique-name" in case you use it more than once on a page</li>\r
+  <li>[options]="yourArray" with your array of radio button labels, values, and icons\r
+  </li>\r
+  <li>[(selected)]="yourSelectedButton" to define which button is currently selected</li>\r
+  <li>(selectedChange)="yourFunction($event) to define what happens when the buttons are clicked</li>\r
+</ul>\r
+<p>The component emits the value of the selected radio button.</p>\r
+<ca-horizontal-radio-buttons label="your.translation.key" name="unique-name" [options]="yourArray"\r
+                             [(selected)]="yourSelectedButton" (selectedChange)="yourFunction($event)">\r
+</ca-horizontal-radio-buttons>\r
+<h2>Fetch service example (check console log)</h2>\r
 <p-button label="Test Fetch" icon="pi pi-file-import" (onClick)="testFetch()"></p-button>` }]
   }], null, null);
 })();
@@ -24218,7 +24708,7 @@ var TestComponent = class _TestComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-stepper.mjs
-var _c011 = ["*"];
+var _c012 = ["*"];
 var _c111 = ["content"];
 var _c23 = (a0, a1, a2) => ({
   activateCallback: a0,
@@ -24554,7 +25044,7 @@ var StepList = class _StepList extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c011,
+    ngContentSelectors: _c012,
     decls: 1,
     vars: 0,
     template: function StepList_Template(rf, ctx) {
@@ -24602,7 +25092,7 @@ var StepperSeparator = class _StepperSeparator extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c011,
+    ngContentSelectors: _c012,
     decls: 1,
     vars: 0,
     template: function StepperSeparator_Template(rf, ctx) {
@@ -24683,7 +25173,7 @@ var StepItem = class _StepItem extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c011,
+    ngContentSelectors: _c012,
     decls: 1,
     vars: 0,
     template: function StepItem_Template(rf, ctx) {
@@ -24802,7 +25292,7 @@ var Step = class _Step extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c011,
+    ngContentSelectors: _c012,
     decls: 2,
     vars: 1,
     consts: [["type", "button", 1, "p-step-header", 3, "click", "tabindex", "disabled"], [1, "p-step-number"], [1, "p-step-title"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
@@ -25046,7 +25536,7 @@ var StepPanels = class _StepPanels extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c011,
+    ngContentSelectors: _c012,
     decls: 1,
     vars: 0,
     template: function StepPanels_Template(rf, ctx) {
@@ -25147,7 +25637,7 @@ var Stepper = class _Stepper extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275ProvidersFeature([StepperStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c011,
+    ngContentSelectors: _c012,
     decls: 1,
     vars: 0,
     template: function Stepper_Template(rf, ctx) {
@@ -25205,7 +25695,7 @@ var StepperModule = class _StepperModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-confirmpopup.mjs
-var _c012 = ["content"];
+var _c013 = ["content"];
 var _c113 = ["accepticon"];
 var _c24 = ["rejecticon"];
 var _c34 = ["headless"];
@@ -25875,7 +26365,7 @@ var ConfirmPopup = class _ConfirmPopup extends BaseComponent {
     selectors: [["p-confirmPopup"], ["p-confirmpopup"], ["p-confirm-popup"]],
     contentQueries: function ConfirmPopup_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c012, 4);
+        \u0275\u0275contentQuery(dirIndex, _c013, 4);
         \u0275\u0275contentQuery(dirIndex, _c113, 4);
         \u0275\u0275contentQuery(dirIndex, _c24, 4);
         \u0275\u0275contentQuery(dirIndex, _c34, 4);
@@ -26649,7 +27139,7 @@ var LinkListComponent = class _LinkListComponent {
     </div>
   </div>
 </ng-container>
-  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;/home/naomi/content-assistant/src/app/views/ia-assistant/components/link-list.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/link-list.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */\n"] }]
   }], null, { labelKey: [{
     type: Input
   }], links: [{
@@ -27358,119 +27848,119 @@ var ValidateUrlsComponent = class _ValidateUrlsComponent {
       TableModule,
       ChipModule,
       LinkListComponent
-    ], template: `<!--Enter URLs-->
-<h2 class="my-0">Canada.ca URLs</h2>
-<p class="my-0 text-color-secondary text-xs">Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.</p>
-
-<p-iftalabel>
-    <textarea id="urls" autoResize="true" rows="5" pTextarea [(ngModel)]="iaState.getUrlData().rawUrls" (change)="setUrlPairs()" (paste)="onPasteUrls()" fluid></textarea>
-    <label for="urls">URLs</label>
-</p-iftalabel>
-
-<!--Show url pairs if prototype links were included-->
-<p-table [value]="iaState.getUrlData().urlPairs" *ngIf="iaState.getUrlData().includePrototypeLinks" size="small" stripedRows [scrollable]="true" scrollHeight="400px" styleClass="mb-2">
-    <ng-template #header>
-        <tr>
-            <th>Production URL</th>
-            <th>Prototype URL</th>
-        </tr>
-    </ng-template>
-    <ng-template #body let-url>
-        <tr>
-            <td>{{ url.production.href }}</td>
-            <td>{{ url.prototype?.href }}</td>
-        </tr>
-    </ng-template>
-</p-table>
-
-<!--Validate links button-->
-<p-button label="Validate URLs" icon="pi pi-check-square" [loading]="iaState.getUrlData().isValidating" (onClick)="validateUrlPairs()" [disabled]="iaState.getUrlData().rawUrls.length === 0 || iaState.getUrlData().isValidated" />
-
-<!--Show link validation-->
-<ng-container *ngIf="iaState.getUrlData().isValidating || iaState.getUrlData().isValidated">
-    <h2 *ngIf="urlsChecking.length > 0">Validating links</h2>
-    <h2 *ngIf="urlsChecking.length === 0">Validated links</h2>
-
-    <p-progressbar [value]="iaState.getUrlData().urlPercent">
-        <ng-template #content let-value>
-            <span>{{iaState.getUrlData().urlChecked}}/{{iaState.getUrlData().urlTotal}}</span>
-        </ng-template>
-    </p-progressbar>
-
-    <div class="flex flex-column gap-2 mt-3" *ngIf="urlsChecking.length > 0 || urlsProtoChecking.length > 0">
-        <ng-container *ngFor="let url of urlsChecking">
-            <p-chip styleClass="bg-yellow-100 text-black-alpha-90" class="max-w-max">
-                <i class="pi pi-spin pi-spinner"></i>
-                <span>{{ url.href }}</span>
-            </p-chip>
-        </ng-container>
-        <ng-container *ngFor="let url of urlsProtoChecking">
-            <p-chip styleClass="bg-orange-100 text-black-alpha-90" class="max-w-max">
-                <i class="pi pi-spin pi-spinner"></i>
-                <span>{{ url.href }}</span>
-            </p-chip>
-        </ng-container>
-    </div>
-</ng-container>
-
-<p-confirmpopup />
-<h2 *ngIf="urlsBad.length > 0 || urlsProtoBad.length > 0" class="mb-0">Broken links</h2>
-<div class="flex flex-column gap-2">
-    <ca-link-list labelKey="Broken"
-                  [links]="urlsBad"
-                  type="prod"
-                  (approve)="approve($event.url, $event.event, 'prod')"
-                  (remove)="remove($event, 'prod')"
-                  *ngIf="urlsBad.length > 0">
-    </ca-link-list>
-    <ca-link-list labelKey="Broken"
-                  [links]="urlsProtoBad"
-                  type="proto"
-                  (approve)="approve($event.url, $event.event, 'proto')"
-                  (remove)="remove($event, 'proto')"
-                  *ngIf="urlsProtoBad.length > 0">
-    </ca-link-list>
-</div>
-<h2 *ngIf="urlsRedirected.length > 0 || urlsProtoRedirected.length > 0" class="mb-0">Redirected links</h2>
-<div class="flex flex-column gap-2">
-    <ca-link-list labelKey="Redirected"
-                  [links]="urlsRedirected"
-                  type="prod"
-                  (approve)="approve($event.url, $event.event, 'prod')"
-                  (remove)="remove($event, 'prod')"
-                  *ngIf="urlsRedirected.length > 0">
-    </ca-link-list>
-    <ca-link-list labelKey="Redirected"
-                  [links]="urlsProtoRedirected"
-                  type="proto"
-                  (approve)="approve($event.url, $event.event, 'proto')"
-                  (remove)="remove($event, 'proto')"
-                  *ngIf="urlsProtoRedirected.length > 0">
-    </ca-link-list>
-</div>
-<h2 *ngIf="urlsBlocked.length > 0 || urlsProtoBlocked.length > 0" class="mb-0">Blocked links</h2>
-<div class="flex flex-column gap-2">
-    <ca-link-list labelKey="Blocked"
-                  [links]="urlsBlocked"
-                  type="prod"
-                  (approve)="approve($event.url, $event.event, 'prod')"
-                  (remove)="remove($event, 'prod')"
-                  *ngIf="urlsBlocked.length > 0">
-    </ca-link-list>
-    <ca-link-list labelKey="Blocked"
-                  [links]="urlsProtoBlocked"
-                  type="proto"
-                  (approve)="approve($event.url, $event.event, 'proto')"
-                  (remove)="remove($event, 'proto')"
-                  *ngIf="urlsProtoBlocked.length > 0">
-    </ca-link-list>
-</div>
-<ng-container *ngIf="urlsOk.length > 0 || urlsProtoOk.length > 0">
-    <h2 class="mb-0">Valid links</h2>
-    <ul class="my-0 list-none">
-        <li *ngFor="let url of urlsOk"><i class="pi pi-check text-green-500 mr-2"></i>{{ url.href }}</li>
-        <li *ngFor="let url of urlsProtoOk"><i class="pi pi-check text-blue-500 mr-2"></i>{{ url.href }}</li>
-    </ul>
+    ], template: `<!--Enter URLs-->\r
+<h2 class="my-0">Canada.ca URLs</h2>\r
+<p class="my-0 text-color-secondary text-xs">Paste some relevant Canada.ca URLs to get started. These links will be crawled to find any child pages to include in your inventory. Each link should begin on a new line. If you have prototype links, you can paste both columns or separate them with a comma or semicolon.</p>\r
+\r
+<p-iftalabel>\r
+    <textarea id="urls" autoResize="true" rows="5" pTextarea [(ngModel)]="iaState.getUrlData().rawUrls" (change)="setUrlPairs()" (paste)="onPasteUrls()" fluid></textarea>\r
+    <label for="urls">URLs</label>\r
+</p-iftalabel>\r
+\r
+<!--Show url pairs if prototype links were included-->\r
+<p-table [value]="iaState.getUrlData().urlPairs" *ngIf="iaState.getUrlData().includePrototypeLinks" size="small" stripedRows [scrollable]="true" scrollHeight="400px" styleClass="mb-2">\r
+    <ng-template #header>\r
+        <tr>\r
+            <th>Production URL</th>\r
+            <th>Prototype URL</th>\r
+        </tr>\r
+    </ng-template>\r
+    <ng-template #body let-url>\r
+        <tr>\r
+            <td>{{ url.production.href }}</td>\r
+            <td>{{ url.prototype?.href }}</td>\r
+        </tr>\r
+    </ng-template>\r
+</p-table>\r
+\r
+<!--Validate links button-->\r
+<p-button label="Validate URLs" icon="pi pi-check-square" [loading]="iaState.getUrlData().isValidating" (onClick)="validateUrlPairs()" [disabled]="iaState.getUrlData().rawUrls.length === 0 || iaState.getUrlData().isValidated" />\r
+\r
+<!--Show link validation-->\r
+<ng-container *ngIf="iaState.getUrlData().isValidating || iaState.getUrlData().isValidated">\r
+    <h2 *ngIf="urlsChecking.length > 0">Validating links</h2>\r
+    <h2 *ngIf="urlsChecking.length === 0">Validated links</h2>\r
+\r
+    <p-progressbar [value]="iaState.getUrlData().urlPercent">\r
+        <ng-template #content let-value>\r
+            <span>{{iaState.getUrlData().urlChecked}}/{{iaState.getUrlData().urlTotal}}</span>\r
+        </ng-template>\r
+    </p-progressbar>\r
+\r
+    <div class="flex flex-column gap-2 mt-3" *ngIf="urlsChecking.length > 0 || urlsProtoChecking.length > 0">\r
+        <ng-container *ngFor="let url of urlsChecking">\r
+            <p-chip styleClass="bg-yellow-100 text-black-alpha-90" class="max-w-max">\r
+                <i class="pi pi-spin pi-spinner"></i>\r
+                <span>{{ url.href }}</span>\r
+            </p-chip>\r
+        </ng-container>\r
+        <ng-container *ngFor="let url of urlsProtoChecking">\r
+            <p-chip styleClass="bg-orange-100 text-black-alpha-90" class="max-w-max">\r
+                <i class="pi pi-spin pi-spinner"></i>\r
+                <span>{{ url.href }}</span>\r
+            </p-chip>\r
+        </ng-container>\r
+    </div>\r
+</ng-container>\r
+\r
+<p-confirmpopup />\r
+<h2 *ngIf="urlsBad.length > 0 || urlsProtoBad.length > 0" class="mb-0">Broken links</h2>\r
+<div class="flex flex-column gap-2">\r
+    <ca-link-list labelKey="Broken"\r
+                  [links]="urlsBad"\r
+                  type="prod"\r
+                  (approve)="approve($event.url, $event.event, 'prod')"\r
+                  (remove)="remove($event, 'prod')"\r
+                  *ngIf="urlsBad.length > 0">\r
+    </ca-link-list>\r
+    <ca-link-list labelKey="Broken"\r
+                  [links]="urlsProtoBad"\r
+                  type="proto"\r
+                  (approve)="approve($event.url, $event.event, 'proto')"\r
+                  (remove)="remove($event, 'proto')"\r
+                  *ngIf="urlsProtoBad.length > 0">\r
+    </ca-link-list>\r
+</div>\r
+<h2 *ngIf="urlsRedirected.length > 0 || urlsProtoRedirected.length > 0" class="mb-0">Redirected links</h2>\r
+<div class="flex flex-column gap-2">\r
+    <ca-link-list labelKey="Redirected"\r
+                  [links]="urlsRedirected"\r
+                  type="prod"\r
+                  (approve)="approve($event.url, $event.event, 'prod')"\r
+                  (remove)="remove($event, 'prod')"\r
+                  *ngIf="urlsRedirected.length > 0">\r
+    </ca-link-list>\r
+    <ca-link-list labelKey="Redirected"\r
+                  [links]="urlsProtoRedirected"\r
+                  type="proto"\r
+                  (approve)="approve($event.url, $event.event, 'proto')"\r
+                  (remove)="remove($event, 'proto')"\r
+                  *ngIf="urlsProtoRedirected.length > 0">\r
+    </ca-link-list>\r
+</div>\r
+<h2 *ngIf="urlsBlocked.length > 0 || urlsProtoBlocked.length > 0" class="mb-0">Blocked links</h2>\r
+<div class="flex flex-column gap-2">\r
+    <ca-link-list labelKey="Blocked"\r
+                  [links]="urlsBlocked"\r
+                  type="prod"\r
+                  (approve)="approve($event.url, $event.event, 'prod')"\r
+                  (remove)="remove($event, 'prod')"\r
+                  *ngIf="urlsBlocked.length > 0">\r
+    </ca-link-list>\r
+    <ca-link-list labelKey="Blocked"\r
+                  [links]="urlsProtoBlocked"\r
+                  type="proto"\r
+                  (approve)="approve($event.url, $event.event, 'proto')"\r
+                  (remove)="remove($event, 'proto')"\r
+                  *ngIf="urlsProtoBlocked.length > 0">\r
+    </ca-link-list>\r
+</div>\r
+<ng-container *ngIf="urlsOk.length > 0 || urlsProtoOk.length > 0">\r
+    <h2 class="mb-0">Valid links</h2>\r
+    <ul class="my-0 list-none">\r
+        <li *ngFor="let url of urlsOk"><i class="pi pi-check text-green-500 mr-2"></i>{{ url.href }}</li>\r
+        <li *ngFor="let url of urlsProtoOk"><i class="pi pi-check text-blue-500 mr-2"></i>{{ url.href }}</li>\r
+    </ul>\r
 </ng-container>` }]
   }], null, null);
 })();
@@ -28035,7 +28525,7 @@ var SetRootsComponent = class _SetRootsComponent {
       TranslateModule,
       ProgressBarModule,
       TooltipModule
-    ], template: '<h2 *ngIf="breadcrumbData().progress < 100">Validating breadcrumb</h2>\n<h2 *ngIf="breadcrumbData().progress === 100">Validated breadcrumb</h2>\n<!--Progress bar-->\n<p-progressbar [value]="breadcrumbData().progress">\n    <ng-template #content let-value>\n        <span>{{breadcrumbData().step}}</span>\n    </ng-template>\n</p-progressbar>\n\n<!--Display detected root pages-->\n<h2 *ngIf="breadcrumbData().rootPages.length > 0" class="mb-0">Root pages</h2>\n<ol class="mt-0">\n    <ng-container *ngFor="let root of breadcrumbData().rootPages">\n        <li><a [href]="root.href" target="_blank" class="text-color-secondary hover:text-color no-underline flex-wrap">{{root.h1}}</a>\n            <!--Display user-added children of roots-->\n            <ul *ngIf="root.descendants.length > 0">\n                <li>Crawl depth <strong>{{root.minDepth}}</strong> to reach user-added child pages<br>\n                    {{root.href}}\n                </li>\n                <ng-container *ngFor="let page of root.descendants">\n                    <li>{{page}}</li>\n                </ng-container>\n            </ul>\n        </li>\n    </ng-container>\n</ol>\n\n<!--Display detected breadcrumb trails-->\n<h2 *ngIf="breadcrumbData().breadcrumbs.length > 0" class="mb-0">Breadcrumb branches</h2>\n<ol class="mt-0">\n    <ng-container *ngFor="let breadcrumb of breadcrumbData().breadcrumbs">\n        <li class="mb-3 pl-2">\n            <div class="flex flex-row flex-wrap gap-1">\n                <ng-container *ngFor="let crumb of breadcrumb">\n                    <span class="flex flex-row align-items-center justify-content-around gap-1 max-w-12rem">\n                        <span class="flex flex-row" *ngIf="crumb.icon">\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\n                            <i *ngIf="crumb.icon" [class]="crumb.icon" [pTooltip]="`${crumb.iconTooltip}` | translate" tooltipPosition="top" [attr.aria-label]="`${crumb.iconTooltip}` | translate" style="font-size: 1.25rem"></i>\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\n                        </span>\n                        <a [href]="crumb.url" target="_blank" class="no-underline flex-wrap hover:bg-surface p-1 -mx-1 border-2 shadow-2 border-round-lg text-center" [ngClass]="crumb.styleClass" [pTooltip]="`${crumb.linkTooltip}` | translate" tooltipPosition="top">{{crumb.label}}</a>\n                    </span>\n                </ng-container>\n            </div>\n        </li>\n    </ng-container>\n</ol>\n<ng-container *ngIf="breadcrumbData().progress === 100">\n    <p *ngIf="breadcrumbData().hasBreakAfterRoot" class="text-red-500">One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.<br>To-do: automatically set IA orphans as roots so their child pages are crawled</p>\n    <p *ngIf="breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-blue-500">One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won\'t impact the crawl since they occur before the detected root pages.</p>\n    <p *ngIf="!breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-green-500">There are no problems with your breadcrumb!</p>\n    <p>To-do: set up method for user to change which pages to crawl</p>\n</ng-container>' }]
+    ], template: '<h2 *ngIf="breadcrumbData().progress < 100">Validating breadcrumb</h2>\r\n<h2 *ngIf="breadcrumbData().progress === 100">Validated breadcrumb</h2>\r\n<!--Progress bar-->\r\n<p-progressbar [value]="breadcrumbData().progress">\r\n    <ng-template #content let-value>\r\n        <span>{{breadcrumbData().step}}</span>\r\n    </ng-template>\r\n</p-progressbar>\r\n\r\n<!--Display detected root pages-->\r\n<h2 *ngIf="breadcrumbData().rootPages.length > 0" class="mb-0">Root pages</h2>\r\n<ol class="mt-0">\r\n    <ng-container *ngFor="let root of breadcrumbData().rootPages">\r\n        <li><a [href]="root.href" target="_blank" class="text-color-secondary hover:text-color no-underline flex-wrap">{{root.h1}}</a>\r\n            <!--Display user-added children of roots-->\r\n            <ul *ngIf="root.descendants.length > 0">\r\n                <li>Crawl depth <strong>{{root.minDepth}}</strong> to reach user-added child pages<br>\r\n                    {{root.href}}\r\n                </li>\r\n                <ng-container *ngFor="let page of root.descendants">\r\n                    <li>{{page}}</li>\r\n                </ng-container>\r\n            </ul>\r\n        </li>\r\n    </ng-container>\r\n</ol>\r\n\r\n<!--Display detected breadcrumb trails-->\r\n<h2 *ngIf="breadcrumbData().breadcrumbs.length > 0" class="mb-0">Breadcrumb branches</h2>\r\n<ol class="mt-0">\r\n    <ng-container *ngFor="let breadcrumb of breadcrumbData().breadcrumbs">\r\n        <li class="mb-3 pl-2">\r\n            <div class="flex flex-row flex-wrap gap-1">\r\n                <ng-container *ngFor="let crumb of breadcrumb">\r\n                    <span class="flex flex-row align-items-center justify-content-around gap-1 max-w-12rem">\r\n                        <span class="flex flex-row" *ngIf="crumb.icon">\r\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r\n                            <i *ngIf="crumb.icon" [class]="crumb.icon" [pTooltip]="`${crumb.iconTooltip}` | translate" tooltipPosition="top" [attr.aria-label]="`${crumb.iconTooltip}` | translate" style="font-size: 1.25rem"></i>\r\n                            <i *ngIf="crumb.icon" class="pi pi-minus text-gray-300" aria-hidden="true" style="font-size: 1.25rem"></i>\r\n                        </span>\r\n                        <a [href]="crumb.url" target="_blank" class="no-underline flex-wrap hover:bg-surface p-1 -mx-1 border-2 shadow-2 border-round-lg text-center" [ngClass]="crumb.styleClass" [pTooltip]="`${crumb.linkTooltip}` | translate" tooltipPosition="top">{{crumb.label}}</a>\r\n                    </span>\r\n                </ng-container>\r\n            </div>\r\n        </li>\r\n    </ng-container>\r\n</ol>\r\n<ng-container *ngIf="breadcrumbData().progress === 100">\r\n    <p *ngIf="breadcrumbData().hasBreakAfterRoot" class="text-red-500">One or more of your pages is an IA orphan and will not be included in your IA tree if we crawl from the detected root pages.<br>To-do: automatically set IA orphans as roots so their child pages are crawled</p>\r\n    <p *ngIf="breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-blue-500">One or more pages in the breadcrumb are IA orphans. These should be fixed if possible but they won\'t impact the crawl since they occur before the detected root pages.</p>\r\n    <p *ngIf="!breadcrumbData().hasBreakBeforeRoot && !breadcrumbData().hasBreakAfterRoot" class="text-green-500">There are no problems with your breadcrumb!</p>\r\n    <p>To-do: set up method for user to change which pages to crawl</p>\r\n</ng-container>' }]
   }], null, null);
 })();
 (() => {
@@ -28179,7 +28669,7 @@ var SearchCriteriaComponent = class _SearchCriteriaComponent {
       IftaLabelModule,
       ChipModule,
       BadgeModule
-    ], template: '<h2 class="my-0">Search criteria</h2>\n<p class="my-0 text-color-secondary text-xs">Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is <strong>not</strong> case-sensitive. Regex patterns should begin with "regex:".</p>\n<p-iftalabel>\n    <textarea id="search" autoResize="true" rows="2" pTextarea [(ngModel)]="searchData().rawTerms" (blur)="iaState.updateTerms(); updateRawTerms();" (keydown)="onKeydownTerm($event)" (paste)="onPasteTerm()" fluid\n              placeholder=""></textarea>\n    <label for="search">Search terms (optional)</label>\n</p-iftalabel>\n\n<div class="flex gap-2 flex-wrap">\n    <p-chip *ngFor="let term of searchData().terms" [label]="term.toString()" [styleClass]="getTermColor(term)" [removable]="true" (onRemove)="removeTerm(term)"><p-badge *ngIf="isRegex(term)" value="regex" severity="info"></p-badge></p-chip>\n</div>' }]
+    ], template: '<h2 class="my-0">Search criteria</h2>\r\n<p class="my-0 text-color-secondary text-xs">Enter terms separated by semicolons or new lines. These will be used to include additional pages in your result, even if there is no direct breadcrumb IA relationship between the pages. The search is <strong>not</strong> case-sensitive. Regex patterns should begin with "regex:".</p>\r\n<p-iftalabel>\r\n    <textarea id="search" autoResize="true" rows="2" pTextarea [(ngModel)]="searchData().rawTerms" (blur)="iaState.updateTerms(); updateRawTerms();" (keydown)="onKeydownTerm($event)" (paste)="onPasteTerm()" fluid\r\n              placeholder=""></textarea>\r\n    <label for="search">Search terms (optional)</label>\r\n</p-iftalabel>\r\n\r\n<div class="flex gap-2 flex-wrap">\r\n    <p-chip *ngFor="let term of searchData().terms" [label]="term.toString()" [styleClass]="getTermColor(term)" [removable]="true" (onRemove)="removeTerm(term)"><p-badge *ngIf="isRegex(term)" value="regex" severity="info"></p-badge></p-chip>\r\n</div>' }]
   }], null, null);
 })();
 (() => {
@@ -28187,7 +28677,7 @@ var SearchCriteriaComponent = class _SearchCriteriaComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-toggleswitch.mjs
-var _c013 = ["handle"];
+var _c014 = ["handle"];
 var _c114 = ["input"];
 var _c25 = (a0) => ({
   checked: a0
@@ -28518,7 +29008,7 @@ var ToggleSwitch = class _ToggleSwitch extends BaseComponent {
     selectors: [["p-toggleswitch"], ["p-toggleSwitch"], ["p-toggle-switch"]],
     contentQueries: function ToggleSwitch_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c013, 4);
+        \u0275\u0275contentQuery(dirIndex, _c014, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -29086,7 +29576,7 @@ var IaTreeService = class _IaTreeService {
 })();
 
 // src/app/views/ia-assistant/components/ia-tree.component.ts
-var _c014 = ["chartContainer"];
+var _c015 = ["chartContainer"];
 var _c115 = ["cm"];
 var _c26 = () => ({ "min-width": "50rem" });
 function IaTreeComponent_ng_container_2_p_3_Template(rf, ctx) {
@@ -30091,7 +30581,7 @@ var IaTreeComponent = class _IaTreeComponent {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaTreeComponent, selectors: [["ca-ia-tree"]], viewQuery: function IaTreeComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c014, 5);
+      \u0275\u0275viewQuery(_c015, 5);
       \u0275\u0275viewQuery(_c115, 5);
     }
     if (rf & 2) {
@@ -30135,139 +30625,139 @@ var IaTreeComponent = class _IaTreeComponent {
       PopoverModule,
       ToggleSwitchModule,
       TabsModule
-    ], providers: [TreeDragDropService], template: `<p>To do: set up crawl for root URLs to complete IA tree, also set up referring link/search term/url structure crawl (for unique links that aren't in the IA tree)</p>
-<ng-container *ngIf="iaData().iaTree">
-
-    <h2>IA structure</h2>
-    <p *ngIf="iaData().iaTree.length === 0">No child pages found.</p>
-
-    <p-tabs value="0" *ngIf="iaData().iaTree.length > 0">
-        <p-tablist>
-            <p-tab value="0">Chart</p-tab>
-            <p-tab value="1">Table</p-tab>
-            <p-tab value="2" *ngIf="iaData().brokenLinks.length > 0">Broken links</p-tab>
-            <p-tab value="3" *ngIf="iaData().searchMatches.length > 0">Search matches</p-tab>
-        </p-tablist>
-        <p-tabpanels>
-            <p-tabpanel value="0">
-                <!--OPTIONS-->
-                <div class="flex flex-row justify-content-between align-items-center gap-2 mb-2">
-                    <p-inputgroup class="max-w-max">
-                        <p-inputgroup-addon class="secondary-outline">
-                            <p-button [icon]="getMainToggleIcon()" [label]="getMainToggleLabel()" (click)="onMainToggleClick()"
-                                      severity="secondary" text class="w-10rem" />
-                            <p-button icon="pi pi-chevron-down" (click)="togglesPopover.toggle($event)"
-                                      severity="secondary" text />
-                        </p-inputgroup-addon>
-                    </p-inputgroup>
-                    <!--div class="flex flex-row border-1 align-items-center border-round-sm secondary-outline">
-                            <p-button [icon]="getMainToggleIcon()" [label]="getMainToggleLabel()" (click)="onMainToggleClick()"
-                                      severity="secondary" text class="w-10rem" />
-                            <p-button icon="pi pi-chevron-down" (click)="togglesPopover.toggle($event)"
-                                      severity="secondary" text />
-                        </div-->
-                    <p-popover #togglesPopover>
-                        <div class="flex flex-column gap-3">
-                            <div class="flex flex-row justify-content-between align-items-center gap-2" *ngFor="let key of toggleKeys">
-                                <span>{{ \`ia.toggle.\${key}\` | translate }}</span>
-                                <p-toggleswitch [(ngModel)]="toggles[key]"></p-toggleswitch>
-                            </div>
-                        </div>
-                    </p-popover>
-                    <p-button label="Maximize IA chart" severity="secondary" outlined styleClass="secondary-outline" (click)="maximize(chartContainer)" icon="pi pi-window-maximize" />
-                </div>
-                <!--CHART-->
-                <div #chartContainer *ngIf="iaData().iaTree.length > 0" class="overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container">
-                    <p-organization-chart [value]="iaData().iaTree">
-                        <ng-template let-node pTemplate="default">
-                            <!--STATUS ICONS-->
-                            <div class="flex flex-row gap-2 justify-content-between align-items-center -mx-2 -my-3" *ngIf="!getToggleStates().allFalse">
-                                <!--Orphan status-->
-                                <span class="flex gap-2">
-                                    <!--i class="pi pi-verified text-green-500" pTooltip="Linked from parent" tooltipPosition="top" *ngIf="node.data.notOrphan && toggles['orphan']"></i-->
-                                    <i class="pi pi-sitemap text-red-500" pTooltip="IA orphan" tooltipPosition="top" *ngIf="!node.data.notOrphan && node.data.originalParent && toggles['orphan']"></i>
-                                </span>
-                                <!--Scope status-->
-                                <span class="flex gap-2">
-                                    <p-button icon="pi pi-github" pTooltip="has prototype" tooltipPosition="top" [rounded]="true" text severity="secondary" class="-mr-4 -my-1" *ngIf="node.data.prototype && toggles['proto']" />
-                                    <p-togglebutton [(ngModel)]="node.data.isUserAdded" class="p-button-rounded p-button-outlined p-button-sm pr-0 -mr-3 -my-1 transparent-toggle" *ngIf="toggles['scope']"
-                                                    offIcon="pi pi-lock" offLabel="" onIcon="pi pi-lock-open" onLabel=""
-                                                    [pTooltip]="node.data.isUserAdded ? 'In-scope' : 'Out-of-scope'" tooltipPosition="top" ariaLabel="Mark as in-scope" />
-
-                                </span>
-                            </div>
-                            <!--PAGE-->
-                            <p><a [href]="node.data.url" target="_blank" (click)="onNodeClick($event)" [innerHTML]="node.label" class="ia-label"></a></p>
-                            <!--CRAWL STATUS-->
-                            <div class="flex flex-row gap-2 justify-content-center align-items-center" *ngIf="!getToggleStates().allFalse">
-                                <i class="pi pi-spin pi-spinner text-color-secondary -my-3" pTooltip="crawling" tooltipPosition="top" *ngIf="node.data.isRoot && !node.data.isCrawled && toggles['crawl']"></i>
-                                <p-button icon="pi pi-plus-circle" (click)="getChildPages(node)" pTooltip="Get child pages?" tooltipPosition="top" [rounded]="true" text severity="primary" class="-my-4" *ngIf="!node.data.isRoot && !node.data.isCrawled && toggles['crawl']" />
-                            </div>
-                        </ng-template>
-                    </p-organization-chart>
-                </div>
-            </p-tabpanel>
-            <p-tabpanel value="1">
-                <!--TREE TABLE-->
-                <p-contextMenu #cm [model]="options"></p-contextMenu>
-                <h2>IA structure tree</h2>
-                <p-tree [value]="iaData().iaTree" styleClass="w-full md:w-[30rem]"
-                        [selectionMode]="selectable ? 'multiple' : null" [(selection)]="selectedNode"
-                        [draggableNodes]="draggable" [droppableNodes]="true" draggableScope="self" droppableScope="self" (onNodeDrop)="handleNodeDrop($event)" [validateDrop]="true"
-                        [contextMenu]="cm" (onNodeContextMenuSelect)="onNodeContextMenu($event)">
-                    <ng-template pTemplate="default" let-node>
-                        <div class="flex flex-row align-items-center gap-2 w-full">
-                            <i class="pi pi-folder" *ngIf="node.children.length > 0 && !draggable && !node.data.editing"></i>
-                            <i class="pi pi-file" *ngIf="(node.children.length === 0 || !node.children) && !draggable && !node.data.editing"></i>
-                            <i *ngIf="draggable" class="pi pi-arrows-alt cursor-move text-color-secondary"></i>
-                            <i *ngIf="node.data.editing" class="pi pi-pencil text-color-secondary"></i>
-                            <ng-container *ngIf="!node.data.editing"><a [href]="node.data.url" target="_blank" (click)="onNodeClick($event)" [innerHTML]="node.label" class="ia-label"></a></ng-container>
-                            <p-inputgroup *ngIf="node.data.editing === 'label'">
-                                <input type="text" pInputText [(ngModel)]="node.label" pSize="small" class="ia-label" (keydown)="onInputKeydown($event)" />
-                                <p-inputgroup-addon><p-button icon="pi pi-check" severity="secondary" size="small" (onClick)="saveNode()" /></p-inputgroup-addon>
-                            </p-inputgroup>
-                            <p-inputgroup *ngIf="node.data.editing === 'link'">
-                                <input type="text" pInputText [(ngModel)]="node.data.url" pSize="small" class="ia-label" (keydown)="onInputKeydown($event)" />
-                                <p-inputgroup-addon><p-button icon="pi pi-check" severity="secondary" size="small" (onClick)="saveNode()" /></p-inputgroup-addon>
-                            </p-inputgroup>
-                        </div>
-                    </ng-template>
-                </p-tree>
-            </p-tabpanel>
-            <p-tabpanel value="2">
-                <!--BROKEN LINKS-->
-                <h2>Broken links</h2>
-                <p *ngIf="iaData().brokenLinks.length === 0">No broken links found on this page<span *ngIf="iaData().iaTree[0].children?.length"> or on any detected child pages</span>.</p>
-                <p-table *ngIf="iaData().brokenLinks.length > 0" [value]="iaData().brokenLinks" size="small" stripedRows [tableStyle]="{ 'min-width': '50rem' }">
-                    <ng-template #header>
-                        <tr>
-                            <th>Parent page</th>
-                            <th>Broken link</th>
-                            <th>Status</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template #body let-rowData>
-                        <tr>
-                            <td>{{ rowData.parentUrl }}</td>
-                            <td>{{ rowData.url }}</td>
-                            <td>{{ rowData.status }}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </p-tabpanel>
-            <p-tabpanel value="3">
-                <!--Search Matches-->
-                <h2>Search matches</h2>
-                <p *ngIf="iaData().searchMatches.length === 0">No matches found.</p>
-                <ol class="mt-0">
-                    <ng-container *ngFor="let match of iaData().searchMatches">
-                        <li><a [href]="match.url" target="_blank" class="no-underline">{{match.h1}}</a></li>
-                    </ng-container>
-                </ol>
-            </p-tabpanel>
-        </p-tabpanels>
-    </p-tabs>
-</ng-container>`, styles: ["/* angular:styles/component:css;9a93770ea141d081e54eb414c0d33e6ca7cb03d141457e5b29bfd7a65f253928;/home/naomi/content-assistant/src/app/views/ia-assistant/components/ia-tree.component.ts */\n:host {\n  display: block;\n}\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n::ng-deep .transparent-toggle:hover {\n  background-color: var(--p-primary-50) !important;\n}\n::ng-deep .transparent-toggle {\n  background-color: unset !important;\n  border: none !important;\n}\n/*# sourceMappingURL=ia-tree.component.css.map */\n"] }]
+    ], providers: [TreeDragDropService], template: `<p>To do: set up crawl for root URLs to complete IA tree, also set up referring link/search term/url structure crawl (for unique links that aren't in the IA tree)</p>\r
+<ng-container *ngIf="iaData().iaTree">\r
+\r
+    <h2>IA structure</h2>\r
+    <p *ngIf="iaData().iaTree.length === 0">No child pages found.</p>\r
+\r
+    <p-tabs value="0" *ngIf="iaData().iaTree.length > 0">\r
+        <p-tablist>\r
+            <p-tab value="0">Chart</p-tab>\r
+            <p-tab value="1">Table</p-tab>\r
+            <p-tab value="2" *ngIf="iaData().brokenLinks.length > 0">Broken links</p-tab>\r
+            <p-tab value="3" *ngIf="iaData().searchMatches.length > 0">Search matches</p-tab>\r
+        </p-tablist>\r
+        <p-tabpanels>\r
+            <p-tabpanel value="0">\r
+                <!--OPTIONS-->\r
+                <div class="flex flex-row justify-content-between align-items-center gap-2 mb-2">\r
+                    <p-inputgroup class="max-w-max">\r
+                        <p-inputgroup-addon class="secondary-outline">\r
+                            <p-button [icon]="getMainToggleIcon()" [label]="getMainToggleLabel()" (click)="onMainToggleClick()"\r
+                                      severity="secondary" text class="w-10rem" />\r
+                            <p-button icon="pi pi-chevron-down" (click)="togglesPopover.toggle($event)"\r
+                                      severity="secondary" text />\r
+                        </p-inputgroup-addon>\r
+                    </p-inputgroup>\r
+                    <!--div class="flex flex-row border-1 align-items-center border-round-sm secondary-outline">\r
+                            <p-button [icon]="getMainToggleIcon()" [label]="getMainToggleLabel()" (click)="onMainToggleClick()"\r
+                                      severity="secondary" text class="w-10rem" />\r
+                            <p-button icon="pi pi-chevron-down" (click)="togglesPopover.toggle($event)"\r
+                                      severity="secondary" text />\r
+                        </div-->\r
+                    <p-popover #togglesPopover>\r
+                        <div class="flex flex-column gap-3">\r
+                            <div class="flex flex-row justify-content-between align-items-center gap-2" *ngFor="let key of toggleKeys">\r
+                                <span>{{ \`ia.toggle.\${key}\` | translate }}</span>\r
+                                <p-toggleswitch [(ngModel)]="toggles[key]"></p-toggleswitch>\r
+                            </div>\r
+                        </div>\r
+                    </p-popover>\r
+                    <p-button label="Maximize IA chart" severity="secondary" outlined styleClass="secondary-outline" (click)="maximize(chartContainer)" icon="pi pi-window-maximize" />\r
+                </div>\r
+                <!--CHART-->\r
+                <div #chartContainer *ngIf="iaData().iaTree.length > 0" class="overflow-auto max-h-75vh surface-ground surface-border border-1 py-3 mb-3 ia-chart-container">\r
+                    <p-organization-chart [value]="iaData().iaTree">\r
+                        <ng-template let-node pTemplate="default">\r
+                            <!--STATUS ICONS-->\r
+                            <div class="flex flex-row gap-2 justify-content-between align-items-center -mx-2 -my-3" *ngIf="!getToggleStates().allFalse">\r
+                                <!--Orphan status-->\r
+                                <span class="flex gap-2">\r
+                                    <!--i class="pi pi-verified text-green-500" pTooltip="Linked from parent" tooltipPosition="top" *ngIf="node.data.notOrphan && toggles['orphan']"></i-->\r
+                                    <i class="pi pi-sitemap text-red-500" pTooltip="IA orphan" tooltipPosition="top" *ngIf="!node.data.notOrphan && node.data.originalParent && toggles['orphan']"></i>\r
+                                </span>\r
+                                <!--Scope status-->\r
+                                <span class="flex gap-2">\r
+                                    <p-button icon="pi pi-github" pTooltip="has prototype" tooltipPosition="top" [rounded]="true" text severity="secondary" class="-mr-4 -my-1" *ngIf="node.data.prototype && toggles['proto']" />\r
+                                    <p-togglebutton [(ngModel)]="node.data.isUserAdded" class="p-button-rounded p-button-outlined p-button-sm pr-0 -mr-3 -my-1 transparent-toggle" *ngIf="toggles['scope']"\r
+                                                    offIcon="pi pi-lock" offLabel="" onIcon="pi pi-lock-open" onLabel=""\r
+                                                    [pTooltip]="node.data.isUserAdded ? 'In-scope' : 'Out-of-scope'" tooltipPosition="top" ariaLabel="Mark as in-scope" />\r
+\r
+                                </span>\r
+                            </div>\r
+                            <!--PAGE-->\r
+                            <p><a [href]="node.data.url" target="_blank" (click)="onNodeClick($event)" [innerHTML]="node.label" class="ia-label"></a></p>\r
+                            <!--CRAWL STATUS-->\r
+                            <div class="flex flex-row gap-2 justify-content-center align-items-center" *ngIf="!getToggleStates().allFalse">\r
+                                <i class="pi pi-spin pi-spinner text-color-secondary -my-3" pTooltip="crawling" tooltipPosition="top" *ngIf="node.data.isRoot && !node.data.isCrawled && toggles['crawl']"></i>\r
+                                <p-button icon="pi pi-plus-circle" (click)="getChildPages(node)" pTooltip="Get child pages?" tooltipPosition="top" [rounded]="true" text severity="primary" class="-my-4" *ngIf="!node.data.isRoot && !node.data.isCrawled && toggles['crawl']" />\r
+                            </div>\r
+                        </ng-template>\r
+                    </p-organization-chart>\r
+                </div>\r
+            </p-tabpanel>\r
+            <p-tabpanel value="1">\r
+                <!--TREE TABLE-->\r
+                <p-contextMenu #cm [model]="options"></p-contextMenu>\r
+                <h2>IA structure tree</h2>\r
+                <p-tree [value]="iaData().iaTree" styleClass="w-full md:w-[30rem]"\r
+                        [selectionMode]="selectable ? 'multiple' : null" [(selection)]="selectedNode"\r
+                        [draggableNodes]="draggable" [droppableNodes]="true" draggableScope="self" droppableScope="self" (onNodeDrop)="handleNodeDrop($event)" [validateDrop]="true"\r
+                        [contextMenu]="cm" (onNodeContextMenuSelect)="onNodeContextMenu($event)">\r
+                    <ng-template pTemplate="default" let-node>\r
+                        <div class="flex flex-row align-items-center gap-2 w-full">\r
+                            <i class="pi pi-folder" *ngIf="node.children.length > 0 && !draggable && !node.data.editing"></i>\r
+                            <i class="pi pi-file" *ngIf="(node.children.length === 0 || !node.children) && !draggable && !node.data.editing"></i>\r
+                            <i *ngIf="draggable" class="pi pi-arrows-alt cursor-move text-color-secondary"></i>\r
+                            <i *ngIf="node.data.editing" class="pi pi-pencil text-color-secondary"></i>\r
+                            <ng-container *ngIf="!node.data.editing"><a [href]="node.data.url" target="_blank" (click)="onNodeClick($event)" [innerHTML]="node.label" class="ia-label"></a></ng-container>\r
+                            <p-inputgroup *ngIf="node.data.editing === 'label'">\r
+                                <input type="text" pInputText [(ngModel)]="node.label" pSize="small" class="ia-label" (keydown)="onInputKeydown($event)" />\r
+                                <p-inputgroup-addon><p-button icon="pi pi-check" severity="secondary" size="small" (onClick)="saveNode()" /></p-inputgroup-addon>\r
+                            </p-inputgroup>\r
+                            <p-inputgroup *ngIf="node.data.editing === 'link'">\r
+                                <input type="text" pInputText [(ngModel)]="node.data.url" pSize="small" class="ia-label" (keydown)="onInputKeydown($event)" />\r
+                                <p-inputgroup-addon><p-button icon="pi pi-check" severity="secondary" size="small" (onClick)="saveNode()" /></p-inputgroup-addon>\r
+                            </p-inputgroup>\r
+                        </div>\r
+                    </ng-template>\r
+                </p-tree>\r
+            </p-tabpanel>\r
+            <p-tabpanel value="2">\r
+                <!--BROKEN LINKS-->\r
+                <h2>Broken links</h2>\r
+                <p *ngIf="iaData().brokenLinks.length === 0">No broken links found on this page<span *ngIf="iaData().iaTree[0].children?.length"> or on any detected child pages</span>.</p>\r
+                <p-table *ngIf="iaData().brokenLinks.length > 0" [value]="iaData().brokenLinks" size="small" stripedRows [tableStyle]="{ 'min-width': '50rem' }">\r
+                    <ng-template #header>\r
+                        <tr>\r
+                            <th>Parent page</th>\r
+                            <th>Broken link</th>\r
+                            <th>Status</th>\r
+                        </tr>\r
+                    </ng-template>\r
+                    <ng-template #body let-rowData>\r
+                        <tr>\r
+                            <td>{{ rowData.parentUrl }}</td>\r
+                            <td>{{ rowData.url }}</td>\r
+                            <td>{{ rowData.status }}</td>\r
+                        </tr>\r
+                    </ng-template>\r
+                </p-table>\r
+            </p-tabpanel>\r
+            <p-tabpanel value="3">\r
+                <!--Search Matches-->\r
+                <h2>Search matches</h2>\r
+                <p *ngIf="iaData().searchMatches.length === 0">No matches found.</p>\r
+                <ol class="mt-0">\r
+                    <ng-container *ngFor="let match of iaData().searchMatches">\r
+                        <li><a [href]="match.url" target="_blank" class="no-underline">{{match.h1}}</a></li>\r
+                    </ng-container>\r
+                </ol>\r
+            </p-tabpanel>\r
+        </p-tabpanels>\r
+    </p-tabs>\r
+</ng-container>`, styles: ["/* angular:styles/component:css;9a93770ea141d081e54eb414c0d33e6ca7cb03d141457e5b29bfd7a65f253928;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/ia-tree.component.ts */\n:host {\n  display: block;\n}\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n::ng-deep .transparent-toggle:hover {\n  background-color: var(--p-primary-50) !important;\n}\n::ng-deep .transparent-toggle {\n  background-color: unset !important;\n  border: none !important;\n}\n/*# sourceMappingURL=ia-tree.component.css.map */\n"] }]
   }], () => [], { chartContainer: [{
     type: ViewChild,
     args: ["chartContainer"]
@@ -30605,148 +31095,148 @@ var IaAssistantComponent = class _IaAssistantComponent {
       IaTreeComponent,
       ValidateUrlsComponent,
       SetRootsComponent
-    ], template: `<h1 id="wb-cont">{{ 'title.ia' | translate}}</h1>
-<p>{{'ia.description' | translate }}</p>
-
-<div class="border-1 secondary-outline p-3">
-    <div class="border-y-1 secondary-outline surface-card sticky top-0 z-5 -m-3 mb-1">
-        <p-toolbar styleClass="p-1">
-            <ng-template #start>
-                <div class="flex gap-1">
-                    <p-button icon="pi pi-save" pTooltip="Save session" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.saveToLocalStorage()" />
-                    <p-button icon="pi pi-file-export" pTooltip="Export JSON file" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.exportIaState()" />
-
-                    <p-button icon="pi pi-download" pTooltip="Download CSV" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.exportIaTreeAsCsv()" [disabled]="iaState.getIaData().iaTree.length === 0" />
-
-                    <p-button icon="pi pi-github" pTooltip="Export to GitHub" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="goToGitHubExport()" [disabled]="iaState.getIaData().iaTree.length === 0" />
-
-                    <!--p-button *ngIf="isDev" icon="pi pi-github" pTooltip="Export to GitHub" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="op.toggle($event)" [disabled]="iaState.getIaData().iaTree.length === 0" />
-
-
-                    <p-popover #op>
-                        <div class="flex flex-column gap-2">
-                            <p-iftalabel>
-                                <input type="text" id="owner" pInputText [(ngModel)]="owner" pSize="small" fluid (blur)="updateRepoList()" />
-                                <label for="repo">Owner</label>
-                            </p-iftalabel>
-                            <p-iftalabel>
-                                <input type="text" id="repo" pInputText [(ngModel)]="repo" pSize="small" fluid />
-                                <label for="repo">Repository</label>
-                            </p-iftalabel>
-                            <p-dropdown
-                                        [options]="repos"
-                                        [(ngModel)]="repo"
-                                        placeholder="Select a repo">
-                            </p-dropdown>
-                            <p-iftalabel>
-                                <input type="text" id="branch" pInputText [(ngModel)]="branch" pSize="small" fluid />
-                                <label for="branch">Branch</label>
-                            </p-iftalabel>
-                            <p-iftalabel>
-                                <input type="text" id="token" pInputText [(ngModel)]="userToken" pSize="small" fluid />
-                                <label for="token">GitHub Token</label>
-                            </p-iftalabel>
-                            <p-button icon="pi pi-github" label="Export to GitHub" severity="primary" (onClick)="exportProjectToGitHub(owner,repo,branch,userToken,true)" [disabled]="iaState.getIaData().iaTree.length === 0" />
-
-                        </div>
-                    </p-popover-->
-
-                </div>
-            </ng-template>
-            <ng-template #center>
-
-            </ng-template>
-            <ng-template #end>
-                <div class="flex gap-1">
-                    <p-fileUpload #fileUploadRef name="iaStateFile" accept=".json" auto="true" mode="basic"
-                                  [customUpload]="true" (uploadHandler)="iaState.importIaState($event)"
-                                  chooseLabel="Import JSON" chooseIcon="pi pi-file-import" outlined styleClass="upload-secondary-outline" severity="secondary" pTooltip="Import JSON file" tooltipPosition="top" />
-                    <p-button icon="pi pi-trash" pTooltip="Reset" tooltipPosition="top" outlined styleClass="secondary-outline" severity="danger" (onClick)="iaState.resetIaFlow()" />
-                </div>
-            </ng-template>
-        </p-toolbar>
-    </div>
-    <p-stepper [(value)]="iaState.activeStep" [linear]="true">
-        <p-step-list class="-mx-4">
-            <p-step [value]="1">Enter and validate URLs</p-step>
-            <p-step [value]="2">Set initial pages to crawl</p-step>
-            <p-step [value]="3">Add search criteria</p-step>
-            <p-step [value]="4">Build IA tree</p-step>
-        </p-step-list>
-        <p-step-panels>
-
-            <p-step-panel [value]="1">
-                <ng-template #content let-activateCallback="activateCallback">
-                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">
-
-                        <ca-validate-urls></ca-validate-urls>
-
-                        <!--p>TEST LINKS
-                            <br>https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4001/employers-guide-payroll-deductions-remittances.html
-                            <br>https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html
-                            <br>https://www.canada.ca/en/services/taxes/income-tax.html
-                            <br>https://www.canada.ca/en.html<br>
-
-                            <br>Top 5 search results for GST:
-                            <br>https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit.html
-                            <br>https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit/goods-services-tax-harmonized-sales-tax-gst-hst-credit-payment-amounts-tax-years-2013-2015.html
-                            <br>https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html
-                            <br>https://www.canada.ca/en/services/taxes/resources-for-small-and-medium-businesses/gst-hst.html
-                            <br>https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit/goods-services-tax-harmonized-sales-tax-gst-hst-credit-payment-amounts-tax-year-2016.html
-                        </p-->
-
-                    </div>
-                    <div class="flex pt-4 gap-2 justify-content-between">
-                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" class="ml-auto" (onClick)="activateCallback(2); iaState.saveToLocalStorage();" [disabled]="!iaState.getUrlData().isValidated || !iaState.getUrlData().isOk" />
-                    </div>
-                </ng-template>
-            </p-step-panel>
-
-            <p-step-panel [value]="2">
-                <ng-template #content let-activateCallback="activateCallback">
-                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">
-
-                        <ca-set-roots></ca-set-roots>
-
-                    </div>
-                    <div class="flex pt-4 justify-content-between">
-                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1); iaState.saveToLocalStorage();" />
-                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3); iaState.saveToLocalStorage();" [disabled]="iaState.getBreadcrumbData().progress !== 100" />
-                    </div>
-                </ng-template>
-            </p-step-panel>
-
-            <p-step-panel [value]="3">
-                <ng-template #content let-activateCallback="activateCallback">
-                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">
-
-                        <ca-search-criteria></ca-search-criteria>
-
-                    </div>
-                    <div class="flex pt-4 justify-content-between">
-                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />
-                        <p-button label="Build IA Tree" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4); iaState.saveToLocalStorage();" *ngIf="iaState.getIaData().iaTree.length === 0" />
-                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4)" *ngIf="iaState.getIaData().iaTree.length > 0"></p-button>
-                    </div>
-                </ng-template>
-            </p-step-panel>
-
-            <p-step-panel [value]="4">
-                <ng-template #content let-activateCallback="activateCallback">
-                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">
-
-                        <ca-ia-tree></ca-ia-tree>
-
-                    </div>
-                    <div class="flex pt-4 justify-content-start">
-                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(3)" />
-                    </div>
-                </ng-template>
-            </p-step-panel>
-
-        </p-step-panels>
-    </p-stepper>
-</div>`, styles: ["/* angular:styles/component:css;59d84de9e62055b88cf35acb7b824d1f3f6cb65bf585bd8213d7e42f57354ff4;/home/naomi/content-assistant/src/app/views/ia-assistant/ia-assistant.component.ts */\n::ng-deep .upload-secondary-outline .p-button {\n  border: 1px solid var(--p-zinc-200) !important;\n  background-color: transparent !important;\n  color: var(--p-button-secondary-color);\n}\n::ng-deep .upload-secondary-outline .p-button:hover {\n  background-color: var(--p-button-outlined-secondary-hover-background);\n  color: var(--p-button-secondary-hover-color);\n}\n::ng-deep .upload-secondary-outline .p-button-label {\n  display: none;\n}\n/*# sourceMappingURL=ia-assistant.component.css.map */\n"] }]
+    ], template: `<h1 id="wb-cont">{{ 'title.ia' | translate}}</h1>\r
+<p>{{'ia.description' | translate }}</p>\r
+\r
+<div class="border-1 secondary-outline p-3">\r
+    <div class="border-y-1 secondary-outline surface-card sticky top-0 z-5 -m-3 mb-1">\r
+        <p-toolbar styleClass="p-1">\r
+            <ng-template #start>\r
+                <div class="flex gap-1">\r
+                    <p-button icon="pi pi-save" pTooltip="Save session" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.saveToLocalStorage()" />\r
+                    <p-button icon="pi pi-file-export" pTooltip="Export JSON file" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.exportIaState()" />\r
+\r
+                    <p-button icon="pi pi-download" pTooltip="Download CSV" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="iaState.exportIaTreeAsCsv()" [disabled]="iaState.getIaData().iaTree.length === 0" />\r
+\r
+                    <p-button icon="pi pi-github" pTooltip="Export to GitHub" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="goToGitHubExport()" [disabled]="iaState.getIaData().iaTree.length === 0" />\r
+\r
+                    <!--p-button *ngIf="isDev" icon="pi pi-github" pTooltip="Export to GitHub" tooltipPosition="top" outlined styleClass="secondary-outline" severity="secondary" (onClick)="op.toggle($event)" [disabled]="iaState.getIaData().iaTree.length === 0" />\r
+\r
+\r
+                    <p-popover #op>\r
+                        <div class="flex flex-column gap-2">\r
+                            <p-iftalabel>\r
+                                <input type="text" id="owner" pInputText [(ngModel)]="owner" pSize="small" fluid (blur)="updateRepoList()" />\r
+                                <label for="repo">Owner</label>\r
+                            </p-iftalabel>\r
+                            <p-iftalabel>\r
+                                <input type="text" id="repo" pInputText [(ngModel)]="repo" pSize="small" fluid />\r
+                                <label for="repo">Repository</label>\r
+                            </p-iftalabel>\r
+                            <p-dropdown\r
+                                        [options]="repos"\r
+                                        [(ngModel)]="repo"\r
+                                        placeholder="Select a repo">\r
+                            </p-dropdown>\r
+                            <p-iftalabel>\r
+                                <input type="text" id="branch" pInputText [(ngModel)]="branch" pSize="small" fluid />\r
+                                <label for="branch">Branch</label>\r
+                            </p-iftalabel>\r
+                            <p-iftalabel>\r
+                                <input type="text" id="token" pInputText [(ngModel)]="userToken" pSize="small" fluid />\r
+                                <label for="token">GitHub Token</label>\r
+                            </p-iftalabel>\r
+                            <p-button icon="pi pi-github" label="Export to GitHub" severity="primary" (onClick)="exportProjectToGitHub(owner,repo,branch,userToken,true)" [disabled]="iaState.getIaData().iaTree.length === 0" />\r
+\r
+                        </div>\r
+                    </p-popover-->\r
+\r
+                </div>\r
+            </ng-template>\r
+            <ng-template #center>\r
+\r
+            </ng-template>\r
+            <ng-template #end>\r
+                <div class="flex gap-1">\r
+                    <p-fileUpload #fileUploadRef name="iaStateFile" accept=".json" auto="true" mode="basic"\r
+                                  [customUpload]="true" (uploadHandler)="iaState.importIaState($event)"\r
+                                  chooseLabel="Import JSON" chooseIcon="pi pi-file-import" outlined styleClass="upload-secondary-outline" severity="secondary" pTooltip="Import JSON file" tooltipPosition="top" />\r
+                    <p-button icon="pi pi-trash" pTooltip="Reset" tooltipPosition="top" outlined styleClass="secondary-outline" severity="danger" (onClick)="iaState.resetIaFlow()" />\r
+                </div>\r
+            </ng-template>\r
+        </p-toolbar>\r
+    </div>\r
+    <p-stepper [(value)]="iaState.activeStep" [linear]="true">\r
+        <p-step-list class="-mx-4">\r
+            <p-step [value]="1">Enter and validate URLs</p-step>\r
+            <p-step [value]="2">Set initial pages to crawl</p-step>\r
+            <p-step [value]="3">Add search criteria</p-step>\r
+            <p-step [value]="4">Build IA tree</p-step>\r
+        </p-step-list>\r
+        <p-step-panels>\r
+\r
+            <p-step-panel [value]="1">\r
+                <ng-template #content let-activateCallback="activateCallback">\r
+                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">\r
+\r
+                        <ca-validate-urls></ca-validate-urls>\r
+\r
+                        <!--p>TEST LINKS\r
+                            <br>https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4001/employers-guide-payroll-deductions-remittances.html\r
+                            <br>https://www.canada.ca/en/revenue-agency/services/forms-publications/publications.html\r
+                            <br>https://www.canada.ca/en/services/taxes/income-tax.html\r
+                            <br>https://www.canada.ca/en.html<br>\r
+\r
+                            <br>Top 5 search results for GST:\r
+                            <br>https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit.html\r
+                            <br>https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit/goods-services-tax-harmonized-sales-tax-gst-hst-credit-payment-amounts-tax-years-2013-2015.html\r
+                            <br>https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html\r
+                            <br>https://www.canada.ca/en/services/taxes/resources-for-small-and-medium-businesses/gst-hst.html\r
+                            <br>https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit/goods-services-tax-harmonized-sales-tax-gst-hst-credit-payment-amounts-tax-year-2016.html\r
+                        </p-->\r
+\r
+                    </div>\r
+                    <div class="flex pt-4 gap-2 justify-content-between">\r
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" class="ml-auto" (onClick)="activateCallback(2); iaState.saveToLocalStorage();" [disabled]="!iaState.getUrlData().isValidated || !iaState.getUrlData().isOk" />\r
+                    </div>\r
+                </ng-template>\r
+            </p-step-panel>\r
+\r
+            <p-step-panel [value]="2">\r
+                <ng-template #content let-activateCallback="activateCallback">\r
+                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">\r
+\r
+                        <ca-set-roots></ca-set-roots>\r
+\r
+                    </div>\r
+                    <div class="flex pt-4 justify-content-between">\r
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1); iaState.saveToLocalStorage();" />\r
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3); iaState.saveToLocalStorage();" [disabled]="iaState.getBreadcrumbData().progress !== 100" />\r
+                    </div>\r
+                </ng-template>\r
+            </p-step-panel>\r
+\r
+            <p-step-panel [value]="3">\r
+                <ng-template #content let-activateCallback="activateCallback">\r
+                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">\r
+\r
+                        <ca-search-criteria></ca-search-criteria>\r
+\r
+                    </div>\r
+                    <div class="flex pt-4 justify-content-between">\r
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />\r
+                        <p-button label="Build IA Tree" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4); iaState.saveToLocalStorage();" *ngIf="iaState.getIaData().iaTree.length === 0" />\r
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4)" *ngIf="iaState.getIaData().iaTree.length > 0"></p-button>\r
+                    </div>\r
+                </ng-template>\r
+            </p-step-panel>\r
+\r
+            <p-step-panel [value]="4">\r
+                <ng-template #content let-activateCallback="activateCallback">\r
+                    <div class="flex flex-column gap-2 p-3 border-2 border-dashed border-primary">\r
+\r
+                        <ca-ia-tree></ca-ia-tree>\r
+\r
+                    </div>\r
+                    <div class="flex pt-4 justify-content-start">\r
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(3)" />\r
+                    </div>\r
+                </ng-template>\r
+            </p-step-panel>\r
+\r
+        </p-step-panels>\r
+    </p-stepper>\r
+</div>`, styles: ["/* angular:styles/component:css;59d84de9e62055b88cf35acb7b824d1f3f6cb65bf585bd8213d7e42f57354ff4;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/ia-assistant.component.ts */\n::ng-deep .upload-secondary-outline .p-button {\n  border: 1px solid var(--p-zinc-200) !important;\n  background-color: transparent !important;\n  color: var(--p-button-secondary-color);\n}\n::ng-deep .upload-secondary-outline .p-button:hover {\n  background-color: var(--p-button-outlined-secondary-hover-background);\n  color: var(--p-button-secondary-hover-color);\n}\n::ng-deep .upload-secondary-outline .p-button-label {\n  display: none;\n}\n/*# sourceMappingURL=ia-assistant.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
@@ -30754,7 +31244,7 @@ var IaAssistantComponent = class _IaAssistantComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-autocomplete.mjs
-var _c015 = ["item"];
+var _c016 = ["item"];
 var _c116 = ["empty"];
 var _c27 = ["header"];
 var _c35 = ["footer"];
@@ -33097,7 +33587,7 @@ var AutoComplete = class _AutoComplete extends BaseComponent {
     selectors: [["p-autoComplete"], ["p-autocomplete"], ["p-auto-complete"]],
     contentQueries: function AutoComplete_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c015, 5);
+        \u0275\u0275contentQuery(dirIndex, _c016, 5);
         \u0275\u0275contentQuery(dirIndex, _c116, 5);
         \u0275\u0275contentQuery(dirIndex, _c27, 5);
         \u0275\u0275contentQuery(dirIndex, _c35, 5);
@@ -33946,7 +34436,7 @@ var AutoCompleteModule = class _AutoCompleteModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-password.mjs
-var _c016 = ["content"];
+var _c017 = ["content"];
 var _c118 = ["footer"];
 var _c28 = ["header"];
 var _c36 = ["clearicon"];
@@ -35247,7 +35737,7 @@ var Password = class _Password extends BaseComponent {
     selectors: [["p-password"]],
     contentQueries: function Password_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c016, 4);
+        \u0275\u0275contentQuery(dirIndex, _c017, 4);
         \u0275\u0275contentQuery(dirIndex, _c118, 4);
         \u0275\u0275contentQuery(dirIndex, _c28, 4);
         \u0275\u0275contentQuery(dirIndex, _c36, 4);
@@ -35958,7 +36448,7 @@ var KeyFilterModule = class _KeyFilterModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-fieldset.mjs
-var _c017 = ["header"];
+var _c018 = ["header"];
 var _c119 = ["expandicon"];
 var _c29 = ["collapseicon"];
 var _c37 = ["content"];
@@ -36403,7 +36893,7 @@ var Fieldset = class _Fieldset extends BaseComponent {
     selectors: [["p-fieldset"]],
     contentQueries: function Fieldset_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c017, 4);
+        \u0275\u0275contentQuery(dirIndex, _c018, 4);
         \u0275\u0275contentQuery(dirIndex, _c119, 4);
         \u0275\u0275contentQuery(dirIndex, _c29, 4);
         \u0275\u0275contentQuery(dirIndex, _c37, 4);
@@ -37156,7 +37646,7 @@ Add information on how to manage the repo here.
 })();
 
 // src/app/views/ia-assistant/components/export-github.component.ts
-var _c018 = (a0) => ({ "ng-invalid ng-dirty": a0 });
+var _c019 = (a0) => ({ "ng-invalid ng-dirty": a0 });
 function ExportGithubComponent_div_11_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 14)(1, "p");
@@ -37499,7 +37989,7 @@ var ExportGithubComponent = class _ExportGithubComponent {
       \u0275\u0275property("ngIf", ctx.showHelp);
       \u0275\u0275advance(5);
       \u0275\u0275twoWayProperty("ngModel", ctx.gitHubData().owner);
-      \u0275\u0275property("pKeyFilter", ctx.ownerFilter)("ngClass", \u0275\u0275pureFunction1(15, _c018, ctx.ownerError));
+      \u0275\u0275property("pKeyFilter", ctx.ownerFilter)("ngClass", \u0275\u0275pureFunction1(15, _c019, ctx.ownerError));
       \u0275\u0275advance(3);
       \u0275\u0275property("ngIf", ctx.ownerError);
       \u0275\u0275advance(2);
@@ -37558,63 +38048,63 @@ var ExportGithubComponent = class _ExportGithubComponent {
       ButtonModule,
       MessageModule,
       FieldsetModule
-    ], template: `<h2>Export to GitHub</h2>
-<p>Export the current in-scope pages for your project to a GitHub repository. You can specify the owner, repository, branch, and provide a <p-button icon="pi pi-question-circle" (onClick)="showHelp = !showHelp" [rounded]="true" [text]="true" styleClass="-m-3 nohover" iconPos="right" severity="help" label="GitHub token"></p-button> for authentication.</p>
-<p>The pages will be exported in Jekyll format. Redirects for the included pages are automatically set up, so you don't need to update links in your repo manually. If you create new pages directly in GitHub, remember to list them in your <code>/source/data/exclude-redirect-links.json</code> file.</p>
-
-
-<div *ngIf="showHelp" class="text-sm mt-2">
-    <p>To push changes to a repository, you need a valid GitHub token. Your token works like a username and password, so keep it private and do not share it with anyone.</p>
-
-    <p>Follow these steps to create a new GitHub token:</p>
-
-    <ol>
-        <li>Go to your GitHub <strong>Settings</strong>.</li>
-        <li>Select <strong>Developer settings</strong>.</li>
-        <li>Click <strong>Personal Access Tokens</strong> &gt; <strong>Fine-grained tokens</strong>.</li>
-        <li>Click <strong>Generate new token</strong>.</li>
-        <li>Give your token a <strong>unique name</strong> and a <strong>description</strong>.</li>
-        <li>Under <strong>Resource owner</strong>, select either cra-design or your personal account.</li>
-        <li>Under <strong>Repository access</strong>, select <strong>All repositories</strong>.</li>
-        <li>Add the necessary <strong>permissions</strong> for pushing changes to repositories:
-            <ul>
-                <li><strong>Administration</strong> (Access: Read and write)</li>
-                <li><strong>Contents</strong> (Access: Read and write)</li>
-                <li><strong>Metadata</strong> (Access: Read-only)</li>
-                <li><strong>Pages</strong> (Access: Read and write)</li>
-            </ul>
-        </li>
-        <li>Copy the generated token and enter it into the GitHub token field whenever you push changes to GitHub.</li>
-    </ol>
-
-    <p><strong>Important:</strong> Keep this token secret. Treat it like a password.</p>
-
-</div>
-
-<!--TODO: Generate link to repo and a bookmarklet for toggling between repo and Canada.ca-->
-<p-fieldset legend="Export settings">
-    <div class="flex flex-column gap-2">
-        <div class="flex flex-column gap-1">
-            <p-iftalabel>
-                <input type="text" id="owner" pInputText [(ngModel)]="gitHubData().owner" pSize="small" fluid (blur)="updateOwner();updateRepoList()" maxlength="39" [pKeyFilter]="ownerFilter" [ngClass]="{ 'ng-invalid ng-dirty': ownerError }" />
-                <label for="repo">Owner</label>
-            </p-iftalabel>
-            <p-message severity="error" variant="simple" size="small" *ngIf="ownerError">{{ownerError}}</p-message>
-        </div>
-        <p-iftalabel>
-            <p-autocomplete id="repo" [(ngModel)]="gitHubData().repo" [suggestions]="filteredRepos" (input)="updateRepo()" (completeMethod)="filterRepos($event)" [dropdown]=true pSize="small" maxlength="100" [pKeyFilter]="repoFilter" fluid />
-            <label for="repo">Repository</label>
-        </p-iftalabel>
-        <p-iftalabel>
-            <input type="text" id="branch" pInputText [(ngModel)]="gitHubData().branch" pSize="small" fluid (blur)="updateBranch()" [pKeyFilter]="branchFilter" />
-            <label for="branch">Branch</label>
-        </p-iftalabel>
-        <p-iftalabel>
-            <p-password feedback="false" id="token" [(ngModel)]="userToken" pSize="small" fluid />
-            <label for="token">GitHub Token</label>
-        </p-iftalabel>
-        <p-button icon="pi pi-github" label="Export to GitHub" severity="primary" (onClick)="exportProjectToGitHub(gitHubData().owner,gitHubData().repo,gitHubData().branch,userToken,true)" [disabled]="iaData().iaTree.length === 0" />
-    </div>
+    ], template: `<h2>Export to GitHub</h2>\r
+<p>Export the current in-scope pages for your project to a GitHub repository. You can specify the owner, repository, branch, and provide a <p-button icon="pi pi-question-circle" (onClick)="showHelp = !showHelp" [rounded]="true" [text]="true" styleClass="-m-3 nohover" iconPos="right" severity="help" label="GitHub token"></p-button> for authentication.</p>\r
+<p>The pages will be exported in Jekyll format. Redirects for the included pages are automatically set up, so you don't need to update links in your repo manually. If you create new pages directly in GitHub, remember to list them in your <code>/source/data/exclude-redirect-links.json</code> file.</p>\r
+\r
+\r
+<div *ngIf="showHelp" class="text-sm mt-2">\r
+    <p>To push changes to a repository, you need a valid GitHub token. Your token works like a username and password, so keep it private and do not share it with anyone.</p>\r
+\r
+    <p>Follow these steps to create a new GitHub token:</p>\r
+\r
+    <ol>\r
+        <li>Go to your GitHub <strong>Settings</strong>.</li>\r
+        <li>Select <strong>Developer settings</strong>.</li>\r
+        <li>Click <strong>Personal Access Tokens</strong> &gt; <strong>Fine-grained tokens</strong>.</li>\r
+        <li>Click <strong>Generate new token</strong>.</li>\r
+        <li>Give your token a <strong>unique name</strong> and a <strong>description</strong>.</li>\r
+        <li>Under <strong>Resource owner</strong>, select either cra-design or your personal account.</li>\r
+        <li>Under <strong>Repository access</strong>, select <strong>All repositories</strong>.</li>\r
+        <li>Add the necessary <strong>permissions</strong> for pushing changes to repositories:\r
+            <ul>\r
+                <li><strong>Administration</strong> (Access: Read and write)</li>\r
+                <li><strong>Contents</strong> (Access: Read and write)</li>\r
+                <li><strong>Metadata</strong> (Access: Read-only)</li>\r
+                <li><strong>Pages</strong> (Access: Read and write)</li>\r
+            </ul>\r
+        </li>\r
+        <li>Copy the generated token and enter it into the GitHub token field whenever you push changes to GitHub.</li>\r
+    </ol>\r
+\r
+    <p><strong>Important:</strong> Keep this token secret. Treat it like a password.</p>\r
+\r
+</div>\r
+\r
+<!--TODO: Generate link to repo and a bookmarklet for toggling between repo and Canada.ca-->\r
+<p-fieldset legend="Export settings">\r
+    <div class="flex flex-column gap-2">\r
+        <div class="flex flex-column gap-1">\r
+            <p-iftalabel>\r
+                <input type="text" id="owner" pInputText [(ngModel)]="gitHubData().owner" pSize="small" fluid (blur)="updateOwner();updateRepoList()" maxlength="39" [pKeyFilter]="ownerFilter" [ngClass]="{ 'ng-invalid ng-dirty': ownerError }" />\r
+                <label for="repo">Owner</label>\r
+            </p-iftalabel>\r
+            <p-message severity="error" variant="simple" size="small" *ngIf="ownerError">{{ownerError}}</p-message>\r
+        </div>\r
+        <p-iftalabel>\r
+            <p-autocomplete id="repo" [(ngModel)]="gitHubData().repo" [suggestions]="filteredRepos" (input)="updateRepo()" (completeMethod)="filterRepos($event)" [dropdown]=true pSize="small" maxlength="100" [pKeyFilter]="repoFilter" fluid />\r
+            <label for="repo">Repository</label>\r
+        </p-iftalabel>\r
+        <p-iftalabel>\r
+            <input type="text" id="branch" pInputText [(ngModel)]="gitHubData().branch" pSize="small" fluid (blur)="updateBranch()" [pKeyFilter]="branchFilter" />\r
+            <label for="branch">Branch</label>\r
+        </p-iftalabel>\r
+        <p-iftalabel>\r
+            <p-password feedback="false" id="token" [(ngModel)]="userToken" pSize="small" fluid />\r
+            <label for="token">GitHub Token</label>\r
+        </p-iftalabel>\r
+        <p-button icon="pi pi-github" label="Export to GitHub" severity="primary" (onClick)="exportProjectToGitHub(gitHubData().owner,gitHubData().repo,gitHubData().branch,userToken,true)" [disabled]="iaData().iaTree.length === 0" />\r
+    </div>\r
 </p-fieldset>` }]
   }], null, null);
 })();
@@ -37641,7 +38131,7 @@ var routes = [
       }
       return true;
     }],
-    loadComponent: () => import("./chunk-PGHVV7LC.js").then((m) => m.PageAssistantCompareComponent)
+    loadComponent: () => import("./chunk-GIFHTQUV.js").then((m) => m.PageAssistantCompareComponent)
   },
   {
     path: "page-assistant/share",
@@ -37687,6 +38177,11 @@ var routes = [
     path: "metadata-assistant",
     component: MetadataAssistantComponent,
     title: "title.metadata"
+  },
+  {
+    path: "llm-evaluation",
+    component: LlmEvaluationComponent,
+    title: "title.llmEvaluation"
   },
   {
     path: "about-us",
@@ -37767,7 +38262,7 @@ var ApiResetComponent = class _ApiResetComponent {
     args: [{ selector: "ca-api-reset", imports: [TranslateModule, ButtonModule], template: `
     <p-button icon="pi pi-key" [label]="'apiKey.change' | translate" [rounded]="true" outlined severity="secondary"
     id="api-key-reset-btn" class="my-2 api-button" styleClass="surface-border api-button-size" (click)="this.localStore.removeData('apiKey');" />
-  `, styles: ["/* angular:styles/component:css;3a79632ccf9b2a1bf9b85450cd9ee1a91b4c6a930bfce5ba9d88905c12f7b962;/home/naomi/content-assistant/src/app/template/api-reset.component.ts */\n::ng-deep .api-button-size {\n  width: 13rem !important;\n}\n@media (max-width: 768px) {\n  ::ng-deep .api-button-size {\n    width: auto !important;\n    padding: 10px !important;\n  }\n  ::ng-deep .api-button .p-button-label {\n    display: none;\n  }\n}\n::ng-deep .api-button:hover .p-button-icon {\n  color: var(--p-primary-400) !important;\n}\n::ng-deep html.dark-mode .api-button:hover .p-button-icon {\n  color: var(--p-primary-200) !important;\n}\n/*# sourceMappingURL=api-reset.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;3a79632ccf9b2a1bf9b85450cd9ee1a91b4c6a930bfce5ba9d88905c12f7b962;C:/AmberDev/main-repo/content-assistant/src/app/template/api-reset.component.ts */\n::ng-deep .api-button-size {\n  width: 13rem !important;\n}\n@media (max-width: 768px) {\n  ::ng-deep .api-button-size {\n    width: auto !important;\n    padding: 10px !important;\n  }\n  ::ng-deep .api-button .p-button-label {\n    display: none;\n  }\n}\n::ng-deep .api-button:hover .p-button-icon {\n  color: var(--p-primary-400) !important;\n}\n::ng-deep html.dark-mode .api-button:hover .p-button-icon {\n  color: var(--p-primary-200) !important;\n}\n/*# sourceMappingURL=api-reset.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
@@ -37877,7 +38372,7 @@ var HeaderComponent = class _HeaderComponent {
     </div>
   </p-toolbar>
 </header>
-  `, styles: ["/* angular:styles/component:css;607ff6dd9fa2de823f98ca3db927b4c2688fafc0a7c156a199ce40df64b470ce;/home/naomi/content-assistant/src/app/template/header.component.ts */\n::ng-deep .p-toolbar {\n  background-color: transparent !important;\n  border: none !important;\n}\nheader {\n  border-bottom-style: solid;\n  border-bottom-color: var(--p-gray-400);\n  border-width: 1px;\n  margin-top: -4rem;\n}\n::ng-deep .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-cyan-400) !important;\n}\n::ng-deep html.dark-mode .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-amber-400) !important;\n}\n/*# sourceMappingURL=header.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;607ff6dd9fa2de823f98ca3db927b4c2688fafc0a7c156a199ce40df64b470ce;C:/AmberDev/main-repo/content-assistant/src/app/template/header.component.ts */\n::ng-deep .p-toolbar {\n  background-color: transparent !important;\n  border: none !important;\n}\nheader {\n  border-bottom-style: solid;\n  border-bottom-color: var(--p-gray-400);\n  border-width: 1px;\n  margin-top: -4rem;\n}\n::ng-deep .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-cyan-400) !important;\n}\n::ng-deep html.dark-mode .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-amber-400) !important;\n}\n/*# sourceMappingURL=header.component.css.map */\n"] }]
   }], () => [], null);
 })();
 (() => {
@@ -37885,19 +38380,21 @@ var HeaderComponent = class _HeaderComponent {
 })();
 
 // src/app/template/sidebar.component.ts
-var _c019 = () => ["/"];
+var _c020 = () => ["/"];
 var _c120 = () => ["/page-assistant"];
 var _c210 = () => ["/image-assistant"];
 var _c38 = () => ["/translation-assistant"];
 var _c48 = () => ["/ia-assistant"];
 var _c58 = () => ["/inventory-assistant"];
 var _c67 = () => ["/metadata-assistant"];
-var _c76 = () => ["/about-us"];
+var _c76 = () => ["/llm-evaluation"];
+var _c86 = () => ["/about-us"];
 var SidebarComponent = class _SidebarComponent {
   // Section toggle state
   isExpanded = {
     main: true,
     project: true,
+    monitoring: true,
     info: true
   };
   toggleSection(section) {
@@ -37911,7 +38408,7 @@ var SidebarComponent = class _SidebarComponent {
   static \u0275fac = function SidebarComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _SidebarComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SidebarComponent, selectors: [["ca-sidebar"]], decls: 78, vars: 62, consts: [["id", "nav-bar", 1, "l-navbar", "show-n"], [1, "nav"], [1, "flex", "flex-column", "justify-content-between", "min-h-full"], [1, "nav_logo"], [3, "routerLink"], [1, "material-icons", "text-primary-200"], [1, "logo_text"], [1, "section"], ["tabindex", "0", "role", "button", "aria-controls", "main", 1, "nav_header", "text-primary-200", "hover:text-primary-400", 3, "click", "keydown"], ["id", "menu-content", 1, "nav_section_text"], [1, "material-icons", "toggle-icon"], ["id", "main", "role", "region", "aria-labelledby", "menu-content", 1, "nav_section_body"], ["routerLinkActive", "active", 1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "routerLink"], [1, "material-icons"], [1, "nav_link_text"], ["tabindex", "0", "role", "button", "aria-controls", "project", 1, "nav_header", "text-primary-200", "hover:text-primary-400", "hover:font-bold", 3, "click", "keydown"], ["id", "menu-project", 1, "nav_section_text"], ["id", "project", "role", "region", "aria-labelledby", "menu-project", 1, "nav_section_body"], [1, "nav_section_body"], [1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "href"]], template: function SidebarComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SidebarComponent, selectors: [["ca-sidebar"]], decls: 92, vars: 74, consts: [["id", "nav-bar", 1, "l-navbar", "show-n"], [1, "nav"], [1, "flex", "flex-column", "justify-content-between", "min-h-full"], [1, "nav_logo"], [3, "routerLink"], [1, "material-icons", "text-primary-200"], [1, "logo_text"], [1, "section"], ["tabindex", "0", "role", "button", "aria-controls", "main", 1, "nav_header", "text-primary-200", "hover:text-primary-400", 3, "click", "keydown"], ["id", "menu-content", 1, "nav_section_text"], [1, "material-icons", "toggle-icon"], ["id", "main", "role", "region", "aria-labelledby", "menu-content", 1, "nav_section_body"], ["routerLinkActive", "active", 1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "routerLink"], [1, "material-icons"], [1, "nav_link_text"], ["tabindex", "0", "role", "button", "aria-controls", "project", 1, "nav_header", "text-primary-200", "hover:text-primary-400", "hover:font-bold", 3, "click", "keydown"], ["id", "menu-project", 1, "nav_section_text"], ["id", "project", "role", "region", "aria-labelledby", "menu-project", 1, "nav_section_body"], ["tabindex", "0", "role", "button", "aria-controls", "monitoring", 1, "nav_header", "text-primary-200", "hover:text-primary-400", "hover:font-bold", 3, "click", "keydown"], ["id", "menu-monitoring", 1, "nav_section_text"], ["id", "monitoring", "role", "region", "aria-labelledby", "menu-monitoring", 1, "nav_section_body"], [1, "nav_section_body"], [1, "nav_link", "flex", "hover:bg-primary-600", "border-round", 3, "href"]], template: function SidebarComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "nav", 1)(2, "div", 2)(3, "div")(4, "div", 3)(5, "a", 4)(6, "span", 5);
       \u0275\u0275text(7, "design_services");
@@ -37987,166 +38484,213 @@ var SidebarComponent = class _SidebarComponent {
       \u0275\u0275elementStart(60, "span", 14);
       \u0275\u0275text(61);
       \u0275\u0275pipe(62, "translate");
-      \u0275\u0275elementEnd()()()()();
-      \u0275\u0275elementStart(63, "div", 7)(64, "div", 18)(65, "a", 12)(66, "span", 13);
-      \u0275\u0275text(67, "web_asset");
+      \u0275\u0275elementEnd()()()();
+      \u0275\u0275elementStart(63, "div", 7)(64, "div", 18);
+      \u0275\u0275listener("click", function SidebarComponent_Template_div_click_64_listener() {
+        return ctx.toggleSection("monitoring");
+      })("keydown", function SidebarComponent_Template_div_keydown_64_listener($event) {
+        return ctx.toggleOnEnter($event, "monitoring");
+      });
+      \u0275\u0275elementStart(65, "span", 19);
+      \u0275\u0275text(66);
+      \u0275\u0275pipe(67, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(68, "span", 14);
+      \u0275\u0275elementStart(68, "span", 10);
       \u0275\u0275text(69);
-      \u0275\u0275pipe(70, "translate");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(71, "a", 19);
-      \u0275\u0275pipe(72, "translate");
-      \u0275\u0275elementStart(73, "span", 13);
-      \u0275\u0275text(74, "feedback");
+      \u0275\u0275elementStart(70, "div", 20)(71, "a", 12)(72, "span", 13);
+      \u0275\u0275text(73, "assessment");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(75, "span", 14);
-      \u0275\u0275text(76);
-      \u0275\u0275pipe(77, "translate");
+      \u0275\u0275elementStart(74, "span", 14);
+      \u0275\u0275text(75);
+      \u0275\u0275pipe(76, "translate");
+      \u0275\u0275elementEnd()()()()();
+      \u0275\u0275elementStart(77, "div", 7)(78, "div", 21)(79, "a", 12)(80, "span", 13);
+      \u0275\u0275text(81, "web_asset");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(82, "span", 14);
+      \u0275\u0275text(83);
+      \u0275\u0275pipe(84, "translate");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(85, "a", 22);
+      \u0275\u0275pipe(86, "translate");
+      \u0275\u0275elementStart(87, "span", 13);
+      \u0275\u0275text(88, "feedback");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(89, "span", 14);
+      \u0275\u0275text(90);
+      \u0275\u0275pipe(91, "translate");
       \u0275\u0275elementEnd()()()()()()();
     }
     if (rf & 2) {
       \u0275\u0275advance(5);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(54, _c019));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(65, _c020));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 30, "title.landing"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 37, "title.landing"));
       \u0275\u0275advance(3);
       \u0275\u0275attribute("aria-expanded", ctx.isExpanded.main);
       \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 32, "menu.content"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 39, "menu.content"));
       \u0275\u0275advance(3);
       \u0275\u0275textInterpolate(ctx.isExpanded.main ? "expand_less" : "expand_more");
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.main);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(55, _c120));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(66, _c120));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(24, 34, "menu.page"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(24, 41, "menu.page"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(56, _c210));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(67, _c210));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(30, 36, "menu.image"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(30, 43, "menu.image"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(57, _c38));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(68, _c38));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(36, 38, "menu.translation"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(36, 45, "menu.translation"));
       \u0275\u0275advance(3);
       \u0275\u0275attribute("aria-expanded", ctx.isExpanded.project);
       \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(41, 40, "menu.project"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(41, 47, "menu.project"));
       \u0275\u0275advance(3);
       \u0275\u0275textInterpolate(ctx.isExpanded.project ? "expand_less" : "expand_more");
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.project);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(58, _c48));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(69, _c48));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(50, 42, "menu.ia"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(50, 49, "menu.ia"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(59, _c58));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(70, _c58));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(56, 44, "menu.inventory"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(56, 51, "menu.inventory"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(60, _c67));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(71, _c67));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(62, 46, "menu.metadata"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(62, 53, "menu.metadata"));
+      \u0275\u0275advance(3);
+      \u0275\u0275attribute("aria-expanded", ctx.isExpanded.monitoring);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(67, 55, "menu.monitoring"));
+      \u0275\u0275advance(3);
+      \u0275\u0275textInterpolate(ctx.isExpanded.monitoring ? "expand_less" : "expand_more");
+      \u0275\u0275advance();
+      \u0275\u0275classProp("hidden", !ctx.isExpanded.monitoring);
+      \u0275\u0275advance();
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(72, _c76));
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(76, 57, "menu.llmEvaluation"));
       \u0275\u0275advance(3);
       \u0275\u0275classProp("hidden", !ctx.isExpanded.info);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(61, _c76));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(73, _c86));
       \u0275\u0275advance(4);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(70, 48, "menu.about"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(84, 59, "menu.about"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("href", \u0275\u0275pipeBind1(72, 50, "feedback.email"), \u0275\u0275sanitizeUrl);
+      \u0275\u0275property("href", \u0275\u0275pipeBind1(86, 61, "feedback.email"), \u0275\u0275sanitizeUrl);
       \u0275\u0275advance(5);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(77, 52, "menu.feedback"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(91, 63, "menu.feedback"));
     }
   }, dependencies: [CommonModule, RouterModule, RouterLink, RouterLinkActive, TranslateModule, TranslatePipe], styles: ["\n\n.l-navbar[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  text-decoration: none;\n}\n.l-navbar[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: -30%;\n  width: var(--nav-width);\n  height: 100vh;\n  background-color: var(--p-gray-800);\n  padding: .5rem 1rem 1rem;\n  transition: .3s;\n  z-index: var(--z-fixed);\n}\n.nav[_ngcontent-%COMP%] {\n  height: 100%;\n  display: contents;\n  flex-direction: column;\n  justify-content: space-between;\n  overflow: hidden;\n}\n.nav_link[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: .3rem 0 0 .3rem;\n  position: relative;\n  color: var(--first-color-light);\n  margin-bottom: .8rem;\n  transition: .3s;\n}\n.nav_link[_ngcontent-%COMP%]:hover {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: 0rem;\n}\n.nav_link.active[_ngcontent-%COMP%]:hover {\n  color: #fff;\n}\n.nav_link.active[_ngcontent-%COMP%] {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .3rem;\n  margin-bottom: .1rem;\n}\n.nav_link.active-hide[_ngcontent-%COMP%] {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.nav_logo[_ngcontent-%COMP%] {\n  display: flex;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: 0;\n  margin-bottom: 2rem;\n}\n.nav_logo-icon[_ngcontent-%COMP%] {\n  font-size: 1.25rem;\n}\n.nav_logo-name[_ngcontent-%COMP%] {\n  color: var(--first-color-light);\n  font-weight: 700;\n}\n.show-n[_ngcontent-%COMP%] {\n  left: 0;\n}\n.section[_ngcontent-%COMP%] {\n  padding: .1rem;\n}\n.nav_section_body[_ngcontent-%COMP%] {\n  padding-left: .7rem;\n}\n.nav_section_body.hidden[_ngcontent-%COMP%] {\n  display: none;\n}\n.nav_link_text[_ngcontent-%COMP%] {\n  margin-left: 0rem;\n}\n.nav_header[_ngcontent-%COMP%] {\n  font-size: 18px;\n  border-radius: .25rem;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 0.5rem 0;\n}\n.nav_header[_ngcontent-%COMP%]:hover {\n  font-weight: bold;\n  padding-bottom: .5rem;\n}\n.nav_header.active[_ngcontent-%COMP%]:hover {\n  color: #fff;\n}\n.nav_header.active[_ngcontent-%COMP%] {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: .1rem;\n}\n.nav_header.active-hide[_ngcontent-%COMP%] {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.toggle-icon[_ngcontent-%COMP%] {\n  margin-left: auto;\n}\n.nav_icon[_ngcontent-%COMP%], \n.nav_section_text[_ngcontent-%COMP%] {\n  margin-left: .5rem;\n}\n.nav_section[_ngcontent-%COMP%] {\n  overflow: hidden;\n  max-width: 100%;\n}\n@media (max-width: 600px) {\n  .section[_ngcontent-%COMP%], \n   .nav_section-body[_ngcontent-%COMP%], \n   .nav_section_text[_ngcontent-%COMP%] {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 100%;\n    min-width: 0;\n    display: block;\n  }\n  .nav_header[_ngcontent-%COMP%], \n   .nav_link_text[_ngcontent-%COMP%] {\n    display: none;\n  }\n  .toggle-icon[_ngcontent-%COMP%] {\n    margin-left: 0;\n    margin-top: 0.5rem;\n    align-self: flex-end;\n  }\n  .logo_text[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n.nav_logo[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0;\n  color: var(--first-color-light);\n}\n.nav_logo[_ngcontent-%COMP%]   .material-icons[_ngcontent-%COMP%] {\n  font-size: 2.2rem;\n  align-self: flex-start;\n  margin-right: 0.5rem;\n  border-radius: 0.25rem;\n}\n.logo_text[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n  font-weight: 600;\n  letter-spacing: 0.05em;\n  padding: 0 .5rem;\n  align-self: flex-start;\n}\n@media screen and (min-width: 600px) {\n  .l-navbar[_ngcontent-%COMP%] {\n    left: 0;\n    padding: 1rem 1rem 0;\n  }\n  .show-n[_ngcontent-%COMP%] {\n    width: calc(var(--nav-width) + 110px);\n  }\n}\n/*# sourceMappingURL=sidebar.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SidebarComponent, [{
     type: Component,
-    args: [{ selector: "ca-sidebar", standalone: true, imports: [CommonModule, RouterModule, TranslateModule], template: `<div class="l-navbar show-n" id="nav-bar">
-  <nav class="nav">
-    <div class="flex flex-column justify-content-between min-h-full">
-      <div>
-        <!-- App Title -->
-        <div class="nav_logo">
-          <a [routerLink]="['/']">
-            <span class="material-icons text-primary-200">design_services</span>
-            <span class="logo_text">{{ 'title.landing' | translate }}</span>
-          </a>
-        </div>
-
-        <!-- Main Tools -->
-        <div class="section">
-          <div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('main')" (keydown)="toggleOnEnter($event, 'main')" tabindex="0" role="button" [attr.aria-expanded]="isExpanded.main" aria-controls="main">
-            <span id="menu-content" class="nav_section_text">{{ 'menu.content' | translate }}</span>
-            <span class="material-icons toggle-icon">{{ isExpanded.main ? 'expand_less' : 'expand_more' }}</span>
-          </div>
-          <div class="nav_section_body" id="main" role="region" aria-labelledby="menu-content" [class.hidden]="!isExpanded.main">
-            <a [routerLink]="['/page-assistant']" routerLinkActive="active"
-               class="nav_link flex hover:bg-primary-600 border-round ">
-              <span class="material-icons">article</span>
-              <span class="nav_link_text">{{ 'menu.page' | translate }}</span>
-            </a>
-            <a [routerLink]="['/image-assistant']" routerLinkActive="active"
-               class="nav_link flex hover:bg-primary-600 border-round">
-              <span class="material-icons">photo</span>
-              <span class="nav_link_text">{{ 'menu.image' | translate }}</span>
-            </a>
-            <a [routerLink]="['/translation-assistant']" routerLinkActive="active"
-               class="nav_link flex hover:bg-primary-600 border-round">
-              <span class="material-icons">language</span>
-              <span class="nav_link_text">{{ 'menu.translation' | translate }}</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Project Tools -->
-        <div class="section">
-          <div class="nav_header text-primary-200 hover:text-primary-400 hover:font-bold" (click)="toggleSection('project')" (keydown)="toggleOnEnter($event, 'project')" tabindex="0" role="button" [attr.aria-expanded]="isExpanded.project" aria-controls="project">
-            <span id="menu-project" class="nav_section_text">{{ 'menu.project' | translate }}</span>
-            <span class="material-icons toggle-icon">{{ isExpanded.project ? 'expand_less' : 'expand_more' }}</span>
-          </div>
-          <div class="nav_section_body" id="project" role="region" aria-labelledby="menu-project" [class.hidden]="!isExpanded.project">
-            <a [routerLink]="['/ia-assistant']" routerLinkActive="active"
-               class="nav_link flex hover:bg-primary-600 border-round">
-              <span class="material-icons">lan</span>
-              <span class="nav_link_text">{{ 'menu.ia' | translate }}</span>
-            </a>
-            <a [routerLink]="['/inventory-assistant']" routerLinkActive="active"
-               class="nav_link flex hover:bg-primary-600 border-round">
-              <span class="material-icons">inventory</span>
-              <span class="nav_link_text">{{ 'menu.inventory' | translate }}</span>
-            </a>
-            <a [routerLink]="['/metadata-assistant']" routerLinkActive="active"
-               class="nav_link flex hover:bg-primary-600 border-round">
-              <span class="material-icons">description</span>
-              <span class="nav_link_text">{{ 'menu.metadata' | translate }}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- App Info -->
-      <div class="section">
-        <!--div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('info')">
-          <span class="nav_section_text">{{ 'menu.appInfo' | translate }}</span>
-          <span class="material-icons toggle-icon">{{ isExpanded.info ? 'expand_less' : 'expand_more' }}</span>
-        </div-->
-        <div class="nav_section_body" [class.hidden]="!isExpanded.info">
-          <a [routerLink]="['/about-us']" routerLinkActive="active" class="nav_link flex hover:bg-primary-600 border-round">
-            <span class="material-icons">web_asset</span>
-            <span class="nav_link_text">{{ 'menu.about' | translate }}</span>
-          </a>
-          <a [href]="'feedback.email' | translate" class="nav_link flex hover:bg-primary-600 border-round">
-            <span class="material-icons">feedback</span>
-            <span class="nav_link_text">{{ 'menu.feedback' | translate }}</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
+    args: [{ selector: "ca-sidebar", standalone: true, imports: [CommonModule, RouterModule, TranslateModule], template: `<div class="l-navbar show-n" id="nav-bar">\r
+  <nav class="nav">\r
+    <div class="flex flex-column justify-content-between min-h-full">\r
+      <div>\r
+        <!-- App Title -->\r
+        <div class="nav_logo">\r
+          <a [routerLink]="['/']">\r
+            <span class="material-icons text-primary-200">design_services</span>\r
+            <span class="logo_text">{{ 'title.landing' | translate }}</span>\r
+          </a>\r
+        </div>\r
+\r
+        <!-- Main Tools -->\r
+        <div class="section">\r
+          <div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('main')" (keydown)="toggleOnEnter($event, 'main')" tabindex="0" role="button" [attr.aria-expanded]="isExpanded.main" aria-controls="main">\r
+            <span id="menu-content" class="nav_section_text">{{ 'menu.content' | translate }}</span>\r
+            <span class="material-icons toggle-icon">{{ isExpanded.main ? 'expand_less' : 'expand_more' }}</span>\r
+          </div>\r
+          <div class="nav_section_body" id="main" role="region" aria-labelledby="menu-content" [class.hidden]="!isExpanded.main">\r
+            <a [routerLink]="['/page-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round ">\r
+              <span class="material-icons">article</span>\r
+              <span class="nav_link_text">{{ 'menu.page' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/image-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">photo</span>\r
+              <span class="nav_link_text">{{ 'menu.image' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/translation-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">language</span>\r
+              <span class="nav_link_text">{{ 'menu.translation' | translate }}</span>\r
+            </a>\r
+          </div>\r
+        </div>\r
+\r
+        <!-- Project Tools -->\r
+        <div class="section">\r
+          <div class="nav_header text-primary-200 hover:text-primary-400 hover:font-bold" (click)="toggleSection('project')" (keydown)="toggleOnEnter($event, 'project')" tabindex="0" role="button" [attr.aria-expanded]="isExpanded.project" aria-controls="project">\r
+            <span id="menu-project" class="nav_section_text">{{ 'menu.project' | translate }}</span>\r
+            <span class="material-icons toggle-icon">{{ isExpanded.project ? 'expand_less' : 'expand_more' }}</span>\r
+          </div>\r
+          <div class="nav_section_body" id="project" role="region" aria-labelledby="menu-project" [class.hidden]="!isExpanded.project">\r
+            <a [routerLink]="['/ia-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">lan</span>\r
+              <span class="nav_link_text">{{ 'menu.ia' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/inventory-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">inventory</span>\r
+              <span class="nav_link_text">{{ 'menu.inventory' | translate }}</span>\r
+            </a>\r
+            <a [routerLink]="['/metadata-assistant']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">description</span>\r
+              <span class="nav_link_text">{{ 'menu.metadata' | translate }}</span>\r
+            </a>\r
+          </div>\r
+        </div>\r
+\r
+        <!-- Monitoring Tools -->\r
+        <div class="section">\r
+          <div class="nav_header text-primary-200 hover:text-primary-400 hover:font-bold" (click)="toggleSection('monitoring')" (keydown)="toggleOnEnter($event, 'monitoring')" tabindex="0" role="button" [attr.aria-expanded]="isExpanded.monitoring" aria-controls="monitoring">\r
+            <span id="menu-monitoring" class="nav_section_text">{{ 'menu.monitoring' | translate }}</span>\r
+            <span class="material-icons toggle-icon">{{ isExpanded.monitoring ? 'expand_less' : 'expand_more' }}</span>\r
+          </div>\r
+          <div class="nav_section_body" id="monitoring" role="region" aria-labelledby="menu-monitoring" [class.hidden]="!isExpanded.monitoring">\r
+            <a [routerLink]="['/llm-evaluation']" routerLinkActive="active"\r
+               class="nav_link flex hover:bg-primary-600 border-round">\r
+              <span class="material-icons">assessment</span>\r
+              <span class="nav_link_text">{{ 'menu.llmEvaluation' | translate }}</span>\r
+            </a>\r
+          </div>\r
+        </div>\r
+      </div>\r
+      <!-- App Info -->\r
+      <div class="section">\r
+        <!--div class="nav_header text-primary-200 hover:text-primary-400" (click)="toggleSection('info')">\r
+          <span class="nav_section_text">{{ 'menu.appInfo' | translate }}</span>\r
+          <span class="material-icons toggle-icon">{{ isExpanded.info ? 'expand_less' : 'expand_more' }}</span>\r
+        </div-->\r
+        <div class="nav_section_body" [class.hidden]="!isExpanded.info">\r
+          <a [routerLink]="['/about-us']" routerLinkActive="active" class="nav_link flex hover:bg-primary-600 border-round">\r
+            <span class="material-icons">web_asset</span>\r
+            <span class="nav_link_text">{{ 'menu.about' | translate }}</span>\r
+          </a>\r
+          <a [href]="'feedback.email' | translate" class="nav_link flex hover:bg-primary-600 border-round">\r
+            <span class="material-icons">feedback</span>\r
+            <span class="nav_link_text">{{ 'menu.feedback' | translate }}</span>\r
+          </a>\r
+        </div>\r
+      </div>\r
+    </div>\r
+  </nav>\r
 </div>`, styles: ["/* src/app/template/sidebar.component.css */\n.l-navbar a {\n  text-decoration: none;\n}\n.l-navbar {\n  position: fixed;\n  top: 0;\n  left: -30%;\n  width: var(--nav-width);\n  height: 100vh;\n  background-color: var(--p-gray-800);\n  padding: .5rem 1rem 1rem;\n  transition: .3s;\n  z-index: var(--z-fixed);\n}\n.nav {\n  height: 100%;\n  display: contents;\n  flex-direction: column;\n  justify-content: space-between;\n  overflow: hidden;\n}\n.nav_link {\n  display: grid;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: .3rem 0 0 .3rem;\n  position: relative;\n  color: var(--first-color-light);\n  margin-bottom: .8rem;\n  transition: .3s;\n}\n.nav_link:hover {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: 0rem;\n}\n.nav_link.active:hover {\n  color: #fff;\n}\n.nav_link.active {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .3rem;\n  margin-bottom: .1rem;\n}\n.nav_link.active-hide {\n  background-color: var(--p-primary-color);\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.nav_logo {\n  display: flex;\n  grid-template-columns: max-content max-content;\n  align-items: center;\n  column-gap: 1rem;\n  padding: 0;\n  margin-bottom: 2rem;\n}\n.nav_logo-icon {\n  font-size: 1.25rem;\n}\n.nav_logo-name {\n  color: var(--first-color-light);\n  font-weight: 700;\n}\n.show-n {\n  left: 0;\n}\n.section {\n  padding: .1rem;\n}\n.nav_section_body {\n  padding-left: .7rem;\n}\n.nav_section_body.hidden {\n  display: none;\n}\n.nav_link_text {\n  margin-left: 0rem;\n}\n.nav_header {\n  font-size: 18px;\n  border-radius: .25rem;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 0.5rem 0;\n}\n.nav_header:hover {\n  font-weight: bold;\n  padding-bottom: .5rem;\n}\n.nav_header.active:hover {\n  color: #fff;\n}\n.nav_header.active {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  margin-bottom: .1rem;\n}\n.nav_header.active-hide {\n  border-radius: .25rem;\n  padding-bottom: .5rem;\n  width: 2.8rem;\n}\n.toggle-icon {\n  margin-left: auto;\n}\n.nav_icon,\n.nav_section_text {\n  margin-left: .5rem;\n}\n.nav_section {\n  overflow: hidden;\n  max-width: 100%;\n}\n@media (max-width: 600px) {\n  .section,\n  .nav_section-body,\n  .nav_section_text {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 100%;\n    min-width: 0;\n    display: block;\n  }\n  .nav_header,\n  .nav_link_text {\n    display: none;\n  }\n  .toggle-icon {\n    margin-left: 0;\n    margin-top: 0.5rem;\n    align-self: flex-end;\n  }\n  .logo_text {\n    display: none;\n  }\n}\n.nav_logo a {\n  display: flex;\n  align-items: center;\n  padding: 0;\n  color: var(--first-color-light);\n}\n.nav_logo .material-icons {\n  font-size: 2.2rem;\n  align-self: flex-start;\n  margin-right: 0.5rem;\n  border-radius: 0.25rem;\n}\n.logo_text {\n  font-size: 1.1rem;\n  font-weight: 600;\n  letter-spacing: 0.05em;\n  padding: 0 .5rem;\n  align-self: flex-start;\n}\n@media screen and (min-width: 600px) {\n  .l-navbar {\n    left: 0;\n    padding: 1rem 1rem 0;\n  }\n  .show-n {\n    width: calc(var(--nav-width) + 110px);\n  }\n}\n/*# sourceMappingURL=sidebar.component.css.map */\n"] }]
   }], null, null);
 })();
@@ -38200,7 +38744,7 @@ var FooterComponent = class _FooterComponent {
     </div>
   </p-toolbar>
 </footer>
-  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;/home/naomi/content-assistant/src/app/template/footer.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=footer.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/template/footer.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=footer.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
@@ -38298,31 +38842,31 @@ var ApiKeyComponent = class _ApiKeyComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ApiKeyComponent, [{
     type: Component,
-    args: [{ selector: "ca-api-key", imports: [CommonModule, FormsModule, TranslateModule, ButtonModule, InputGroupModule, InputGroupAddon, IftaLabel, CardModule], template: `<p-card [header]="'title.apiKey' | translate">
-  <div class="flex flex-column gap-3">
-
-    <p class="m-0">
-      {{'apiKey.intro' | translate}}
-    </p>
-
-    <p-inputgroup>
-      <p-iftalabel>
-        <input id="apiKeyInput" pInputText variant="outlined" [(ngModel)]="api" #apiField="ngModel" #apiKey required class="w-full" fluid />
-        <label for="apiKeyInput">{{'apiKey.placeholder' | translate}}</label>
-      </p-iftalabel>
-      <p-inputgroup-addon class="flex-none">
-        <p-button icon="pi pi-key" [label]="'apiKey.save' | translate" severity="success" (click)="this.localStore.saveData('apiKey', api)" />
-      </p-inputgroup-addon>
-    </p-inputgroup>
-
-
-    <div *ngIf="apiField.invalid && apiField.touched">
-      <ng-container *ngIf="apiField.errors?.['required']">
-        <p class="m-0 text-red-500 text-sm">{{'apiKey.error' | translate}}</p>
-      </ng-container>
-    </div>
-    <div [innerHTML]="'apiKey.instructions' | translate"></div>
-  </div>
+    args: [{ selector: "ca-api-key", imports: [CommonModule, FormsModule, TranslateModule, ButtonModule, InputGroupModule, InputGroupAddon, IftaLabel, CardModule], template: `<p-card [header]="'title.apiKey' | translate">\r
+  <div class="flex flex-column gap-3">\r
+\r
+    <p class="m-0">\r
+      {{'apiKey.intro' | translate}}\r
+    </p>\r
+\r
+    <p-inputgroup>\r
+      <p-iftalabel>\r
+        <input id="apiKeyInput" pInputText variant="outlined" [(ngModel)]="api" #apiField="ngModel" #apiKey required class="w-full" fluid />\r
+        <label for="apiKeyInput">{{'apiKey.placeholder' | translate}}</label>\r
+      </p-iftalabel>\r
+      <p-inputgroup-addon class="flex-none">\r
+        <p-button icon="pi pi-key" [label]="'apiKey.save' | translate" severity="success" (click)="this.localStore.saveData('apiKey', api)" />\r
+      </p-inputgroup-addon>\r
+    </p-inputgroup>\r
+\r
+\r
+    <div *ngIf="apiField.invalid && apiField.touched">\r
+      <ng-container *ngIf="apiField.errors?.['required']">\r
+        <p class="m-0 text-red-500 text-sm">{{'apiKey.error' | translate}}</p>\r
+      </ng-container>\r
+    </div>\r
+    <div [innerHTML]="'apiKey.instructions' | translate"></div>\r
+  </div>\r
 </p-card>` }]
   }], null, null);
 })();
@@ -38388,14 +38932,14 @@ var AppComponent = class _AppComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
     type: Component,
-    args: [{ selector: "ca-root", imports: [CommonModule, RouterOutlet, RouterModule, TranslateModule, HeaderComponent, SidebarComponent, FooterComponent, ApiKeyComponent], template: `<body vocab="http://schema.org/" typeof="WebPage" class="mx-8 my-2 container">
-  <main class="container">
-    <ca-header></ca-header>
-    <ca-sidebar></ca-sidebar>
-    <ca-api-key *ngIf="this.localStore.getData('apiKey') === null"></ca-api-key>
-    <router-outlet *ngIf="this.localStore.getData('apiKey') !== null"></router-outlet>
-  </main>
-  <ca-footer></ca-footer>
+    args: [{ selector: "ca-root", imports: [CommonModule, RouterOutlet, RouterModule, TranslateModule, HeaderComponent, SidebarComponent, FooterComponent, ApiKeyComponent], template: `<body vocab="http://schema.org/" typeof="WebPage" class="mx-8 my-2 container">\r
+  <main class="container">\r
+    <ca-header></ca-header>\r
+    <ca-sidebar></ca-sidebar>\r
+    <ca-api-key *ngIf="this.localStore.getData('apiKey') === null"></ca-api-key>\r
+    <router-outlet *ngIf="this.localStore.getData('apiKey') !== null"></router-outlet>\r
+  </main>\r
+  <ca-footer></ca-footer>\r
 </body>` }]
   }], null, null);
 })();
@@ -38409,7 +38953,7 @@ bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err))
 
 @angular/platform-browser/fesm2022/animations/async.mjs:
   (**
-   * @license Angular v19.2.15
+   * @license Angular v19.2.14
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)

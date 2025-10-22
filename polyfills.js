@@ -2453,7 +2453,7 @@ zone.js/fesm2015/zone.js:
 @angular/localize/fesm2022/localize-CajB9YLv.mjs:
 @angular/localize/fesm2022/init.mjs:
   (**
-   * @license Angular v19.2.15
+   * @license Angular v19.2.14
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["src/app/views/metadata-assistant/metadata-assistant.component.css"],
-  "sourcesContent": [".metadata-assistant-container {\n  padding: 1rem;\n}\n\n.api-key-status {\n  margin-bottom: 1.5rem;\n}\n\n.results-section {\n  margin-top: 2rem;\n}\n\n"],
-  "mappings": ";AAAA,CAAC;AACC,WAAS;AACX;AAEA,CAAC;AACC,iBAAe;AACjB;AAEA,CAAC;AACC,cAAY;AACd;",
+  "sourcesContent": [".api-key-status {\r\n  margin-bottom: 1.5rem;\r\n}\r\n\r\n.results-section {\r\n  margin-top: 2rem;\r\n}\r\n"],
+  "mappings": ";AAAA,CAAC;AACC,iBAAe;AACjB;AAEA,CAAC;AACC,cAAY;AACd;",
   "names": []
 }
