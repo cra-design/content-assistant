@@ -93392,8 +93392,6 @@ export {
   ToggleButton,
   ToggleButtonModule,
   Table,
-  SortableColumn,
-  SortIcon,
   SelectableRow,
   TableCheckbox,
   TableHeaderCheckbox,
@@ -93456,4 +93454,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-KYBXMQFX.js.map
+//# sourceMappingURL=chunk-JUWWJDUW.js.map
