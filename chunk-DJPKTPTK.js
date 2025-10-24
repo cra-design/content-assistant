@@ -79,6 +79,8 @@ import {
   RouterModule,
   SelectableRow,
   SharedModule,
+  SortIcon,
+  SortableColumn,
   SourceViewType,
   TTRow,
   Tab,
@@ -149,7 +151,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-JUWWJDUW.js";
+} from "./chunk-KYBXMQFX.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -30447,71 +30449,35 @@ Return ONLY compact JSON (no prose):
 })();
 
 // src/app/views/page-assistant/components/problems/component-guidance.component.ts
+var _c09 = (a0, a1, a2, a3) => ({ "chip-severe": a0, "chip-minor": a1, "chip-ok": a2, "chip-unk": a3 });
+var _c110 = (a0, a1, a2, a3) => ({ "pi-exclamation-triangle": a0, "pi-times-circle": a1, "pi-check-circle": a2, "pi-question-circle": a3 });
 function ComponentGuidanceComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr")(1, "th", 7);
     \u0275\u0275element(2, "p-tableHeaderCheckbox");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "th", 8);
-    \u0275\u0275element(4, "span", 9);
-    \u0275\u0275text(5, " Index ");
+    \u0275\u0275elementStart(3, "th", 8)(4, "span");
+    \u0275\u0275text(5, "Index");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "th");
-    \u0275\u0275text(7, "Component");
+    \u0275\u0275element(6, "p-sortIcon", 9);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "th");
-    \u0275\u0275text(9, "UCDG guidance");
+    \u0275\u0275elementStart(7, "th")(8, "span");
+    \u0275\u0275text(9, "Component");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "th")(11, "span");
+    \u0275\u0275text(12, "UCDG guidance");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(13, "th", 10)(14, "span");
+    \u0275\u0275text(15, "Health");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "th", 10);
-    \u0275\u0275text(11, "Component health");
+    \u0275\u0275element(16, "p-sortIcon", 11);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "th");
-    \u0275\u0275text(13, "Explanation");
+    \u0275\u0275elementStart(17, "th");
+    \u0275\u0275text(18, "Pain points");
     \u0275\u0275elementEnd()();
   }
 }
-function ComponentGuidanceComponent_ng_template_2_span_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 23);
-    \u0275\u0275element(1, "i", 24);
-    \u0275\u0275elementStart(2, "span");
-    \u0275\u0275text(3, "OK");
-    \u0275\u0275elementEnd()();
-  }
-}
-function ComponentGuidanceComponent_ng_template_2_span_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 25);
-    \u0275\u0275element(1, "i", 26);
-    \u0275\u0275elementStart(2, "span");
-    \u0275\u0275text(3, "Issues");
-    \u0275\u0275elementEnd()();
-  }
-}
-function ComponentGuidanceComponent_ng_template_2_span_14_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 27);
-    \u0275\u0275element(1, "i", 28);
-    \u0275\u0275elementStart(2, "span");
-    \u0275\u0275text(3, "Unknown");
-    \u0275\u0275elementEnd()();
-  }
-}
-function ComponentGuidanceComponent_ng_template_2_span_15_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 29);
-    \u0275\u0275text(1, "code up to date");
-    \u0275\u0275elementEnd();
-  }
-}
-function ComponentGuidanceComponent_ng_template_2_span_16_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 30);
-    \u0275\u0275text(1, "update code");
-    \u0275\u0275elementEnd();
-  }
-}
-function ComponentGuidanceComponent_ng_template_2_div_18_li_2_Template(rf, ctx) {
+function ComponentGuidanceComponent_ng_template_2_div_16_li_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "li");
     \u0275\u0275text(1);
@@ -30523,9 +30489,9 @@ function ComponentGuidanceComponent_ng_template_2_div_18_li_2_Template(rf, ctx) 
     \u0275\u0275textInterpolate(it_r1);
   }
 }
-function ComponentGuidanceComponent_ng_template_2_div_18_div_3_Template(rf, ctx) {
+function ComponentGuidanceComponent_ng_template_2_div_16_div_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 34);
+    \u0275\u0275elementStart(0, "div", 24);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -30535,12 +30501,12 @@ function ComponentGuidanceComponent_ng_template_2_div_18_div_3_Template(rf, ctx)
     \u0275\u0275textInterpolate(row_r2.rationale);
   }
 }
-function ComponentGuidanceComponent_ng_template_2_div_18_Template(rf, ctx) {
+function ComponentGuidanceComponent_ng_template_2_div_16_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "ul", 31);
-    \u0275\u0275template(2, ComponentGuidanceComponent_ng_template_2_div_18_li_2_Template, 2, 1, "li", 32);
+    \u0275\u0275elementStart(0, "div")(1, "ul", 21);
+    \u0275\u0275template(2, ComponentGuidanceComponent_ng_template_2_div_16_li_2_Template, 2, 1, "li", 22);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(3, ComponentGuidanceComponent_ng_template_2_div_18_div_3_Template, 2, 1, "div", 33);
+    \u0275\u0275template(3, ComponentGuidanceComponent_ng_template_2_div_16_div_3_Template, 2, 1, "div", 23);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -30551,7 +30517,7 @@ function ComponentGuidanceComponent_ng_template_2_div_18_Template(rf, ctx) {
     \u0275\u0275property("ngIf", row_r2.rationale);
   }
 }
-function ComponentGuidanceComponent_ng_template_2_ng_template_19_Template(rf, ctx) {
+function ComponentGuidanceComponent_ng_template_2_ng_template_17_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span");
     \u0275\u0275text(1);
@@ -30565,8 +30531,8 @@ function ComponentGuidanceComponent_ng_template_2_ng_template_19_Template(rf, ct
 }
 function ComponentGuidanceComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "tr", 11)(1, "td", 12);
-    \u0275\u0275element(2, "p-tableCheckbox", 13);
+    \u0275\u0275elementStart(0, "tr", 12)(1, "td", 13);
+    \u0275\u0275element(2, "p-tableCheckbox", 14);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "td");
     \u0275\u0275text(4);
@@ -30574,22 +30540,22 @@ function ComponentGuidanceComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275elementStart(5, "td");
     \u0275\u0275text(6);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "td")(8, "a", 14);
+    \u0275\u0275elementStart(7, "td")(8, "a", 15);
     \u0275\u0275text(9);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "td", 15);
-    \u0275\u0275elementContainerStart(11, 16);
-    \u0275\u0275template(12, ComponentGuidanceComponent_ng_template_2_span_12_Template, 4, 0, "span", 17)(13, ComponentGuidanceComponent_ng_template_2_span_13_Template, 4, 0, "span", 18)(14, ComponentGuidanceComponent_ng_template_2_span_14_Template, 4, 0, "span", 19);
-    \u0275\u0275elementContainerEnd();
-    \u0275\u0275template(15, ComponentGuidanceComponent_ng_template_2_span_15_Template, 2, 0, "span", 20)(16, ComponentGuidanceComponent_ng_template_2_span_16_Template, 2, 0, "span", 21);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "td");
-    \u0275\u0275template(18, ComponentGuidanceComponent_ng_template_2_div_18_Template, 4, 2, "div", 22)(19, ComponentGuidanceComponent_ng_template_2_ng_template_19_Template, 2, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementStart(10, "td", 16)(11, "span", 17);
+    \u0275\u0275element(12, "i", 18);
+    \u0275\u0275elementStart(13, "span", 19);
+    \u0275\u0275text(14);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(15, "td");
+    \u0275\u0275template(16, ComponentGuidanceComponent_ng_template_2_div_16_Template, 4, 2, "div", 20)(17, ComponentGuidanceComponent_ng_template_2_ng_template_17_Template, 2, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const row_r2 = ctx.$implicit;
-    const rationaleOnly_r3 = \u0275\u0275reference(20);
+    const rationaleOnly_r3 = \u0275\u0275reference(18);
+    const ctx_r3 = \u0275\u0275nextContext();
     \u0275\u0275property("pSelectableRow", row_r2);
     \u0275\u0275advance(2);
     \u0275\u0275property("value", row_r2);
@@ -30602,15 +30568,11 @@ function ComponentGuidanceComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275textInterpolate(row_r2.url);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngSwitch", row_r2.health);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction4(11, _c09, row_r2.health === "severe", row_r2.health === "minor", row_r2.health === "ok", !row_r2.health || row_r2.health === "unknown"));
     \u0275\u0275advance();
-    \u0275\u0275property("ngSwitchCase", "ok");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngSwitchCase", "issue");
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction4(16, _c110, row_r2.health === "severe", row_r2.health === "minor", row_r2.health === "ok", !row_r2.health || row_r2.health === "unknown"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", row_r2.codeUpToDate === true);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", row_r2.codeUpToDate === false);
+    \u0275\u0275textInterpolate1(" ", ctx_r3.healthLabel(row_r2.health), " ");
     \u0275\u0275advance(2);
     \u0275\u0275property("ngIf", ((row_r2.issues == null ? null : row_r2.issues.length) || 0) > 0)("ngIfElse", rationaleOnly_r3);
   }
@@ -30634,6 +30596,13 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     { field: "health", header: "Component health" },
     { field: "rationale", header: "Explanation" }
   ];
+  // rank for custom sort (severe > minor > ok > unknown)
+  HEALTH_RANK = {
+    severe: 3,
+    minor: 2,
+    ok: 1,
+    unknown: 0
+  };
   ngOnInit() {
     const data = this.uploadState.getUploadData();
     if (data?.originalHtml) {
@@ -30644,9 +30613,11 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
   /** Build sorted, de-duped table rows from validator findings. */
   buildRows(list) {
     const unique = /* @__PURE__ */ new Map();
-    for (const g of list)
-      if (!unique.has(g.url))
+    for (const g of list) {
+      if (!unique.has(g.url)) {
         unique.set(g.url, { nameKey: g.name, urlKey: g.url });
+      }
+    }
     const resolved = Array.from(unique.values()).map((it) => ({
       component: this.translate.instant(it.nameKey) || it.nameKey,
       url: this.translate.instant(it.urlKey) || it.urlKey,
@@ -30677,7 +30648,7 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
         const inputs = this.selectedRows.map((row) => ({
           componentLabel: row.component,
           guidanceUrl: row.url,
-          htmlSnippet: this.findSnippetForRow(doc, row) || this.trimHtml(html, 8e3)
+          htmlSnippet: this.findSnippetForRow(doc) || this.trimHtml(html, 8e3)
         }));
         const results = yield this.ai.assess(inputs);
         this.applyResults(results);
@@ -30687,8 +30658,7 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     });
   }
   /** Try to find a compact snippet in the current page that matches the component */
-  findSnippetForRow(doc, row) {
-    void row;
+  findSnippetForRow(doc) {
     const candidate = doc.querySelector("[class]");
     if (!candidate)
       return null;
@@ -30699,21 +30669,64 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     const t = (s || "").replace(/\s+/g, " ").trim();
     return t.length > max ? t.slice(0, max) : t;
   }
-  /** Merge AI outputs back into table rows */
+  /** Merge AI outputs back into table rows (derive 4-state UI health) */
   applyResults(results) {
     const byLabel = new Map(results.map((r) => [r.componentLabel, r]));
     this.rows = this.rows.map((r) => {
       const ai = byLabel.get(r.component);
       if (!ai)
         return r;
+      const issues = [...ai.issues ?? []];
+      if (ai.codeUpToDate === false) {
+        issues.push("Code not up to date");
+      }
+      const uiHealth = ai.health === "unknown" ? "unknown" : issues.length >= 2 ? "severe" : issues.length === 1 ? "minor" : "ok";
       const out = __spreadProps(__spreadValues({}, r), {
-        health: ai.health,
+        health: uiHealth,
         codeUpToDate: ai.codeUpToDate,
-        issues: ai.issues || [],
+        issues,
         rationale: ai.rationale || ""
       });
       return out;
     });
+  }
+  // ---- Sorting (Index & Health only) ----
+  /** Map UI health to a numeric rank for sorting. */
+  healthRank(h) {
+    return this.HEALTH_RANK[h ?? "unknown"];
+  }
+  /** Custom sort: supports 'order' (numeric) and 'health' (by rank). */
+  onCustomSort(event) {
+    const data = event.data ?? [];
+    const order = event.order ?? 1;
+    const field = event.field ?? "";
+    if (!Array.isArray(data) || data.length === 0)
+      return;
+    switch (field) {
+      case "order": {
+        data.sort((a, b) => (a.order - b.order) * order);
+        break;
+      }
+      case "health": {
+        data.sort((a, b) => (this.healthRank(a.health) - this.healthRank(b.health)) * order);
+        break;
+      }
+      default:
+        break;
+    }
+  }
+  /** Label used in the chip */
+  healthLabel(h) {
+    switch (h) {
+      case "severe":
+        return "Severe";
+      case "minor":
+        return "Minor";
+      case "ok":
+        return "OK";
+      default:
+        return "Unknown";
+    }
   }
   // (leftover dev helper if you still need it)
   // TEMP FXN FOR BUILDING WHITELIST
@@ -30736,14 +30749,17 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
   static \u0275fac = function ComponentGuidanceComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ComponentGuidanceComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ComponentGuidanceComponent, selectors: [["ca-component-guidance"]], decls: 7, vars: 7, consts: [["rationaleOnly", ""], ["dataKey", "url", "styleClass", "p-datatable-sm", "selectionMode", "multiple", 3, "selectionChange", "value", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [1, "mt-3"], ["pButton", "", "type", "button", "aria-label", "Get GenAI recommendations based on user data", "pTooltip", "Select one or more components", 1, "ai-btn", 3, "click", "label", "icon", "disabled", "showDelay", "hideDelay"], [1, "sr-only"], [2, "width", "3rem", "text-align", "center"], [2, "width", "4rem"], ["aria-hidden", "true", 1, "pi", "pi-list", "mr-1"], [2, "width", "11rem"], [3, "pSelectableRow"], [2, "text-align", "center"], [3, "value"], ["target", "_blank", "rel", "noopener", 3, "href"], [1, "health-cell"], [3, "ngSwitch"], ["class", "chip chip-ok", 4, "ngSwitchCase"], ["class", "chip chip-issue", 4, "ngSwitchCase"], ["class", "chip chip-unk", 4, "ngSwitchDefault"], ["class", "tag tag-ok", 4, "ngIf"], ["class", "tag tag-warn", 4, "ngIf"], [4, "ngIf", "ngIfElse"], [1, "chip", "chip-ok"], ["aria-hidden", "true", 1, "pi", "pi-check-circle"], [1, "chip", "chip-issue"], ["aria-hidden", "true", 1, "pi", "pi-exclamation-triangle"], [1, "chip", "chip-unk"], ["aria-hidden", "true", 1, "pi", "pi-question-circle"], [1, "tag", "tag-ok"], [1, "tag", "tag-warn"], [1, "issues"], [4, "ngFor", "ngForOf"], ["class", "muted", 4, "ngIf"], [1, "muted"]], template: function ComponentGuidanceComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ComponentGuidanceComponent, selectors: [["ca-component-guidance"]], decls: 7, vars: 8, consts: [["rationaleOnly", ""], ["dataKey", "url", "styleClass", "p-datatable-sm", "selectionMode", "multiple", 3, "selectionChange", "sortFunction", "value", "selection", "customSort"], ["pTemplate", "header"], ["pTemplate", "body"], [1, "mt-3"], ["pButton", "", "type", "button", "aria-label", "Get GenAI recommendations based on user data", "pTooltip", "Select one or more components", 1, "ai-btn", 3, "click", "label", "icon", "disabled", "showDelay", "hideDelay"], [1, "sr-only"], [2, "width", "3rem", "text-align", "center"], ["pSortableColumn", "order"], ["field", "order"], ["pSortableColumn", "health", 1, "health-col"], ["field", "health"], [3, "pSelectableRow"], [2, "text-align", "center"], [3, "value"], ["target", "_blank", "rel", "noopener", 3, "href"], [1, "health-cell", "health-col"], [1, "chip", 3, "ngClass"], ["aria-hidden", "true", 1, "pi", 3, "ngClass"], [1, "chip-label"], [4, "ngIf", "ngIfElse"], [1, "issues"], [4, "ngFor", "ngForOf"], ["class", "muted", 4, "ngIf"], [1, "muted"]], template: function ComponentGuidanceComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "p-table", 1);
       \u0275\u0275twoWayListener("selectionChange", function ComponentGuidanceComponent_Template_p_table_selectionChange_0_listener($event) {
         \u0275\u0275twoWayBindingSet(ctx.selectedRows, $event) || (ctx.selectedRows = $event);
         return $event;
       });
-      \u0275\u0275template(1, ComponentGuidanceComponent_ng_template_1_Template, 14, 0, "ng-template", 2)(2, ComponentGuidanceComponent_ng_template_2_Template, 21, 13, "ng-template", 3);
+      \u0275\u0275listener("sortFunction", function ComponentGuidanceComponent_Template_p_table_sortFunction_0_listener($event) {
+        return ctx.onCustomSort($event);
+      });
+      \u0275\u0275template(1, ComponentGuidanceComponent_ng_template_1_Template, 19, 0, "ng-template", 2)(2, ComponentGuidanceComponent_ng_template_2_Template, 19, 21, "ng-template", 3);
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(3, "div", 4)(4, "button", 5);
       \u0275\u0275listener("click", function ComponentGuidanceComponent_Template_button_click_4_listener() {
@@ -30756,21 +30772,22 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     if (rf & 2) {
       \u0275\u0275property("value", ctx.tableRows);
       \u0275\u0275twoWayProperty("selection", ctx.selectedRows);
+      \u0275\u0275property("customSort", true);
       \u0275\u0275advance(4);
       \u0275\u0275property("label", "Get GenAI recommendations based on user data")("icon", "pi pi-sparkles")("disabled", !ctx.selectedRows.length || ctx.isLoading)("showDelay", 1e3)("hideDelay", 300);
     }
   }, dependencies: [
     CommonModule,
+    NgClass,
     NgForOf,
     NgIf,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
     FormsModule,
     TableModule,
     Table,
     PrimeTemplate,
+    SortableColumn,
     SelectableRow,
+    SortIcon,
     TableCheckbox,
     TableHeaderCheckbox,
     ButtonModule,
@@ -30779,7 +30796,7 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     TooltipModule,
     Tooltip,
     TranslateModule
-  ], styles: ["\n\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.issues[_ngcontent-%COMP%] {\n  margin: 0;\n  padding-left: 1rem;\n}\n.health-cell[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 0.4rem;\n  align-items: center;\n  flex-wrap: wrap;\n}\n.chip[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.35rem;\n  padding: 0.15rem 0.5rem;\n  border-radius: 9999px;\n  font-size: 12px;\n  line-height: 1.2;\n  border: 1px solid transparent;\n}\n.chip-ok[_ngcontent-%COMP%] {\n  background: #dcfce7;\n  color: #166534;\n  border-color: #bbf7d0;\n}\n.chip-issue[_ngcontent-%COMP%] {\n  background: #fee2e2;\n  color: #991b1b;\n  border-color: #fecaca;\n}\n.chip-unk[_ngcontent-%COMP%] {\n  background: #e5e7eb;\n  color: #374151;\n  border-color: #e5e7eb;\n}\n.tag[_ngcontent-%COMP%] {\n  font-size: 11px;\n  padding: 0.05rem 0.4rem;\n  border-radius: 6px;\n  border: 1px solid transparent;\n}\n.tag-ok[_ngcontent-%COMP%] {\n  background: #eefdf3;\n  color: #166534;\n  border-color: #bbf7d0;\n}\n.tag-warn[_ngcontent-%COMP%] {\n  background: #fff7ed;\n  color: #9a3412;\n  border-color: #fed7aa;\n}\n.ai-btn[_ngcontent-%COMP%] {\n  font-weight: 600;\n}\n.sr-only[_ngcontent-%COMP%] {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border: 0;\n}\n/*# sourceMappingURL=component-guidance.component.css.map */"] });
+  ], styles: ["\n\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.issues[_ngcontent-%COMP%] {\n  margin: 0;\n  padding-left: 1rem;\n}\n.health-cell[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 0.4rem;\n  align-items: center;\n  flex-wrap: wrap;\n}\n.chip[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.4rem;\n  padding: 0.15rem 0.55rem;\n  border-radius: 9999px;\n  border: 1px solid transparent;\n  font-weight: 500;\n  line-height: 1.1;\n}\n.chip[_ngcontent-%COMP%]   .pi[_ngcontent-%COMP%] {\n  color: inherit !important;\n}\n.chip-severe[_ngcontent-%COMP%] {\n  background: #fee2e2;\n  border-color: #fecaca;\n  color: #b91c1c;\n}\n.chip-minor[_ngcontent-%COMP%] {\n  background: #fef3c7;\n  border-color: #fde68a;\n  color: #92400e;\n}\n.chip-ok[_ngcontent-%COMP%] {\n  background: #dcfce7;\n  border-color: #86efac;\n  color: #166534;\n}\n.chip-unk[_ngcontent-%COMP%] {\n  background: #e5e7eb;\n  border-color: #cbd5e1;\n  color: #334155;\n}\n.tag[_ngcontent-%COMP%] {\n  font-size: 11px;\n  padding: 0.05rem 0.4rem;\n  border-radius: 6px;\n  border: 1px solid transparent;\n}\n.ai-btn[_ngcontent-%COMP%] {\n  font-weight: 600;\n}\n.sr-only[_ngcontent-%COMP%] {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border: 0;\n}\n/*# sourceMappingURL=component-guidance.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ComponentGuidanceComponent, [{
@@ -30798,6 +30815,8 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
   styleClass="p-datatable-sm"\r
   [(selection)]="selectedRows"\r
   selectionMode="multiple"\r
+  [customSort]="true"\r
+  (sortFunction)="onCustomSort($event)"\r
 >\r
   <ng-template pTemplate="header">\r
     <tr>\r
@@ -30807,15 +30826,29 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
       </th>\r
 \r
       <!-- Index -->\r
-      <th style="width: 4rem">\r
-        <span class="pi pi-list mr-1" aria-hidden="true"></span>\r
-        Index\r
+      <th pSortableColumn="order">\r
+        <span>Index</span>\r
+        <p-sortIcon field="order"></p-sortIcon>\r
       </th>\r
 \r
-      <th>Component</th>\r
-      <th>UCDG guidance</th>\r
-      <th style="width: 11rem">Component health</th>\r
-      <th>Explanation</th>\r
+      <!-- Component -->\r
+      <th>\r
+        <span>Component</span>\r
+      </th>\r
+\r
+      <!-- UCDG guidance URL -->\r
+      <th>\r
+        <span>UCDG guidance</span>\r
+      </th>\r
+\r
+      <!-- Health (custom sort) -->\r
+      <th pSortableColumn="health" class="health-col">\r
+        <span>Health</span>\r
+        <p-sortIcon field="health"></p-sortIcon>\r
+      </th>\r
+\r
+      <!-- Pain points (not sortable) -->\r
+      <th>Pain points</th>\r
     </tr>\r
   </ng-template>\r
 \r
@@ -30838,32 +30871,33 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
       </td>\r
 \r
       <!-- Health -->\r
-      <td class="health-cell">\r
-        <ng-container [ngSwitch]="row.health">\r
-          <span *ngSwitchCase="'ok'" class="chip chip-ok">\r
-            <i class="pi pi-check-circle" aria-hidden="true"></i>\r
-            <span>OK</span>\r
-          </span>\r
-          <span *ngSwitchCase="'issue'" class="chip chip-issue">\r
-            <i class="pi pi-exclamation-triangle" aria-hidden="true"></i>\r
-            <span>Issues</span>\r
-          </span>\r
-          <span *ngSwitchDefault class="chip chip-unk">\r
-            <i class="pi pi-question-circle" aria-hidden="true"></i>\r
-            <span>Unknown</span>\r
-          </span>\r
-        </ng-container>\r
-\r
-        <!-- optional: show codeUpToDate tag when AI returns it -->\r
-        <span *ngIf="row.codeUpToDate === true" class="tag tag-ok"\r
-          >code up to date</span\r
+      <td class="health-cell health-col">\r
+        <span\r
+          class="chip"\r
+          [ngClass]="{\r
+            'chip-severe': row.health === 'severe',\r
+            'chip-minor': row.health === 'minor',\r
+            'chip-ok': row.health === 'ok',\r
+            'chip-unk': !row.health || row.health === 'unknown',\r
+          }"\r
         >\r
-        <span *ngIf="row.codeUpToDate === false" class="tag tag-warn"\r
-          >update code</span\r
-        >\r
+          <i\r
+            class="pi"\r
+            [ngClass]="{\r
+              'pi-exclamation-triangle': row.health === 'severe',\r
+              'pi-times-circle': row.health === 'minor',\r
+              'pi-check-circle': row.health === 'ok',\r
+              'pi-question-circle': !row.health || row.health === 'unknown',\r
+            }"\r
+            aria-hidden="true"\r
+          ></i>\r
+          <span class="chip-label">\r
+            {{ healthLabel(row.health) }}\r
+          </span>\r
+        </span>\r
       </td>\r
 \r
-      <!-- Explanation (keep simple for now as requested) -->\r
+      <!-- Pain points -->\r
       <td>\r
         <div *ngIf="(row.issues?.length || 0) > 0; else rationaleOnly">\r
           <ul class="issues">\r
@@ -30894,15 +30928,14 @@ var ComponentGuidanceComponent = class _ComponentGuidanceComponent {
     [showDelay]="1000"\r
     [hideDelay]="300"\r
   >\r
-    <!-- satisfy elements-content lint rule -->\r
     <span class="sr-only">Get GenAI recommendations based on user data</span>\r
   </button>\r
 </div>\r
-`, styles: ["/* angular:styles/component:css;3d7aa608e0bf8b9b6fde118cf8899b2da95a1dc20471895a497b43197f46b026;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems/component-guidance.component.ts */\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.issues {\n  margin: 0;\n  padding-left: 1rem;\n}\n.health-cell {\n  display: flex;\n  gap: 0.4rem;\n  align-items: center;\n  flex-wrap: wrap;\n}\n.chip {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.35rem;\n  padding: 0.15rem 0.5rem;\n  border-radius: 9999px;\n  font-size: 12px;\n  line-height: 1.2;\n  border: 1px solid transparent;\n}\n.chip-ok {\n  background: #dcfce7;\n  color: #166534;\n  border-color: #bbf7d0;\n}\n.chip-issue {\n  background: #fee2e2;\n  color: #991b1b;\n  border-color: #fecaca;\n}\n.chip-unk {\n  background: #e5e7eb;\n  color: #374151;\n  border-color: #e5e7eb;\n}\n.tag {\n  font-size: 11px;\n  padding: 0.05rem 0.4rem;\n  border-radius: 6px;\n  border: 1px solid transparent;\n}\n.tag-ok {\n  background: #eefdf3;\n  color: #166534;\n  border-color: #bbf7d0;\n}\n.tag-warn {\n  background: #fff7ed;\n  color: #9a3412;\n  border-color: #fed7aa;\n}\n.ai-btn {\n  font-weight: 600;\n}\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border: 0;\n}\n/*# sourceMappingURL=component-guidance.component.css.map */\n"] }]
+`, styles: ["/* angular:styles/component:css;e75efd3dead0d6cd4c767d057101e8fb724f670a7bb1e603a73782ddf42e03d9;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems/component-guidance.component.ts */\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.issues {\n  margin: 0;\n  padding-left: 1rem;\n}\n.health-cell {\n  display: flex;\n  gap: 0.4rem;\n  align-items: center;\n  flex-wrap: wrap;\n}\n.chip {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.4rem;\n  padding: 0.15rem 0.55rem;\n  border-radius: 9999px;\n  border: 1px solid transparent;\n  font-weight: 500;\n  line-height: 1.1;\n}\n.chip .pi {\n  color: inherit !important;\n}\n.chip-severe {\n  background: #fee2e2;\n  border-color: #fecaca;\n  color: #b91c1c;\n}\n.chip-minor {\n  background: #fef3c7;\n  border-color: #fde68a;\n  color: #92400e;\n}\n.chip-ok {\n  background: #dcfce7;\n  border-color: #86efac;\n  color: #166534;\n}\n.chip-unk {\n  background: #e5e7eb;\n  border-color: #cbd5e1;\n  color: #334155;\n}\n.tag {\n  font-size: 11px;\n  padding: 0.05rem 0.4rem;\n  border-radius: 6px;\n  border: 1px solid transparent;\n}\n.ai-btn {\n  font-weight: 600;\n}\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border: 0;\n}\n/*# sourceMappingURL=component-guidance.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ComponentGuidanceComponent, { className: "ComponentGuidanceComponent", filePath: "src/app/views/page-assistant/components/problems/component-guidance.component.ts", lineNumber: 126 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ComponentGuidanceComponent, { className: "ComponentGuidanceComponent", filePath: "src/app/views/page-assistant/components/problems/component-guidance.component.ts", lineNumber: 134 });
 })();
 
 // src/app/views/page-assistant/components/problems/seo.component.ts
@@ -31633,63 +31666,62 @@ var ContentExtractorService = class _ContentExtractorService {
 })();
 
 // src/app/views/page-assistant/components/problems/link-report.component.ts
-var _c09 = ["typePanel"];
-var _c110 = () => ({ "min-width": "50rem" });
-function LinkReportComponent_ng_template_1_th_2_button_4_Template(rf, ctx) {
+var _c010 = ["typePanel"];
+var _c111 = () => ({ "min-width": "50rem" });
+var _c27 = (a0, a1, a2, a3) => ({ "chip-severe": a0, "chip-minor": a1, "chip-ok": a2, "chip-unk": a3 });
+var _c37 = (a0, a1, a2, a3) => ({ "pi-exclamation-triangle": a0, "pi-times-circle": a1, "pi-check-circle": a2, "pi-question-circle": a3 });
+function LinkReportComponent_ng_template_1_th_2_p_sortIcon_4_Template(rf, ctx) {
   if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 28);
-    \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_4_Template_button_click_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      \u0275\u0275nextContext(3);
-      const typePanel_r3 = \u0275\u0275reference(4);
-      return \u0275\u0275resetView(typePanel_r3 == null ? null : typePanel_r3.toggle($event));
-    });
-    \u0275\u0275elementEnd();
+    \u0275\u0275element(0, "p-sortIcon", 28);
+  }
+  if (rf & 2) {
+    const col_r2 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("field", col_r2.field);
   }
 }
 function LinkReportComponent_ng_template_1_th_2_button_5_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
+    const _r3 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "button", 29);
     \u0275\u0275listener("click", function LinkReportComponent_ng_template_1_th_2_button_5_Template_button_click_0_listener($event) {
-      \u0275\u0275restoreView(_r4);
+      \u0275\u0275restoreView(_r3);
       \u0275\u0275nextContext(3);
-      const statusPanel_r5 = \u0275\u0275reference(15);
-      return \u0275\u0275resetView(statusPanel_r5 == null ? null : statusPanel_r5.toggle($event));
+      const typePanel_r4 = \u0275\u0275reference(4);
+      return \u0275\u0275resetView(typePanel_r4 == null ? null : typePanel_r4.toggle($event));
     });
     \u0275\u0275elementEnd();
   }
 }
 function LinkReportComponent_ng_template_1_th_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "th")(1, "div", 25)(2, "span");
+    \u0275\u0275elementStart(0, "th", 24)(1, "div", 25)(2, "span");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_button_4_Template, 1, 0, "button", 26)(5, LinkReportComponent_ng_template_1_th_2_button_5_Template, 1, 0, "button", 27);
+    \u0275\u0275template(4, LinkReportComponent_ng_template_1_th_2_p_sortIcon_4_Template, 1, 1, "p-sortIcon", 26)(5, LinkReportComponent_ng_template_1_th_2_button_5_Template, 1, 0, "button", 27);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const col_r6 = ctx.$implicit;
+    const col_r2 = ctx.$implicit;
+    \u0275\u0275property("pSortableColumn", col_r2.field === "order" || col_r2.field === "matchStatus" ? col_r2.field : void 0);
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(col_r6.header);
+    \u0275\u0275textInterpolate(col_r2.header);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", col_r6.field === "type");
+    \u0275\u0275property("ngIf", col_r2.field === "order" || col_r2.field === "matchStatus");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", col_r6.field === "matchStatus");
+    \u0275\u0275property("ngIf", col_r2.field === "type");
   }
 }
 function LinkReportComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "tr");
-    \u0275\u0275element(1, "th", 23);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 6, 3, "th", 24);
+    \u0275\u0275element(1, "th", 22);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_1_th_2_Template, 6, 4, "th", 23);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r6 = \u0275\u0275nextContext();
+    const ctx_r4 = \u0275\u0275nextContext();
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r6.cols);
+    \u0275\u0275property("ngForOf", ctx_r4.cols);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_2_Template(rf, ctx) {
@@ -31699,9 +31731,9 @@ function LinkReportComponent_ng_template_2_td_3_span_2_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r8.order);
+    \u0275\u0275textInterpolate(rowData_r6.order);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
@@ -31711,9 +31743,9 @@ function LinkReportComponent_ng_template_2_td_3_span_3_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r8.type);
+    \u0275\u0275textInterpolate(rowData_r6.type);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_div_2_Template(rf, ctx) {
@@ -31727,11 +31759,11 @@ function LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_div_2_Temp
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(4).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(4).$implicit;
     \u0275\u0275advance(2);
-    \u0275\u0275property("href", rowData_r8.absUrl || rowData_r8.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("href", rowData_r6.absUrl || rowData_r6.href, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r8.absUrl || rowData_r8.href, " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r6.absUrl || rowData_r6.href, " ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_Template(rf, ctx) {
@@ -31742,11 +31774,11 @@ function LinkReportComponent_ng_template_2_td_3_span_4_ng_container_1_Template(r
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(3).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r8.text, " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r6.text, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.href);
+    \u0275\u0275property("ngIf", rowData_r6.href);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_li_3_Template(rf, ctx) {
@@ -31756,9 +31788,9 @@ function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_li_3_Templa
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const v_r9 = ctx.$implicit;
+    const v_r7 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(v_r9);
+    \u0275\u0275textInterpolate(v_r7);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_div_4_Template(rf, ctx) {
@@ -31772,11 +31804,11 @@ function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_div_4_Templ
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(4).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(4).$implicit;
     \u0275\u0275advance(2);
-    \u0275\u0275property("href", rowData_r8.absUrl || rowData_r8.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("href", rowData_r6.absUrl || rowData_r6.href, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r8.absUrl || rowData_r8.href, " ");
+    \u0275\u0275textInterpolate1(" ", rowData_r6.absUrl || rowData_r6.href, " ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_Template(rf, ctx) {
@@ -31785,19 +31817,19 @@ function LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_Template(rf
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(2, "ul", 43);
-    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_li_3_Template, 2, 1, "li", 24);
+    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_li_3_Template, 2, 1, "li", 32);
     \u0275\u0275elementEnd();
     \u0275\u0275template(4, LinkReportComponent_ng_template_2_td_3_span_4_ng_template_2_div_4_Template, 5, 2, "div", 40);
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
-    const ctx_r6 = \u0275\u0275nextContext();
+    const rowData_r6 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r4 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r8.text);
+    \u0275\u0275textInterpolate(rowData_r6.text);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r6.getOtherVariants(rowData_r8));
+    \u0275\u0275property("ngForOf", ctx_r4.getOtherVariants(rowData_r6));
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.href);
+    \u0275\u0275property("ngIf", rowData_r6.href);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
@@ -31807,12 +31839,12 @@ function LinkReportComponent_ng_template_2_td_3_span_4_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const variantNames_r10 = \u0275\u0275reference(3);
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r6 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngStyle", ctx_r6.getTextStyle(rowData_r8));
+    const variantNames_r8 = \u0275\u0275reference(3);
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r4 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngStyle", ctx_r4.getTextStyle(rowData_r6));
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !rowData_r8.hasTextConflict)("ngIfElse", variantNames_r10);
+    \u0275\u0275property("ngIf", !rowData_r6.hasTextConflict)("ngIfElse", variantNames_r8);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_5_span_1_Template(rf, ctx) {
@@ -31822,11 +31854,11 @@ function LinkReportComponent_ng_template_2_td_3_span_5_span_1_Template(rf, ctx) 
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
-    const ctx_r6 = \u0275\u0275nextContext();
-    \u0275\u0275property("title", ctx_r6.buildMismatchReason(rowData_r8));
+    const rowData_r6 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r4 = \u0275\u0275nextContext();
+    \u0275\u0275property("title", ctx_r4.buildMismatchReason(rowData_r6));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r6.buildMismatchReason(rowData_r8), " ");
+    \u0275\u0275textInterpolate1(" ", ctx_r4.buildMismatchReason(rowData_r6), " ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_5_ng_template_2_Template(rf, ctx) {
@@ -31841,10 +31873,10 @@ function LinkReportComponent_ng_template_2_td_3_span_5_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const noExp_r11 = \u0275\u0275reference(3);
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    const noExp_r9 = \u0275\u0275reference(3);
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "mismatch")("ngIfElse", noExp_r11);
+    \u0275\u0275property("ngIf", rowData_r6.matchStatus === "mismatch")("ngIfElse", noExp_r9);
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
@@ -31854,71 +31886,28 @@ function LinkReportComponent_ng_template_2_td_3_span_6_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", rowData_r8.destH1 || "\u2014", " ");
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_7_i_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 50);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_7_i_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 51);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_7_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "i", 52);
-    \u0275\u0275elementContainerEnd();
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 56);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 57);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "i", 58);
-  }
-}
-function LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_0_Template, 1, 0, "i", 53)(1, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_1_Template, 1, 0, "i", 54)(2, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_i_2_Template, 1, 0, "i", 55);
-  }
-  if (rf & 2) {
-    const rowData_r8 = \u0275\u0275nextContext(3).$implicit;
-    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "match");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "mismatch");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.matchStatus === "unknown" || rowData_r8.matchStatus === "na");
+    \u0275\u0275textInterpolate1(" ", rowData_r6.destH1 || "\u2014", " ");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 47);
-    \u0275\u0275template(1, LinkReportComponent_ng_template_2_td_3_span_7_i_1_Template, 1, 0, "i", 48)(2, LinkReportComponent_ng_template_2_td_3_span_7_i_2_Template, 1, 0, "i", 49)(3, LinkReportComponent_ng_template_2_td_3_span_7_ng_container_3_Template, 2, 0, "ng-container", 39)(4, LinkReportComponent_ng_template_2_td_3_span_7_ng_template_4_Template, 3, 3, "ng-template", null, 4, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(0, "span")(1, "span", 47);
+    \u0275\u0275element(2, "i", 48);
+    \u0275\u0275elementStart(3, "span", 49);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    const normalStatus_r12 = \u0275\u0275reference(5);
-    const rowData_r8 = \u0275\u0275nextContext(2).$implicit;
+    const rowData_r6 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r4 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.is404);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction4(3, _c27, ctx_r4.uiHealth(rowData_r6) === "severe", ctx_r4.uiHealth(rowData_r6) === "minor", ctx_r4.uiHealth(rowData_r6) === "ok", ctx_r4.uiHealth(rowData_r6) === "unknown"));
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.anchorMissing);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", rowData_r8.hasTextConflict)("ngIfElse", normalStatus_r12);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction4(8, _c37, ctx_r4.uiHealth(rowData_r6) === "severe", ctx_r4.uiHealth(rowData_r6) === "minor", ctx_r4.uiHealth(rowData_r6) === "ok", ctx_r4.uiHealth(rowData_r6) === "unknown"));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r4.healthLabel(ctx_r4.uiHealth(rowData_r6)));
   }
 }
 function LinkReportComponent_ng_template_2_td_3_span_8_Template(rf, ctx) {
@@ -31928,24 +31917,24 @@ function LinkReportComponent_ng_template_2_td_3_span_8_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r13 = \u0275\u0275nextContext().$implicit;
-    const rowData_r8 = \u0275\u0275nextContext().$implicit;
+    const col_r10 = \u0275\u0275nextContext().$implicit;
+    const rowData_r6 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(rowData_r8[col_r13.field] || "\u2014");
+    \u0275\u0275textInterpolate(rowData_r6[col_r10.field] || "\u2014");
   }
 }
 function LinkReportComponent_ng_template_2_td_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "td");
-    \u0275\u0275elementContainerStart(1, 32);
-    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 33)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 33)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 4, 3, "span", 34)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 4, 2, "span", 33)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 2, 1, "span", 35)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 6, 4, "span", 36)(8, LinkReportComponent_ng_template_2_td_3_span_8_Template, 2, 1, "span", 37);
+    \u0275\u0275elementContainerStart(1, 33);
+    \u0275\u0275template(2, LinkReportComponent_ng_template_2_td_3_span_2_Template, 2, 1, "span", 34)(3, LinkReportComponent_ng_template_2_td_3_span_3_Template, 2, 1, "span", 34)(4, LinkReportComponent_ng_template_2_td_3_span_4_Template, 4, 3, "span", 35)(5, LinkReportComponent_ng_template_2_td_3_span_5_Template, 4, 2, "span", 34)(6, LinkReportComponent_ng_template_2_td_3_span_6_Template, 2, 1, "span", 36)(7, LinkReportComponent_ng_template_2_td_3_span_7_Template, 5, 13, "span", 34)(8, LinkReportComponent_ng_template_2_td_3_span_8_Template, 2, 1, "span", 37);
     \u0275\u0275elementContainerEnd();
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const col_r13 = ctx.$implicit;
+    const col_r10 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngSwitch", col_r13.field);
+    \u0275\u0275property("ngSwitch", col_r10.field);
     \u0275\u0275advance();
     \u0275\u0275property("ngSwitchCase", "order");
     \u0275\u0275advance();
@@ -31965,61 +31954,61 @@ function LinkReportComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275elementStart(0, "tr", 30)(1, "td");
     \u0275\u0275element(2, "span", 31);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 9, 7, "td", 24);
+    \u0275\u0275template(3, LinkReportComponent_ng_template_2_td_3_Template, 9, 7, "td", 32);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const rowData_r8 = ctx.$implicit;
-    const rowIndex_r14 = ctx.rowIndex;
-    const ctx_r6 = \u0275\u0275nextContext();
-    \u0275\u0275property("pReorderableRow", rowIndex_r14)("pSelectableRow", rowData_r8);
+    const rowData_r6 = ctx.$implicit;
+    const rowIndex_r11 = ctx.rowIndex;
+    const ctx_r4 = \u0275\u0275nextContext();
+    \u0275\u0275property("pReorderableRow", rowIndex_r11)("pSelectableRow", rowData_r6);
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r6.cols);
+    \u0275\u0275property("ngForOf", ctx_r4.cols);
   }
 }
 function LinkReportComponent_div_12_Template(rf, ctx) {
   if (rf & 1) {
-    const _r15 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 11)(1, "p-checkbox", 59);
+    const _r12 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 10)(1, "p-checkbox", 50);
     \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_div_12_Template_p_checkbox_ngModelChange_1_listener($event) {
-      const t_r16 = \u0275\u0275restoreView(_r15).$implicit;
-      const ctx_r6 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r6.typeChecks[t_r16], $event) || (ctx_r6.typeChecks[t_r16] = $event);
+      const t_r13 = \u0275\u0275restoreView(_r12).$implicit;
+      const ctx_r4 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r4.typeChecks[t_r13], $event) || (ctx_r4.typeChecks[t_r13] = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275listener("onChange", function LinkReportComponent_div_12_Template_p_checkbox_onChange_1_listener() {
-      const t_r16 = \u0275\u0275restoreView(_r15).$implicit;
-      const ctx_r6 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r6.onTypeToggle(t_r16));
+      const t_r13 = \u0275\u0275restoreView(_r12).$implicit;
+      const ctx_r4 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r4.onTypeToggle(t_r13));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "label", 60);
+    \u0275\u0275elementStart(2, "label", 51);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const t_r16 = ctx.$implicit;
-    const i_r17 = ctx.index;
-    const ctx_r6 = \u0275\u0275nextContext();
+    const t_r13 = ctx.$implicit;
+    const i_r14 = ctx.index;
+    const ctx_r4 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", ctx_r6.typeChecks[t_r16]);
-    \u0275\u0275property("disabled", ctx_r6.allSelected)("inputId", "type-" + i_r17);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r4.typeChecks[t_r13]);
+    \u0275\u0275property("disabled", ctx_r4.allSelected)("inputId", "type-" + i_r14);
     \u0275\u0275advance();
-    \u0275\u0275attribute("for", "type-" + i_r17);
+    \u0275\u0275attribute("for", "type-" + i_r14);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", t_r16, " ");
+    \u0275\u0275textInterpolate1(" ", t_r13, " ");
   }
 }
 function LinkReportComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 61);
+    \u0275\u0275elementStart(0, "div", 52);
     \u0275\u0275text(1, " All types are currently included. ");
     \u0275\u0275elementEnd();
   }
 }
 function LinkReportComponent_div_31_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 61);
+    \u0275\u0275elementStart(0, "div", 52);
     \u0275\u0275text(1, " All match statuses are currently included. ");
     \u0275\u0275elementEnd();
   }
@@ -32071,9 +32060,50 @@ var LinkReportComponent = class _LinkReportComponent {
   linkAi = inject(LinkAiService);
   extractor = inject(ContentExtractorService);
   fetchService = inject(FetchService);
+  HEALTH_RANK = {
+    severe: 3,
+    minor: 2,
+    ok: 1,
+    unknown: 0
+  };
+  uiHealth(r) {
+    const issues = (r.hasTextConflict ? 1 : 0) + (r.is404 ? 1 : 0) + (r.anchorMissing ? 1 : 0) + (r.matchStatus === "mismatch" ? 1 : 0);
+    if (issues >= 2)
+      return "severe";
+    if (issues === 1)
+      return "minor";
+    if (r.matchStatus === "match" || r.matchStatus === "na")
+      return "ok";
+    return "unknown";
+  }
+  healthLabel(h) {
+    switch (h) {
+      case "severe":
+        return "Severe";
+      case "minor":
+        return "Minor";
+      case "ok":
+        return "OK";
+      default:
+        return "Unknown";
+    }
+  }
   // data & selection
   headings = [];
   selectedHeading;
+  onCustomSort(event) {
+    const data = event.data ?? [];
+    const order = event.order ?? 1;
+    const field = event.field;
+    if (field === "order") {
+      data.sort((a, b) => (a.order - b.order) * order);
+      return;
+    }
+    if (field === "matchStatus") {
+      data.sort((a, b) => (this.HEALTH_RANK[this.uiHealth(a)] - this.HEALTH_RANK[this.uiHealth(b)]) * order);
+      return;
+    }
+  }
   emitProblems() {
     const hasProblems = this.headings.some((r) => r.hasTextConflict || r.is404 || r.anchorMissing || r.matchStatus === "mismatch");
     this.hasProblemsChange.emit(hasProblems);
@@ -32084,8 +32114,8 @@ var LinkReportComponent = class _LinkReportComponent {
     { field: "type", header: "Link Type" },
     { field: "text", header: "Link name on page" },
     { field: "destH1", header: "Destination link content" },
-    { field: "matchStatus", header: "Link text health" },
-    { field: "explanation", header: "Explanation" },
+    { field: "matchStatus", header: "Health" },
+    { field: "explanation", header: "Pain points" },
     { field: "searchTerm", header: "Search term" },
     { field: "clicks", header: "Clicks" }
   ];
@@ -32751,31 +32781,35 @@ var LinkReportComponent = class _LinkReportComponent {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LinkReportComponent, selectors: [["ca-link-report"]], viewQuery: function LinkReportComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c09, 5);
+      \u0275\u0275viewQuery(_c010, 5);
     }
     if (rf & 2) {
       let _t;
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.typePanel = _t.first);
     }
-  }, outputs: { hasProblemsChange: "hasProblemsChange" }, decls: 32, vars: 19, consts: [["typePanel", ""], ["statusPanel", ""], ["variantNames", ""], ["noExp", ""], ["normalStatus", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "value", "tableStyle", "selection"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "appendTo", "styleClass"], [1, "filter-panel"], ["pButton", "", "type", "button", "icon", "pi pi-times", "aria-label", "Close filter", 1, "p-button-text", "p-button-sm", "close-btn", 3, "click"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], ["inputId", "allMatch", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allMatch", 1, "filter-label"], ["inputId", "ms-match", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-match", 1, "filter-label"], ["inputId", "ms-mismatch", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-mismatch", 1, "filter-label"], [2, "width", "3rem"], [4, "ngFor", "ngForOf"], [1, "header-with-filter"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 3, "click", 4, "ngIf"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link text health", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", "aria-hidden", "true", 1, "pi", "pi-bars"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], ["class", "flex justify-center", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngStyle"], [4, "ngIf", "ngIfElse"], ["class", "muted", 4, "ngIf"], [1, "muted"], ["target", "_blank", "rel", "noopener", 3, "href"], [1, "variant-list"], ["class", "exp-badge", "role", "note", 3, "title", 4, "ngIf", "ngIfElse"], ["role", "note", 1, "exp-badge", 3, "title"], [1, "break-all"], [1, "flex", "justify-center"], ["class", "pi pi-exclamation-triangle text-bad", "title", "404/410 (Not found)", "style", "margin-right: 0.25rem", "aria-hidden", "true", 4, "ngIf"], ["class", "pi pi-link", "title", "Anchor target not found on page", "style", "\n                margin-right: 0.25rem;\n                transform: rotate(45deg);\n                opacity: 0.8;\n              ", "aria-hidden", "true", 4, "ngIf"], ["title", "404/410 (Not found)", "aria-hidden", "true", 1, "pi", "pi-exclamation-triangle", "text-bad", 2, "margin-right", "0.25rem"], ["title", "Anchor target not found on page", "aria-hidden", "true", 1, "pi", "pi-link", 2, "margin-right", "0.25rem", "transform", "rotate(45deg)", "opacity", "0.8"], ["title", "Different link names point to the same destination", 1, "pi", "pi-exclamation-triangle", "text-bad"], ["class", "pi pi-check-circle text-ok", "title", "Match", 4, "ngIf"], ["class", "pi pi-times-circle text-bad", "title", "Mismatch", 4, "ngIf"], ["class", "pi pi-question-circle text-unk", "title", "Unknown", 4, "ngIf"], ["title", "Match", 1, "pi", "pi-check-circle", "text-ok"], ["title", "Mismatch", 1, "pi", "pi-times-circle", "text-bad"], ["title", "Unknown", 1, "pi", "pi-question-circle", "text-unk"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
+  }, outputs: { hasProblemsChange: "hasProblemsChange" }, decls: 32, vars: 20, consts: [["typePanel", ""], ["statusPanel", ""], ["variantNames", ""], ["noExp", ""], ["size", "small", "stripedRows", "", "selectionMode", "single", "dataKey", "order", "metaKeySelection", "false", 3, "selectionChange", "sortFunction", "value", "tableStyle", "selection", "customSort"], ["pTemplate", "header"], ["pTemplate", "body"], [3, "dismissable", "appendTo", "styleClass"], [1, "filter-panel"], ["pButton", "", "type", "button", "icon", "pi pi-times", "aria-label", "Close filter", 1, "p-button-text", "p-button-sm", "close-btn", 3, "click"], [1, "filter-row"], ["inputId", "allTypes", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allTypes", 1, "filter-label"], [1, "divider"], ["class", "filter-row", 4, "ngFor", "ngForOf"], ["class", "filter-muted", 4, "ngIf"], ["inputId", "allMatch", "binary", "true", 3, "ngModelChange", "onChange", "ngModel"], ["for", "allMatch", 1, "filter-label"], ["inputId", "ms-match", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-match", 1, "filter-label"], ["inputId", "ms-mismatch", "binary", "true", 3, "ngModelChange", "pOnChange", "ngModel", "disabled"], ["for", "ms-mismatch", 1, "filter-label"], [2, "width", "3rem"], [3, "pSortableColumn", 4, "ngFor", "ngForOf"], [3, "pSortableColumn"], [1, "header-with-filter"], [3, "field", 4, "ngIf"], ["pButton", "", "type", "button", "class", "p-button-text p-button-sm", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 3, "click", 4, "ngIf"], [3, "field"], ["pButton", "", "type", "button", "icon", "pi pi-chevron-down", "aria-label", "Filter link types", 1, "p-button-text", "p-button-sm", 3, "click"], [3, "pReorderableRow", "pSelectableRow"], ["pReorderableRowHandle", "", "aria-hidden", "true", 1, "pi", "pi-bars"], [4, "ngFor", "ngForOf"], [3, "ngSwitch"], [4, "ngSwitchCase"], [3, "ngStyle", 4, "ngSwitchCase"], ["class", "break-all", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], [3, "ngStyle"], [4, "ngIf", "ngIfElse"], ["class", "muted", 4, "ngIf"], [1, "muted"], ["target", "_blank", "rel", "noopener", 3, "href"], [1, "variant-list"], ["class", "exp-badge", "role", "note", 3, "title", 4, "ngIf", "ngIfElse"], ["role", "note", 1, "exp-badge", 3, "title"], [1, "break-all"], [1, "chip", 3, "ngClass"], ["aria-hidden", "true", 1, "pi", 3, "ngClass"], [1, "chip-label"], ["binary", "true", 3, "ngModelChange", "onChange", "ngModel", "disabled", "inputId"], [1, "filter-label"], [1, "filter-muted"]], template: function LinkReportComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275elementStart(0, "p-table", 5);
+      \u0275\u0275elementStart(0, "p-table", 4);
       \u0275\u0275twoWayListener("selectionChange", function LinkReportComponent_Template_p_table_selectionChange_0_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.selectedHeading, $event) || (ctx.selectedHeading = $event);
         return \u0275\u0275resetView($event);
       });
-      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 6)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 7);
+      \u0275\u0275listener("sortFunction", function LinkReportComponent_Template_p_table_sortFunction_0_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onCustomSort($event));
+      });
+      \u0275\u0275template(1, LinkReportComponent_ng_template_1_Template, 3, 1, "ng-template", 5)(2, LinkReportComponent_ng_template_2_Template, 4, 3, "ng-template", 6);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "p-popover", 8, 0)(5, "div", 9)(6, "button", 10);
+      \u0275\u0275elementStart(3, "p-popover", 7, 0)(5, "div", 8)(6, "button", 9);
       \u0275\u0275listener("click", function LinkReportComponent_Template_button_click_6_listener() {
         \u0275\u0275restoreView(_r1);
-        const typePanel_r3 = \u0275\u0275reference(4);
-        return \u0275\u0275resetView(typePanel_r3.hide());
+        const typePanel_r4 = \u0275\u0275reference(4);
+        return \u0275\u0275resetView(typePanel_r4.hide());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(7, "div", 11)(8, "p-checkbox", 12);
+      \u0275\u0275elementStart(7, "div", 10)(8, "p-checkbox", 11);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_8_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.allSelected, $event) || (ctx.allSelected = $event);
@@ -32786,20 +32820,20 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onAllToggle());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "label", 13);
+      \u0275\u0275elementStart(9, "label", 12);
       \u0275\u0275text(10, "ALL");
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(11, "div", 14);
-      \u0275\u0275template(12, LinkReportComponent_div_12_Template, 4, 5, "div", 15)(13, LinkReportComponent_div_13_Template, 2, 0, "div", 16);
+      \u0275\u0275element(11, "div", 13);
+      \u0275\u0275template(12, LinkReportComponent_div_12_Template, 4, 5, "div", 14)(13, LinkReportComponent_div_13_Template, 2, 0, "div", 15);
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(14, "p-popover", 8, 1)(16, "div", 9)(17, "button", 10);
+      \u0275\u0275elementStart(14, "p-popover", 7, 1)(16, "div", 8)(17, "button", 9);
       \u0275\u0275listener("click", function LinkReportComponent_Template_button_click_17_listener() {
         \u0275\u0275restoreView(_r1);
-        const statusPanel_r5 = \u0275\u0275reference(15);
-        return \u0275\u0275resetView(statusPanel_r5.hide());
+        const statusPanel_r15 = \u0275\u0275reference(15);
+        return \u0275\u0275resetView(statusPanel_r15.hide());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(18, "div", 11)(19, "p-checkbox", 17);
+      \u0275\u0275elementStart(18, "div", 10)(19, "p-checkbox", 16);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_19_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.matchAllSelected, $event) || (ctx.matchAllSelected = $event);
@@ -32810,11 +32844,11 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onMatchAllToggle());
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(20, "label", 18);
+      \u0275\u0275elementStart(20, "label", 17);
       \u0275\u0275text(21, "ALL");
       \u0275\u0275elementEnd()();
-      \u0275\u0275element(22, "div", 14);
-      \u0275\u0275elementStart(23, "div", 11)(24, "p-checkbox", 19);
+      \u0275\u0275element(22, "div", 13);
+      \u0275\u0275elementStart(23, "div", 10)(24, "p-checkbox", 18);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_24_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.matchChecks.match, $event) || (ctx.matchChecks.match = $event);
@@ -32825,10 +32859,10 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onMatchToggle("match"));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(25, "label", 20);
+      \u0275\u0275elementStart(25, "label", 19);
       \u0275\u0275text(26, "match");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(27, "div", 11)(28, "p-checkbox", 21);
+      \u0275\u0275elementStart(27, "div", 10)(28, "p-checkbox", 20);
       \u0275\u0275twoWayListener("ngModelChange", function LinkReportComponent_Template_p_checkbox_ngModelChange_28_listener($event) {
         \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.matchChecks.mismatch, $event) || (ctx.matchChecks.mismatch = $event);
@@ -32839,15 +32873,16 @@ var LinkReportComponent = class _LinkReportComponent {
         return \u0275\u0275resetView(ctx.onMatchToggle("mismatch"));
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(29, "label", 22);
+      \u0275\u0275elementStart(29, "label", 21);
       \u0275\u0275text(30, "mismatch");
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(31, LinkReportComponent_div_31_Template, 2, 0, "div", 16);
+      \u0275\u0275template(31, LinkReportComponent_div_31_Template, 2, 0, "div", 15);
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(18, _c110));
+      \u0275\u0275property("value", ctx.filteredHeadings)("tableStyle", \u0275\u0275pureFunction0(19, _c111));
       \u0275\u0275twoWayProperty("selection", ctx.selectedHeading);
+      \u0275\u0275property("customSort", true);
       \u0275\u0275advance(3);
       \u0275\u0275property("dismissable", true)("appendTo", "body")("styleClass", "link-type-popover");
       \u0275\u0275advance(5);
@@ -32869,7 +32904,7 @@ var LinkReportComponent = class _LinkReportComponent {
       \u0275\u0275advance(3);
       \u0275\u0275property("ngIf", ctx.matchAllSelected);
     }
-  }, dependencies: [CommonModule, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SelectableRow, ReorderableRowHandle, ReorderableRow, PopoverModule, Popover, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.text-ok[_ngcontent-%COMP%] {\n  color: #16a34a;\n}\n.text-bad[_ngcontent-%COMP%] {\n  color: #dc2626;\n}\n.text-unk[_ngcontent-%COMP%] {\n  color: #64748b;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list[_ngcontent-%COMP%] {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list[_ngcontent-%COMP%]    > li[_ngcontent-%COMP%] {\n  margin: 0.05rem 0;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge[_ngcontent-%COMP%] {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
+  }, dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, FormsModule, NgControlStatus, NgModel, TableModule, Table, PrimeTemplate, SortableColumn, SelectableRow, SortIcon, ReorderableRowHandle, ReorderableRow, PopoverModule, Popover, CheckboxModule, Checkbox, ButtonModule, ButtonDirective], styles: ["\n\n.chip[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.4rem;\n  padding: 0.15rem 0.55rem;\n  border-radius: 9999px;\n  border: 1px solid transparent;\n  font-weight: 500;\n  line-height: 1.1;\n}\n.chip[_ngcontent-%COMP%]   .pi[_ngcontent-%COMP%] {\n  color: inherit !important;\n}\n.chip-severe[_ngcontent-%COMP%] {\n  background: #fee2e2;\n  border-color: #fecaca;\n  color: #b91c1c;\n}\n.chip-minor[_ngcontent-%COMP%] {\n  background: #fef3c7;\n  border-color: #fde68a;\n  color: #92400e;\n}\n.chip-ok[_ngcontent-%COMP%] {\n  background: #dcfce7;\n  border-color: #86efac;\n  color: #166534;\n}\n.chip-unk[_ngcontent-%COMP%] {\n  background: #e5e7eb;\n  border-color: #cbd5e1;\n  color: #334155;\n}\n.health-cell[_ngcontent-%COMP%]   .chip[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.35rem;\n}\n.chip-label[_ngcontent-%COMP%] {\n  line-height: 1;\n}\n.break-all[_ngcontent-%COMP%] {\n  word-break: break-all;\n}\n.muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n.justify-center[_ngcontent-%COMP%] {\n  justify-content: center;\n}\n.header-with-filter[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm[_ngcontent-%COMP%] {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list[_ngcontent-%COMP%] {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list[_ngcontent-%COMP%]    > li[_ngcontent-%COMP%] {\n  margin: 0.05rem 0;\n}\n.filter-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label[_ngcontent-%COMP%] {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted[_ngcontent-%COMP%] {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge[_ngcontent-%COMP%] {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LinkReportComponent, [{
@@ -32890,16 +32925,31 @@ var LinkReportComponent = class _LinkReportComponent {
   [(selection)]="selectedHeading"\r
   dataKey="order"\r
   metaKeySelection="false"\r
+  [customSort]="true"\r
+  (sortFunction)="onCustomSort($event)"\r
 >\r
   <ng-template pTemplate="header">\r
     <tr>\r
       <th style="width: 3rem"></th>\r
 \r
-      <th *ngFor="let col of cols">\r
+      <th\r
+        *ngFor="let col of cols"\r
+        [pSortableColumn]="\r
+          col.field === 'order' || col.field === 'matchStatus'\r
+            ? col.field\r
+            : undefined\r
+        "\r
+      >\r
         <div class="header-with-filter">\r
           <span>{{ col.header }}</span>\r
 \r
-          <!-- Down-arrow filter button for Link Type -->\r
+          <!-- Sort icon only on Index & Health -->\r
+          <p-sortIcon\r
+            *ngIf="col.field === 'order' || col.field === 'matchStatus'"\r
+            [field]="col.field"\r
+          ></p-sortIcon>\r
+\r
+          <!-- Link Type filter button (unchanged) -->\r
           <button\r
             *ngIf="col.field === 'type'"\r
             pButton\r
@@ -32908,17 +32958,6 @@ var LinkReportComponent = class _LinkReportComponent {
             icon="pi pi-chevron-down"\r
             (click)="typePanel?.toggle($event)"\r
             aria-label="Filter link types"\r
-          ></button>\r
-\r
-          <!-- NEW: Down-arrow filter button for Match status -->\r
-          <button\r
-            *ngIf="col.field === 'matchStatus'"\r
-            pButton\r
-            type="button"\r
-            class="p-button-text p-button-sm"\r
-            icon="pi pi-chevron-down"\r
-            (click)="statusPanel?.toggle($event)"\r
-            aria-label="Filter link text health"\r
           ></button>\r
         </div>\r
       </th>\r
@@ -32937,12 +32976,14 @@ var LinkReportComponent = class _LinkReportComponent {
 \r
       <td *ngFor="let col of cols">\r
         <ng-container [ngSwitch]="col.field">\r
+          <!-- Index -->\r
           <span *ngSwitchCase="'order'">{{ rowData.order }}</span>\r
 \r
+          <!-- Link Type -->\r
           <span *ngSwitchCase="'type'">{{ rowData.type }}</span>\r
 \r
+          <!-- Link name / variants -->\r
           <span *ngSwitchCase="'text'" [ngStyle]="getTextStyle(rowData)">\r
-            <!-- A) DEFAULT (no variants) \u2014 keep your existing look -->\r
             <ng-container *ngIf="!rowData.hasTextConflict; else variantNames">\r
               {{ rowData.text }}\r
               <div class="muted" *ngIf="rowData.href">\r
@@ -32958,17 +32999,11 @@ var LinkReportComponent = class _LinkReportComponent {
               </div>\r
             </ng-container>\r
 \r
-            <!-- B) VARIANTS (different link names \u2192 same destination) -->\r
             <ng-template #variantNames>\r
-              <!-- main name first, same font/size -->\r
               <div>{{ rowData.text }}</div>\r
-\r
-              <!-- then every other variant on its own line, same font/size -->\r
               <ul class="variant-list">\r
                 <li *ngFor="let v of getOtherVariants(rowData)">{{ v }}</li>\r
               </ul>\r
-\r
-              <!-- clickable destination URL under the list -->\r
               <div class="muted" *ngIf="rowData.href">\r
                 (\r
                 <a\r
@@ -32982,6 +33017,8 @@ var LinkReportComponent = class _LinkReportComponent {
               </div>\r
             </ng-template>\r
           </span>\r
+\r
+          <!-- Pain points / rationale -->\r
           <span *ngSwitchCase="'explanation'">\r
             <span\r
               *ngIf="rowData.matchStatus === 'mismatch'; else noExp"\r
@@ -32994,63 +33031,39 @@ var LinkReportComponent = class _LinkReportComponent {
             <ng-template #noExp>\u2014</ng-template>\r
           </span>\r
 \r
+          <!-- Destination link content -->\r
           <span *ngSwitchCase="'destH1'" class="break-all">\r
             {{ rowData.destH1 || "\u2014" }}\r
           </span>\r
 \r
-          <span *ngSwitchCase="'matchStatus'" class="flex justify-center">\r
-            <!-- 404 / broken -->\r
-            <i\r
-              *ngIf="rowData.is404"\r
-              class="pi pi-exclamation-triangle text-bad"\r
-              title="404/410 (Not found)"\r
-              style="margin-right: 0.25rem"\r
-              aria-hidden="true"\r
-            ></i>\r
-\r
-            <!-- Missing anchor on same page -->\r
-            <i\r
-              *ngIf="rowData.anchorMissing"\r
-              class="pi pi-link"\r
-              title="Anchor target not found on page"\r
-              style="\r
-                margin-right: 0.25rem;\r
-                transform: rotate(45deg);\r
-                opacity: 0.8;\r
-              "\r
-              aria-hidden="true"\r
-            ></i>\r
-\r
-            <!-- Duplicates: show ONLY a red exclamation, hide match/mismatch/question -->\r
-            <ng-container *ngIf="rowData.hasTextConflict; else normalStatus">\r
+          <!-- Health: same chip (icon + label) used in Component Guidance -->\r
+          <span *ngSwitchCase="'matchStatus'">\r
+            <span\r
+              class="chip"\r
+              [ngClass]="{\r
+                'chip-severe': uiHealth(rowData) === 'severe',\r
+                'chip-minor': uiHealth(rowData) === 'minor',\r
+                'chip-ok': uiHealth(rowData) === 'ok',\r
+                'chip-unk': uiHealth(rowData) === 'unknown',\r
+              }"\r
+            >\r
               <i\r
-                class="pi pi-exclamation-triangle text-bad"\r
-                title="Different link names point to the same destination"\r
+                class="pi"\r
+                [ngClass]="{\r
+                  'pi-exclamation-triangle': uiHealth(rowData) === 'severe',\r
+                  'pi-times-circle': uiHealth(rowData) === 'minor',\r
+                  'pi-check-circle': uiHealth(rowData) === 'ok',\r
+                  'pi-question-circle': uiHealth(rowData) === 'unknown',\r
+                }"\r
+                aria-hidden="true"\r
               ></i>\r
-            </ng-container>\r
-\r
-            <ng-template #normalStatus>\r
-              <i\r
-                *ngIf="rowData.matchStatus === 'match'"\r
-                class="pi pi-check-circle text-ok"\r
-                title="Match"\r
-              ></i>\r
-              <i\r
-                *ngIf="rowData.matchStatus === 'mismatch'"\r
-                class="pi pi-times-circle text-bad"\r
-                title="Mismatch"\r
-              ></i>\r
-              <i\r
-                *ngIf="\r
-                  rowData.matchStatus === 'unknown' ||\r
-                  rowData.matchStatus === 'na'\r
-                "\r
-                class="pi pi-question-circle text-unk"\r
-                title="Unknown"\r
-              ></i>\r
-            </ng-template>\r
+              <span class="chip-label">{{\r
+                healthLabel(uiHealth(rowData))\r
+              }}</span>\r
+            </span>\r
           </span>\r
 \r
+          <!-- Fallback -->\r
           <span *ngSwitchDefault>{{ rowData[col.field] || "\u2014" }}</span>\r
         </ng-container>\r
       </td>\r
@@ -33058,7 +33071,7 @@ var LinkReportComponent = class _LinkReportComponent {
   </ng-template>\r
 </p-table>\r
 \r
-<!-- Popover for Link Type -->\r
+<!-- Popover for Link Type (unchanged) -->\r
 <p-popover\r
   #typePanel\r
   [dismissable]="true"\r
@@ -33106,7 +33119,7 @@ var LinkReportComponent = class _LinkReportComponent {
   </div>\r
 </p-popover>\r
 \r
-<!-- NEW: Popover for Match status -->\r
+<!-- (Optional) Existing Match-status popover \u2014 keep if you still want it -->\r
 <p-popover\r
   #statusPanel\r
   [dismissable]="true"\r
@@ -33162,7 +33175,7 @@ var LinkReportComponent = class _LinkReportComponent {
     </div>\r
   </div>\r
 </p-popover>\r
-`, styles: ["/* angular:styles/component:css;8a83dd044d98027c2645d6b20f9b4e2b48ac6e74e6617d7ca74a50e95c781114;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems/link-report.component.ts */\n.text-ok {\n  color: #16a34a;\n}\n.text-bad {\n  color: #dc2626;\n}\n.text-unk {\n  color: #64748b;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list > li {\n  margin: 0.05rem 0;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
+`, styles: ["/* angular:styles/component:css;94c43cf70e5fdab8f66a1ce99538053048633c25950ee0250b8c193d90fe65a4;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems/link-report.component.ts */\n.chip {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.4rem;\n  padding: 0.15rem 0.55rem;\n  border-radius: 9999px;\n  border: 1px solid transparent;\n  font-weight: 500;\n  line-height: 1.1;\n}\n.chip .pi {\n  color: inherit !important;\n}\n.chip-severe {\n  background: #fee2e2;\n  border-color: #fecaca;\n  color: #b91c1c;\n}\n.chip-minor {\n  background: #fef3c7;\n  border-color: #fde68a;\n  color: #92400e;\n}\n.chip-ok {\n  background: #dcfce7;\n  border-color: #86efac;\n  color: #166534;\n}\n.chip-unk {\n  background: #e5e7eb;\n  border-color: #cbd5e1;\n  color: #334155;\n}\n.health-cell .chip {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.35rem;\n}\n.chip-label {\n  line-height: 1;\n}\n.break-all {\n  word-break: break-all;\n}\n.muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.flex {\n  display: flex;\n}\n.justify-center {\n  justify-content: center;\n}\n.header-with-filter {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n.p-button-sm {\n  padding: 0.15rem 0.35rem;\n  height: 1.6rem;\n  width: 1.6rem;\n}\n.filter-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  padding: 0.25rem 0.25rem 0.1rem;\n}\n.variant-list {\n  list-style: none;\n  margin: 0.15rem 0 0;\n  padding: 0;\n}\n.variant-list > li {\n  margin: 0.05rem 0;\n}\n.filter-row {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  line-height: 1.2;\n}\n.divider {\n  height: 1px;\n  background: #e5e7eb;\n  margin: 0.25rem 0;\n}\n.filter-label {\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.filter-muted {\n  color: #6b7280;\n  font-size: 12px;\n}\n.exp-badge {\n  display: inline-block;\n  margin-left: 0.35rem;\n  padding: 0.1rem 0.45rem;\n  font-size: 12px;\n  line-height: 1.1;\n  border-radius: 9999px;\n  background: #fee2e2;\n  color: #991b1b;\n  border: 1px solid #fecaca;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=link-report.component.css.map */\n"] }]
   }], null, { hasProblemsChange: [{
     type: Output
   }], typePanel: [{
@@ -33171,620 +33184,17 @@ var LinkReportComponent = class _LinkReportComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/problems/link-report.component.ts", lineNumber: 271 });
-})();
-
-// src/app/views/page-assistant/components/problems.component.ts
-function PageProblemsComponent_p_accordion_panel_3_span_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 8);
-  }
-}
-function PageProblemsComponent_p_accordion_panel_3_p_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 9);
-    \u0275\u0275text(1, " View or reorganize your heading structure. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageProblemsComponent_p_accordion_panel_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 7)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Heading structure ");
-    \u0275\u0275element(3, "span", 3);
-    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_3_span_4_Template, 1, 0, "span", 4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_3_p_5_Template, 2, 0, "p", 5);
-    \u0275\u0275elementStart(6, "p-accordion-content");
-    \u0275\u0275element(7, "ca-heading-structure");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 0);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r0.flags.headingStructure);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
-  }
-}
-function PageProblemsComponent_span_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 8);
-  }
-}
-function PageProblemsComponent_p_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 9);
-    \u0275\u0275text(1, " Find guidance on the components used on your page and check for deprecated code or unexpected classes or elements. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageProblemsComponent_p_accordion_panel_12_span_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 8);
-  }
-}
-function PageProblemsComponent_p_accordion_panel_12_p_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 9);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageProblemsComponent_p_accordion_panel_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "SEO ");
-    \u0275\u0275element(3, "span", 3);
-    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_12_span_4_Template, 1, 0, "span", 4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_12_p_5_Template, 2, 0, "p", 5);
-    \u0275\u0275elementStart(6, "p-accordion-content");
-    \u0275\u0275element(7, "ca-seo");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 2);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r0.flags.seo);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
-  }
-}
-function PageProblemsComponent_p_accordion_panel_13_span_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 8);
-  }
-}
-function PageProblemsComponent_p_accordion_panel_13_p_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 9);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageProblemsComponent_p_accordion_panel_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "User insights ");
-    \u0275\u0275element(3, "span", 3);
-    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_13_span_4_Template, 1, 0, "span", 4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_13_p_5_Template, 2, 0, "p", 5);
-    \u0275\u0275elementStart(6, "p-accordion-content");
-    \u0275\u0275element(7, "ca-user-insights");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 3);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r0.flags.userInsights);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(4));
-  }
-}
-function PageProblemsComponent_p_accordion_panel_14_span_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 8);
-  }
-}
-function PageProblemsComponent_p_accordion_panel_14_p_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 9);
-    \u0275\u0275text(1, " Check link text vs destination content, flag duplicate destinations and 404 page. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageProblemsComponent_p_accordion_panel_14_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Link report ");
-    \u0275\u0275element(3, "span", 3);
-    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_14_span_4_Template, 1, 0, "span", 4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_14_p_5_Template, 2, 0, "p", 5);
-    \u0275\u0275elementStart(6, "p-accordion-content")(7, "ca-link-report", 10);
-    \u0275\u0275listener("hasProblemsChange", function PageProblemsComponent_p_accordion_panel_14_Template_ca_link_report_hasProblemsChange_7_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.onFeatureProblem("linkReport", $event));
-    });
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 4);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r0.flags.linkReport);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
-  }
-}
-var PageProblemsComponent = class _PageProblemsComponent {
-  // keep your variables
-  production = environment.production;
-  activePanels = [];
-  isPanelOpen(panelIndex) {
-    return this.activePanels.includes(panelIndex);
-  }
-  summary = new EventEmitter();
-  // track the 5 features shown under Problems
-  flags = {
-    headingStructure: false,
-    componentGuidance: false,
-    seo: false,
-    userInsights: false,
-    linkReport: false
-  };
-  /** Call this from each feature panel when its status changes */
-  onFeatureProblem(feature, hasProblem) {
-    this.flags = __spreadProps(__spreadValues({}, this.flags), { [feature]: hasProblem });
-    this.summary.emit(this.flags);
-  }
-  static \u0275fac = function PageProblemsComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _PageProblemsComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageProblemsComponent, selectors: [["ca-page-problems"]], outputs: { summary: "summary" }, decls: 15, vars: 9, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], [1, "flex-spacer"], ["class", "feature-badge", "aria-label", "Issues found", 4, "ngIf"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["aria-label", "Issues found", 1, "feature-badge"], [1, "mt-0", "ml-4", "text-color-secondary"], [3, "hasProblemsChange"]], template: function PageProblemsComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "p");
-      \u0275\u0275text(1, " Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.\n");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p-accordion", 0);
-      \u0275\u0275twoWayListener("valueChange", function PageProblemsComponent_Template_p_accordion_valueChange_2_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
-        return $event;
-      });
-      \u0275\u0275template(3, PageProblemsComponent_p_accordion_panel_3_Template, 8, 3, "p-accordion-panel", 1);
-      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
-      \u0275\u0275text(6, "Component guidance ");
-      \u0275\u0275element(7, "span", 3);
-      \u0275\u0275template(8, PageProblemsComponent_span_8_Template, 1, 0, "span", 4);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(9, PageProblemsComponent_p_9_Template, 2, 0, "p", 5);
-      \u0275\u0275elementStart(10, "p-accordion-content");
-      \u0275\u0275element(11, "ca-component-guidance");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275template(12, PageProblemsComponent_p_accordion_panel_12_Template, 8, 3, "p-accordion-panel", 6)(13, PageProblemsComponent_p_accordion_panel_13_Template, 8, 3, "p-accordion-panel", 6)(14, PageProblemsComponent_p_accordion_panel_14_Template, 8, 3, "p-accordion-panel", 6);
-      \u0275\u0275elementEnd();
-    }
-    if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275twoWayProperty("value", ctx.activePanels);
-      \u0275\u0275property("multiple", true);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("value", 1);
-      \u0275\u0275advance(4);
-      \u0275\u0275property("ngIf", ctx.flags.componentGuidance);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-    }
-  }, dependencies: [
-    CommonModule,
-    NgIf,
-    TranslateModule,
-    AccordionModule,
-    Accordion,
-    AccordionPanel,
-    AccordionHeader,
-    AccordionContent,
-    SeoComponent,
-    UserInsightsComponent,
-    LinkReportComponent,
-    ComponentGuidanceComponent,
-    HeadingStructureComponent
-  ], styles: ["\n\n[_nghost-%COMP%]     .p-accordion-header-content {\n  display: flex;\n  align-items: center;\n}\n.flex-spacer[_ngcontent-%COMP%] {\n  flex: 1 1 auto;\n}\n.feature-badge[_ngcontent-%COMP%] {\n  width: 1rem;\n  height: 1rem;\n  border-radius: 9999px;\n  background: #ef4444;\n  margin-right: 0.25rem;\n  display: inline-block;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06) inset;\n}\n/*# sourceMappingURL=problems.component.css.map */"] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageProblemsComponent, [{
-    type: Component,
-    args: [{ selector: "ca-page-problems", imports: [
-      CommonModule,
-      TranslateModule,
-      AccordionModule,
-      SeoComponent,
-      UserInsightsComponent,
-      LinkReportComponent,
-      ComponentGuidanceComponent,
-      HeadingStructureComponent
-    ], template: `<p>\r
-  Use these tools to analyze and improve your web page. You can restructure\r
-  headings, generate an IA diagram, find guidance on the components used in your\r
-  page, integrate SEO and user insights into your updates, check your link\r
-  quality, or convert your page to a different template.\r
-</p>\r
-\r
-<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r
-\r
-<p-accordion\r
-  [(value)]="activePanels"\r
-  [multiple]="true"\r
-  class="flex flex-column gap-3"\r
->\r
-  <p-accordion-panel\r
-    [value]="0"\r
-    class="border-1 border-round-md border-surface"\r
-    *ngIf="!production"\r
-  >\r
-    <p-accordion-header\r
-      >Heading structure\r
-      <span class="flex-spacer"></span>\r
-      <span\r
-        class="feature-badge"\r
-        *ngIf="flags.headingStructure"\r
-        aria-label="Issues found"\r
-      ></span>\r
-    </p-accordion-header>\r
-    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r
-      View or reorganize your heading structure.\r
-    </p>\r
-    <p-accordion-content>\r
-      <ca-heading-structure></ca-heading-structure>\r
-    </p-accordion-content>\r
-  </p-accordion-panel>\r
-\r
-  <p-accordion-panel\r
-    [value]="1"\r
-    class="border-1 border-round-sm border-surface"\r
-  >\r
-    <p-accordion-header\r
-      >Component guidance\r
-      <span class="flex-spacer"></span>\r
-      <span\r
-        class="feature-badge"\r
-        *ngIf="flags.componentGuidance"\r
-        aria-label="Issues found"\r
-      ></span>\r
-    </p-accordion-header>\r
-    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r
-      Find guidance on the components used on your page and check for deprecated\r
-      code or unexpected classes or elements.\r
-    </p>\r
-    <p-accordion-content>\r
-      <ca-component-guidance></ca-component-guidance>\r
-    </p-accordion-content>\r
-  </p-accordion-panel>\r
-\r
-  <p-accordion-panel\r
-    [value]="2"\r
-    class="border-1 border-round-sm border-surface"\r
-    *ngIf="!production"\r
-  >\r
-    <p-accordion-header\r
-      >SEO\r
-      <span class="flex-spacer"></span>\r
-      <span\r
-        class="feature-badge"\r
-        *ngIf="flags.seo"\r
-        aria-label="Issues found"\r
-      ></span>\r
-    </p-accordion-header>\r
-    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r
-      Add doormat text.\r
-    </p>\r
-    <p-accordion-content>\r
-      <ca-seo></ca-seo>\r
-    </p-accordion-content>\r
-  </p-accordion-panel>\r
-\r
-  <p-accordion-panel\r
-    [value]="3"\r
-    class="border-1 border-round-sm border-surface"\r
-    *ngIf="!production"\r
-  >\r
-    <p-accordion-header\r
-      >User insights\r
-      <span class="flex-spacer"></span>\r
-      <span\r
-        class="feature-badge"\r
-        *ngIf="flags.userInsights"\r
-        aria-label="Issues found"\r
-      ></span>\r
-    </p-accordion-header>\r
-    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(4)">\r
-      Add doormat text.\r
-    </p>\r
-    <p-accordion-content>\r
-      <ca-user-insights></ca-user-insights>\r
-    </p-accordion-content>\r
-  </p-accordion-panel>\r
-\r
-  <p-accordion-panel\r
-    [value]="4"\r
-    class="border-1 border-round-sm border-surface"\r
-    *ngIf="!production"\r
-  >\r
-    <p-accordion-header\r
-      >Link report\r
-      <span class="flex-spacer"></span>\r
-      <span\r
-        class="feature-badge"\r
-        *ngIf="flags.linkReport"\r
-        aria-label="Issues found"\r
-      ></span>\r
-    </p-accordion-header>\r
-    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r
-      Check link text vs destination content, flag duplicate destinations and\r
-      404 page.\r
-    </p>\r
-    <p-accordion-content>\r
-      <ca-link-report\r
-        (hasProblemsChange)="onFeatureProblem('linkReport', $event)"\r
-      >\r
-      </ca-link-report>\r
-    </p-accordion-content>\r
-  </p-accordion-panel>\r
-</p-accordion>\r
-`, styles: ["/* angular:styles/component:css;6b9035aeccebb8e4c84e29a4b5f612916f33954446739eb3118b52eabe00dd4a;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems.component.ts */\n:host ::ng-deep .p-accordion-header-content {\n  display: flex;\n  align-items: center;\n}\n.flex-spacer {\n  flex: 1 1 auto;\n}\n.feature-badge {\n  width: 1rem;\n  height: 1rem;\n  border-radius: 9999px;\n  background: #ef4444;\n  margin-right: 0.25rem;\n  display: inline-block;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06) inset;\n}\n/*# sourceMappingURL=problems.component.css.map */\n"] }]
-  }], null, { summary: [{
-    type: Output
-  }] });
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageProblemsComponent, { className: "PageProblemsComponent", filePath: "src/app/views/page-assistant/components/problems.component.ts", lineNumber: 64 });
-})();
-
-// src/app/views/page-assistant/components/data/search.component.ts
-var SearchComponent = class _SearchComponent {
-  static \u0275fac = function SearchComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _SearchComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SearchComponent, selectors: [["ca-search"]], decls: 0, vars: 0, template: function SearchComponent_Template(rf, ctx) {
-  }, encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SearchComponent, [{
-    type: Component,
-    args: [{ selector: "ca-search", imports: [], template: "\r\n" }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SearchComponent, { className: "SearchComponent", filePath: "src/app/views/page-assistant/components/data/search.component.ts", lineNumber: 9 });
-})();
-
-// src/app/views/page-assistant/components/data/chatLogs.component.ts
-var ChatLogsComponent = class _ChatLogsComponent {
-  static \u0275fac = function ChatLogsComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ChatLogsComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ChatLogsComponent, selectors: [["ca-chat-logs"]], decls: 0, vars: 0, template: function ChatLogsComponent_Template(rf, ctx) {
-  }, encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChatLogsComponent, [{
-    type: Component,
-    args: [{ selector: "ca-chat-logs", imports: [], template: "" }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ChatLogsComponent, { className: "ChatLogsComponent", filePath: "src/app/views/page-assistant/components/data/chatlogs.component.ts", lineNumber: 9 });
-})();
-
-// src/app/views/page-assistant/components/data/feedback.component.ts
-var FeedbackComponent = class _FeedbackComponent {
-  static \u0275fac = function FeedbackComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _FeedbackComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FeedbackComponent, selectors: [["ca-feedback"]], decls: 0, vars: 0, template: function FeedbackComponent_Template(rf, ctx) {
-  }, encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FeedbackComponent, [{
-    type: Component,
-    args: [{ selector: "ca-feedback", imports: [], template: "" }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FeedbackComponent, { className: "FeedbackComponent", filePath: "src/app/views/page-assistant/components/data/feedback.component.ts", lineNumber: 9 });
-})();
-
-// src/app/views/page-assistant/components/data/uxTesting.component.ts
-var UxTestingComponent = class _UxTestingComponent {
-  static \u0275fac = function UxTestingComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _UxTestingComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UxTestingComponent, selectors: [["ca-ux-testing"]], decls: 0, vars: 0, template: function UxTestingComponent_Template(rf, ctx) {
-  }, encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UxTestingComponent, [{
-    type: Component,
-    args: [{ selector: "ca-ux-testing", imports: [], template: "" }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UxTestingComponent, { className: "UxTestingComponent", filePath: "src/app/views/page-assistant/components/data/uxtesting.component.ts", lineNumber: 9 });
-})();
-
-// src/app/views/page-assistant/components/data.component.ts
-function PageDataComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageDataComponent_p_accordion_panel_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
-    \u0275\u0275text(2, "Search");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageDataComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-search");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 0);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
-  }
-}
-function PageDataComponent_p_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageDataComponent_p_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageDataComponent_p_accordion_panel_16_p_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 6);
-    \u0275\u0275text(1, " Add doormat text. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageDataComponent_p_accordion_panel_16_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
-    \u0275\u0275text(2, "UX testing");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageDataComponent_p_accordion_panel_16_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-ux-testing");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 3);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
-  }
-}
-var PageDataComponent = class _PageDataComponent {
-  production = environment.production;
-  activePanels = [];
-  isPanelOpen(panelIndex) {
-    return this.activePanels.includes(panelIndex);
-  }
-  static \u0275fac = function PageDataComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _PageDataComponent)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageDataComponent, selectors: [["ca-page-data"]], decls: 17, vars: 8, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageDataComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "p");
-      \u0275\u0275text(1, "Add description here.");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p-accordion", 0);
-      \u0275\u0275twoWayListener("valueChange", function PageDataComponent_Template_p_accordion_valueChange_2_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
-        return $event;
-      });
-      \u0275\u0275template(3, PageDataComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
-      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
-      \u0275\u0275text(6, "Chat logs");
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(7, PageDataComponent_p_7_Template, 2, 0, "p", 3);
-      \u0275\u0275elementStart(8, "p-accordion-content");
-      \u0275\u0275element(9, "ca-chat-logs");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(10, "p-accordion-panel", 4)(11, "p-accordion-header");
-      \u0275\u0275text(12, "Feedback");
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(13, PageDataComponent_p_13_Template, 2, 0, "p", 3);
-      \u0275\u0275elementStart(14, "p-accordion-content");
-      \u0275\u0275element(15, "ca-feedback");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275template(16, PageDataComponent_p_accordion_panel_16_Template, 6, 2, "p-accordion-panel", 5);
-      \u0275\u0275elementEnd();
-    }
-    if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275twoWayProperty("value", ctx.activePanels);
-      \u0275\u0275property("multiple", true);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("value", 1);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(1));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("value", 2);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.production);
-    }
-  }, dependencies: [
-    CommonModule,
-    NgIf,
-    TranslateModule,
-    AccordionModule,
-    Accordion,
-    AccordionPanel,
-    AccordionHeader,
-    AccordionContent,
-    SearchComponent,
-    ChatLogsComponent,
-    FeedbackComponent,
-    UxTestingComponent
-  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=data.component.css.map */"] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageDataComponent, [{
-    type: Component,
-    args: [{ selector: "ca-page-data", standalone: true, imports: [
-      CommonModule,
-      TranslateModule,
-      AccordionModule,
-      SearchComponent,
-      ChatLogsComponent,
-      FeedbackComponent,
-      UxTestingComponent
-    ], template: '<p>Add description here.</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Search</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-search></ca-search>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="1"\r\n    class="border-1 border-round-md border-surface"\r\n  >\r\n    <p-accordion-header>Chat logs</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(1)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-chat-logs></ca-chat-logs>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="2"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Feedback</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-feedback></ca-feedback>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="3"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>UX testing</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-ux-testing></ca-ux-testing>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/data.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=data.component.css.map */\n"] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageDataComponent, { className: "PageDataComponent", filePath: "src/app/views/page-assistant/components/data.component.ts", lineNumber: 36 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LinkReportComponent, { className: "LinkReportComponent", filePath: "src/app/views/page-assistant/components/problems/link-report.component.ts", lineNumber: 311 });
 })();
 
 // node_modules/primeng/fesm2022/primeng-breadcrumb.mjs
-var _c010 = ["item"];
-var _c111 = ["separator"];
-var _c27 = (a0) => ({
+var _c011 = ["item"];
+var _c114 = ["separator"];
+var _c28 = (a0) => ({
   "p-breadcrumb-home-item": true,
   "p-disabled": a0
 });
-var _c37 = () => ({
+var _c38 = () => ({
   exact: false
 });
 var _c47 = (a0) => ({
@@ -33934,7 +33344,7 @@ function Breadcrumb_li_2_a_2_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("routerLink", ctx_r1.home.routerLink)("queryParams", ctx_r1.home.queryParams)("routerLinkActiveOptions", ctx_r1.home.routerLinkActiveOptions || \u0275\u0275pureFunction0(16, _c37))("target", ctx_r1.home.target)("fragment", ctx_r1.home.fragment)("queryParamsHandling", ctx_r1.home.queryParamsHandling)("preserveFragment", ctx_r1.home.preserveFragment)("skipLocationChange", ctx_r1.home.skipLocationChange)("replaceUrl", ctx_r1.home.replaceUrl)("state", ctx_r1.home.state);
+    \u0275\u0275property("routerLink", ctx_r1.home.routerLink)("queryParams", ctx_r1.home.queryParams)("routerLinkActiveOptions", ctx_r1.home.routerLinkActiveOptions || \u0275\u0275pureFunction0(16, _c38))("target", ctx_r1.home.target)("fragment", ctx_r1.home.fragment)("queryParamsHandling", ctx_r1.home.queryParamsHandling)("preserveFragment", ctx_r1.home.preserveFragment)("skipLocationChange", ctx_r1.home.skipLocationChange)("replaceUrl", ctx_r1.home.replaceUrl)("state", ctx_r1.home.state);
     \u0275\u0275attribute("aria-label", ctx_r1.homeAriaLabel)("title", ctx_r1.home.title)("tabindex", ctx_r1.home.disabled ? null : "0");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.home.icon);
@@ -33953,7 +33363,7 @@ function Breadcrumb_li_2_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classMap(ctx_r1.home.styleClass);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(9, _c27, ctx_r1.home.disabled))("ngStyle", ctx_r1.home.style)("tooltipOptions", ctx_r1.home.tooltipOptions);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(9, _c28, ctx_r1.home.disabled))("ngStyle", ctx_r1.home.style)("tooltipOptions", ctx_r1.home.tooltipOptions);
     \u0275\u0275attribute("id", ctx_r1.home.id)("data-pc-section", "home");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.home.routerLink);
@@ -34142,7 +33552,7 @@ function Breadcrumb_ng_template_4_li_0_Conditional_2_a_1_Template(rf, ctx) {
   }
   if (rf & 2) {
     const menuitem_r6 = \u0275\u0275nextContext(3).$implicit;
-    \u0275\u0275property("routerLink", menuitem_r6 == null ? null : menuitem_r6.routerLink)("queryParams", menuitem_r6 == null ? null : menuitem_r6.queryParams)("routerLinkActiveOptions", (menuitem_r6 == null ? null : menuitem_r6.routerLinkActiveOptions) || \u0275\u0275pureFunction0(14, _c37))("target", menuitem_r6 == null ? null : menuitem_r6.target)("fragment", menuitem_r6 == null ? null : menuitem_r6.fragment)("queryParamsHandling", menuitem_r6 == null ? null : menuitem_r6.queryParamsHandling)("preserveFragment", menuitem_r6 == null ? null : menuitem_r6.preserveFragment)("skipLocationChange", menuitem_r6 == null ? null : menuitem_r6.skipLocationChange)("replaceUrl", menuitem_r6 == null ? null : menuitem_r6.replaceUrl)("state", menuitem_r6 == null ? null : menuitem_r6.state);
+    \u0275\u0275property("routerLink", menuitem_r6 == null ? null : menuitem_r6.routerLink)("queryParams", menuitem_r6 == null ? null : menuitem_r6.queryParams)("routerLinkActiveOptions", (menuitem_r6 == null ? null : menuitem_r6.routerLinkActiveOptions) || \u0275\u0275pureFunction0(14, _c38))("target", menuitem_r6 == null ? null : menuitem_r6.target)("fragment", menuitem_r6 == null ? null : menuitem_r6.fragment)("queryParamsHandling", menuitem_r6 == null ? null : menuitem_r6.queryParamsHandling)("preserveFragment", menuitem_r6 == null ? null : menuitem_r6.preserveFragment)("skipLocationChange", menuitem_r6 == null ? null : menuitem_r6.skipLocationChange)("replaceUrl", menuitem_r6 == null ? null : menuitem_r6.replaceUrl)("state", menuitem_r6 == null ? null : menuitem_r6.state);
     \u0275\u0275attribute("title", menuitem_r6 == null ? null : menuitem_r6.title)("tabindex", (menuitem_r6 == null ? null : menuitem_r6.disabled) ? null : "0");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", menuitem_r6 == null ? null : menuitem_r6.icon);
@@ -34421,8 +33831,8 @@ var Breadcrumb = class _Breadcrumb extends BaseComponent {
     selectors: [["p-breadcrumb"]],
     contentQueries: function Breadcrumb_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c010, 5);
-        \u0275\u0275contentQuery(dirIndex, _c111, 5);
+        \u0275\u0275contentQuery(dirIndex, _c011, 5);
+        \u0275\u0275contentQuery(dirIndex, _c114, 5);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -34664,11 +34074,11 @@ var BreadcrumbModule = class _BreadcrumbModule {
   }], null, null);
 })();
 
-// src/app/views/page-assistant/components/tools/ia-structure.component.ts
-var _c011 = ["chartContainer"];
-var _c114 = ["cm"];
-var _c28 = () => ({ height: "1rem" });
-var _c38 = () => ({ "min-width": "50rem" });
+// src/app/views/page-assistant/components/problems/ia-structure.component.ts
+var _c012 = ["chartContainer"];
+var _c115 = ["cm"];
+var _c29 = () => ({ height: "1rem" });
+var _c39 = () => ({ "min-width": "50rem" });
 function IaStructureComponent_p_button_6_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -34687,7 +34097,7 @@ function IaStructureComponent_p_progressbar_7_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275styleMap(\u0275\u0275pureFunction0(4, _c28));
+    \u0275\u0275styleMap(\u0275\u0275pureFunction0(4, _c29));
     \u0275\u0275property("value", ctx_r1.iaProgress)("showValue", false);
   }
 }
@@ -35057,7 +34467,7 @@ function IaStructureComponent_ng_container_12_p_table_4_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("value", ctx_r1.brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c38));
+    \u0275\u0275property("value", ctx_r1.brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c39));
   }
 }
 function IaStructureComponent_ng_container_12_Template(rf, ctx) {
@@ -35762,8 +35172,8 @@ var IaStructureComponent = class _IaStructureComponent {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaStructureComponent, selectors: [["ca-ia-structure"]], viewQuery: function IaStructureComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c011, 5);
-      \u0275\u0275viewQuery(_c114, 5);
+      \u0275\u0275viewQuery(_c012, 5);
+      \u0275\u0275viewQuery(_c115, 5);
     }
     if (rf & 2) {
       let _t;
@@ -36092,7 +35502,7 @@ var IaStructureComponent = class _IaStructureComponent {
     </ng-template>\r
   </p-table>\r
 </ng-container>\r
-`, styles: ["/* angular:styles/component:css;bdfdbdfe91275a57484d194f9b85e530ebd36ad6ccbe8fc911102dbac7cda77f;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools/ia-structure.component.ts */\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n/*# sourceMappingURL=ia-structure.component.css.map */\n"] }]
+`, styles: ["/* angular:styles/component:css;bdfdbdfe91275a57484d194f9b85e530ebd36ad6ccbe8fc911102dbac7cda77f;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems/ia-structure.component.ts */\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n/*# sourceMappingURL=ia-structure.component.css.map */\n"] }]
   }], () => [], { chartContainer: [{
     type: ViewChild,
     args: ["chartContainer"]
@@ -36102,7 +35512,669 @@ var IaStructureComponent = class _IaStructureComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaStructureComponent, { className: "IaStructureComponent", filePath: "src/app/views/page-assistant/components/tools/ia-structure.component.ts", lineNumber: 104 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaStructureComponent, { className: "IaStructureComponent", filePath: "src/app/views/page-assistant/components/problems/ia-structure.component.ts", lineNumber: 104 });
+})();
+
+// src/app/views/page-assistant/components/problems.component.ts
+function PageProblemsComponent_p_accordion_panel_3_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 8);
+  }
+}
+function PageProblemsComponent_p_accordion_panel_3_p_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 9);
+    \u0275\u0275text(1, " View or reorganize your heading structure. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 7)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Heading structure ");
+    \u0275\u0275element(3, "span", 3);
+    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_3_span_4_Template, 1, 0, "span", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_3_p_5_Template, 2, 0, "p", 5);
+    \u0275\u0275elementStart(6, "p-accordion-content");
+    \u0275\u0275element(7, "ca-heading-structure");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 0);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r0.flags.headingStructure);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
+  }
+}
+function PageProblemsComponent_span_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 8);
+  }
+}
+function PageProblemsComponent_p_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 9);
+    \u0275\u0275text(1, " Find guidance on the components used on your page and check for deprecated code or unexpected classes or elements. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_12_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 8);
+  }
+}
+function PageProblemsComponent_p_accordion_panel_12_p_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 9);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "SEO ");
+    \u0275\u0275element(3, "span", 3);
+    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_12_span_4_Template, 1, 0, "span", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_12_p_5_Template, 2, 0, "p", 5);
+    \u0275\u0275elementStart(6, "p-accordion-content");
+    \u0275\u0275element(7, "ca-seo");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 2);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r0.flags.seo);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(2));
+  }
+}
+function PageProblemsComponent_p_accordion_panel_13_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 8);
+  }
+}
+function PageProblemsComponent_p_accordion_panel_13_p_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 9);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "User insights ");
+    \u0275\u0275element(3, "span", 3);
+    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_13_span_4_Template, 1, 0, "span", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_13_p_5_Template, 2, 0, "p", 5);
+    \u0275\u0275elementStart(6, "p-accordion-content");
+    \u0275\u0275element(7, "ca-user-insights");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 3);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r0.flags.userInsights);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
+  }
+}
+function PageProblemsComponent_p_accordion_panel_14_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 8);
+  }
+}
+function PageProblemsComponent_p_accordion_panel_14_p_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 9);
+    \u0275\u0275text(1, " Check link text vs destination content, flag duplicate destinations and 404 page. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_14_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Link report ");
+    \u0275\u0275element(3, "span", 3);
+    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_14_span_4_Template, 1, 0, "span", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_14_p_5_Template, 2, 0, "p", 5);
+    \u0275\u0275elementStart(6, "p-accordion-content")(7, "ca-link-report", 10);
+    \u0275\u0275listener("hasProblemsChange", function PageProblemsComponent_p_accordion_panel_14_Template_ca_link_report_hasProblemsChange_7_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onFeatureProblem("linkReport", $event));
+    });
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 4);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r0.flags.linkReport);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(4));
+  }
+}
+function PageProblemsComponent_p_accordion_panel_15_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 8);
+  }
+}
+function PageProblemsComponent_p_accordion_panel_15_p_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 9);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageProblemsComponent_p_accordion_panel_15_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "IA structure ");
+    \u0275\u0275element(3, "span", 3);
+    \u0275\u0275template(4, PageProblemsComponent_p_accordion_panel_15_span_4_Template, 1, 0, "span", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, PageProblemsComponent_p_accordion_panel_15_p_5_Template, 2, 0, "p", 5);
+    \u0275\u0275elementStart(6, "p-accordion-content");
+    \u0275\u0275element(7, "ca-ia-structure");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 5);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r0.flags.userInsights);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(5));
+  }
+}
+var PageProblemsComponent = class _PageProblemsComponent {
+  // keep your variables
+  production = environment.production;
+  activePanels = [];
+  isPanelOpen(panelIndex) {
+    return this.activePanels.includes(panelIndex);
+  }
+  summary = new EventEmitter();
+  // track the 5 features shown under Problems
+  flags = {
+    headingStructure: false,
+    componentGuidance: false,
+    seo: false,
+    userInsights: false,
+    linkReport: false
+  };
+  /** Call this from each feature panel when its status changes */
+  onFeatureProblem(feature, hasProblem) {
+    this.flags = __spreadProps(__spreadValues({}, this.flags), { [feature]: hasProblem });
+    this.summary.emit(this.flags);
+  }
+  static \u0275fac = function PageProblemsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PageProblemsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageProblemsComponent, selectors: [["ca-page-problems"]], outputs: { summary: "summary" }, decls: 16, vars: 10, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], [1, "flex-spacer"], ["class", "feature-badge", "aria-label", "Issues found", 4, "ngIf"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["aria-label", "Issues found", 1, "feature-badge"], [1, "mt-0", "ml-4", "text-color-secondary"], [3, "hasProblemsChange"]], template: function PageProblemsComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "p");
+      \u0275\u0275text(1, " Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.\n");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p-accordion", 0);
+      \u0275\u0275twoWayListener("valueChange", function PageProblemsComponent_Template_p_accordion_valueChange_2_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
+        return $event;
+      });
+      \u0275\u0275template(3, PageProblemsComponent_p_accordion_panel_3_Template, 8, 3, "p-accordion-panel", 1);
+      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
+      \u0275\u0275text(6, "Component guidance ");
+      \u0275\u0275element(7, "span", 3);
+      \u0275\u0275template(8, PageProblemsComponent_span_8_Template, 1, 0, "span", 4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(9, PageProblemsComponent_p_9_Template, 2, 0, "p", 5);
+      \u0275\u0275elementStart(10, "p-accordion-content");
+      \u0275\u0275element(11, "ca-component-guidance");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(12, PageProblemsComponent_p_accordion_panel_12_Template, 8, 3, "p-accordion-panel", 6)(13, PageProblemsComponent_p_accordion_panel_13_Template, 8, 3, "p-accordion-panel", 6)(14, PageProblemsComponent_p_accordion_panel_14_Template, 8, 3, "p-accordion-panel", 6)(15, PageProblemsComponent_p_accordion_panel_15_Template, 8, 3, "p-accordion-panel", 6);
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275twoWayProperty("value", ctx.activePanels);
+      \u0275\u0275property("multiple", true);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("value", 1);
+      \u0275\u0275advance(4);
+      \u0275\u0275property("ngIf", ctx.flags.componentGuidance);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(1));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+    }
+  }, dependencies: [
+    CommonModule,
+    NgIf,
+    TranslateModule,
+    AccordionModule,
+    Accordion,
+    AccordionPanel,
+    AccordionHeader,
+    AccordionContent,
+    SeoComponent,
+    UserInsightsComponent,
+    LinkReportComponent,
+    ComponentGuidanceComponent,
+    HeadingStructureComponent,
+    IaStructureComponent
+  ], styles: ["\n\n[_nghost-%COMP%]     .p-accordion-header-content {\n  display: flex;\n  align-items: center;\n}\n.flex-spacer[_ngcontent-%COMP%] {\n  flex: 1 1 auto;\n}\n.feature-badge[_ngcontent-%COMP%] {\n  width: 1rem;\n  height: 1rem;\n  border-radius: 9999px;\n  background: #ef4444;\n  margin-right: 0.25rem;\n  display: inline-block;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06) inset;\n}\n/*# sourceMappingURL=problems.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageProblemsComponent, [{
+    type: Component,
+    args: [{ selector: "ca-page-problems", imports: [
+      CommonModule,
+      TranslateModule,
+      AccordionModule,
+      SeoComponent,
+      UserInsightsComponent,
+      LinkReportComponent,
+      ComponentGuidanceComponent,
+      HeadingStructureComponent,
+      IaStructureComponent
+    ], template: `<p>\r
+  Use these tools to analyze and improve your web page. You can restructure\r
+  headings, generate an IA diagram, find guidance on the components used in your\r
+  page, integrate SEO and user insights into your updates, check your link\r
+  quality, or convert your page to a different template.\r
+</p>\r
+\r
+<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r
+\r
+<p-accordion\r
+  [(value)]="activePanels"\r
+  [multiple]="true"\r
+  class="flex flex-column gap-3"\r
+>\r
+  <p-accordion-panel\r
+    [value]="0"\r
+    class="border-1 border-round-md border-surface"\r
+    *ngIf="!production"\r
+  >\r
+    <p-accordion-header\r
+      >Heading structure\r
+      <span class="flex-spacer"></span>\r
+      <span\r
+        class="feature-badge"\r
+        *ngIf="flags.headingStructure"\r
+        aria-label="Issues found"\r
+      ></span>\r
+    </p-accordion-header>\r
+    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r
+      View or reorganize your heading structure.\r
+    </p>\r
+    <p-accordion-content>\r
+      <ca-heading-structure></ca-heading-structure>\r
+    </p-accordion-content>\r
+  </p-accordion-panel>\r
+\r
+  <p-accordion-panel\r
+    [value]="1"\r
+    class="border-1 border-round-sm border-surface"\r
+  >\r
+    <p-accordion-header\r
+      >Component guidance\r
+      <span class="flex-spacer"></span>\r
+      <span\r
+        class="feature-badge"\r
+        *ngIf="flags.componentGuidance"\r
+        aria-label="Issues found"\r
+      ></span>\r
+    </p-accordion-header>\r
+    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(1)">\r
+      Find guidance on the components used on your page and check for deprecated\r
+      code or unexpected classes or elements.\r
+    </p>\r
+    <p-accordion-content>\r
+      <ca-component-guidance></ca-component-guidance>\r
+    </p-accordion-content>\r
+  </p-accordion-panel>\r
+\r
+  <p-accordion-panel\r
+    [value]="2"\r
+    class="border-1 border-round-sm border-surface"\r
+    *ngIf="!production"\r
+  >\r
+    <p-accordion-header\r
+      >SEO\r
+      <span class="flex-spacer"></span>\r
+      <span\r
+        class="feature-badge"\r
+        *ngIf="flags.seo"\r
+        aria-label="Issues found"\r
+      ></span>\r
+    </p-accordion-header>\r
+    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r
+      Add doormat text.\r
+    </p>\r
+    <p-accordion-content>\r
+      <ca-seo></ca-seo>\r
+    </p-accordion-content>\r
+  </p-accordion-panel>\r
+\r
+  <p-accordion-panel\r
+    [value]="3"\r
+    class="border-1 border-round-sm border-surface"\r
+    *ngIf="!production"\r
+  >\r
+    <p-accordion-header\r
+      >User insights\r
+      <span class="flex-spacer"></span>\r
+      <span\r
+        class="feature-badge"\r
+        *ngIf="flags.userInsights"\r
+        aria-label="Issues found"\r
+      ></span>\r
+    </p-accordion-header>\r
+    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r
+      Add doormat text.\r
+    </p>\r
+    <p-accordion-content>\r
+      <ca-user-insights></ca-user-insights>\r
+    </p-accordion-content>\r
+  </p-accordion-panel>\r
+\r
+  <p-accordion-panel\r
+    [value]="4"\r
+    class="border-1 border-round-sm border-surface"\r
+    *ngIf="!production"\r
+  >\r
+    <p-accordion-header\r
+      >Link report\r
+      <span class="flex-spacer"></span>\r
+      <span\r
+        class="feature-badge"\r
+        *ngIf="flags.linkReport"\r
+        aria-label="Issues found"\r
+      ></span>\r
+    </p-accordion-header>\r
+    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(4)">\r
+      Check link text vs destination content, flag duplicate destinations and\r
+      404 page.\r
+    </p>\r
+    <p-accordion-content>\r
+      <ca-link-report\r
+        (hasProblemsChange)="onFeatureProblem('linkReport', $event)"\r
+      >\r
+      </ca-link-report>\r
+    </p-accordion-content>\r
+  </p-accordion-panel>\r
+\r
+  <p-accordion-panel\r
+    [value]="5"\r
+    class="border-1 border-round-sm border-surface"\r
+    *ngIf="!production"\r
+  >\r
+    <p-accordion-header\r
+      >IA structure\r
+      <span class="flex-spacer"></span>\r
+      <span\r
+        class="feature-badge"\r
+        *ngIf="flags.userInsights"\r
+        aria-label="Issues found"\r
+      ></span>\r
+    </p-accordion-header>\r
+    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(5)">\r
+      Add doormat text.\r
+    </p>\r
+    <p-accordion-content>\r
+      <ca-ia-structure></ca-ia-structure>\r
+    </p-accordion-content>\r
+  </p-accordion-panel>\r
+</p-accordion>\r
+`, styles: ["/* angular:styles/component:css;6b9035aeccebb8e4c84e29a4b5f612916f33954446739eb3118b52eabe00dd4a;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/problems.component.ts */\n:host ::ng-deep .p-accordion-header-content {\n  display: flex;\n  align-items: center;\n}\n.flex-spacer {\n  flex: 1 1 auto;\n}\n.feature-badge {\n  width: 1rem;\n  height: 1rem;\n  border-radius: 9999px;\n  background: #ef4444;\n  margin-right: 0.25rem;\n  display: inline-block;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06) inset;\n}\n/*# sourceMappingURL=problems.component.css.map */\n"] }]
+  }], null, { summary: [{
+    type: Output
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageProblemsComponent, { className: "PageProblemsComponent", filePath: "src/app/views/page-assistant/components/problems.component.ts", lineNumber: 66 });
+})();
+
+// src/app/views/page-assistant/components/data/search.component.ts
+var SearchComponent = class _SearchComponent {
+  static \u0275fac = function SearchComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _SearchComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SearchComponent, selectors: [["ca-search"]], decls: 0, vars: 0, template: function SearchComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SearchComponent, [{
+    type: Component,
+    args: [{ selector: "ca-search", imports: [], template: "\r\n" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SearchComponent, { className: "SearchComponent", filePath: "src/app/views/page-assistant/components/data/search.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data/chatLogs.component.ts
+var ChatLogsComponent = class _ChatLogsComponent {
+  static \u0275fac = function ChatLogsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ChatLogsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ChatLogsComponent, selectors: [["ca-chat-logs"]], decls: 0, vars: 0, template: function ChatLogsComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChatLogsComponent, [{
+    type: Component,
+    args: [{ selector: "ca-chat-logs", imports: [], template: "" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ChatLogsComponent, { className: "ChatLogsComponent", filePath: "src/app/views/page-assistant/components/data/chatlogs.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data/feedback.component.ts
+var FeedbackComponent = class _FeedbackComponent {
+  static \u0275fac = function FeedbackComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FeedbackComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FeedbackComponent, selectors: [["ca-feedback"]], decls: 0, vars: 0, template: function FeedbackComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FeedbackComponent, [{
+    type: Component,
+    args: [{ selector: "ca-feedback", imports: [], template: "" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FeedbackComponent, { className: "FeedbackComponent", filePath: "src/app/views/page-assistant/components/data/feedback.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data/uxTesting.component.ts
+var UxTestingComponent = class _UxTestingComponent {
+  static \u0275fac = function UxTestingComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _UxTestingComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UxTestingComponent, selectors: [["ca-ux-testing"]], decls: 0, vars: 0, template: function UxTestingComponent_Template(rf, ctx) {
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UxTestingComponent, [{
+    type: Component,
+    args: [{ selector: "ca-ux-testing", imports: [], template: "" }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UxTestingComponent, { className: "UxTestingComponent", filePath: "src/app/views/page-assistant/components/data/uxtesting.component.ts", lineNumber: 9 });
+})();
+
+// src/app/views/page-assistant/components/data.component.ts
+function PageDataComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_accordion_panel_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 2)(1, "p-accordion-header");
+    \u0275\u0275text(2, "Search");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageDataComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-search");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 0);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
+  }
+}
+function PageDataComponent_p_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_accordion_panel_16_p_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 6);
+    \u0275\u0275text(1, " Add doormat text. ");
+    \u0275\u0275elementEnd();
+  }
+}
+function PageDataComponent_p_accordion_panel_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
+    \u0275\u0275text(2, "UX testing");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, PageDataComponent_p_accordion_panel_16_p_3_Template, 2, 0, "p", 3);
+    \u0275\u0275elementStart(4, "p-accordion-content");
+    \u0275\u0275element(5, "ca-ux-testing");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", 3);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(3));
+  }
+}
+var PageDataComponent = class _PageDataComponent {
+  production = environment.production;
+  activePanels = [];
+  isPanelOpen(panelIndex) {
+    return this.activePanels.includes(panelIndex);
+  }
+  static \u0275fac = function PageDataComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PageDataComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageDataComponent, selectors: [["ca-page-data"]], decls: 17, vars: 8, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "border-1 border-round-sm border-surface", 3, "value", 4, "ngIf"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageDataComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "p");
+      \u0275\u0275text(1, "Add description here.");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "p-accordion", 0);
+      \u0275\u0275twoWayListener("valueChange", function PageDataComponent_Template_p_accordion_valueChange_2_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
+        return $event;
+      });
+      \u0275\u0275template(3, PageDataComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
+      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
+      \u0275\u0275text(6, "Chat logs");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(7, PageDataComponent_p_7_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(8, "p-accordion-content");
+      \u0275\u0275element(9, "ca-chat-logs");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(10, "p-accordion-panel", 4)(11, "p-accordion-header");
+      \u0275\u0275text(12, "Feedback");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(13, PageDataComponent_p_13_Template, 2, 0, "p", 3);
+      \u0275\u0275elementStart(14, "p-accordion-content");
+      \u0275\u0275element(15, "ca-feedback");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(16, PageDataComponent_p_accordion_panel_16_Template, 6, 2, "p-accordion-panel", 5);
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275twoWayProperty("value", ctx.activePanels);
+      \u0275\u0275property("multiple", true);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.production);
+      \u0275\u0275advance();
+      \u0275\u0275property("value", 1);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(1));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("value", 2);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.production);
+    }
+  }, dependencies: [
+    CommonModule,
+    NgIf,
+    TranslateModule,
+    AccordionModule,
+    Accordion,
+    AccordionPanel,
+    AccordionHeader,
+    AccordionContent,
+    SearchComponent,
+    ChatLogsComponent,
+    FeedbackComponent,
+    UxTestingComponent
+  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=data.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PageDataComponent, [{
+    type: Component,
+    args: [{ selector: "ca-page-data", standalone: true, imports: [
+      CommonModule,
+      TranslateModule,
+      AccordionModule,
+      SearchComponent,
+      ChatLogsComponent,
+      FeedbackComponent,
+      UxTestingComponent
+    ], template: '<p>Add description here.</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>Search</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-search></ca-search>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="1"\r\n    class="border-1 border-round-md border-surface"\r\n  >\r\n    <p-accordion-header>Chat logs</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(1)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-chat-logs></ca-chat-logs>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="2"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Feedback</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-feedback></ca-feedback>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="3"\r\n    class="border-1 border-round-sm border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>UX testing</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(3)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-ux-testing></ca-ux-testing>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/data.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=data.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageDataComponent, { className: "PageDataComponent", filePath: "src/app/views/page-assistant/components/data.component.ts", lineNumber: 36 });
 })();
 
 // src/app/views/page-assistant/components/tools/template-conversion.component.ts
@@ -36132,33 +36204,9 @@ var TemplateConversionComponent = class _TemplateConversionComponent {
 })();
 
 // src/app/views/page-assistant/components/tools.component.ts
-function PageToolsComponent_p_accordion_panel_3_p_3_Template(rf, ctx) {
+function PageToolsComponent_p_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 5);
-    \u0275\u0275text(1, " Check if your page is an IA orphan and view its current IA diagram. ");
-    \u0275\u0275elementEnd();
-  }
-}
-function PageToolsComponent_p_accordion_panel_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-accordion-panel", 4)(1, "p-accordion-header");
-    \u0275\u0275text(2, "IA structure");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_p_3_Template, 2, 0, "p", 3);
-    \u0275\u0275elementStart(4, "p-accordion-content");
-    \u0275\u0275element(5, "ca-ia-structure");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", 0);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r0.isPanelOpen(0));
-  }
-}
-function PageToolsComponent_p_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 5);
+    \u0275\u0275elementStart(0, "p", 3);
     \u0275\u0275text(1, " Add doormat text. ");
     \u0275\u0275elementEnd();
   }
@@ -36172,7 +36220,7 @@ var PageToolsComponent = class _PageToolsComponent {
   static \u0275fac = function PageToolsComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _PageToolsComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageToolsComponent, selectors: [["ca-page-tools"]], decls: 10, vars: 5, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], ["class", "border-1 border-round-md border-surface", 3, "value", 4, "ngIf"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "border-1", "border-round-md", "border-surface", 3, "value"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageToolsComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageToolsComponent, selectors: [["ca-page-tools"]], decls: 9, vars: 4, consts: [[1, "flex", "flex-column", "gap-3", 3, "valueChange", "value", "multiple"], [1, "border-1", "border-round-sm", "border-surface", 3, "value"], ["class", "mt-0 ml-4 text-color-secondary", 4, "ngIf"], [1, "mt-0", "ml-4", "text-color-secondary"]], template: function PageToolsComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "p");
       \u0275\u0275text(1, " Use these tools to analyze and improve your web page. You can restructure headings, generate an IA diagram, find guidance on the components used in your page, integrate SEO and user insights into your updates, check your link quality, or convert your page to a different template.\n");
@@ -36182,13 +36230,12 @@ var PageToolsComponent = class _PageToolsComponent {
         \u0275\u0275twoWayBindingSet(ctx.activePanels, $event) || (ctx.activePanels = $event);
         return $event;
       });
-      \u0275\u0275template(3, PageToolsComponent_p_accordion_panel_3_Template, 6, 2, "p-accordion-panel", 1);
-      \u0275\u0275elementStart(4, "p-accordion-panel", 2)(5, "p-accordion-header");
-      \u0275\u0275text(6, "Template conversion");
+      \u0275\u0275elementStart(3, "p-accordion-panel", 1)(4, "p-accordion-header");
+      \u0275\u0275text(5, "Template conversion");
       \u0275\u0275elementEnd();
-      \u0275\u0275template(7, PageToolsComponent_p_7_Template, 2, 0, "p", 3);
-      \u0275\u0275elementStart(8, "p-accordion-content");
-      \u0275\u0275element(9, "ca-template-conversion");
+      \u0275\u0275template(6, PageToolsComponent_p_6_Template, 2, 0, "p", 2);
+      \u0275\u0275elementStart(7, "p-accordion-content");
+      \u0275\u0275element(8, "ca-template-conversion");
       \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
@@ -36196,11 +36243,9 @@ var PageToolsComponent = class _PageToolsComponent {
       \u0275\u0275twoWayProperty("value", ctx.activePanels);
       \u0275\u0275property("multiple", true);
       \u0275\u0275advance();
-      \u0275\u0275property("ngIf", !ctx.production);
-      \u0275\u0275advance();
-      \u0275\u0275property("value", 1);
+      \u0275\u0275property("value", 0);
       \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", !ctx.isPanelOpen(2));
+      \u0275\u0275property("ngIf", !ctx.isPanelOpen(0));
     }
   }, dependencies: [
     CommonModule,
@@ -36211,7 +36256,6 @@ var PageToolsComponent = class _PageToolsComponent {
     AccordionPanel,
     AccordionHeader,
     AccordionContent,
-    IaStructureComponent,
     TemplateConversionComponent
   ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */"] });
 };
@@ -36222,20 +36266,19 @@ var PageToolsComponent = class _PageToolsComponent {
       CommonModule,
       TranslateModule,
       AccordionModule,
-      IaStructureComponent,
       TemplateConversionComponent
-    ], template: '<p>\r\n  Use these tools to analyze and improve your web page. You can restructure\r\n  headings, generate an IA diagram, find guidance on the components used in your\r\n  page, integrate SEO and user insights into your updates, check your link\r\n  quality, or convert your page to a different template.\r\n</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-md border-surface"\r\n    *ngIf="!production"\r\n  >\r\n    <p-accordion-header>IA structure</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Check if your page is an IA orphan and view its current IA diagram.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-ia-structure></ca-ia-structure>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n\r\n  <p-accordion-panel\r\n    [value]="1"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Template conversion</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(2)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-template-conversion></ca-template-conversion>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */\n"] }]
+    ], template: '<p>\r\n  Use these tools to analyze and improve your web page. You can restructure\r\n  headings, generate an IA diagram, find guidance on the components used in your\r\n  page, integrate SEO and user insights into your updates, check your link\r\n  quality, or convert your page to a different template.\r\n</p>\r\n\r\n<!--REMINDER: remove *ngIf="!production" as tools are finished (or close enough for people to use them)-->\r\n\r\n<p-accordion\r\n  [(value)]="activePanels"\r\n  [multiple]="true"\r\n  class="flex flex-column gap-3"\r\n>\r\n  <p-accordion-panel\r\n    [value]="0"\r\n    class="border-1 border-round-sm border-surface"\r\n  >\r\n    <p-accordion-header>Template conversion</p-accordion-header>\r\n    <p class="mt-0 ml-4 text-color-secondary" *ngIf="!isPanelOpen(0)">\r\n      Add doormat text.\r\n    </p>\r\n    <p-accordion-content>\r\n      <ca-template-conversion></ca-template-conversion>\r\n    </p-accordion-content>\r\n  </p-accordion-panel>\r\n</p-accordion>\r\n', styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/tools.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=tools.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageToolsComponent, { className: "PageToolsComponent", filePath: "src/app/views/page-assistant/components/tools.component.ts", lineNumber: 32 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PageToolsComponent, { className: "PageToolsComponent", filePath: "src/app/views/page-assistant/components/tools.component.ts", lineNumber: 30 });
 })();
 
 // src/app/views/page-assistant/page-assistant.component.ts
-var _c012 = ["liveContainer"];
-var _c115 = ["sourceContainer"];
-var _c29 = () => ({ ariaLabel: "Accept selected changes" });
-var _c39 = () => ({ ariaLabel: "More accept options" });
+var _c013 = ["liveContainer"];
+var _c116 = ["sourceContainer"];
+var _c210 = () => ({ ariaLabel: "Accept selected changes" });
+var _c310 = () => ({ ariaLabel: "More accept options" });
 var _c48 = () => ({ ariaLabel: "Reject selected changes" });
 var _c57 = () => ({ ariaLabel: "More reject options" });
 var _c66 = (a0, a1) => ({ "background-color": a0, border: a1 });
@@ -36342,7 +36385,7 @@ function PageAssistantCompareComponent_ng_template_41_ng_container_0_Template(rf
     \u0275\u0275advance(5);
     \u0275\u0275textInterpolate(ctx_r2.displayCounter);
     \u0275\u0275advance(2);
-    \u0275\u0275property("model", ctx_r2.acceptItems)("buttonProps", \u0275\u0275pureFunction0(8, _c29))("menuButtonProps", \u0275\u0275pureFunction0(9, _c39));
+    \u0275\u0275property("model", ctx_r2.acceptItems)("buttonProps", \u0275\u0275pureFunction0(8, _c210))("menuButtonProps", \u0275\u0275pureFunction0(9, _c310));
     \u0275\u0275advance();
     \u0275\u0275property("model", ctx_r2.rejectItems)("buttonProps", \u0275\u0275pureFunction0(10, _c48))("menuButtonProps", \u0275\u0275pureFunction0(11, _c57));
     \u0275\u0275advance();
@@ -37180,8 +37223,8 @@ ${base}`;
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PageAssistantCompareComponent, selectors: [["ca-page-assistant-compare"]], viewQuery: function PageAssistantCompareComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c012, 5);
-      \u0275\u0275viewQuery(_c115, 5);
+      \u0275\u0275viewQuery(_c013, 5);
+      \u0275\u0275viewQuery(_c116, 5);
     }
     if (rf & 2) {
       let _t;
@@ -37294,10 +37337,10 @@ ${base}`;
       \u0275\u0275elementEnd()();
       \u0275\u0275elementStart(55, "p-tabpanel", 22);
       \u0275\u0275element(56, "ca-page-data");
-      \u0275\u0275elementEnd()();
+      \u0275\u0275elementEnd();
       \u0275\u0275elementStart(57, "p-tabpanel", 24);
       \u0275\u0275element(58, "ca-page-tools");
-      \u0275\u0275elementEnd()();
+      \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
       \u0275\u0275advance();
@@ -37629,12 +37672,12 @@ ${base}`;
     <p-tabpanel value="3">\r
       <ca-page-data></ca-page-data>\r
     </p-tabpanel>\r
-  </p-tabpanels>\r
 \r
-  <!-- Tool tabpanel -->\r
-  <p-tabpanel value="4">\r
-    <ca-page-tools></ca-page-tools>\r
-  </p-tabpanel>\r
+    <!-- Tool tabpanel -->\r
+    <p-tabpanel value="4">\r
+      <ca-page-tools></ca-page-tools>\r
+    </p-tabpanel>\r
+  </p-tabpanels>\r
 </p-tabs>\r
 `, styles: ['@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";\n\n/* src/app/views/page-assistant/page-assistant.component.css */\n@font-face {\n  font-family: "Glyphicons Halflings";\n  src: url(https://www.canada.ca/etc/designs/canada/wet-boew/fonts/glyphicons-halflings-regular.woff2) format("woff2");\n}\n.d2h-file-side-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-file-diff {\n  overflow-x: scroll;\n  overflow-y: scroll;\n  max-height: 75vh;\n}\n.d2h-code-wrapper {\n  position: relative;\n}\n.d2h-file-name-wrapper {\n  display: none;\n}\n.live-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.live-container.original {\n  border-color: #f3a59d;\n}\n.live-container.modified {\n  border-color: #83d5a8;\n}\n.source-container {\n  border: 1px solid #dee2e6;\n  border-radius: 4px;\n  padding: 1rem;\n  overflow-y: scroll;\n  height: 75vh;\n  position: relative;\n}\n.source-container.original {\n  border-color: #f3a59d;\n}\n.source-container.modified {\n  border-color: #83d5a8;\n}\n.slide-content {\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.change-text {\n  margin: 0;\n  text-align: right;\n  padding: 10px;\n}\n.custom-prev,\n.custom-next {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.5);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n  border-radius: 5px;\n  font-size: 14px;\n}\n.custom-prev {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.custom-next {\n  border-left: none;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.custom-prev:hover,\n.custom-next:hover {\n  background: rgba(255, 255, 255, 0.5);\n}\n.loading-spinner {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  font-size: 1.2rem;\n  color: #888;\n}\n.group-legend {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  justify-content: flex-end;\n}\n.legend-item {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.legend-box {\n  width: 16px;\n  height: 16px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.loading-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 10;\n  color: white;\n}\n.loading-spinner {\n  border: 4px solid rgba(255, 255, 255, 0.3);\n  border-top: 4px solid white;\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  animation: spin 1s linear infinite;\n  margin-right: 10px;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n.legend-box-modal {\n  display: inline-block;\n  width: 16px;\n  height: 16px;\n  margin-right: 5px;\n  vertical-align: middle;\n}\n.legend-red-modal {\n  background-color: rgb(243, 165, 157);\n}\n.legend-green-modal {\n  background-color: rgb(131, 213, 168);\n}\n.legend-yellow-modal {\n  background-color: rgb(255, 238, 140);\n}\n.legend-blue-modal {\n  background-color: transparent;\n  border: 2px solid rgb(111, 159, 255);\n}\n.legend-dashed-popup-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(102, 102, 102);\n}\n.legend-dashed-dynamic-modal {\n  background-color: transparent;\n  border: 2px dashed rgb(251, 192, 47);\n}\n.no-bullet-points {\n  list-style: none;\n}\n:host ::ng-deep .p-tabs .p-tablist .p-tab .tab-badge,\n.problems-badge {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 1.25rem;\n  height: 1.25rem;\n  padding: 0 0.35rem;\n  margin-left: 0.5rem;\n  border-radius: 9999px;\n  background: #ef4444 !important;\n  color: #fff !important;\n  font-weight: 700;\n  font-size: 0.75rem;\n  line-height: 1;\n  vertical-align: middle;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);\n}\n:host ::ng-deep .tab-badge {\n  transform: translateY(-1px);\n}\n:host ::ng-deep .dark .tab-badge {\n  background: #f43f5e;\n}\n/*# sourceMappingURL=page-assistant.component.css.map */\n'] }]
   }], () => [], { liveContainer: [{
@@ -37651,4 +37694,4 @@ ${base}`;
 export {
   PageAssistantCompareComponent
 };
-//# sourceMappingURL=chunk-B2WG4KHB.js.map
+//# sourceMappingURL=chunk-DJPKTPTK.js.map
