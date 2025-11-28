@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "sources": ["angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/data.component.ts"],
+  "sources": ["angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;D:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/data.component.ts"],
   "sourcesContent": ["\n    :host {\n      display: block;\n    }\n  "],
   "mappings": ";AACI;AACE,WAAS;AACX;",
   "names": []

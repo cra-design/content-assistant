@@ -20557,6 +20557,17 @@ html.dark-mode .secondary-outline.p-button,
 html.dark-mode .secondary-outline {
   border-color: var(--p-zinc-600) !important;
 }
+.center-chip {
+  display: flex;
+  justify-content: center;
+}
+.p-chip.text-white .p-chip-icon {
+  color: white;
+}
+.p-chip.text-black,
+.p-chip.text-black .p-chip-icon {
+  color: black;
+}
 
 /* node_modules/diff2html/bundles/css/diff2html.min.css */
 :host,

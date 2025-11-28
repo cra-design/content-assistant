@@ -21021,8 +21021,8 @@ var RouterLinkActive = class _RouterLinkActive {
     });
   }
   set routerLinkActive(data) {
-    const classes34 = Array.isArray(data) ? data : data.split(" ");
-    this.classes = classes34.filter((c) => !!c);
+    const classes37 = Array.isArray(data) ? data : data.split(" ");
+    this.classes = classes37.filter((c) => !!c);
   }
   /** @docs-private */
   ngOnChanges(changes) {
@@ -29753,10 +29753,10 @@ function getRule(selector, properties) {
 }
 var $dt = (tokenPath) => {
   var _a;
-  const theme35 = config_default.getTheme();
-  const variable = dtwt(theme35, tokenPath, void 0, "variable");
+  const theme38 = config_default.getTheme();
+  const variable = dtwt(theme38, tokenPath, void 0, "variable");
   const name = (_a = variable == null ? void 0 : variable.match(/--[\w-]+/g)) == null ? void 0 : _a[0];
-  const value = dtwt(theme35, tokenPath, void 0, "value");
+  const value = dtwt(theme38, tokenPath, void 0, "value");
   return {
     name,
     variable,
@@ -29766,7 +29766,7 @@ var $dt = (tokenPath) => {
 var dt = (...args) => {
   return dtwt(config_default.getTheme(), ...args);
 };
-var dtwt = (theme35 = {}, tokenPath, fallback, type) => {
+var dtwt = (theme38 = {}, tokenPath, fallback, type) => {
   if (tokenPath) {
     const {
       variable: VARIABLE,
@@ -29775,7 +29775,7 @@ var dtwt = (theme35 = {}, tokenPath, fallback, type) => {
     const {
       prefix,
       transform
-    } = (theme35 == null ? void 0 : theme35.options) || OPTIONS || {};
+    } = (theme38 == null ? void 0 : theme38.options) || OPTIONS || {};
     const regex = /{([^}]*)}/g;
     const token = matchRegex(tokenPath, regex) ? tokenPath : `{${tokenPath}}`;
     const isStrictTransform = type === "value" || isEmpty(type) && transform === "strict";
@@ -29783,7 +29783,7 @@ var dtwt = (theme35 = {}, tokenPath, fallback, type) => {
   }
   return "";
 };
-function toVariables_default(theme35, options = {}) {
+function toVariables_default(theme38, options = {}) {
   const VARIABLE = config_default.defaults.variable;
   const {
     prefix = VARIABLE.prefix,
@@ -29814,7 +29814,7 @@ function toVariables_default(theme35, options = {}) {
   const {
     variables,
     tokens
-  } = _toVariables(theme35, prefix);
+  } = _toVariables(theme38, prefix);
   return {
     value: variables,
     tokens,
@@ -29883,14 +29883,14 @@ var themeUtils_default = {
       });
     }
   },
-  _toVariables(theme35, options) {
-    return toVariables_default(theme35, {
+  _toVariables(theme38, options) {
+    return toVariables_default(theme38, {
       prefix: options == null ? void 0 : options.prefix
     });
   },
   getCommon({
     name = "",
-    theme: theme35 = {},
+    theme: theme38 = {},
     params,
     set,
     defaults
@@ -29899,7 +29899,7 @@ var themeUtils_default = {
     const {
       preset,
       options
-    } = theme35;
+    } = theme38;
     let primitive_css, primitive_tokens, semantic_css, semantic_tokens, global_css, global_tokens, style2;
     if (isNotEmpty(preset) && options.transform !== "strict") {
       const {
@@ -30032,7 +30032,7 @@ var themeUtils_default = {
   },
   getPresetC({
     name = "",
-    theme: theme35 = {},
+    theme: theme38 = {},
     params,
     set,
     defaults
@@ -30041,7 +30041,7 @@ var themeUtils_default = {
     const {
       preset,
       options
-    } = theme35;
+    } = theme38;
     const cPreset = (_a = preset == null ? void 0 : preset.components) == null ? void 0 : _a[name];
     return this.getPreset({
       name,
@@ -30054,7 +30054,7 @@ var themeUtils_default = {
   },
   getPresetD({
     name = "",
-    theme: theme35 = {},
+    theme: theme38 = {},
     params,
     set,
     defaults
@@ -30064,7 +30064,7 @@ var themeUtils_default = {
     const {
       preset,
       options
-    } = theme35;
+    } = theme38;
     const dPreset = (_a = preset == null ? void 0 : preset.directives) == null ? void 0 : _a[dName];
     return this.getPreset({
       name: dName,
@@ -30094,7 +30094,7 @@ var themeUtils_default = {
   },
   getCommonStyleSheet({
     name = "",
-    theme: theme35 = {},
+    theme: theme38 = {},
     params,
     props = {},
     set,
@@ -30102,7 +30102,7 @@ var themeUtils_default = {
   }) {
     const common = this.getCommon({
       name,
-      theme: theme35,
+      theme: theme38,
       params,
       set,
       defaults
@@ -30119,7 +30119,7 @@ var themeUtils_default = {
   },
   getStyleSheet({
     name = "",
-    theme: theme35 = {},
+    theme: theme38 = {},
     params,
     props = {},
     set,
@@ -30128,7 +30128,7 @@ var themeUtils_default = {
     var _a;
     const options = {
       name,
-      theme: theme35,
+      theme: theme38,
       params,
       set,
       defaults
@@ -30266,11 +30266,11 @@ var config_default = {
   _tokens: {},
   update(newValues = {}) {
     const {
-      theme: theme35
+      theme: theme38
     } = newValues;
-    if (theme35) {
-      this._theme = __spreadProps2(__spreadValues3({}, theme35), {
-        options: __spreadValues3(__spreadValues3({}, this.defaults.options), theme35.options)
+    if (theme38) {
+      this._theme = __spreadProps2(__spreadValues3({}, theme38), {
+        options: __spreadValues3(__spreadValues3({}, this.defaults.options), theme38.options)
       });
       this._tokens = themeUtils_default.createTokens(this.preset, this.defaults);
       this.clearLoadedStyleNames();
@@ -30871,10 +30871,10 @@ var ThemeProvider = class _ThemeProvider {
   }
   setThemeConfig(config) {
     const {
-      theme: theme35,
+      theme: theme38,
       csp
     } = config || {};
-    if (theme35) this.theme.set(theme35);
+    if (theme38) this.theme.set(theme38);
     if (csp) this.csp.set(csp);
   }
   static \u0275fac = function ThemeProvider_Factory(__ngFactoryType__) {
@@ -31057,7 +31057,7 @@ var PrimeNG = class _PrimeNG extends ThemeProvider {
       ripple,
       inputStyle,
       inputVariant,
-      theme: theme35,
+      theme: theme38,
       overlayOptions,
       translation,
       filterMatchModeOptions
@@ -31069,8 +31069,8 @@ var PrimeNG = class _PrimeNG extends ThemeProvider {
     if (overlayOptions) this.overlayOptions = overlayOptions;
     if (translation) this.setTranslation(translation);
     if (filterMatchModeOptions) this.filterMatchModeOptions = filterMatchModeOptions;
-    if (theme35) this.setThemeConfig({
-      theme: theme35,
+    if (theme38) this.setThemeConfig({
+      theme: theme38,
       csp
     });
   }
@@ -31277,13 +31277,13 @@ var BaseComponent = class _BaseComponent {
     this.themeChangeListeners.push(callback);
   }
   cx(arg, rest) {
-    const classes34 = this.parent ? this.parent.componentStyle?.classes?.[arg] : this.componentStyle?.classes?.[arg];
-    if (typeof classes34 === "function") {
-      return classes34({
+    const classes37 = this.parent ? this.parent.componentStyle?.classes?.[arg] : this.componentStyle?.classes?.[arg];
+    if (typeof classes37 === "function") {
+      return classes37({
         instance: this
       });
     }
-    return typeof classes34 === "string" ? classes34 : arg;
+    return typeof classes37 === "string" ? classes37 : arg;
   }
   sx(arg) {
     const styles = this.componentStyle?.inlineStyles?.[arg];
@@ -33189,27 +33189,27 @@ var Badge = class _Badge extends BaseComponent {
    * @returns An object representing the CSS classes to be applied to the badge container.
    */
   containerClass = computed(() => {
-    let classes34 = "p-badge p-component";
+    let classes37 = "p-badge p-component";
     if (isNotEmpty(this.value()) && String(this.value()).length === 1) {
-      classes34 += " p-badge-circle";
+      classes37 += " p-badge-circle";
     }
     if (this.badgeSize() === "large") {
-      classes34 += " p-badge-lg";
+      classes37 += " p-badge-lg";
     } else if (this.badgeSize() === "xlarge") {
-      classes34 += " p-badge-xl";
+      classes37 += " p-badge-xl";
     } else if (this.badgeSize() === "small") {
-      classes34 += " p-badge-sm";
+      classes37 += " p-badge-sm";
     }
     if (isEmpty(this.value())) {
-      classes34 += " p-badge-dot";
+      classes37 += " p-badge-dot";
     }
     if (this.styleClass()) {
-      classes34 += ` ${this.styleClass()}`;
+      classes37 += ` ${this.styleClass()}`;
     }
     if (this.severity()) {
-      classes34 += ` p-badge-${this.severity()}`;
+      classes37 += ` p-badge-${this.severity()}`;
     }
-    return classes34;
+    return classes37;
   });
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275Badge_BaseFactory;
@@ -35154,6 +35154,142 @@ var UploadIcon = class _UploadIcon extends BaseIcon {
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     d="M6.58942 9.82197C6.70165 9.93405 6.85328 9.99793 7.012 10C7.17071 9.99793 7.32234 9.93405 7.43458 9.82197C7.54681 9.7099 7.61079 9.55849 7.61286 9.4V2.04798L9.79204 4.22402C9.84752 4.28011 9.91365 4.32457 9.98657 4.35479C10.0595 4.38502 10.1377 4.40039 10.2167 4.40002C10.2956 4.40039 10.3738 4.38502 10.4467 4.35479C10.5197 4.32457 10.5858 4.28011 10.6413 4.22402C10.7538 4.11152 10.817 3.95902 10.817 3.80002C10.817 3.64102 10.7538 3.48852 10.6413 3.37602L7.45127 0.190618C7.44656 0.185584 7.44176 0.180622 7.43687 0.175736C7.32419 0.063214 7.17136 0 7.012 0C6.85264 0 6.69981 0.063214 6.58712 0.175736C6.58181 0.181045 6.5766 0.186443 6.5715 0.191927L3.38282 3.37602C3.27669 3.48976 3.2189 3.6402 3.22165 3.79564C3.2244 3.95108 3.28746 4.09939 3.39755 4.20932C3.50764 4.31925 3.65616 4.38222 3.81182 4.38496C3.96749 4.3877 4.11814 4.33001 4.23204 4.22402L6.41113 2.04807V9.4C6.41321 9.55849 6.47718 9.7099 6.58942 9.82197ZM11.9952 14H2.02883C1.751 13.9887 1.47813 13.9228 1.22584 13.8061C0.973545 13.6894 0.746779 13.5241 0.558517 13.3197C0.370254 13.1154 0.22419 12.876 0.128681 12.6152C0.0331723 12.3545 -0.00990605 12.0775 0.0019109 11.8V9.40005C0.0019109 9.24092 0.065216 9.08831 0.1779 8.97579C0.290584 8.86326 0.443416 8.80005 0.602775 8.80005C0.762134 8.80005 0.914966 8.86326 1.02765 8.97579C1.14033 9.08831 1.20364 9.24092 1.20364 9.40005V11.8C1.18295 12.0376 1.25463 12.274 1.40379 12.4602C1.55296 12.6463 1.76817 12.7681 2.00479 12.8H11.9952C12.2318 12.7681 12.447 12.6463 12.5962 12.4602C12.7453 12.274 12.817 12.0376 12.7963 11.8V9.40005C12.7963 9.24092 12.8596 9.08831 12.9723 8.97579C13.085 8.86326 13.2378 8.80005 13.3972 8.80005C13.5565 8.80005 13.7094 8.86326 13.8221 8.97579C13.9347 9.08831 13.998 9.24092 13.998 9.40005V11.8C14.022 12.3563 13.8251 12.8996 13.45 13.3116C13.0749 13.7236 12.552 13.971 11.9952 14Z"
+                    fill="currentColor"
+                />
+            </g>
+            <defs>
+                <clipPath [id]="pathId">
+                    <rect width="14" height="14" fill="white" />
+                </clipPath>
+            </defs>
+        </svg>
+    `
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-icons-windowmaximize.mjs
+var WindowMaximizeIcon = class _WindowMaximizeIcon extends BaseIcon {
+  pathId;
+  ngOnInit() {
+    this.pathId = "url(#" + uuid() + ")";
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275WindowMaximizeIcon_BaseFactory;
+    return function WindowMaximizeIcon_Factory(__ngFactoryType__) {
+      return (\u0275WindowMaximizeIcon_BaseFactory || (\u0275WindowMaximizeIcon_BaseFactory = \u0275\u0275getInheritedFactory(_WindowMaximizeIcon)))(__ngFactoryType__ || _WindowMaximizeIcon);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _WindowMaximizeIcon,
+    selectors: [["WindowMaximizeIcon"]],
+    features: [\u0275\u0275InheritDefinitionFeature],
+    decls: 6,
+    vars: 7,
+    consts: [["width", "14", "height", "14", "viewBox", "0 0 14 14", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M7 14H11.8C12.3835 14 12.9431 13.7682 13.3556 13.3556C13.7682 12.9431 14 12.3835 14 11.8V2.2C14 1.61652 13.7682 1.05694 13.3556 0.644365C12.9431 0.231785 12.3835 0 11.8 0H2.2C1.61652 0 1.05694 0.231785 0.644365 0.644365C0.231785 1.05694 0 1.61652 0 2.2V7C0 7.15913 0.063214 7.31174 0.175736 7.42426C0.288258 7.53679 0.44087 7.6 0.6 7.6C0.75913 7.6 0.911742 7.53679 1.02426 7.42426C1.13679 7.31174 1.2 7.15913 1.2 7V2.2C1.2 1.93478 1.30536 1.68043 1.49289 1.49289C1.68043 1.30536 1.93478 1.2 2.2 1.2H11.8C12.0652 1.2 12.3196 1.30536 12.5071 1.49289C12.6946 1.68043 12.8 1.93478 12.8 2.2V11.8C12.8 12.0652 12.6946 12.3196 12.5071 12.5071C12.3196 12.6946 12.0652 12.8 11.8 12.8H7C6.84087 12.8 6.68826 12.8632 6.57574 12.9757C6.46321 13.0883 6.4 13.2409 6.4 13.4C6.4 13.5591 6.46321 13.7117 6.57574 13.8243C6.68826 13.9368 6.84087 14 7 14ZM9.77805 7.42192C9.89013 7.534 10.0415 7.59788 10.2 7.59995C10.3585 7.59788 10.5099 7.534 10.622 7.42192C10.7341 7.30985 10.798 7.15844 10.8 6.99995V3.94242C10.8066 3.90505 10.8096 3.86689 10.8089 3.82843C10.8079 3.77159 10.7988 3.7157 10.7824 3.6623C10.756 3.55552 10.701 3.45698 10.622 3.37798C10.5099 3.2659 10.3585 3.20202 10.2 3.19995H7.00002C6.84089 3.19995 6.68828 3.26317 6.57576 3.37569C6.46324 3.48821 6.40002 3.64082 6.40002 3.79995C6.40002 3.95908 6.46324 4.11169 6.57576 4.22422C6.68828 4.33674 6.84089 4.39995 7.00002 4.39995H8.80006L6.19997 7.00005C6.10158 7.11005 6.04718 7.25246 6.04718 7.40005C6.04718 7.54763 6.10158 7.69004 6.19997 7.80005C6.30202 7.91645 6.44561 7.98824 6.59997 8.00005C6.75432 7.98824 6.89791 7.91645 6.99997 7.80005L9.60002 5.26841V6.99995C9.6021 7.15844 9.66598 7.30985 9.77805 7.42192ZM1.4 14H3.8C4.17066 13.9979 4.52553 13.8498 4.78763 13.5877C5.04973 13.3256 5.1979 12.9707 5.2 12.6V10.2C5.1979 9.82939 5.04973 9.47452 4.78763 9.21242C4.52553 8.95032 4.17066 8.80215 3.8 8.80005H1.4C1.02934 8.80215 0.674468 8.95032 0.412371 9.21242C0.150274 9.47452 0.00210008 9.82939 0 10.2V12.6C0.00210008 12.9707 0.150274 13.3256 0.412371 13.5877C0.674468 13.8498 1.02934 13.9979 1.4 14ZM1.25858 10.0586C1.29609 10.0211 1.34696 10 1.4 10H3.8C3.85304 10 3.90391 10.0211 3.94142 10.0586C3.97893 10.0961 4 10.147 4 10.2V12.6C4 12.6531 3.97893 12.704 3.94142 12.7415C3.90391 12.779 3.85304 12.8 3.8 12.8H1.4C1.34696 12.8 1.29609 12.779 1.25858 12.7415C1.22107 12.704 1.2 12.6531 1.2 12.6V10.2C1.2 10.147 1.22107 10.0961 1.25858 10.0586Z", "fill", "currentColor"], [3, "id"], ["width", "14", "height", "14", "fill", "white"]],
+    template: function WindowMaximizeIcon_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(0, "svg", 0)(1, "g");
+        \u0275\u0275element(2, "path", 1);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "defs")(4, "clipPath", 2);
+        \u0275\u0275element(5, "rect", 3);
+        \u0275\u0275elementEnd()()();
+      }
+      if (rf & 2) {
+        \u0275\u0275classMap(ctx.getClassNames());
+        \u0275\u0275attribute("aria-label", ctx.ariaLabel)("aria-hidden", ctx.ariaHidden)("role", ctx.role);
+        \u0275\u0275advance();
+        \u0275\u0275attribute("clip-path", ctx.pathId);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("id", ctx.pathId);
+      }
+    },
+    encapsulation: 2
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(WindowMaximizeIcon, [{
+    type: Component,
+    args: [{
+      selector: "WindowMaximizeIcon",
+      standalone: true,
+      template: `
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" [attr.aria-label]="ariaLabel" [attr.aria-hidden]="ariaHidden" [attr.role]="role" [class]="getClassNames()">
+            <g [attr.clip-path]="pathId">
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M7 14H11.8C12.3835 14 12.9431 13.7682 13.3556 13.3556C13.7682 12.9431 14 12.3835 14 11.8V2.2C14 1.61652 13.7682 1.05694 13.3556 0.644365C12.9431 0.231785 12.3835 0 11.8 0H2.2C1.61652 0 1.05694 0.231785 0.644365 0.644365C0.231785 1.05694 0 1.61652 0 2.2V7C0 7.15913 0.063214 7.31174 0.175736 7.42426C0.288258 7.53679 0.44087 7.6 0.6 7.6C0.75913 7.6 0.911742 7.53679 1.02426 7.42426C1.13679 7.31174 1.2 7.15913 1.2 7V2.2C1.2 1.93478 1.30536 1.68043 1.49289 1.49289C1.68043 1.30536 1.93478 1.2 2.2 1.2H11.8C12.0652 1.2 12.3196 1.30536 12.5071 1.49289C12.6946 1.68043 12.8 1.93478 12.8 2.2V11.8C12.8 12.0652 12.6946 12.3196 12.5071 12.5071C12.3196 12.6946 12.0652 12.8 11.8 12.8H7C6.84087 12.8 6.68826 12.8632 6.57574 12.9757C6.46321 13.0883 6.4 13.2409 6.4 13.4C6.4 13.5591 6.46321 13.7117 6.57574 13.8243C6.68826 13.9368 6.84087 14 7 14ZM9.77805 7.42192C9.89013 7.534 10.0415 7.59788 10.2 7.59995C10.3585 7.59788 10.5099 7.534 10.622 7.42192C10.7341 7.30985 10.798 7.15844 10.8 6.99995V3.94242C10.8066 3.90505 10.8096 3.86689 10.8089 3.82843C10.8079 3.77159 10.7988 3.7157 10.7824 3.6623C10.756 3.55552 10.701 3.45698 10.622 3.37798C10.5099 3.2659 10.3585 3.20202 10.2 3.19995H7.00002C6.84089 3.19995 6.68828 3.26317 6.57576 3.37569C6.46324 3.48821 6.40002 3.64082 6.40002 3.79995C6.40002 3.95908 6.46324 4.11169 6.57576 4.22422C6.68828 4.33674 6.84089 4.39995 7.00002 4.39995H8.80006L6.19997 7.00005C6.10158 7.11005 6.04718 7.25246 6.04718 7.40005C6.04718 7.54763 6.10158 7.69004 6.19997 7.80005C6.30202 7.91645 6.44561 7.98824 6.59997 8.00005C6.75432 7.98824 6.89791 7.91645 6.99997 7.80005L9.60002 5.26841V6.99995C9.6021 7.15844 9.66598 7.30985 9.77805 7.42192ZM1.4 14H3.8C4.17066 13.9979 4.52553 13.8498 4.78763 13.5877C5.04973 13.3256 5.1979 12.9707 5.2 12.6V10.2C5.1979 9.82939 5.04973 9.47452 4.78763 9.21242C4.52553 8.95032 4.17066 8.80215 3.8 8.80005H1.4C1.02934 8.80215 0.674468 8.95032 0.412371 9.21242C0.150274 9.47452 0.00210008 9.82939 0 10.2V12.6C0.00210008 12.9707 0.150274 13.3256 0.412371 13.5877C0.674468 13.8498 1.02934 13.9979 1.4 14ZM1.25858 10.0586C1.29609 10.0211 1.34696 10 1.4 10H3.8C3.85304 10 3.90391 10.0211 3.94142 10.0586C3.97893 10.0961 4 10.147 4 10.2V12.6C4 12.6531 3.97893 12.704 3.94142 12.7415C3.90391 12.779 3.85304 12.8 3.8 12.8H1.4C1.34696 12.8 1.29609 12.779 1.25858 12.7415C1.22107 12.704 1.2 12.6531 1.2 12.6V10.2C1.2 10.147 1.22107 10.0961 1.25858 10.0586Z"
+                    fill="currentColor"
+                />
+            </g>
+            <defs>
+                <clipPath [id]="pathId">
+                    <rect width="14" height="14" fill="white" />
+                </clipPath>
+            </defs>
+        </svg>
+    `
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-icons-windowminimize.mjs
+var WindowMinimizeIcon = class _WindowMinimizeIcon extends BaseIcon {
+  pathId;
+  ngOnInit() {
+    this.pathId = "url(#" + uuid() + ")";
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275WindowMinimizeIcon_BaseFactory;
+    return function WindowMinimizeIcon_Factory(__ngFactoryType__) {
+      return (\u0275WindowMinimizeIcon_BaseFactory || (\u0275WindowMinimizeIcon_BaseFactory = \u0275\u0275getInheritedFactory(_WindowMinimizeIcon)))(__ngFactoryType__ || _WindowMinimizeIcon);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _WindowMinimizeIcon,
+    selectors: [["WindowMinimizeIcon"]],
+    features: [\u0275\u0275InheritDefinitionFeature],
+    decls: 6,
+    vars: 7,
+    consts: [["width", "14", "height", "14", "viewBox", "0 0 14 14", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M11.8 0H2.2C1.61652 0 1.05694 0.231785 0.644365 0.644365C0.231785 1.05694 0 1.61652 0 2.2V7C0 7.15913 0.063214 7.31174 0.175736 7.42426C0.288258 7.53679 0.44087 7.6 0.6 7.6C0.75913 7.6 0.911742 7.53679 1.02426 7.42426C1.13679 7.31174 1.2 7.15913 1.2 7V2.2C1.2 1.93478 1.30536 1.68043 1.49289 1.49289C1.68043 1.30536 1.93478 1.2 2.2 1.2H11.8C12.0652 1.2 12.3196 1.30536 12.5071 1.49289C12.6946 1.68043 12.8 1.93478 12.8 2.2V11.8C12.8 12.0652 12.6946 12.3196 12.5071 12.5071C12.3196 12.6946 12.0652 12.8 11.8 12.8H7C6.84087 12.8 6.68826 12.8632 6.57574 12.9757C6.46321 13.0883 6.4 13.2409 6.4 13.4C6.4 13.5591 6.46321 13.7117 6.57574 13.8243C6.68826 13.9368 6.84087 14 7 14H11.8C12.3835 14 12.9431 13.7682 13.3556 13.3556C13.7682 12.9431 14 12.3835 14 11.8V2.2C14 1.61652 13.7682 1.05694 13.3556 0.644365C12.9431 0.231785 12.3835 0 11.8 0ZM6.368 7.952C6.44137 7.98326 6.52025 7.99958 6.6 8H9.8C9.95913 8 10.1117 7.93678 10.2243 7.82426C10.3368 7.71174 10.4 7.55913 10.4 7.4C10.4 7.24087 10.3368 7.08826 10.2243 6.97574C10.1117 6.86321 9.95913 6.8 9.8 6.8H8.048L10.624 4.224C10.73 4.11026 10.7877 3.95982 10.7849 3.80438C10.7822 3.64894 10.7192 3.50063 10.6093 3.3907C10.4994 3.28077 10.3511 3.2178 10.1956 3.21506C10.0402 3.21232 9.88974 3.27002 9.776 3.376L7.2 5.952V4.2C7.2 4.04087 7.13679 3.88826 7.02426 3.77574C6.91174 3.66321 6.75913 3.6 6.6 3.6C6.44087 3.6 6.28826 3.66321 6.17574 3.77574C6.06321 3.88826 6 4.04087 6 4.2V7.4C6.00042 7.47975 6.01674 7.55862 6.048 7.632C6.07656 7.70442 6.11971 7.7702 6.17475 7.82524C6.2298 7.88029 6.29558 7.92344 6.368 7.952ZM1.4 8.80005H3.8C4.17066 8.80215 4.52553 8.95032 4.78763 9.21242C5.04973 9.47452 5.1979 9.82939 5.2 10.2V12.6C5.1979 12.9707 5.04973 13.3256 4.78763 13.5877C4.52553 13.8498 4.17066 13.9979 3.8 14H1.4C1.02934 13.9979 0.674468 13.8498 0.412371 13.5877C0.150274 13.3256 0.00210008 12.9707 0 12.6V10.2C0.00210008 9.82939 0.150274 9.47452 0.412371 9.21242C0.674468 8.95032 1.02934 8.80215 1.4 8.80005ZM3.94142 12.7415C3.97893 12.704 4 12.6531 4 12.6V10.2C4 10.147 3.97893 10.0961 3.94142 10.0586C3.90391 10.0211 3.85304 10 3.8 10H1.4C1.34696 10 1.29609 10.0211 1.25858 10.0586C1.22107 10.0961 1.2 10.147 1.2 10.2V12.6C1.2 12.6531 1.22107 12.704 1.25858 12.7415C1.29609 12.779 1.34696 12.8 1.4 12.8H3.8C3.85304 12.8 3.90391 12.779 3.94142 12.7415Z", "fill", "currentColor"], [3, "id"], ["width", "14", "height", "14", "fill", "white"]],
+    template: function WindowMinimizeIcon_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(0, "svg", 0)(1, "g");
+        \u0275\u0275element(2, "path", 1);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "defs")(4, "clipPath", 2);
+        \u0275\u0275element(5, "rect", 3);
+        \u0275\u0275elementEnd()()();
+      }
+      if (rf & 2) {
+        \u0275\u0275classMap(ctx.getClassNames());
+        \u0275\u0275attribute("aria-label", ctx.ariaLabel)("aria-hidden", ctx.ariaHidden)("role", ctx.role);
+        \u0275\u0275advance();
+        \u0275\u0275attribute("clip-path", ctx.pathId);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("id", ctx.pathId);
+      }
+    },
+    encapsulation: 2
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(WindowMinimizeIcon, [{
+    type: Component,
+    args: [{
+      selector: "WindowMinimizeIcon",
+      standalone: true,
+      template: `
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" [attr.aria-label]="ariaLabel" [attr.aria-hidden]="ariaHidden" [attr.role]="role" [class]="getClassNames()">
+            <g [attr.clip-path]="pathId">
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M11.8 0H2.2C1.61652 0 1.05694 0.231785 0.644365 0.644365C0.231785 1.05694 0 1.61652 0 2.2V7C0 7.15913 0.063214 7.31174 0.175736 7.42426C0.288258 7.53679 0.44087 7.6 0.6 7.6C0.75913 7.6 0.911742 7.53679 1.02426 7.42426C1.13679 7.31174 1.2 7.15913 1.2 7V2.2C1.2 1.93478 1.30536 1.68043 1.49289 1.49289C1.68043 1.30536 1.93478 1.2 2.2 1.2H11.8C12.0652 1.2 12.3196 1.30536 12.5071 1.49289C12.6946 1.68043 12.8 1.93478 12.8 2.2V11.8C12.8 12.0652 12.6946 12.3196 12.5071 12.5071C12.3196 12.6946 12.0652 12.8 11.8 12.8H7C6.84087 12.8 6.68826 12.8632 6.57574 12.9757C6.46321 13.0883 6.4 13.2409 6.4 13.4C6.4 13.5591 6.46321 13.7117 6.57574 13.8243C6.68826 13.9368 6.84087 14 7 14H11.8C12.3835 14 12.9431 13.7682 13.3556 13.3556C13.7682 12.9431 14 12.3835 14 11.8V2.2C14 1.61652 13.7682 1.05694 13.3556 0.644365C12.9431 0.231785 12.3835 0 11.8 0ZM6.368 7.952C6.44137 7.98326 6.52025 7.99958 6.6 8H9.8C9.95913 8 10.1117 7.93678 10.2243 7.82426C10.3368 7.71174 10.4 7.55913 10.4 7.4C10.4 7.24087 10.3368 7.08826 10.2243 6.97574C10.1117 6.86321 9.95913 6.8 9.8 6.8H8.048L10.624 4.224C10.73 4.11026 10.7877 3.95982 10.7849 3.80438C10.7822 3.64894 10.7192 3.50063 10.6093 3.3907C10.4994 3.28077 10.3511 3.2178 10.1956 3.21506C10.0402 3.21232 9.88974 3.27002 9.776 3.376L7.2 5.952V4.2C7.2 4.04087 7.13679 3.88826 7.02426 3.77574C6.91174 3.66321 6.75913 3.6 6.6 3.6C6.44087 3.6 6.28826 3.66321 6.17574 3.77574C6.06321 3.88826 6 4.04087 6 4.2V7.4C6.00042 7.47975 6.01674 7.55862 6.048 7.632C6.07656 7.70442 6.11971 7.7702 6.17475 7.82524C6.2298 7.88029 6.29558 7.92344 6.368 7.952ZM1.4 8.80005H3.8C4.17066 8.80215 4.52553 8.95032 4.78763 9.21242C5.04973 9.47452 5.1979 9.82939 5.2 10.2V12.6C5.1979 12.9707 5.04973 13.3256 4.78763 13.5877C4.52553 13.8498 4.17066 13.9979 3.8 14H1.4C1.02934 13.9979 0.674468 13.8498 0.412371 13.5877C0.150274 13.3256 0.00210008 12.9707 0 12.6V10.2C0.00210008 9.82939 0.150274 9.47452 0.412371 9.21242C0.674468 8.95032 1.02934 8.80215 1.4 8.80005ZM3.94142 12.7415C3.97893 12.704 4 12.6531 4 12.6V10.2C4 10.147 3.97893 10.0961 3.94142 10.0586C3.90391 10.0211 3.85304 10 3.8 10H1.4C1.34696 10 1.29609 10.0211 1.25858 10.0586C1.22107 10.0961 1.2 10.147 1.2 10.2V12.6C1.2 12.6531 1.22107 12.704 1.25858 12.7415C1.29609 12.779 1.34696 12.8 1.4 12.8H3.8C3.85304 12.8 3.90391 12.779 3.94142 12.7415Z"
                     fill="currentColor"
                 />
             </g>
@@ -43444,13 +43580,2942 @@ var CardModule = class _CardModule {
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-togglebutton.mjs
-var _c08 = ["icon"];
-var _c16 = ["content"];
+// node_modules/primeng/fesm2022/primeng-tieredmenu.mjs
+var _c08 = ["sublist"];
+var _c16 = (a0, a1) => ({
+  "p-tieredmenu-submenu": a0,
+  "p-tieredmenu-root-list": a1
+});
 var _c25 = (a0) => ({
+  "p-tieredmenu-item-link": true,
+  "p-disabled": a0
+});
+var _c35 = () => ({
+  exact: false
+});
+var _c45 = (a0, a1) => ({
+  $implicit: a0,
+  hasSubmenu: a1
+});
+var _c54 = (a0) => ({
+  display: a0
+});
+function TieredMenuSub_ng_template_2_li_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "li", 7);
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext().$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275styleMap(ctx_r2.getItemProp(processedItem_r2, "style"));
+    \u0275\u0275property("ngClass", ctx_r2.getSeparatorItemClass(processedItem_r2));
+    \u0275\u0275attribute("id", ctx_r2.getItemId(processedItem_r2))("data-pc-section", "separator");
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 18);
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngClass", ctx_r2.getItemProp(processedItem_r2, "icon"))("ngStyle", ctx_r2.getItemProp(processedItem_r2, "iconStyle"));
+    \u0275\u0275attribute("data-pc-section", "icon")("tabindex", -1);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275attribute("data-pc-section", "label");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r2.getItemLabel(processedItem_r2), " ");
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 20);
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("innerHTML", ctx_r2.getItemLabel(processedItem_r2), \u0275\u0275sanitizeHtml);
+    \u0275\u0275attribute("data-pc-section", "label");
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_span_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngClass", ctx_r2.getItemProp(processedItem_r2, "badgeStyleClass"));
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r2.getItemProp(processedItem_r2, "badge"));
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_AngleRightIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "AngleRightIcon", 24);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("ngClass", "p-tieredmenu-submenu-icon");
+    \u0275\u0275attribute("data-pc-section", "submenuicon")("aria-hidden", true);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_2_ng_template_0_Template(rf, ctx) {
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_2_ng_template_0_Template, 0, 0, "ng-template", 25);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("data-pc-section", "submenuicon")("aria-hidden", true);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_AngleRightIcon_1_Template, 1, 3, "AngleRightIcon", 22)(2, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_2_Template, 1, 2, null, 23);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(5);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.tieredMenu.submenuIconTemplate && !ctx_r2.tieredMenu._submenuIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tieredMenu.submenuIconTemplate || ctx_r2.tieredMenu._submenuIconTemplate);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "a", 14);
+    \u0275\u0275template(1, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_span_1_Template, 1, 4, "span", 15)(2, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_span_2_Template, 2, 2, "span", 16)(3, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_template_3_Template, 1, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(5, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_span_5_Template, 2, 2, "span", 17)(6, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_ng_container_6_Template, 3, 2, "ng-container", 10);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const htmlLabel_r5 = \u0275\u0275reference(4);
+    const processedItem_r2 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("target", ctx_r2.getItemProp(processedItem_r2, "target"))("ngClass", \u0275\u0275pureFunction1(11, _c25, ctx_r2.getItemProp(processedItem_r2, "disabled")));
+    \u0275\u0275attribute("href", ctx_r2.getItemProp(processedItem_r2, "url"), \u0275\u0275sanitizeUrl)("data-automationid", ctx_r2.getItemProp(processedItem_r2, "automationId"))("data-pc-section", "action")("tabindex", -1);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r2, "icon"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r2, "escape"))("ngIfElse", htmlLabel_r5);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r2, "badge"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.isItemGroup(processedItem_r2));
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 18);
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngClass", ctx_r2.getItemProp(processedItem_r2, "icon"))("ngStyle", ctx_r2.getItemProp(processedItem_r2, "iconStyle"));
+    \u0275\u0275attribute("data-pc-section", "icon")("aria-hidden", true)("tabindex", -1);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275attribute("data-pc-section", "label");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r2.getItemLabel(processedItem_r2), " ");
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 20);
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("innerHTML", ctx_r2.getItemLabel(processedItem_r2), \u0275\u0275sanitizeHtml);
+    \u0275\u0275attribute("data-pc-section", "label");
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_span_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(4).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngClass", ctx_r2.getItemProp(processedItem_r2, "badgeStyleClass"));
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r2.getItemProp(processedItem_r2, "badge"));
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_AngleRightIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "AngleRightIcon", 24);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("ngClass", "p-tieredmenu-submenu-icon");
+    \u0275\u0275attribute("data-pc-section", "submenuicon")("aria-hidden", true);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_2_ng_template_0_Template(rf, ctx) {
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_2_ng_template_0_Template, 0, 0, "ng-template", 25);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("data-pc-section", "submenuicon")("aria-hidden", true);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_AngleRightIcon_1_Template, 1, 3, "AngleRightIcon", 22)(2, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_2_Template, 1, 2, null, 23);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(5);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.tieredMenu.submenuIconTemplate && !ctx_r2.tieredMenu._submenuIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tieredMenu.submenuIconTemplate || ctx_r2.tieredMenu._submenuIconTemplate);
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "a", 26);
+    \u0275\u0275template(1, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_span_1_Template, 1, 5, "span", 15)(2, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_span_2_Template, 2, 2, "span", 16)(3, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_template_3_Template, 1, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(5, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_span_5_Template, 2, 2, "span", 17)(6, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_ng_container_6_Template, 3, 2, "ng-container", 10);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const htmlLabel_r6 = \u0275\u0275reference(4);
+    const processedItem_r2 = \u0275\u0275nextContext(3).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("routerLink", ctx_r2.getItemProp(processedItem_r2, "routerLink"))("queryParams", ctx_r2.getItemProp(processedItem_r2, "queryParams"))("routerLinkActive", "p-tieredmenu-item-link-active")("routerLinkActiveOptions", ctx_r2.getItemProp(processedItem_r2, "routerLinkActiveOptions") || \u0275\u0275pureFunction0(20, _c35))("target", ctx_r2.getItemProp(processedItem_r2, "target"))("ngClass", \u0275\u0275pureFunction1(21, _c25, ctx_r2.getItemProp(processedItem_r2, "disabled")))("fragment", ctx_r2.getItemProp(processedItem_r2, "fragment"))("queryParamsHandling", ctx_r2.getItemProp(processedItem_r2, "queryParamsHandling"))("preserveFragment", ctx_r2.getItemProp(processedItem_r2, "preserveFragment"))("skipLocationChange", ctx_r2.getItemProp(processedItem_r2, "skipLocationChange"))("replaceUrl", ctx_r2.getItemProp(processedItem_r2, "replaceUrl"))("state", ctx_r2.getItemProp(processedItem_r2, "state"));
+    \u0275\u0275attribute("data-automationid", ctx_r2.getItemProp(processedItem_r2, "automationId"))("tabindex", -1)("data-pc-section", "action");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r2, "icon"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r2, "escape"))("ngIfElse", htmlLabel_r6);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r2, "badge"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.isItemGroup(processedItem_r2));
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_1_Template, 7, 13, "a", 12)(2, TieredMenuSub_ng_template_2_li_1_ng_container_3_a_2_Template, 7, 23, "a", 13);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.getItemProp(processedItem_r2, "routerLink"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r2, "routerLink"));
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_4_1_ng_template_0_Template(rf, ctx) {
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_4_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, TieredMenuSub_ng_template_2_li_1_ng_container_4_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_ng_container_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, TieredMenuSub_ng_template_2_li_1_ng_container_4_1_Template, 1, 0, null, 27);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c45, processedItem_r2.item, ctx_r2.getItemProp(processedItem_r2, "items")));
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_p_tieredmenusub_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-tieredmenusub", 28);
+    \u0275\u0275listener("itemClick", function TieredMenuSub_ng_template_2_li_1_p_tieredmenusub_5_Template_p_tieredmenusub_itemClick_0_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.itemClick.emit($event));
+    })("itemMouseEnter", function TieredMenuSub_ng_template_2_li_1_p_tieredmenusub_5_Template_p_tieredmenusub_itemMouseEnter_0_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.onItemMouseEnter($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const processedItem_r2 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("items", processedItem_r2.items)("itemTemplate", ctx_r2.itemTemplate)("autoDisplay", ctx_r2.autoDisplay)("menuId", ctx_r2.menuId)("activeItemPath", ctx_r2.activeItemPath())("focusedItemId", ctx_r2.focusedItemId)("ariaLabelledBy", ctx_r2.getItemId(processedItem_r2))("level", ctx_r2.level + 1)("inlineStyles", \u0275\u0275pureFunction1(9, _c54, ctx_r2.isItemActive(processedItem_r2) ? "flex" : "none"));
+  }
+}
+function TieredMenuSub_ng_template_2_li_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "li", 8, 1)(2, "div", 9);
+    \u0275\u0275listener("click", function TieredMenuSub_ng_template_2_li_1_Template_div_click_2_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const processedItem_r2 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onItemClick($event, processedItem_r2));
+    })("mouseenter", function TieredMenuSub_ng_template_2_li_1_Template_div_mouseenter_2_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const processedItem_r2 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onItemMouseEnter({
+        $event,
+        processedItem: processedItem_r2
+      }));
+    });
+    \u0275\u0275template(3, TieredMenuSub_ng_template_2_li_1_ng_container_3_Template, 3, 2, "ng-container", 10)(4, TieredMenuSub_ng_template_2_li_1_ng_container_4_Template, 2, 5, "ng-container", 10);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, TieredMenuSub_ng_template_2_li_1_p_tieredmenusub_5_Template, 1, 11, "p-tieredmenusub", 11);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r7 = \u0275\u0275nextContext();
+    const processedItem_r2 = ctx_r7.$implicit;
+    const index_r9 = ctx_r7.index;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r2.getItemProp(processedItem_r2, "styleClass"));
+    \u0275\u0275property("ngStyle", ctx_r2.getItemProp(processedItem_r2, "style"))("ngClass", ctx_r2.getItemClass(processedItem_r2))("tooltipOptions", ctx_r2.getItemProp(processedItem_r2, "tooltipOptions"));
+    \u0275\u0275attribute("id", ctx_r2.getItemId(processedItem_r2))("data-pc-section", "menuitem")("data-p-highlight", ctx_r2.isItemActive(processedItem_r2))("data-p-focused", ctx_r2.isItemFocused(processedItem_r2))("data-p-disabled", ctx_r2.isItemDisabled(processedItem_r2))("aria-label", ctx_r2.getItemLabel(processedItem_r2))("aria-disabled", ctx_r2.isItemDisabled(processedItem_r2) || void 0)("aria-haspopup", ctx_r2.isItemGroup(processedItem_r2) && !ctx_r2.getItemProp(processedItem_r2, "to") ? "menu" : void 0)("aria-expanded", ctx_r2.isItemGroup(processedItem_r2) ? ctx_r2.isItemActive(processedItem_r2) : void 0)("aria-setsize", ctx_r2.getAriaSetSize())("aria-posinset", ctx_r2.getAriaPosInset(index_r9));
+    \u0275\u0275advance(2);
+    \u0275\u0275attribute("data-pc-section", "content");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.itemTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.itemTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.isItemVisible(processedItem_r2) && ctx_r2.isItemGroup(processedItem_r2));
+  }
+}
+function TieredMenuSub_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, TieredMenuSub_ng_template_2_li_0_Template, 1, 5, "li", 5)(1, TieredMenuSub_ng_template_2_li_1_Template, 6, 20, "li", 6);
+  }
+  if (rf & 2) {
+    const processedItem_r2 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngIf", ctx_r2.isItemVisible(processedItem_r2) && ctx_r2.getItemProp(processedItem_r2, "separator"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.isItemVisible(processedItem_r2) && !ctx_r2.getItemProp(processedItem_r2, "separator"));
+  }
+}
+var _c64 = ["submenuicon"];
+var _c7 = ["item"];
+var _c8 = ["rootmenu"];
+var _c9 = ["container"];
+var _c10 = (a0, a1) => ({
+  "p-tieredmenu p-component": true,
+  "p-tieredmenu-mobile": a0,
+  "p-tieredmenu-overlay": a1
+});
+var _c11 = (a0, a1) => ({
+  showTransitionParams: a0,
+  hideTransitionParams: a1
+});
+var _c122 = (a0) => ({
+  value: "visible",
+  params: a0
+});
+function TieredMenu_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 3, 0);
+    \u0275\u0275listener("click", function TieredMenu_div_0_Template_div_click_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onOverlayClick($event));
+    })("@overlayAnimation.start", function TieredMenu_div_0_Template_div_animation_overlayAnimation_start_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onOverlayAnimationStart($event));
+    })("@overlayAnimation.done", function TieredMenu_div_0_Template_div_animation_overlayAnimation_done_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onOverlayAnimationEnd($event));
+    });
+    \u0275\u0275elementStart(2, "p-tieredMenuSub", 4, 1);
+    \u0275\u0275listener("itemClick", function TieredMenu_div_0_Template_p_tieredMenuSub_itemClick_2_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onItemClick($event));
+    })("menuFocus", function TieredMenu_div_0_Template_p_tieredMenuSub_menuFocus_2_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onMenuFocus($event));
+    })("menuBlur", function TieredMenu_div_0_Template_p_tieredMenuSub_menuBlur_2_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onMenuBlur($event));
+    })("menuKeydown", function TieredMenu_div_0_Template_p_tieredMenuSub_menuKeydown_2_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onKeyDown($event));
+    })("itemMouseEnter", function TieredMenu_div_0_Template_p_tieredMenuSub_itemMouseEnter_2_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onItemMouseEnter($event));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r1.styleClass);
+    \u0275\u0275property("id", ctx_r1.id)("ngClass", \u0275\u0275pureFunction2(22, _c10, ctx_r1.queryMatches, ctx_r1.popup))("ngStyle", ctx_r1.style)("@overlayAnimation", \u0275\u0275pureFunction1(28, _c122, \u0275\u0275pureFunction2(25, _c11, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)))("@.disabled", ctx_r1.popup !== true);
+    \u0275\u0275attribute("data-pc-section", "root")("data-pc-name", "tieredmenu");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("root", true)("items", ctx_r1.processedItems)("itemTemplate", ctx_r1.itemTemplate || ctx_r1._itemTemplate)("menuId", ctx_r1.id)("tabindex", !ctx_r1.disabled ? ctx_r1.tabindex : -1)("ariaLabel", ctx_r1.ariaLabel)("ariaLabelledBy", ctx_r1.ariaLabelledBy)("baseZIndex", ctx_r1.baseZIndex)("autoZIndex", ctx_r1.autoZIndex)("autoDisplay", ctx_r1.autoDisplay)("popup", ctx_r1.popup)("focusedItemId", ctx_r1.focused ? ctx_r1.focusedItemId : void 0)("activeItemPath", ctx_r1.activeItemPath());
+  }
+}
+var theme10 = ({
+  dt: dt2
+}) => `
+.p-tieredmenu {
+    background: ${dt2("tieredmenu.background")};
+    color: ${dt2("tieredmenu.color")};
+    border: 1px solid ${dt2("tieredmenu.border.color")};
+    border-radius: ${dt2("tieredmenu.border.radius")};
+    min-width: 12.5rem;
+}
+
+.p-tieredmenu-root-list,
+.p-tieredmenu-submenu {
+    margin: 0;
+    padding: ${dt2("tieredmenu.list.padding")};
+    list-style: none;
+    outline: 0 none;
+    display: flex;
+    flex-direction: column;
+    gap: ${dt2("tieredmenu.list.gap")};
+}
+
+.p-tieredmenu-submenu {
+    position: absolute;
+    min-width: 100%;
+    z-index: 1;
+    background: ${dt2("tieredmenu.background")};
+    color: ${dt2("tieredmenu.color")};
+    border: 1px solid ${dt2("tieredmenu.border.color")};
+    border-radius: ${dt2("tieredmenu.border.radius")};
+    box-shadow: ${dt2("tieredmenu.shadow")};
+}
+
+.p-tieredmenu-item {
+    position: relative;
+}
+
+.p-tieredmenu-item-content {
+    transition: background ${dt2("tieredmenu.transition.duration")}, color ${dt2("tieredmenu.transition.duration")};
+    border-radius: ${dt2("tieredmenu.item.border.radius")};
+    color: ${dt2("tieredmenu.item.color")};
+}
+
+.p-tieredmenu-item-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+    color: inherit;
+    padding: ${dt2("tieredmenu.item.padding")};
+    gap: ${dt2("tieredmenu.item.gap")};
+    user-select: none;
+    outline: 0 none;
+}
+
+.p-tieredmenu-item-label {
+    line-height: 1;
+}
+
+.p-tieredmenu-item-icon {
+    color: ${dt2("tieredmenu.item.icon.color")};
+}
+
+.p-tieredmenu-submenu-icon {
+    color: ${dt2("tieredmenu.submenu.icon.color")};
+    margin-left: auto;
+    font-size: ${dt2("tieredmenu.submenu.icon.size")};
+    width: ${dt2("tieredmenu.submenu.icon.size")};
+    height: ${dt2("tieredmenu.submenu.icon.size")};
+}
+
+.p-tieredmenu-submenu-icon:dir(rtl) {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.p-tieredmenu-item.p-focus > .p-tieredmenu-item-content {
+    color: ${dt2("tieredmenu.item.focus.color")};
+    background: ${dt2("tieredmenu.item.focus.background")};
+}
+
+.p-tieredmenu-item.p-focus > .p-tieredmenu-item-content .p-tieredmenu-item-icon {
+    color: ${dt2("tieredmenu.item.icon.focus.color")};
+}
+
+.p-tieredmenu-item.p-focus > .p-tieredmenu-item-content .p-tieredmenu-submenu-icon {
+    color: ${dt2("tieredmenu.submenu.icon.focus.color")};
+}
+
+.p-tieredmenu-item:not(.p-disabled) > .p-tieredmenu-item-content:hover {
+    color: ${dt2("tieredmenu.item.focus.color")};
+    background: ${dt2("tieredmenu.item.focus.background")};
+}
+
+.p-tieredmenu-item:not(.p-disabled) > .p-tieredmenu-item-content:hover .p-tieredmenu-item-icon {
+    color: ${dt2("tieredmenu.item.icon.focus.color")};
+}
+
+.p-tieredmenu-item:not(.p-disabled) > .p-tieredmenu-item-content:hover .p-tieredmenu-submenu-icon {
+    color: ${dt2("tieredmenu.submenu.icon.focus.color")};
+}
+
+.p-tieredmenu-item-active > .p-tieredmenu-item-content {
+    color: ${dt2("tieredmenu.item.active.color")};
+    background: ${dt2("tieredmenu.item.active.background")};
+}
+
+.p-tieredmenu-item-active > .p-tieredmenu-item-content .p-tieredmenu-item-icon {
+    color: ${dt2("tieredmenu.item.icon.active.color")};
+}
+
+.p-tieredmenu-item-active > .p-tieredmenu-item-content .p-tieredmenu-submenu-icon {
+    color: ${dt2("tieredmenu.submenu.icon.active.color")};
+}
+
+.p-tieredmenu-separator {
+    border-block-start: 1px solid ${dt2("tieredmenu.separator.border.color")};
+}
+
+.p-tieredmenu-overlay {
+    box-shadow: ${dt2("tieredmenu.shadow")};
+}
+
+.p-tieredmenu-enter-from,
+.p-tieredmenu-leave-active {
+    opacity: 0;
+}
+
+.p-tieredmenu-enter-active {
+    transition: opacity 250ms;
+}
+
+.p-tieredmenu-mobile .p-tieredmenu-submenu {
+    position: static;
+    box-shadow: none;
+    border: 0 none;
+    padding-inline-start: ${dt2("tieredmenu.submenu.mobile.indent")};
+    padding-inline-end: 0;
+}
+
+.p-tieredmenu-mobile .p-tieredmenu-submenu:dir(rtl) {
+    padding-inline-start: 0;
+    padding-inline-end: ${dt2("tieredmenu.submenu.mobile.indent")};
+}
+
+.p-tieredmenu-mobile .p-tieredmenu-submenu-icon {
+    transition: transform 0.2s;
+    transform: rotate(90deg);
+}
+
+.p-tieredmenu-mobile .p-tieredmenu-item-active > .p-tieredmenu-item-content .p-tieredmenu-submenu-icon {
+    transform: rotate(-90deg);
+}
+`;
+var classes9 = {
+  root: ({
+    instance,
+    props
+  }) => ["p-tieredmenu p-component", {
+    "p-tieredmenu-overlay": props.popup
+  }],
+  start: "p-tieredmenu-start",
+  rootList: "p-tieredmenu-root-list",
+  item: ({
+    instance,
+    processedItem
+  }) => ["p-tieredmenu-item", {
+    "p-tieredmenu-item-active": instance.isItemActive(processedItem),
+    "p-focus": instance.isItemFocused(processedItem),
+    "p-disabled": instance.isItemDisabled(processedItem)
+  }],
+  itemContent: "p-tieredmenu-item-content",
+  itemLink: "p-tieredmenu-item-link",
+  itemIcon: "p-tieredmenu-item-icon",
+  itemLabel: "p-tieredmenu-item-label",
+  submenuIcon: "p-tieredmenu-submenu-icon",
+  submenu: "p-tieredmenu-submenu",
+  separator: "p-tieredmenu-separator",
+  end: "p-tieredmenu-end"
+};
+var TieredMenuStyle = class _TieredMenuStyle extends BaseStyle {
+  name = "tieredmenu";
+  theme = theme10;
+  classes = classes9;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275TieredMenuStyle_BaseFactory;
+    return function TieredMenuStyle_Factory(__ngFactoryType__) {
+      return (\u0275TieredMenuStyle_BaseFactory || (\u0275TieredMenuStyle_BaseFactory = \u0275\u0275getInheritedFactory(_TieredMenuStyle)))(__ngFactoryType__ || _TieredMenuStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _TieredMenuStyle,
+    factory: _TieredMenuStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TieredMenuStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var TieredMenuClasses;
+(function(TieredMenuClasses2) {
+  TieredMenuClasses2["root"] = "p-tieredmenu";
+  TieredMenuClasses2["start"] = "p-tieredmenu-start";
+  TieredMenuClasses2["rootList"] = "p-tieredmenu-root-list";
+  TieredMenuClasses2["item"] = "p-tieredmenu-item";
+  TieredMenuClasses2["itemContent"] = "p-tieredmenu-item-content";
+  TieredMenuClasses2["itemLink"] = "p-tieredmenu-item-link";
+  TieredMenuClasses2["itemIcon"] = "p-tieredmenu-item-icon";
+  TieredMenuClasses2["itemLabel"] = "p-tieredmenu-item-label";
+  TieredMenuClasses2["submenuIcon"] = "p-tieredmenu-submenu-icon";
+  TieredMenuClasses2["submenu"] = "p-tieredmenu-submenu";
+  TieredMenuClasses2["separator"] = "p-tieredmenu-separator";
+  TieredMenuClasses2["end"] = "p-tieredmenu-end";
+})(TieredMenuClasses || (TieredMenuClasses = {}));
+var TieredMenuSub = class _TieredMenuSub extends BaseComponent {
+  el;
+  renderer;
+  tieredMenu;
+  items;
+  itemTemplate;
+  root = false;
+  autoDisplay;
+  autoZIndex = true;
+  baseZIndex = 0;
+  popup;
+  menuId;
+  ariaLabel;
+  ariaLabelledBy;
+  level = 0;
+  focusedItemId;
+  activeItemPath = input([]);
+  tabindex = 0;
+  inlineStyles;
+  itemClick = new EventEmitter();
+  itemMouseEnter = new EventEmitter();
+  menuFocus = new EventEmitter();
+  menuBlur = new EventEmitter();
+  menuKeydown = new EventEmitter();
+  sublistViewChild;
+  constructor(el, renderer, tieredMenu) {
+    super();
+    this.el = el;
+    this.renderer = renderer;
+    this.tieredMenu = tieredMenu;
+  }
+  positionSubmenu() {
+    if (isPlatformBrowser(this.tieredMenu.platformId)) {
+      const sublist = this.sublistViewChild && this.sublistViewChild.nativeElement;
+      if (sublist) {
+        nestedPosition(sublist, this.level);
+      }
+    }
+  }
+  getItemProp(processedItem, name, params = null) {
+    return processedItem && processedItem.item ? resolve(processedItem.item[name], params) : void 0;
+  }
+  getItemId(processedItem) {
+    return processedItem.item?.id ?? `${this.menuId}_${processedItem.key}`;
+  }
+  getItemKey(processedItem) {
+    return this.getItemId(processedItem);
+  }
+  getItemClass(processedItem) {
+    return __spreadProps(__spreadValues({}, this.getItemProp(processedItem, "class")), {
+      "p-tieredmenu-item": true,
+      "p-tieredmenu-item-active": this.isItemActive(processedItem),
+      "p-focus": this.isItemFocused(processedItem),
+      "p-disabled": this.isItemDisabled(processedItem)
+    });
+  }
+  getItemLabel(processedItem) {
+    return this.getItemProp(processedItem, "label");
+  }
+  getSeparatorItemClass(processedItem) {
+    return __spreadProps(__spreadValues({}, this.getItemProp(processedItem, "class")), {
+      "p-tieredmenu-separator": true
+    });
+  }
+  getAriaSetSize() {
+    return this.items.filter((processedItem) => this.isItemVisible(processedItem) && !this.getItemProp(processedItem, "separator")).length;
+  }
+  getAriaPosInset(index) {
+    return index - this.items.slice(0, index).filter((processedItem) => {
+      const isItemVisible = this.isItemVisible(processedItem);
+      const isVisibleSeparator = isItemVisible && this.getItemProp(processedItem, "separator");
+      return !isItemVisible || isVisibleSeparator;
+    }).length + 1;
+  }
+  isItemVisible(processedItem) {
+    return this.getItemProp(processedItem, "visible") !== false;
+  }
+  isItemActive(processedItem) {
+    if (this.activeItemPath()) {
+      this.positionSubmenu();
+      return this.activeItemPath().some((path) => path.key === processedItem.key);
+    }
+  }
+  isItemDisabled(processedItem) {
+    return this.getItemProp(processedItem, "disabled");
+  }
+  isItemFocused(processedItem) {
+    return this.focusedItemId === this.getItemId(processedItem);
+  }
+  isItemGroup(processedItem) {
+    return isNotEmpty(processedItem.items);
+  }
+  onItemMouseEnter(param) {
+    if (this.autoDisplay) {
+      const {
+        event: event2,
+        processedItem
+      } = param;
+      this.itemMouseEnter.emit({
+        originalEvent: event2,
+        processedItem
+      });
+    }
+  }
+  onItemClick(event2, processedItem) {
+    this.getItemProp(processedItem, "command", {
+      originalEvent: event2,
+      item: processedItem.item
+    });
+    this.itemClick.emit({
+      originalEvent: event2,
+      processedItem,
+      isFocus: true
+    });
+  }
+  static \u0275fac = function TieredMenuSub_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _TieredMenuSub)(\u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(Renderer2), \u0275\u0275directiveInject(forwardRef(() => TieredMenu)));
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _TieredMenuSub,
+    selectors: [["p-tieredMenuSub"], ["p-tieredmenusub"]],
+    viewQuery: function TieredMenuSub_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c08, 7);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.sublistViewChild = _t.first);
+      }
+    },
+    inputs: {
+      items: "items",
+      itemTemplate: "itemTemplate",
+      root: [2, "root", "root", booleanAttribute],
+      autoDisplay: [2, "autoDisplay", "autoDisplay", booleanAttribute],
+      autoZIndex: [2, "autoZIndex", "autoZIndex", booleanAttribute],
+      baseZIndex: [2, "baseZIndex", "baseZIndex", numberAttribute],
+      popup: [2, "popup", "popup", booleanAttribute],
+      menuId: "menuId",
+      ariaLabel: "ariaLabel",
+      ariaLabelledBy: "ariaLabelledBy",
+      level: [2, "level", "level", numberAttribute],
+      focusedItemId: "focusedItemId",
+      activeItemPath: [1, "activeItemPath"],
+      tabindex: [2, "tabindex", "tabindex", numberAttribute],
+      inlineStyles: "inlineStyles"
+    },
+    outputs: {
+      itemClick: "itemClick",
+      itemMouseEnter: "itemMouseEnter",
+      menuFocus: "menuFocus",
+      menuBlur: "menuBlur",
+      menuKeydown: "menuKeydown"
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
+    decls: 3,
+    vars: 13,
+    consts: [["sublist", ""], ["listItem", ""], ["htmlLabel", ""], ["role", "menu", 3, "keydown", "focus", "blur", "ngClass", "id", "tabindex", "ngStyle"], ["ngFor", "", 3, "ngForOf"], ["role", "separator", 3, "style", "ngClass", 4, "ngIf"], ["role", "menuitem", "pTooltip", "", 3, "ngStyle", "ngClass", "class", "tooltipOptions", 4, "ngIf"], ["role", "separator", 3, "ngClass"], ["role", "menuitem", "pTooltip", "", 3, "ngStyle", "ngClass", "tooltipOptions"], [1, "p-tieredmenu-item-content", 3, "click", "mouseenter"], [4, "ngIf"], [3, "items", "itemTemplate", "autoDisplay", "menuId", "activeItemPath", "focusedItemId", "ariaLabelledBy", "level", "inlineStyles", "itemClick", "itemMouseEnter", 4, "ngIf"], ["pRipple", "", 3, "target", "ngClass", 4, "ngIf"], ["pRipple", "", 3, "routerLink", "queryParams", "routerLinkActive", "routerLinkActiveOptions", "target", "ngClass", "fragment", "queryParamsHandling", "preserveFragment", "skipLocationChange", "replaceUrl", "state", 4, "ngIf"], ["pRipple", "", 3, "target", "ngClass"], ["class", "p-tieredmenu-item-icon", 3, "ngClass", "ngStyle", 4, "ngIf"], ["class", "p-tieredmenu-item-label", 4, "ngIf", "ngIfElse"], ["class", "p-menuitem-badge", 3, "ngClass", 4, "ngIf"], [1, "p-tieredmenu-item-icon", 3, "ngClass", "ngStyle"], [1, "p-tieredmenu-item-label"], [1, "p-tieredmenu-item-label", 3, "innerHTML"], [1, "p-menuitem-badge", 3, "ngClass"], [3, "ngClass", 4, "ngIf"], [4, "ngTemplateOutlet"], [3, "ngClass"], [3, "data-pc-section", "aria-hidden"], ["pRipple", "", 3, "routerLink", "queryParams", "routerLinkActive", "routerLinkActiveOptions", "target", "ngClass", "fragment", "queryParamsHandling", "preserveFragment", "skipLocationChange", "replaceUrl", "state"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [3, "itemClick", "itemMouseEnter", "items", "itemTemplate", "autoDisplay", "menuId", "activeItemPath", "focusedItemId", "ariaLabelledBy", "level", "inlineStyles"]],
+    template: function TieredMenuSub_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "ul", 3, 0);
+        \u0275\u0275listener("keydown", function TieredMenuSub_Template_ul_keydown_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.menuKeydown.emit($event));
+        })("focus", function TieredMenuSub_Template_ul_focus_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.menuFocus.emit($event));
+        })("blur", function TieredMenuSub_Template_ul_blur_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.menuBlur.emit($event));
+        });
+        \u0275\u0275template(2, TieredMenuSub_ng_template_2_Template, 2, 2, "ng-template", 4);
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(10, _c16, !ctx.root, ctx.root))("id", ctx.menuId + "_list")("tabindex", ctx.tabindex)("ngStyle", ctx.inlineStyles);
+        \u0275\u0275attribute("aria-label", ctx.ariaLabel)("aria-labelledBy", ctx.ariaLabelledBy)("aria-activedescendant", ctx.focusedItemId)("aria-orientation", "vertical")("data-pc-section", "menu");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngForOf", ctx.items);
+      }
+    },
+    dependencies: [_TieredMenuSub, CommonModule, NgClass, NgForOf, NgIf, NgTemplateOutlet, NgStyle, RouterModule, RouterLink, RouterLinkActive, Ripple, TooltipModule, Tooltip, AngleRightIcon, SharedModule],
+    encapsulation: 2
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TieredMenuSub, [{
+    type: Component,
+    args: [{
+      selector: "p-tieredMenuSub, p-tieredmenusub",
+      standalone: true,
+      imports: [CommonModule, RouterModule, Ripple, TooltipModule, AngleRightIcon, SharedModule],
+      template: `
+        <ul
+            #sublist
+            role="menu"
+            [ngClass]="{ 'p-tieredmenu-submenu': !root, 'p-tieredmenu-root-list': root }"
+            [id]="menuId + '_list'"
+            [tabindex]="tabindex"
+            [attr.aria-label]="ariaLabel"
+            [attr.aria-labelledBy]="ariaLabelledBy"
+            [attr.aria-activedescendant]="focusedItemId"
+            [attr.aria-orientation]="'vertical'"
+            [attr.data-pc-section]="'menu'"
+            (keydown)="menuKeydown.emit($event)"
+            (focus)="menuFocus.emit($event)"
+            (blur)="menuBlur.emit($event)"
+            [ngStyle]="inlineStyles"
+        >
+            <ng-template ngFor let-processedItem [ngForOf]="items" let-index="index">
+                <li
+                    *ngIf="isItemVisible(processedItem) && getItemProp(processedItem, 'separator')"
+                    [attr.id]="getItemId(processedItem)"
+                    [style]="getItemProp(processedItem, 'style')"
+                    [ngClass]="getSeparatorItemClass(processedItem)"
+                    role="separator"
+                    [attr.data-pc-section]="'separator'"
+                ></li>
+                <li
+                    #listItem
+                    *ngIf="isItemVisible(processedItem) && !getItemProp(processedItem, 'separator')"
+                    role="menuitem"
+                    [attr.id]="getItemId(processedItem)"
+                    [attr.data-pc-section]="'menuitem'"
+                    [attr.data-p-highlight]="isItemActive(processedItem)"
+                    [attr.data-p-focused]="isItemFocused(processedItem)"
+                    [attr.data-p-disabled]="isItemDisabled(processedItem)"
+                    [attr.aria-label]="getItemLabel(processedItem)"
+                    [attr.aria-disabled]="isItemDisabled(processedItem) || undefined"
+                    [attr.aria-haspopup]="isItemGroup(processedItem) && !getItemProp(processedItem, 'to') ? 'menu' : undefined"
+                    [attr.aria-expanded]="isItemGroup(processedItem) ? isItemActive(processedItem) : undefined"
+                    [attr.aria-setsize]="getAriaSetSize()"
+                    [attr.aria-posinset]="getAriaPosInset(index)"
+                    [ngStyle]="getItemProp(processedItem, 'style')"
+                    [ngClass]="getItemClass(processedItem)"
+                    [class]="getItemProp(processedItem, 'styleClass')"
+                    pTooltip
+                    [tooltipOptions]="getItemProp(processedItem, 'tooltipOptions')"
+                >
+                    <div [attr.data-pc-section]="'content'" class="p-tieredmenu-item-content" (click)="onItemClick($event, processedItem)" (mouseenter)="onItemMouseEnter({ $event, processedItem })">
+                        <ng-container *ngIf="!itemTemplate">
+                            <a
+                                *ngIf="!getItemProp(processedItem, 'routerLink')"
+                                [attr.href]="getItemProp(processedItem, 'url')"
+                                [attr.data-automationid]="getItemProp(processedItem, 'automationId')"
+                                [attr.data-pc-section]="'action'"
+                                [target]="getItemProp(processedItem, 'target')"
+                                [ngClass]="{ 'p-tieredmenu-item-link': true, 'p-disabled': getItemProp(processedItem, 'disabled') }"
+                                [attr.tabindex]="-1"
+                                pRipple
+                            >
+                                <span
+                                    *ngIf="getItemProp(processedItem, 'icon')"
+                                    class="p-tieredmenu-item-icon"
+                                    [ngClass]="getItemProp(processedItem, 'icon')"
+                                    [ngStyle]="getItemProp(processedItem, 'iconStyle')"
+                                    [attr.data-pc-section]="'icon'"
+                                    [attr.tabindex]="-1"
+                                >
+                                </span>
+                                <span *ngIf="getItemProp(processedItem, 'escape'); else htmlLabel" class="p-tieredmenu-item-label" [attr.data-pc-section]="'label'">
+                                    {{ getItemLabel(processedItem) }}
+                                </span>
+                                <ng-template #htmlLabel>
+                                    <span class="p-tieredmenu-item-label" [innerHTML]="getItemLabel(processedItem)" [attr.data-pc-section]="'label'"></span>
+                                </ng-template>
+                                <span class="p-menuitem-badge" *ngIf="getItemProp(processedItem, 'badge')" [ngClass]="getItemProp(processedItem, 'badgeStyleClass')">{{ getItemProp(processedItem, 'badge') }}</span>
+
+                                <ng-container *ngIf="isItemGroup(processedItem)">
+                                    <AngleRightIcon *ngIf="!tieredMenu.submenuIconTemplate && !tieredMenu._submenuIconTemplate" [ngClass]="'p-tieredmenu-submenu-icon'" [attr.data-pc-section]="'submenuicon'" [attr.aria-hidden]="true" />
+                                    <ng-template *ngTemplateOutlet="tieredMenu.submenuIconTemplate || tieredMenu._submenuIconTemplate" [attr.data-pc-section]="'submenuicon'" [attr.aria-hidden]="true"></ng-template>
+                                </ng-container>
+                            </a>
+                            <a
+                                *ngIf="getItemProp(processedItem, 'routerLink')"
+                                [routerLink]="getItemProp(processedItem, 'routerLink')"
+                                [attr.data-automationid]="getItemProp(processedItem, 'automationId')"
+                                [attr.tabindex]="-1"
+                                [attr.data-pc-section]="'action'"
+                                [queryParams]="getItemProp(processedItem, 'queryParams')"
+                                [routerLinkActive]="'p-tieredmenu-item-link-active'"
+                                [routerLinkActiveOptions]="getItemProp(processedItem, 'routerLinkActiveOptions') || { exact: false }"
+                                [target]="getItemProp(processedItem, 'target')"
+                                [ngClass]="{ 'p-tieredmenu-item-link': true, 'p-disabled': getItemProp(processedItem, 'disabled') }"
+                                [fragment]="getItemProp(processedItem, 'fragment')"
+                                [queryParamsHandling]="getItemProp(processedItem, 'queryParamsHandling')"
+                                [preserveFragment]="getItemProp(processedItem, 'preserveFragment')"
+                                [skipLocationChange]="getItemProp(processedItem, 'skipLocationChange')"
+                                [replaceUrl]="getItemProp(processedItem, 'replaceUrl')"
+                                [state]="getItemProp(processedItem, 'state')"
+                                pRipple
+                            >
+                                <span
+                                    *ngIf="getItemProp(processedItem, 'icon')"
+                                    class="p-tieredmenu-item-icon"
+                                    [ngClass]="getItemProp(processedItem, 'icon')"
+                                    [ngStyle]="getItemProp(processedItem, 'iconStyle')"
+                                    [attr.data-pc-section]="'icon'"
+                                    [attr.aria-hidden]="true"
+                                    [attr.tabindex]="-1"
+                                >
+                                </span>
+                                <span *ngIf="getItemProp(processedItem, 'escape'); else htmlLabel" class="p-tieredmenu-item-label" [attr.data-pc-section]="'label'">
+                                    {{ getItemLabel(processedItem) }}
+                                </span>
+                                <ng-template #htmlLabel>
+                                    <span class="p-tieredmenu-item-label" [innerHTML]="getItemLabel(processedItem)" [attr.data-pc-section]="'label'"></span>
+                                </ng-template>
+                                <span class="p-menuitem-badge" *ngIf="getItemProp(processedItem, 'badge')" [ngClass]="getItemProp(processedItem, 'badgeStyleClass')">{{ getItemProp(processedItem, 'badge') }}</span>
+
+                                <ng-container *ngIf="isItemGroup(processedItem)">
+                                    <AngleRightIcon *ngIf="!tieredMenu.submenuIconTemplate && !tieredMenu._submenuIconTemplate" [ngClass]="'p-tieredmenu-submenu-icon'" [attr.data-pc-section]="'submenuicon'" [attr.aria-hidden]="true" />
+                                    <ng-template *ngTemplateOutlet="tieredMenu.submenuIconTemplate || tieredMenu._submenuIconTemplate" [attr.data-pc-section]="'submenuicon'" [attr.aria-hidden]="true"></ng-template>
+                                </ng-container>
+                            </a>
+                        </ng-container>
+                        <ng-container *ngIf="itemTemplate">
+                            <ng-template *ngTemplateOutlet="itemTemplate; context: { $implicit: processedItem.item, hasSubmenu: getItemProp(processedItem, 'items') }"></ng-template>
+                        </ng-container>
+                    </div>
+
+                    <p-tieredmenusub
+                        *ngIf="isItemVisible(processedItem) && isItemGroup(processedItem)"
+                        [items]="processedItem.items"
+                        [itemTemplate]="itemTemplate"
+                        [autoDisplay]="autoDisplay"
+                        [menuId]="menuId"
+                        [activeItemPath]="activeItemPath()"
+                        [focusedItemId]="focusedItemId"
+                        [ariaLabelledBy]="getItemId(processedItem)"
+                        [level]="level + 1"
+                        (itemClick)="itemClick.emit($event)"
+                        (itemMouseEnter)="onItemMouseEnter($event)"
+                        [inlineStyles]="{ display: isItemActive(processedItem) ? 'flex' : 'none' }"
+                    ></p-tieredmenusub>
+                </li>
+            </ng-template>
+        </ul>
+    `,
+      encapsulation: ViewEncapsulation.None
+    }]
+  }], () => [{
+    type: ElementRef
+  }, {
+    type: Renderer2
+  }, {
+    type: TieredMenu,
+    decorators: [{
+      type: Inject,
+      args: [forwardRef(() => TieredMenu)]
+    }]
+  }], {
+    items: [{
+      type: Input
+    }],
+    itemTemplate: [{
+      type: Input
+    }],
+    root: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    autoDisplay: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    autoZIndex: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    baseZIndex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    popup: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    menuId: [{
+      type: Input
+    }],
+    ariaLabel: [{
+      type: Input
+    }],
+    ariaLabelledBy: [{
+      type: Input
+    }],
+    level: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    focusedItemId: [{
+      type: Input
+    }],
+    tabindex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    inlineStyles: [{
+      type: Input
+    }],
+    itemClick: [{
+      type: Output
+    }],
+    itemMouseEnter: [{
+      type: Output
+    }],
+    menuFocus: [{
+      type: Output
+    }],
+    menuBlur: [{
+      type: Output
+    }],
+    menuKeydown: [{
+      type: Output
+    }],
+    sublistViewChild: [{
+      type: ViewChild,
+      args: ["sublist", {
+        static: true
+      }]
+    }]
+  });
+})();
+var TieredMenu = class _TieredMenu extends BaseComponent {
+  overlayService;
+  /**
+   * An array of menuitems.
+   * @group Props
+   */
+  set model(value) {
+    this._model = value;
+    this._processedItems = this.createProcessedItems(this._model || []);
+  }
+  get model() {
+    return this._model;
+  }
+  /**
+   * Defines if menu would displayed as a popup.
+   * @group Props
+   */
+  popup;
+  /**
+   * Inline style of the component.
+   * @group Props
+   */
+  style;
+  /**
+   * Style class of the component.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element.
+   * @group Props
+   */
+  appendTo;
+  /**
+   * The breakpoint to define the maximum width boundary.
+   * @group Props
+   */
+  breakpoint = "960px";
+  /**
+   * Whether to automatically manage layering.
+   * @group Props
+   */
+  autoZIndex = true;
+  /**
+   * Base zIndex value to use in layering.
+   * @group Props
+   */
+  baseZIndex = 0;
+  /**
+   * Whether to show a root submenu on mouse over.
+   * @defaultValue true
+   * @group Props
+   */
+  autoDisplay = true;
+  /**
+   * Transition options of the show animation.
+   * @group Props
+   */
+  showTransitionOptions = ".12s cubic-bezier(0, 0, 0.2, 1)";
+  /**
+   * Transition options of the hide animation.
+   * @group Props
+   */
+  hideTransitionOptions = ".1s linear";
+  /**
+   * Current id state as a string.
+   * @group Props
+   */
+  id;
+  /**
+   * Defines a string value that labels an interactive element.
+   * @group Props
+   */
+  ariaLabel;
+  /**
+   * Identifier of the underlying input element.
+   * @group Props
+   */
+  ariaLabelledBy;
+  /**
+   * When present, it specifies that the component should be disabled.
+   * @group Props
+   */
+  disabled = false;
+  /**
+   * Index of the element in tabbing order.
+   * @group Props
+   */
+  tabindex = 0;
+  /**
+   * Callback to invoke when overlay menu is shown.
+   * @group Emits
+   */
+  onShow = new EventEmitter();
+  /**
+   * Callback to invoke when overlay menu is hidden.
+   * @group Emits
+   */
+  onHide = new EventEmitter();
+  rootmenu;
+  containerViewChild;
+  /**
+   * Template of the submenu icon.
+   * @group Templates
+   */
+  submenuIconTemplate;
+  /**
+   * Template of the item.
+   * @group Templates
+   */
+  itemTemplate;
+  templates;
+  container;
+  outsideClickListener;
+  resizeListener;
+  scrollHandler;
+  target;
+  relatedTarget;
+  visible;
+  relativeAlign;
+  dirty = false;
+  focused = false;
+  activeItemPath = signal([]);
+  number = signal(0);
+  focusedItemInfo = signal({
+    index: -1,
+    level: 0,
+    parentKey: "",
+    item: null
+  });
+  searchValue = "";
+  searchTimeout;
+  _processedItems;
+  _model;
+  _componentStyle = inject(TieredMenuStyle);
+  matchMediaListener;
+  query;
+  queryMatches;
+  _submenuIconTemplate;
+  _itemTemplate;
+  get visibleItems() {
+    const processedItem = this.activeItemPath().find((p) => p.key === this.focusedItemInfo().parentKey);
+    return processedItem ? processedItem.items : this.processedItems;
+  }
+  get processedItems() {
+    if (!this._processedItems || !this._processedItems.length) {
+      this._processedItems = this.createProcessedItems(this.model || []);
+    }
+    return this._processedItems;
+  }
+  get focusedItemId() {
+    const focusedItemInfo = this.focusedItemInfo();
+    return focusedItemInfo.item?.id ? focusedItemInfo.item.id : focusedItemInfo.index !== -1 ? `${this.id}${isNotEmpty(focusedItemInfo.parentKey) ? "_" + focusedItemInfo.parentKey : ""}_${focusedItemInfo.index}` : null;
+  }
+  constructor(overlayService) {
+    super();
+    this.overlayService = overlayService;
+    effect(() => {
+      const path = this.activeItemPath();
+      if (isNotEmpty(path)) {
+        this.bindOutsideClickListener();
+        this.bindResizeListener();
+      } else {
+        this.unbindOutsideClickListener();
+        this.unbindResizeListener();
+      }
+    });
+  }
+  ngOnInit() {
+    super.ngOnInit();
+    this.bindMatchMediaListener();
+    this.id = this.id || uuid("pn_id_");
+  }
+  ngAfterContentInit() {
+    this.templates?.forEach((item) => {
+      switch (item.getType()) {
+        case "submenuicon":
+          this._submenuIconTemplate = item.template;
+          break;
+        case "item":
+          this._itemTemplate = item.template;
+          break;
+        default:
+          this._itemTemplate = item.template;
+          break;
+      }
+    });
+  }
+  bindMatchMediaListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.matchMediaListener) {
+        const query2 = window.matchMedia(`(max-width: ${this.breakpoint})`);
+        this.query = query2;
+        this.queryMatches = query2.matches;
+        this.matchMediaListener = () => {
+          this.queryMatches = query2.matches;
+        };
+        query2.addEventListener("change", this.matchMediaListener);
+      }
+    }
+  }
+  unbindMatchMediaListener() {
+    if (this.matchMediaListener) {
+      this.query.removeEventListener("change", this.matchMediaListener);
+      this.matchMediaListener = null;
+    }
+  }
+  createProcessedItems(items, level = 0, parent = {}, parentKey = "") {
+    const processedItems = [];
+    items && items.forEach((item, index) => {
+      const key = (parentKey !== "" ? parentKey + "_" : "") + index;
+      const newItem = {
+        item,
+        index,
+        level,
+        key,
+        parent,
+        parentKey
+      };
+      newItem["items"] = this.createProcessedItems(item.items, level + 1, newItem, key);
+      processedItems.push(newItem);
+    });
+    return processedItems;
+  }
+  getItemProp(item, name) {
+    return item ? resolve(item[name]) : void 0;
+  }
+  getProccessedItemLabel(processedItem) {
+    return processedItem ? this.getItemLabel(processedItem.item) : void 0;
+  }
+  getItemLabel(item) {
+    return this.getItemProp(item, "label");
+  }
+  isProcessedItemGroup(processedItem) {
+    return processedItem && isNotEmpty(processedItem.items);
+  }
+  isSelected(processedItem) {
+    return this.activeItemPath().some((p) => p.key === processedItem.key);
+  }
+  isValidSelectedItem(processedItem) {
+    return this.isValidItem(processedItem) && this.isSelected(processedItem);
+  }
+  isValidItem(processedItem) {
+    return !!processedItem && !this.isItemDisabled(processedItem.item) && !this.isItemSeparator(processedItem.item) && this.isItemVisible(processedItem.item);
+  }
+  isItemDisabled(item) {
+    return this.getItemProp(item, "disabled");
+  }
+  isItemVisible(item) {
+    return this.getItemProp(item, "visible") !== false;
+  }
+  isItemSeparator(item) {
+    return this.getItemProp(item, "separator");
+  }
+  isItemMatched(processedItem) {
+    return this.isValidItem(processedItem) && this.getProccessedItemLabel(processedItem).toLocaleLowerCase().startsWith(this.searchValue.toLocaleLowerCase());
+  }
+  isProccessedItemGroup(processedItem) {
+    return processedItem && isNotEmpty(processedItem.items);
+  }
+  onOverlayClick(event2) {
+    if (this.popup) {
+      this.overlayService.add({
+        originalEvent: event2,
+        target: this.el.nativeElement
+      });
+    }
+  }
+  onItemClick(event2) {
+    const {
+      originalEvent,
+      processedItem
+    } = event2;
+    const grouped = this.isProcessedItemGroup(processedItem);
+    const root = isEmpty(processedItem.parent);
+    const selected = this.isSelected(processedItem);
+    if (selected) {
+      const {
+        index,
+        key,
+        level,
+        parentKey,
+        item
+      } = processedItem;
+      this.activeItemPath.set(this.activeItemPath().filter((p) => key !== p.key && key.startsWith(p.key)));
+      this.focusedItemInfo.set({
+        index,
+        level,
+        parentKey,
+        item
+      });
+      this.dirty = true;
+      focus(this.rootmenu.sublistViewChild.nativeElement);
+    } else {
+      if (grouped) {
+        this.onItemChange(event2);
+      } else {
+        const rootProcessedItem = root ? processedItem : this.activeItemPath().find((p) => p.parentKey === "");
+        this.hide(originalEvent);
+        this.changeFocusedItemIndex(originalEvent, rootProcessedItem ? rootProcessedItem.index : -1);
+        focus(this.rootmenu.sublistViewChild.nativeElement);
+      }
+    }
+  }
+  onItemMouseEnter(event2) {
+    if (!isTouchDevice()) {
+      if (this.dirty) {
+        this.onItemChange(event2, "hover");
+      }
+    } else {
+      this.onItemChange({
+        event: event2,
+        processedItem: event2.processedItem,
+        focus: this.autoDisplay
+      }, "hover");
+    }
+  }
+  onKeyDown(event2) {
+    const metaKey = event2.metaKey || event2.ctrlKey;
+    switch (event2.code) {
+      case "ArrowDown":
+        this.onArrowDownKey(event2);
+        break;
+      case "ArrowUp":
+        this.onArrowUpKey(event2);
+        break;
+      case "ArrowLeft":
+        this.onArrowLeftKey(event2);
+        break;
+      case "ArrowRight":
+        this.onArrowRightKey(event2);
+        break;
+      case "Home":
+        this.onHomeKey(event2);
+        break;
+      case "End":
+        this.onEndKey(event2);
+        break;
+      case "Space":
+        this.onSpaceKey(event2);
+        break;
+      case "Enter":
+        this.onEnterKey(event2);
+        break;
+      case "Escape":
+        this.onEscapeKey(event2);
+        break;
+      case "Tab":
+        this.onTabKey(event2);
+        break;
+      case "PageDown":
+      case "PageUp":
+      case "Backspace":
+      case "ShiftLeft":
+      case "ShiftRight":
+        break;
+      default:
+        if (!metaKey && isPrintableCharacter(event2.key)) {
+          this.searchItems(event2, event2.key);
+        }
+        break;
+    }
+  }
+  onArrowDownKey(event2) {
+    const itemIndex = this.focusedItemInfo().index !== -1 ? this.findNextItemIndex(this.focusedItemInfo().index) : this.findFirstFocusedItemIndex();
+    this.changeFocusedItemIndex(event2, itemIndex);
+    event2.preventDefault();
+  }
+  onArrowRightKey(event2) {
+    const processedItem = this.visibleItems[this.focusedItemInfo().index];
+    const grouped = this.isProccessedItemGroup(processedItem);
+    const item = processedItem?.item;
+    if (grouped) {
+      this.onItemChange({
+        originalEvent: event2,
+        processedItem
+      });
+      this.focusedItemInfo.set({
+        index: -1,
+        parentKey: processedItem.key,
+        item
+      });
+      this.searchValue = "";
+      this.onArrowDownKey(event2);
+    }
+    event2.preventDefault();
+  }
+  onArrowUpKey(event2) {
+    if (event2.altKey) {
+      if (this.focusedItemInfo().index !== -1) {
+        const processedItem = this.visibleItems[this.focusedItemInfo().index];
+        const grouped = this.isProccessedItemGroup(processedItem);
+        !grouped && this.onItemChange({
+          originalEvent: event2,
+          processedItem
+        });
+      }
+      this.popup && this.hide(event2, true);
+      event2.preventDefault();
+    } else {
+      const itemIndex = this.focusedItemInfo().index !== -1 ? this.findPrevItemIndex(this.focusedItemInfo().index) : this.findLastFocusedItemIndex();
+      this.changeFocusedItemIndex(event2, itemIndex);
+      event2.preventDefault();
+    }
+  }
+  onArrowLeftKey(event2) {
+    const processedItem = this.visibleItems[this.focusedItemInfo().index];
+    const parentItem = this.activeItemPath().find((p) => p.key === processedItem.parentKey);
+    const root = isEmpty(processedItem.parent);
+    if (!root) {
+      this.focusedItemInfo.set({
+        index: -1,
+        parentKey: parentItem ? parentItem.parentKey : "",
+        item: processedItem.item
+      });
+      this.searchValue = "";
+      this.onArrowDownKey(event2);
+    }
+    const activeItemPath = this.activeItemPath().filter((p) => p.parentKey !== this.focusedItemInfo().parentKey);
+    this.activeItemPath.set(activeItemPath);
+    event2.preventDefault();
+  }
+  onHomeKey(event2) {
+    this.changeFocusedItemIndex(event2, this.findFirstItemIndex());
+    event2.preventDefault();
+  }
+  onEndKey(event2) {
+    this.changeFocusedItemIndex(event2, this.findLastItemIndex());
+    event2.preventDefault();
+  }
+  onSpaceKey(event2) {
+    this.onEnterKey(event2);
+  }
+  onEscapeKey(event2) {
+    this.hide(event2, true);
+    this.focusedItemInfo().index = this.findFirstFocusedItemIndex();
+    event2.preventDefault();
+  }
+  onTabKey(event2) {
+    if (this.focusedItemInfo().index !== -1) {
+      const processedItem = this.visibleItems[this.focusedItemInfo().index];
+      const grouped = this.isProccessedItemGroup(processedItem);
+      !grouped && this.onItemChange({
+        originalEvent: event2,
+        processedItem
+      });
+    }
+    this.hide();
+  }
+  onEnterKey(event2) {
+    if (this.focusedItemInfo().index !== -1) {
+      const element = findSingle(this.rootmenu.el.nativeElement, `li[id="${`${this.focusedItemId}`}"]`);
+      const anchorElement = element && findSingle(element, 'a[data-pc-section="action"]');
+      anchorElement ? anchorElement.click() : element && element.click();
+      if (!this.popup) {
+        const processedItem = this.visibleItems[this.focusedItemInfo().index];
+        const grouped = this.isProccessedItemGroup(processedItem);
+        !grouped && (this.focusedItemInfo().index = this.findFirstFocusedItemIndex());
+      }
+    }
+    event2.preventDefault();
+  }
+  onItemChange(event2, type) {
+    const {
+      processedItem,
+      isFocus
+    } = event2;
+    if (isEmpty(processedItem)) return;
+    const {
+      index,
+      key,
+      level,
+      parentKey,
+      items,
+      item
+    } = processedItem;
+    const grouped = isNotEmpty(items);
+    const activeItemPath = this.activeItemPath().filter((p) => p.parentKey !== parentKey && p.parentKey !== key);
+    grouped && activeItemPath.push(processedItem);
+    this.focusedItemInfo.set({
+      index,
+      level,
+      parentKey,
+      item
+    });
+    grouped && (this.dirty = true);
+    isFocus && focus(this.rootmenu.sublistViewChild.nativeElement);
+    if (type === "hover" && this.queryMatches) {
+      return;
+    }
+    this.activeItemPath.set(activeItemPath);
+  }
+  onMenuFocus(event2) {
+    this.focused = true;
+    if (this.focusedItemInfo().index === -1 && !this.popup) {
+    }
+  }
+  onMenuBlur(event2) {
+    this.focused = false;
+    this.focusedItemInfo.set({
+      index: -1,
+      level: 0,
+      parentKey: "",
+      item: null
+    });
+    this.searchValue = "";
+    this.dirty = false;
+  }
+  onOverlayAnimationStart(event2) {
+    switch (event2.toState) {
+      case "visible":
+        if (this.popup) {
+          this.container = event2.element;
+          this.moveOnTop();
+          this.onShow.emit({});
+          addStyle(this.containerViewChild.nativeElement, {
+            position: "absolute",
+            top: 0
+          });
+          this.appendOverlay();
+          this.alignOverlay();
+          this.bindOutsideClickListener();
+          this.bindResizeListener();
+          this.bindScrollListener();
+          focus(this.rootmenu.sublistViewChild.nativeElement);
+          this.scrollInView();
+        }
+        break;
+      case "void":
+        this.onOverlayHide();
+        this.onHide.emit({});
+        break;
+    }
+  }
+  alignOverlay() {
+    if (this.relativeAlign) relativePosition(this.container, this.target);
+    else absolutePosition(this.container, this.target);
+    const targetWidth = getOuterWidth(this.target);
+    if (targetWidth > getOuterWidth(this.container)) {
+      this.container.style.minWidth = getOuterWidth(this.target) + "px";
+    }
+  }
+  onOverlayAnimationEnd(event2) {
+    switch (event2.toState) {
+      case "void":
+        zindexutils.clear(event2.element);
+        break;
+    }
+  }
+  appendOverlay() {
+    if (this.appendTo) {
+      if (this.appendTo === "body") this.renderer.appendChild(this.document.body, this.container);
+      else appendChild(this.appendTo, this.container);
+    }
+  }
+  restoreOverlayAppend() {
+    if (this.container && this.appendTo) {
+      this.renderer.appendChild(this.el.nativeElement, this.container);
+    }
+  }
+  moveOnTop() {
+    if (this.autoZIndex) {
+      zindexutils.set("menu", this.container, this.baseZIndex + this.config.zIndex.menu);
+    }
+  }
+  /**
+   * Hides the popup menu.
+   * @group Method
+   */
+  hide(event2, isFocus) {
+    if (this.popup) {
+      this.onHide.emit({});
+      this.visible = false;
+    }
+    this.activeItemPath.set([]);
+    this.focusedItemInfo.set({
+      index: -1,
+      level: 0,
+      parentKey: ""
+    });
+    isFocus && focus(this.relatedTarget || this.target || this.rootmenu.sublistViewChild.nativeElement);
+    this.dirty = false;
+  }
+  /**
+   * Toggles the visibility of the popup menu.
+   * @param {Event} event - Browser event.
+   * @group Method
+   */
+  toggle(event2) {
+    this.visible ? this.hide(event2, true) : this.show(event2);
+  }
+  /**
+   * Displays the popup menu.
+   * @param {Event} even - Browser event.
+   * @group Method
+   */
+  show(event2, isFocus) {
+    if (this.popup) {
+      this.visible = true;
+      this.target = this.target || event2.currentTarget;
+      this.relatedTarget = event2.relatedTarget || null;
+      this.relativeAlign = event2?.relativeAlign || null;
+    }
+    this.focusedItemInfo.set({
+      index: -1,
+      level: 0,
+      parentKey: ""
+    });
+    isFocus && focus(this.rootmenu.sublistViewChild.nativeElement);
+    this.cd.markForCheck();
+  }
+  searchItems(event2, char) {
+    this.searchValue = (this.searchValue || "") + char;
+    let itemIndex = -1;
+    let matched = false;
+    if (this.focusedItemInfo().index !== -1) {
+      itemIndex = this.visibleItems.slice(this.focusedItemInfo().index).findIndex((processedItem) => this.isItemMatched(processedItem));
+      itemIndex = itemIndex === -1 ? this.visibleItems.slice(0, this.focusedItemInfo().index).findIndex((processedItem) => this.isItemMatched(processedItem)) : itemIndex + this.focusedItemInfo().index;
+    } else {
+      itemIndex = this.visibleItems.findIndex((processedItem) => this.isItemMatched(processedItem));
+    }
+    if (itemIndex !== -1) {
+      matched = true;
+    }
+    if (itemIndex === -1 && this.focusedItemInfo().index === -1) {
+      itemIndex = this.findFirstFocusedItemIndex();
+    }
+    if (itemIndex !== -1) {
+      this.changeFocusedItemIndex(event2, itemIndex);
+    }
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+    this.searchTimeout = setTimeout(() => {
+      this.searchValue = "";
+      this.searchTimeout = null;
+    }, 500);
+    return matched;
+  }
+  findLastFocusedItemIndex() {
+    const selectedIndex = this.findSelectedItemIndex();
+    return selectedIndex < 0 ? this.findLastItemIndex() : selectedIndex;
+  }
+  findLastItemIndex() {
+    return findLastIndex(this.visibleItems, (processedItem) => this.isValidItem(processedItem));
+  }
+  findPrevItemIndex(index) {
+    const matchedItemIndex = index > 0 ? findLastIndex(this.visibleItems.slice(0, index), (processedItem) => this.isValidItem(processedItem)) : -1;
+    return matchedItemIndex > -1 ? matchedItemIndex : index;
+  }
+  findNextItemIndex(index) {
+    const matchedItemIndex = index < this.visibleItems.length - 1 ? this.visibleItems.slice(index + 1).findIndex((processedItem) => this.isValidItem(processedItem)) : -1;
+    return matchedItemIndex > -1 ? matchedItemIndex + index + 1 : index;
+  }
+  findFirstFocusedItemIndex() {
+    const selectedIndex = this.findSelectedItemIndex();
+    return selectedIndex < 0 ? this.findFirstItemIndex() : selectedIndex;
+  }
+  findFirstItemIndex() {
+    return this.visibleItems.findIndex((processedItem) => this.isValidItem(processedItem));
+  }
+  findSelectedItemIndex() {
+    return this.visibleItems.findIndex((processedItem) => this.isValidSelectedItem(processedItem));
+  }
+  changeFocusedItemIndex(event2, index) {
+    if (this.focusedItemInfo().index !== index) {
+      const focusedItemInfo = this.focusedItemInfo();
+      this.focusedItemInfo.set(__spreadProps(__spreadValues({}, focusedItemInfo), {
+        item: this.visibleItems[index].item,
+        index
+      }));
+      this.scrollInView();
+    }
+  }
+  scrollInView(index = -1) {
+    const id = index !== -1 ? `${this.id}_${index}` : this.focusedItemId;
+    const element = findSingle(this.rootmenu.el.nativeElement, `li[id="${id}"]`);
+    if (element) {
+      element.scrollIntoView && element.scrollIntoView({
+        block: "nearest",
+        inline: "nearest"
+      });
+    }
+  }
+  bindScrollListener() {
+    if (!this.scrollHandler) {
+      this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, (event2) => {
+        if (this.visible) {
+          this.hide(event2, true);
+        }
+      });
+    }
+    this.scrollHandler.bindScrollListener();
+  }
+  unbindScrollListener() {
+    if (this.scrollHandler) {
+      this.scrollHandler.unbindScrollListener();
+      this.scrollHandler = null;
+    }
+  }
+  bindResizeListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.resizeListener) {
+        this.resizeListener = this.renderer.listen(this.document.defaultView, "resize", (event2) => {
+          if (!isTouchDevice()) {
+            this.hide(event2, true);
+          }
+        });
+      }
+    }
+  }
+  bindOutsideClickListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.outsideClickListener) {
+        this.outsideClickListener = this.renderer.listen(this.document, "click", (event2) => {
+          const isOutsideContainer = this.containerViewChild && !this.containerViewChild.nativeElement.contains(event2.target);
+          const isOutsideTarget = this.popup ? !(this.target && (this.target === event2.target || this.target.contains(event2.target))) : true;
+          if (isOutsideContainer && isOutsideTarget) {
+            this.hide();
+          }
+        });
+      }
+    }
+  }
+  unbindOutsideClickListener() {
+    if (this.outsideClickListener) {
+      document.removeEventListener("click", this.outsideClickListener);
+      this.outsideClickListener = null;
+    }
+  }
+  unbindResizeListener() {
+    if (this.resizeListener) {
+      this.resizeListener();
+      this.resizeListener = null;
+    }
+  }
+  onOverlayHide() {
+    this.unbindOutsideClickListener();
+    this.unbindResizeListener();
+    this.unbindScrollListener();
+    if (!this.cd.destroyed) {
+      this.target = null;
+    }
+  }
+  ngOnDestroy() {
+    if (this.popup) {
+      if (this.scrollHandler) {
+        this.scrollHandler.destroy();
+        this.scrollHandler = null;
+      }
+      if (this.container && this.autoZIndex) {
+        zindexutils.clear(this.container);
+      }
+      this.restoreOverlayAppend();
+      this.onOverlayHide();
+    }
+    this.unbindMatchMediaListener();
+    super.ngOnDestroy();
+  }
+  static \u0275fac = function TieredMenu_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _TieredMenu)(\u0275\u0275directiveInject(OverlayService));
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _TieredMenu,
+    selectors: [["p-tieredMenu"], ["p-tieredmenu"], ["p-tiered-menu"]],
+    contentQueries: function TieredMenu_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c64, 4);
+        \u0275\u0275contentQuery(dirIndex, _c7, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.submenuIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.itemTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    viewQuery: function TieredMenu_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c8, 5);
+        \u0275\u0275viewQuery(_c9, 5);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.rootmenu = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.containerViewChild = _t.first);
+      }
+    },
+    inputs: {
+      model: "model",
+      popup: [2, "popup", "popup", booleanAttribute],
+      style: "style",
+      styleClass: "styleClass",
+      appendTo: "appendTo",
+      breakpoint: "breakpoint",
+      autoZIndex: [2, "autoZIndex", "autoZIndex", booleanAttribute],
+      baseZIndex: [2, "baseZIndex", "baseZIndex", numberAttribute],
+      autoDisplay: [2, "autoDisplay", "autoDisplay", booleanAttribute],
+      showTransitionOptions: "showTransitionOptions",
+      hideTransitionOptions: "hideTransitionOptions",
+      id: "id",
+      ariaLabel: "ariaLabel",
+      ariaLabelledBy: "ariaLabelledBy",
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      tabindex: [2, "tabindex", "tabindex", numberAttribute]
+    },
+    outputs: {
+      onShow: "onShow",
+      onHide: "onHide"
+    },
+    features: [\u0275\u0275ProvidersFeature([TieredMenuStyle]), \u0275\u0275InheritDefinitionFeature],
+    decls: 1,
+    vars: 1,
+    consts: [["container", ""], ["rootmenu", ""], [3, "id", "ngClass", "class", "ngStyle", "click", 4, "ngIf"], [3, "click", "id", "ngClass", "ngStyle"], [3, "itemClick", "menuFocus", "menuBlur", "menuKeydown", "itemMouseEnter", "root", "items", "itemTemplate", "menuId", "tabindex", "ariaLabel", "ariaLabelledBy", "baseZIndex", "autoZIndex", "autoDisplay", "popup", "focusedItemId", "activeItemPath"]],
+    template: function TieredMenu_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, TieredMenu_div_0_Template, 4, 30, "div", 2);
+      }
+      if (rf & 2) {
+        \u0275\u0275property("ngIf", !ctx.popup || ctx.visible);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgIf, NgStyle, TieredMenuSub, RouterModule, TooltipModule, SharedModule],
+    encapsulation: 2,
+    data: {
+      animation: [trigger("overlayAnimation", [transition(":enter", [style({
+        opacity: 0,
+        transform: "scaleY(0.8)"
+      }), animate("{{showTransitionParams}}")]), transition(":leave", [animate("{{hideTransitionParams}}", style({
+        opacity: 0
+      }))])])]
+    },
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TieredMenu, [{
+    type: Component,
+    args: [{
+      selector: "p-tieredMenu, p-tieredmenu, p-tiered-menu",
+      standalone: true,
+      imports: [CommonModule, TieredMenuSub, RouterModule, TooltipModule, SharedModule],
+      template: `
+        <div
+            #container
+            [attr.data-pc-section]="'root'"
+            [attr.data-pc-name]="'tieredmenu'"
+            [id]="id"
+            [ngClass]="{ 'p-tieredmenu p-component': true, 'p-tieredmenu-mobile': queryMatches, 'p-tieredmenu-overlay': popup }"
+            [class]="styleClass"
+            [ngStyle]="style"
+            (click)="onOverlayClick($event)"
+            [@overlayAnimation]="{
+                value: 'visible',
+                params: { showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions }
+            }"
+            [@.disabled]="popup !== true"
+            (@overlayAnimation.start)="onOverlayAnimationStart($event)"
+            (@overlayAnimation.done)="onOverlayAnimationEnd($event)"
+            *ngIf="!popup || visible"
+        >
+            <p-tieredMenuSub
+                #rootmenu
+                [root]="true"
+                [items]="processedItems"
+                [itemTemplate]="itemTemplate || _itemTemplate"
+                [menuId]="id"
+                [tabindex]="!disabled ? tabindex : -1"
+                [ariaLabel]="ariaLabel"
+                [ariaLabelledBy]="ariaLabelledBy"
+                [baseZIndex]="baseZIndex"
+                [autoZIndex]="autoZIndex"
+                [autoDisplay]="autoDisplay"
+                [popup]="popup"
+                [focusedItemId]="focused ? focusedItemId : undefined"
+                [activeItemPath]="activeItemPath()"
+                (itemClick)="onItemClick($event)"
+                (menuFocus)="onMenuFocus($event)"
+                (menuBlur)="onMenuBlur($event)"
+                (menuKeydown)="onKeyDown($event)"
+                (itemMouseEnter)="onItemMouseEnter($event)"
+            ></p-tieredMenuSub>
+        </div>
+    `,
+      animations: [trigger("overlayAnimation", [transition(":enter", [style({
+        opacity: 0,
+        transform: "scaleY(0.8)"
+      }), animate("{{showTransitionParams}}")]), transition(":leave", [animate("{{hideTransitionParams}}", style({
+        opacity: 0
+      }))])])],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      providers: [TieredMenuStyle]
+    }]
+  }], () => [{
+    type: OverlayService
+  }], {
+    model: [{
+      type: Input
+    }],
+    popup: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    style: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    appendTo: [{
+      type: Input
+    }],
+    breakpoint: [{
+      type: Input
+    }],
+    autoZIndex: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    baseZIndex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    autoDisplay: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    showTransitionOptions: [{
+      type: Input
+    }],
+    hideTransitionOptions: [{
+      type: Input
+    }],
+    id: [{
+      type: Input
+    }],
+    ariaLabel: [{
+      type: Input
+    }],
+    ariaLabelledBy: [{
+      type: Input
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    tabindex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    onShow: [{
+      type: Output
+    }],
+    onHide: [{
+      type: Output
+    }],
+    rootmenu: [{
+      type: ViewChild,
+      args: ["rootmenu"]
+    }],
+    containerViewChild: [{
+      type: ViewChild,
+      args: ["container"]
+    }],
+    submenuIconTemplate: [{
+      type: ContentChild,
+      args: ["submenuicon", {
+        descendants: false
+      }]
+    }],
+    itemTemplate: [{
+      type: ContentChild,
+      args: ["item", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var TieredMenuModule = class _TieredMenuModule {
+  static \u0275fac = function TieredMenuModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _TieredMenuModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _TieredMenuModule,
+    imports: [TieredMenu, SharedModule],
+    exports: [TieredMenu, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [TieredMenu, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TieredMenuModule, [{
+    type: NgModule,
+    args: [{
+      imports: [TieredMenu, SharedModule],
+      exports: [TieredMenu, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-splitbutton.mjs
+var _c09 = ["content"];
+var _c17 = ["dropdownicon"];
+var _c26 = ["container"];
+var _c36 = ["defaultbtn"];
+var _c46 = ["menu"];
+function SplitButton_ng_container_2_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function SplitButton_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "button", 10);
+    \u0275\u0275listener("click", function SplitButton_ng_container_2_Template_button_click_1_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onDefaultButtonClick($event));
+    });
+    \u0275\u0275template(2, SplitButton_ng_container_2_ng_container_2_Template, 1, 0, "ng-container", 11);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("severity", ctx_r2.severity)("text", ctx_r2.text)("outlined", ctx_r2.outlined)("size", ctx_r2.size)("icon", ctx_r2.icon)("iconPos", ctx_r2.iconPos)("disabled", ctx_r2.disabled)("pAutoFocus", ctx_r2.autofocus)("pTooltip", ctx_r2.tooltip)("tooltipOptions", ctx_r2.tooltipOptions);
+    \u0275\u0275attribute("tabindex", ctx_r2.tabindex)("aria-label", (ctx_r2.buttonProps == null ? null : ctx_r2.buttonProps["ariaLabel"]) || ctx_r2.label);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.contentTemplate || ctx_r2._contentTemplate);
+  }
+}
+function SplitButton_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 12, 3);
+    \u0275\u0275listener("click", function SplitButton_ng_template_3_Template_button_click_0_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onDefaultButtonClick($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("severity", ctx_r2.severity)("text", ctx_r2.text)("outlined", ctx_r2.outlined)("size", ctx_r2.size)("icon", ctx_r2.icon)("iconPos", ctx_r2.iconPos)("label", ctx_r2.label)("disabled", ctx_r2.buttonDisabled)("pAutoFocus", ctx_r2.autofocus)("pTooltip", ctx_r2.tooltip)("tooltipOptions", ctx_r2.tooltipOptions);
+    \u0275\u0275attribute("tabindex", ctx_r2.tabindex)("aria-label", ctx_r2.buttonProps == null ? null : ctx_r2.buttonProps["ariaLabel"]);
+  }
+}
+function SplitButton_span_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span");
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r2.dropdownIcon);
+  }
+}
+function SplitButton_ng_container_7_ChevronDownIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "ChevronDownIcon");
+  }
+}
+function SplitButton_ng_container_7_2_ng_template_0_Template(rf, ctx) {
+}
+function SplitButton_ng_container_7_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, SplitButton_ng_container_7_2_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function SplitButton_ng_container_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, SplitButton_ng_container_7_ChevronDownIcon_1_Template, 1, 0, "ChevronDownIcon", 8)(2, SplitButton_ng_container_7_2_Template, 1, 0, null, 11);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.dropdownIconTemplate && !ctx_r2._dropdownIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.dropdownIconTemplate || ctx_r2._dropdownIconTemplate);
+  }
+}
+var theme11 = ({
+  dt: dt2
+}) => `
+.p-splitbutton {
+    display: inline-flex;
+    position: relative;
+    border-radius: ${dt2("splitbutton.border.radius")};
+}
+
+.p-splitbutton-button.p-button {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    border-right: 0 none;
+}
+
+.p-splitbutton-button.p-button:focus-visible,
+.p-splitbutton-dropdown.p-button:focus-visible {
+    z-index: 1;
+}
+
+.p-splitbutton-button.p-button:not(:disabled):hover,
+.p-splitbutton-button.p-button:not(:disabled):active {
+    border-right: 0 none;
+}
+
+.p-splitbutton-dropdown.p-button {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+}
+
+.p-splitbutton .p-menu {
+    min-width: 100%;
+}
+
+.p-splitbutton-fluid {
+    display: flex;
+}
+
+.p-splitbutton-rounded .p-splitbutton-dropdown {
+    border-start-end-radius: ${dt2("splitbutton.rounded.border.radius")};
+    border-end-end-radius: ${dt2("splitbutton.rounded.border.radius")};
+}
+
+.p-splitbutton-rounded > .p-splitbutton-button {
+    border-start-start-radius: ${dt2("splitbutton.rounded.border.radius")};
+    border-end-start-radius: ${dt2("splitbutton.rounded.border.radius")};
+}
+
+.p-splitbutton-raised {
+    box-shadow: ${dt2("splitbutton.raised.shadow")};
+}
+`;
+var classes10 = {
+  root: ({
+    props
+  }) => ["p-splitbutton p-component", {
+    "p-splitbutton-raised": props.raised,
+    "p-splitbutton-rounded": props.rounded,
+    "p-splitbutton-fluid": props.fluid
+  }],
+  pcButton: "p-splitbutton-button",
+  pcDropdown: "p-splitbutton-dropdown"
+};
+var SplitButtonStyle = class _SplitButtonStyle extends BaseStyle {
+  name = "splitbutton";
+  theme = theme11;
+  classes = classes10;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275SplitButtonStyle_BaseFactory;
+    return function SplitButtonStyle_Factory(__ngFactoryType__) {
+      return (\u0275SplitButtonStyle_BaseFactory || (\u0275SplitButtonStyle_BaseFactory = \u0275\u0275getInheritedFactory(_SplitButtonStyle)))(__ngFactoryType__ || _SplitButtonStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _SplitButtonStyle,
+    factory: _SplitButtonStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SplitButtonStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var SplitButtonClasses;
+(function(SplitButtonClasses2) {
+  SplitButtonClasses2["root"] = "p-splitbutton";
+  SplitButtonClasses2["pcButton"] = "p-splitbutton-button";
+  SplitButtonClasses2["pcDropdown"] = "p-splitbutton-dropdown";
+})(SplitButtonClasses || (SplitButtonClasses = {}));
+var SplitButton = class _SplitButton extends BaseComponent {
+  /**
+   * MenuModel instance to define the overlay items.
+   * @group Props
+   */
+  model;
+  /**
+   * Defines the style of the button.
+   * @group Props
+   */
+  severity;
+  /**
+   * Add a shadow to indicate elevation.
+   * @group Props
+   */
+  raised = false;
+  /**
+   * Add a circular border radius to the button.
+   * @group Props
+   */
+  rounded = false;
+  /**
+   * Add a textual class to the button without a background initially.
+   * @group Props
+   */
+  text = false;
+  /**
+   * Add a border class without a background initially.
+   * @group Props
+   */
+  outlined = false;
+  /**
+   * Defines the size of the button.
+   * @group Props
+   */
+  size = null;
+  /**
+   * Add a plain textual class to the button without a background initially.
+   * @group Props
+   */
+  plain = false;
+  /**
+   * Name of the icon.
+   * @group Props
+   */
+  icon;
+  /**
+   * Position of the icon.
+   * @group Props
+   */
+  iconPos = "left";
+  /**
+   * Text of the button.
+   * @group Props
+   */
+  label;
+  /**
+   * Tooltip for the main button.
+   * @group Props
+   */
+  tooltip;
+  /**
+   * Tooltip options for the main button.
+   * @group Props
+   */
+  tooltipOptions;
+  /**
+   * Inline style of the element.
+   * @group Props
+   */
+  style;
+  /**
+   * Class of the element.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Inline style of the overlay menu.
+   * @group Props
+   */
+  menuStyle;
+  /**
+   * Style class of the overlay menu.
+   * @group Props
+   */
+  menuStyleClass;
+  /**
+   * Name of the dropdown icon.
+   * @group Props
+   */
+  dropdownIcon;
+  /**
+   *  Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
+   * @group Props
+   */
+  appendTo = "body";
+  /**
+   * Indicates the direction of the element.
+   * @group Props
+   */
+  dir;
+  /**
+   * Defines a string that labels the expand button for accessibility.
+   * @group Props
+   */
+  expandAriaLabel;
+  /**
+   * Transition options of the show animation.
+   * @group Props
+   */
+  showTransitionOptions = ".12s cubic-bezier(0, 0, 0.2, 1)";
+  /**
+   * Transition options of the hide animation.
+   * @group Props
+   */
+  hideTransitionOptions = ".1s linear";
+  /**
+   * Button Props
+   */
+  buttonProps;
+  /**
+   * Menu Button Props
+   */
+  menuButtonProps;
+  /**
+   * When present, it specifies that the component should automatically get focus on load.
+   * @group Props
+   */
+  autofocus;
+  /**
+   * When present, it specifies that the element should be disabled.
+   * @group Props
+   */
+  set disabled(v) {
+    this._disabled = v;
+    this.buttonDisabled = v;
+    this.menuButtonDisabled = v;
+  }
+  get disabled() {
+    return this._disabled;
+  }
+  /**
+   * Index of the element in tabbing order.
+   * @group Props
+   */
+  tabindex;
+  /**
+   * When present, it specifies that the menu button element should be disabled.
+   * @group Props
+   */
+  menuButtonDisabled = false;
+  /**
+   * When present, it specifies that the button element should be disabled.
+   * @group Props
+   */
+  buttonDisabled = false;
+  /**
+   * Callback to invoke when default command button is clicked.
+   * @param {MouseEvent} event - Mouse event.
+   * @group Emits
+   */
+  onClick = new EventEmitter();
+  /**
+   * Callback to invoke when overlay menu is hidden.
+   * @group Emits
+   */
+  onMenuHide = new EventEmitter();
+  /**
+   * Callback to invoke when overlay menu is shown.
+   * @group Emits
+   */
+  onMenuShow = new EventEmitter();
+  /**
+   * Callback to invoke when dropdown button is clicked.
+   * @param {MouseEvent} event - Mouse event.
+   * @group Emits
+   */
+  onDropdownClick = new EventEmitter();
+  containerViewChild;
+  buttonViewChild;
+  menu;
+  /**
+   * Template of the content.
+   * @group Templates
+   */
+  contentTemplate;
+  /**
+   * Template of the dropdownicon.
+   * @group Templates
+   **/
+  dropdownIconTemplate;
+  templates;
+  ariaId;
+  isExpanded = signal(false);
+  _disabled;
+  _componentStyle = inject(SplitButtonStyle);
+  _contentTemplate;
+  _dropdownIconTemplate;
+  ngOnInit() {
+    super.ngOnInit();
+    this.ariaId = uuid("pn_id_");
+  }
+  ngAfterContentInit() {
+    this.templates?.forEach((item) => {
+      switch (item.getType()) {
+        case "content":
+          this._contentTemplate = item.template;
+          break;
+        case "dropdownicon":
+          this._dropdownIconTemplate = item.template;
+          break;
+        default:
+          this._contentTemplate = item.template;
+          break;
+      }
+    });
+  }
+  get containerClass() {
+    const cls = {
+      "p-splitbutton p-component": true,
+      "p-splitbutton-raised": this.raised,
+      "p-splitbutton-rounded": this.rounded,
+      "p-splitbutton-outlined": this.outlined,
+      "p-splitbutton-text": this.text,
+      [`p-splitbutton-${this.size === "small" ? "sm" : "lg"}`]: this.size
+    };
+    return __spreadValues({}, cls);
+  }
+  onDefaultButtonClick(event2) {
+    this.onClick.emit(event2);
+    this.menu.hide();
+  }
+  onDropdownButtonClick(event2) {
+    this.onDropdownClick.emit(event2);
+    this.menu?.toggle({
+      currentTarget: this.containerViewChild?.nativeElement,
+      relativeAlign: this.appendTo == null
+    });
+  }
+  onDropdownButtonKeydown(event2) {
+    if (event2.code === "ArrowDown" || event2.code === "ArrowUp") {
+      this.onDropdownButtonClick();
+      event2.preventDefault();
+    }
+  }
+  onHide() {
+    this.isExpanded.set(false);
+    this.onMenuHide.emit();
+  }
+  onShow() {
+    this.isExpanded.set(true);
+    this.onMenuShow.emit();
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275SplitButton_BaseFactory;
+    return function SplitButton_Factory(__ngFactoryType__) {
+      return (\u0275SplitButton_BaseFactory || (\u0275SplitButton_BaseFactory = \u0275\u0275getInheritedFactory(_SplitButton)))(__ngFactoryType__ || _SplitButton);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _SplitButton,
+    selectors: [["p-splitbutton"], ["p-splitButton"], ["p-split-button"]],
+    contentQueries: function SplitButton_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c09, 4);
+        \u0275\u0275contentQuery(dirIndex, _c17, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.dropdownIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    viewQuery: function SplitButton_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c26, 5);
+        \u0275\u0275viewQuery(_c36, 5);
+        \u0275\u0275viewQuery(_c46, 5);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.containerViewChild = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.buttonViewChild = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.menu = _t.first);
+      }
+    },
+    inputs: {
+      model: "model",
+      severity: "severity",
+      raised: [2, "raised", "raised", booleanAttribute],
+      rounded: [2, "rounded", "rounded", booleanAttribute],
+      text: [2, "text", "text", booleanAttribute],
+      outlined: [2, "outlined", "outlined", booleanAttribute],
+      size: "size",
+      plain: [2, "plain", "plain", booleanAttribute],
+      icon: "icon",
+      iconPos: "iconPos",
+      label: "label",
+      tooltip: "tooltip",
+      tooltipOptions: "tooltipOptions",
+      style: "style",
+      styleClass: "styleClass",
+      menuStyle: "menuStyle",
+      menuStyleClass: "menuStyleClass",
+      dropdownIcon: "dropdownIcon",
+      appendTo: "appendTo",
+      dir: "dir",
+      expandAriaLabel: "expandAriaLabel",
+      showTransitionOptions: "showTransitionOptions",
+      hideTransitionOptions: "hideTransitionOptions",
+      buttonProps: "buttonProps",
+      menuButtonProps: "menuButtonProps",
+      autofocus: [2, "autofocus", "autofocus", booleanAttribute],
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      tabindex: [2, "tabindex", "tabindex", numberAttribute],
+      menuButtonDisabled: [2, "menuButtonDisabled", "menuButtonDisabled", booleanAttribute],
+      buttonDisabled: [2, "buttonDisabled", "buttonDisabled", booleanAttribute]
+    },
+    outputs: {
+      onClick: "onClick",
+      onMenuHide: "onMenuHide",
+      onMenuShow: "onMenuShow",
+      onDropdownClick: "onDropdownClick"
+    },
+    features: [\u0275\u0275ProvidersFeature([SplitButtonStyle]), \u0275\u0275InheritDefinitionFeature],
+    decls: 10,
+    vars: 26,
+    consts: [["container", ""], ["defaultButton", ""], ["menu", ""], ["defaultbtn", ""], [3, "ngClass", "ngStyle"], [4, "ngIf", "ngIfElse"], ["type", "button", "pButton", "", "pRipple", "", 1, "p-splitbutton-dropdown", "p-button-icon-only", 3, "click", "keydown", "size", "severity", "text", "outlined", "disabled"], [3, "class", 4, "ngIf"], [4, "ngIf"], [3, "onHide", "onShow", "id", "popup", "model", "styleClass", "appendTo", "showTransitionOptions", "hideTransitionOptions"], ["type", "button", "pButton", "", "pRipple", "", 1, "p-splitbutton-button", 3, "click", "severity", "text", "outlined", "size", "icon", "iconPos", "disabled", "pAutoFocus", "pTooltip", "tooltipOptions"], [4, "ngTemplateOutlet"], ["type", "button", "pButton", "", "pRipple", "", 1, "p-splitbutton-button", 3, "click", "severity", "text", "outlined", "size", "icon", "iconPos", "label", "disabled", "pAutoFocus", "pTooltip", "tooltipOptions"]],
+    template: function SplitButton_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 4, 0);
+        \u0275\u0275template(2, SplitButton_ng_container_2_Template, 3, 13, "ng-container", 5)(3, SplitButton_ng_template_3_Template, 2, 13, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+        \u0275\u0275elementStart(5, "button", 6);
+        \u0275\u0275listener("click", function SplitButton_Template_button_click_5_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onDropdownButtonClick($event));
+        })("keydown", function SplitButton_Template_button_keydown_5_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onDropdownButtonKeydown($event));
+        });
+        \u0275\u0275template(6, SplitButton_span_6_Template, 1, 2, "span", 7)(7, SplitButton_ng_container_7_Template, 3, 2, "ng-container", 8);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(8, "p-tieredMenu", 9, 2);
+        \u0275\u0275listener("onHide", function SplitButton_Template_p_tieredMenu_onHide_8_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onHide());
+        })("onShow", function SplitButton_Template_p_tieredMenu_onShow_8_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onShow());
+        });
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        const defaultButton_r5 = \u0275\u0275reference(4);
+        \u0275\u0275classMap(ctx.styleClass);
+        \u0275\u0275property("ngClass", ctx.containerClass)("ngStyle", ctx.style);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.contentTemplate || ctx._contentTemplate)("ngIfElse", defaultButton_r5);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("size", ctx.size)("severity", ctx.severity)("text", ctx.text)("outlined", ctx.outlined)("disabled", ctx.menuButtonDisabled);
+        \u0275\u0275attribute("aria-label", (ctx.menuButtonProps == null ? null : ctx.menuButtonProps["ariaLabel"]) || ctx.expandAriaLabel)("aria-haspopup", (ctx.menuButtonProps == null ? null : ctx.menuButtonProps["ariaHasPopup"]) || true)("aria-expanded", (ctx.menuButtonProps == null ? null : ctx.menuButtonProps["ariaExpanded"]) || ctx.isExpanded())("aria-controls", (ctx.menuButtonProps == null ? null : ctx.menuButtonProps["ariaControls"]) || ctx.ariaId);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.dropdownIcon);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !ctx.dropdownIcon);
+        \u0275\u0275advance();
+        \u0275\u0275styleMap(ctx.menuStyle);
+        \u0275\u0275property("id", ctx.ariaId)("popup", true)("model", ctx.model)("styleClass", ctx.menuStyleClass)("appendTo", ctx.appendTo)("showTransitionOptions", ctx.showTransitionOptions)("hideTransitionOptions", ctx.hideTransitionOptions);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, ButtonDirective, TieredMenu, AutoFocus, ChevronDownIcon, Ripple, TooltipModule, Tooltip, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SplitButton, [{
+    type: Component,
+    args: [{
+      selector: "p-splitbutton, p-splitButton, p-split-button",
+      standalone: true,
+      imports: [CommonModule, ButtonDirective, TieredMenu, AutoFocus, ChevronDownIcon, Ripple, TooltipModule, SharedModule],
+      template: `
+        <div #container [ngClass]="containerClass" [class]="styleClass" [ngStyle]="style">
+            <ng-container *ngIf="contentTemplate || _contentTemplate; else defaultButton">
+                <button
+                    class="p-splitbutton-button"
+                    type="button"
+                    pButton
+                    pRipple
+                    [severity]="severity"
+                    [text]="text"
+                    [outlined]="outlined"
+                    [size]="size"
+                    [icon]="icon"
+                    [iconPos]="iconPos"
+                    (click)="onDefaultButtonClick($event)"
+                    [disabled]="disabled"
+                    [attr.tabindex]="tabindex"
+                    [attr.aria-label]="buttonProps?.['ariaLabel'] || label"
+                    [pAutoFocus]="autofocus"
+                    [pTooltip]="tooltip"
+                    [tooltipOptions]="tooltipOptions"
+                >
+                    <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
+                </button>
+            </ng-container>
+            <ng-template #defaultButton>
+                <button
+                    #defaultbtn
+                    class="p-splitbutton-button"
+                    type="button"
+                    pButton
+                    pRipple
+                    [severity]="severity"
+                    [text]="text"
+                    [outlined]="outlined"
+                    [size]="size"
+                    [icon]="icon"
+                    [iconPos]="iconPos"
+                    [label]="label"
+                    (click)="onDefaultButtonClick($event)"
+                    [disabled]="buttonDisabled"
+                    [attr.tabindex]="tabindex"
+                    [attr.aria-label]="buttonProps?.['ariaLabel']"
+                    [pAutoFocus]="autofocus"
+                    [pTooltip]="tooltip"
+                    [tooltipOptions]="tooltipOptions"
+                ></button>
+            </ng-template>
+            <button
+                type="button"
+                pButton
+                pRipple
+                [size]="size"
+                [severity]="severity"
+                [text]="text"
+                [outlined]="outlined"
+                class="p-splitbutton-dropdown p-button-icon-only"
+                (click)="onDropdownButtonClick($event)"
+                (keydown)="onDropdownButtonKeydown($event)"
+                [disabled]="menuButtonDisabled"
+                [attr.aria-label]="menuButtonProps?.['ariaLabel'] || expandAriaLabel"
+                [attr.aria-haspopup]="menuButtonProps?.['ariaHasPopup'] || true"
+                [attr.aria-expanded]="menuButtonProps?.['ariaExpanded'] || isExpanded()"
+                [attr.aria-controls]="menuButtonProps?.['ariaControls'] || ariaId"
+            >
+                <span *ngIf="dropdownIcon" [class]="dropdownIcon"></span>
+                <ng-container *ngIf="!dropdownIcon">
+                    <ChevronDownIcon *ngIf="!dropdownIconTemplate && !_dropdownIconTemplate" />
+                    <ng-template *ngTemplateOutlet="dropdownIconTemplate || _dropdownIconTemplate"></ng-template>
+                </ng-container>
+            </button>
+            <p-tieredMenu
+                [id]="ariaId"
+                #menu
+                [popup]="true"
+                [model]="model"
+                [style]="menuStyle"
+                [styleClass]="menuStyleClass"
+                [appendTo]="appendTo"
+                [showTransitionOptions]="showTransitionOptions"
+                [hideTransitionOptions]="hideTransitionOptions"
+                (onHide)="onHide()"
+                (onShow)="onShow()"
+            ></p-tieredMenu>
+        </div>
+    `,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      providers: [SplitButtonStyle],
+      encapsulation: ViewEncapsulation.None
+    }]
+  }], null, {
+    model: [{
+      type: Input
+    }],
+    severity: [{
+      type: Input
+    }],
+    raised: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    rounded: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    text: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    outlined: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    size: [{
+      type: Input
+    }],
+    plain: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    icon: [{
+      type: Input
+    }],
+    iconPos: [{
+      type: Input
+    }],
+    label: [{
+      type: Input
+    }],
+    tooltip: [{
+      type: Input
+    }],
+    tooltipOptions: [{
+      type: Input
+    }],
+    style: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    menuStyle: [{
+      type: Input
+    }],
+    menuStyleClass: [{
+      type: Input
+    }],
+    dropdownIcon: [{
+      type: Input
+    }],
+    appendTo: [{
+      type: Input
+    }],
+    dir: [{
+      type: Input
+    }],
+    expandAriaLabel: [{
+      type: Input
+    }],
+    showTransitionOptions: [{
+      type: Input
+    }],
+    hideTransitionOptions: [{
+      type: Input
+    }],
+    buttonProps: [{
+      type: Input
+    }],
+    menuButtonProps: [{
+      type: Input
+    }],
+    autofocus: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    tabindex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    menuButtonDisabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    buttonDisabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    onClick: [{
+      type: Output
+    }],
+    onMenuHide: [{
+      type: Output
+    }],
+    onMenuShow: [{
+      type: Output
+    }],
+    onDropdownClick: [{
+      type: Output
+    }],
+    containerViewChild: [{
+      type: ViewChild,
+      args: ["container"]
+    }],
+    buttonViewChild: [{
+      type: ViewChild,
+      args: ["defaultbtn"]
+    }],
+    menu: [{
+      type: ViewChild,
+      args: ["menu"]
+    }],
+    contentTemplate: [{
+      type: ContentChild,
+      args: ["content", {
+        descendants: false
+      }]
+    }],
+    dropdownIconTemplate: [{
+      type: ContentChild,
+      args: ["dropdownicon", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var SplitButtonModule = class _SplitButtonModule {
+  static \u0275fac = function SplitButtonModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _SplitButtonModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _SplitButtonModule,
+    imports: [SplitButton, SharedModule],
+    exports: [SplitButton, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [SplitButton, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SplitButtonModule, [{
+    type: NgModule,
+    args: [{
+      imports: [SplitButton, SharedModule],
+      exports: [SplitButton, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-togglebutton.mjs
+var _c010 = ["icon"];
+var _c18 = ["content"];
+var _c27 = (a0) => ({
   $implicit: a0
 });
-var _c35 = (a0, a1) => ({
+var _c37 = (a0, a1) => ({
   "p-togglebutton-icon": true,
   "p-togglebutton-icon-left": a0,
   "p-togglebutton-icon-right": a1
@@ -43467,7 +46532,7 @@ function ToggleButton_Conditional_2_Conditional_0_Conditional_0_Template(rf, ctx
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext(3);
     \u0275\u0275classMap(ctx_r0.checked ? ctx_r0.onIcon : ctx_r0.offIcon);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(4, _c35, ctx_r0.iconPos === "left", ctx_r0.iconPos === "right"));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(4, _c37, ctx_r0.iconPos === "left", ctx_r0.iconPos === "right"));
     \u0275\u0275attribute("data-pc-section", "icon");
   }
 }
@@ -43491,7 +46556,7 @@ function ToggleButton_Conditional_2_Conditional_1_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r0.iconTemplate || ctx_r0._iconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c25, ctx_r0.checked));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r0.iconTemplate || ctx_r0._iconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c27, ctx_r0.checked));
   }
 }
 function ToggleButton_Conditional_2_Template(rf, ctx) {
@@ -43511,7 +46576,7 @@ function ToggleButton_Conditional_2_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r0.checked ? ctx_r0.hasOnLabel ? ctx_r0.onLabel : "\xA0" : ctx_r0.hasOffLabel ? ctx_r0.offLabel : "\xA0");
   }
 }
-var theme10 = ({
+var theme12 = ({
   dt: dt2
 }) => `
 .p-togglebutton {
@@ -43630,7 +46695,7 @@ var theme10 = ({
     border-color: ${dt2("togglebutton.invalid.border.color")};
 }
 `;
-var classes9 = {
+var classes11 = {
   root: ({
     instance
   }) => ({
@@ -43646,8 +46711,8 @@ var classes9 = {
 };
 var ToggleButtonStyle = class _ToggleButtonStyle extends BaseStyle {
   name = "togglebutton";
-  theme = theme10;
-  classes = classes9;
+  theme = theme12;
+  classes = classes11;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275ToggleButtonStyle_BaseFactory;
     return function ToggleButtonStyle_Factory(__ngFactoryType__) {
@@ -43855,8 +46920,8 @@ var ToggleButton = class _ToggleButton extends BaseComponent {
     selectors: [["p-toggleButton"], ["p-togglebutton"], ["p-toggle-button"]],
     contentQueries: function ToggleButton_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c08, 4);
-        \u0275\u0275contentQuery(dirIndex, _c16, 4);
+        \u0275\u0275contentQuery(dirIndex, _c010, 4);
+        \u0275\u0275contentQuery(dirIndex, _c18, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -43915,7 +46980,7 @@ var ToggleButton = class _ToggleButton extends BaseComponent {
       if (rf & 2) {
         \u0275\u0275property("ngClass", ctx.cx("content"));
         \u0275\u0275advance();
-        \u0275\u0275property("ngTemplateOutlet", ctx.contentTemplate || ctx._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(4, _c25, ctx.checked));
+        \u0275\u0275property("ngTemplateOutlet", ctx.contentTemplate || ctx._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(4, _c27, ctx.checked));
         \u0275\u0275advance();
         \u0275\u0275conditional(!ctx.contentTemplate ? 2 : -1);
       }
@@ -44087,15 +47152,15 @@ var ToggleButtonModule = class _ToggleButtonModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-tabs.mjs
-var _c09 = ["previcon"];
-var _c17 = ["nexticon"];
-var _c26 = ["content"];
-var _c36 = ["prevButton"];
-var _c45 = ["nextButton"];
-var _c54 = ["inkbar"];
-var _c64 = ["tabs"];
-var _c7 = ["*"];
-var _c8 = (a0) => ({
+var _c011 = ["previcon"];
+var _c19 = ["nexticon"];
+var _c28 = ["content"];
+var _c38 = ["prevButton"];
+var _c47 = ["nextButton"];
+var _c55 = ["inkbar"];
+var _c65 = ["tabs"];
+var _c72 = ["*"];
+var _c82 = (a0) => ({
   "p-tablist-viewport": a0
 });
 function TabList_Conditional_0_Conditional_2_ng_container_0_Template(rf, ctx) {
@@ -44179,7 +47244,7 @@ function TabPanel_Conditional_0_Template(rf, ctx) {
     \u0275\u0275projection(0);
   }
 }
-var theme11 = ({
+var theme13 = ({
   dt: dt2
 }) => `
 .p-tabs {
@@ -44322,7 +47387,7 @@ var theme11 = ({
     transition: 250ms cubic-bezier(0.35, 0, 0.25, 1);
 }
 `;
-var classes10 = {
+var classes12 = {
   root: ({
     props
   }) => ["p-tabs p-component", {
@@ -44331,8 +47396,8 @@ var classes10 = {
 };
 var TabsStyle = class _TabsStyle extends BaseStyle {
   name = "tabs";
-  theme = theme11;
-  classes = classes10;
+  theme = theme13;
+  classes = classes12;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275TabsStyle_BaseFactory;
     return function TabsStyle_Factory(__ngFactoryType__) {
@@ -44493,8 +47558,8 @@ var TabList = class _TabList extends BaseComponent {
     selectors: [["p-tablist"]],
     contentQueries: function TabList_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c09, 4);
-        \u0275\u0275contentQuery(dirIndex, _c17, 4);
+        \u0275\u0275contentQuery(dirIndex, _c011, 4);
+        \u0275\u0275contentQuery(dirIndex, _c19, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -44506,11 +47571,11 @@ var TabList = class _TabList extends BaseComponent {
     },
     viewQuery: function TabList_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c26, 5);
-        \u0275\u0275viewQuery(_c36, 5);
-        \u0275\u0275viewQuery(_c45, 5);
-        \u0275\u0275viewQuery(_c54, 5);
-        \u0275\u0275viewQuery(_c64, 5);
+        \u0275\u0275viewQuery(_c28, 5);
+        \u0275\u0275viewQuery(_c38, 5);
+        \u0275\u0275viewQuery(_c47, 5);
+        \u0275\u0275viewQuery(_c55, 5);
+        \u0275\u0275viewQuery(_c65, 5);
       }
       if (rf & 2) {
         let _t;
@@ -44529,7 +47594,7 @@ var TabList = class _TabList extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c7,
+    ngContentSelectors: _c72,
     decls: 9,
     vars: 6,
     consts: [["content", ""], ["tabs", ""], ["inkbar", ""], ["prevButton", ""], ["nextButton", ""], ["type", "button", "pRipple", "", 1, "p-tablist-nav-button", "p-tablist-prev-button"], [1, "p-tablist-content", 3, "scroll", "ngClass"], ["role", "tablist", 1, "p-tablist-tab-list"], ["role", "presentation", 1, "p-tablist-active-bar"], ["type", "button", "pRipple", "", 1, "p-tablist-nav-button", "p-tablist-next-button"], ["type", "button", "pRipple", "", 1, "p-tablist-nav-button", "p-tablist-prev-button", 3, "click"], [4, "ngTemplateOutlet"], ["type", "button", "pRipple", "", 1, "p-tablist-nav-button", "p-tablist-next-button", 3, "click"]],
@@ -44552,7 +47617,7 @@ var TabList = class _TabList extends BaseComponent {
       if (rf & 2) {
         \u0275\u0275conditional(ctx.showNavigators() && ctx.isPrevButtonEnabled() ? 0 : -1);
         \u0275\u0275advance();
-        \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c8, ctx.scrollable()));
+        \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c82, ctx.scrollable()));
         \u0275\u0275advance(5);
         \u0275\u0275attribute("data-pc-section", "inkbar");
         \u0275\u0275advance(2);
@@ -44824,7 +47889,7 @@ var Tab = class _Tab extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275HostDirectivesFeature([Ripple]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c7,
+    ngContentSelectors: _c72,
     decls: 1,
     vars: 0,
     template: function Tab_Template(rf, ctx) {
@@ -44913,7 +47978,7 @@ var TabPanel = class _TabPanel extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c7,
+    ngContentSelectors: _c72,
     decls: 1,
     vars: 1,
     template: function TabPanel_Template(rf, ctx) {
@@ -44972,7 +48037,7 @@ var TabPanels = class _TabPanels extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c7,
+    ngContentSelectors: _c72,
     decls: 1,
     vars: 0,
     template: function TabPanels_Template(rf, ctx) {
@@ -45090,7 +48155,7 @@ var Tabs = class _Tabs extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275ProvidersFeature([TabsStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c7,
+    ngContentSelectors: _c72,
     decls: 1,
     vars: 0,
     template: function Tabs_Template(rf, ctx) {
@@ -45300,10 +48365,10 @@ var AiModel;
 })(AiModel || (AiModel = {}));
 
 // node_modules/primeng/fesm2022/primeng-toolbar.mjs
-var _c010 = ["start"];
-var _c18 = ["end"];
-var _c27 = ["center"];
-var _c37 = ["*"];
+var _c012 = ["start"];
+var _c110 = ["end"];
+var _c29 = ["center"];
+var _c39 = ["*"];
 function Toolbar_div_2_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainer(0);
@@ -45358,7 +48423,7 @@ function Toolbar_div_4_Template(rf, ctx) {
     \u0275\u0275property("ngTemplateOutlet", ctx_r0.endTemplate || ctx_r0._endTemplate);
   }
 }
-var theme12 = ({
+var theme14 = ({
   dt: dt2
 }) => `
 .p-toolbar {
@@ -45381,7 +48446,7 @@ var theme12 = ({
     align-items: center;
 }
 `;
-var classes11 = {
+var classes13 = {
   root: "p-toolbar p-component",
   start: "p-toolbar-start",
   center: "p-toolbar-center",
@@ -45389,8 +48454,8 @@ var classes11 = {
 };
 var ToolbarStyle = class _ToolbarStyle extends BaseStyle {
   name = "toolbar";
-  theme = theme12;
-  classes = classes11;
+  theme = theme14;
+  classes = classes13;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275ToolbarStyle_BaseFactory;
     return function ToolbarStyle_Factory(__ngFactoryType__) {
@@ -45481,9 +48546,9 @@ var Toolbar = class _Toolbar extends BaseComponent {
     selectors: [["p-toolbar"]],
     contentQueries: function Toolbar_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c010, 4);
-        \u0275\u0275contentQuery(dirIndex, _c18, 4);
-        \u0275\u0275contentQuery(dirIndex, _c27, 4);
+        \u0275\u0275contentQuery(dirIndex, _c012, 4);
+        \u0275\u0275contentQuery(dirIndex, _c110, 4);
+        \u0275\u0275contentQuery(dirIndex, _c29, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -45500,7 +48565,7 @@ var Toolbar = class _Toolbar extends BaseComponent {
       ariaLabelledBy: "ariaLabelledBy"
     },
     features: [\u0275\u0275ProvidersFeature([ToolbarStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c37,
+    ngContentSelectors: _c39,
     decls: 5,
     vars: 9,
     consts: [["role", "toolbar", 3, "ngClass", "ngStyle"], ["class", "p-toolbar-start", 4, "ngIf"], ["class", "p-toolbar-center", 4, "ngIf"], ["class", "p-toolbar-end", 4, "ngIf"], [1, "p-toolbar-start"], [4, "ngTemplateOutlet"], [1, "p-toolbar-center"], [1, "p-toolbar-end"]],
@@ -45612,7 +48677,7 @@ var ToolbarModule = class _ToolbarModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-inputtext.mjs
-var theme13 = ({
+var theme15 = ({
   dt: dt2
 }) => `
 .p-inputtext {
@@ -45692,7 +48757,7 @@ var theme13 = ({
     width: 100%;
 }
 `;
-var classes12 = {
+var classes14 = {
   root: ({
     instance,
     props
@@ -45707,8 +48772,8 @@ var classes12 = {
 };
 var InputTextStyle = class _InputTextStyle extends BaseStyle {
   name = "inputtext";
-  theme = theme13;
-  classes = classes12;
+  theme = theme15;
+  classes = classes14;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275InputTextStyle_BaseFactory;
     return function InputTextStyle_Factory(__ngFactoryType__) {
@@ -45863,8 +48928,8 @@ var InputTextModule = class _InputTextModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-inputgroup.mjs
-var _c011 = ["*"];
-var theme14 = ({
+var _c013 = ["*"];
+var theme16 = ({
   dt: dt2
 }) => `
 .p-inputgroup,
@@ -45973,7 +49038,7 @@ var theme14 = ({
     border-end-end-radius: ${dt2("inputgroup.addon.border.radius")};
 }
 `;
-var classes13 = {
+var classes15 = {
   root: ({
     props
   }) => ["p-inputgroup", {
@@ -45982,8 +49047,8 @@ var classes13 = {
 };
 var InputGroupStyle = class _InputGroupStyle extends BaseStyle {
   name = "inputgroup";
-  theme = theme14;
-  classes = classes13;
+  theme = theme16;
+  classes = classes15;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275InputGroupStyle_BaseFactory;
     return function InputGroupStyle_Factory(__ngFactoryType__) {
@@ -46039,7 +49104,7 @@ var InputGroup = class _InputGroup extends BaseComponent {
       styleClass: "styleClass"
     },
     features: [\u0275\u0275ProvidersFeature([InputGroupStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c011,
+    ngContentSelectors: _c013,
     decls: 1,
     vars: 0,
     template: function InputGroup_Template(rf, ctx) {
@@ -46101,13 +49166,13 @@ var InputGroupModule = class _InputGroupModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-inputgroupaddon.mjs
-var _c012 = ["*"];
-var classes14 = {
+var _c014 = ["*"];
+var classes16 = {
   root: "p-inputgroupaddon"
 };
 var InputGroupAddonStyle = class _InputGroupAddonStyle extends BaseStyle {
   name = "inputgroupaddon";
-  classes = classes14;
+  classes = classes16;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275InputGroupAddonStyle_BaseFactory;
     return function InputGroupAddonStyle_Factory(__ngFactoryType__) {
@@ -46162,7 +49227,7 @@ var InputGroupAddon = class _InputGroupAddon extends BaseComponent {
       styleClass: "styleClass"
     },
     features: [\u0275\u0275ProvidersFeature([InputGroupAddonStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c012,
+    ngContentSelectors: _c014,
     decls: 1,
     vars: 0,
     template: function InputGroupAddon_Template(rf, ctx) {
@@ -46513,7 +49578,7 @@ var UploadUrlComponent = class _UploadUrlComponent {
     </div>\r
 \r
   </fieldset>\r
-</form>`, styles: ["/* angular:styles/component:css;0fa652a1c86377aee4ef825a2bb99ad0e448461d03666f6bb8c80d6b3ad3fe3e;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/upload/upload-url.component.ts */\n:host {\n  display: block;\n}\n::ng-deep button.p-button.nohover:hover {\n  background-color: transparent !important;\n}\n::ng-deep button.p-button.nohover {\n  border: none !important;\n}\n/*# sourceMappingURL=upload-url.component.css.map */\n"] }]
+</form>`, styles: ["/* angular:styles/component:css;0fa652a1c86377aee4ef825a2bb99ad0e448461d03666f6bb8c80d6b3ad3fe3e;D:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/upload/upload-url.component.ts */\n:host {\n  display: block;\n}\n::ng-deep button.p-button.nohover:hover {\n  background-color: transparent !important;\n}\n::ng-deep button.p-button.nohover {\n  border: none !important;\n}\n/*# sourceMappingURL=upload-url.component.css.map */\n"] }]
   }], null, { mode: [{
     type: Input
   }], showSampleDataButton: [{
@@ -46527,7 +49592,7 @@ var UploadUrlComponent = class _UploadUrlComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-textarea.mjs
-var theme15 = ({
+var theme17 = ({
   dt: dt2
 }) => `
 .p-textarea {
@@ -46611,7 +49676,7 @@ var theme15 = ({
     padding-inline: ${dt2("textarea.lg.padding.x")};
 }
 `;
-var classes15 = {
+var classes17 = {
   root: ({
     instance,
     props
@@ -46625,8 +49690,8 @@ var classes15 = {
 };
 var TextareaStyle = class _TextareaStyle extends BaseStyle {
   name = "textarea";
-  theme = theme15;
-  classes = classes15;
+  theme = theme17;
+  classes = classes17;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275TextareaStyle_BaseFactory;
     return function TextareaStyle_Factory(__ngFactoryType__) {
@@ -47071,7 +50136,7 @@ var UploadPasteComponent = class _UploadPasteComponent {
     </div>\r
 \r
   </fieldset>\r
-</form>`, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/upload/upload-paste.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=upload-paste.component.css.map */\n"] }]
+</form>`, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;D:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/upload/upload-paste.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=upload-paste.component.css.map */\n"] }]
   }], null, { mode: [{
     type: Input
   }], showSampleDataButton: [{
@@ -47085,13 +50150,13 @@ var UploadPasteComponent = class _UploadPasteComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-progressbar.mjs
-var _c013 = ["content"];
-var _c19 = (a0, a1) => ({
+var _c015 = ["content"];
+var _c111 = (a0, a1) => ({
   "p-progressbar p-component": true,
   "p-progressbar-determinate": a0,
   "p-progressbar-indeterminate": a1
 });
-var _c28 = (a0) => ({
+var _c210 = (a0) => ({
   $implicit: a0
 });
 function ProgressBar_div_1_div_2_Template(rf, ctx) {
@@ -47128,7 +50193,7 @@ function ProgressBar_div_1_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275property("ngIf", ctx_r0.showValue && !ctx_r0.contentTemplate && !ctx_r0._contentTemplate);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r0.contentTemplate || ctx_r0._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(11, _c28, ctx_r0.value));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r0.contentTemplate || ctx_r0._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(11, _c210, ctx_r0.value));
   }
 }
 function ProgressBar_div_2_Template(rf, ctx) {
@@ -47147,7 +50212,7 @@ function ProgressBar_div_2_Template(rf, ctx) {
     \u0275\u0275attribute("data-pc-section", "value");
   }
 }
-var theme16 = ({
+var theme18 = ({
   dt: dt2
 }) => `
 .p-progressbar {
@@ -47265,7 +50330,7 @@ var theme16 = ({
     }
 }
 `;
-var classes16 = {
+var classes18 = {
   root: ({
     instance
   }) => ["p-progressbar p-component", {
@@ -47277,8 +50342,8 @@ var classes16 = {
 };
 var ProgressBarStyle = class _ProgressBarStyle extends BaseStyle {
   name = "progressbar";
-  theme = theme16;
-  classes = classes16;
+  theme = theme18;
+  classes = classes18;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275ProgressBarStyle_BaseFactory;
     return function ProgressBarStyle_Factory(__ngFactoryType__) {
@@ -47372,7 +50437,7 @@ var ProgressBar = class _ProgressBar extends BaseComponent {
     selectors: [["p-progressBar"], ["p-progressbar"], ["p-progress-bar"]],
     contentQueries: function ProgressBar_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c013, 4);
+        \u0275\u0275contentQuery(dirIndex, _c015, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -47403,7 +50468,7 @@ var ProgressBar = class _ProgressBar extends BaseComponent {
       }
       if (rf & 2) {
         \u0275\u0275classMap(ctx.styleClass);
-        \u0275\u0275property("ngStyle", ctx.style)("ngClass", \u0275\u0275pureFunction2(12, _c19, ctx.mode === "determinate", ctx.mode === "indeterminate"));
+        \u0275\u0275property("ngStyle", ctx.style)("ngClass", \u0275\u0275pureFunction2(12, _c111, ctx.mode === "determinate", ctx.mode === "indeterminate"));
         \u0275\u0275attribute("aria-valuemin", 0)("aria-valuenow", ctx.value)("aria-valuemax", 100)("data-pc-name", "progressbar")("data-pc-section", "root")("aria-label", ctx.value + ctx.unit);
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.mode === "determinate");
@@ -47522,25 +50587,25 @@ var ProgressBarModule = class _ProgressBarModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-fileupload.mjs
-var _c014 = ["file"];
-var _c110 = ["header"];
-var _c29 = ["content"];
-var _c38 = ["toolbar"];
-var _c46 = ["chooseicon"];
-var _c55 = ["filelabel"];
-var _c65 = ["uploadicon"];
-var _c72 = ["cancelicon"];
-var _c82 = ["empty"];
-var _c9 = ["advancedfileinput"];
-var _c10 = ["basicfileinput"];
-var _c11 = (a0, a1, a2, a3, a4) => ({
+var _c016 = ["file"];
+var _c112 = ["header"];
+var _c211 = ["content"];
+var _c310 = ["toolbar"];
+var _c48 = ["chooseicon"];
+var _c56 = ["filelabel"];
+var _c66 = ["uploadicon"];
+var _c73 = ["cancelicon"];
+var _c83 = ["empty"];
+var _c92 = ["advancedfileinput"];
+var _c102 = ["basicfileinput"];
+var _c113 = (a0, a1, a2, a3, a4) => ({
   $implicit: a0,
   uploadedFiles: a1,
   chooseCallback: a2,
   clearCallback: a3,
   uploadCallback: a4
 });
-var _c122 = (a0, a1, a2, a3, a4, a5, a6, a7) => ({
+var _c123 = (a0, a1, a2, a3, a4, a5, a6, a7) => ({
   $implicit: a0,
   uploadedFiles: a1,
   chooseCallback: a2,
@@ -47997,7 +51062,7 @@ function FileUpload_div_0_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275property("ngIf", !ctx_r1.headerTemplate && !ctx_r1._headerTemplate);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.headerTemplate || ctx_r1._headerTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction5(24, _c11, ctx_r1.files, ctx_r1.uploadedFiles, ctx_r1.choose.bind(ctx_r1), ctx_r1.clear.bind(ctx_r1), ctx_r1.upload.bind(ctx_r1)));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.headerTemplate || ctx_r1._headerTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction5(24, _c113, ctx_r1.files, ctx_r1.uploadedFiles, ctx_r1.choose.bind(ctx_r1), ctx_r1.clear.bind(ctx_r1), ctx_r1.upload.bind(ctx_r1)));
     \u0275\u0275advance();
     \u0275\u0275property("ngTemplateOutlet", ctx_r1.toolbarTemplate || ctx_r1._toolbarTemplate);
     \u0275\u0275advance();
@@ -48009,7 +51074,7 @@ function FileUpload_div_0_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275property("ngIf", ctx_r1.hasFiles());
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction8(30, _c122, ctx_r1.files, ctx_r1.uploadedFiles, ctx_r1.choose.bind(ctx_r1), ctx_r1.clear.bind(ctx_r1), ctx_r1.removeUploadedFile.bind(ctx_r1), ctx_r1.remove.bind(ctx_r1), ctx_r1.progress, ctx_r1.msgs));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction8(30, _c123, ctx_r1.files, ctx_r1.uploadedFiles, ctx_r1.choose.bind(ctx_r1), ctx_r1.clear.bind(ctx_r1), ctx_r1.removeUploadedFile.bind(ctx_r1), ctx_r1.remove.bind(ctx_r1), ctx_r1.progress, ctx_r1.msgs));
     \u0275\u0275advance();
     \u0275\u0275conditional((ctx_r1.emptyTemplate || ctx_r1._emptyTemplate) && !ctx_r1.hasFiles() && !ctx_r1.hasUploadedFiles() ? 14 : -1);
   }
@@ -48229,7 +51294,7 @@ function FileUpload_div_1_Template(rf, ctx) {
     \u0275\u0275conditional(!ctx_r1.auto ? 8 : -1);
   }
 }
-var theme17 = ({
+var theme19 = ({
   dt: dt2
 }) => `
 .p-fileupload input[type="file"] {
@@ -48319,7 +51384,7 @@ var theme17 = ({
     gap: ${dt2("fileupload.basic.gap")};
 }
 `;
-var classes17 = {
+var classes19 = {
   root: ({
     instance
   }) => `p-fileupload p-fileupload-${instance.mode} p-component`,
@@ -48340,8 +51405,8 @@ var classes17 = {
 };
 var FileUploadStyle = class _FileUploadStyle extends BaseStyle {
   name = "fileupload";
-  theme = theme17;
-  classes = classes17;
+  theme = theme19;
+  classes = classes19;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275FileUploadStyle_BaseFactory;
     return function FileUploadStyle_Factory(__ngFactoryType__) {
@@ -49161,15 +52226,15 @@ var FileUpload = class _FileUpload extends BaseComponent {
     selectors: [["p-fileupload"], ["p-fileUpload"]],
     contentQueries: function FileUpload_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c014, 4);
-        \u0275\u0275contentQuery(dirIndex, _c110, 4);
-        \u0275\u0275contentQuery(dirIndex, _c29, 4);
-        \u0275\u0275contentQuery(dirIndex, _c38, 4);
-        \u0275\u0275contentQuery(dirIndex, _c46, 4);
-        \u0275\u0275contentQuery(dirIndex, _c55, 4);
-        \u0275\u0275contentQuery(dirIndex, _c65, 4);
-        \u0275\u0275contentQuery(dirIndex, _c72, 4);
-        \u0275\u0275contentQuery(dirIndex, _c82, 4);
+        \u0275\u0275contentQuery(dirIndex, _c016, 4);
+        \u0275\u0275contentQuery(dirIndex, _c112, 4);
+        \u0275\u0275contentQuery(dirIndex, _c211, 4);
+        \u0275\u0275contentQuery(dirIndex, _c310, 4);
+        \u0275\u0275contentQuery(dirIndex, _c48, 4);
+        \u0275\u0275contentQuery(dirIndex, _c56, 4);
+        \u0275\u0275contentQuery(dirIndex, _c66, 4);
+        \u0275\u0275contentQuery(dirIndex, _c73, 4);
+        \u0275\u0275contentQuery(dirIndex, _c83, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -49188,9 +52253,9 @@ var FileUpload = class _FileUpload extends BaseComponent {
     },
     viewQuery: function FileUpload_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c9, 5);
-        \u0275\u0275viewQuery(_c10, 5);
-        \u0275\u0275viewQuery(_c29, 5);
+        \u0275\u0275viewQuery(_c92, 5);
+        \u0275\u0275viewQuery(_c102, 5);
+        \u0275\u0275viewQuery(_c211, 5);
       }
       if (rf & 2) {
         let _t;
@@ -49746,7 +52811,7 @@ var FileUploadModule = class _FileUploadModule {
 })();
 
 // src/app/views/page-assistant/components/upload/upload-word.component.ts
-var _c015 = ["fileUploadRef"];
+var _c017 = ["fileUploadRef"];
 function UploadWordComponent_ng_template_6_Template(rf, ctx) {
 }
 function UploadWordComponent_ng_template_8_Template(rf, ctx) {
@@ -49981,7 +53046,7 @@ var UploadWordComponent = class _UploadWordComponent {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadWordComponent, selectors: [["ca-upload-word"]], viewQuery: function UploadWordComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c015, 5);
+      \u0275\u0275viewQuery(_c017, 5);
     }
     if (rf & 2) {
       let _t;
@@ -50088,7 +53153,7 @@ var UploadWordComponent = class _UploadWordComponent {
 \r
     </p-fileupload>\r
 \r
-</fieldset>`, styles: ["/* angular:styles/component:css;19ceb5ac9df98086b129e963aa1391530b725e22715988600140fc11941cb360;C:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/upload/upload-word.component.ts */\n:host {\n  display: block;\n}\n:host ::ng-deep .p-fileupload-header {\n  background: transparent;\n  box-shadow: none;\n  padding: 0;\n  border: none;\n}\n:host ::ng-deep .p-fileupload-content {\n  background: transparent;\n  box-shadow: none;\n  padding: 0;\n  border: none;\n}\n:host ::ng-deep .p-fileupload .p-progressbar {\n  margin: 0 !important;\n  padding: 0 !important;\n  height: 0 !important;\n  display: none !important;\n  border: none !important;\n}\n::ng-deep .p-fileupload {\n  --p-fileupload-content-gap: 0.0rem;\n}\n/*# sourceMappingURL=upload-word.component.css.map */\n"] }]
+</fieldset>`, styles: ["/* angular:styles/component:css;19ceb5ac9df98086b129e963aa1391530b725e22715988600140fc11941cb360;D:/AmberDev/main-repo/content-assistant/src/app/views/page-assistant/components/upload/upload-word.component.ts */\n:host {\n  display: block;\n}\n:host ::ng-deep .p-fileupload-header {\n  background: transparent;\n  box-shadow: none;\n  padding: 0;\n  border: none;\n}\n:host ::ng-deep .p-fileupload-content {\n  background: transparent;\n  box-shadow: none;\n  padding: 0;\n  border: none;\n}\n:host ::ng-deep .p-fileupload .p-progressbar {\n  margin: 0 !important;\n  padding: 0 !important;\n  height: 0 !important;\n  display: none !important;\n  border: none !important;\n}\n::ng-deep .p-fileupload {\n  --p-fileupload-content-gap: 0.0rem;\n}\n/*# sourceMappingURL=upload-word.component.css.map */\n"] }]
   }], null, { mode: [{
     type: Input
   }], showSampleDataButton: [{
@@ -50105,8 +53170,8 @@ var UploadWordComponent = class _UploadWordComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-iftalabel.mjs
-var _c016 = ["*"];
-var theme18 = ({
+var _c018 = ["*"];
+var theme20 = ({
   dt: dt2
 }) => `
 .p-iftalabel {
@@ -50177,13 +53242,13 @@ var theme18 = ({
     transition-timing-function: ease;
 }*/
 `;
-var classes18 = {
+var classes20 = {
   root: "p-iftalabel"
 };
 var IftaLabelStyle = class _IftaLabelStyle extends BaseStyle {
   name = "iftalabel";
-  theme = theme18;
-  classes = classes18;
+  theme = theme20;
+  classes = classes20;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275IftaLabelStyle_BaseFactory;
     return function IftaLabelStyle_Factory(__ngFactoryType__) {
@@ -50217,7 +53282,7 @@ var IftaLabel = class _IftaLabel extends BaseComponent {
     selectors: [["p-iftalabel"], ["p-iftaLabel"], ["p-ifta-label"]],
     hostAttrs: [1, "p-iftalabel"],
     features: [\u0275\u0275ProvidersFeature([IftaLabelStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c016,
+    ngContentSelectors: _c018,
     decls: 1,
     vars: 0,
     template: function IftaLabel_Template(rf, ctx) {
@@ -50301,12 +53366,12 @@ var LocalStorageService = class _LocalStorageService {
 })();
 
 // node_modules/primeng/fesm2022/primeng-checkbox.mjs
-var _c017 = ["checkboxicon"];
-var _c111 = ["input"];
-var _c210 = () => ({
+var _c019 = ["checkboxicon"];
+var _c114 = ["input"];
+var _c212 = () => ({
   "p-checkbox-input": true
 });
-var _c39 = (a0) => ({
+var _c311 = (a0) => ({
   checked: a0,
   class: "p-checkbox-icon"
 });
@@ -50373,7 +53438,7 @@ function Checkbox_5_Template(rf, ctx) {
     \u0275\u0275template(0, Checkbox_5_ng_template_0_Template, 0, 0, "ng-template");
   }
 }
-var theme19 = ({
+var theme21 = ({
   dt: dt2
 }) => `
 .p-checkbox {
@@ -50512,7 +53577,7 @@ p-checkbox.ng-invalid.ng-dirty .p-checkbox-box {
     height: ${dt2("checkbox.icon.lg.size")};
 }
 `;
-var classes19 = {
+var classes21 = {
   root: ({
     instance,
     props
@@ -50528,8 +53593,8 @@ var classes19 = {
 };
 var CheckboxStyle = class _CheckboxStyle extends BaseStyle {
   name = "checkbox";
-  theme = theme19;
-  classes = classes19;
+  theme = theme21;
+  classes = classes21;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275CheckboxStyle_BaseFactory;
     return function CheckboxStyle_Factory(__ngFactoryType__) {
@@ -50806,7 +53871,7 @@ var Checkbox = class _Checkbox extends BaseComponent {
     selectors: [["p-checkbox"], ["p-checkBox"], ["p-check-box"]],
     contentQueries: function Checkbox_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c017, 4);
+        \u0275\u0275contentQuery(dirIndex, _c019, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -50817,7 +53882,7 @@ var Checkbox = class _Checkbox extends BaseComponent {
     },
     viewQuery: function Checkbox_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c111, 5);
+        \u0275\u0275viewQuery(_c114, 5);
       }
       if (rf & 2) {
         let _t;
@@ -50884,12 +53949,12 @@ var Checkbox = class _Checkbox extends BaseComponent {
         \u0275\u0275advance();
         \u0275\u0275styleMap(ctx.inputStyle);
         \u0275\u0275classMap(ctx.inputClass);
-        \u0275\u0275property("value", ctx.value)("checked", ctx.checked)("disabled", ctx.disabled)("readonly", ctx.readonly)("ngClass", \u0275\u0275pureFunction0(26, _c210));
+        \u0275\u0275property("value", ctx.value)("checked", ctx.checked)("disabled", ctx.disabled)("readonly", ctx.readonly)("ngClass", \u0275\u0275pureFunction0(26, _c212));
         \u0275\u0275attribute("id", ctx.inputId)("name", ctx.name)("tabindex", ctx.tabindex)("required", ctx.required ? true : null)("aria-labelledby", ctx.ariaLabelledBy)("aria-label", ctx.ariaLabel);
         \u0275\u0275advance(3);
         \u0275\u0275property("ngIf", !ctx.checkboxIconTemplate && !ctx._checkboxIconTemplate);
         \u0275\u0275advance();
-        \u0275\u0275property("ngTemplateOutlet", ctx.checkboxIconTemplate || ctx._checkboxIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(27, _c39, ctx.checked));
+        \u0275\u0275property("ngTemplateOutlet", ctx.checkboxIconTemplate || ctx._checkboxIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(27, _c311, ctx.checked));
       }
     },
     dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, CheckIcon, MinusIcon, SharedModule],
@@ -51078,10 +54143,2155 @@ var CheckboxModule = class _CheckboxModule {
   }], null, null);
 })();
 
+// node_modules/primeng/fesm2022/primeng-focustrap.mjs
+var FocusTrap = class _FocusTrap extends BaseComponent {
+  /**
+   * When set as true, focus wouldn't be managed.
+   * @group Props
+   */
+  pFocusTrapDisabled = false;
+  platformId = inject(PLATFORM_ID);
+  document = inject(DOCUMENT);
+  firstHiddenFocusableElement;
+  lastHiddenFocusableElement;
+  ngOnInit() {
+    super.ngOnInit();
+    if (isPlatformBrowser(this.platformId) && !this.pFocusTrapDisabled) {
+      !this.firstHiddenFocusableElement && !this.lastHiddenFocusableElement && this.createHiddenFocusableElements();
+    }
+  }
+  ngOnChanges(changes) {
+    super.ngOnChanges(changes);
+    if (changes.pFocusTrapDisabled && isPlatformBrowser(this.platformId)) {
+      if (changes.pFocusTrapDisabled.currentValue) {
+        this.removeHiddenFocusableElements();
+      } else {
+        this.createHiddenFocusableElements();
+      }
+    }
+  }
+  removeHiddenFocusableElements() {
+    if (this.firstHiddenFocusableElement && this.firstHiddenFocusableElement.parentNode) {
+      this.firstHiddenFocusableElement.parentNode.removeChild(this.firstHiddenFocusableElement);
+    }
+    if (this.lastHiddenFocusableElement && this.lastHiddenFocusableElement.parentNode) {
+      this.lastHiddenFocusableElement.parentNode.removeChild(this.lastHiddenFocusableElement);
+    }
+  }
+  getComputedSelector(selector) {
+    return `:not(.p-hidden-focusable):not([data-p-hidden-focusable="true"])${selector ?? ""}`;
+  }
+  createHiddenFocusableElements() {
+    const tabindex = "0";
+    const createFocusableElement = (onFocus) => {
+      return createElement("span", {
+        class: "p-hidden-accessible p-hidden-focusable",
+        tabindex,
+        role: "presentation",
+        "aria-hidden": true,
+        "data-p-hidden-accessible": true,
+        "data-p-hidden-focusable": true,
+        onFocus: onFocus?.bind(this)
+      });
+    };
+    this.firstHiddenFocusableElement = createFocusableElement(this.onFirstHiddenElementFocus);
+    this.lastHiddenFocusableElement = createFocusableElement(this.onLastHiddenElementFocus);
+    this.firstHiddenFocusableElement.setAttribute("data-pc-section", "firstfocusableelement");
+    this.lastHiddenFocusableElement.setAttribute("data-pc-section", "lastfocusableelement");
+    this.el.nativeElement.prepend(this.firstHiddenFocusableElement);
+    this.el.nativeElement.append(this.lastHiddenFocusableElement);
+  }
+  onFirstHiddenElementFocus(event2) {
+    const {
+      currentTarget,
+      relatedTarget
+    } = event2;
+    const focusableElement = relatedTarget === this.lastHiddenFocusableElement || !this.el.nativeElement?.contains(relatedTarget) ? getFirstFocusableElement(currentTarget.parentElement, ":not(.p-hidden-focusable)") : this.lastHiddenFocusableElement;
+    focus(focusableElement);
+  }
+  onLastHiddenElementFocus(event2) {
+    const {
+      currentTarget,
+      relatedTarget
+    } = event2;
+    const focusableElement = relatedTarget === this.firstHiddenFocusableElement || !this.el.nativeElement?.contains(relatedTarget) ? getLastFocusableElement(currentTarget.parentElement, ":not(.p-hidden-focusable)") : this.firstHiddenFocusableElement;
+    focus(focusableElement);
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275FocusTrap_BaseFactory;
+    return function FocusTrap_Factory(__ngFactoryType__) {
+      return (\u0275FocusTrap_BaseFactory || (\u0275FocusTrap_BaseFactory = \u0275\u0275getInheritedFactory(_FocusTrap)))(__ngFactoryType__ || _FocusTrap);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _FocusTrap,
+    selectors: [["", "pFocusTrap", ""]],
+    inputs: {
+      pFocusTrapDisabled: [2, "pFocusTrapDisabled", "pFocusTrapDisabled", booleanAttribute]
+    },
+    features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FocusTrap, [{
+    type: Directive,
+    args: [{
+      selector: "[pFocusTrap]",
+      standalone: true
+    }]
+  }], null, {
+    pFocusTrapDisabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }]
+  });
+})();
+var FocusTrapModule = class _FocusTrapModule {
+  static \u0275fac = function FocusTrapModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FocusTrapModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _FocusTrapModule,
+    imports: [FocusTrap],
+    exports: [FocusTrap]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({});
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FocusTrapModule, [{
+    type: NgModule,
+    args: [{
+      imports: [FocusTrap],
+      exports: [FocusTrap]
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-dialog.mjs
+var _c020 = ["header"];
+var _c115 = ["content"];
+var _c213 = ["footer"];
+var _c312 = ["closeicon"];
+var _c49 = ["maximizeicon"];
+var _c57 = ["minimizeicon"];
+var _c67 = ["headless"];
+var _c74 = ["titlebar"];
+var _c84 = ["*", [["p-footer"]]];
+var _c93 = ["*", "p-footer"];
+var _c103 = (a0, a1, a2) => ({
+  position: "fixed",
+  height: "100%",
+  width: "100%",
+  left: 0,
+  top: 0,
+  display: "flex",
+  "justify-content": a0,
+  "align-items": a1,
+  "pointer-events": a2
+});
+var _c116 = (a0) => ({
+  "p-dialog p-component": true,
+  "p-dialog-maximized": a0
+});
+var _c124 = () => ({
+  display: "flex",
+  "flex-direction": "column",
+  "pointer-events": "auto"
+});
+var _c133 = (a0, a1) => ({
+  transform: a0,
+  transition: a1
+});
+var _c142 = (a0) => ({
+  value: "visible",
+  params: a0
+});
+function Dialog_div_0_div_1_ng_container_2_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Dialog_div_0_div_1_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_container_2_ng_container_1_Template, 1, 0, "ng-container", 11);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1._headlessTemplate || ctx_r1.headlessTemplate || ctx_r1.headlessT);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 15);
+    \u0275\u0275listener("mousedown", function Dialog_div_0_div_1_ng_template_3_div_0_Template_div_mousedown_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(4);
+      return \u0275\u0275resetView(ctx_r1.initResize($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275property("ngClass", ctx_r1.cx("resizeHandle"));
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(5);
+    \u0275\u0275property("id", ctx_r1.ariaLabelledBy)("ngClass", ctx_r1.cx("title"));
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.header);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 18);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(6);
+    \u0275\u0275property("ngClass", ctx_r1.maximized ? ctx_r1.minimizeIcon : ctx_r1.maximizeIcon);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_2_WindowMaximizeIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "WindowMaximizeIcon");
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_2_WindowMinimizeIcon_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "WindowMinimizeIcon");
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_2_WindowMaximizeIcon_1_Template, 1, 0, "WindowMaximizeIcon", 23)(2, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_2_WindowMinimizeIcon_2_Template, 1, 0, "WindowMinimizeIcon", 23);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(6);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.maximized && !ctx_r1._maximizeiconTemplate && !ctx_r1.maximizeIconTemplate && !ctx_r1.maximizeIconT);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.maximized && !ctx_r1._minimizeiconTemplate && !ctx_r1.minimizeIconTemplate && !ctx_r1.minimizeIconT);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_3_1_ng_template_0_Template(rf, ctx) {
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_3_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_3_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_3_1_Template, 1, 0, null, 11);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(6);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1._maximizeiconTemplate || ctx_r1.maximizeIconTemplate || ctx_r1.maximizeIconT);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_4_1_ng_template_0_Template(rf, ctx) {
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_4_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_4_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_4_1_Template, 1, 0, null, 11);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(6);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1._minimizeiconTemplate || ctx_r1.minimizeIconTemplate || ctx_r1.minimizeIconT);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 22);
+    \u0275\u0275listener("onClick", function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_Template_p_button_onClick_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext(5);
+      return \u0275\u0275resetView(ctx_r1.maximize());
+    })("keydown.enter", function Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_Template_p_button_keydown_enter_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext(5);
+      return \u0275\u0275resetView(ctx_r1.maximize());
+    });
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_span_1_Template, 1, 1, "span", 14)(2, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_2_Template, 3, 2, "ng-container", 23)(3, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_3_Template, 2, 1, "ng-container", 23)(4, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_ng_container_4_Template, 2, 1, "ng-container", 23);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(5);
+    \u0275\u0275property("styleClass", ctx_r1.cx("pcMaximizeButton"))("tabindex", ctx_r1.maximizable ? "0" : "-1")("ariaLabel", ctx_r1.maximizeLabel)("buttonProps", ctx_r1.maximizeButtonProps);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.maximizeIcon && !ctx_r1._maximizeiconTemplate && !ctx_r1._minimizeiconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.maximizeIcon && !(ctx_r1.maximizeButtonProps == null ? null : ctx_r1.maximizeButtonProps.icon));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.maximized);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.maximized);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_ng_container_0_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 18);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(8);
+    \u0275\u0275property("ngClass", ctx_r1.closeIcon);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_ng_container_0_TimesIcon_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "TimesIcon");
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_ng_container_0_span_1_Template, 1, 1, "span", 14)(2, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_ng_container_0_TimesIcon_2_Template, 1, 0, "TimesIcon", 23);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(7);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.closeIcon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.closeIcon);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_span_1_1_ng_template_0_Template(rf, ctx) {
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_span_1_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_span_1_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_span_1_1_Template, 1, 0, null, 11);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(7);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1._closeiconTemplate || ctx_r1.closeIconTemplate || ctx_r1.closeIconT);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_ng_container_0_Template, 3, 2, "ng-container", 23)(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_span_1_Template, 2, 1, "span", 23);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(6);
+    \u0275\u0275property("ngIf", !ctx_r1._closeiconTemplate && !ctx_r1.closeIconTemplate && !ctx_r1.closeIconT && !(ctx_r1.closeButtonProps == null ? null : ctx_r1.closeButtonProps.icon));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1._closeiconTemplate || ctx_r1.closeIconTemplate || ctx_r1.closeIconT);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 24);
+    \u0275\u0275listener("onClick", function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_Template_p_button_onClick_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext(5);
+      return \u0275\u0275resetView(ctx_r1.close($event));
+    })("keydown.enter", function Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_Template_p_button_keydown_enter_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext(5);
+      return \u0275\u0275resetView(ctx_r1.close($event));
+    });
+    \u0275\u0275template(1, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_ng_template_1_Template, 2, 2, "ng-template", null, 4, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(5);
+    \u0275\u0275property("styleClass", ctx_r1.cx("pcCloseButton"))("ariaLabel", ctx_r1.closeAriaLabel)("tabindex", ctx_r1.closeTabindex)("buttonProps", ctx_r1.closeButtonProps);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16, 3);
+    \u0275\u0275listener("mousedown", function Dialog_div_0_div_1_ng_template_3_div_1_Template_div_mousedown_0_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(4);
+      return \u0275\u0275resetView(ctx_r1.initDrag($event));
+    });
+    \u0275\u0275template(2, Dialog_div_0_div_1_ng_template_3_div_1_span_2_Template, 2, 3, "span", 17)(3, Dialog_div_0_div_1_ng_template_3_div_1_ng_container_3_Template, 1, 0, "ng-container", 11);
+    \u0275\u0275elementStart(4, "div", 18);
+    \u0275\u0275template(5, Dialog_div_0_div_1_ng_template_3_div_1_p_button_5_Template, 5, 8, "p-button", 19)(6, Dialog_div_0_div_1_ng_template_3_div_1_p_button_6_Template, 3, 4, "p-button", 20);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275property("ngClass", ctx_r1.cx("header"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", !ctx_r1._headerTemplate && !ctx_r1.headerTemplate && !ctx_r1.headerT);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1._headerTemplate || ctx_r1.headerTemplate || ctx_r1.headerT);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", ctx_r1.cx("headerActions"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.maximizable);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.closable);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_6_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 18, 5);
+    \u0275\u0275projection(2, 1);
+    \u0275\u0275template(3, Dialog_div_0_div_1_ng_template_3_div_6_ng_container_3_Template, 1, 0, "ng-container", 11);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275property("ngClass", ctx_r1.cx("footer"));
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1._footerTemplate || ctx_r1.footerTemplate || ctx_r1.footerT);
+  }
+}
+function Dialog_div_0_div_1_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Dialog_div_0_div_1_ng_template_3_div_0_Template, 1, 1, "div", 12)(1, Dialog_div_0_div_1_ng_template_3_div_1_Template, 7, 6, "div", 13);
+    \u0275\u0275elementStart(2, "div", 7, 2);
+    \u0275\u0275projection(4);
+    \u0275\u0275template(5, Dialog_div_0_div_1_ng_template_3_ng_container_5_Template, 1, 0, "ng-container", 11);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(6, Dialog_div_0_div_1_ng_template_3_div_6_Template, 4, 2, "div", 14);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275property("ngIf", ctx_r1.resizable);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.showHeader);
+    \u0275\u0275advance();
+    \u0275\u0275classMap(ctx_r1.contentStyleClass);
+    \u0275\u0275property("ngClass", ctx_r1.cx("content"))("ngStyle", ctx_r1.contentStyle);
+    \u0275\u0275attribute("data-pc-section", "content");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1._contentTemplate || ctx_r1.contentTemplate || ctx_r1.contentT);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1._footerTemplate || ctx_r1.footerTemplate || ctx_r1.footerT);
+  }
+}
+function Dialog_div_0_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 9, 0);
+    \u0275\u0275listener("@animation.start", function Dialog_div_0_div_1_Template_div_animation_animation_start_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onAnimationStart($event));
+    })("@animation.done", function Dialog_div_0_div_1_Template_div_animation_animation_done_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onAnimationEnd($event));
+    });
+    \u0275\u0275template(2, Dialog_div_0_div_1_ng_container_2_Template, 2, 1, "ng-container", 10)(3, Dialog_div_0_div_1_ng_template_3_Template, 7, 9, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const notHeadless_r7 = \u0275\u0275reference(4);
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275styleMap(ctx_r1.style);
+    \u0275\u0275classMap(ctx_r1.styleClass);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(13, _c116, ctx_r1.maximizable && ctx_r1.maximized))("ngStyle", \u0275\u0275pureFunction0(15, _c124))("pFocusTrapDisabled", ctx_r1.focusTrap === false)("@animation", \u0275\u0275pureFunction1(19, _c142, \u0275\u0275pureFunction2(16, _c133, ctx_r1.transformOptions, ctx_r1.transitionOptions)));
+    \u0275\u0275attribute("role", ctx_r1.role)("aria-labelledby", ctx_r1.ariaLabelledBy)("aria-modal", true);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1._headlessTemplate || ctx_r1.headlessTemplate || ctx_r1.headlessT)("ngIfElse", notHeadless_r7);
+  }
+}
+function Dialog_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 7);
+    \u0275\u0275template(1, Dialog_div_0_div_1_Template, 5, 21, "div", 8);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275styleMap(ctx_r1.maskStyle);
+    \u0275\u0275classMap(ctx_r1.maskStyleClass);
+    \u0275\u0275property("ngClass", ctx_r1.maskClass)("ngStyle", \u0275\u0275pureFunction3(7, _c103, ctx_r1.position === "left" || ctx_r1.position === "topleft" || ctx_r1.position === "bottomleft" ? "flex-start" : ctx_r1.position === "right" || ctx_r1.position === "topright" || ctx_r1.position === "bottomright" ? "flex-end" : "center", ctx_r1.position === "top" || ctx_r1.position === "topleft" || ctx_r1.position === "topright" ? "flex-start" : ctx_r1.position === "bottom" || ctx_r1.position === "bottomleft" || ctx_r1.position === "bottomright" ? "flex-end" : "center", ctx_r1.modal ? "auto" : "none"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.visible);
+  }
+}
+var theme22 = ({
+  dt: dt2
+}) => `
+.p-dialog {
+    max-height: 90%;
+    transform: scale(1);
+    border-radius: ${dt2("dialog.border.radius")};
+    box-shadow: ${dt2("dialog.shadow")};
+    background: ${dt2("dialog.background")};
+    border: 1px solid ${dt2("dialog.border.color")};
+    color: ${dt2("dialog.color")};
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto
+}
+
+.p-dialog-content {
+    overflow-y: auto;
+    padding: ${dt2("dialog.content.padding")};
+    flex-grow: 1;
+}
+
+.p-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    padding: ${dt2("dialog.header.padding")};
+}
+
+.p-dialog-title {
+    font-weight: ${dt2("dialog.title.font.weight")};
+    font-size: ${dt2("dialog.title.font.size")};
+}
+
+.p-dialog-footer {
+    flex-shrink: 0;
+    padding: ${dt2("dialog.footer.padding")};
+    display: flex;
+    justify-content: flex-end;
+    gap: ${dt2("dialog.footer.gap")};
+}
+
+.p-dialog-header-actions {
+    display: flex;
+    align-items: center;
+    gap: ${dt2("dialog.header.gap")};
+}
+
+.p-dialog-enter-active {
+    transition: all 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.p-dialog-leave-active {
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.p-dialog-enter-from,
+.p-dialog-leave-to {
+    opacity: 0;
+    transform: scale(0.7);
+}
+
+.p-dialog-top .p-dialog,
+.p-dialog-bottom .p-dialog,
+.p-dialog-left .p-dialog,
+.p-dialog-right .p-dialog,
+.p-dialog-topleft .p-dialog,
+.p-dialog-topright .p-dialog,
+.p-dialog-bottomleft .p-dialog,
+.p-dialog-bottomright .p-dialog {
+    margin: 0.75rem;
+    transform: translate3d(0px, 0px, 0px);
+}
+
+.p-dialog-top .p-dialog-enter-active,
+.p-dialog-top .p-dialog-leave-active,
+.p-dialog-bottom .p-dialog-enter-active,
+.p-dialog-bottom .p-dialog-leave-active,
+.p-dialog-left .p-dialog-enter-active,
+.p-dialog-left .p-dialog-leave-active,
+.p-dialog-right .p-dialog-enter-active,
+.p-dialog-right .p-dialog-leave-active,
+.p-dialog-topleft .p-dialog-enter-active,
+.p-dialog-topleft .p-dialog-leave-active,
+.p-dialog-topright .p-dialog-enter-active,
+.p-dialog-topright .p-dialog-leave-active,
+.p-dialog-bottomleft .p-dialog-enter-active,
+.p-dialog-bottomleft .p-dialog-leave-active,
+.p-dialog-bottomright .p-dialog-enter-active,
+.p-dialog-bottomright .p-dialog-leave-active {
+    transition: all 0.3s ease-out;
+}
+
+.p-dialog-top .p-dialog-enter-from,
+.p-dialog-top .p-dialog-leave-to {
+    transform: translate3d(0px, -100%, 0px);
+}
+
+.p-dialog-bottom .p-dialog-enter-from,
+.p-dialog-bottom .p-dialog-leave-to {
+    transform: translate3d(0px, 100%, 0px);
+}
+
+.p-dialog-left .p-dialog-enter-from,
+.p-dialog-left .p-dialog-leave-to,
+.p-dialog-topleft .p-dialog-enter-from,
+.p-dialog-topleft .p-dialog-leave-to,
+.p-dialog-bottomleft .p-dialog-enter-from,
+.p-dialog-bottomleft .p-dialog-leave-to {
+    transform: translate3d(-100%, 0px, 0px);
+}
+
+.p-dialog-right .p-dialog-enter-from,
+.p-dialog-right .p-dialog-leave-to,
+.p-dialog-topright .p-dialog-enter-from,
+.p-dialog-topright .p-dialog-leave-to,
+.p-dialog-bottomright .p-dialog-enter-from,
+.p-dialog-bottomright .p-dialog-leave-to {
+    transform: translate3d(100%, 0px, 0px);
+}
+
+.p-dialog-left:dir(rtl) .p-dialog-enter-from,
+.p-dialog-left:dir(rtl) .p-dialog-leave-to,
+.p-dialog-topleft:dir(rtl) .p-dialog-enter-from,
+.p-dialog-topleft:dir(rtl) .p-dialog-leave-to,
+.p-dialog-bottomleft:dir(rtl) .p-dialog-enter-from,
+.p-dialog-bottomleft:dir(rtl) .p-dialog-leave-to {
+    transform: translate3d(100%, 0px, 0px);
+}
+
+.p-dialog-right:dir(rtl) .p-dialog-enter-from,
+.p-dialog-right:dir(rtl) .p-dialog-leave-to,
+.p-dialog-topright:dir(rtl) .p-dialog-enter-from,
+.p-dialog-topright:dir(rtl) .p-dialog-leave-to,
+.p-dialog-bottomright:dir(rtl) .p-dialog-enter-from,
+.p-dialog-bottomright:dir(rtl) .p-dialog-leave-to {
+    transform: translate3d(-100%, 0px, 0px);
+}
+
+.p-dialog-maximized {
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0px !important;
+    left: 0px !important;
+    max-height: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.p-dialog-maximized .p-dialog-content {
+    flex-grow: 1;
+}
+
+.p-overlay-mask:dir(rtl) {
+    flex-direction: row-reverse;
+}
+
+/* For PrimeNG */
+
+.p-dialog .p-resizable-handle {
+    position: absolute;
+    font-size: 0.1px;
+    display: block;
+    cursor: se-resize;
+    width: 12px;
+    height: 12px;
+    right: 1px;
+    bottom: 1px;
+}
+
+.p-confirm-dialog .p-dialog-content {
+    display: flex;
+    align-items: center;
+}
+`;
+var inlineStyles2 = {
+  mask: ({
+    instance
+  }) => ({
+    position: "fixed",
+    height: "100%",
+    width: "100%",
+    left: 0,
+    top: 0,
+    display: "flex",
+    justifyContent: instance.position === "left" || instance.position === "topleft" || instance.position === "bottomleft" ? "flex-start" : instance.position === "right" || instance.position === "topright" || instance.position === "bottomright" ? "flex-end" : "center",
+    alignItems: instance.position === "top" || instance.position === "topleft" || instance.position === "topright" ? "flex-start" : instance.position === "bottom" || instance.position === "bottomleft" || instance.position === "bottomright" ? "flex-end" : "center",
+    pointerEvents: instance.modal ? "auto" : "none"
+  }),
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    pointerEvents: "auto"
+  }
+};
+var classes22 = {
+  mask: ({
+    instance
+  }) => {
+    const positions = ["left", "right", "top", "topleft", "topright", "bottom", "bottomleft", "bottomright"];
+    const pos = positions.find((item) => item === instance.position);
+    return {
+      "p-dialog-mask": true,
+      "p-overlay-mask p-overlay-mask-enter": instance.modal,
+      [`p-dialog-${pos}`]: pos
+    };
+  },
+  root: ({
+    instance
+  }) => ({
+    "p-dialog p-component": true,
+    "p-dialog-maximized": instance.maximizable && instance.maximized
+  }),
+  header: "p-dialog-header",
+  title: "p-dialog-title",
+  resizeHandle: "p-resizable-handle",
+  headerActions: "p-dialog-header-actions",
+  pcMaximizeButton: "p-dialog-maximize-button",
+  pcCloseButton: "p-dialog-close-button",
+  content: "p-dialog-content",
+  footer: "p-dialog-footer"
+};
+var DialogStyle = class _DialogStyle extends BaseStyle {
+  name = "dialog";
+  theme = theme22;
+  classes = classes22;
+  inlineStyles = inlineStyles2;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275DialogStyle_BaseFactory;
+    return function DialogStyle_Factory(__ngFactoryType__) {
+      return (\u0275DialogStyle_BaseFactory || (\u0275DialogStyle_BaseFactory = \u0275\u0275getInheritedFactory(_DialogStyle)))(__ngFactoryType__ || _DialogStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _DialogStyle,
+    factory: _DialogStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DialogStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var DialogClasses;
+(function(DialogClasses2) {
+  DialogClasses2["mask"] = "p-dialog-mask";
+  DialogClasses2["root"] = "p-dialog";
+  DialogClasses2["header"] = "p-dialog-header";
+  DialogClasses2["title"] = "p-dialog-title";
+  DialogClasses2["headerActions"] = "p-dialog-header-actions";
+  DialogClasses2["pcMaximizeButton"] = "p-dialog-maximize-button";
+  DialogClasses2["pcCloseButton"] = "p-dialog-close-button";
+  DialogClasses2["content"] = "p-dialog-content";
+  DialogClasses2["footer"] = "p-dialog-footer";
+})(DialogClasses || (DialogClasses = {}));
+var showAnimation = animation([style({
+  transform: "{{transform}}",
+  opacity: 0
+}), animate("{{transition}}")]);
+var hideAnimation = animation([animate("{{transition}}", style({
+  transform: "{{transform}}",
+  opacity: 0
+}))]);
+var Dialog = class _Dialog extends BaseComponent {
+  /**
+   * Title text of the dialog.
+   * @group Props
+   */
+  header;
+  /**
+   * Enables dragging to change the position using header.
+   * @group Props
+   */
+  draggable = true;
+  /**
+   * Enables resizing of the content.
+   * @group Props
+   */
+  resizable = true;
+  /**
+   * Defines the left offset of dialog.
+   * @group Props
+   * @deprecated positionLeft property is deprecated.
+   */
+  get positionLeft() {
+    return 0;
+  }
+  set positionLeft(_positionLeft) {
+    console.log("positionLeft property is deprecated.");
+  }
+  /**
+   * Defines the top offset of dialog.
+   * @group Props
+   * @deprecated positionTop property is deprecated.
+   */
+  get positionTop() {
+    return 0;
+  }
+  set positionTop(_positionTop) {
+    console.log("positionTop property is deprecated.");
+  }
+  /**
+   * Style of the content section.
+   * @group Props
+   */
+  contentStyle;
+  /**
+   * Style class of the content.
+   * @group Props
+   */
+  contentStyleClass;
+  /**
+   * Defines if background should be blocked when dialog is displayed.
+   * @group Props
+   */
+  modal = false;
+  /**
+   * Specifies if pressing escape key should hide the dialog.
+   * @group Props
+   */
+  closeOnEscape = true;
+  /**
+   * Specifies if clicking the modal background should hide the dialog.
+   * @group Props
+   */
+  dismissableMask = false;
+  /**
+   * When enabled dialog is displayed in RTL direction.
+   * @group Props
+   */
+  rtl = false;
+  /**
+   * Adds a close icon to the header to hide the dialog.
+   * @group Props
+   */
+  closable = true;
+  /**
+   * Defines if the component is responsive.
+   * @group Props
+   * @deprecated Responsive property is deprecated.
+   */
+  get responsive() {
+    return false;
+  }
+  set responsive(_responsive) {
+    console.log("Responsive property is deprecated.");
+  }
+  /**
+   * Target element to attach the dialog, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
+   * @group Props
+   */
+  appendTo;
+  /**
+   * Object literal to define widths per screen size.
+   * @group Props
+   */
+  breakpoints;
+  /**
+   * Style class of the component.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Style class of the mask.
+   * @group Props
+   */
+  maskStyleClass;
+  /**
+   * Style of the mask.
+   * @group Props
+   */
+  maskStyle;
+  /**
+   * Whether to show the header or not.
+   * @group Props
+   */
+  showHeader = true;
+  /**
+   * Defines the breakpoint of the component responsive.
+   * @group Props
+   * @deprecated Breakpoint property is not utilized and deprecated. Use breakpoints or CSS media queries instead.
+   */
+  get breakpoint() {
+    return 649;
+  }
+  set breakpoint(_breakpoint) {
+    console.log("Breakpoint property is not utilized and deprecated, use breakpoints or CSS media queries instead.");
+  }
+  /**
+   * Whether background scroll should be blocked when dialog is visible.
+   * @group Props
+   */
+  blockScroll = false;
+  /**
+   * Whether to automatically manage layering.
+   * @group Props
+   */
+  autoZIndex = true;
+  /**
+   * Base zIndex value to use in layering.
+   * @group Props
+   */
+  baseZIndex = 0;
+  /**
+   * Minimum value for the left coordinate of dialog in dragging.
+   * @group Props
+   */
+  minX = 0;
+  /**
+   * Minimum value for the top coordinate of dialog in dragging.
+   * @group Props
+   */
+  minY = 0;
+  /**
+   * When enabled, first focusable element receives focus on show.
+   * @group Props
+   */
+  focusOnShow = true;
+  /**
+   * Whether the dialog can be displayed full screen.
+   * @group Props
+   */
+  maximizable = false;
+  /**
+   * Keeps dialog in the viewport.
+   * @group Props
+   */
+  keepInViewport = true;
+  /**
+   * When enabled, can only focus on elements inside the dialog.
+   * @group Props
+   */
+  focusTrap = true;
+  /**
+   * Transition options of the animation.
+   * @group Props
+   */
+  transitionOptions = "150ms cubic-bezier(0, 0, 0.2, 1)";
+  /**
+   * Name of the close icon.
+   * @group Props
+   */
+  closeIcon;
+  /**
+   * Defines a string that labels the close button for accessibility.
+   * @group Props
+   */
+  closeAriaLabel;
+  /**
+   * Index of the close button in tabbing order.
+   * @group Props
+   */
+  closeTabindex = "0";
+  /**
+   * Name of the minimize icon.
+   * @group Props
+   */
+  minimizeIcon;
+  /**
+   * Name of the maximize icon.
+   * @group Props
+   */
+  maximizeIcon;
+  /**
+   * Used to pass all properties of the ButtonProps to the Button component.
+   * @group Props
+   */
+  closeButtonProps = {
+    severity: "secondary",
+    text: true,
+    rounded: true
+  };
+  /**
+   * Used to pass all properties of the ButtonProps to the Button component.
+   * @group Props
+   */
+  maximizeButtonProps = {
+    severity: "secondary",
+    text: true,
+    rounded: true
+  };
+  /**
+   * Specifies the visibility of the dialog.
+   * @group Props
+   */
+  get visible() {
+    return this._visible;
+  }
+  set visible(value) {
+    this._visible = value;
+    if (this._visible && !this.maskVisible) {
+      this.maskVisible = true;
+    }
+  }
+  /**
+   * Inline style of the component.
+   * @group Props
+   */
+  get style() {
+    return this._style;
+  }
+  set style(value) {
+    if (value) {
+      this._style = __spreadValues({}, value);
+      this.originalStyle = value;
+    }
+  }
+  /**
+   * Position of the dialog.
+   * @group Props
+   */
+  get position() {
+    return this._position;
+  }
+  set position(value) {
+    this._position = value;
+    switch (value) {
+      case "topleft":
+      case "bottomleft":
+      case "left":
+        this.transformOptions = "translate3d(-100%, 0px, 0px)";
+        break;
+      case "topright":
+      case "bottomright":
+      case "right":
+        this.transformOptions = "translate3d(100%, 0px, 0px)";
+        break;
+      case "bottom":
+        this.transformOptions = "translate3d(0px, 100%, 0px)";
+        break;
+      case "top":
+        this.transformOptions = "translate3d(0px, -100%, 0px)";
+        break;
+      default:
+        this.transformOptions = "scale(0.7)";
+        break;
+    }
+  }
+  /**
+   * Role attribute of html element.
+   * @group Emits
+   */
+  role = "dialog";
+  /**
+   * Callback to invoke when dialog is shown.
+   * @group Emits
+   */
+  onShow = new EventEmitter();
+  /**
+   * Callback to invoke when dialog is hidden.
+   * @group Emits
+   */
+  onHide = new EventEmitter();
+  /**
+   * This EventEmitter is used to notify changes in the visibility state of a component.
+   * @param {boolean} value - New value.
+   * @group Emits
+   */
+  visibleChange = new EventEmitter();
+  /**
+   * Callback to invoke when dialog resizing is initiated.
+   * @param {MouseEvent} event - Mouse event.
+   * @group Emits
+   */
+  onResizeInit = new EventEmitter();
+  /**
+   * Callback to invoke when dialog resizing is completed.
+   * @param {MouseEvent} event - Mouse event.
+   * @group Emits
+   */
+  onResizeEnd = new EventEmitter();
+  /**
+   * Callback to invoke when dialog dragging is completed.
+   * @param {DragEvent} event - Drag event.
+   * @group Emits
+   */
+  onDragEnd = new EventEmitter();
+  /**
+   * Callback to invoke when dialog maximized or unmaximized.
+   * @group Emits
+   */
+  onMaximize = new EventEmitter();
+  headerViewChild;
+  contentViewChild;
+  footerViewChild;
+  /**
+   * Header template.
+   * @group Props
+   */
+  headerTemplate;
+  /**
+   * Content template.
+   * @group Props
+   */
+  contentTemplate;
+  /**
+   * Footer template.
+   * @group Props
+   */
+  footerTemplate;
+  /**
+   * Close icon template.
+   * @group Props
+   */
+  closeIconTemplate;
+  /**
+   * Maximize icon template.
+   * @group Props
+   */
+  maximizeIconTemplate;
+  /**
+   * Minimize icon template.
+   * @group Props
+   */
+  minimizeIconTemplate;
+  /**
+   * Headless template.
+   * @group Props
+   */
+  headlessTemplate;
+  _headerTemplate;
+  _contentTemplate;
+  _footerTemplate;
+  _closeiconTemplate;
+  _maximizeiconTemplate;
+  _minimizeiconTemplate;
+  _headlessTemplate;
+  _visible = false;
+  maskVisible;
+  container;
+  wrapper;
+  dragging;
+  ariaLabelledBy = this.getAriaLabelledBy();
+  documentDragListener;
+  documentDragEndListener;
+  resizing;
+  documentResizeListener;
+  documentResizeEndListener;
+  documentEscapeListener;
+  maskClickListener;
+  lastPageX;
+  lastPageY;
+  preventVisibleChangePropagation;
+  maximized;
+  preMaximizeContentHeight;
+  preMaximizeContainerWidth;
+  preMaximizeContainerHeight;
+  preMaximizePageX;
+  preMaximizePageY;
+  id = uuid("pn_id_");
+  _style = {};
+  _position = "center";
+  originalStyle;
+  transformOptions = "scale(0.7)";
+  styleElement;
+  window;
+  _componentStyle = inject(DialogStyle);
+  headerT;
+  contentT;
+  footerT;
+  closeIconT;
+  maximizeIconT;
+  minimizeIconT;
+  headlessT;
+  get maximizeLabel() {
+    return this.config.getTranslation(TranslationKeys.ARIA)["maximizeLabel"];
+  }
+  zone = inject(NgZone);
+  get maskClass() {
+    const positions = ["left", "right", "top", "topleft", "topright", "bottom", "bottomleft", "bottomright"];
+    const pos = positions.find((item) => item === this.position);
+    return {
+      "p-dialog-mask": true,
+      "p-overlay-mask p-overlay-mask-enter": this.modal || this.dismissableMask,
+      [`p-dialog-${pos}`]: pos
+    };
+  }
+  ngOnInit() {
+    super.ngOnInit();
+    if (this.breakpoints) {
+      this.createStyle();
+    }
+  }
+  templates;
+  ngAfterContentInit() {
+    this.templates?.forEach((item) => {
+      switch (item.getType()) {
+        case "header":
+          this.headerT = item.template;
+          break;
+        case "content":
+          this.contentT = item.template;
+          break;
+        case "footer":
+          this.footerT = item.template;
+          break;
+        case "closeicon":
+          this.closeIconT = item.template;
+          break;
+        case "maximizeicon":
+          this.maximizeIconT = item.template;
+          break;
+        case "minimizeicon":
+          this.minimizeIconT = item.template;
+          break;
+        case "headless":
+          this.headlessT = item.template;
+          break;
+        default:
+          this.contentT = item.template;
+          break;
+      }
+    });
+  }
+  getAriaLabelledBy() {
+    return this.header !== null ? uuid("pn_id_") + "_header" : null;
+  }
+  parseDurationToMilliseconds(durationString) {
+    const transitionTimeRegex = /([\d\.]+)(ms|s)\b/g;
+    let totalMilliseconds = 0;
+    let match2;
+    while ((match2 = transitionTimeRegex.exec(durationString)) !== null) {
+      const value = parseFloat(match2[1]);
+      const unit = match2[2];
+      if (unit === "ms") {
+        totalMilliseconds += value;
+      } else if (unit === "s") {
+        totalMilliseconds += value * 1e3;
+      }
+    }
+    if (totalMilliseconds === 0) {
+      return void 0;
+    }
+    return totalMilliseconds;
+  }
+  _focus(focusParentElement) {
+    if (focusParentElement) {
+      const timeoutDuration = this.parseDurationToMilliseconds(this.transitionOptions);
+      let _focusableElements = DomHandler.getFocusableElements(focusParentElement);
+      if (_focusableElements && _focusableElements.length > 0) {
+        this.zone.runOutsideAngular(() => {
+          setTimeout(() => _focusableElements[0].focus(), timeoutDuration || 5);
+        });
+        return true;
+      }
+    }
+    return false;
+  }
+  focus(focusParentElement) {
+    let focused = this._focus(focusParentElement);
+    if (!focused) {
+      focused = this._focus(this.footerViewChild?.nativeElement);
+      if (!focused) {
+        focused = this._focus(this.headerViewChild?.nativeElement);
+        if (!focused) {
+          this._focus(this.contentViewChild?.nativeElement);
+        }
+      }
+    }
+  }
+  close(event2) {
+    this.visibleChange.emit(false);
+    event2.preventDefault();
+  }
+  enableModality() {
+    if (this.closable && this.dismissableMask) {
+      this.maskClickListener = this.renderer.listen(this.wrapper, "mousedown", (event2) => {
+        if (this.wrapper && this.wrapper.isSameNode(event2.target)) {
+          this.close(event2);
+        }
+      });
+    }
+    if (this.modal) {
+      blockBodyScroll();
+    }
+  }
+  disableModality() {
+    if (this.wrapper) {
+      if (this.dismissableMask) {
+        this.unbindMaskClickListener();
+      }
+      const scrollBlockers = document.querySelectorAll(".p-dialog-mask-scrollblocker");
+      if (this.modal && scrollBlockers && scrollBlockers.length == 1) {
+        unblockBodyScroll();
+      }
+      if (!this.cd.destroyed) {
+        this.cd.detectChanges();
+      }
+    }
+  }
+  maximize() {
+    this.maximized = !this.maximized;
+    if (!this.modal && !this.blockScroll) {
+      if (this.maximized) {
+        blockBodyScroll();
+      } else {
+        unblockBodyScroll();
+      }
+    }
+    this.onMaximize.emit({
+      maximized: this.maximized
+    });
+  }
+  unbindMaskClickListener() {
+    if (this.maskClickListener) {
+      this.maskClickListener();
+      this.maskClickListener = null;
+    }
+  }
+  moveOnTop() {
+    if (this.autoZIndex) {
+      zindexutils.set("modal", this.container, this.baseZIndex + this.config.zIndex.modal);
+      this.wrapper.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
+    }
+  }
+  createStyle() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.styleElement) {
+        this.styleElement = this.renderer.createElement("style");
+        this.styleElement.type = "text/css";
+        this.renderer.appendChild(this.document.head, this.styleElement);
+        let innerHTML = "";
+        for (let breakpoint in this.breakpoints) {
+          innerHTML += `
+                        @media screen and (max-width: ${breakpoint}) {
+                            .p-dialog[${this.id}]:not(.p-dialog-maximized) {
+                                width: ${this.breakpoints[breakpoint]} !important;
+                            }
+                        }
+                    `;
+        }
+        this.renderer.setProperty(this.styleElement, "innerHTML", innerHTML);
+        setAttribute(this.styleElement, "nonce", this.config?.csp()?.nonce);
+      }
+    }
+  }
+  initDrag(event2) {
+    if (hasClass(event2.target, "p-dialog-maximize-icon") || hasClass(event2.target, "p-dialog-header-close-icon") || hasClass(event2.target.parentElement, "p-dialog-header-icon")) {
+      return;
+    }
+    if (this.draggable) {
+      this.dragging = true;
+      this.lastPageX = event2.pageX;
+      this.lastPageY = event2.pageY;
+      this.container.style.margin = "0";
+      addClass(this.document.body, "p-unselectable-text");
+    }
+  }
+  onDrag(event2) {
+    if (this.dragging) {
+      const containerWidth = getOuterWidth(this.container);
+      const containerHeight = getOuterHeight(this.container);
+      const deltaX = event2.pageX - this.lastPageX;
+      const deltaY = event2.pageY - this.lastPageY;
+      const offset = this.container.getBoundingClientRect();
+      const containerComputedStyle = getComputedStyle(this.container);
+      const leftMargin = parseFloat(containerComputedStyle.marginLeft);
+      const topMargin = parseFloat(containerComputedStyle.marginTop);
+      const leftPos = offset.left + deltaX - leftMargin;
+      const topPos = offset.top + deltaY - topMargin;
+      const viewport = getViewport();
+      this.container.style.position = "fixed";
+      if (this.keepInViewport) {
+        if (leftPos >= this.minX && leftPos + containerWidth < viewport.width) {
+          this._style.left = `${leftPos}px`;
+          this.lastPageX = event2.pageX;
+          this.container.style.left = `${leftPos}px`;
+        }
+        if (topPos >= this.minY && topPos + containerHeight < viewport.height) {
+          this._style.top = `${topPos}px`;
+          this.lastPageY = event2.pageY;
+          this.container.style.top = `${topPos}px`;
+        }
+      } else {
+        this.lastPageX = event2.pageX;
+        this.container.style.left = `${leftPos}px`;
+        this.lastPageY = event2.pageY;
+        this.container.style.top = `${topPos}px`;
+      }
+    }
+  }
+  endDrag(event2) {
+    if (this.dragging) {
+      this.dragging = false;
+      removeClass(this.document.body, "p-unselectable-text");
+      this.cd.detectChanges();
+      this.onDragEnd.emit(event2);
+    }
+  }
+  resetPosition() {
+    this.container.style.position = "";
+    this.container.style.left = "";
+    this.container.style.top = "";
+    this.container.style.margin = "";
+  }
+  //backward compatibility
+  center() {
+    this.resetPosition();
+  }
+  initResize(event2) {
+    if (this.resizable) {
+      this.resizing = true;
+      this.lastPageX = event2.pageX;
+      this.lastPageY = event2.pageY;
+      addClass(this.document.body, "p-unselectable-text");
+      this.onResizeInit.emit(event2);
+    }
+  }
+  onResize(event2) {
+    if (this.resizing) {
+      let deltaX = event2.pageX - this.lastPageX;
+      let deltaY = event2.pageY - this.lastPageY;
+      let containerWidth = getOuterWidth(this.container);
+      let containerHeight = getOuterHeight(this.container);
+      let contentHeight = getOuterHeight(this.contentViewChild?.nativeElement);
+      let newWidth = containerWidth + deltaX;
+      let newHeight = containerHeight + deltaY;
+      let minWidth = this.container.style.minWidth;
+      let minHeight = this.container.style.minHeight;
+      let offset = this.container.getBoundingClientRect();
+      let viewport = getViewport();
+      let hasBeenDragged = !parseInt(this.container.style.top) || !parseInt(this.container.style.left);
+      if (hasBeenDragged) {
+        newWidth += deltaX;
+        newHeight += deltaY;
+      }
+      if ((!minWidth || newWidth > parseInt(minWidth)) && offset.left + newWidth < viewport.width) {
+        this._style.width = newWidth + "px";
+        this.container.style.width = this._style.width;
+      }
+      if ((!minHeight || newHeight > parseInt(minHeight)) && offset.top + newHeight < viewport.height) {
+        this.contentViewChild.nativeElement.style.height = contentHeight + newHeight - containerHeight + "px";
+        if (this._style.height) {
+          this._style.height = newHeight + "px";
+          this.container.style.height = this._style.height;
+        }
+      }
+      this.lastPageX = event2.pageX;
+      this.lastPageY = event2.pageY;
+    }
+  }
+  resizeEnd(event2) {
+    if (this.resizing) {
+      this.resizing = false;
+      removeClass(this.document.body, "p-unselectable-text");
+      this.onResizeEnd.emit(event2);
+    }
+  }
+  bindGlobalListeners() {
+    if (this.draggable) {
+      this.bindDocumentDragListener();
+      this.bindDocumentDragEndListener();
+    }
+    if (this.resizable) {
+      this.bindDocumentResizeListeners();
+    }
+    if (this.closeOnEscape && this.closable) {
+      this.bindDocumentEscapeListener();
+    }
+  }
+  unbindGlobalListeners() {
+    this.unbindDocumentDragListener();
+    this.unbindDocumentDragEndListener();
+    this.unbindDocumentResizeListeners();
+    this.unbindDocumentEscapeListener();
+  }
+  bindDocumentDragListener() {
+    if (!this.documentDragListener) {
+      this.zone.runOutsideAngular(() => {
+        this.documentDragListener = this.renderer.listen(this.document.defaultView, "mousemove", this.onDrag.bind(this));
+      });
+    }
+  }
+  unbindDocumentDragListener() {
+    if (this.documentDragListener) {
+      this.documentDragListener();
+      this.documentDragListener = null;
+    }
+  }
+  bindDocumentDragEndListener() {
+    if (!this.documentDragEndListener) {
+      this.zone.runOutsideAngular(() => {
+        this.documentDragEndListener = this.renderer.listen(this.document.defaultView, "mouseup", this.endDrag.bind(this));
+      });
+    }
+  }
+  unbindDocumentDragEndListener() {
+    if (this.documentDragEndListener) {
+      this.documentDragEndListener();
+      this.documentDragEndListener = null;
+    }
+  }
+  bindDocumentResizeListeners() {
+    if (!this.documentResizeListener && !this.documentResizeEndListener) {
+      this.zone.runOutsideAngular(() => {
+        this.documentResizeListener = this.renderer.listen(this.document.defaultView, "mousemove", this.onResize.bind(this));
+        this.documentResizeEndListener = this.renderer.listen(this.document.defaultView, "mouseup", this.resizeEnd.bind(this));
+      });
+    }
+  }
+  unbindDocumentResizeListeners() {
+    if (this.documentResizeListener && this.documentResizeEndListener) {
+      this.documentResizeListener();
+      this.documentResizeEndListener();
+      this.documentResizeListener = null;
+      this.documentResizeEndListener = null;
+    }
+  }
+  bindDocumentEscapeListener() {
+    const documentTarget = this.el ? this.el.nativeElement.ownerDocument : "document";
+    this.documentEscapeListener = this.renderer.listen(documentTarget, "keydown", (event2) => {
+      if (event2.key == "Escape") {
+        this.close(event2);
+      }
+    });
+  }
+  unbindDocumentEscapeListener() {
+    if (this.documentEscapeListener) {
+      this.documentEscapeListener();
+      this.documentEscapeListener = null;
+    }
+  }
+  appendContainer() {
+    if (this.appendTo) {
+      if (this.appendTo === "body") this.renderer.appendChild(this.document.body, this.wrapper);
+      else appendChild(this.appendTo, this.wrapper);
+    }
+  }
+  restoreAppend() {
+    if (this.container && this.appendTo) {
+      this.renderer.appendChild(this.el.nativeElement, this.wrapper);
+    }
+  }
+  onAnimationStart(event2) {
+    switch (event2.toState) {
+      case "visible":
+        this.container = event2.element;
+        this.wrapper = this.container?.parentElement;
+        this.appendContainer();
+        this.moveOnTop();
+        this.bindGlobalListeners();
+        this.container?.setAttribute(this.id, "");
+        if (this.modal) {
+          this.enableModality();
+        }
+        if (this.focusOnShow) {
+          this.focus();
+        }
+        break;
+      case "void":
+        if (this.wrapper && this.modal) {
+          addClass(this.wrapper, "p-overlay-mask-leave");
+        }
+        break;
+    }
+  }
+  onAnimationEnd(event2) {
+    switch (event2.toState) {
+      case "void":
+        this.onContainerDestroy();
+        this.onHide.emit({});
+        this.cd.markForCheck();
+        if (this.maskVisible !== this.visible) {
+          this.maskVisible = this.visible;
+        }
+        break;
+      case "visible":
+        this.onShow.emit({});
+        break;
+    }
+  }
+  onContainerDestroy() {
+    this.unbindGlobalListeners();
+    this.dragging = false;
+    this.maskVisible = false;
+    if (this.maximized) {
+      this.document.body.style.removeProperty("--scrollbar;-width");
+      this.maximized = false;
+    }
+    if (this.modal) {
+      this.disableModality();
+    }
+    if (hasClass(this.document.body, "p-overflow-hidden")) {
+      removeClass(this.document.body, "p-overflow-hidden");
+    }
+    if (this.container && this.autoZIndex) {
+      zindexutils.clear(this.container);
+    }
+    this.container = null;
+    this.wrapper = null;
+    this._style = this.originalStyle ? __spreadValues({}, this.originalStyle) : {};
+  }
+  destroyStyle() {
+    if (this.styleElement) {
+      this.renderer.removeChild(this.document.head, this.styleElement);
+      this.styleElement = null;
+    }
+  }
+  ngOnDestroy() {
+    if (this.container) {
+      this.restoreAppend();
+      this.onContainerDestroy();
+    }
+    this.destroyStyle();
+    super.ngOnDestroy();
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Dialog_BaseFactory;
+    return function Dialog_Factory(__ngFactoryType__) {
+      return (\u0275Dialog_BaseFactory || (\u0275Dialog_BaseFactory = \u0275\u0275getInheritedFactory(_Dialog)))(__ngFactoryType__ || _Dialog);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Dialog,
+    selectors: [["p-dialog"]],
+    contentQueries: function Dialog_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c020, 4);
+        \u0275\u0275contentQuery(dirIndex, _c115, 4);
+        \u0275\u0275contentQuery(dirIndex, _c213, 4);
+        \u0275\u0275contentQuery(dirIndex, _c312, 4);
+        \u0275\u0275contentQuery(dirIndex, _c49, 4);
+        \u0275\u0275contentQuery(dirIndex, _c57, 4);
+        \u0275\u0275contentQuery(dirIndex, _c67, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._headerTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._contentTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._footerTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._closeiconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._maximizeiconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._minimizeiconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._headlessTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    viewQuery: function Dialog_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c74, 5);
+        \u0275\u0275viewQuery(_c115, 5);
+        \u0275\u0275viewQuery(_c213, 5);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.headerViewChild = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentViewChild = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.footerViewChild = _t.first);
+      }
+    },
+    inputs: {
+      header: "header",
+      draggable: [2, "draggable", "draggable", booleanAttribute],
+      resizable: [2, "resizable", "resizable", booleanAttribute],
+      positionLeft: "positionLeft",
+      positionTop: "positionTop",
+      contentStyle: "contentStyle",
+      contentStyleClass: "contentStyleClass",
+      modal: [2, "modal", "modal", booleanAttribute],
+      closeOnEscape: [2, "closeOnEscape", "closeOnEscape", booleanAttribute],
+      dismissableMask: [2, "dismissableMask", "dismissableMask", booleanAttribute],
+      rtl: [2, "rtl", "rtl", booleanAttribute],
+      closable: [2, "closable", "closable", booleanAttribute],
+      responsive: "responsive",
+      appendTo: "appendTo",
+      breakpoints: "breakpoints",
+      styleClass: "styleClass",
+      maskStyleClass: "maskStyleClass",
+      maskStyle: "maskStyle",
+      showHeader: [2, "showHeader", "showHeader", booleanAttribute],
+      breakpoint: "breakpoint",
+      blockScroll: [2, "blockScroll", "blockScroll", booleanAttribute],
+      autoZIndex: [2, "autoZIndex", "autoZIndex", booleanAttribute],
+      baseZIndex: [2, "baseZIndex", "baseZIndex", numberAttribute],
+      minX: [2, "minX", "minX", numberAttribute],
+      minY: [2, "minY", "minY", numberAttribute],
+      focusOnShow: [2, "focusOnShow", "focusOnShow", booleanAttribute],
+      maximizable: [2, "maximizable", "maximizable", booleanAttribute],
+      keepInViewport: [2, "keepInViewport", "keepInViewport", booleanAttribute],
+      focusTrap: [2, "focusTrap", "focusTrap", booleanAttribute],
+      transitionOptions: "transitionOptions",
+      closeIcon: "closeIcon",
+      closeAriaLabel: "closeAriaLabel",
+      closeTabindex: "closeTabindex",
+      minimizeIcon: "minimizeIcon",
+      maximizeIcon: "maximizeIcon",
+      closeButtonProps: "closeButtonProps",
+      maximizeButtonProps: "maximizeButtonProps",
+      visible: "visible",
+      style: "style",
+      position: "position",
+      role: "role",
+      headerTemplate: [0, "content", "headerTemplate"],
+      contentTemplate: "contentTemplate",
+      footerTemplate: "footerTemplate",
+      closeIconTemplate: "closeIconTemplate",
+      maximizeIconTemplate: "maximizeIconTemplate",
+      minimizeIconTemplate: "minimizeIconTemplate",
+      headlessTemplate: "headlessTemplate"
+    },
+    outputs: {
+      onShow: "onShow",
+      onHide: "onHide",
+      visibleChange: "visibleChange",
+      onResizeInit: "onResizeInit",
+      onResizeEnd: "onResizeEnd",
+      onDragEnd: "onDragEnd",
+      onMaximize: "onMaximize"
+    },
+    features: [\u0275\u0275ProvidersFeature([DialogStyle]), \u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c93,
+    decls: 1,
+    vars: 1,
+    consts: [["container", ""], ["notHeadless", ""], ["content", ""], ["titlebar", ""], ["icon", ""], ["footer", ""], [3, "ngClass", "class", "ngStyle", "style", 4, "ngIf"], [3, "ngClass", "ngStyle"], ["pFocusTrap", "", 3, "class", "ngClass", "ngStyle", "style", "pFocusTrapDisabled", 4, "ngIf"], ["pFocusTrap", "", 3, "ngClass", "ngStyle", "pFocusTrapDisabled"], [4, "ngIf", "ngIfElse"], [4, "ngTemplateOutlet"], ["style", "z-index: 90;", 3, "ngClass", "mousedown", 4, "ngIf"], [3, "ngClass", "mousedown", 4, "ngIf"], [3, "ngClass", 4, "ngIf"], [2, "z-index", "90", 3, "mousedown", "ngClass"], [3, "mousedown", "ngClass"], [3, "id", "ngClass", 4, "ngIf"], [3, "ngClass"], [3, "styleClass", "tabindex", "ariaLabel", "buttonProps", "onClick", "keydown.enter", 4, "ngIf"], [3, "styleClass", "ariaLabel", "tabindex", "buttonProps", "onClick", "keydown.enter", 4, "ngIf"], [3, "id", "ngClass"], [3, "onClick", "keydown.enter", "styleClass", "tabindex", "ariaLabel", "buttonProps"], [4, "ngIf"], [3, "onClick", "keydown.enter", "styleClass", "ariaLabel", "tabindex", "buttonProps"]],
+    template: function Dialog_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef(_c84);
+        \u0275\u0275template(0, Dialog_div_0_Template, 2, 11, "div", 6);
+      }
+      if (rf & 2) {
+        \u0275\u0275property("ngIf", ctx.maskVisible);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, Button, FocusTrap, TimesIcon, WindowMaximizeIcon, WindowMinimizeIcon, SharedModule],
+    encapsulation: 2,
+    data: {
+      animation: [trigger("animation", [transition("void => visible", [useAnimation(showAnimation)]), transition("visible => void", [useAnimation(hideAnimation)])])]
+    },
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Dialog, [{
+    type: Component,
+    args: [{
+      selector: "p-dialog",
+      standalone: true,
+      imports: [CommonModule, Button, FocusTrap, TimesIcon, WindowMaximizeIcon, WindowMinimizeIcon, SharedModule],
+      template: `
+        <div
+            *ngIf="maskVisible"
+            [ngClass]="maskClass"
+            [class]="maskStyleClass"
+            [ngStyle]="{
+                position: 'fixed',
+                height: '100%',
+                width: '100%',
+                left: 0,
+                top: 0,
+                display: 'flex',
+                'justify-content': position === 'left' || position === 'topleft' || position === 'bottomleft' ? 'flex-start' : position === 'right' || position === 'topright' || position === 'bottomright' ? 'flex-end' : 'center',
+                'align-items': position === 'top' || position === 'topleft' || position === 'topright' ? 'flex-start' : position === 'bottom' || position === 'bottomleft' || position === 'bottomright' ? 'flex-end' : 'center',
+                'pointer-events': modal ? 'auto' : 'none'
+            }"
+            [style]="maskStyle"
+        >
+            <div
+                *ngIf="visible"
+                #container
+                [class]="styleClass"
+                [ngClass]="{ 'p-dialog p-component': true, 'p-dialog-maximized': maximizable && maximized }"
+                [ngStyle]="{ display: 'flex', 'flex-direction': 'column', 'pointer-events': 'auto' }"
+                [style]="style"
+                pFocusTrap
+                [pFocusTrapDisabled]="focusTrap === false"
+                [@animation]="{
+                    value: 'visible',
+                    params: { transform: transformOptions, transition: transitionOptions }
+                }"
+                (@animation.start)="onAnimationStart($event)"
+                (@animation.done)="onAnimationEnd($event)"
+                [attr.role]="role"
+                [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-modal]="true"
+            >
+                <ng-container *ngIf="_headlessTemplate || headlessTemplate || headlessT; else notHeadless">
+                    <ng-container *ngTemplateOutlet="_headlessTemplate || headlessTemplate || headlessT"></ng-container>
+                </ng-container>
+
+                <ng-template #notHeadless>
+                    <div *ngIf="resizable" [ngClass]="cx('resizeHandle')" style="z-index: 90;" (mousedown)="initResize($event)"></div>
+                    <div #titlebar [ngClass]="cx('header')" (mousedown)="initDrag($event)" *ngIf="showHeader">
+                        <span [id]="ariaLabelledBy" [ngClass]="cx('title')" *ngIf="!_headerTemplate && !headerTemplate && !headerT">{{ header }}</span>
+                        <ng-container *ngTemplateOutlet="_headerTemplate || headerTemplate || headerT"></ng-container>
+                        <div [ngClass]="cx('headerActions')">
+                            <p-button *ngIf="maximizable" [styleClass]="cx('pcMaximizeButton')" (onClick)="maximize()" (keydown.enter)="maximize()" [tabindex]="maximizable ? '0' : '-1'" [ariaLabel]="maximizeLabel" [buttonProps]="maximizeButtonProps">
+                                <span *ngIf="maximizeIcon && !_maximizeiconTemplate && !_minimizeiconTemplate" [ngClass]="maximized ? minimizeIcon : maximizeIcon"></span>
+                                <ng-container *ngIf="!maximizeIcon && !maximizeButtonProps?.icon">
+                                    <WindowMaximizeIcon *ngIf="!maximized && !_maximizeiconTemplate && !maximizeIconTemplate && !maximizeIconT" />
+                                    <WindowMinimizeIcon *ngIf="maximized && !_minimizeiconTemplate && !minimizeIconTemplate && !minimizeIconT" />
+                                </ng-container>
+                                <ng-container *ngIf="!maximized">
+                                    <ng-template *ngTemplateOutlet="_maximizeiconTemplate || maximizeIconTemplate || maximizeIconT"></ng-template>
+                                </ng-container>
+                                <ng-container *ngIf="maximized">
+                                    <ng-template *ngTemplateOutlet="_minimizeiconTemplate || minimizeIconTemplate || minimizeIconT"></ng-template>
+                                </ng-container>
+                            </p-button>
+                            <p-button *ngIf="closable" [styleClass]="cx('pcCloseButton')" [ariaLabel]="closeAriaLabel" (onClick)="close($event)" (keydown.enter)="close($event)" [tabindex]="closeTabindex" [buttonProps]="closeButtonProps">
+                                <ng-template #icon>
+                                    <ng-container *ngIf="!_closeiconTemplate && !closeIconTemplate && !closeIconT && !closeButtonProps?.icon">
+                                        <span *ngIf="closeIcon" [ngClass]="closeIcon"></span>
+                                        <TimesIcon *ngIf="!closeIcon" />
+                                    </ng-container>
+                                    <span *ngIf="_closeiconTemplate || closeIconTemplate || closeIconT">
+                                        <ng-template *ngTemplateOutlet="_closeiconTemplate || closeIconTemplate || closeIconT"></ng-template>
+                                    </span>
+                                </ng-template>
+                            </p-button>
+                        </div>
+                    </div>
+                    <div #content [ngClass]="cx('content')" [class]="contentStyleClass" [ngStyle]="contentStyle" [attr.data-pc-section]="'content'">
+                        <ng-content></ng-content>
+                        <ng-container *ngTemplateOutlet="_contentTemplate || contentTemplate || contentT"></ng-container>
+                    </div>
+                    <div #footer [ngClass]="cx('footer')" *ngIf="_footerTemplate || footerTemplate || footerT">
+                        <ng-content select="p-footer"></ng-content>
+                        <ng-container *ngTemplateOutlet="_footerTemplate || footerTemplate || footerT"></ng-container>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    `,
+      animations: [trigger("animation", [transition("void => visible", [useAnimation(showAnimation)]), transition("visible => void", [useAnimation(hideAnimation)])])],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      providers: [DialogStyle]
+    }]
+  }], null, {
+    header: [{
+      type: Input
+    }],
+    draggable: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    resizable: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    positionLeft: [{
+      type: Input
+    }],
+    positionTop: [{
+      type: Input
+    }],
+    contentStyle: [{
+      type: Input
+    }],
+    contentStyleClass: [{
+      type: Input
+    }],
+    modal: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    closeOnEscape: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    dismissableMask: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    rtl: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    closable: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    responsive: [{
+      type: Input
+    }],
+    appendTo: [{
+      type: Input
+    }],
+    breakpoints: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    maskStyleClass: [{
+      type: Input
+    }],
+    maskStyle: [{
+      type: Input
+    }],
+    showHeader: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    breakpoint: [{
+      type: Input
+    }],
+    blockScroll: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    autoZIndex: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    baseZIndex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    minX: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    minY: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    focusOnShow: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    maximizable: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    keepInViewport: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    focusTrap: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    transitionOptions: [{
+      type: Input
+    }],
+    closeIcon: [{
+      type: Input
+    }],
+    closeAriaLabel: [{
+      type: Input
+    }],
+    closeTabindex: [{
+      type: Input
+    }],
+    minimizeIcon: [{
+      type: Input
+    }],
+    maximizeIcon: [{
+      type: Input
+    }],
+    closeButtonProps: [{
+      type: Input
+    }],
+    maximizeButtonProps: [{
+      type: Input
+    }],
+    visible: [{
+      type: Input
+    }],
+    style: [{
+      type: Input
+    }],
+    position: [{
+      type: Input
+    }],
+    role: [{
+      type: Input
+    }],
+    onShow: [{
+      type: Output
+    }],
+    onHide: [{
+      type: Output
+    }],
+    visibleChange: [{
+      type: Output
+    }],
+    onResizeInit: [{
+      type: Output
+    }],
+    onResizeEnd: [{
+      type: Output
+    }],
+    onDragEnd: [{
+      type: Output
+    }],
+    onMaximize: [{
+      type: Output
+    }],
+    headerViewChild: [{
+      type: ViewChild,
+      args: ["titlebar"]
+    }],
+    contentViewChild: [{
+      type: ViewChild,
+      args: ["content"]
+    }],
+    footerViewChild: [{
+      type: ViewChild,
+      args: ["footer"]
+    }],
+    headerTemplate: [{
+      type: Input,
+      args: ["content"]
+    }],
+    contentTemplate: [{
+      type: Input
+    }],
+    footerTemplate: [{
+      type: Input
+    }],
+    closeIconTemplate: [{
+      type: Input
+    }],
+    maximizeIconTemplate: [{
+      type: Input
+    }],
+    minimizeIconTemplate: [{
+      type: Input
+    }],
+    headlessTemplate: [{
+      type: Input
+    }],
+    _headerTemplate: [{
+      type: ContentChild,
+      args: ["header", {
+        descendants: false
+      }]
+    }],
+    _contentTemplate: [{
+      type: ContentChild,
+      args: ["content", {
+        descendants: false
+      }]
+    }],
+    _footerTemplate: [{
+      type: ContentChild,
+      args: ["footer", {
+        descendants: false
+      }]
+    }],
+    _closeiconTemplate: [{
+      type: ContentChild,
+      args: ["closeicon", {
+        descendants: false
+      }]
+    }],
+    _maximizeiconTemplate: [{
+      type: ContentChild,
+      args: ["maximizeicon", {
+        descendants: false
+      }]
+    }],
+    _minimizeiconTemplate: [{
+      type: ContentChild,
+      args: ["minimizeicon", {
+        descendants: false
+      }]
+    }],
+    _headlessTemplate: [{
+      type: ContentChild,
+      args: ["headless", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var DialogModule = class _DialogModule {
+  static \u0275fac = function DialogModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _DialogModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _DialogModule,
+    imports: [Dialog, SharedModule],
+    exports: [Dialog, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [Dialog, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DialogModule, [{
+    type: NgModule,
+    args: [{
+      imports: [Dialog, SharedModule],
+      exports: [Dialog, SharedModule]
+    }]
+  }], null, null);
+})();
+
 // node_modules/primeng/fesm2022/primeng-accordion.mjs
-var _c018 = ["*"];
-var _c112 = ["toggleicon"];
-var _c211 = (a0) => ({
+var _c021 = ["*"];
+var _c117 = ["toggleicon"];
+var _c214 = (a0) => ({
   active: a0
 });
 function AccordionHeader_Conditional_1_0_ng_template_0_Template(rf, ctx) {
@@ -51097,7 +56307,7 @@ function AccordionHeader_Conditional_1_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r0.toggleicon)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c211, ctx_r0.active()));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r0.toggleicon)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c214, ctx_r0.active()));
   }
 }
 function AccordionHeader_Conditional_2_ng_container_0_span_1_Template(rf, ctx) {
@@ -51181,23 +56391,23 @@ function AccordionHeader_Conditional_2_Template(rf, ctx) {
     \u0275\u0275property("ngIf", !ctx_r0.active());
   }
 }
-var _c310 = (a0) => ({
+var _c313 = (a0) => ({
   transitionParams: a0
 });
-var _c47 = (a0) => ({
+var _c410 = (a0) => ({
   value: "visible",
   params: a0
 });
-var _c56 = (a0) => ({
+var _c58 = (a0) => ({
   value: "hidden",
   params: a0
 });
-var _c66 = ["header"];
-var _c73 = ["icon"];
-var _c83 = ["content"];
-var _c92 = ["*", [["p-header"]]];
-var _c102 = ["*", "p-header"];
-var _c113 = (a0) => ({
+var _c68 = ["header"];
+var _c75 = ["icon"];
+var _c85 = ["content"];
+var _c94 = ["*", [["p-header"]]];
+var _c104 = ["*", "p-header"];
+var _c118 = (a0) => ({
   $implicit: a0
 });
 function AccordionTab_Conditional_1_Template(rf, ctx) {
@@ -51252,7 +56462,7 @@ function AccordionTab_Conditional_3_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r0.iconTemplate || ctx_r0._iconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c113, ctx_r0.selected));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r0.iconTemplate || ctx_r0._iconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c118, ctx_r0.selected));
   }
 }
 function AccordionTab_Conditional_4_ng_container_0_span_1_Template(rf, ctx) {
@@ -51353,7 +56563,7 @@ function AccordionTab_ng_container_8_Template(rf, ctx) {
     \u0275\u0275property("ngTemplateOutlet", ctx_r0.contentTemplate || ctx_r0._contentTemplate);
   }
 }
-var theme20 = ({
+var theme23 = ({
   dt: dt2
 }) => `
 .p-accordionpanel {
@@ -51465,13 +56675,13 @@ var theme20 = ({
     gap: ${dt2("accordion.header.padding")};
 }
 `;
-var classes20 = {
+var classes23 = {
   root: "p-accordion p-component"
 };
 var AccordionStyle = class _AccordionStyle extends BaseStyle {
   name = "accordion";
-  theme = theme20;
-  classes = classes20;
+  theme = theme23;
+  classes = classes23;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275AccordionStyle_BaseFactory;
     return function AccordionStyle_Factory(__ngFactoryType__) {
@@ -51544,7 +56754,7 @@ var AccordionPanel = class _AccordionPanel extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c018,
+    ngContentSelectors: _c021,
     decls: 1,
     vars: 0,
     template: function AccordionPanel_Template(rf, ctx) {
@@ -51701,7 +56911,7 @@ var AccordionHeader = class _AccordionHeader extends BaseComponent {
     selectors: [["p-accordion-header"], ["p-accordionheader"]],
     contentQueries: function AccordionHeader_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c112, 5);
+        \u0275\u0275contentQuery(dirIndex, _c117, 5);
       }
       if (rf & 2) {
         let _t;
@@ -51726,7 +56936,7 @@ var AccordionHeader = class _AccordionHeader extends BaseComponent {
       }
     },
     features: [\u0275\u0275HostDirectivesFeature([Ripple]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c018,
+    ngContentSelectors: _c021,
     decls: 3,
     vars: 1,
     consts: [[4, "ngTemplateOutlet", "ngTemplateOutletContext"], [4, "ngIf"], [3, "class", "ngClass", 4, "ngIf"], [3, "ngClass", 4, "ngIf"], [3, "ngClass"]],
@@ -51827,7 +57037,7 @@ var AccordionContent = class _AccordionContent extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c018,
+    ngContentSelectors: _c021,
     decls: 2,
     vars: 9,
     consts: [[1, "p-accordioncontent-content"]],
@@ -51839,7 +57049,7 @@ var AccordionContent = class _AccordionContent extends BaseComponent {
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
-        \u0275\u0275property("@content", ctx.active() ? \u0275\u0275pureFunction1(3, _c47, \u0275\u0275pureFunction1(1, _c310, ctx.pcAccordion.transitionOptions)) : \u0275\u0275pureFunction1(7, _c56, \u0275\u0275pureFunction1(5, _c310, ctx.pcAccordion.transitionOptions)));
+        \u0275\u0275property("@content", ctx.active() ? \u0275\u0275pureFunction1(3, _c410, \u0275\u0275pureFunction1(1, _c313, ctx.pcAccordion.transitionOptions)) : \u0275\u0275pureFunction1(7, _c58, \u0275\u0275pureFunction1(5, _c313, ctx.pcAccordion.transitionOptions)));
       }
     },
     dependencies: [CommonModule],
@@ -52110,9 +57320,9 @@ var AccordionTab = class _AccordionTab extends BaseComponent {
     selectors: [["p-accordionTab"], ["p-accordion-tab"], ["p-accordiontab"]],
     contentQueries: function AccordionTab_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c66, 4);
-        \u0275\u0275contentQuery(dirIndex, _c73, 4);
-        \u0275\u0275contentQuery(dirIndex, _c83, 4);
+        \u0275\u0275contentQuery(dirIndex, _c68, 4);
+        \u0275\u0275contentQuery(dirIndex, _c75, 4);
+        \u0275\u0275contentQuery(dirIndex, _c85, 4);
         \u0275\u0275contentQuery(dirIndex, Header, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
@@ -52154,13 +57364,13 @@ var AccordionTab = class _AccordionTab extends BaseComponent {
       selectedChange: "selectedChange"
     },
     features: [\u0275\u0275ProvidersFeature([AccordionStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c102,
+    ngContentSelectors: _c104,
     decls: 9,
     vars: 30,
     consts: [["type", "button", 1, "p-accordionheader", 3, "click", "keydown", "disabled", "ngClass", "ngStyle"], ["role", "region", 1, "p-accordioncontent"], [1, "p-accordioncontent-content", 3, "ngClass", "ngStyle"], [4, "ngIf"], [4, "ngTemplateOutlet"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [3, "class", "ngClass", 4, "ngIf"], [3, "ngClass", 4, "ngIf"], [3, "ngClass"]],
     template: function AccordionTab_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c92);
+        \u0275\u0275projectionDef(_c94);
         \u0275\u0275elementStart(0, "button", 0);
         \u0275\u0275listener("click", function AccordionTab_Template_button_click_0_listener($event) {
           return ctx.toggle($event);
@@ -52183,7 +57393,7 @@ var AccordionTab = class _AccordionTab extends BaseComponent {
         \u0275\u0275advance(2);
         \u0275\u0275conditional(ctx.iconTemplate || ctx._iconTemplate ? 3 : 4);
         \u0275\u0275advance(2);
-        \u0275\u0275property("@tabContent", ctx.selected ? \u0275\u0275pureFunction1(24, _c47, \u0275\u0275pureFunction1(22, _c310, ctx.transitionOptions)) : \u0275\u0275pureFunction1(28, _c56, \u0275\u0275pureFunction1(26, _c310, ctx.transitionOptions)));
+        \u0275\u0275property("@tabContent", ctx.selected ? \u0275\u0275pureFunction1(24, _c410, \u0275\u0275pureFunction1(22, _c313, ctx.transitionOptions)) : \u0275\u0275pureFunction1(28, _c58, \u0275\u0275pureFunction1(26, _c313, ctx.transitionOptions)));
         \u0275\u0275attribute("id", ctx.getTabContentId(ctx.id))("aria-hidden", !ctx.selected)("aria-labelledby", ctx.getTabHeaderActionId(ctx.id))("data-pc-section", "toggleablecontent");
         \u0275\u0275advance();
         \u0275\u0275property("ngClass", ctx.contentStyleClass)("ngStyle", ctx.contentStyle);
@@ -52707,7 +57917,7 @@ var Accordion = class _Accordion extends BaseComponent {
       onOpen: "onOpen"
     },
     features: [\u0275\u0275ProvidersFeature([AccordionStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c018,
+    ngContentSelectors: _c021,
     decls: 1,
     vars: 0,
     template: function Accordion_Template(rf, ctx) {
@@ -52811,10 +58021,10 @@ var AccordionModule = class _AccordionModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-inputnumber.mjs
-var _c019 = ["clearicon"];
-var _c114 = ["incrementbuttonicon"];
-var _c212 = ["decrementbuttonicon"];
-var _c311 = ["input"];
+var _c022 = ["clearicon"];
+var _c119 = ["incrementbuttonicon"];
+var _c215 = ["decrementbuttonicon"];
+var _c314 = ["input"];
 function InputNumber_ng_container_2_TimesIcon_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -53178,7 +58388,7 @@ function InputNumber_button_5_Template(rf, ctx) {
     \u0275\u0275property("ngIf", !ctx_r2.decrementButtonIcon);
   }
 }
-var theme21 = ({
+var theme24 = ({
   dt: dt2
 }) => `
 .p-inputnumber {
@@ -53368,7 +58578,7 @@ p-inputnumber.ng-invalid.ng-dirty > .p-inputtext::placeholder {
     color: ${dt2("inputtext.invalid.placeholder.color")};
 }
 `;
-var classes21 = {
+var classes24 = {
   root: ({
     instance
   }) => ({
@@ -53397,8 +58607,8 @@ var classes21 = {
 };
 var InputNumberStyle = class _InputNumberStyle extends BaseStyle {
   name = "inputnumber";
-  theme = theme21;
-  classes = classes21;
+  theme = theme24;
+  classes = classes24;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275InputNumberStyle_BaseFactory;
     return function InputNumberStyle_Factory(__ngFactoryType__) {
@@ -54603,9 +59813,9 @@ var InputNumber = class _InputNumber extends BaseComponent {
     selectors: [["p-inputNumber"], ["p-inputnumber"], ["p-input-number"]],
     contentQueries: function InputNumber_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c019, 4);
-        \u0275\u0275contentQuery(dirIndex, _c114, 4);
-        \u0275\u0275contentQuery(dirIndex, _c212, 4);
+        \u0275\u0275contentQuery(dirIndex, _c022, 4);
+        \u0275\u0275contentQuery(dirIndex, _c119, 4);
+        \u0275\u0275contentQuery(dirIndex, _c215, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -54618,7 +59828,7 @@ var InputNumber = class _InputNumber extends BaseComponent {
     },
     viewQuery: function InputNumber_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c311, 5);
+        \u0275\u0275viewQuery(_c314, 5);
       }
       if (rf & 2) {
         let _t;
@@ -55145,21 +60355,21 @@ var InputNumberModule = class _InputNumberModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-datepicker.mjs
-var _c020 = ["date"];
-var _c115 = ["header"];
-var _c213 = ["footer"];
-var _c312 = ["disabledDate"];
-var _c48 = ["decade"];
-var _c57 = ["previousicon"];
-var _c67 = ["nexticon"];
-var _c74 = ["triggericon"];
-var _c84 = ["clearicon"];
-var _c93 = ["decrementicon"];
-var _c103 = ["incrementicon"];
-var _c116 = ["inputicon"];
-var _c123 = ["container"];
-var _c133 = ["inputfield"];
-var _c142 = ["contentWrapper"];
+var _c023 = ["date"];
+var _c120 = ["header"];
+var _c216 = ["footer"];
+var _c315 = ["disabledDate"];
+var _c411 = ["decade"];
+var _c59 = ["previousicon"];
+var _c69 = ["nexticon"];
+var _c76 = ["triggericon"];
+var _c86 = ["clearicon"];
+var _c95 = ["decrementicon"];
+var _c105 = ["incrementicon"];
+var _c1110 = ["inputicon"];
+var _c125 = ["container"];
+var _c134 = ["inputfield"];
+var _c143 = ["contentWrapper"];
 var _c152 = [[["p-header"]], [["p-footer"]]];
 var _c162 = ["p-header", "p-footer"];
 var _c172 = (a0) => ({
@@ -56485,7 +61695,7 @@ function DatePicker_div_3_Template(rf, ctx) {
     \u0275\u0275property("ngTemplateOutlet", ctx_r1.footerTemplate || ctx_r1._footerTemplate);
   }
 }
-var theme22 = ({
+var theme25 = ({
   dt: dt2
 }) => `
 .p-datepicker {
@@ -56905,14 +62115,14 @@ p-datepicker.ng-invalid.ng-dirty .p-datepicker.p-inputwrapper .p-inputtext {
 }
 
 `;
-var inlineStyles2 = {
+var inlineStyles3 = {
   root: ({
     props
   }) => ({
     position: props.appendTo === "self" ? "relative" : void 0
   })
 };
-var classes22 = {
+var classes25 = {
   root: ({
     instance
   }) => ({
@@ -57008,9 +62218,9 @@ var classes22 = {
 };
 var DatePickerStyle = class _DatePickerStyle extends BaseStyle {
   name = "datepicker";
-  theme = theme22;
-  classes = classes22;
-  inlineStyles = inlineStyles2;
+  theme = theme25;
+  classes = classes25;
+  inlineStyles = inlineStyles3;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275DatePickerStyle_BaseFactory;
     return function DatePickerStyle_Factory(__ngFactoryType__) {
@@ -60052,18 +65262,18 @@ var DatePicker = class _DatePicker extends BaseComponent {
     selectors: [["p-datePicker"], ["p-datepicker"], ["p-date-picker"]],
     contentQueries: function DatePicker_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c020, 4);
-        \u0275\u0275contentQuery(dirIndex, _c115, 4);
-        \u0275\u0275contentQuery(dirIndex, _c213, 4);
-        \u0275\u0275contentQuery(dirIndex, _c312, 4);
-        \u0275\u0275contentQuery(dirIndex, _c48, 4);
-        \u0275\u0275contentQuery(dirIndex, _c57, 4);
-        \u0275\u0275contentQuery(dirIndex, _c67, 4);
-        \u0275\u0275contentQuery(dirIndex, _c74, 4);
-        \u0275\u0275contentQuery(dirIndex, _c84, 4);
-        \u0275\u0275contentQuery(dirIndex, _c93, 4);
-        \u0275\u0275contentQuery(dirIndex, _c103, 4);
-        \u0275\u0275contentQuery(dirIndex, _c116, 4);
+        \u0275\u0275contentQuery(dirIndex, _c023, 4);
+        \u0275\u0275contentQuery(dirIndex, _c120, 4);
+        \u0275\u0275contentQuery(dirIndex, _c216, 4);
+        \u0275\u0275contentQuery(dirIndex, _c315, 4);
+        \u0275\u0275contentQuery(dirIndex, _c411, 4);
+        \u0275\u0275contentQuery(dirIndex, _c59, 4);
+        \u0275\u0275contentQuery(dirIndex, _c69, 4);
+        \u0275\u0275contentQuery(dirIndex, _c76, 4);
+        \u0275\u0275contentQuery(dirIndex, _c86, 4);
+        \u0275\u0275contentQuery(dirIndex, _c95, 4);
+        \u0275\u0275contentQuery(dirIndex, _c105, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1110, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -60085,9 +65295,9 @@ var DatePicker = class _DatePicker extends BaseComponent {
     },
     viewQuery: function DatePicker_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c123, 5);
-        \u0275\u0275viewQuery(_c133, 5);
-        \u0275\u0275viewQuery(_c142, 5);
+        \u0275\u0275viewQuery(_c125, 5);
+        \u0275\u0275viewQuery(_c134, 5);
+        \u0275\u0275viewQuery(_c143, 5);
       }
       if (rf & 2) {
         let _t;
@@ -61140,8 +66350,8 @@ var DatePickerModule = class _DatePickerModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-iconfield.mjs
-var _c021 = ["*"];
-var theme23 = ({
+var _c024 = ["*"];
+var theme26 = ({
   dt: dt2
 }) => `
 .p-iconfield {
@@ -61187,13 +66397,13 @@ var theme23 = ({
     margin-top: calc(-1 * (${dt2("form.field.lg.font.size")} / 2));
 }
 `;
-var classes23 = {
+var classes26 = {
   root: "p-iconfield"
 };
 var IconFieldStyle = class _IconFieldStyle extends BaseStyle {
   name = "iconfield";
-  theme = theme23;
-  classes = classes23;
+  theme = theme26;
+  classes = classes26;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275IconFieldStyle_BaseFactory;
     return function IconFieldStyle_Factory(__ngFactoryType__) {
@@ -61251,7 +66461,7 @@ var IconField = class _IconField extends BaseComponent {
       styleClass: "styleClass"
     },
     features: [\u0275\u0275ProvidersFeature([IconFieldStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c021,
+    ngContentSelectors: _c024,
     decls: 1,
     vars: 0,
     template: function IconField_Template(rf, ctx) {
@@ -61319,13 +66529,13 @@ var IconFieldModule = class _IconFieldModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-inputicon.mjs
-var _c022 = ["*"];
-var classes24 = {
+var _c025 = ["*"];
+var classes27 = {
   root: "p-inputicon"
 };
 var InputIconStyle = class _InputIconStyle extends BaseStyle {
   name = "inputicon";
-  classes = classes24;
+  classes = classes27;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275InputIconStyle_BaseFactory;
     return function InputIconStyle_Factory(__ngFactoryType__) {
@@ -61372,7 +66582,7 @@ var InputIcon = class _InputIcon extends BaseComponent {
       styleClass: "styleClass"
     },
     features: [\u0275\u0275ProvidersFeature([InputIconStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c022,
+    ngContentSelectors: _c025,
     decls: 1,
     vars: 0,
     template: function InputIcon_Template(rf, ctx) {
@@ -61436,10 +66646,10 @@ var InputIconModule = class _InputIconModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-overlay.mjs
-var _c023 = ["content"];
-var _c117 = ["overlay"];
-var _c214 = ["*"];
-var _c313 = (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13) => ({
+var _c026 = ["content"];
+var _c121 = ["overlay"];
+var _c217 = ["*"];
+var _c316 = (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13) => ({
   "p-overlay p-component": true,
   "p-overlay-modal p-overlay-mask p-overlay-mask-enter": a0,
   "p-overlay-center": a1,
@@ -61456,19 +66666,19 @@ var _c313 = (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13) => ({
   "p-overlay-right-start": a12,
   "p-overlay-right-end": a13
 });
-var _c49 = (a0, a1, a2) => ({
+var _c412 = (a0, a1, a2) => ({
   showTransitionParams: a0,
   hideTransitionParams: a1,
   transform: a2
 });
-var _c58 = (a0) => ({
+var _c510 = (a0) => ({
   value: "visible",
   params: a0
 });
-var _c68 = (a0) => ({
+var _c610 = (a0) => ({
   mode: a0
 });
-var _c75 = (a0) => ({
+var _c77 = (a0) => ({
   $implicit: a0
 });
 function Overlay_div_0_div_2_ng_container_3_Template(rf, ctx) {
@@ -61500,9 +66710,9 @@ function Overlay_div_0_div_2_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275classMap(ctx_r1.contentStyleClass);
-    \u0275\u0275property("ngStyle", ctx_r1.contentStyle)("ngClass", "p-overlay-content")("@overlayContentAnimation", \u0275\u0275pureFunction1(11, _c58, \u0275\u0275pureFunction3(7, _c49, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions, ctx_r1.transformOptions[ctx_r1.modal ? ctx_r1.overlayResponsiveDirection : "default"])));
+    \u0275\u0275property("ngStyle", ctx_r1.contentStyle)("ngClass", "p-overlay-content")("@overlayContentAnimation", \u0275\u0275pureFunction1(11, _c510, \u0275\u0275pureFunction3(7, _c412, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions, ctx_r1.transformOptions[ctx_r1.modal ? ctx_r1.overlayResponsiveDirection : "default"])));
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(15, _c75, \u0275\u0275pureFunction1(13, _c68, ctx_r1.overlayMode)));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(15, _c77, \u0275\u0275pureFunction1(13, _c610, ctx_r1.overlayMode)));
   }
 }
 function Overlay_div_0_Template(rf, ctx) {
@@ -61520,12 +66730,12 @@ function Overlay_div_0_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classMap(ctx_r1.styleClass);
-    \u0275\u0275property("ngStyle", ctx_r1.style)("ngClass", \u0275\u0275pureFunctionV(5, _c313, [ctx_r1.modal, ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "center", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "top", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "top-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "top-end", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "bottom", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "bottom-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "bottom-end", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "left", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "left-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "left-end", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "right", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "right-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "right-end"]));
+    \u0275\u0275property("ngStyle", ctx_r1.style)("ngClass", \u0275\u0275pureFunctionV(5, _c316, [ctx_r1.modal, ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "center", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "top", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "top-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "top-end", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "bottom", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "bottom-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "bottom-end", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "left", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "left-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "left-end", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "right", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "right-start", ctx_r1.modal && ctx_r1.overlayResponsiveDirection === "right-end"]));
     \u0275\u0275advance(2);
     \u0275\u0275property("ngIf", ctx_r1.visible);
   }
 }
-var theme24 = ({
+var theme27 = ({
   dt: dt2
 }) => `
 .p-overlay {
@@ -61608,7 +66818,7 @@ var theme24 = ({
 `;
 var OverlayStyle = class _OverlayStyle extends BaseStyle {
   name = "overlay";
-  theme = theme24;
+  theme = theme27;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275OverlayStyle_BaseFactory;
     return function OverlayStyle_Factory(__ngFactoryType__) {
@@ -62155,7 +67365,7 @@ var Overlay = class _Overlay extends BaseComponent {
     selectors: [["p-overlay"]],
     contentQueries: function Overlay_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c023, 4);
+        \u0275\u0275contentQuery(dirIndex, _c026, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -62166,8 +67376,8 @@ var Overlay = class _Overlay extends BaseComponent {
     },
     viewQuery: function Overlay_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c117, 5);
-        \u0275\u0275viewQuery(_c023, 5);
+        \u0275\u0275viewQuery(_c121, 5);
+        \u0275\u0275viewQuery(_c026, 5);
       }
       if (rf & 2) {
         let _t;
@@ -62202,7 +67412,7 @@ var Overlay = class _Overlay extends BaseComponent {
       onAnimationDone: "onAnimationDone"
     },
     features: [\u0275\u0275ProvidersFeature([OverlayStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c214,
+    ngContentSelectors: _c217,
     decls: 1,
     vars: 1,
     consts: [["overlay", ""], ["content", ""], [3, "ngStyle", "class", "ngClass", "click", 4, "ngIf"], [3, "click", "ngStyle", "ngClass"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
@@ -62398,39 +67608,39 @@ var OverlayModule = class _OverlayModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-scroller.mjs
-var _c024 = ["content"];
-var _c118 = ["item"];
-var _c215 = ["loader"];
-var _c314 = ["loadericon"];
-var _c410 = ["element"];
-var _c59 = ["*"];
-var _c69 = (a0, a1, a2) => ({
+var _c027 = ["content"];
+var _c126 = ["item"];
+var _c218 = ["loader"];
+var _c317 = ["loadericon"];
+var _c413 = ["element"];
+var _c511 = ["*"];
+var _c611 = (a0, a1, a2) => ({
   "p-virtualscroller": true,
   "p-virtualscroller-inline": a0,
   "p-virtualscroller-both p-both-scroll": a1,
   "p-virtualscroller-horizontal p-horizontal-scroll": a2
 });
-var _c76 = (a0, a1) => ({
+var _c78 = (a0, a1) => ({
   $implicit: a0,
   options: a1
 });
-var _c85 = (a0) => ({
+var _c87 = (a0) => ({
   "p-virtualscroller-content": true,
   "p-virtualscroller-loading ": a0
 });
-var _c94 = (a0) => ({
+var _c96 = (a0) => ({
   "p-virtualscroller-loader-mask": a0
 });
-var _c104 = (a0) => ({
+var _c106 = (a0) => ({
   numCols: a0
 });
-var _c119 = (a0) => ({
+var _c1111 = (a0) => ({
   options: a0
 });
-var _c124 = () => ({
+var _c127 = () => ({
   styleClass: "p-virtualscroller-loading-icon"
 });
-var _c134 = (a0, a1) => ({
+var _c135 = (a0, a1) => ({
   rows: a0,
   columns: a1
 });
@@ -62448,7 +67658,7 @@ function Scroller_ng_container_0_ng_container_3_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c76, ctx_r1.loadedItems, ctx_r1.getContentOptions()));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c78, ctx_r1.loadedItems, ctx_r1.getContentOptions()));
   }
 }
 function Scroller_ng_container_0_ng_template_4_ng_container_2_ng_container_1_Template(rf, ctx) {
@@ -62467,7 +67677,7 @@ function Scroller_ng_container_0_ng_template_4_ng_container_2_Template(rf, ctx) 
     const index_r4 = ctx.index;
     const ctx_r1 = \u0275\u0275nextContext(3);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.itemTemplate || ctx_r1._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c76, item_r3, ctx_r1.getOptions(index_r4)));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.itemTemplate || ctx_r1._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c78, item_r3, ctx_r1.getOptions(index_r4)));
   }
 }
 function Scroller_ng_container_0_ng_template_4_Template(rf, ctx) {
@@ -62480,7 +67690,7 @@ function Scroller_ng_container_0_ng_template_4_Template(rf, ctx) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275styleMap(ctx_r1.contentStyle);
     \u0275\u0275classMap(ctx_r1.contentStyleClass);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(8, _c85, ctx_r1.d_loading));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(8, _c87, ctx_r1.d_loading));
     \u0275\u0275attribute("data-pc-section", "content");
     \u0275\u0275advance(2);
     \u0275\u0275property("ngForOf", ctx_r1.loadedItems)("ngForTrackBy", ctx_r1._trackBy);
@@ -62511,7 +67721,7 @@ function Scroller_ng_container_0_div_7_ng_container_1_ng_container_1_Template(rf
     const index_r5 = ctx.index;
     const ctx_r1 = \u0275\u0275nextContext(4);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.loaderTemplate || ctx_r1._loaderTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(4, _c119, ctx_r1.getLoaderOptions(index_r5, ctx_r1.both && \u0275\u0275pureFunction1(2, _c104, ctx_r1.numItemsInViewport.cols))));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.loaderTemplate || ctx_r1._loaderTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(4, _c1111, ctx_r1.getLoaderOptions(index_r5, ctx_r1.both && \u0275\u0275pureFunction1(2, _c106, ctx_r1.numItemsInViewport.cols))));
   }
 }
 function Scroller_ng_container_0_div_7_ng_container_1_Template(rf, ctx) {
@@ -62540,7 +67750,7 @@ function Scroller_ng_container_0_div_7_ng_template_2_ng_container_0_Template(rf,
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(4);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.loaderIconTemplate || ctx_r1._loaderIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c119, \u0275\u0275pureFunction0(2, _c124)));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.loaderIconTemplate || ctx_r1._loaderIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c1111, \u0275\u0275pureFunction0(2, _c127)));
   }
 }
 function Scroller_ng_container_0_div_7_ng_template_2_ng_template_1_Template(rf, ctx) {
@@ -62571,7 +67781,7 @@ function Scroller_ng_container_0_div_7_Template(rf, ctx) {
   if (rf & 2) {
     const buildInLoader_r7 = \u0275\u0275reference(3);
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c94, !ctx_r1.loaderTemplate));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c96, !ctx_r1.loaderTemplate));
     \u0275\u0275attribute("data-pc-section", "loader");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.loaderTemplate || ctx_r1._loaderTemplate)("ngIfElse", buildInLoader_r7);
@@ -62596,7 +67806,7 @@ function Scroller_ng_container_0_Template(rf, ctx) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
     \u0275\u0275classMap(ctx_r1._styleClass);
-    \u0275\u0275property("ngStyle", ctx_r1._style)("ngClass", \u0275\u0275pureFunction3(12, _c69, ctx_r1.inline, ctx_r1.both, ctx_r1.horizontal));
+    \u0275\u0275property("ngStyle", ctx_r1._style)("ngClass", \u0275\u0275pureFunction3(12, _c611, ctx_r1.inline, ctx_r1.both, ctx_r1.horizontal));
     \u0275\u0275attribute("id", ctx_r1._id)("tabindex", ctx_r1.tabindex)("data-pc-name", "scroller")("data-pc-section", "root");
     \u0275\u0275advance(2);
     \u0275\u0275property("ngIf", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngIfElse", buildInContent_r8);
@@ -62620,7 +67830,7 @@ function Scroller_ng_template_1_ng_container_1_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(5, _c76, ctx_r1.items, \u0275\u0275pureFunction2(2, _c134, ctx_r1._items, ctx_r1.loadedColumns)));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(5, _c78, ctx_r1.items, \u0275\u0275pureFunction2(2, _c135, ctx_r1._items, ctx_r1.loadedColumns)));
   }
 }
 function Scroller_ng_template_1_Template(rf, ctx) {
@@ -62634,7 +67844,7 @@ function Scroller_ng_template_1_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.contentTemplate || ctx_r1._contentTemplate);
   }
 }
-var theme25 = ({
+var theme28 = ({
   dt: dt2
 }) => `
 .p-virtualscroller {
@@ -62697,7 +67907,7 @@ var theme25 = ({
 `;
 var ScrollerStyle = class _ScrollerStyle extends BaseStyle {
   name = "virtualscroller";
-  theme = theme25;
+  theme = theme28;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275ScrollerStyle_BaseFactory;
     return function ScrollerStyle_Factory(__ngFactoryType__) {
@@ -63743,10 +68953,10 @@ var Scroller = class _Scroller extends BaseComponent {
     selectors: [["p-scroller"], ["p-virtualscroller"], ["p-virtual-scroller"], ["p-virtualScroller"]],
     contentQueries: function Scroller_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c024, 4);
-        \u0275\u0275contentQuery(dirIndex, _c118, 4);
-        \u0275\u0275contentQuery(dirIndex, _c215, 4);
-        \u0275\u0275contentQuery(dirIndex, _c314, 4);
+        \u0275\u0275contentQuery(dirIndex, _c027, 4);
+        \u0275\u0275contentQuery(dirIndex, _c126, 4);
+        \u0275\u0275contentQuery(dirIndex, _c218, 4);
+        \u0275\u0275contentQuery(dirIndex, _c317, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -63760,8 +68970,8 @@ var Scroller = class _Scroller extends BaseComponent {
     },
     viewQuery: function Scroller_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c410, 5);
-        \u0275\u0275viewQuery(_c024, 5);
+        \u0275\u0275viewQuery(_c413, 5);
+        \u0275\u0275viewQuery(_c027, 5);
       }
       if (rf & 2) {
         let _t;
@@ -63808,7 +69018,7 @@ var Scroller = class _Scroller extends BaseComponent {
       onScrollIndexChange: "onScrollIndexChange"
     },
     features: [\u0275\u0275ProvidersFeature([ScrollerStyle]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature],
-    ngContentSelectors: _c59,
+    ngContentSelectors: _c511,
     decls: 3,
     vars: 2,
     consts: [["disabledContainer", ""], ["element", ""], ["buildInContent", ""], ["content", ""], ["buildInLoader", ""], ["buildInLoaderIcon", ""], [4, "ngIf", "ngIfElse"], [3, "scroll", "ngStyle", "ngClass"], ["class", "p-virtualscroller-spacer", 3, "ngStyle", 4, "ngIf"], ["class", "p-virtualscroller-loader", 3, "ngClass", 4, "ngIf"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [3, "ngClass"], [4, "ngFor", "ngForOf", "ngForTrackBy"], [1, "p-virtualscroller-spacer", 3, "ngStyle"], [1, "p-virtualscroller-loader", 3, "ngClass"], [4, "ngFor", "ngForOf"], [3, "styleClass"], [4, "ngIf"]],
@@ -64050,16 +69260,16 @@ var ScrollerModule = class _ScrollerModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-select.mjs
-var _c025 = (a0) => ({
+var _c028 = (a0) => ({
   height: a0
 });
-var _c120 = (a0, a1, a2) => ({
+var _c128 = (a0, a1, a2) => ({
   "p-select-option": true,
   "p-select-option-selected": a0,
   "p-disabled": a1,
   "p-focus": a2
 });
-var _c216 = (a0) => ({
+var _c219 = (a0) => ({
   $implicit: a0
 });
 function SelectItem_ng_container_1_CheckIcon_1_Template(rf, ctx) {
@@ -64104,25 +69314,25 @@ function SelectItem_ng_container_3_Template(rf, ctx) {
     \u0275\u0275elementContainer(0);
   }
 }
-var _c315 = ["item"];
-var _c411 = ["group"];
-var _c510 = ["loader"];
-var _c610 = ["selectedItem"];
-var _c77 = ["header"];
-var _c86 = ["filter"];
-var _c95 = ["footer"];
-var _c105 = ["emptyfilter"];
-var _c1110 = ["empty"];
-var _c125 = ["dropdownicon"];
-var _c135 = ["loadingicon"];
-var _c143 = ["clearicon"];
+var _c318 = ["item"];
+var _c414 = ["group"];
+var _c512 = ["loader"];
+var _c612 = ["selectedItem"];
+var _c79 = ["header"];
+var _c88 = ["filter"];
+var _c97 = ["footer"];
+var _c107 = ["emptyfilter"];
+var _c1112 = ["empty"];
+var _c129 = ["dropdownicon"];
+var _c136 = ["loadingicon"];
+var _c144 = ["clearicon"];
 var _c153 = ["filtericon"];
 var _c163 = ["onicon"];
 var _c173 = ["officon"];
 var _c183 = ["cancelicon"];
 var _c193 = ["focusInput"];
 var _c202 = ["editableInput"];
-var _c217 = ["items"];
+var _c2110 = ["items"];
 var _c223 = ["scroller"];
 var _c233 = ["overlay"];
 var _c243 = ["firstHiddenFocusableEl"];
@@ -64159,7 +69369,7 @@ function Select_span_0_ng_container_3_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.selectedItemTemplate || ctx_r2._selectedItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c216, ctx_r2.selectedOption));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.selectedItemTemplate || ctx_r2._selectedItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c219, ctx_r2.selectedOption));
   }
 }
 function Select_span_0_ng_template_4_span_0_Template(rf, ctx) {
@@ -64572,7 +69782,7 @@ function Select_ng_template_9_p_scroller_6_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275styleMap(\u0275\u0275pureFunction1(8, _c025, ctx_r2.scrollHeight));
+    \u0275\u0275styleMap(\u0275\u0275pureFunction1(8, _c028, ctx_r2.scrollHeight));
     \u0275\u0275property("items", ctx_r2.visibleOptions())("itemSize", ctx_r2.virtualScrollItemSize || ctx_r2._itemSize)("autoSize", true)("lazy", ctx_r2.lazy)("options", ctx_r2.virtualScrollOptions);
     \u0275\u0275advance(4);
     \u0275\u0275property("ngIf", ctx_r2.loaderTemplate || ctx_r2._loaderTemplate);
@@ -64630,12 +69840,12 @@ function Select_ng_template_9_ng_template_8_ng_template_2_ng_container_0_Templat
     const scrollerOptions_r20 = \u0275\u0275nextContext().options;
     const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(5, _c025, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(5, _c028, scrollerOptions_r20.itemSize + "px"));
     \u0275\u0275attribute("id", ctx_r2.id + "_" + ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r2.groupTemplate && !ctx_r2._groupTemplate);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.groupTemplate || ctx_r2._groupTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(7, _c216, option_r17.optionGroup));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.groupTemplate || ctx_r2._groupTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(7, _c219, option_r17.optionGroup));
   }
 }
 function Select_ng_template_9_ng_template_8_ng_template_2_ng_container_1_Template(rf, ctx) {
@@ -64712,7 +69922,7 @@ function Select_ng_template_9_ng_template_8_li_3_Template(rf, ctx) {
   if (rf & 2) {
     const scrollerOptions_r20 = \u0275\u0275nextContext().options;
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c025, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c028, scrollerOptions_r20.itemSize + "px"));
     \u0275\u0275advance();
     \u0275\u0275conditional(!ctx_r2.emptyFilterTemplate && !ctx_r2._emptyFilterTemplate && !ctx_r2.emptyTemplate ? 1 : 2);
   }
@@ -64749,7 +69959,7 @@ function Select_ng_template_9_ng_template_8_li_4_Template(rf, ctx) {
   if (rf & 2) {
     const scrollerOptions_r20 = \u0275\u0275nextContext().options;
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c025, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(2, _c028, scrollerOptions_r20.itemSize + "px"));
     \u0275\u0275advance();
     \u0275\u0275conditional(!ctx_r2.emptyTemplate && !ctx_r2._emptyTemplate ? 1 : 2);
   }
@@ -64825,7 +70035,7 @@ function Select_ng_template_9_Template(rf, ctx) {
     \u0275\u0275attribute("tabindex", 0)("data-p-hidden-accessible", true)("data-p-hidden-focusable", true);
   }
 }
-var theme26 = ({
+var theme29 = ({
   dt: dt2
 }) => `
 .p-select {
@@ -65049,7 +70259,7 @@ input.p-select-label {
     height: ${dt2("select.lg.font.size")};
 }
 `;
-var classes25 = {
+var classes28 = {
   root: ({
     instance
   }) => ["p-select p-component p-inputwrapper", {
@@ -65099,8 +70309,8 @@ var classes25 = {
 };
 var SelectStyle = class _SelectStyle extends BaseStyle {
   name = "select";
-  theme = theme26;
-  classes = classes25;
+  theme = theme29;
+  classes = classes28;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275SelectStyle_BaseFactory;
     return function SelectStyle_Factory(__ngFactoryType__) {
@@ -65207,14 +70417,14 @@ var SelectItem = class _SelectItem extends BaseComponent {
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
-        \u0275\u0275property("id", ctx.id)("ngStyle", \u0275\u0275pureFunction1(14, _c025, ctx.itemSize + "px"))("ngClass", \u0275\u0275pureFunction3(16, _c120, ctx.selected && !ctx.checkmark, ctx.disabled, ctx.focused));
+        \u0275\u0275property("id", ctx.id)("ngStyle", \u0275\u0275pureFunction1(14, _c028, ctx.itemSize + "px"))("ngClass", \u0275\u0275pureFunction3(16, _c128, ctx.selected && !ctx.checkmark, ctx.disabled, ctx.focused));
         \u0275\u0275attribute("aria-label", ctx.label)("aria-setsize", ctx.ariaSetSize)("aria-posinset", ctx.ariaPosInset)("aria-selected", ctx.selected)("data-p-focused", ctx.focused)("data-p-highlight", ctx.selected)("data-p-disabled", ctx.disabled);
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.checkmark);
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.template);
         \u0275\u0275advance();
-        \u0275\u0275property("ngTemplateOutlet", ctx.template)("ngTemplateOutletContext", \u0275\u0275pureFunction1(20, _c216, ctx.option));
+        \u0275\u0275property("ngTemplateOutlet", ctx.template)("ngTemplateOutletContext", \u0275\u0275pureFunction1(20, _c219, ctx.option));
       }
     },
     dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, SharedModule, Ripple, CheckIcon, BlankIcon],
@@ -65793,7 +71003,7 @@ var Select = class _Select extends BaseComponent {
   }
   // @todo to be refactored
   get hostClass() {
-    const classes34 = this._componentStyle.classes.root({
+    const classes37 = this._componentStyle.classes.root({
       instance: this
     }).map((cls) => {
       if (typeof cls === "string") {
@@ -65802,7 +71012,7 @@ var Select = class _Select extends BaseComponent {
         return Object.keys(cls).filter((key) => cls[key]).join(" ");
       }
     }).join(" ");
-    return classes34 + " " + this.styleClass;
+    return classes37 + " " + this.styleClass;
   }
   get hostStyle() {
     return this.style;
@@ -66762,18 +71972,18 @@ var Select = class _Select extends BaseComponent {
     selectors: [["p-select"]],
     contentQueries: function Select_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c315, 4);
-        \u0275\u0275contentQuery(dirIndex, _c411, 4);
-        \u0275\u0275contentQuery(dirIndex, _c510, 4);
-        \u0275\u0275contentQuery(dirIndex, _c610, 4);
-        \u0275\u0275contentQuery(dirIndex, _c77, 4);
-        \u0275\u0275contentQuery(dirIndex, _c86, 4);
-        \u0275\u0275contentQuery(dirIndex, _c95, 4);
-        \u0275\u0275contentQuery(dirIndex, _c105, 4);
-        \u0275\u0275contentQuery(dirIndex, _c1110, 4);
-        \u0275\u0275contentQuery(dirIndex, _c125, 4);
-        \u0275\u0275contentQuery(dirIndex, _c135, 4);
-        \u0275\u0275contentQuery(dirIndex, _c143, 4);
+        \u0275\u0275contentQuery(dirIndex, _c318, 4);
+        \u0275\u0275contentQuery(dirIndex, _c414, 4);
+        \u0275\u0275contentQuery(dirIndex, _c512, 4);
+        \u0275\u0275contentQuery(dirIndex, _c612, 4);
+        \u0275\u0275contentQuery(dirIndex, _c79, 4);
+        \u0275\u0275contentQuery(dirIndex, _c88, 4);
+        \u0275\u0275contentQuery(dirIndex, _c97, 4);
+        \u0275\u0275contentQuery(dirIndex, _c107, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1112, 4);
+        \u0275\u0275contentQuery(dirIndex, _c129, 4);
+        \u0275\u0275contentQuery(dirIndex, _c136, 4);
+        \u0275\u0275contentQuery(dirIndex, _c144, 4);
         \u0275\u0275contentQuery(dirIndex, _c153, 4);
         \u0275\u0275contentQuery(dirIndex, _c163, 4);
         \u0275\u0275contentQuery(dirIndex, _c173, 4);
@@ -66803,10 +72013,10 @@ var Select = class _Select extends BaseComponent {
     },
     viewQuery: function Select_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c86, 5);
+        \u0275\u0275viewQuery(_c88, 5);
         \u0275\u0275viewQuery(_c193, 5);
         \u0275\u0275viewQuery(_c202, 5);
-        \u0275\u0275viewQuery(_c217, 5);
+        \u0275\u0275viewQuery(_c2110, 5);
         \u0275\u0275viewQuery(_c223, 5);
         \u0275\u0275viewQuery(_c233, 5);
         \u0275\u0275viewQuery(_c243, 5);
@@ -67655,18 +72865,18 @@ var SelectModule = class _SelectModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-paginator.mjs
-var _c026 = ["dropdownicon"];
-var _c121 = ["firstpagelinkicon"];
-var _c218 = ["previouspagelinkicon"];
-var _c316 = ["lastpagelinkicon"];
-var _c412 = ["nextpagelinkicon"];
-var _c511 = (a0) => ({
+var _c029 = ["dropdownicon"];
+var _c130 = ["firstpagelinkicon"];
+var _c220 = ["previouspagelinkicon"];
+var _c319 = ["lastpagelinkicon"];
+var _c415 = ["nextpagelinkicon"];
+var _c513 = (a0) => ({
   "p-disabled": a0
 });
-var _c611 = (a0) => ({
+var _c613 = (a0) => ({
   $implicit: a0
 });
-var _c78 = (a0) => ({
+var _c710 = (a0) => ({
   "p-paginator-page-selected": a0
 });
 function Paginator_div_0_div_1_ng_container_1_Template(rf, ctx) {
@@ -67684,7 +72894,7 @@ function Paginator_div_0_div_1_Template(rf, ctx) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275attribute("data-pc-section", "start");
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.templateLeft)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c611, ctx_r1.paginatorState));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.templateLeft)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c613, ctx_r1.paginatorState));
   }
 }
 function Paginator_div_0_span_2_Template(rf, ctx) {
@@ -67740,7 +72950,7 @@ function Paginator_div_0_button_3_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("disabled", ctx_r1.isFirstPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(5, _c511, ctx_r1.isFirstPage() || ctx_r1.empty()));
+    \u0275\u0275property("disabled", ctx_r1.isFirstPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(5, _c513, ctx_r1.isFirstPage() || ctx_r1.empty()));
     \u0275\u0275attribute("aria-label", ctx_r1.getAriaLabel("firstPageLabel"));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.firstPageLinkIconTemplate && !ctx_r1._firstPageLinkIconTemplate);
@@ -67790,7 +73000,7 @@ function Paginator_div_0_span_7_button_1_Template(rf, ctx) {
   if (rf & 2) {
     const pageLink_r5 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c78, pageLink_r5 - 1 == ctx_r1.getPage()));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c710, pageLink_r5 - 1 == ctx_r1.getPage()));
     \u0275\u0275attribute("aria-label", ctx_r1.getPageAriaLabel(pageLink_r5))("aria-current", pageLink_r5 - 1 == ctx_r1.getPage() ? "page" : void 0);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", ctx_r1.getLocalization(pageLink_r5), " ");
@@ -67829,7 +73039,7 @@ function Paginator_div_0_p_select_8_ng_container_2_ng_template_1_Template(rf, ct
   if (rf & 2) {
     const item_r7 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext(4);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.jumpToPageItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c611, item_r7));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.jumpToPageItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c613, item_r7));
   }
 }
 function Paginator_div_0_p_select_8_ng_container_2_Template(rf, ctx) {
@@ -67948,7 +73158,7 @@ function Paginator_div_0_button_12_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("disabled", ctx_r1.isLastPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(5, _c511, ctx_r1.isLastPage() || ctx_r1.empty()));
+    \u0275\u0275property("disabled", ctx_r1.isLastPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(5, _c513, ctx_r1.isLastPage() || ctx_r1.empty()));
     \u0275\u0275attribute("aria-label", ctx_r1.getAriaLabel("lastPageLabel"));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.lastPageLinkIconTemplate && !ctx_r1._lastPageLinkIconTemplate);
@@ -67984,7 +73194,7 @@ function Paginator_div_0_p_select_14_ng_container_1_ng_template_1_Template(rf, c
   if (rf & 2) {
     const item_r11 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext(4);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.dropdownItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c611, item_r11));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.dropdownItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c613, item_r11));
   }
 }
 function Paginator_div_0_p_select_14_ng_container_1_Template(rf, ctx) {
@@ -68057,7 +73267,7 @@ function Paginator_div_0_div_15_Template(rf, ctx) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275attribute("data-pc-section", "end");
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.templateRight)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c611, ctx_r1.paginatorState));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.templateRight)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c613, ctx_r1.paginatorState));
   }
 }
 function Paginator_div_0_Template(rf, ctx) {
@@ -68097,7 +73307,7 @@ function Paginator_div_0_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.showFirstLastIcon);
     \u0275\u0275advance();
-    \u0275\u0275property("disabled", ctx_r1.isFirstPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(25, _c511, ctx_r1.isFirstPage() || ctx_r1.empty()));
+    \u0275\u0275property("disabled", ctx_r1.isFirstPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(25, _c513, ctx_r1.isFirstPage() || ctx_r1.empty()));
     \u0275\u0275attribute("aria-label", ctx_r1.getAriaLabel("prevPageLabel"));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.previousPageLinkIconTemplate && !ctx_r1._previousPageLinkIconTemplate);
@@ -68108,7 +73318,7 @@ function Paginator_div_0_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.showJumpToPageDropdown);
     \u0275\u0275advance();
-    \u0275\u0275property("disabled", ctx_r1.isLastPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(27, _c511, ctx_r1.isLastPage() || ctx_r1.empty()));
+    \u0275\u0275property("disabled", ctx_r1.isLastPage() || ctx_r1.empty())("ngClass", \u0275\u0275pureFunction1(27, _c513, ctx_r1.isLastPage() || ctx_r1.empty()));
     \u0275\u0275attribute("aria-label", ctx_r1.getAriaLabel("nextPageLabel"));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.nextPageLinkIconTemplate && !ctx_r1._nextPageLinkIconTemplate);
@@ -68124,7 +73334,7 @@ function Paginator_div_0_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.templateRight);
   }
 }
-var theme27 = ({
+var theme30 = ({
   dt: dt2
 }) => `
 .p-paginator {
@@ -68224,7 +73434,7 @@ var theme27 = ({
     max-width: ${dt2("paginator.jump.to.page.input.max.width")};
 }
 `;
-var classes26 = {
+var classes29 = {
   paginator: ({
     instance,
     key
@@ -68273,8 +73483,8 @@ var classes26 = {
 };
 var PaginatorStyle = class _PaginatorStyle extends BaseStyle {
   name = "paginator";
-  theme = theme27;
-  classes = classes26;
+  theme = theme30;
+  classes = classes29;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275PaginatorStyle_BaseFactory;
     return function PaginatorStyle_Factory(__ngFactoryType__) {
@@ -68679,11 +73889,11 @@ var Paginator = class _Paginator extends BaseComponent {
     selectors: [["p-paginator"]],
     contentQueries: function Paginator_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c026, 4);
-        \u0275\u0275contentQuery(dirIndex, _c121, 4);
-        \u0275\u0275contentQuery(dirIndex, _c218, 4);
-        \u0275\u0275contentQuery(dirIndex, _c316, 4);
-        \u0275\u0275contentQuery(dirIndex, _c412, 4);
+        \u0275\u0275contentQuery(dirIndex, _c029, 4);
+        \u0275\u0275contentQuery(dirIndex, _c130, 4);
+        \u0275\u0275contentQuery(dirIndex, _c220, 4);
+        \u0275\u0275contentQuery(dirIndex, _c319, 4);
+        \u0275\u0275contentQuery(dirIndex, _c415, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -69017,8 +74227,8 @@ var PaginatorModule = class _PaginatorModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-selectbutton.mjs
-var _c027 = ["item"];
-var _c126 = (a0, a1) => ({
+var _c030 = ["item"];
+var _c131 = (a0, a1) => ({
   $implicit: a0,
   index: a1
 });
@@ -69039,7 +74249,7 @@ function SelectButton_For_1_Conditional_1_ng_template_0_Template(rf, ctx) {
     const option_r3 = ctx_r5.$implicit;
     const \u0275$index_1_r4 = ctx_r5.$index;
     const ctx_r4 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r4.itemTemplate || ctx_r4._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c126, option_r3, \u0275$index_1_r4));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r4.itemTemplate || ctx_r4._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c131, option_r3, \u0275$index_1_r4));
   }
 }
 function SelectButton_For_1_Conditional_1_Template(rf, ctx) {
@@ -69069,7 +74279,7 @@ function SelectButton_For_1_Template(rf, ctx) {
     \u0275\u0275conditional(ctx_r4.itemTemplate || ctx_r4._itemTemplate ? 1 : -1);
   }
 }
-var theme28 = ({
+var theme31 = ({
   dt: dt2
 }) => `
 .p-selectbutton {
@@ -69106,7 +74316,7 @@ var theme28 = ({
     outline-offset: 0;
 }
 `;
-var classes27 = {
+var classes30 = {
   root: ({
     props
   }) => ["p-selectbutton p-component", {
@@ -69115,8 +74325,8 @@ var classes27 = {
 };
 var SelectButtonStyle = class _SelectButtonStyle extends BaseStyle {
   name = "selectbutton";
-  theme = theme28;
-  classes = classes27;
+  theme = theme31;
+  classes = classes30;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275SelectButtonStyle_BaseFactory;
     return function SelectButtonStyle_Factory(__ngFactoryType__) {
@@ -69379,7 +74589,7 @@ var SelectButton = class _SelectButton extends BaseComponent {
     selectors: [["p-selectButton"], ["p-selectbutton"], ["p-select-button"]],
     contentQueries: function SelectButton_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c027, 4);
+        \u0275\u0275contentQuery(dirIndex, _c030, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -69581,28 +74791,28 @@ var SelectButtonModule = class _SelectButtonModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-table.mjs
-var _c028 = ["header"];
-var _c127 = ["headergrouped"];
-var _c219 = ["body"];
-var _c317 = ["loadingbody"];
-var _c413 = ["caption"];
-var _c512 = ["footer"];
-var _c612 = ["footergrouped"];
-var _c79 = ["summary"];
-var _c87 = ["colgroup"];
-var _c96 = ["expandedrow"];
-var _c106 = ["groupheader"];
-var _c1111 = ["groupfooter"];
-var _c128 = ["frozenexpandedrow"];
-var _c136 = ["frozenheader"];
-var _c144 = ["frozenbody"];
+var _c031 = ["header"];
+var _c137 = ["headergrouped"];
+var _c221 = ["body"];
+var _c320 = ["loadingbody"];
+var _c416 = ["caption"];
+var _c514 = ["footer"];
+var _c614 = ["footergrouped"];
+var _c711 = ["summary"];
+var _c89 = ["colgroup"];
+var _c98 = ["expandedrow"];
+var _c108 = ["groupheader"];
+var _c1113 = ["groupfooter"];
+var _c1210 = ["frozenexpandedrow"];
+var _c138 = ["frozenheader"];
+var _c145 = ["frozenbody"];
 var _c154 = ["frozenfooter"];
 var _c164 = ["frozencolgroup"];
 var _c174 = ["emptymessage"];
 var _c184 = ["paginatorleft"];
 var _c194 = ["paginatorright"];
 var _c203 = ["paginatordropdownitem"];
-var _c2110 = ["loadingicon"];
+var _c2111 = ["loadingicon"];
 var _c224 = ["reorderindicatorupicon"];
 var _c234 = ["reorderindicatordownicon"];
 var _c244 = ["sorticon"];
@@ -71218,7 +76428,7 @@ function ColumnFilterFormElement_ng_template_1_Template(rf, ctx) {
     \u0275\u0275property("ngSwitchCase", "date");
   }
 }
-var theme29 = ({
+var theme32 = ({
   dt: dt2
 }) => `
 .p-datatable {
@@ -71831,7 +77041,7 @@ p-datatable-gridlines .p-datatable-tbody > tr:last-child > td {
     outline-offset: ${dt2("datatable.row.toggle.button.focus.ring.offset")};
 }
 `;
-var classes28 = {
+var classes31 = {
   root: ({
     instance
   }) => ({
@@ -71931,7 +77141,7 @@ var classes28 = {
   rowReorderIndicatorUp: "p-datatable-row-reorder-indicator-up",
   rowReorderIndicatorDown: "p-datatable-row-reorder-indicator-down"
 };
-var inlineStyles3 = {
+var inlineStyles4 = {
   tableContainer: ({
     instance
   }) => ({
@@ -71947,9 +77157,9 @@ var inlineStyles3 = {
 };
 var TableStyle = class _TableStyle extends BaseStyle {
   name = "datatable";
-  theme = theme29;
-  classes = classes28;
-  inlineStyles = inlineStyles3;
+  theme = theme32;
+  classes = classes31;
+  inlineStyles = inlineStyles4;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275TableStyle_BaseFactory;
     return function TableStyle_Factory(__ngFactoryType__) {
@@ -74513,28 +79723,28 @@ var Table = class _Table extends BaseComponent {
     selectors: [["p-table"]],
     contentQueries: function Table_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c028, 4);
-        \u0275\u0275contentQuery(dirIndex, _c127, 4);
-        \u0275\u0275contentQuery(dirIndex, _c219, 4);
-        \u0275\u0275contentQuery(dirIndex, _c317, 4);
-        \u0275\u0275contentQuery(dirIndex, _c413, 4);
-        \u0275\u0275contentQuery(dirIndex, _c512, 4);
-        \u0275\u0275contentQuery(dirIndex, _c612, 4);
-        \u0275\u0275contentQuery(dirIndex, _c79, 4);
-        \u0275\u0275contentQuery(dirIndex, _c87, 4);
-        \u0275\u0275contentQuery(dirIndex, _c96, 4);
-        \u0275\u0275contentQuery(dirIndex, _c106, 4);
-        \u0275\u0275contentQuery(dirIndex, _c1111, 4);
-        \u0275\u0275contentQuery(dirIndex, _c128, 4);
-        \u0275\u0275contentQuery(dirIndex, _c136, 4);
-        \u0275\u0275contentQuery(dirIndex, _c144, 4);
+        \u0275\u0275contentQuery(dirIndex, _c031, 4);
+        \u0275\u0275contentQuery(dirIndex, _c137, 4);
+        \u0275\u0275contentQuery(dirIndex, _c221, 4);
+        \u0275\u0275contentQuery(dirIndex, _c320, 4);
+        \u0275\u0275contentQuery(dirIndex, _c416, 4);
+        \u0275\u0275contentQuery(dirIndex, _c514, 4);
+        \u0275\u0275contentQuery(dirIndex, _c614, 4);
+        \u0275\u0275contentQuery(dirIndex, _c711, 4);
+        \u0275\u0275contentQuery(dirIndex, _c89, 4);
+        \u0275\u0275contentQuery(dirIndex, _c98, 4);
+        \u0275\u0275contentQuery(dirIndex, _c108, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1113, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1210, 4);
+        \u0275\u0275contentQuery(dirIndex, _c138, 4);
+        \u0275\u0275contentQuery(dirIndex, _c145, 4);
         \u0275\u0275contentQuery(dirIndex, _c154, 4);
         \u0275\u0275contentQuery(dirIndex, _c164, 4);
         \u0275\u0275contentQuery(dirIndex, _c174, 4);
         \u0275\u0275contentQuery(dirIndex, _c184, 4);
         \u0275\u0275contentQuery(dirIndex, _c194, 4);
         \u0275\u0275contentQuery(dirIndex, _c203, 4);
-        \u0275\u0275contentQuery(dirIndex, _c2110, 4);
+        \u0275\u0275contentQuery(dirIndex, _c2111, 4);
         \u0275\u0275contentQuery(dirIndex, _c224, 4);
         \u0275\u0275contentQuery(dirIndex, _c234, 4);
         \u0275\u0275contentQuery(dirIndex, _c244, 4);
@@ -79115,9 +84325,9 @@ var ColumnFilter = class _ColumnFilter extends BaseComponent {
     selectors: [["p-columnFilter"]],
     contentQueries: function ColumnFilter_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c028, 4);
+        \u0275\u0275contentQuery(dirIndex, _c031, 4);
         \u0275\u0275contentQuery(dirIndex, _c542, 4);
-        \u0275\u0275contentQuery(dirIndex, _c512, 4);
+        \u0275\u0275contentQuery(dirIndex, _c514, 4);
         \u0275\u0275contentQuery(dirIndex, _c552, 4);
         \u0275\u0275contentQuery(dirIndex, _c562, 4);
         \u0275\u0275contentQuery(dirIndex, _c572, 4);
@@ -79807,17 +85017,17 @@ var TableModule = class _TableModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-popover.mjs
-var _c029 = ["content"];
-var _c129 = ["*"];
-var _c220 = (a0, a1) => ({
+var _c032 = ["content"];
+var _c139 = ["*"];
+var _c225 = (a0, a1) => ({
   showTransitionParams: a0,
   hideTransitionParams: a1
 });
-var _c318 = (a0, a1) => ({
+var _c321 = (a0, a1) => ({
   value: a0,
   params: a1
 });
-var _c414 = (a0) => ({
+var _c417 = (a0) => ({
   closeCallback: a0
 });
 function Popover_div_0_3_ng_template_0_Template(rf, ctx) {
@@ -79861,13 +85071,13 @@ function Popover_div_0_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classMap(ctx_r1.styleClass);
-    \u0275\u0275property("ngClass", "p-popover p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction2(13, _c318, ctx_r1.overlayVisible ? "open" : "close", \u0275\u0275pureFunction2(10, _c220, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
+    \u0275\u0275property("ngClass", "p-popover p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction2(13, _c321, ctx_r1.overlayVisible ? "open" : "close", \u0275\u0275pureFunction2(10, _c225, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
     \u0275\u0275attribute("aria-modal", ctx_r1.overlayVisible)("aria-label", ctx_r1.ariaLabel)("aria-labelledBy", ctx_r1.ariaLabelledBy);
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(16, _c414, ctx_r1.onCloseClick.bind(ctx_r1)));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(16, _c417, ctx_r1.onCloseClick.bind(ctx_r1)));
   }
 }
-var theme30 = ({
+var theme33 = ({
   dt: dt2
 }) => `
 .p-popover {
@@ -79950,14 +85160,14 @@ var theme30 = ({
 }
 
 `;
-var classes29 = {
+var classes32 = {
   root: "p-popover p-component",
   content: "p-popover-content"
 };
 var PopoverStyle = class _PopoverStyle extends BaseStyle {
   name = "popover";
-  theme = theme30;
-  classes = classes29;
+  theme = theme33;
+  classes = classes32;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275PopoverStyle_BaseFactory;
     return function PopoverStyle_Factory(__ngFactoryType__) {
@@ -80328,7 +85538,7 @@ var Popover = class _Popover extends BaseComponent {
     selectors: [["p-popover"]],
     contentQueries: function Popover_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c029, 4);
+        \u0275\u0275contentQuery(dirIndex, _c032, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -80363,7 +85573,7 @@ var Popover = class _Popover extends BaseComponent {
       onHide: "onHide"
     },
     features: [\u0275\u0275ProvidersFeature([PopoverStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c129,
+    ngContentSelectors: _c139,
     decls: 1,
     vars: 1,
     consts: [["role", "dialog", 3, "ngClass", "ngStyle", "class", "click", 4, "ngIf"], ["role", "dialog", 3, "click", "ngClass", "ngStyle"], [1, "p-popover-content", 3, "click", "mousedown"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
@@ -80531,16 +85741,16 @@ var PopoverModule = class _PopoverModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-organizationchart.mjs
-var _c030 = ["pOrganizationChartNode", ""];
-var _c130 = (a0, a1) => ({
+var _c033 = ["pOrganizationChartNode", ""];
+var _c140 = (a0, a1) => ({
   "p-organizationchart-node": true,
   "p-organizationchart-node-selectable": a0,
   "p-organizationchart-node-selected": a1
 });
-var _c221 = (a0) => ({
+var _c226 = (a0) => ({
   $implicit: a0
 });
-var _c319 = (a0) => ({
+var _c323 = (a0) => ({
   "p-organizationchart-connector-top": a0
 });
 function OrganizationChartNode_tbody_0_div_4_Template(rf, ctx) {
@@ -80569,7 +85779,7 @@ function OrganizationChartNode_tbody_0_div_5_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.chart.getTemplateForNode(ctx_r1.node))("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c221, ctx_r1.node));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.chart.getTemplateForNode(ctx_r1.node))("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c226, ctx_r1.node));
   }
 }
 function OrganizationChartNode_tbody_0_ng_container_6_a_1_ng_container_1_ChevronDownIcon_1_Template(rf, ctx) {
@@ -80621,7 +85831,7 @@ function OrganizationChartNode_tbody_0_ng_container_6_a_1_span_2_Template(rf, ct
     const ctx_r1 = \u0275\u0275nextContext(4);
     \u0275\u0275attribute("data-pc-section", "nodeTogglerIcon");
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.chart.togglerIconTemplate || ctx_r1.chart._togglerIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c221, ctx_r1.node.expanded));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.chart.togglerIconTemplate || ctx_r1.chart._togglerIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(3, _c226, ctx_r1.node.expanded));
   }
 }
 function OrganizationChartNode_tbody_0_ng_container_6_a_1_Template(rf, ctx) {
@@ -80693,10 +85903,10 @@ function OrganizationChartNode_tbody_0_ng_container_12_ng_template_1_Template(rf
   if (rf & 2) {
     const first_r4 = ctx.first;
     const last_r5 = ctx.last;
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c319, !first_r4));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(4, _c323, !first_r4));
     \u0275\u0275attribute("data-pc-section", "lineLeft");
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(6, _c319, !last_r5));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(6, _c323, !last_r5));
     \u0275\u0275attribute("data-pc-section", "lineRight");
   }
 }
@@ -80756,7 +85966,7 @@ function OrganizationChartNode_tbody_0_Template(rf, ctx) {
     \u0275\u0275attribute("colspan", ctx_r1.colspan)("data-pc-section", "cell");
     \u0275\u0275advance();
     \u0275\u0275classMap(ctx_r1.node.styleClass);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(26, _c130, ctx_r1.chart.selectionMode && ctx_r1.node.selectable !== false, ctx_r1.isSelected()));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(26, _c140, ctx_r1.chart.selectionMode && ctx_r1.node.selectable !== false, ctx_r1.isSelected()));
     \u0275\u0275attribute("data-pc-section", "node");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.chart.getTemplateForNode(ctx_r1.node));
@@ -80785,8 +85995,8 @@ function OrganizationChartNode_tbody_0_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", ctx_r1.node.children);
   }
 }
-var _c415 = ["togglericon"];
-var _c513 = (a0) => ({
+var _c418 = ["togglericon"];
+var _c515 = (a0) => ({
   "p-organizationchart p-component": true,
   "p-organizationchart-preservespace": a0
 });
@@ -80799,7 +86009,7 @@ function OrganizationChart_table_1_Template(rf, ctx) {
     \u0275\u0275property("collapsible", ctx_r0.collapsible)("node", ctx_r0.root);
   }
 }
-var theme31 = ({
+var theme34 = ({
   dt: dt2
 }) => `
 .p-organizationchart-table {
@@ -80914,7 +86124,7 @@ var theme31 = ({
     border-start-start-radius: ${dt2("organizationchart.connector.border.radius")};
 }
 `;
-var classes30 = {
+var classes33 = {
   root: "p-organizationchart p-component",
   table: "p-organizationchart-table",
   node: ({
@@ -80942,8 +86152,8 @@ var classes30 = {
 };
 var OrganizationChartStyle = class _OrganizationChartStyle extends BaseStyle {
   name = "organizationchart";
-  theme = theme31;
-  classes = classes30;
+  theme = theme34;
+  classes = classes33;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275OrganizationChartStyle_BaseFactory;
     return function OrganizationChartStyle_Factory(__ngFactoryType__) {
@@ -81038,7 +86248,7 @@ var OrganizationChartNode = class _OrganizationChartNode {
       last: [2, "last", "last", booleanAttribute],
       collapsible: [2, "collapsible", "collapsible", booleanAttribute]
     },
-    attrs: _c030,
+    attrs: _c033,
     decls: 1,
     vars: 1,
     consts: [[4, "ngIf"], [3, "click", "ngClass"], [1, "p-organizationchart-connectors", 3, "ngStyle"], [1, "p-organizationchart-connector-down"], [1, "p-organizationchart-node-children", 3, "ngStyle"], ["colspan", "2", 4, "ngFor", "ngForOf"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["tabindex", "0", "class", "p-organizationchart-node-toggle-button", 3, "click", "keydown.enter", "keydown.space", 4, "ngIf"], ["tabindex", "0", 1, "p-organizationchart-node-toggle-button", 3, "click", "keydown.enter", "keydown.space"], ["class", "p-organizationchart-node-toggle-button-icon", 4, "ngIf"], [3, "styleClass", 4, "ngIf"], [3, "styleClass"], [1, "p-organizationchart-node-toggle-button-icon"], ["ngFor", "", 3, "ngForOf"], [1, "p-organizationchart-connector-left", 3, "ngClass"], [1, "p-organizationchart-connector-right", 3, "ngClass"], ["colspan", "2"], ["pOrganizationChartNode", "", 1, "p-organizationchart-table", 3, "node", "collapsible"]],
@@ -81361,7 +86571,7 @@ var OrganizationChart = class _OrganizationChart extends BaseComponent {
     selectors: [["p-organizationChart"], ["p-organization-chart"], ["p-organizationchart"]],
     contentQueries: function OrganizationChart_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c415, 4);
+        \u0275\u0275contentQuery(dirIndex, _c418, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -81398,7 +86608,7 @@ var OrganizationChart = class _OrganizationChart extends BaseComponent {
       }
       if (rf & 2) {
         \u0275\u0275classMap(ctx.styleClass);
-        \u0275\u0275property("ngStyle", ctx.style)("ngClass", \u0275\u0275pureFunction1(6, _c513, ctx.preserveSpace));
+        \u0275\u0275property("ngStyle", ctx.style)("ngClass", \u0275\u0275pureFunction1(6, _c515, ctx.preserveSpace));
         \u0275\u0275attribute("data-pc-section", "root");
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.root);
@@ -81506,29 +86716,29 @@ var OrganizationChartModule = class _OrganizationChartModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-treetable.mjs
-var _c031 = ["colgroup"];
-var _c131 = ["caption"];
-var _c225 = ["header"];
-var _c320 = ["body"];
-var _c416 = ["footer"];
-var _c514 = ["summary"];
-var _c613 = ["emptymessage"];
-var _c710 = ["paginatorleft"];
-var _c88 = ["paginatorright"];
-var _c97 = ["paginatordropdownitem"];
-var _c107 = ["frozenheader"];
-var _c1112 = ["frozenbody"];
-var _c1210 = ["frozenfooter"];
-var _c137 = ["frozencolgroup"];
-var _c145 = ["loadingicon"];
+var _c034 = ["colgroup"];
+var _c141 = ["caption"];
+var _c227 = ["header"];
+var _c324 = ["body"];
+var _c419 = ["footer"];
+var _c516 = ["summary"];
+var _c615 = ["emptymessage"];
+var _c712 = ["paginatorleft"];
+var _c810 = ["paginatorright"];
+var _c99 = ["paginatordropdownitem"];
+var _c109 = ["frozenheader"];
+var _c1114 = ["frozenbody"];
+var _c1211 = ["frozenfooter"];
+var _c1310 = ["frozencolgroup"];
+var _c146 = ["loadingicon"];
 var _c155 = ["reorderindicatorupicon"];
 var _c165 = ["reorderindicatordownicon"];
 var _c175 = ["sorticon"];
 var _c185 = ["checkboxicon"];
 var _c195 = ["headercheckboxicon"];
 var _c204 = ["togglericon"];
-var _c2111 = ["paginatorfirstpagelinkicon"];
-var _c226 = ["paginatorlastpagelinkicon"];
+var _c2112 = ["paginatorfirstpagelinkicon"];
+var _c228 = ["paginatorlastpagelinkicon"];
 var _c235 = ["paginatorpreviouspagelinkicon"];
 var _c245 = ["paginatornextpagelinkicon"];
 var _c255 = ["loader"];
@@ -81538,7 +86748,7 @@ var _c284 = ["reorderIndicatorUp"];
 var _c294 = ["reorderIndicatorDown"];
 var _c303 = ["table"];
 var _c3110 = ["scrollableView"];
-var _c323 = ["scrollableFrozenView"];
+var _c325 = ["scrollableFrozenView"];
 var _c333 = (a0, a1, a2, a3, a4, a5) => ({
   "p-treetable p-component": true,
   "p-treetable-gridlines": a0,
@@ -82043,7 +87253,7 @@ function TTBody_ng_container_1_Template(rf, ctx) {
   }
 }
 var _c402 = ["scrollHeader"];
-var _c417 = ["scrollHeaderBox"];
+var _c4110 = ["scrollHeaderBox"];
 var _c423 = ["scrollBody"];
 var _c433 = ["scrollTable"];
 var _c443 = ["loadingTable"];
@@ -82055,7 +87265,7 @@ var _c493 = ["ttScrollableView", ""];
 var _c502 = (a0) => ({
   height: a0
 });
-var _c515 = (a0, a1) => ({
+var _c517 = (a0, a1) => ({
   $implicit: a0,
   options: a1
 });
@@ -82091,7 +87301,7 @@ function TTScrollableView_p_scroller_8_ng_template_2_Template(rf, ctx) {
     const scrollerOptions_r4 = ctx.options;
     \u0275\u0275nextContext(2);
     const buildInItems_r5 = \u0275\u0275reference(11);
-    \u0275\u0275property("ngTemplateOutlet", buildInItems_r5)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c515, items_r3, scrollerOptions_r4));
+    \u0275\u0275property("ngTemplateOutlet", buildInItems_r5)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c517, items_r3, scrollerOptions_r4));
   }
 }
 function TTScrollableView_p_scroller_8_ng_container_4_ng_template_1_ng_container_0_Template(rf, ctx) {
@@ -82155,7 +87365,7 @@ function TTScrollableView_ng_container_9_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngStyle", \u0275\u0275pureFunction2(3, _c533, ctx_r1.tt.scrollHeight !== "flex" ? ctx_r1.scrollHeight : void 0, !ctx_r1.frozen && ctx_r1.tt.scrollHeight ? "scroll" : void 0));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngTemplateOutlet", buildInItems_r5)("ngTemplateOutletContext", \u0275\u0275pureFunction2(7, _c515, ctx_r1.serializedValue, \u0275\u0275pureFunction0(6, _c543)));
+    \u0275\u0275property("ngTemplateOutlet", buildInItems_r5)("ngTemplateOutletContext", \u0275\u0275pureFunction2(7, _c517, ctx_r1.serializedValue, \u0275\u0275pureFunction0(6, _c543)));
   }
 }
 function TTScrollableView_ng_template_10_ng_container_2_Template(rf, ctx) {
@@ -82399,7 +87609,7 @@ function TreeTableToggler_2_Template(rf, ctx) {
     \u0275\u0275template(0, TreeTableToggler_2_ng_template_0_Template, 0, 0, "ng-template");
   }
 }
-var theme32 = ({
+var theme35 = ({
   dt: dt2
 }) => `
 /* For PrimeNG */
@@ -82850,7 +88060,7 @@ p-tree-table-toggler + p-tree-table-checkbox + span {
     vertical-align: middle;
 }
 `;
-var classes31 = {
+var classes34 = {
   root: ({
     instance
   }) => ({
@@ -82927,7 +88137,7 @@ var classes31 = {
   footer: "p-treetable-footer",
   columnResizeIndicator: "p-treetable-column-resize-indicator"
 };
-var inlineStyles4 = {
+var inlineStyles5 = {
   tableContainer: {
     overflow: "auto"
   },
@@ -82940,9 +88150,9 @@ var inlineStyles4 = {
 };
 var TreeTableStyle = class _TreeTableStyle extends BaseStyle {
   name = "treetable";
-  theme = theme32;
-  classes = classes31;
-  inlineStyles = inlineStyles4;
+  theme = theme35;
+  classes = classes34;
+  inlineStyles = inlineStyles5;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275TreeTableStyle_BaseFactory;
     return function TreeTableStyle_Factory(__ngFactoryType__) {
@@ -84851,29 +90061,29 @@ var TreeTable = class _TreeTable extends BaseComponent {
     selectors: [["p-treeTable"], ["p-treetable"], ["p-tree-table"]],
     contentQueries: function TreeTable_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c031, 4);
-        \u0275\u0275contentQuery(dirIndex, _c131, 4);
-        \u0275\u0275contentQuery(dirIndex, _c225, 4);
-        \u0275\u0275contentQuery(dirIndex, _c320, 4);
-        \u0275\u0275contentQuery(dirIndex, _c416, 4);
-        \u0275\u0275contentQuery(dirIndex, _c514, 4);
-        \u0275\u0275contentQuery(dirIndex, _c613, 4);
-        \u0275\u0275contentQuery(dirIndex, _c710, 4);
-        \u0275\u0275contentQuery(dirIndex, _c88, 4);
-        \u0275\u0275contentQuery(dirIndex, _c97, 4);
-        \u0275\u0275contentQuery(dirIndex, _c107, 4);
-        \u0275\u0275contentQuery(dirIndex, _c1112, 4);
-        \u0275\u0275contentQuery(dirIndex, _c1210, 4);
-        \u0275\u0275contentQuery(dirIndex, _c137, 4);
-        \u0275\u0275contentQuery(dirIndex, _c145, 4);
+        \u0275\u0275contentQuery(dirIndex, _c034, 4);
+        \u0275\u0275contentQuery(dirIndex, _c141, 4);
+        \u0275\u0275contentQuery(dirIndex, _c227, 4);
+        \u0275\u0275contentQuery(dirIndex, _c324, 4);
+        \u0275\u0275contentQuery(dirIndex, _c419, 4);
+        \u0275\u0275contentQuery(dirIndex, _c516, 4);
+        \u0275\u0275contentQuery(dirIndex, _c615, 4);
+        \u0275\u0275contentQuery(dirIndex, _c712, 4);
+        \u0275\u0275contentQuery(dirIndex, _c810, 4);
+        \u0275\u0275contentQuery(dirIndex, _c99, 4);
+        \u0275\u0275contentQuery(dirIndex, _c109, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1114, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1211, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1310, 4);
+        \u0275\u0275contentQuery(dirIndex, _c146, 4);
         \u0275\u0275contentQuery(dirIndex, _c155, 4);
         \u0275\u0275contentQuery(dirIndex, _c165, 4);
         \u0275\u0275contentQuery(dirIndex, _c175, 4);
         \u0275\u0275contentQuery(dirIndex, _c185, 4);
         \u0275\u0275contentQuery(dirIndex, _c195, 4);
         \u0275\u0275contentQuery(dirIndex, _c204, 4);
-        \u0275\u0275contentQuery(dirIndex, _c2111, 4);
-        \u0275\u0275contentQuery(dirIndex, _c226, 4);
+        \u0275\u0275contentQuery(dirIndex, _c2112, 4);
+        \u0275\u0275contentQuery(dirIndex, _c228, 4);
         \u0275\u0275contentQuery(dirIndex, _c235, 4);
         \u0275\u0275contentQuery(dirIndex, _c245, 4);
         \u0275\u0275contentQuery(dirIndex, _c255, 4);
@@ -84918,7 +90128,7 @@ var TreeTable = class _TreeTable extends BaseComponent {
         \u0275\u0275viewQuery(_c294, 5);
         \u0275\u0275viewQuery(_c303, 5);
         \u0275\u0275viewQuery(_c3110, 5);
-        \u0275\u0275viewQuery(_c323, 5);
+        \u0275\u0275viewQuery(_c325, 5);
       }
       if (rf & 2) {
         let _t;
@@ -86035,7 +91245,7 @@ var TTScrollableView = class _TTScrollableView {
     viewQuery: function TTScrollableView_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(_c402, 5);
-        \u0275\u0275viewQuery(_c417, 5);
+        \u0275\u0275viewQuery(_c4110, 5);
         \u0275\u0275viewQuery(_c423, 5);
         \u0275\u0275viewQuery(_c433, 5);
         \u0275\u0275viewQuery(_c443, 5);
@@ -87923,22 +93133,22 @@ var TreeTableModule = class _TreeTableModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-tree.mjs
-var _c032 = (a0) => ({
+var _c035 = (a0) => ({
   height: a0
 });
-var _c138 = (a0) => ({
+var _c147 = (a0) => ({
   "p-tree-node-droppoint-active": a0
 });
-var _c227 = (a0, a1) => ({
+var _c229 = (a0, a1) => ({
   $implicit: a0,
   loading: a1
 });
-var _c321 = (a0, a1) => ({
+var _c326 = (a0, a1) => ({
   $implicit: a0,
   partialSelected: a1,
   class: "p-tree-node-checkbox"
 });
-var _c418 = (a0) => ({
+var _c420 = (a0) => ({
   $implicit: a0
 });
 function UITreeNode_Conditional_0_li_0_Template(rf, ctx) {
@@ -87966,7 +93176,7 @@ function UITreeNode_Conditional_0_li_0_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(2, _c138, ctx_r2.draghoverPrev));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(2, _c147, ctx_r2.draghoverPrev));
     \u0275\u0275attribute("aria-hidden", true);
   }
 }
@@ -88041,7 +93251,7 @@ function UITreeNode_Conditional_0_span_5_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tree.togglerIconTemplate || ctx_r2.tree._togglerIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c227, ctx_r2.node.expanded, ctx_r2.node.loading));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tree.togglerIconTemplate || ctx_r2.tree._togglerIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c229, ctx_r2.node.expanded, ctx_r2.node.loading));
   }
 }
 function UITreeNode_Conditional_0_p_checkbox_6_ng_container_1_ng_template_1_0_ng_template_0_Template(rf, ctx) {
@@ -88057,7 +93267,7 @@ function UITreeNode_Conditional_0_p_checkbox_6_ng_container_1_ng_template_1_Temp
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(4);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tree.checkboxIconTemplate || ctx_r2.tree._checkboxIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c321, ctx_r2.isSelected(), ctx_r2.node.partialSelected));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tree.checkboxIconTemplate || ctx_r2.tree._checkboxIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c326, ctx_r2.isSelected(), ctx_r2.node.partialSelected));
   }
 }
 function UITreeNode_Conditional_0_p_checkbox_6_ng_container_1_Template(rf, ctx) {
@@ -88121,7 +93331,7 @@ function UITreeNode_Conditional_0_span_10_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tree.getTemplateForNode(ctx_r2.node))("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c418, ctx_r2.node));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.tree.getTemplateForNode(ctx_r2.node))("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c420, ctx_r2.node));
   }
 }
 function UITreeNode_Conditional_0_ul_11_p_treeNode_1_Template(rf, ctx) {
@@ -88175,7 +93385,7 @@ function UITreeNode_Conditional_0_li_12_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(2, _c138, ctx_r2.draghoverNext));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(2, _c147, ctx_r2.draghoverNext));
     \u0275\u0275attribute("aria-hidden", true);
   }
 }
@@ -88253,7 +93463,7 @@ function UITreeNode_Conditional_0_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275styleMap(ctx_r2.node.style);
     \u0275\u0275classMap(ctx_r2.node.styleClass);
-    \u0275\u0275property("ngClass", ctx_r2.nodeClass)("ngStyle", \u0275\u0275pureFunction1(29, _c032, ctx_r2.itemSize + "px"));
+    \u0275\u0275property("ngClass", ctx_r2.nodeClass)("ngStyle", \u0275\u0275pureFunction1(29, _c035, ctx_r2.itemSize + "px"));
     \u0275\u0275attribute("aria-label", ctx_r2.node.label)("aria-checked", ctx_r2.checked)("aria-setsize", ctx_r2.node.children ? ctx_r2.node.children.length : 0)("aria-selected", ctx_r2.selected)("aria-expanded", ctx_r2.node.expanded)("aria-posinset", ctx_r2.index + 1)("aria-level", ctx_r2.level + 1)("tabindex", ctx_r2.index === 0 ? 0 : -1)("data-id", ctx_r2.node.key);
     \u0275\u0275advance();
     \u0275\u0275styleProp("padding-left", ctx_r2.level * ctx_r2.indentation + "rem");
@@ -88278,16 +93488,16 @@ function UITreeNode_Conditional_0_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r2.tree.droppableNodes && ctx_r2.lastChild);
   }
 }
-var _c516 = ["filter"];
-var _c614 = ["node"];
-var _c711 = ["header"];
-var _c89 = ["footer"];
-var _c98 = ["loader"];
-var _c108 = ["empty"];
-var _c1113 = ["togglericon"];
-var _c1211 = ["checkboxicon"];
-var _c139 = ["loadingicon"];
-var _c146 = ["filtericon"];
+var _c518 = ["filter"];
+var _c616 = ["node"];
+var _c713 = ["header"];
+var _c811 = ["footer"];
+var _c910 = ["loader"];
+var _c1010 = ["empty"];
+var _c1115 = ["togglericon"];
+var _c1212 = ["checkboxicon"];
+var _c1311 = ["loadingicon"];
+var _c148 = ["filtericon"];
 var _c156 = ["scroller"];
 var _c166 = ["wrapper"];
 var _c176 = (a0) => ({
@@ -88373,7 +93583,7 @@ function Tree_Conditional_3_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r0.filterTemplate || ctx_r0._filterTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c418, ctx_r0.filterOptions));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r0.filterTemplate || ctx_r0._filterTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c420, ctx_r0.filterOptions));
   }
 }
 function Tree_Conditional_4_p_iconField_0_SearchIcon_4_Template(rf, ctx) {
@@ -88522,7 +93732,7 @@ function Tree_ng_container_5_p_scroller_1_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275styleMap(\u0275\u0275pureFunction1(9, _c032, ctx_r0.scrollHeight !== "flex" ? ctx_r0.scrollHeight : void 0));
+    \u0275\u0275styleMap(\u0275\u0275pureFunction1(9, _c035, ctx_r0.scrollHeight !== "flex" ? ctx_r0.scrollHeight : void 0));
     \u0275\u0275property("items", ctx_r0.serializedValue)("tabindex", -1)("scrollHeight", ctx_r0.scrollHeight !== "flex" ? void 0 : "100%")("itemSize", ctx_r0.virtualScrollItemSize || ctx_r0._virtualNodeHeight)("lazy", ctx_r0.lazy)("options", ctx_r0.virtualScrollOptions);
     \u0275\u0275advance(4);
     \u0275\u0275property("ngIf", ctx_r0.loaderTemplate || ctx_r0._loaderTemplate);
@@ -88622,7 +93832,7 @@ function Tree_ng_container_7_Template(rf, ctx) {
     \u0275\u0275elementContainer(0);
   }
 }
-var theme33 = ({
+var theme36 = ({
   dt: dt2
 }) => `
 .p-tree {
@@ -88847,7 +94057,7 @@ var theme33 = ({
     height: 0;
 }
 `;
-var classes32 = {
+var classes35 = {
   root: ({
     instance
   }) => ({
@@ -88887,8 +94097,8 @@ var classes32 = {
 };
 var TreeStyle = class _TreeStyle extends BaseStyle {
   name = "tree";
-  theme = theme33;
-  classes = classes32;
+  theme = theme36;
+  classes = classes35;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275TreeStyle_BaseFactory;
     return function TreeStyle_Factory(__ngFactoryType__) {
@@ -90515,16 +95725,16 @@ var Tree2 = class _Tree extends BaseComponent {
     selectors: [["p-tree"]],
     contentQueries: function Tree_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c516, 4);
-        \u0275\u0275contentQuery(dirIndex, _c614, 4);
-        \u0275\u0275contentQuery(dirIndex, _c711, 4);
-        \u0275\u0275contentQuery(dirIndex, _c89, 4);
-        \u0275\u0275contentQuery(dirIndex, _c98, 4);
-        \u0275\u0275contentQuery(dirIndex, _c108, 4);
-        \u0275\u0275contentQuery(dirIndex, _c1113, 4);
-        \u0275\u0275contentQuery(dirIndex, _c1211, 4);
-        \u0275\u0275contentQuery(dirIndex, _c139, 4);
-        \u0275\u0275contentQuery(dirIndex, _c146, 4);
+        \u0275\u0275contentQuery(dirIndex, _c518, 4);
+        \u0275\u0275contentQuery(dirIndex, _c616, 4);
+        \u0275\u0275contentQuery(dirIndex, _c713, 4);
+        \u0275\u0275contentQuery(dirIndex, _c811, 4);
+        \u0275\u0275contentQuery(dirIndex, _c910, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1010, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1115, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1212, 4);
+        \u0275\u0275contentQuery(dirIndex, _c1311, 4);
+        \u0275\u0275contentQuery(dirIndex, _c148, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -90544,7 +95754,7 @@ var Tree2 = class _Tree extends BaseComponent {
     },
     viewQuery: function Tree_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c516, 5);
+        \u0275\u0275viewQuery(_c518, 5);
         \u0275\u0275viewQuery(_c156, 5);
         \u0275\u0275viewQuery(_c166, 5);
       }
@@ -91067,25 +96277,25 @@ var TreeModule = class _TreeModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-contextmenu.mjs
-var _c033 = ["sublist"];
-var _c140 = (a0, a1) => ({
+var _c036 = ["sublist"];
+var _c149 = (a0, a1) => ({
   "p-contextmenu-submenu": a0,
   "p-contextmenu-root-list": a1
 });
-var _c228 = () => ({
+var _c230 = () => ({
   "p-contextmenu-item-link": true
 });
-var _c324 = () => ({
+var _c327 = () => ({
   class: "p-contextmenu-submenu-icon"
 });
-var _c419 = () => ({
+var _c421 = () => ({
   exact: false
 });
-var _c517 = (a0) => ({
+var _c519 = (a0) => ({
   "p-contextmenu-item-link": true,
   "p-disabled": a0
 });
-var _c615 = (a0) => ({
+var _c617 = (a0) => ({
   $implicit: a0
 });
 function ContextMenuSub_ul_0_ng_template_2_li_0_Template(rf, ctx) {
@@ -91176,7 +96386,7 @@ function ContextMenuSub_ul_0_ng_template_2_li_1_ng_container_3_a_1_ng_container_
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r2.contextMenu.submenuIconTemplate && !ctx_r2.contextMenu._submenuIconTemplate);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.contextMenu.submenuIconTemplate || ctx_r2.contextMenu._submenuIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction0(3, _c324));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.contextMenu.submenuIconTemplate || ctx_r2.contextMenu._submenuIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction0(3, _c327));
   }
 }
 function ContextMenuSub_ul_0_ng_template_2_li_1_ng_container_3_a_1_Template(rf, ctx) {
@@ -91189,7 +96399,7 @@ function ContextMenuSub_ul_0_ng_template_2_li_1_ng_container_3_a_1_Template(rf, 
     const htmlLabel_r6 = \u0275\u0275reference(4);
     const processedItem_r4 = \u0275\u0275nextContext(3).$implicit;
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("target", ctx_r2.getItemProp(processedItem_r4, "target"))("ngClass", \u0275\u0275pureFunction0(12, _c228));
+    \u0275\u0275property("target", ctx_r2.getItemProp(processedItem_r4, "target"))("ngClass", \u0275\u0275pureFunction0(12, _c230));
     \u0275\u0275attribute("href", ctx_r2.getItemProp(processedItem_r4, "url"), \u0275\u0275sanitizeUrl)("aria-hidden", true)("data-automationid", ctx_r2.getItemProp(processedItem_r4, "automationId"))("data-pc-section", "action")("tabindex", -1);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r4, "icon"));
@@ -91277,7 +96487,7 @@ function ContextMenuSub_ul_0_ng_template_2_li_1_ng_container_3_a_2_ng_container_
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r2.contextMenu.submenuIconTemplate && !ctx_r2.contextMenu._submenuIconTemplate);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", !ctx_r2.contextMenu.submenuIconTemplate || !ctx_r2.contextMenu._submenuIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction0(3, _c324));
+    \u0275\u0275property("ngTemplateOutlet", !ctx_r2.contextMenu.submenuIconTemplate || !ctx_r2.contextMenu._submenuIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction0(3, _c327));
   }
 }
 function ContextMenuSub_ul_0_ng_template_2_li_1_ng_container_3_a_2_Template(rf, ctx) {
@@ -91290,7 +96500,7 @@ function ContextMenuSub_ul_0_ng_template_2_li_1_ng_container_3_a_2_Template(rf, 
     const htmlLabel_r7 = \u0275\u0275reference(4);
     const processedItem_r4 = \u0275\u0275nextContext(3).$implicit;
     const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("routerLink", ctx_r2.getItemProp(processedItem_r4, "routerLink"))("queryParams", ctx_r2.getItemProp(processedItem_r4, "queryParams"))("routerLinkActiveOptions", ctx_r2.getItemProp(processedItem_r4, "routerLinkActiveOptions") || \u0275\u0275pureFunction0(20, _c419))("target", ctx_r2.getItemProp(processedItem_r4, "target"))("ngClass", \u0275\u0275pureFunction1(21, _c517, ctx_r2.getItemProp(processedItem_r4, "disabled")))("fragment", ctx_r2.getItemProp(processedItem_r4, "fragment"))("queryParamsHandling", ctx_r2.getItemProp(processedItem_r4, "queryParamsHandling"))("preserveFragment", ctx_r2.getItemProp(processedItem_r4, "preserveFragment"))("skipLocationChange", ctx_r2.getItemProp(processedItem_r4, "skipLocationChange"))("replaceUrl", ctx_r2.getItemProp(processedItem_r4, "replaceUrl"))("state", ctx_r2.getItemProp(processedItem_r4, "state"));
+    \u0275\u0275property("routerLink", ctx_r2.getItemProp(processedItem_r4, "routerLink"))("queryParams", ctx_r2.getItemProp(processedItem_r4, "queryParams"))("routerLinkActiveOptions", ctx_r2.getItemProp(processedItem_r4, "routerLinkActiveOptions") || \u0275\u0275pureFunction0(20, _c421))("target", ctx_r2.getItemProp(processedItem_r4, "target"))("ngClass", \u0275\u0275pureFunction1(21, _c519, ctx_r2.getItemProp(processedItem_r4, "disabled")))("fragment", ctx_r2.getItemProp(processedItem_r4, "fragment"))("queryParamsHandling", ctx_r2.getItemProp(processedItem_r4, "queryParamsHandling"))("preserveFragment", ctx_r2.getItemProp(processedItem_r4, "preserveFragment"))("skipLocationChange", ctx_r2.getItemProp(processedItem_r4, "skipLocationChange"))("replaceUrl", ctx_r2.getItemProp(processedItem_r4, "replaceUrl"))("state", ctx_r2.getItemProp(processedItem_r4, "state"));
     \u0275\u0275attribute("data-automationid", ctx_r2.getItemProp(processedItem_r4, "automationId"))("tabindex", -1)("aria-hidden", true)("data-pc-section", "action");
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r2.getItemProp(processedItem_r4, "icon"));
@@ -91334,7 +96544,7 @@ function ContextMenuSub_ul_0_ng_template_2_li_1_ng_container_4_Template(rf, ctx)
     const processedItem_r4 = \u0275\u0275nextContext(2).$implicit;
     const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c615, processedItem_r4.item));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c617, processedItem_r4.item));
   }
 }
 function ContextMenuSub_ul_0_ng_template_2_li_1_p_contextmenu_sub_5_Template(rf, ctx) {
@@ -91438,21 +96648,21 @@ function ContextMenuSub_ul_0_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(10, _c140, !ctx_r2.root, ctx_r2.root))("@overlayAnimation", ctx_r2.visible)("tabindex", ctx_r2.tabindex);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(10, _c149, !ctx_r2.root, ctx_r2.root))("@overlayAnimation", ctx_r2.visible)("tabindex", ctx_r2.tabindex);
     \u0275\u0275attribute("id", ctx_r2.menuId + "_list")("aria-label", ctx_r2.ariaLabel)("aria-labelledBy", ctx_r2.ariaLabelledBy)("aria-activedescendant", ctx_r2.focusedItemId)("aria-orientation", "vertical")("data-pc-section", "menu");
     \u0275\u0275advance(2);
     \u0275\u0275property("ngForOf", ctx_r2.items);
   }
 }
-var _c712 = ["item"];
-var _c810 = ["submenuicon"];
-var _c99 = ["rootmenu"];
-var _c109 = ["container"];
-var _c1114 = (a0) => ({
+var _c714 = ["item"];
+var _c812 = ["submenuicon"];
+var _c911 = ["rootmenu"];
+var _c1011 = ["container"];
+var _c1116 = (a0) => ({
   "p-contextmenu p-component": true,
   "p-contextmenu-mobile": a0
 });
-var _c1212 = () => ({
+var _c1213 = () => ({
   value: "visible"
 });
 function ContextMenu_div_0_Template(rf, ctx) {
@@ -91495,13 +96705,13 @@ function ContextMenu_div_0_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classMap(ctx_r1.styleClass);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(20, _c1114, ctx_r1.queryMatches))("ngStyle", ctx_r1.style)("@overlayAnimation", \u0275\u0275pureFunction0(22, _c1212));
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(20, _c1116, ctx_r1.queryMatches))("ngStyle", ctx_r1.style)("@overlayAnimation", \u0275\u0275pureFunction0(22, _c1213));
     \u0275\u0275attribute("data-pc-section", "root")("data-pc-name", "contextmenu")("id", ctx_r1.id);
     \u0275\u0275advance(2);
     \u0275\u0275property("root", true)("items", ctx_r1.processedItems)("itemTemplate", ctx_r1.itemTemplate || ctx_r1._itemTemplate)("menuId", ctx_r1.id)("tabindex", !ctx_r1.disabled ? ctx_r1.tabindex : -1)("ariaLabel", ctx_r1.ariaLabel)("ariaLabelledBy", ctx_r1.ariaLabelledBy)("baseZIndex", ctx_r1.baseZIndex)("autoZIndex", ctx_r1.autoZIndex)("visible", ctx_r1.submenuVisible())("focusedItemId", ctx_r1.focused ? ctx_r1.focusedItemId : void 0)("activeItemPath", ctx_r1.activeItemPath());
   }
 }
-var theme34 = ({
+var theme37 = ({
   dt: dt2
 }) => `
 .p-contextmenu {
@@ -91661,7 +96871,7 @@ var theme34 = ({
     margin-right: auto;
 }
 `;
-var classes33 = {
+var classes36 = {
   root: "p-contextmenu p-component",
   rootList: "p-contextmenu-root-list",
   item: ({
@@ -91682,8 +96892,8 @@ var classes33 = {
 };
 var ContextMenuStyle = class _ContextMenuStyle extends BaseStyle {
   name = "contextmenu";
-  theme = theme34;
-  classes = classes33;
+  theme = theme37;
+  classes = classes36;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275ContextMenuStyle_BaseFactory;
     return function ContextMenuStyle_Factory(__ngFactoryType__) {
@@ -91835,7 +97045,7 @@ var ContextMenuSub = class _ContextMenuSub extends BaseComponent {
     selectors: [["p-contextMenuSub"], ["p-contextmenu-sub"]],
     viewQuery: function ContextMenuSub_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c033, 5);
+        \u0275\u0275viewQuery(_c036, 5);
       }
       if (rf & 2) {
         let _t;
@@ -92921,8 +98131,8 @@ var ContextMenu = class _ContextMenu extends BaseComponent {
     selectors: [["p-contextMenu"], ["p-contextmenu"], ["p-context-menu"]],
     contentQueries: function ContextMenu_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c712, 4);
-        \u0275\u0275contentQuery(dirIndex, _c810, 4);
+        \u0275\u0275contentQuery(dirIndex, _c714, 4);
+        \u0275\u0275contentQuery(dirIndex, _c812, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -92934,8 +98144,8 @@ var ContextMenu = class _ContextMenu extends BaseComponent {
     },
     viewQuery: function ContextMenu_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c99, 5);
-        \u0275\u0275viewQuery(_c109, 5);
+        \u0275\u0275viewQuery(_c911, 5);
+        \u0275\u0275viewQuery(_c1011, 5);
       }
       if (rf & 2) {
         let _t;
@@ -93154,6 +98364,7 @@ var ContextMenuModule = class _ContextMenuModule {
 // src/app/services/theme.service.ts
 var ThemeService2 = class _ThemeService {
   darkMode = signal(false);
+  icon = signal("pi pi-sun");
   constructor() {
     const storedTheme = localStorage.getItem("darkMode");
     this.setDarkMode(storedTheme === "true");
@@ -93162,6 +98373,7 @@ var ThemeService2 = class _ThemeService {
     this.darkMode.set(enabled);
     localStorage.setItem("darkMode", String(enabled));
     document.documentElement.classList.toggle("dark-mode", enabled);
+    this.icon.set(enabled ? "pi pi-sun" : "pi pi-moon");
     console.log(`Dark mode set to ${enabled}`);
   }
   toggle() {
@@ -93264,15 +98476,12 @@ export {
   blockBodyScroll,
   removeClass,
   unblockBodyScroll,
-  getViewport,
   getWindowScrollLeft,
   getWindowScrollTop,
   absolutePosition,
-  addStyle,
   getOuterWidth,
   relativePosition,
   appendChild,
-  createElement,
   find,
   findSingle,
   focus,
@@ -93281,12 +98490,10 @@ export {
   getFirstFocusableElement,
   getLastFocusableElement,
   getOffset,
-  getOuterHeight,
   isAndroid,
   isIOS,
   isRTL,
   isTouchDevice,
-  nestedPosition,
   scrollInView,
   setAttribute,
   isEmpty,
@@ -93296,7 +98503,6 @@ export {
   equals2 as equals,
   findIndexInList,
   findLastIndex,
-  resolve,
   isPrintableCharacter,
   uuid,
   ConfirmEventType,
@@ -93333,7 +98539,6 @@ export {
   Badge,
   BadgeModule,
   BaseIcon,
-  AngleRightIcon,
   BlankIcon,
   CheckIcon,
   ChevronDownIcon,
@@ -93387,10 +98592,16 @@ export {
   Scroller,
   Checkbox,
   CheckboxModule,
+  Dialog,
+  DialogModule,
+  SplitButton,
+  SplitButtonModule,
   InputNumber,
   InputNumberModule,
   ToggleButton,
   ToggleButtonModule,
+  SelectButton,
+  SelectButtonModule,
   Table,
   SortableColumn,
   SortIcon,
@@ -93456,4 +98667,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-KYBXMQFX.js.map
+//# sourceMappingURL=chunk-U3JBCNDX.js.map

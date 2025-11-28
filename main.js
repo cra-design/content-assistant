@@ -29,6 +29,8 @@ import {
   ContextMenuModule,
   DOCUMENT,
   DefaultValueAccessor,
+  Dialog,
+  DialogModule,
   DomHandler,
   DomRendererFactory2,
   DomSanitizer,
@@ -94,8 +96,12 @@ import {
   RouterOutlet,
   Scroller,
   SearchIcon,
+  SelectButton,
+  SelectButtonModule,
   SharedModule,
   SpinnerIcon,
+  SplitButton,
+  SplitButtonModule,
   Tab,
   TabList,
   TabPanel,
@@ -135,6 +141,8 @@ import {
   WebViewType,
   absolutePosition,
   addClass,
+  appendChild,
+  blockBodyScroll,
   bootstrapApplication,
   deepEquals,
   definePreset,
@@ -170,7 +178,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-KYBXMQFX.js";
+} from "./chunk-U3JBCNDX.js";
 import {
   ANIMATION_MODULE_TYPE,
   BehaviorSubject,
@@ -204,6 +212,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   animate,
+  animation,
   booleanAttribute,
   catchError,
   computed,
@@ -233,6 +242,7 @@ import {
   timeout,
   transition,
   trigger,
+  useAnimation,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
   ɵɵNgOnChangesFeature,
@@ -10266,7 +10276,7 @@ var Dropdown = class _Dropdown extends BaseComponent {
   lastHiddenFocusableElementOnOverlay;
   // @todo to be refactored
   get hostClass() {
-    const classes14 = this._componentStyle.classes.root({
+    const classes16 = this._componentStyle.classes.root({
       instance: this
     }).map((cls) => {
       if (typeof cls === "string") {
@@ -10275,7 +10285,7 @@ var Dropdown = class _Dropdown extends BaseComponent {
         return Object.keys(cls).filter((key) => cls[key]).join(" ");
       }
     }).join(" ");
-    return classes14 + " " + this.styleClass;
+    return classes16 + " " + this.styleClass;
   }
   get hostStyle() {
     return this.style;
@@ -12250,7 +12260,7 @@ var ProgressIndicatorComponent = class _ProgressIndicatorComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProgressIndicatorComponent, [{
     type: Component,
-    args: [{ selector: "ca-progress-indicator", standalone: true, imports: [CommonModule, ProgressBarModule], template: '<div class="progress-container" *ngIf="showProgress">\r\n  <div class="progress-text">\r\n    <div class="spinner" *ngIf="showSpinner"></div>\r\n    <span>{{ progressText }}</span>\r\n  </div>\r\n  <p-progressBar [value]="progressValue" [showValue]="true"></p-progressBar>\r\n</div>', styles: ["/* angular:styles/component:css;3626b4fd80763a0a8c7fd3ac85e8e2b1a9ea83f9e1ae2febc71f6ef0fd0f4baa;C:/AmberDev/main-repo/content-assistant/src/app/components/progress-indicator/progress-indicator.component.ts */\n.progress-container {\n  margin-top: 1.5rem;\n  padding: 1rem;\n  background-color: #f8f9fa;\n  border-radius: 8px;\n}\n.progress-text {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  margin-bottom: 1rem;\n}\n.spinner {\n  width: 24px;\n  height: 24px;\n  border: 4px solid #ccc;\n  border-top-color: #a7a72e;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */\n"] }]
+    args: [{ selector: "ca-progress-indicator", standalone: true, imports: [CommonModule, ProgressBarModule], template: '<div class="progress-container" *ngIf="showProgress">\r\n  <div class="progress-text">\r\n    <div class="spinner" *ngIf="showSpinner"></div>\r\n    <span>{{ progressText }}</span>\r\n  </div>\r\n  <p-progressBar [value]="progressValue" [showValue]="true"></p-progressBar>\r\n</div>', styles: ["/* angular:styles/component:css;3626b4fd80763a0a8c7fd3ac85e8e2b1a9ea83f9e1ae2febc71f6ef0fd0f4baa;D:/AmberDev/main-repo/content-assistant/src/app/components/progress-indicator/progress-indicator.component.ts */\n.progress-container {\n  margin-top: 1.5rem;\n  padding: 1rem;\n  background-color: #f8f9fa;\n  border-radius: 8px;\n}\n.progress-text {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  margin-bottom: 1rem;\n}\n.spinner {\n  width: 24px;\n  height: 24px;\n  border: 4px solid #ccc;\n  border-top-color: #a7a72e;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */\n"] }]
   }], null, { progressText: [{
     type: Input
   }], processedCount: [{
@@ -13079,7 +13089,7 @@ var CsvDownloadComponent = class _CsvDownloadComponent {
   <p *ngIf="shouldShowNoDataMessage()">\r
     {{ 'image.csv.noData' | translate }}\r
   </p>\r
-</div>`, styles: ["/* angular:styles/component:css;1c997a74d74a98c53de94cd1b23dcec12d9454b472a147986b6d5799e58fa7ae;C:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/components/csv-download/csv-download.component.ts */\n.csv-download-container {\n  margin-top: 2rem;\n  padding: 1rem;\n  background-color: var(--surface-100);\n  border-radius: 8px;\n}\n/*# sourceMappingURL=csv-download.component.css.map */\n"] }]
+</div>`, styles: ["/* angular:styles/component:css;1c997a74d74a98c53de94cd1b23dcec12d9454b472a147986b6d5799e58fa7ae;D:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/components/csv-download/csv-download.component.ts */\n.csv-download-container {\n  margin-top: 2rem;\n  padding: 1rem;\n  background-color: var(--surface-100);\n  border-radius: 8px;\n}\n/*# sourceMappingURL=csv-download.component.css.map */\n"] }]
   }], null, { results: [{
     type: Input
   }] });
@@ -13562,7 +13572,7 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
       </div>\r
     </div>\r
   </ng-container>\r
-</section>`, styles: ["/* angular:styles/component:css;09dc9166e46b9e7aabdb069b1dc488d36e7e0913816855e9dc9912d983b17aa9;C:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/image-assistant.component.ts */\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=image-assistant.component.css.map */\n"] }]
+</section>`, styles: ["/* angular:styles/component:css;09dc9166e46b9e7aabdb069b1dc488d36e7e0913816855e9dc9912d983b17aa9;D:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/image-assistant.component.ts */\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=image-assistant.component.css.map */\n"] }]
   }], () => [], null);
 })();
 (() => {
@@ -16480,7 +16490,7 @@ var render = function(iconDefinition) {
     maskId = null,
     title = null,
     titleId = null,
-    classes: classes14 = [],
+    classes: classes16 = [],
     attributes = {},
     styles: styles2 = {}
   } = params;
@@ -16525,7 +16535,7 @@ var render = function(iconDefinition) {
       extra: {
         attributes,
         styles: styles2,
-        classes: classes14
+        classes: classes16
       }
     });
   });
@@ -16627,7 +16637,7 @@ var Layers = {
       layer(assembler) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
-          classes: classes14 = []
+          classes: classes16 = []
         } = params;
         return domVariants({
           type: "layer"
@@ -16645,7 +16655,7 @@ var Layers = {
           return [{
             tag: "span",
             attributes: {
-              class: ["".concat(config.cssPrefix, "-layers"), ...classes14].join(" ")
+              class: ["".concat(config.cssPrefix, "-layers"), ...classes16].join(" ")
             },
             children
           }];
@@ -16661,7 +16671,7 @@ var LayersCounter = {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           title = null,
-          classes: classes14 = [],
+          classes: classes16 = [],
           attributes = {},
           styles: styles2 = {}
         } = params;
@@ -16679,7 +16689,7 @@ var LayersCounter = {
             extra: {
               attributes,
               styles: styles2,
-              classes: ["".concat(config.cssPrefix, "-layers-counter"), ...classes14]
+              classes: ["".concat(config.cssPrefix, "-layers-counter"), ...classes16]
             }
           });
         });
@@ -16695,7 +16705,7 @@ var LayersText = {
         const {
           transform = meaninglessTransform,
           title = null,
-          classes: classes14 = [],
+          classes: classes16 = [],
           attributes = {},
           styles: styles2 = {}
         } = params;
@@ -16714,7 +16724,7 @@ var LayersText = {
             extra: {
               attributes,
               styles: styles2,
-              classes: ["".concat(config.cssPrefix, "-layers-text"), ...classes14]
+              classes: ["".concat(config.cssPrefix, "-layers-text"), ...classes16]
             }
           });
         });
@@ -17289,7 +17299,7 @@ var faWarnIfIconSpecMissing = () => {
 var isKnownRotateValue = (rotate) => rotate != null && (rotate === 90 || rotate === 180 || rotate === 270 || rotate === "90" || rotate === "180" || rotate === "270");
 var faClassList = (props) => {
   const knownRotateValue = isKnownRotateValue(props.rotate);
-  const classes14 = {
+  const classes16 = {
     [`fa-${props.animation}`]: props.animation != null && !props.animation.startsWith("spin"),
     "fa-spin": props.animation === "spin" || props.animation === "spin-reverse",
     "fa-spin-pulse": props.animation === "spin-pulse" || props.animation === "spin-pulse-reverse",
@@ -17310,7 +17320,7 @@ var faClassList = (props) => {
     [`fa-pull-${props.pull}`]: props.pull !== null,
     [`fa-stack-${props.stackItemSize}`]: props.stackItemSize != null
   };
-  return Object.keys(classes14).map((key) => classes14[key] ? key : null).filter((key) => key);
+  return Object.keys(classes16).map((key) => classes16[key] ? key : null).filter((key) => key);
 };
 var cssInserted = /* @__PURE__ */ new WeakSet();
 var autoCssId = "fa-auto-css";
@@ -19284,69 +19294,8701 @@ var TranslationAssistantComponent = class _TranslationAssistantComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TranslationAssistantComponent, { className: "TranslationAssistantComponent", filePath: "src/app/views/translation-assistant/translation-assistant.component.ts", lineNumber: 41 });
 })();
 
-// src/app/views/project-assistant/project-assistant.component.ts
-var _c08 = () => ["/metadata-assistant"];
-function ProjectAssistantComponent_ng_template_9_Template(rf, ctx) {
+// node_modules/primeng/fesm2022/primeng-fieldset.mjs
+var _c08 = ["header"];
+var _c19 = ["expandicon"];
+var _c23 = ["collapseicon"];
+var _c33 = ["content"];
+var _c43 = ["*", [["p-header"]]];
+var _c53 = ["*", "p-header"];
+var _c63 = (a0, a1) => ({
+  "p-fieldset p-component": true,
+  "p-fieldset-toggleable": a0,
+  "p-fieldset-expanded": a1
+});
+var _c73 = (a0) => ({
+  transitionParams: a0,
+  height: "0"
+});
+var _c83 = (a0) => ({
+  value: "hidden",
+  params: a0
+});
+var _c93 = (a0) => ({
+  transitionParams: a0,
+  height: "*"
+});
+var _c103 = (a0) => ({
+  value: "visible",
+  params: a0
+});
+function Fieldset_ng_container_2_ng_container_2_PlusIcon_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 7)(1, "h3", 8);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd()();
+    \u0275\u0275element(0, "PlusIcon", 11);
   }
   if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "metadata.title"));
+    \u0275\u0275property("styleClass", "p-fieldset-toggler");
+    \u0275\u0275attribute("data-pc-section", "togglericon");
   }
 }
-function ProjectAssistantComponent_ng_template_13_Template(rf, ctx) {
+function Fieldset_ng_container_2_ng_container_2_span_2_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 9);
-    \u0275\u0275element(1, "p-button", 10);
-    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Fieldset_ng_container_2_ng_container_2_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 12);
+    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_2_span_2_ng_container_1_Template, 1, 0, "ng-container", 6);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275attribute("data-pc-section", "togglericon");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.expandIconTemplate || ctx_r2._expandIconTemplate);
+  }
+}
+function Fieldset_ng_container_2_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_2_PlusIcon_1_Template, 1, 2, "PlusIcon", 9)(2, Fieldset_ng_container_2_ng_container_2_span_2_Template, 2, 2, "span", 10);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.expandIconTemplate && !ctx_r2._expandIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.expandIconTemplate || ctx_r2._expandIconTemplate);
+  }
+}
+function Fieldset_ng_container_2_ng_container_3_MinusIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "MinusIcon", 11);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("styleClass", "p-fieldset-toggler");
+    \u0275\u0275attribute("aria-hidden", true)("data-pc-section", "togglericon");
+  }
+}
+function Fieldset_ng_container_2_ng_container_3_span_2_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Fieldset_ng_container_2_ng_container_3_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 12);
+    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_3_span_2_ng_container_1_Template, 1, 0, "ng-container", 6);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275attribute("data-pc-section", "togglericon");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.collapseIconTemplate || ctx_r2._collapseIconTemplate);
+  }
+}
+function Fieldset_ng_container_2_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_3_MinusIcon_1_Template, 1, 3, "MinusIcon", 9)(2, Fieldset_ng_container_2_ng_container_3_span_2_Template, 2, 2, "span", 10);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.collapseIconTemplate && !ctx_r2._collapseIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.collapseIconTemplate || ctx_r2._collapseIconTemplate);
+  }
+}
+function Fieldset_ng_container_2_ng_container_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Fieldset_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "button", 7);
+    \u0275\u0275listener("click", function Fieldset_ng_container_2_Template_button_click_1_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.toggle($event));
+    })("keydown", function Fieldset_ng_container_2_Template_button_keydown_1_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onKeyDown($event));
+    });
+    \u0275\u0275template(2, Fieldset_ng_container_2_ng_container_2_Template, 3, 2, "ng-container", 8)(3, Fieldset_ng_container_2_ng_container_3_Template, 3, 2, "ng-container", 8)(4, Fieldset_ng_container_2_ng_container_4_Template, 1, 0, "ng-container", 6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    const legendContent_r4 = \u0275\u0275reference(4);
+    \u0275\u0275advance();
+    \u0275\u0275attribute("id", ctx_r2.id + "_header")("aria-controls", ctx_r2.id + "_content")("aria-expanded", !ctx_r2.collapsed)("aria-label", ctx_r2.buttonAriaLabel);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.collapsed);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.collapsed);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", legendContent_r4);
+  }
+}
+function Fieldset_ng_template_3_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Fieldset_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 13);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+    \u0275\u0275projection(2, 1);
+    \u0275\u0275template(3, Fieldset_ng_template_3_ng_container_3_Template, 1, 0, "ng-container", 6);
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275attribute("data-pc-section", "legendtitle");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r2.legend);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.headerTemplate || ctx_r2._headerTemplate);
+  }
+}
+function Fieldset_ng_container_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+var theme5 = ({
+  dt
+}) => `
+.p-fieldset {
+    background: ${dt("fieldset.background")};
+    border: 1px solid ${dt("fieldset.border.color")};
+    border-radius: ${dt("fieldset.border.radius")};
+    color: ${dt("fieldset.color")};
+    padding:  ${dt("fieldset.padding")};
+    margin: 0;
+}
+
+.p-fieldset-legend {
+    background: ${dt("fieldset.legend.background")};
+    border-radius: ${dt("fieldset.legend.border.radius")};
+    border-width: ${dt("fieldset.legend.border.width")};
+    border-style: solid;
+    border-color: ${dt("fieldset.legend.border.color")};
+    color: ${dt("fieldset.legend.color")};
+    padding: ${dt("fieldset.legend.padding")};
+    transition: background ${dt("fieldset.transition.duration")}, color ${dt("fieldset.transition.duration")}, outline-color ${dt("fieldset.transition.duration")}, box-shadow ${dt("fieldset.transition.duration")};
+}
+
+.p-fieldset-toggleable > .p-fieldset-legend {
+    padding: 0;
+}
+
+.p-fieldset-toggle-button {
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    gap: ${dt("fieldset.legend.gap")};
+    align-items: center;
+    justify-content: center;
+    padding: ${dt("fieldset.legend.padding")};
+    background: transparent;
+    border: 0 none;
+    border-radius: ${dt("fieldset.legend.border.radius")};
+    transition: background ${dt("fieldset.transition.duration")}, color ${dt("fieldset.transition.duration")}, outline-color ${dt("fieldset.transition.duration")}, box-shadow ${dt("fieldset.transition.duration")};
+    outline-color: transparent;
+}
+
+.p-fieldset-legend-label {
+    font-weight: ${dt("fieldset.legend.font.weight")};
+}
+
+.p-fieldset-toggle-button:focus-visible {
+    box-shadow: ${dt("fieldset.legend.focus.ring.shadow")};
+    outline: ${dt("fieldset.legend.focus.ring.width")} ${dt("fieldset.legend.focus.ring.style")} ${dt("fieldset.legend.focus.ring.color")};
+    outline-offset: ${dt("fieldset.legend.focus.ring.offset")};
+}
+
+.p-fieldset-toggleable > .p-fieldset-legend:hover {
+    color: ${dt("fieldset.legend.hover.color")};
+    background: ${dt("fieldset.legend.hover.background")};
+}
+
+.p-fieldset-toggle-icon {
+    color: ${dt("fieldset.toggle.icon.color")};
+    transition: color ${dt("fieldset.transition.duration")};
+}
+
+.p-fieldset-toggleable > .p-fieldset-legend:hover .p-fieldset-toggle-icon {
+    color: ${dt("fieldset.toggle.icon.hover.color")};
+}
+
+.p-fieldset .p-fieldset-content {
+    padding: ${dt("fieldset.content.padding")};
+}
+
+/* For PrimeNG */
+.p-fieldset-toggleable.p-fieldset-expanded > .p-fieldset-content-container:not(.ng-animating) {
+    overflow: visible
+}
+
+.p-fieldset-toggleable .p-fieldset-content-container {
+    overflow: hidden;
+}
+`;
+var classes5 = {
+  root: ({
+    props
+  }) => ["p-fieldset p-component", {
+    "p-fieldset-toggleable": props.toggleable
+  }],
+  legend: "p-fieldset-legend",
+  legendLabel: "p-fieldset-legend-label",
+  toggleButton: "p-fieldset-toggle-button",
+  toggleIcon: "p-fieldset-toggle-icon",
+  contentContainer: "p-fieldset-content-container",
+  content: "p-fieldset-content"
+};
+var FieldsetStyle = class _FieldsetStyle extends BaseStyle {
+  name = "fieldset";
+  theme = theme5;
+  classes = classes5;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275FieldsetStyle_BaseFactory;
+    return function FieldsetStyle_Factory(__ngFactoryType__) {
+      return (\u0275FieldsetStyle_BaseFactory || (\u0275FieldsetStyle_BaseFactory = \u0275\u0275getInheritedFactory(_FieldsetStyle)))(__ngFactoryType__ || _FieldsetStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _FieldsetStyle,
+    factory: _FieldsetStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FieldsetStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var FieldsetClasses;
+(function(FieldsetClasses2) {
+  FieldsetClasses2["root"] = "p-fieldset";
+  FieldsetClasses2["legend"] = "p-fieldset-legend";
+  FieldsetClasses2["legendLabel"] = "p-fieldset-legend-label";
+  FieldsetClasses2["toggleIcon"] = "p-fieldset-toggle-icon";
+  FieldsetClasses2["contentContainer"] = "p-fieldset-content-container";
+  FieldsetClasses2["content"] = "p-fieldset-content";
+})(FieldsetClasses || (FieldsetClasses = {}));
+var Fieldset = class _Fieldset extends BaseComponent {
+  /**
+   * Header text of the fieldset.
+   * @group Props
+   */
+  legend;
+  /**
+   * When specified, content can toggled by clicking the legend.
+   * @group Props
+   * @defaultValue false
+   */
+  toggleable;
+  /**
+   * Defines the default visibility state of the content.
+   * * @group Props
+   */
+  collapsed = false;
+  /**
+   * Inline style of the component.
+   * @group Props
+   */
+  style;
+  /**
+   * Style class of the component.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Transition options of the panel animation.
+   * @group Props
+   */
+  transitionOptions = "400ms cubic-bezier(0.86, 0, 0.07, 1)";
+  /**
+   * Emits when the collapsed state changes.
+   * @param {boolean} value - New value.
+   * @group Emits
+   */
+  collapsedChange = new EventEmitter();
+  /**
+   * Callback to invoke before panel toggle.
+   * @param {PanelBeforeToggleEvent} event - Custom toggle event
+   * @group Emits
+   */
+  onBeforeToggle = new EventEmitter();
+  /**
+   * Callback to invoke after panel toggle.
+   * @param {PanelAfterToggleEvent} event - Custom toggle event
+   * @group Emits
+   */
+  onAfterToggle = new EventEmitter();
+  get id() {
+    return uuid("pn_id_");
+  }
+  get buttonAriaLabel() {
+    return this.legend;
+  }
+  animating;
+  _componentStyle = inject(FieldsetStyle);
+  /**
+   * Defines the header template.
+   * @group Templates
+   */
+  headerTemplate;
+  /**
+   * Defines the expandicon template.
+   * @group Templates
+   */
+  expandIconTemplate;
+  /**
+   * Defines the collapseicon template.
+   * @group Templates
+   */
+  collapseIconTemplate;
+  /**
+   * Defines the content template.
+   * @group Templates
+   */
+  contentTemplate;
+  toggle(event) {
+    if (this.animating) {
+      return false;
+    }
+    this.animating = true;
+    this.onBeforeToggle.emit({
+      originalEvent: event,
+      collapsed: this.collapsed
+    });
+    if (this.collapsed) this.expand();
+    else this.collapse();
+    this.onAfterToggle.emit({
+      originalEvent: event,
+      collapsed: this.collapsed
+    });
+    event.preventDefault();
+  }
+  onKeyDown(event) {
+    if (event.code === "Enter" || event.code === "Space") {
+      this.toggle(event);
+      event.preventDefault();
+    }
+  }
+  expand() {
+    this.collapsed = false;
+    this.collapsedChange.emit(this.collapsed);
+  }
+  collapse() {
+    this.collapsed = true;
+    this.collapsedChange.emit(this.collapsed);
+  }
+  getBlockableElement() {
+    return this.el.nativeElement.children[0];
+  }
+  onToggleDone() {
+    this.animating = false;
+  }
+  _headerTemplate;
+  _expandIconTemplate;
+  _collapseIconTemplate;
+  _contentTemplate;
+  templates;
+  ngAfterContentInit() {
+    this.templates.forEach((item) => {
+      switch (item.getType()) {
+        case "header":
+          this._headerTemplate = item.template;
+          break;
+        case "expandicon":
+          this._expandIconTemplate = item.template;
+          break;
+        case "collapseicon":
+          this._collapseIconTemplate = item.template;
+          break;
+        case "content":
+          this._contentTemplate = item.template;
+          break;
+      }
+    });
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Fieldset_BaseFactory;
+    return function Fieldset_Factory(__ngFactoryType__) {
+      return (\u0275Fieldset_BaseFactory || (\u0275Fieldset_BaseFactory = \u0275\u0275getInheritedFactory(_Fieldset)))(__ngFactoryType__ || _Fieldset);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Fieldset,
+    selectors: [["p-fieldset"]],
+    contentQueries: function Fieldset_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c08, 4);
+        \u0275\u0275contentQuery(dirIndex, _c19, 4);
+        \u0275\u0275contentQuery(dirIndex, _c23, 4);
+        \u0275\u0275contentQuery(dirIndex, _c33, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.headerTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.expandIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.collapseIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    inputs: {
+      legend: "legend",
+      toggleable: [2, "toggleable", "toggleable", booleanAttribute],
+      collapsed: [2, "collapsed", "collapsed", booleanAttribute],
+      style: "style",
+      styleClass: "styleClass",
+      transitionOptions: "transitionOptions"
+    },
+    outputs: {
+      collapsedChange: "collapsedChange",
+      onBeforeToggle: "onBeforeToggle",
+      onAfterToggle: "onAfterToggle"
+    },
+    features: [\u0275\u0275ProvidersFeature([FieldsetStyle]), \u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c53,
+    decls: 9,
+    vars: 28,
+    consts: [["legendContent", ""], [3, "ngClass", "ngStyle"], [1, "p-fieldset-legend"], [4, "ngIf", "ngIfElse"], ["role", "region", 1, "p-fieldset-content-container"], [1, "p-fieldset-content"], [4, "ngTemplateOutlet"], ["tabindex", "0", "role", "button", 1, "p-fieldset-toggle-button", 3, "click", "keydown"], [4, "ngIf"], [3, "styleClass", 4, "ngIf"], ["class", "p-fieldset-toggler", 4, "ngIf"], [3, "styleClass"], [1, "p-fieldset-toggler"], [1, "p-fieldset-legend-label"]],
+    template: function Fieldset_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef(_c43);
+        \u0275\u0275elementStart(0, "fieldset", 1)(1, "legend", 2);
+        \u0275\u0275template(2, Fieldset_ng_container_2_Template, 5, 7, "ng-container", 3)(3, Fieldset_ng_template_3_Template, 4, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(5, "div", 4);
+        \u0275\u0275listener("@fieldsetContent.done", function Fieldset_Template_div_animation_fieldsetContent_done_5_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onToggleDone());
+        });
+        \u0275\u0275elementStart(6, "div", 5);
+        \u0275\u0275projection(7);
+        \u0275\u0275template(8, Fieldset_ng_container_8_Template, 1, 0, "ng-container", 6);
+        \u0275\u0275elementEnd()()();
+      }
+      if (rf & 2) {
+        const legendContent_r4 = \u0275\u0275reference(4);
+        \u0275\u0275classMap(ctx.styleClass);
+        \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(17, _c63, ctx.toggleable, !ctx.collapsed && ctx.toggleable))("ngStyle", ctx.style);
+        \u0275\u0275attribute("id", ctx.id)("data-pc-name", "fieldset")("data-pc-section", "root");
+        \u0275\u0275advance();
+        \u0275\u0275attribute("data-pc-section", "legend");
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.toggleable)("ngIfElse", legendContent_r4);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("@fieldsetContent", ctx.collapsed ? \u0275\u0275pureFunction1(22, _c83, \u0275\u0275pureFunction1(20, _c73, ctx.transitionOptions)) : \u0275\u0275pureFunction1(26, _c103, \u0275\u0275pureFunction1(24, _c93, ctx.animating ? ctx.transitionOptions : "0ms")));
+        \u0275\u0275attribute("id", ctx.id + "_content")("aria-labelledby", ctx.id + "_header")("aria-hidden", ctx.collapsed)("data-pc-section", "toggleablecontent");
+        \u0275\u0275advance();
+        \u0275\u0275attribute("data-pc-section", "content");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngTemplateOutlet", ctx.contentTemplate || ctx._contentTemplate);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, ButtonModule, MinusIcon, PlusIcon, SharedModule],
+    encapsulation: 2,
+    data: {
+      animation: [trigger("fieldsetContent", [state("hidden", style({
+        height: "0"
+      })), state("visible", style({
+        height: "*"
+      })), transition("visible <=> hidden", [animate("{{transitionParams}}")]), transition("void => *", animate(0))])]
+    },
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Fieldset, [{
+    type: Component,
+    args: [{
+      selector: "p-fieldset",
+      standalone: true,
+      imports: [CommonModule, ButtonModule, MinusIcon, PlusIcon, SharedModule],
+      template: `
+        <fieldset
+            [attr.id]="id"
+            [ngClass]="{
+                'p-fieldset p-component': true,
+                'p-fieldset-toggleable': toggleable,
+                'p-fieldset-expanded': !collapsed && toggleable
+            }"
+            [ngStyle]="style"
+            [class]="styleClass"
+            [attr.data-pc-name]="'fieldset'"
+            [attr.data-pc-section]="'root'"
+        >
+            <legend class="p-fieldset-legend" [attr.data-pc-section]="'legend'">
+                <ng-container *ngIf="toggleable; else legendContent">
+                    <button
+                        [attr.id]="id + '_header'"
+                        tabindex="0"
+                        role="button"
+                        [attr.aria-controls]="id + '_content'"
+                        [attr.aria-expanded]="!collapsed"
+                        [attr.aria-label]="buttonAriaLabel"
+                        (click)="toggle($event)"
+                        (keydown)="onKeyDown($event)"
+                        class="p-fieldset-toggle-button"
+                    >
+                        <ng-container *ngIf="collapsed">
+                            <PlusIcon *ngIf="!expandIconTemplate && !_expandIconTemplate" [styleClass]="'p-fieldset-toggler'" [attr.data-pc-section]="'togglericon'" />
+                            <span *ngIf="expandIconTemplate || _expandIconTemplate" class="p-fieldset-toggler" [attr.data-pc-section]="'togglericon'">
+                                <ng-container *ngTemplateOutlet="expandIconTemplate || _expandIconTemplate"></ng-container>
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="!collapsed">
+                            <MinusIcon *ngIf="!collapseIconTemplate && !_collapseIconTemplate" [styleClass]="'p-fieldset-toggler'" [attr.aria-hidden]="true" [attr.data-pc-section]="'togglericon'" />
+                            <span *ngIf="collapseIconTemplate || _collapseIconTemplate" class="p-fieldset-toggler" [attr.data-pc-section]="'togglericon'">
+                                <ng-container *ngTemplateOutlet="collapseIconTemplate || _collapseIconTemplate"></ng-container>
+                            </span>
+                        </ng-container>
+                        <ng-container *ngTemplateOutlet="legendContent"></ng-container>
+                    </button>
+                </ng-container>
+                <ng-template #legendContent>
+                    <span class="p-fieldset-legend-label" [attr.data-pc-section]="'legendtitle'">{{ legend }}</span>
+                    <ng-content select="p-header"></ng-content>
+                    <ng-container *ngTemplateOutlet="headerTemplate || _headerTemplate"></ng-container>
+                </ng-template>
+            </legend>
+            <div
+                [attr.id]="id + '_content'"
+                role="region"
+                class="p-fieldset-content-container"
+                [@fieldsetContent]="collapsed ? { value: 'hidden', params: { transitionParams: transitionOptions, height: '0' } } : { value: 'visible', params: { transitionParams: animating ? transitionOptions : '0ms', height: '*' } }"
+                [attr.aria-labelledby]="id + '_header'"
+                [attr.aria-hidden]="collapsed"
+                [attr.data-pc-section]="'toggleablecontent'"
+                (@fieldsetContent.done)="onToggleDone()"
+            >
+                <div class="p-fieldset-content" [attr.data-pc-section]="'content'">
+                    <ng-content></ng-content>
+                    <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
+                </div>
+            </div>
+        </fieldset>
+    `,
+      animations: [trigger("fieldsetContent", [state("hidden", style({
+        height: "0"
+      })), state("visible", style({
+        height: "*"
+      })), transition("visible <=> hidden", [animate("{{transitionParams}}")]), transition("void => *", animate(0))])],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      providers: [FieldsetStyle]
+    }]
+  }], null, {
+    legend: [{
+      type: Input
+    }],
+    toggleable: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    collapsed: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    style: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    transitionOptions: [{
+      type: Input
+    }],
+    collapsedChange: [{
+      type: Output
+    }],
+    onBeforeToggle: [{
+      type: Output
+    }],
+    onAfterToggle: [{
+      type: Output
+    }],
+    headerTemplate: [{
+      type: ContentChild,
+      args: ["header", {
+        descendants: false
+      }]
+    }],
+    expandIconTemplate: [{
+      type: ContentChild,
+      args: ["expandicon", {
+        descendants: false
+      }]
+    }],
+    collapseIconTemplate: [{
+      type: ContentChild,
+      args: ["collapseicon", {
+        descendants: false
+      }]
+    }],
+    contentTemplate: [{
+      type: ContentChild,
+      args: ["content", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var FieldsetModule = class _FieldsetModule {
+  static \u0275fac = function FieldsetModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FieldsetModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _FieldsetModule,
+    imports: [Fieldset, SharedModule],
+    exports: [Fieldset, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [Fieldset, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FieldsetModule, [{
+    type: NgModule,
+    args: [{
+      imports: [Fieldset, SharedModule],
+      exports: [Fieldset, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// src/app/views/ia-assistant/services/ia-state.service.ts
+var IaStateService = class _IaStateService {
+  production = environment.production;
+  //Active step
+  activeStep = signal(1);
+  getActiveStep = computed(() => this.activeStep());
+  setActiveStep(step) {
+    this.activeStep.set(step);
+  }
+  // Step 1: Validate URLs
+  urlData = signal({
+    rawUrls: "",
+    includePrototypeLinks: false,
+    urlTotal: 0,
+    urlChecked: 0,
+    urlPercent: 0,
+    isValidating: false,
+    isValidated: false,
+    isOk: false,
+    urlPairs: []
+  });
+  getUrlData = computed(() => this.urlData());
+  setUrlData(partial) {
+    this.urlData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Step 2: Breadcrumbs
+  breadcrumbData = signal({
+    breadcrumbs: [],
+    rootPages: [],
+    progress: 0,
+    step: "",
+    hasBreakBeforeRoot: false,
+    hasBreakAfterRoot: false
+  });
+  getBreadcrumbData = computed(() => this.breadcrumbData());
+  setBreadcrumbData(partial) {
+    this.breadcrumbData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Step 3: Search criteria
+  searchData = signal({
+    rawTerms: "",
+    terms: []
+  });
+  getSearchData = computed(() => this.searchData());
+  setSearchData(partial) {
+    this.searchData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Parse raw terms into terms array
+  updateTerms() {
+    this.searchData().terms = this.searchData().rawTerms.split(/[\n;\t]+/).map((term) => term.trim()).filter(Boolean).map((term) => {
+      try {
+        if (term.startsWith("regex:")) {
+          const pattern = term.slice(6);
+          return new RegExp(pattern, "smi");
+        } else
+          return term.toLowerCase();
+      } catch (error) {
+        console.error(error);
+        return `invalid ${term}`;
+      }
+    });
+    this.searchData().terms = Array.from(new Set(this.searchData().terms));
+  }
+  // Step 4: IA tree
+  iaData = signal({
+    iaTree: [],
+    brokenLinks: [],
+    searchMatches: []
+  });
+  getIaData = computed(() => this.iaData());
+  setIaData(partial) {
+    this.iaData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Step 5: GitHub export (optional)
+  gitHubData = signal({
+    owner: "cra-design",
+    repo: "",
+    branch: "main"
+  });
+  getGitHubData = computed(() => this.gitHubData());
+  setGitHubData(partial) {
+    this.gitHubData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
+  }
+  // Reset
+  resetIaFlow(mode = "all") {
+    const step = this.activeStep();
+    if (step > 1) {
+      this.activeStep.set(step - 1);
+    }
+    if (step === 1) {
+      this.urlData.set({
+        rawUrls: mode === "all" ? "" : this.urlData().rawUrls,
+        includePrototypeLinks: false,
+        urlTotal: 0,
+        urlChecked: 0,
+        urlPercent: 0,
+        isValidating: false,
+        isValidated: false,
+        isOk: false,
+        urlPairs: []
+      });
+      this.gitHubData.set({ owner: "cra-design", repo: "", branch: "main" });
+    }
+    if (step <= 2) {
+      this.breadcrumbData.set({
+        breadcrumbs: [],
+        rootPages: [],
+        progress: 0,
+        step: "",
+        hasBreakBeforeRoot: false,
+        hasBreakAfterRoot: false
+      });
+    }
+    if (step <= 3) {
+      this.searchData.set({
+        rawTerms: "",
+        terms: []
+      });
+    }
+    if (step <= 4) {
+      this.iaData.set({
+        iaTree: [],
+        brokenLinks: [],
+        searchMatches: []
+      });
+    }
+    this.saveToLocalStorage();
+  }
+  // Get IA state
+  getIaState() {
+    return {
+      version: 0.1,
+      activeStep: this.activeStep(),
+      urlData: this.urlData(),
+      breadcrumbData: this.breadcrumbData(),
+      searchData: this.searchData(),
+      iaData: this.iaData(),
+      gitHubData: this.gitHubData()
+    };
+  }
+  //Count in-scope pages
+  countInScopePages() {
+    let count = 0;
+    const traverse = (nodes) => {
+      for (const node of nodes) {
+        if (node.data?.isUserAdded)
+          count++;
+        if (node.children?.length)
+          traverse(node.children);
+      }
+    };
+    traverse(this.iaData().iaTree);
+    return count;
+  }
+  //Update project timestamp
+  updateProjectList(key) {
+    const savedProjects = JSON.parse(localStorage.getItem("savedProjects") || "[]");
+    const existingIndex = savedProjects.findIndex((p2) => p2.key === key);
+    const timestamp = Date.now();
+    const pages = this.countInScopePages();
+    if (existingIndex >= 0) {
+      savedProjects[existingIndex].timestamp = timestamp;
+      savedProjects[existingIndex].pages = pages;
+    } else {
+      savedProjects.push({ key, timestamp, pages });
+    }
+    savedProjects.sort((a, b) => b.timestamp - a.timestamp);
+    localStorage.setItem("savedProjects", JSON.stringify(savedProjects));
+    console.groupCollapsed("Project list saved to localStorage");
+    console.table(savedProjects.map((p2) => ({
+      project: p2.key,
+      modified: new Date(p2.timestamp).toLocaleString()
+    })));
+    console.groupEnd();
+  }
+  // Save IA state to local storage (browser memory)
+  saveToLocalStorage() {
+    const state2 = this.getIaState();
+    const key = state2.gitHubData.repo || "autosave";
+    const cleanTree = this.removeParents(state2.iaData.iaTree);
+    const cleanState = __spreadProps(__spreadValues({}, state2), {
+      iaData: __spreadProps(__spreadValues({}, state2.iaData), {
+        iaTree: cleanTree
+      })
+    });
+    console.log("Clean state:", cleanState);
+    localStorage.setItem(key, JSON.stringify(cleanState));
+    this.updateProjectList(key);
+    if (!this.production) {
+      console.groupCollapsed("IA State saved to localStorage");
+      console.log("Active step:", state2.activeStep);
+      console.log("--- URL Data ---");
+      console.table({
+        rawUrls: state2.urlData.rawUrls,
+        includePrototypeLinks: state2.urlData.includePrototypeLinks,
+        isValidating: state2.urlData.isValidating,
+        isValidated: state2.urlData.isValidated,
+        isOk: state2.urlData.isOk
+      });
+      console.log("URL Pairs:", state2.urlData.urlPairs);
+      console.log("--- Breadcrumb Data ---");
+      console.table({
+        breadcrumbProgress: state2.breadcrumbData.progress,
+        hasBreakBeforeRoot: state2.breadcrumbData.hasBreakBeforeRoot,
+        hasBreakAfterRoot: state2.breadcrumbData.hasBreakAfterRoot
+      });
+      console.log("Breadcrumbs:", state2.breadcrumbData.breadcrumbs);
+      console.log("Root Pages:", state2.breadcrumbData.rootPages);
+      console.log("--- Search Data ---");
+      console.log("Terms:", state2.searchData.terms);
+      console.log("--- IA Data ---");
+      console.log("IA Tree:", state2.iaData.iaTree);
+      console.log("Broken Links:", state2.iaData.brokenLinks);
+      console.log("Search Matches:", state2.iaData.searchMatches);
+      console.log("--- GitHub Data ---");
+      console.table({
+        owner: state2.gitHubData.owner,
+        repo: state2.gitHubData.repo,
+        branch: state2.gitHubData.branch
+      });
+      console.groupEnd();
+    }
+  }
+  removeParents(nodes) {
+    return nodes.map((node) => {
+      const _a = node, { parent } = _a, rest = __objRest(_a, ["parent"]);
+      return __spreadProps(__spreadValues({}, rest), {
+        children: node.children ? this.removeParents(node.children) : []
+      });
+    });
+  }
+  // Load from local storage (browser memory)
+  loadFromLocalStorage(project) {
+    let projectKey = "";
+    if (project) {
+      projectKey = project;
+    } else {
+      const projects = JSON.parse(localStorage.getItem("savedProjects") || "[]");
+      projectKey = projects[0].key;
+    }
+    const saved = localStorage.getItem(projectKey);
+    if (!saved) {
+      console.warn(`No project found for ${projectKey}`);
+      return;
+    }
+    const state2 = JSON.parse(saved);
+    this.activeStep.set(state2.activeStep);
+    this.urlData.set(state2.urlData);
+    this.breadcrumbData.set(state2.breadcrumbData);
+    this.searchData.set(state2.searchData);
+    this.iaData.set(state2.iaData);
+    this.gitHubData.set(state2.gitHubData);
+  }
+  // Export as JSON (for sharing with someone else)
+  exportIaState() {
+    const state2 = this.getIaState();
+    const cleanTree = this.removeParents(state2.iaData.iaTree);
+    const exportState = __spreadProps(__spreadValues({}, state2), {
+      searchData: {
+        rawTerms: state2.searchData.rawTerms
+      },
+      iaData: __spreadProps(__spreadValues({}, state2.iaData), {
+        iaTree: cleanTree
+      })
+    });
+    const data = JSON.stringify(exportState, null, 2);
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ia-state.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  // Import JSON
+  importIaState(event) {
+    const file = event.files?.[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const state2 = JSON.parse(reader.result);
+        if (state2.version !== 0.1) {
+          console.warn("Incompatible IA state version. Import skipped.");
+          return;
+        }
+        this.urlData.set(state2.urlData);
+        this.breadcrumbData.set(state2.breadcrumbData);
+        this.searchData.set(state2.searchData);
+        this.updateTerms();
+        this.iaData.set(state2.iaData);
+        this.gitHubData.set(state2.gitHubData || { owner: "cra-design", repo: "", branch: "main" });
+        this.saveToLocalStorage();
+        console.log("IA state successfully imported");
+      } catch (error) {
+        console.error("Invalid IA state file", error);
+      }
+    };
+    reader.readAsText(file);
+  }
+  // Export TreeNode as CSV
+  exportIaTreeAsCsv() {
+    const iaTree = this.iaData().iaTree;
+    const rows = [];
+    rows.push([
+      "Page Title (h1)",
+      "URL",
+      "Prototype URL",
+      "In scope",
+      "Orphaned",
+      "Parent URL",
+      "Old Parent URL",
+      "Status"
+    ].join(","));
+    const walk = (nodes, parentUrl = null) => {
+      for (const node of nodes) {
+        const data = node.data;
+        if (data.customStyleKey === "template") {
+          if (node.children?.length) {
+            walk(node.children, data.url);
+          }
+          continue;
+        }
+        let customStyle = "";
+        switch (data.customStyleKey) {
+          case "new":
+            customStyle = "New page";
+            break;
+          case "rot":
+            customStyle = "Remove ROT";
+            break;
+          case "move":
+            customStyle = "Page move";
+            break;
+          default:
+            customStyle = "";
+        }
+        if (data.originalParent && data.originalParent !== parentUrl && customStyle === "") {
+          customStyle = "Page move";
+        }
+        let oldParent = "";
+        if (data.originalParent && data.originalParent !== parentUrl) {
+          oldParent = data.originalParent;
+        }
+        rows.push([
+          `"${data.h1 || ""}"`,
+          data.url || "",
+          data.prototype || "",
+          data.isUserAdded ? "Yes" : "No",
+          data.notOrphan ? "No" : "Yes",
+          parentUrl || "",
+          oldParent || "",
+          customStyle || ""
+        ].join(","));
+        if (node.children?.length) {
+          walk(node.children, data.url);
+        }
+      }
+    };
+    walk(iaTree);
+    const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ia-tree.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  static \u0275fac = function IaStateService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _IaStateService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaStateService, factory: _IaStateService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaStateService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-chip.mjs
+var _c09 = ["removeicon"];
+var _c110 = ["*"];
+function Chip_img_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "img", 4);
+    \u0275\u0275listener("error", function Chip_img_1_Template_img_error_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.imageError($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("src", ctx_r1.image, \u0275\u0275sanitizeUrl)("alt", ctx_r1.alt);
+  }
+}
+function Chip_ng_template_2_span_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 6);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classMap(ctx_r1.icon);
+    \u0275\u0275property("ngClass", "p-chip-icon");
+    \u0275\u0275attribute("data-pc-section", "icon");
+  }
+}
+function Chip_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Chip_ng_template_2_span_0_Template, 1, 4, "span", 5);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngIf", ctx_r1.icon);
+  }
+}
+function Chip_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 7);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275attribute("data-pc-section", "label");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.label);
+  }
+}
+function Chip_ng_container_5_ng_container_1_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "span", 11);
+    \u0275\u0275listener("click", function Chip_ng_container_5_ng_container_1_span_1_Template_span_click_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.close($event));
+    })("keydown", function Chip_ng_container_5_ng_container_1_span_1_Template_span_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.onKeydown($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275classMap(ctx_r1.removeIcon);
+    \u0275\u0275property("ngClass", "p-chip-remove-icon");
+    \u0275\u0275attribute("data-pc-section", "removeicon")("aria-label", ctx_r1.removeAriaLabel);
+  }
+}
+function Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "TimesCircleIcon", 12);
+    \u0275\u0275listener("click", function Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template_TimesCircleIcon_click_0_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.close($event));
+    })("keydown", function Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template_TimesCircleIcon_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.onKeydown($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275classMap("p-chip-remove-icon");
+    \u0275\u0275attribute("data-pc-section", "removeicon")("aria-label", ctx_r1.removeAriaLabel);
+  }
+}
+function Chip_ng_container_5_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Chip_ng_container_5_ng_container_1_span_1_Template, 1, 5, "span", 9)(2, Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template, 1, 4, "TimesCircleIcon", 10);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.removeIcon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.removeIcon);
+  }
+}
+function Chip_ng_container_5_span_2_1_ng_template_0_Template(rf, ctx) {
+}
+function Chip_ng_container_5_span_2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Chip_ng_container_5_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Chip_ng_container_5_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "span", 13);
+    \u0275\u0275listener("click", function Chip_ng_container_5_span_2_Template_span_click_0_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.close($event));
+    })("keydown", function Chip_ng_container_5_span_2_Template_span_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onKeydown($event));
+    });
+    \u0275\u0275template(1, Chip_ng_container_5_span_2_1_Template, 1, 0, null, 14);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275attribute("data-pc-section", "removeicon")("aria-label", ctx_r1.removeAriaLabel);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.removeIconTemplate || ctx_r1._removeIconTemplate);
+  }
+}
+function Chip_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Chip_ng_container_5_ng_container_1_Template, 3, 2, "ng-container", 3)(2, Chip_ng_container_5_span_2_Template, 2, 3, "span", 8);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.removeIconTemplate && !ctx_r1._removeIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.removeIconTemplate || ctx_r1._removeIconTemplate);
+  }
+}
+var theme6 = ({
+  dt
+}) => `
+.p-chip {
+    display: inline-flex;
+    align-items: center;
+    background: ${dt("chip.background")};
+    color: ${dt("chip.color")};
+    border-radius: ${dt("chip.border.radius")};
+    padding: ${dt("chip.padding.y")} ${dt("chip.padding.x")};
+    gap: ${dt("chip.gap")};
+}
+
+.p-chip-icon {
+    color: ${dt("chip.icon.color")};
+    font-size: ${dt("chip.icon.font.size")};
+    width: ${dt("chip.icon.size")};
+    height: ${dt("chip.icon.size")};
+}
+
+.p-chip-image {
+    border-radius: 50%;
+    width: ${dt("chip.image.width")};
+    height: ${dt("chip.image.height")};
+    margin-left: calc(-1 * ${dt("chip.padding.y")});
+}
+
+.p-chip:has(.p-chip-remove-icon) {
+    padding-inline-end: ${dt("chip.padding.y")};
+}
+
+.p-chip:has(.p-chip-image) {
+    padding-top: calc(${dt("chip.padding.y")} / 2);
+    padding-bottom: calc(${dt("chip.padding.y")} / 2);
+}
+
+.p-chip-remove-icon {
+    cursor: pointer;
+    font-size: ${dt("chip.remove.icon.font.size")};
+    width: ${dt("chip.remove.icon.size")};
+    height: ${dt("chip.remove.icon.size")};
+    color: ${dt("chip.remove.icon.color")};
+    border-radius: 50%;
+    transition: outline-color ${dt("chip.transition.duration")}, box-shadow ${dt("chip.transition.duration")};
+    outline-color: transparent;
+}
+
+.p-chip-remove-icon:focus-visible {
+    box-shadow: ${dt("chip.remove.icon.focus.ring.shadow")};
+    outline: ${dt("chip.remove.icon.focus.ring.width")} ${dt("chip.remove.icon.focus.ring.style")} ${dt("chip.remove.icon.focus.ring.color")};
+    outline-offset: ${dt("chip.remove.icon.focus.ring.offset")};
+}
+`;
+var classes6 = {
+  root: "p-chip p-component",
+  image: "p-chip-image",
+  icon: "p-chip-icon",
+  label: "p-chip-label",
+  removeIcon: "p-chip-remove-icon"
+};
+var ChipStyle = class _ChipStyle extends BaseStyle {
+  name = "chip";
+  theme = theme6;
+  classes = classes6;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275ChipStyle_BaseFactory;
+    return function ChipStyle_Factory(__ngFactoryType__) {
+      return (\u0275ChipStyle_BaseFactory || (\u0275ChipStyle_BaseFactory = \u0275\u0275getInheritedFactory(_ChipStyle)))(__ngFactoryType__ || _ChipStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _ChipStyle,
+    factory: _ChipStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChipStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var ChipClasses;
+(function(ChipClasses2) {
+  ChipClasses2["root"] = "p-chip";
+  ChipClasses2["image"] = "p-chip-image";
+  ChipClasses2["icon"] = "p-chip-icon";
+  ChipClasses2["label"] = "p-chip-label";
+  ChipClasses2["removeIcon"] = "p-chip-remove-icon";
+})(ChipClasses || (ChipClasses = {}));
+var Chip = class _Chip extends BaseComponent {
+  /**
+   * Defines the text to display.
+   * @group Props
+   */
+  label;
+  /**
+   * Defines the icon to display.
+   * @group Props
+   */
+  icon;
+  /**
+   * Defines the image to display.
+   * @group Props
+   */
+  image;
+  /**
+   * Alt attribute of the image.
+   * @group Props
+   */
+  alt;
+  /**
+   * Inline style of the element.
+   * @group Props
+   */
+  style;
+  /**
+   * Class of the element.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Whether to display a remove icon.
+   * @group Props
+   */
+  removable = false;
+  /**
+   * Icon of the remove element.
+   * @group Props
+   */
+  removeIcon;
+  /**
+   * Callback to invoke when a chip is removed.
+   * @param {MouseEvent} event - Mouse event.
+   * @group Emits
+   */
+  onRemove = new EventEmitter();
+  /**
+   * This event is triggered if an error occurs while loading an image file.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onImageError = new EventEmitter();
+  visible = true;
+  get removeAriaLabel() {
+    return this.config.getTranslation(TranslationKeys.ARIA)["removeLabel"];
+  }
+  /**
+   * Used to pass all properties of the chipProps to the Chip component.
+   * @group Props
+   */
+  get chipProps() {
+    return this._chipProps;
+  }
+  set chipProps(val) {
+    this._chipProps = val;
+    if (val && typeof val === "object") {
+      Object.entries(val).forEach(([k, v]) => this[`_${k}`] !== v && (this[`_${k}`] = v));
+    }
+  }
+  _chipProps;
+  _componentStyle = inject(ChipStyle);
+  removeIconTemplate;
+  templates;
+  _removeIconTemplate;
+  ngAfterContentInit() {
+    this.templates.forEach((item) => {
+      switch (item.getType()) {
+        case "removeicon":
+          this._removeIconTemplate = item.template;
+          break;
+        default:
+          this._removeIconTemplate = item.template;
+          break;
+      }
+    });
+  }
+  ngOnChanges(simpleChanges) {
+    super.ngOnChanges(simpleChanges);
+    if (simpleChanges.chipProps && simpleChanges.chipProps.currentValue) {
+      const {
+        currentValue
+      } = simpleChanges.chipProps;
+      if (currentValue.label !== void 0) {
+        this.label = currentValue.label;
+      }
+      if (currentValue.icon !== void 0) {
+        this.icon = currentValue.icon;
+      }
+      if (currentValue.image !== void 0) {
+        this.image = currentValue.image;
+      }
+      if (currentValue.alt !== void 0) {
+        this.alt = currentValue.alt;
+      }
+      if (currentValue.style !== void 0) {
+        this.style = currentValue.style;
+      }
+      if (currentValue.styleClass !== void 0) {
+        this.styleClass = currentValue.styleClass;
+      }
+      if (currentValue.removable !== void 0) {
+        this.removable = currentValue.removable;
+      }
+      if (currentValue.removeIcon !== void 0) {
+        this.removeIcon = currentValue.removeIcon;
+      }
+    }
+  }
+  containerClass() {
+    let classes16 = "p-chip p-component";
+    if (this.styleClass) {
+      classes16 += ` ${this.styleClass}`;
+    }
+    return classes16;
+  }
+  close(event) {
+    this.visible = false;
+    this.onRemove.emit(event);
+  }
+  onKeydown(event) {
+    if (event.key === "Enter" || event.key === "Backspace") {
+      this.close(event);
+    }
+  }
+  imageError(event) {
+    this.onImageError.emit(event);
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Chip_BaseFactory;
+    return function Chip_Factory(__ngFactoryType__) {
+      return (\u0275Chip_BaseFactory || (\u0275Chip_BaseFactory = \u0275\u0275getInheritedFactory(_Chip)))(__ngFactoryType__ || _Chip);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Chip,
+    selectors: [["p-chip"]],
+    contentQueries: function Chip_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c09, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.removeIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    hostVars: 9,
+    hostBindings: function Chip_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("data-pc-name", "chip")("aria-label", ctx.label)("data-pc-section", "root");
+        \u0275\u0275styleMap(ctx.style);
+        \u0275\u0275classMap(ctx.containerClass());
+        \u0275\u0275styleProp("display", !ctx.visible && "none");
+      }
+    },
+    inputs: {
+      label: "label",
+      icon: "icon",
+      image: "image",
+      alt: "alt",
+      style: "style",
+      styleClass: "styleClass",
+      removable: [2, "removable", "removable", booleanAttribute],
+      removeIcon: "removeIcon",
+      chipProps: "chipProps"
+    },
+    outputs: {
+      onRemove: "onRemove",
+      onImageError: "onImageError"
+    },
+    features: [\u0275\u0275ProvidersFeature([ChipStyle]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c110,
+    decls: 6,
+    vars: 4,
+    consts: [["iconTemplate", ""], ["class", "p-chip-image", 3, "src", "alt", "error", 4, "ngIf", "ngIfElse"], ["class", "p-chip-label", 4, "ngIf"], [4, "ngIf"], [1, "p-chip-image", 3, "error", "src", "alt"], [3, "class", "ngClass", 4, "ngIf"], [3, "ngClass"], [1, "p-chip-label"], ["tabindex", "0", "class", "p-chip-remove-icon", "role", "button", 3, "click", "keydown", 4, "ngIf"], ["tabindex", "0", "role", "button", 3, "class", "ngClass", "click", "keydown", 4, "ngIf"], ["tabindex", "0", "role", "button", 3, "class", "click", "keydown", 4, "ngIf"], ["tabindex", "0", "role", "button", 3, "click", "keydown", "ngClass"], ["tabindex", "0", "role", "button", 3, "click", "keydown"], ["tabindex", "0", "role", "button", 1, "p-chip-remove-icon", 3, "click", "keydown"], [4, "ngTemplateOutlet"]],
+    template: function Chip_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+        \u0275\u0275template(1, Chip_img_1_Template, 1, 2, "img", 1)(2, Chip_ng_template_2_Template, 1, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, Chip_div_4_Template, 2, 2, "div", 2)(5, Chip_ng_container_5_Template, 3, 2, "ng-container", 3);
+      }
+      if (rf & 2) {
+        const iconTemplate_r6 = \u0275\u0275reference(3);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.image)("ngIfElse", iconTemplate_r6);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", ctx.label);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.removable);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, TimesCircleIcon, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Chip, [{
+    type: Component,
+    args: [{
+      selector: "p-chip",
+      standalone: true,
+      imports: [CommonModule, TimesCircleIcon, SharedModule],
+      template: `
+        <ng-content></ng-content>
+        <img class="p-chip-image" [src]="image" *ngIf="image; else iconTemplate" (error)="imageError($event)" [alt]="alt" />
+        <ng-template #iconTemplate><span *ngIf="icon" [class]="icon" [ngClass]="'p-chip-icon'" [attr.data-pc-section]="'icon'"></span></ng-template>
+        <div class="p-chip-label" *ngIf="label" [attr.data-pc-section]="'label'">{{ label }}</div>
+        <ng-container *ngIf="removable">
+            <ng-container *ngIf="!removeIconTemplate && !_removeIconTemplate">
+                <span
+                    tabindex="0"
+                    *ngIf="removeIcon"
+                    [class]="removeIcon"
+                    [ngClass]="'p-chip-remove-icon'"
+                    [attr.data-pc-section]="'removeicon'"
+                    (click)="close($event)"
+                    (keydown)="onKeydown($event)"
+                    [attr.aria-label]="removeAriaLabel"
+                    role="button"
+                ></span>
+                <TimesCircleIcon tabindex="0" *ngIf="!removeIcon" [class]="'p-chip-remove-icon'" [attr.data-pc-section]="'removeicon'" (click)="close($event)" (keydown)="onKeydown($event)" [attr.aria-label]="removeAriaLabel" role="button" />
+            </ng-container>
+            <span *ngIf="removeIconTemplate || _removeIconTemplate" tabindex="0" [attr.data-pc-section]="'removeicon'" class="p-chip-remove-icon" (click)="close($event)" (keydown)="onKeydown($event)" [attr.aria-label]="removeAriaLabel" role="button">
+                <ng-template *ngTemplateOutlet="removeIconTemplate || _removeIconTemplate"></ng-template>
+            </span>
+        </ng-container>
+    `,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      providers: [ChipStyle],
+      host: {
+        "[class]": "containerClass()",
+        "[style]": "style",
+        "[style.display]": '!visible && "none"',
+        "[attr.data-pc-name]": "'chip'",
+        "[attr.aria-label]": "label",
+        "[attr.data-pc-section]": "'root'"
+      }
+    }]
+  }], null, {
+    label: [{
+      type: Input
+    }],
+    icon: [{
+      type: Input
+    }],
+    image: [{
+      type: Input
+    }],
+    alt: [{
+      type: Input
+    }],
+    style: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    removable: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    removeIcon: [{
+      type: Input
+    }],
+    onRemove: [{
+      type: Output
+    }],
+    onImageError: [{
+      type: Output
+    }],
+    chipProps: [{
+      type: Input
+    }],
+    removeIconTemplate: [{
+      type: ContentChild,
+      args: ["removeicon", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var ChipModule = class _ChipModule {
+  static \u0275fac = function ChipModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ChipModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _ChipModule,
+    imports: [Chip, SharedModule],
+    exports: [Chip, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [Chip, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChipModule, [{
+    type: NgModule,
+    args: [{
+      imports: [Chip, SharedModule],
+      exports: [Chip, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-autocomplete.mjs
+var _c010 = ["item"];
+var _c111 = ["empty"];
+var _c24 = ["header"];
+var _c34 = ["footer"];
+var _c44 = ["selecteditem"];
+var _c54 = ["group"];
+var _c64 = ["loader"];
+var _c74 = ["removeicon"];
+var _c84 = ["loadingicon"];
+var _c94 = ["clearicon"];
+var _c104 = ["dropdownicon"];
+var _c113 = ["container"];
+var _c123 = ["focusInput"];
+var _c133 = ["multiIn"];
+var _c143 = ["multiContainer"];
+var _c152 = ["ddBtn"];
+var _c162 = ["items"];
+var _c172 = ["scroller"];
+var _c182 = ["overlay"];
+var _c192 = (a0) => ({
+  "p-autocomplete-chip-item": true,
+  "p-focus": a0
+});
+var _c20 = (a0) => ({
+  $implicit: a0
+});
+var _c21 = (a0, a1) => ({
+  class: "p-autocomplete-chip-icon",
+  removeCallback: a0,
+  index: a1
+});
+var _c222 = (a0) => ({
+  height: a0
+});
+var _c232 = (a0, a1) => ({
+  $implicit: a0,
+  options: a1
+});
+var _c242 = (a0) => ({
+  options: a0
+});
+var _c25 = () => ({});
+var _c26 = (a0, a1) => ({
+  $implicit: a0,
+  index: a1
+});
+function AutoComplete_input_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "input", 19, 3);
+    \u0275\u0275listener("input", function AutoComplete_input_2_Template_input_input_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInput($event));
+    })("keydown", function AutoComplete_input_2_Template_input_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onKeyDown($event));
+    })("change", function AutoComplete_input_2_Template_input_change_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputChange($event));
+    })("focus", function AutoComplete_input_2_Template_input_focus_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputFocus($event));
+    })("blur", function AutoComplete_input_2_Template_input_blur_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputBlur($event));
+    })("paste", function AutoComplete_input_2_Template_input_paste_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputPaste($event));
+    })("keyup", function AutoComplete_input_2_Template_input_keyup_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputKeyUp($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_26_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r2.inputStyleClass);
+    \u0275\u0275property("pAutoFocus", ctx_r2.autofocus)("ngClass", "p-autocomplete-input")("ngStyle", ctx_r2.inputStyle)("type", ctx_r2.type)("variant", ctx_r2.variant)("autocomplete", ctx_r2.autocomplete)("required", ctx_r2.required)("name", ctx_r2.name)("pSize", ctx_r2.size)("tabindex", !ctx_r2.disabled ? ctx_r2.tabindex : -1)("readonly", ctx_r2.readonly)("disabled", ctx_r2.disabled)("fluid", ctx_r2.hasFluid);
+    \u0275\u0275attribute("value", ctx_r2.inputValue())("id", ctx_r2.inputId)("placeholder", ctx_r2.placeholder)("maxlength", ctx_r2.maxlength)("aria-label", ctx_r2.ariaLabel)("aria-labelledby", ctx_r2.ariaLabelledBy)("aria-required", ctx_r2.required)("aria-expanded", (tmp_26_0 = ctx_r2.overlayVisible) !== null && tmp_26_0 !== void 0 ? tmp_26_0 : false)("aria-controls", ctx_r2.overlayVisible ? ctx_r2.id + "_list" : null)("aria-activedescendant", ctx_r2.focused ? ctx_r2.focusedOptionId : void 0);
+  }
+}
+function AutoComplete_ng_container_3_TimesIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "TimesIcon", 22);
+    \u0275\u0275listener("click", function AutoComplete_ng_container_3_TimesIcon_1_Template_TimesIcon_click_0_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.clear());
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275property("styleClass", "p-autocomplete-clear-icon");
+    \u0275\u0275attribute("aria-hidden", true);
+  }
+}
+function AutoComplete_ng_container_3_span_2_1_ng_template_0_Template(rf, ctx) {
+}
+function AutoComplete_ng_container_3_span_2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AutoComplete_ng_container_3_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function AutoComplete_ng_container_3_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "span", 23);
+    \u0275\u0275listener("click", function AutoComplete_ng_container_3_span_2_Template_span_click_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.clear());
+    });
+    \u0275\u0275template(1, AutoComplete_ng_container_3_span_2_1_Template, 1, 0, null, 24);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275attribute("aria-hidden", true);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.clearIconTemplate || ctx_r2._clearIconTemplate);
+  }
+}
+function AutoComplete_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, AutoComplete_ng_container_3_TimesIcon_1_Template, 1, 2, "TimesIcon", 20)(2, AutoComplete_ng_container_3_span_2_Template, 2, 2, "span", 21);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.clearIconTemplate && !ctx_r2._clearIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.clearIconTemplate || ctx_r2._clearIconTemplate);
+  }
+}
+function AutoComplete_ul_4_li_2_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "span", 33);
+    \u0275\u0275listener("click", function AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_ng_template_1_Template_span_click_0_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const i_r8 = \u0275\u0275nextContext(3).index;
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(!ctx_r2.readonly ? ctx_r2.removeOption($event, i_r8) : "");
+    });
+    \u0275\u0275element(1, "TimesCircleIcon", 34);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     \u0275\u0275advance();
-    \u0275\u0275property("label", \u0275\u0275pipeBind1(2, 2, "common.goTo"))("routerLink", \u0275\u0275pureFunction0(4, _c08));
+    \u0275\u0275property("styleClass", "p-autocomplete-chip-icon");
+    \u0275\u0275attribute("aria-hidden", true);
+  }
+}
+function AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_ng_template_1_Template, 2, 2, "ng-template", null, 6, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementContainerEnd();
+  }
+}
+function AutoComplete_ul_4_li_2_p_chip_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-chip", 32);
+    \u0275\u0275listener("onRemove", function AutoComplete_ul_4_li_2_p_chip_3_Template_p_chip_onRemove_0_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const i_r8 = \u0275\u0275nextContext().index;
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(!ctx_r2.readonly ? ctx_r2.removeOption($event, i_r8) : "");
+    });
+    \u0275\u0275template(1, AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_Template, 3, 0, "ng-container", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const option_r10 = \u0275\u0275nextContext().$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("label", ctx_r2.getOptionLabel(option_r10))("removable", true);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.removeIconTemplate && !ctx_r2._removeIconTemplate);
+  }
+}
+function AutoComplete_ul_4_li_2_span_4_1_ng_template_0_Template(rf, ctx) {
+}
+function AutoComplete_ul_4_li_2_span_4_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AutoComplete_ul_4_li_2_span_4_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function AutoComplete_ul_4_li_2_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275template(1, AutoComplete_ul_4_li_2_span_4_1_Template, 1, 0, null, 30);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const i_r8 = \u0275\u0275nextContext().index;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.removeIconTemplate || ctx_r2._removeIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c21, ctx_r2.removeOption.bind(ctx_r2), i_r8));
+  }
+}
+function AutoComplete_ul_4_li_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 29, 5);
+    \u0275\u0275template(2, AutoComplete_ul_4_li_2_ng_container_2_Template, 1, 0, "ng-container", 30)(3, AutoComplete_ul_4_li_2_p_chip_3_Template, 2, 3, "p-chip", 31)(4, AutoComplete_ul_4_li_2_span_4_Template, 2, 5, "span", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const option_r10 = ctx.$implicit;
+    const i_r8 = ctx.index;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(10, _c192, ctx_r2.focusedMultipleOptionIndex() === i_r8));
+    \u0275\u0275attribute("id", ctx_r2.id + "_multiple_option_" + i_r8)("aria-label", ctx_r2.getOptionLabel(option_r10))("aria-setsize", ctx_r2.modelValue().length)("aria-posinset", i_r8 + 1)("aria-selected", true);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.selectedItemTemplate || ctx_r2._selectedItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(12, _c20, option_r10));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.selectedItemTemplate && !ctx_r2._selectedItemTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.removeIconTemplate || ctx_r2._removeIconTemplate);
+  }
+}
+function AutoComplete_ul_4_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "ul", 25, 4);
+    \u0275\u0275listener("focus", function AutoComplete_ul_4_Template_ul_focus_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onMultipleContainerFocus($event));
+    })("blur", function AutoComplete_ul_4_Template_ul_blur_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onMultipleContainerBlur($event));
+    })("keydown", function AutoComplete_ul_4_Template_ul_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onMultipleContainerKeyDown($event));
+    });
+    \u0275\u0275template(2, AutoComplete_ul_4_li_2_Template, 5, 14, "li", 26);
+    \u0275\u0275elementStart(3, "li", 27)(4, "input", 28, 3);
+    \u0275\u0275listener("input", function AutoComplete_ul_4_Template_input_input_4_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInput($event));
+    })("keydown", function AutoComplete_ul_4_Template_input_keydown_4_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onKeyDown($event));
+    })("change", function AutoComplete_ul_4_Template_input_change_4_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputChange($event));
+    })("focus", function AutoComplete_ul_4_Template_input_focus_4_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputFocus($event));
+    })("blur", function AutoComplete_ul_4_Template_input_blur_4_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputBlur($event));
+    })("paste", function AutoComplete_ul_4_Template_input_paste_4_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputPaste($event));
+    })("keyup", function AutoComplete_ul_4_Template_input_keyup_4_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onInputKeyUp($event));
+    });
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    let tmp_28_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngClass", ctx_r2.inputMultipleClass)("tabindex", -1);
+    \u0275\u0275attribute("aria-orientation", "horizontal")("aria-activedescendant", ctx_r2.focused ? ctx_r2.focusedMultipleOptionId : void 0);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r2.modelValue());
+    \u0275\u0275advance(2);
+    \u0275\u0275classMap(ctx_r2.inputStyleClass);
+    \u0275\u0275property("pAutoFocus", ctx_r2.autofocus)("ngClass", ctx_r2.inputClass)("ngStyle", ctx_r2.inputStyle)("autocomplete", ctx_r2.autocomplete)("required", ctx_r2.required)("tabindex", !ctx_r2.disabled ? ctx_r2.tabindex : -1)("readonly", ctx_r2.readonly)("disabled", ctx_r2.disabled);
+    \u0275\u0275attribute("type", ctx_r2.type)("id", ctx_r2.inputId)("name", ctx_r2.name)("placeholder", !ctx_r2.filled ? ctx_r2.placeholder : null)("maxlength", ctx_r2.maxlength)("aria-label", ctx_r2.ariaLabel)("aria-labelledby", ctx_r2.ariaLabelledBy)("aria-required", ctx_r2.required)("aria-expanded", (tmp_28_0 = ctx_r2.overlayVisible) !== null && tmp_28_0 !== void 0 ? tmp_28_0 : false)("aria-controls", ctx_r2.overlayVisible ? ctx_r2.id + "_list" : null)("aria-activedescendant", ctx_r2.focused ? ctx_r2.focusedOptionId : void 0);
+  }
+}
+function AutoComplete_ng_container_5_SpinnerIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "SpinnerIcon", 37);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("styleClass", "p-autocomplete-loader")("spin", true);
+    \u0275\u0275attribute("aria-hidden", true);
+  }
+}
+function AutoComplete_ng_container_5_span_2_1_ng_template_0_Template(rf, ctx) {
+}
+function AutoComplete_ng_container_5_span_2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AutoComplete_ng_container_5_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function AutoComplete_ng_container_5_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 38);
+    \u0275\u0275template(1, AutoComplete_ng_container_5_span_2_1_Template, 1, 0, null, 24);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275attribute("aria-hidden", true);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.loadingIconTemplate || ctx_r2._loadingIconTemplate);
+  }
+}
+function AutoComplete_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, AutoComplete_ng_container_5_SpinnerIcon_1_Template, 1, 3, "SpinnerIcon", 35)(2, AutoComplete_ng_container_5_span_2_Template, 2, 2, "span", 36);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.loadingIconTemplate && !ctx_r2._loadingIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.loadingIconTemplate || ctx_r2._loadingIconTemplate);
+  }
+}
+function AutoComplete_button_6_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "span", 41);
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("ngClass", ctx_r2.dropdownIcon);
+    \u0275\u0275attribute("aria-hidden", true);
+  }
+}
+function AutoComplete_button_6_ng_container_3_ChevronDownIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "ChevronDownIcon");
+  }
+}
+function AutoComplete_button_6_ng_container_3_2_ng_template_0_Template(rf, ctx) {
+}
+function AutoComplete_button_6_ng_container_3_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AutoComplete_button_6_ng_container_3_2_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function AutoComplete_button_6_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, AutoComplete_button_6_ng_container_3_ChevronDownIcon_1_Template, 1, 0, "ChevronDownIcon", 15)(2, AutoComplete_button_6_ng_container_3_2_Template, 1, 0, null, 24);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.dropdownIconTemplate && !ctx_r2._dropdownIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.dropdownIconTemplate || ctx_r2._dropdownIconTemplate);
+  }
+}
+function AutoComplete_button_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r11 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 39, 7);
+    \u0275\u0275listener("click", function AutoComplete_button_6_Template_button_click_0_listener($event) {
+      \u0275\u0275restoreView(_r11);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.handleDropdownClick($event));
+    });
+    \u0275\u0275template(2, AutoComplete_button_6_span_2_Template, 1, 2, "span", 40)(3, AutoComplete_button_6_ng_container_3_Template, 3, 2, "ng-container", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("disabled", ctx_r2.disabled);
+    \u0275\u0275attribute("aria-label", ctx_r2.dropdownAriaLabel)("tabindex", ctx_r2.tabindex);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r2.dropdownIcon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.dropdownIcon);
+  }
+}
+function AutoComplete_ng_template_9_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ng_template_9_p_scroller_3_ng_template_2_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ng_template_9_p_scroller_3_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AutoComplete_ng_template_9_p_scroller_3_ng_template_2_ng_container_0_Template, 1, 0, "ng-container", 30);
+  }
+  if (rf & 2) {
+    const items_r13 = ctx.$implicit;
+    const scrollerOptions_r14 = ctx.options;
+    \u0275\u0275nextContext(2);
+    const buildInItems_r15 = \u0275\u0275reference(6);
+    \u0275\u0275property("ngTemplateOutlet", buildInItems_r15)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c232, items_r13, scrollerOptions_r14));
+  }
+}
+function AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_ng_container_0_Template, 1, 0, "ng-container", 30);
+  }
+  if (rf & 2) {
+    const scrollerOptions_r16 = ctx.options;
+    const ctx_r2 = \u0275\u0275nextContext(4);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.loaderTemplate || ctx_r2._loaderTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c242, scrollerOptions_r16));
+  }
+}
+function AutoComplete_ng_template_9_p_scroller_3_ng_container_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_Template, 1, 4, "ng-template", null, 10, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementContainerEnd();
+  }
+}
+function AutoComplete_ng_template_9_p_scroller_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r12 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-scroller", 46, 9);
+    \u0275\u0275listener("onLazyLoad", function AutoComplete_ng_template_9_p_scroller_3_Template_p_scroller_onLazyLoad_0_listener($event) {
+      \u0275\u0275restoreView(_r12);
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.onLazyLoad.emit($event));
+    });
+    \u0275\u0275template(2, AutoComplete_ng_template_9_p_scroller_3_ng_template_2_Template, 1, 5, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(4, AutoComplete_ng_template_9_p_scroller_3_ng_container_4_Template, 3, 0, "ng-container", 15);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275styleMap(\u0275\u0275pureFunction1(8, _c222, ctx_r2.scrollHeight));
+    \u0275\u0275property("items", ctx_r2.visibleOptions())("itemSize", ctx_r2.virtualScrollItemSize || ctx_r2._itemSize)("autoSize", true)("lazy", ctx_r2.lazy)("options", ctx_r2.virtualScrollOptions);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r2.loaderTemplate || ctx_r2._loaderTemplate);
+  }
+}
+function AutoComplete_ng_template_9_ng_container_4_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ng_template_9_ng_container_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, AutoComplete_ng_template_9_ng_container_4_ng_container_1_Template, 1, 0, "ng-container", 30);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275nextContext();
+    const buildInItems_r15 = \u0275\u0275reference(6);
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", buildInItems_r15)("ngTemplateOutletContext", \u0275\u0275pureFunction2(3, _c232, ctx_r2.visibleOptions(), \u0275\u0275pureFunction0(2, _c25)));
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const option_r17 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r2.getOptionGroupLabel(option_r17.optionGroup));
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "li", 50);
+    \u0275\u0275template(2, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_span_2_Template, 2, 1, "span", 15)(3, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_ng_container_3_Template, 1, 0, "ng-container", 30);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r17 = \u0275\u0275nextContext();
+    const option_r17 = ctx_r17.$implicit;
+    const i_r19 = ctx_r17.index;
+    const scrollerOptions_r20 = \u0275\u0275nextContext().options;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(5, _c222, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275attribute("id", ctx_r2.id + "_" + ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.groupTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.groupTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(7, _c20, option_r17.optionGroup));
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const option_r17 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r2.getOptionLabel(option_r17));
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r21 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "li", 51);
+    \u0275\u0275listener("click", function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template_li_click_1_listener($event) {
+      \u0275\u0275restoreView(_r21);
+      const option_r17 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.onOptionSelect($event, option_r17));
+    })("mouseenter", function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template_li_mouseenter_1_listener($event) {
+      \u0275\u0275restoreView(_r21);
+      const i_r19 = \u0275\u0275nextContext().index;
+      const scrollerOptions_r20 = \u0275\u0275nextContext().options;
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.onOptionMouseEnter($event, ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20)));
+    });
+    \u0275\u0275template(2, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_span_2_Template, 2, 1, "span", 15)(3, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_ng_container_3_Template, 1, 0, "ng-container", 30);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r17 = \u0275\u0275nextContext();
+    const option_r17 = ctx_r17.$implicit;
+    const i_r19 = ctx_r17.index;
+    const scrollerOptions_r20 = \u0275\u0275nextContext().options;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(12, _c222, scrollerOptions_r20.itemSize + "px"))("ngClass", ctx_r2.optionClass(option_r17, i_r19, scrollerOptions_r20));
+    \u0275\u0275attribute("id", ctx_r2.id + "_" + ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20))("aria-label", ctx_r2.getOptionLabel(option_r17))("aria-selected", ctx_r2.isSelected(option_r17))("aria-disabled", ctx_r2.isOptionDisabled(option_r17))("data-p-focused", ctx_r2.focusedOptionIndex() === ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20))("aria-setsize", ctx_r2.ariaSetSize)("aria-posinset", ctx_r2.getAriaPosInset(ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20)));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.itemTemplate && !ctx_r2._itemTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.itemTemplate || ctx_r2._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(14, _c26, option_r17, scrollerOptions_r20.getOptions ? scrollerOptions_r20.getOptions(i_r19) : i_r19));
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_Template, 4, 9, "ng-container", 15)(1, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template, 4, 17, "ng-container", 15);
+  }
+  if (rf & 2) {
+    const option_r17 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275property("ngIf", ctx_r2.isOptionGroup(option_r17));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.isOptionGroup(option_r17));
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(4);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r2.searchResultMessageText, " ");
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0, null, 12);
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_li_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 52);
+    \u0275\u0275template(1, AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_1_Template, 2, 1, "ng-container", 53)(2, AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_2_Template, 2, 0, "ng-container", 24);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const scrollerOptions_r20 = \u0275\u0275nextContext().options;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(4, _c222, scrollerOptions_r20.itemSize + "px"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.emptyTemplate && !ctx_r2._emptyTemplate)("ngIfElse", ctx_r2.empty);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.emptyTemplate || ctx_r2._emptyTemplate);
+  }
+}
+function AutoComplete_ng_template_9_ng_template_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "ul", 47, 11);
+    \u0275\u0275template(2, AutoComplete_ng_template_9_ng_template_5_ng_template_2_Template, 2, 2, "ng-template", 48)(3, AutoComplete_ng_template_9_ng_template_5_li_3_Template, 3, 6, "li", 49);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const items_r22 = ctx.$implicit;
+    const scrollerOptions_r20 = ctx.options;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275styleMap(scrollerOptions_r20.contentStyle);
+    \u0275\u0275property("ngClass", scrollerOptions_r20.contentStyleClass);
+    \u0275\u0275attribute("id", ctx_r2.id + "_list")("aria-label", ctx_r2.listLabel);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", items_r22);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !items_r22 || items_r22 && items_r22.length === 0 && ctx_r2.showEmptyMessage);
+  }
+}
+function AutoComplete_ng_template_9_ng_container_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function AutoComplete_ng_template_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 42);
+    \u0275\u0275template(1, AutoComplete_ng_template_9_ng_container_1_Template, 1, 0, "ng-container", 24);
+    \u0275\u0275elementStart(2, "div", 43);
+    \u0275\u0275template(3, AutoComplete_ng_template_9_p_scroller_3_Template, 5, 10, "p-scroller", 44)(4, AutoComplete_ng_template_9_ng_container_4_Template, 2, 6, "ng-container", 15);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, AutoComplete_ng_template_9_ng_template_5_Template, 4, 7, "ng-template", null, 8, \u0275\u0275templateRefExtractor)(7, AutoComplete_ng_template_9_ng_container_7_Template, 1, 0, "ng-container", 24);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "span", 45);
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r2.panelStyleClass);
+    \u0275\u0275property("ngClass", ctx_r2.panelClass)("ngStyle", ctx_r2.panelStyle);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.headerTemplate || ctx_r2._headerTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275styleProp("max-height", ctx_r2.virtualScroll ? "auto" : ctx_r2.scrollHeight);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.virtualScroll);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.virtualScroll);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r2.footerTemplate || ctx_r2._footerTemplate);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", ctx_r2.selectedMessageText, " ");
+  }
+}
+var theme7 = ({
+  dt
+}) => `
+.p-autocomplete {
+    display: inline-flex;
+}
+
+.p-autocomplete-loader {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+    inset-inline-end: ${dt("autocomplete.padding.x")};
+}
+
+.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-loader {
+    inset-inline-end: calc(${dt("autocomplete.dropdown.width")} + ${dt("autocomplete.padding.x")});
+}
+
+.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-input {
+    flex: 1 1 auto;
+    width: 1%;
+}
+
+.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-input,
+.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-input-multiple {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+}
+
+.p-autocomplete-dropdown {
+    cursor: pointer;
+    display: inline-flex;
+    user-select: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: ${dt("autocomplete.dropdown.width")};
+    border-start-end-radius: ${dt("autocomplete.dropdown.border.radius")};
+    border-end-end-radius: ${dt("autocomplete.dropdown.border.radius")};
+    background: ${dt("autocomplete.dropdown.background")};
+    border: 1px solid ${dt("autocomplete.dropdown.border.color")};
+    border-inline-start: 0 none;
+    color: ${dt("autocomplete.dropdown.color")};
+    transition: background ${dt("autocomplete.transition.duration")}, color ${dt("autocomplete.transition.duration")}, border-color ${dt("autocomplete.transition.duration")}, outline-color ${dt("autocomplete.transition.duration")}, box-shadow ${dt("autocomplete.transition.duration")};
+    outline-color: transparent;
+}
+
+.p-autocomplete-dropdown:not(:disabled):hover {
+    background: ${dt("autocomplete.dropdown.hover.background")};
+    border-color: ${dt("autocomplete.dropdown.hover.border.color")};
+    color: ${dt("autocomplete.dropdown.hover.color")};
+}
+
+.p-autocomplete-dropdown:not(:disabled):active {
+    background: ${dt("autocomplete.dropdown.active.background")};
+    border-color: ${dt("autocomplete.dropdown.active.border.color")};
+    color: ${dt("autocomplete.dropdown.active.color")};
+}
+
+.p-autocomplete-dropdown:focus-visible {
+    box-shadow: ${dt("autocomplete.dropdown.focus.ring.shadow")};
+    outline: ${dt("autocomplete.dropdown.focus.ring.width")} ${dt("autocomplete.dropdown.focus.ring.style")} ${dt("autocomplete.dropdown.focus.ring.color")};
+    outline-offset: ${dt("autocomplete.dropdown.focus.ring.offset")};
+}
+
+.p-autocomplete .p-autocomplete-overlay {
+    min-width: 100%;
+}
+
+.p-autocomplete-overlay {
+    background: ${dt("autocomplete.overlay.background")};
+    color: ${dt("autocomplete.overlay.color")};
+    border: 1px solid ${dt("autocomplete.overlay.border.color")};
+    border-radius: ${dt("autocomplete.overlay.border.radius")};
+    box-shadow: ${dt("autocomplete.overlay.shadow")};
+}
+
+.p-autocomplete-list-container {
+    overflow: auto;
+}
+
+.p-autocomplete-list {
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: ${dt("autocomplete.list.gap")};
+    padding: ${dt("autocomplete.list.padding")};
+}
+
+.p-autocomplete-option {
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: ${dt("autocomplete.option.padding")};
+    border: 0 none;
+    color: ${dt("autocomplete.option.color")};
+    background: transparent;
+    transition: background ${dt("autocomplete.transition.duration")}, color ${dt("autocomplete.transition.duration")}, border-color ${dt("autocomplete.transition.duration")};
+    border-radius: ${dt("autocomplete.option.border.radius")};
+}
+
+.p-autocomplete-option:not(.p-autocomplete-option-selected):not(.p-disabled).p-focus {
+    background: ${dt("autocomplete.option.focus.background")};
+    color: ${dt("autocomplete.option.focus.color")};
+}
+
+.p-autocomplete-option-selected {
+    background: ${dt("autocomplete.option.selected.background")};
+    color: ${dt("autocomplete.option.selected.color")};
+}
+
+.p-autocomplete-option-selected.p-focus {
+    background: ${dt("autocomplete.option.selected.focus.background")};
+    color: ${dt("autocomplete.option.selected.focus.color")};
+}
+
+.p-autocomplete-option-group {
+    margin: 0;
+    padding: ${dt("autocomplete.option.group.padding")};
+    color: ${dt("autocomplete.option.group.color")};
+    background: ${dt("autocomplete.option.group.background")};
+    font-weight: ${dt("autocomplete.option.group.font.weight")};
+}
+
+.p-autocomplete-input-multiple {
+    margin: 0;
+    list-style-type: none;
+    cursor: text;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: calc(${dt("autocomplete.padding.y")} / 2) ${dt("autocomplete.padding.x")};
+    gap: calc(${dt("autocomplete.padding.y")} / 2);
+    color: ${dt("autocomplete.color")};
+    background: ${dt("autocomplete.background")};
+    border: 1px solid ${dt("autocomplete.border.color")};
+    border-radius: ${dt("autocomplete.border.radius")};
+    width: 100%;
+    transition: background ${dt("autocomplete.transition.duration")}, color ${dt("autocomplete.transition.duration")}, border-color ${dt("autocomplete.transition.duration")}, outline-color ${dt("autocomplete.transition.duration")}, box-shadow ${dt("autocomplete.transition.duration")};
+    outline-color: transparent;
+    box-shadow: ${dt("autocomplete.shadow")};
+}
+
+.p-autocomplete:not(.p-disabled):hover .p-autocomplete-input-multiple {
+    border-color: ${dt("autocomplete.hover.border.color")};
+}
+
+.p-autocomplete:not(.p-disabled).p-focus .p-autocomplete-input-multiple {
+    border-color: ${dt("autocomplete.focus.border.color")};
+    box-shadow: ${dt("autocomplete.focus.ring.shadow")};
+    outline: ${dt("autocomplete.focus.ring.width")} ${dt("autocomplete.focus.ring.style")} ${dt("autocomplete.focus.ring.color")};
+    outline-offset: ${dt("autocomplete.focus.ring.offset")};
+}
+
+.p-autocomplete.p-invalid .p-autocomplete-input-multiple {
+    border-color: ${dt("autocomplete.invalid.border.color")};
+}
+
+.p-variant-filled.p-autocomplete-input-multiple {
+    background: ${dt("autocomplete.filled.background")};
+}
+
+.p-autocomplete:not(.p-disabled):hover .p-variant-filled.p-autocomplete-input-multiple {
+    background: ${dt("autocomplete.filled.hover.background")};
+}
+
+.p-autocomplete:not(.p-disabled).p-focus .p-variant-filled.p-autocomplete-input-multiple  {
+    background: ${dt("autocomplete.filled.focus.background")};
+}
+
+.p-autocomplete.p-disabled {
+    opacity: 1;
+}
+
+.p-autocomplete.p-disabled .p-autocomplete-input-multiple {
+    opacity: 1;
+    background: ${dt("autocomplete.disabled.background")};
+    color: ${dt("autocomplete.disabled.color")};
+}
+
+.p-autocomplete-chip.p-chip {
+    padding-block-start: calc(${dt("autocomplete.padding.y")} / 2);
+    padding-block-end: calc(${dt("autocomplete.padding.y")} / 2);
+    border-radius: ${dt("autocomplete.chip.border.radius")};
+}
+
+.p-autocomplete-input-multiple:has(.p-autocomplete-chip) {
+    padding-inline-start: calc(${dt("autocomplete.padding.y")} / 2);
+    padding-inline-end: calc(${dt("autocomplete.padding.y")} / 2);
+}
+
+.p-autocomplete-chip-item.p-focus .p-autocomplete-chip {
+    background: ${dt("autocomplete.chip.focus.background")};
+    color: ${dt("autocomplete.chip.focus.color")};
+}
+
+.p-autocomplete-input-chip {
+    flex: 1 1 auto;
+    display: inline-flex;
+    padding-block-start: calc(${dt("autocomplete.padding.y")} / 2);
+    padding-block-end: calc(${dt("autocomplete.padding.y")} / 2);
+}
+
+.p-autocomplete-input-chip input {
+    border: 0 none;
+    outline: 0 none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-size: 1rem;
+    color: inherit;
+}
+
+.p-autocomplete-input-chip input::placeholder {
+    color: ${dt("autocomplete.placeholder.color")};
+}
+
+.p-autocomplete-empty-message {
+    padding: ${dt("autocomplete.empty.message.padding")};
+}
+
+.p-autocomplete-fluid {
+    display: flex;
+}
+
+.p-autocomplete-fluid:has(.p-autocomplete-dropdown) .p-autocomplete-input {
+    width: 1%;
+}
+
+.p-autocomplete:has(.p-inputtext-sm) .p-autocomplete-dropdown {
+    width: ${dt("autocomplete.dropdown.sm.width")};
+}
+
+.p-autocomplete:has(.p-inputtext-sm) .p-autocomplete-dropdown .p-icon {
+    font-size: ${dt("form.field.sm.font.size")};
+    width: ${dt("form.field.sm.font.size")};
+    height: ${dt("form.field.sm.font.size")};
+}
+
+.p-autocomplete:has(.p-inputtext-lg) .p-autocomplete-dropdown {
+    width: ${dt("autocomplete.dropdown.lg.width")};
+}
+
+.p-autocomplete:has(.p-inputtext-lg) .p-autocomplete-dropdown .p-icon {
+    font-size: ${dt("form.field.lg.font.size")};
+    width: ${dt("form.field.lg.font.size")};
+    height: ${dt("form.field.lg.font.size")};
+}
+
+.p-autocomplete-clear-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+    cursor: pointer;
+    right: ${dt("autocomplete.padding.x")};
+    color: ${dt("autocomplete.dropdown.color")};
+}
+
+.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-clear-icon {
+    right: calc(${dt("autocomplete.padding.x")} + ${dt("autocomplete.dropdown.width")});
+}
+p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input,
+p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input-multiple,
+p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input,
+p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input-multiple
+p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input,
+p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input-multiple {
+    border-color: ${dt("autocomplete.invalid.border.color")};
+}
+p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input:enabled:focus,
+p-autoComplete.ng-invalid.ng-dirty:not(.p-disabled).p-focus .p-autocomplete-input-multiple,
+p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input:enabled:focus,
+p-auto-complete.ng-invalid.ng-dirty:not(.p-disabled).p-focus .p-autocomplete-input-multiple,
+p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input:enabled:focus,
+p-autocomplete.ng-invalid.ng-dirty:not(.p-disabled).p-focus .p-autocomplete-input-multiple {
+    border-color: ${dt("autocomplete.focus.border.color")};
+}
+p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input-chip input::placeholder,
+p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input-chip input::placeholder,
+p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input-chip input::placeholder {
+    color: ${dt("autocomplete.invalid.placeholder.color")};
+}
+
+p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input::placeholder,
+p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input::placeholder,
+p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input::placeholder {
+    color: ${dt("autocomplete.invalid.placeholder.color")};
+}`;
+var inlineStyles2 = {
+  root: {
+    position: "relative"
+  }
+};
+var classes7 = {
+  root: ({
+    instance
+  }) => ({
+    "p-autocomplete p-component p-inputwrapper": true,
+    "p-disabled": instance.disabled,
+    "p-focus": instance.focused,
+    "p-inputwrapper-filled": instance.filled,
+    "p-inputwrapper-focus": instance.focused && !instance.disabled || instance.autofocus || instance.overlayVisible,
+    "p-autocomplete-open": instance.overlayVisible,
+    "p-autocomplete-clearable": instance.showClear && !instance.disabled,
+    // 'p-invalid': instance.invalid,
+    "p-autocomplete-fluid": instance.hasFluid
+  }),
+  pcInput: "p-autocomplete-input",
+  inputMultiple: ({
+    instance
+  }) => ({
+    "p-autocomplete-input-multiple": true,
+    "p-variant-filled": (instance.variant ?? (instance.config.inputStyle() || instance.config.inputVariant())) === "filled"
+  }),
+  chipItem: ({
+    instance,
+    i
+  }) => ["p-autocomplete-chip-item", {
+    "p-focus": instance.focusedMultipleOptionIndex === i
+  }],
+  pcChip: "p-autocomplete-chip",
+  chipIcon: "p-autocomplete-chip-icon",
+  inputChip: "p-autocomplete-input-chip",
+  loader: "p-autocomplete-loader",
+  dropdown: "p-autocomplete-dropdown",
+  overlay: "p-autocomplete-overlay p-component",
+  list: "p-autocomplete-list",
+  optionGroup: "p-autocomplete-option-group",
+  option: ({
+    instance,
+    option,
+    i,
+    getItemOptions
+  }) => ({
+    "p-autocomplete-option": true,
+    "p-autocomplete-option-selected": instance.isSelected(option),
+    "p-focus": instance.focusedOptionIndex === instance.getOptionIndex(i, getItemOptions),
+    "p-disabled": instance.isOptionDisabled(option)
+  }),
+  emptyMessage: "p-autocomplete-empty-message"
+};
+var AutoCompleteStyle = class _AutoCompleteStyle extends BaseStyle {
+  name = "autocomplete";
+  theme = theme7;
+  classes = classes7;
+  inlineStyles = inlineStyles2;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275AutoCompleteStyle_BaseFactory;
+    return function AutoCompleteStyle_Factory(__ngFactoryType__) {
+      return (\u0275AutoCompleteStyle_BaseFactory || (\u0275AutoCompleteStyle_BaseFactory = \u0275\u0275getInheritedFactory(_AutoCompleteStyle)))(__ngFactoryType__ || _AutoCompleteStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _AutoCompleteStyle,
+    factory: _AutoCompleteStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AutoCompleteStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var AutoCompleteClasses;
+(function(AutoCompleteClasses2) {
+  AutoCompleteClasses2["root"] = "p-autocomplete";
+  AutoCompleteClasses2["pcInput"] = "p-autocomplete-input";
+  AutoCompleteClasses2["inputMultiple"] = "p-autocomplete-input-multiple";
+  AutoCompleteClasses2["chipItem"] = "p-autocomplete-chip-item";
+  AutoCompleteClasses2["pcChip"] = "p-autocomplete-chip";
+  AutoCompleteClasses2["chipIcon"] = "p-autocomplete-chip-icon";
+  AutoCompleteClasses2["inputChip"] = "p-autocomplete-input-chip";
+  AutoCompleteClasses2["loader"] = "p-autocomplete-loader";
+  AutoCompleteClasses2["dropdown"] = "p-autocomplete-dropdown";
+  AutoCompleteClasses2["panel"] = "p-autocomplete-overlay";
+  AutoCompleteClasses2["list"] = "p-autocomplete-list";
+  AutoCompleteClasses2["optionGroup"] = "p-autocomplete-option-group";
+  AutoCompleteClasses2["option"] = "p-autocomplete-option";
+  AutoCompleteClasses2["emptyMessage"] = "p-autocomplete-empty-message";
+})(AutoCompleteClasses || (AutoCompleteClasses = {}));
+var AUTOCOMPLETE_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => AutoComplete),
+  multi: true
+};
+var AutoComplete = class _AutoComplete extends BaseComponent {
+  overlayService;
+  zone;
+  /**
+   * Minimum number of characters to initiate a search.
+   * @group Props
+   */
+  minLength = 1;
+  /**
+   * Delay between keystrokes to wait before sending a query.
+   * @group Props
+   */
+  delay = 300;
+  /**
+   * Inline style of the component.
+   * @group Props
+   */
+  style;
+  /**
+   * Inline style of the overlay panel element.
+   * @group Props
+   */
+  panelStyle;
+  /**
+   * Style class of the component.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Style class of the overlay panel element.
+   * @group Props
+   */
+  panelStyleClass;
+  /**
+   * Inline style of the input field.
+   * @group Props
+   */
+  inputStyle;
+  /**
+   * Identifier of the focus input to match a label defined for the component.
+   * @group Props
+   */
+  inputId;
+  /**
+   * Inline style of the input field.
+   * @group Props
+   */
+  inputStyleClass;
+  /**
+   * Hint text for the input field.
+   * @group Props
+   */
+  placeholder;
+  /**
+   * When present, it specifies that the input cannot be typed.
+   * @group Props
+   */
+  readonly;
+  /**
+   * When present, it specifies that the component should be disabled.
+   * @group Props
+   */
+  disabled;
+  /**
+   * Maximum height of the suggestions panel.
+   * @group Props
+   */
+  scrollHeight = "200px";
+  /**
+   * Defines if data is loaded and interacted with in lazy manner.
+   * @group Props
+   */
+  lazy = false;
+  /**
+   * Whether the data should be loaded on demand during scroll.
+   * @group Props
+   */
+  virtualScroll;
+  /**
+   * Height of an item in the list for VirtualScrolling.
+   * @group Props
+   */
+  virtualScrollItemSize;
+  /**
+   * Whether to use the scroller feature. The properties of scroller component can be used like an object in it.
+   * @group Props
+   */
+  virtualScrollOptions;
+  /**
+   * Maximum number of character allows in the input field.
+   * @group Props
+   */
+  maxlength;
+  /**
+   * Name of the input element.
+   * @group Props
+   */
+  name;
+  /**
+   * When present, it specifies that an input field must be filled out before submitting the form.
+   * @group Props
+   */
+  required;
+  /**
+   * Defines the size of the component.
+   * @group Props
+   */
+  size;
+  /**
+   * Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
+   * @group Props
+   */
+  appendTo;
+  /**
+   * When enabled, highlights the first item in the list by default.
+   * @group Props
+   */
+  autoHighlight;
+  /**
+   * When present, autocomplete clears the manual input if it does not match of the suggestions to force only accepting values from the suggestions.
+   * @group Props
+   */
+  forceSelection;
+  /**
+   * Type of the input, defaults to "text".
+   * @group Props
+   */
+  type = "text";
+  /**
+   * Whether to automatically manage layering.
+   * @group Props
+   */
+  autoZIndex = true;
+  /**
+   * Base zIndex value to use in layering.
+   * @group Props
+   */
+  baseZIndex = 0;
+  /**
+   * Defines a string that labels the input for accessibility.
+   * @group Props
+   */
+  ariaLabel;
+  /**
+   * Defines a string that labels the dropdown button for accessibility.
+   * @group Props
+   */
+  dropdownAriaLabel;
+  /**
+   * Specifies one or more IDs in the DOM that labels the input field.
+   * @group Props
+   */
+  ariaLabelledBy;
+  /**
+   * Icon class of the dropdown icon.
+   * @group Props
+   */
+  dropdownIcon;
+  /**
+   * Ensures uniqueness of selected items on multiple mode.
+   * @group Props
+   */
+  unique = true;
+  /**
+   * Whether to display options as grouped when nested options are provided.
+   * @group Props
+   */
+  group;
+  /**
+   * Whether to run a query when input receives focus.
+   * @group Props
+   */
+  completeOnFocus = false;
+  /**
+   * When enabled, a clear icon is displayed to clear the value.
+   * @group Props
+   */
+  showClear = false;
+  /**
+   * Field of a suggested object to resolve and display.
+   * @group Props
+   * @deprecated use optionLabel property instead
+   */
+  field;
+  /**
+   * Displays a button next to the input field when enabled.
+   * @group Props
+   */
+  dropdown;
+  /**
+   * Whether to show the empty message or not.
+   * @group Props
+   */
+  showEmptyMessage = true;
+  /**
+   * Specifies the behavior dropdown button. Default "blank" mode sends an empty string and "current" mode sends the input value.
+   * @group Props
+   */
+  dropdownMode = "blank";
+  /**
+   * Specifies if multiple values can be selected.
+   * @group Props
+   */
+  multiple;
+  /**
+   * Index of the element in tabbing order.
+   * @group Props
+   */
+  tabindex;
+  /**
+   * A property to uniquely identify a value in options.
+   * @group Props
+   */
+  dataKey;
+  /**
+   * Text to display when there is no data. Defaults to global value in i18n translation configuration.
+   * @group Props
+   */
+  emptyMessage;
+  /**
+   * Transition options of the show animation.
+   * @group Props
+   */
+  showTransitionOptions = ".12s cubic-bezier(0, 0, 0.2, 1)";
+  /**
+   * Transition options of the hide animation.
+   * @group Props
+   */
+  hideTransitionOptions = ".1s linear";
+  /**
+   * When present, it specifies that the component should automatically get focus on load.
+   * @group Props
+   */
+  autofocus;
+  /**
+   * Used to define a string that autocomplete attribute the current element.
+   * @group Props
+   */
+  autocomplete = "off";
+  /**
+   * Name of the options field of an option group.
+   * @group Props
+   */
+  optionGroupChildren = "items";
+  /**
+   * Name of the label field of an option group.
+   * @group Props
+   */
+  optionGroupLabel = "label";
+  /**
+   * Options for the overlay element.
+   * @group Props
+   */
+  overlayOptions;
+  /**
+   * An array of suggestions to display.
+   * @group Props
+   */
+  get suggestions() {
+    return this._suggestions();
+  }
+  set suggestions(value) {
+    this._suggestions.set(value);
+    this.handleSuggestionsChange();
+  }
+  /**
+   * Element dimensions of option for virtual scrolling.
+   * @group Props
+   * @deprecated use virtualScrollItemSize property instead.
+   */
+  get itemSize() {
+    return this._itemSize;
+  }
+  set itemSize(val) {
+    this._itemSize = val;
+    console.log("The itemSize property is deprecated, use virtualScrollItemSize property instead.");
+  }
+  /**
+   * Property name or getter function to use as the label of an option.
+   * @group Props
+   */
+  optionLabel;
+  /**
+   * Property name or getter function to use as the value of an option.
+   * @group Props
+   */
+  optionValue;
+  /**
+   * Unique identifier of the component.
+   * @group Props
+   */
+  id;
+  /**
+   * Text to display when the search is active. Defaults to global value in i18n translation configuration.
+   * @group Props
+   * @defaultValue '{0} results are available'
+   */
+  searchMessage;
+  /**
+   * Text to display when filtering does not return any results. Defaults to global value in i18n translation configuration.
+   * @group Props
+   * @defaultValue 'No selected item'
+   */
+  emptySelectionMessage;
+  /**
+   * Text to be displayed in hidden accessible field when options are selected. Defaults to global value in i18n translation configuration.
+   * @group Props
+   * @defaultValue '{0} items selected'
+   */
+  selectionMessage;
+  /**
+   * Whether to focus on the first visible or selected element when the overlay panel is shown.
+   * @group Props
+   */
+  autoOptionFocus = false;
+  /**
+   * When enabled, the focused option is selected.
+   * @group Props
+   */
+  selectOnFocus;
+  /**
+   * Locale to use in searching. The default locale is the host environment's current locale.
+   * @group Props
+   */
+  searchLocale;
+  /**
+   * Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.
+   * @group Props
+   */
+  optionDisabled;
+  /**
+   * When enabled, the hovered option will be focused.
+   * @group Props
+   */
+  focusOnHover = true;
+  /**
+   * Whether typeahead is active or not.
+   * @defaultValue true
+   * @group Props
+   */
+  typeahead = true;
+  /**
+   * Specifies the input variant of the component.
+   * @group Props
+   */
+  variant;
+  /**
+   * Spans 100% width of the container when enabled.
+   * @group Props
+   */
+  fluid = false;
+  /**
+   * Callback to invoke to search for suggestions.
+   * @param {AutoCompleteCompleteEvent} event - Custom complete event.
+   * @group Emits
+   */
+  completeMethod = new EventEmitter();
+  /**
+   * Callback to invoke when a suggestion is selected.
+   * @param {AutoCompleteSelectEvent} event - custom select event.
+   * @group Emits
+   */
+  onSelect = new EventEmitter();
+  /**
+   * Callback to invoke when a selected value is removed.
+   * @param {AutoCompleteUnselectEvent} event - custom unselect event.
+   * @group Emits
+   */
+  onUnselect = new EventEmitter();
+  /**
+   * Callback to invoke when the component receives focus.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onFocus = new EventEmitter();
+  /**
+   * Callback to invoke when the component loses focus.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onBlur = new EventEmitter();
+  /**
+   * Callback to invoke to when dropdown button is clicked.
+   * @param {AutoCompleteDropdownClickEvent} event - custom dropdown click event.
+   * @group Emits
+   */
+  onDropdownClick = new EventEmitter();
+  /**
+   * Callback to invoke when clear button is clicked.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onClear = new EventEmitter();
+  /**
+   * Callback to invoke on input key up.
+   * @param {KeyboardEvent} event - Keyboard event.
+   * @group Emits
+   */
+  onKeyUp = new EventEmitter();
+  /**
+   * Callback to invoke on overlay is shown.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onShow = new EventEmitter();
+  /**
+   * Callback to invoke on overlay is hidden.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onHide = new EventEmitter();
+  /**
+   * Callback to invoke on lazy load data.
+   * @param {AutoCompleteLazyLoadEvent} event - Lazy load event.
+   * @group Emits
+   */
+  onLazyLoad = new EventEmitter();
+  containerEL;
+  inputEL;
+  multiInputEl;
+  multiContainerEL;
+  dropdownButton;
+  itemsViewChild;
+  scroller;
+  overlayViewChild;
+  _itemSize;
+  itemsWrapper;
+  /**
+   * Custom item template.
+   * @group Templates
+   */
+  itemTemplate;
+  /**
+   * Custom empty message template.
+   * @group Templates
+   */
+  emptyTemplate;
+  /**
+   * Custom header template.
+   * @group Templates
+   */
+  headerTemplate;
+  /**
+   * Custom footer template.
+   * @group Templates
+   */
+  footerTemplate;
+  /**
+   * Custom selected item template.
+   * @group Templates
+   */
+  selectedItemTemplate;
+  /**
+   * Custom group item template.
+   * @group Templates
+   */
+  groupTemplate;
+  /**
+   * Custom loader template.
+   * @group Templates
+   */
+  loaderTemplate;
+  /**
+   * Custom remove icon template.
+   * @group Templates
+   */
+  removeIconTemplate;
+  /**
+   * Custom loading icon template.
+   * @group Templates
+   */
+  loadingIconTemplate;
+  /**
+   * Custom clear icon template.
+   * @group Templates
+   */
+  clearIconTemplate;
+  /**
+   * Custom dropdown icon template.
+   * @group Templates
+   */
+  dropdownIconTemplate;
+  primeng = inject(PrimeNG);
+  value;
+  _suggestions = signal(null);
+  onModelChange = () => {
+  };
+  onModelTouched = () => {
+  };
+  timeout;
+  overlayVisible;
+  suggestionsUpdated;
+  highlightOption;
+  highlightOptionChanged;
+  focused = false;
+  _filled;
+  get filled() {
+    return this._filled;
+  }
+  set filled(value) {
+    this._filled = value;
+  }
+  loading;
+  scrollHandler;
+  listId;
+  searchTimeout;
+  dirty = false;
+  _itemTemplate;
+  _groupTemplate;
+  _selectedItemTemplate;
+  _headerTemplate;
+  _emptyTemplate;
+  _footerTemplate;
+  _loaderTemplate;
+  _removeIconTemplate;
+  _loadingIconTemplate;
+  _clearIconTemplate;
+  _dropdownIconTemplate;
+  modelValue = signal(null);
+  focusedMultipleOptionIndex = signal(-1);
+  focusedOptionIndex = signal(-1);
+  _componentStyle = inject(AutoCompleteStyle);
+  visibleOptions = computed(() => {
+    return this.group ? this.flatOptions(this._suggestions()) : this._suggestions() || [];
+  });
+  inputValue = computed(() => {
+    const modelValue = this.modelValue();
+    const selectedOption = this.optionValueSelected ? (this.suggestions || []).find((item) => resolveFieldData(item, this.optionValue) === modelValue) : modelValue;
+    if (isNotEmpty(modelValue)) {
+      if (typeof modelValue === "object" || this.optionValueSelected) {
+        const label = this.getOptionLabel(selectedOption);
+        return label != null ? label : modelValue;
+      } else {
+        return modelValue;
+      }
+    } else {
+      return "";
+    }
+  });
+  get focusedMultipleOptionId() {
+    return this.focusedMultipleOptionIndex() !== -1 ? `${this.id}_multiple_option_${this.focusedMultipleOptionIndex()}` : null;
+  }
+  get focusedOptionId() {
+    return this.focusedOptionIndex() !== -1 ? `${this.id}_${this.focusedOptionIndex()}` : null;
+  }
+  get rootClass() {
+    return this._componentStyle.classes.root({
+      instance: this
+    });
+  }
+  get inputMultipleClass() {
+    return this._componentStyle.classes.inputMultiple({
+      instance: this
+    });
+  }
+  get panelClass() {
+    return {
+      "p-autocomplete-overlay p-component": true,
+      "p-input-filled": this.config.inputStyle() === "filled" || this.config.inputVariant() === "filled",
+      "p-ripple-disabled": this.config.ripple() === false
+    };
+  }
+  get inputClass() {
+    return {
+      "p-autocomplete-input": !this.multiple,
+      "p-autocomplete-dd-input": this.dropdown
+    };
+  }
+  get searchResultMessageText() {
+    return isNotEmpty(this.visibleOptions()) && this.overlayVisible ? this.searchMessageText.replaceAll("{0}", this.visibleOptions().length) : this.emptySearchMessageText;
+  }
+  get searchMessageText() {
+    return this.searchMessage || this.config.translation.searchMessage || "";
+  }
+  get emptySearchMessageText() {
+    return this.emptyMessage || this.config.translation.emptySearchMessage || "";
+  }
+  get selectionMessageText() {
+    return this.selectionMessage || this.config.translation.selectionMessage || "";
+  }
+  get emptySelectionMessageText() {
+    return this.emptySelectionMessage || this.config.translation.emptySelectionMessage || "";
+  }
+  get selectedMessageText() {
+    return this.hasSelectedOption() ? this.selectionMessageText.replaceAll("{0}", this.multiple ? this.modelValue().length : "1") : this.emptySelectionMessageText;
+  }
+  get ariaSetSize() {
+    return this.visibleOptions().filter((option) => !this.isOptionGroup(option)).length;
+  }
+  get listLabel() {
+    return this.config.getTranslation(TranslationKeys.ARIA)["listLabel"];
+  }
+  get virtualScrollerDisabled() {
+    return !this.virtualScroll;
+  }
+  get optionValueSelected() {
+    return typeof this.modelValue() === "string" && this.optionValue;
+  }
+  chipItemClass(index) {
+    return this._componentStyle.classes.chipItem({
+      instance: this,
+      i: index
+    });
+  }
+  optionClass(option, i, scrollerOptions) {
+    return {
+      "p-autocomplete-option": true,
+      "p-autocomplete-option-selected": this.isSelected(option),
+      "p-focus": this.focusedOptionIndex() === this.getOptionIndex(i, scrollerOptions),
+      "p-disabled": this.isOptionDisabled(option)
+    };
+  }
+  constructor(overlayService, zone) {
+    super();
+    this.overlayService = overlayService;
+    this.zone = zone;
+    effect(() => {
+      this.filled = isNotEmpty(this.modelValue());
+    });
+  }
+  ngOnInit() {
+    super.ngOnInit();
+    this.id = this.id || uuid("pn_id_");
+    this.cd.detectChanges();
+  }
+  templates;
+  ngAfterContentInit() {
+    this.templates.forEach((item) => {
+      switch (item.getType()) {
+        case "item":
+          this._itemTemplate = item.template;
+          break;
+        case "group":
+          this._groupTemplate = item.template;
+          break;
+        case "selecteditem":
+          this._selectedItemTemplate = item.template;
+          break;
+        case "selectedItem":
+          this._selectedItemTemplate = item.template;
+          break;
+        case "header":
+          this._headerTemplate = item.template;
+          break;
+        case "empty":
+          this._emptyTemplate = item.template;
+          break;
+        case "footer":
+          this._footerTemplate = item.template;
+          break;
+        case "loader":
+          this._loaderTemplate = item.template;
+          break;
+        case "removetokenicon":
+          this._removeIconTemplate = item.template;
+          break;
+        case "loadingicon":
+          this._loadingIconTemplate = item.template;
+          break;
+        case "clearicon":
+          this._clearIconTemplate = item.template;
+          break;
+        case "dropdownicon":
+          this._dropdownIconTemplate = item.template;
+          break;
+        default:
+          this._itemTemplate = item.template;
+          break;
+      }
+    });
+  }
+  ngAfterViewChecked() {
+    if (this.suggestionsUpdated && this.overlayViewChild) {
+      this.zone.runOutsideAngular(() => {
+        setTimeout(() => {
+          if (this.overlayViewChild) {
+            this.overlayViewChild.alignOverlay();
+          }
+        }, 1);
+        this.suggestionsUpdated = false;
+      });
+    }
+  }
+  handleSuggestionsChange() {
+    if (this.loading) {
+      this._suggestions()?.length > 0 || this.showEmptyMessage || !!this.emptyTemplate ? this.show() : this.hide();
+      const focusedOptionIndex = this.overlayVisible && this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
+      this.focusedOptionIndex.set(focusedOptionIndex);
+      this.suggestionsUpdated = true;
+      this.loading = false;
+      this.cd.markForCheck();
+    }
+  }
+  flatOptions(options) {
+    return (options || []).reduce((result, option, index) => {
+      result.push({
+        optionGroup: option,
+        group: true,
+        index
+      });
+      const optionGroupChildren = this.getOptionGroupChildren(option);
+      optionGroupChildren && optionGroupChildren.forEach((o2) => result.push(o2));
+      return result;
+    }, []);
+  }
+  isOptionGroup(option) {
+    return this.optionGroupLabel && option.optionGroup && option.group;
+  }
+  findFirstOptionIndex() {
+    return this.visibleOptions().findIndex((option) => this.isValidOption(option));
+  }
+  findLastOptionIndex() {
+    return findLastIndex(this.visibleOptions(), (option) => this.isValidOption(option));
+  }
+  findFirstFocusedOptionIndex() {
+    const selectedIndex = this.findSelectedOptionIndex();
+    return selectedIndex < 0 ? this.findFirstOptionIndex() : selectedIndex;
+  }
+  findLastFocusedOptionIndex() {
+    const selectedIndex = this.findSelectedOptionIndex();
+    return selectedIndex < 0 ? this.findLastOptionIndex() : selectedIndex;
+  }
+  findSelectedOptionIndex() {
+    return this.hasSelectedOption() ? this.visibleOptions().findIndex((option) => this.isValidSelectedOption(option)) : -1;
+  }
+  findNextOptionIndex(index) {
+    const matchedOptionIndex = index < this.visibleOptions().length - 1 ? this.visibleOptions().slice(index + 1).findIndex((option) => this.isValidOption(option)) : -1;
+    return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : index;
+  }
+  findPrevOptionIndex(index) {
+    const matchedOptionIndex = index > 0 ? findLastIndex(this.visibleOptions().slice(0, index), (option) => this.isValidOption(option)) : -1;
+    return matchedOptionIndex > -1 ? matchedOptionIndex : index;
+  }
+  isValidSelectedOption(option) {
+    return this.isValidOption(option) && this.isSelected(option);
+  }
+  isValidOption(option) {
+    return option && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
+  }
+  isOptionDisabled(option) {
+    return this.optionDisabled ? resolveFieldData(option, this.optionDisabled) : false;
+  }
+  isSelected(option) {
+    if (this.multiple) {
+      return this.unique ? this.modelValue()?.find((model2) => equals(model2, this.getOptionValue(option), this.equalityKey())) : false;
+    }
+    return equals(this.modelValue(), this.getOptionValue(option), this.equalityKey());
+  }
+  isOptionMatched(option, value) {
+    return this.isValidOption(option) && this.getOptionLabel(option).toLocaleLowerCase(this.searchLocale) === value.toLocaleLowerCase(this.searchLocale);
+  }
+  isInputClicked(event) {
+    return event.target === this.inputEL.nativeElement;
+  }
+  isDropdownClicked(event) {
+    return this.dropdownButton?.nativeElement ? event.target === this.dropdownButton.nativeElement || this.dropdownButton.nativeElement.contains(event.target) : false;
+  }
+  equalityKey() {
+    return this.dataKey;
+  }
+  onContainerClick(event) {
+    if (this.disabled || this.loading || this.isInputClicked(event) || this.isDropdownClicked(event)) {
+      return;
+    }
+    if (!this.overlayViewChild || !this.overlayViewChild.overlayViewChild?.nativeElement.contains(event.target)) {
+      focus(this.inputEL.nativeElement);
+    }
+  }
+  handleDropdownClick(event) {
+    let query = void 0;
+    if (this.overlayVisible) {
+      this.hide(true);
+    } else {
+      focus(this.inputEL.nativeElement);
+      query = this.inputEL.nativeElement.value;
+      if (this.dropdownMode === "blank") this.search(event, "", "dropdown");
+      else if (this.dropdownMode === "current") this.search(event, query, "dropdown");
+    }
+    this.onDropdownClick.emit({
+      originalEvent: event,
+      query
+    });
+  }
+  onInput(event) {
+    if (this.typeahead) {
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
+      let query = event.target.value;
+      if (this.maxlength !== null) {
+        query = query.split("").slice(0, this.maxlength).join("");
+      }
+      if (!this.multiple && !this.forceSelection) {
+        this.updateModel(query);
+      }
+      if (query.length === 0 && !this.multiple) {
+        this.onClear.emit();
+        setTimeout(() => {
+          this.hide();
+        }, this.delay / 2);
+      } else {
+        if (query.length >= this.minLength) {
+          this.focusedOptionIndex.set(-1);
+          this.searchTimeout = setTimeout(() => {
+            this.search(event, query, "input");
+          }, this.delay);
+        } else {
+          this.hide();
+        }
+      }
+    }
+  }
+  onInputChange(event) {
+    if (this.forceSelection) {
+      let valid = false;
+      if (this.visibleOptions()) {
+        const matchedValue = this.visibleOptions().find((option) => this.isOptionMatched(option, this.inputEL.nativeElement.value || ""));
+        if (matchedValue !== void 0) {
+          valid = true;
+          !this.isSelected(matchedValue) && this.onOptionSelect(event, matchedValue);
+        }
+      }
+      if (!valid) {
+        this.inputEL.nativeElement.value = "";
+        !this.multiple && this.updateModel(null);
+      }
+    }
+  }
+  onInputFocus(event) {
+    if (this.disabled) {
+      return;
+    }
+    if (!this.dirty && this.completeOnFocus) {
+      this.search(event, event.target.value, "focus");
+    }
+    this.dirty = true;
+    this.focused = true;
+    const focusedOptionIndex = this.focusedOptionIndex() !== -1 ? this.focusedOptionIndex() : this.overlayVisible && this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
+    this.focusedOptionIndex.set(focusedOptionIndex);
+    this.overlayVisible && this.scrollInView(this.focusedOptionIndex());
+    this.onFocus.emit(event);
+  }
+  onMultipleContainerFocus(event) {
+    if (this.disabled) {
+      return;
+    }
+    this.focused = true;
+  }
+  onMultipleContainerBlur(event) {
+    this.focusedMultipleOptionIndex.set(-1);
+    this.focused = false;
+  }
+  onMultipleContainerKeyDown(event) {
+    if (this.disabled) {
+      event.preventDefault();
+      return;
+    }
+    switch (event.code) {
+      case "ArrowLeft":
+        this.onArrowLeftKeyOnMultiple(event);
+        break;
+      case "ArrowRight":
+        this.onArrowRightKeyOnMultiple(event);
+        break;
+      case "Backspace":
+        this.onBackspaceKeyOnMultiple(event);
+        break;
+      default:
+        break;
+    }
+  }
+  onInputBlur(event) {
+    this.dirty = false;
+    this.focused = false;
+    this.focusedOptionIndex.set(-1);
+    this.onModelTouched();
+    this.onBlur.emit(event);
+  }
+  onInputPaste(event) {
+    this.onKeyDown(event);
+  }
+  onInputKeyUp(event) {
+    this.onKeyUp.emit(event);
+  }
+  onKeyDown(event) {
+    if (this.disabled) {
+      event.preventDefault();
+      return;
+    }
+    switch (event.code) {
+      case "ArrowDown":
+        this.onArrowDownKey(event);
+        break;
+      case "ArrowUp":
+        this.onArrowUpKey(event);
+        break;
+      case "ArrowLeft":
+        this.onArrowLeftKey(event);
+        break;
+      case "ArrowRight":
+        this.onArrowRightKey(event);
+        break;
+      case "Home":
+        this.onHomeKey(event);
+        break;
+      case "End":
+        this.onEndKey(event);
+        break;
+      case "PageDown":
+        this.onPageDownKey(event);
+        break;
+      case "PageUp":
+        this.onPageUpKey(event);
+        break;
+      case "Enter":
+      case "NumpadEnter":
+        this.onEnterKey(event);
+        break;
+      case "Escape":
+        this.onEscapeKey(event);
+        break;
+      case "Tab":
+        this.onTabKey(event);
+        break;
+      case "Backspace":
+        this.onBackspaceKey(event);
+        break;
+      case "ShiftLeft":
+      case "ShiftRight":
+        break;
+      default:
+        break;
+    }
+  }
+  onArrowDownKey(event) {
+    if (!this.overlayVisible) {
+      return;
+    }
+    const optionIndex = this.focusedOptionIndex() !== -1 ? this.findNextOptionIndex(this.focusedOptionIndex()) : this.findFirstFocusedOptionIndex();
+    this.changeFocusedOptionIndex(event, optionIndex);
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  onArrowUpKey(event) {
+    if (!this.overlayVisible) {
+      return;
+    }
+    if (event.altKey) {
+      if (this.focusedOptionIndex() !== -1) {
+        this.onOptionSelect(event, this.visibleOptions()[this.focusedOptionIndex()]);
+      }
+      this.overlayVisible && this.hide();
+      event.preventDefault();
+    } else {
+      const optionIndex = this.focusedOptionIndex() !== -1 ? this.findPrevOptionIndex(this.focusedOptionIndex()) : this.findLastFocusedOptionIndex();
+      this.changeFocusedOptionIndex(event, optionIndex);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+  get hasFluid() {
+    const nativeElement = this.el.nativeElement;
+    const fluidComponent = nativeElement.closest("p-fluid");
+    return this.fluid || !!fluidComponent;
+  }
+  onArrowLeftKey(event) {
+    const target = event.currentTarget;
+    this.focusedOptionIndex.set(-1);
+    if (this.multiple) {
+      if (isEmpty(target.value) && this.hasSelectedOption()) {
+        focus(this.multiContainerEL.nativeElement);
+        this.focusedMultipleOptionIndex.set(this.modelValue().length);
+      } else {
+        event.stopPropagation();
+      }
+    }
+  }
+  onArrowRightKey(event) {
+    this.focusedOptionIndex.set(-1);
+    this.multiple && event.stopPropagation();
+  }
+  onHomeKey(event) {
+    const {
+      currentTarget
+    } = event;
+    const len = currentTarget.value.length;
+    currentTarget.setSelectionRange(0, event.shiftKey ? len : 0);
+    this.focusedOptionIndex.set(-1);
+    event.preventDefault();
+  }
+  onEndKey(event) {
+    const {
+      currentTarget
+    } = event;
+    const len = currentTarget.value.length;
+    currentTarget.setSelectionRange(event.shiftKey ? 0 : len, len);
+    this.focusedOptionIndex.set(-1);
+    event.preventDefault();
+  }
+  onPageDownKey(event) {
+    this.scrollInView(this.visibleOptions().length - 1);
+    event.preventDefault();
+  }
+  onPageUpKey(event) {
+    this.scrollInView(0);
+    event.preventDefault();
+  }
+  onEnterKey(event) {
+    if (!this.typeahead) {
+      if (this.multiple) {
+        this.updateModel([...this.modelValue() || [], event.target.value]);
+        this.inputEL.nativeElement.value = "";
+      }
+    }
+    if (!this.overlayVisible) {
+      this.onArrowDownKey(event);
+    } else {
+      if (this.focusedOptionIndex() !== -1) {
+        this.onOptionSelect(event, this.visibleOptions()[this.focusedOptionIndex()]);
+      }
+      this.hide();
+    }
+    event.preventDefault();
+  }
+  onEscapeKey(event) {
+    this.overlayVisible && this.hide(true);
+    event.preventDefault();
+  }
+  onTabKey(event) {
+    if (this.focusedOptionIndex() !== -1) {
+      this.onOptionSelect(event, this.visibleOptions()[this.focusedOptionIndex()]);
+    }
+    this.overlayVisible && this.hide();
+  }
+  onBackspaceKey(event) {
+    if (this.multiple) {
+      if (isNotEmpty(this.modelValue()) && !this.inputEL.nativeElement.value) {
+        const removedValue = this.modelValue()[this.modelValue().length - 1];
+        const newValue = this.modelValue().slice(0, -1);
+        this.updateModel(newValue);
+        this.onUnselect.emit({
+          originalEvent: event,
+          value: removedValue
+        });
+      }
+      event.stopPropagation();
+    }
+    if (!this.multiple && this.showClear && this.findSelectedOptionIndex() != -1) {
+      this.clear();
+    }
+  }
+  onArrowLeftKeyOnMultiple(event) {
+    const optionIndex = this.focusedMultipleOptionIndex() < 1 ? 0 : this.focusedMultipleOptionIndex() - 1;
+    this.focusedMultipleOptionIndex.set(optionIndex);
+  }
+  onArrowRightKeyOnMultiple(event) {
+    let optionIndex = this.focusedMultipleOptionIndex();
+    optionIndex++;
+    this.focusedMultipleOptionIndex.set(optionIndex);
+    if (optionIndex > this.modelValue().length - 1) {
+      this.focusedMultipleOptionIndex.set(-1);
+      focus(this.inputEL.nativeElement);
+    }
+  }
+  onBackspaceKeyOnMultiple(event) {
+    if (this.focusedMultipleOptionIndex() !== -1) {
+      this.removeOption(event, this.focusedMultipleOptionIndex());
+    }
+  }
+  onOptionSelect(event, option, isHide = true) {
+    const value = this.getOptionValue(option);
+    if (this.multiple) {
+      this.inputEL.nativeElement.value = "";
+      if (!this.isSelected(option)) {
+        this.updateModel([...this.modelValue() || [], value]);
+      }
+    } else {
+      this.updateModel(value);
+    }
+    this.onSelect.emit({
+      originalEvent: event,
+      value: option
+    });
+    isHide && this.hide(true);
+  }
+  onOptionMouseEnter(event, index) {
+    if (this.focusOnHover) {
+      this.changeFocusedOptionIndex(event, index);
+    }
+  }
+  search(event, query, source) {
+    if (query === void 0 || query === null) {
+      return;
+    }
+    if (source === "input" && query.trim().length === 0) {
+      return;
+    }
+    this.loading = true;
+    this.completeMethod.emit({
+      originalEvent: event,
+      query
+    });
+  }
+  removeOption(event, index) {
+    event.stopPropagation();
+    const removedOption = this.modelValue()[index];
+    const value = this.modelValue().filter((_, i) => i !== index);
+    this.updateModel(value);
+    this.onUnselect.emit({
+      originalEvent: event,
+      value: removedOption
+    });
+    focus(this.inputEL.nativeElement);
+  }
+  updateModel(value) {
+    this.value = value;
+    this.modelValue.set(value);
+    this.onModelChange(value);
+    this.updateInputValue();
+    this.cd.markForCheck();
+  }
+  updateInputValue() {
+    if (this.inputEL && this.inputEL.nativeElement) {
+      if (!this.multiple) {
+        this.inputEL.nativeElement.value = this.inputValue();
+      } else {
+        this.inputEL.nativeElement.value = "";
+      }
+    }
+  }
+  autoUpdateModel() {
+    if ((this.selectOnFocus || this.autoHighlight) && this.autoOptionFocus && !this.hasSelectedOption()) {
+      const focusedOptionIndex = this.findFirstFocusedOptionIndex();
+      this.focusedOptionIndex.set(focusedOptionIndex);
+      this.onOptionSelect(null, this.visibleOptions()[this.focusedOptionIndex()], false);
+    }
+  }
+  scrollInView(index = -1) {
+    const id = index !== -1 ? `${this.id}_${index}` : this.focusedOptionId;
+    if (this.itemsViewChild && this.itemsViewChild.nativeElement) {
+      const element = findSingle(this.itemsViewChild.nativeElement, `li[id="${id}"]`);
+      if (element) {
+        element.scrollIntoView && element.scrollIntoView({
+          block: "nearest",
+          inline: "nearest"
+        });
+      } else if (!this.virtualScrollerDisabled) {
+        setTimeout(() => {
+          this.virtualScroll && this.scroller?.scrollToIndex(index !== -1 ? index : this.focusedOptionIndex());
+        }, 0);
+      }
+    }
+  }
+  changeFocusedOptionIndex(event, index) {
+    if (this.focusedOptionIndex() !== index) {
+      this.focusedOptionIndex.set(index);
+      this.scrollInView();
+      if (this.selectOnFocus) {
+        this.onOptionSelect(event, this.visibleOptions()[index], false);
+      }
+    }
+  }
+  show(isFocus = false) {
+    this.dirty = true;
+    this.overlayVisible = true;
+    const focusedOptionIndex = this.focusedOptionIndex() !== -1 ? this.focusedOptionIndex() : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
+    this.focusedOptionIndex.set(focusedOptionIndex);
+    isFocus && focus(this.inputEL.nativeElement);
+    if (isFocus) {
+      focus(this.inputEL.nativeElement);
+    }
+    this.onShow.emit();
+    this.cd.markForCheck();
+  }
+  hide(isFocus = false) {
+    const _hide = () => {
+      this.dirty = isFocus;
+      this.overlayVisible = false;
+      this.focusedOptionIndex.set(-1);
+      isFocus && focus(this.inputEL.nativeElement);
+      this.onHide.emit();
+      this.cd.markForCheck();
+    };
+    setTimeout(() => {
+      _hide();
+    }, 0);
+  }
+  clear() {
+    this.updateModel(null);
+    this.inputEL.nativeElement.value = "";
+    this.onClear.emit();
+  }
+  writeValue(value) {
+    this.value = value;
+    this.modelValue.set(value);
+    this.updateInputValue();
+    this.cd.markForCheck();
+  }
+  hasSelectedOption() {
+    return isNotEmpty(this.modelValue());
+  }
+  getAriaPosInset(index) {
+    return (this.optionGroupLabel ? index - this.visibleOptions().slice(0, index).filter((option) => this.isOptionGroup(option)).length : index) + 1;
+  }
+  getOptionLabel(option) {
+    return this.field || this.optionLabel ? resolveFieldData(option, this.field || this.optionLabel) : option && option.label != void 0 ? option.label : option;
+  }
+  getOptionValue(option) {
+    return this.optionValue ? resolveFieldData(option, this.optionValue) : option && option.value != void 0 ? option.value : option;
+  }
+  getOptionIndex(index, scrollerOptions) {
+    return this.virtualScrollerDisabled ? index : scrollerOptions && scrollerOptions.getItemOptions(index)["index"];
+  }
+  getOptionGroupLabel(optionGroup) {
+    return this.optionGroupLabel ? resolveFieldData(optionGroup, this.optionGroupLabel) : optionGroup && optionGroup.label != void 0 ? optionGroup.label : optionGroup;
+  }
+  getOptionGroupChildren(optionGroup) {
+    return this.optionGroupChildren ? resolveFieldData(optionGroup, this.optionGroupChildren) : optionGroup.items;
+  }
+  registerOnChange(fn) {
+    this.onModelChange = fn;
+  }
+  registerOnTouched(fn) {
+    this.onModelTouched = fn;
+  }
+  setDisabledState(val) {
+    this.disabled = val;
+    this.cd.markForCheck();
+  }
+  onOverlayAnimationStart(event) {
+    if (event.toState === "visible") {
+      this.itemsWrapper = findSingle(this.overlayViewChild.overlayViewChild?.nativeElement, this.virtualScroll ? ".p-scroller" : ".p-autocomplete-panel");
+      if (this.virtualScroll) {
+        this.scroller?.setContentEl(this.itemsViewChild?.nativeElement);
+        this.scroller.viewInit();
+      }
+      if (this.visibleOptions() && this.visibleOptions().length) {
+        if (this.virtualScroll) {
+          const selectedIndex = this.modelValue() ? this.focusedOptionIndex() : -1;
+          if (selectedIndex !== -1) {
+            this.scroller?.scrollToIndex(selectedIndex);
+          }
+        } else {
+          let selectedListItem = findSingle(this.itemsWrapper, ".p-autocomplete-item.p-highlight");
+          if (selectedListItem) {
+            selectedListItem.scrollIntoView({
+              block: "nearest",
+              inline: "center"
+            });
+          }
+        }
+      }
+    }
+  }
+  ngOnDestroy() {
+    if (this.scrollHandler) {
+      this.scrollHandler.destroy();
+      this.scrollHandler = null;
+    }
+    super.ngOnDestroy();
+  }
+  static \u0275fac = function AutoComplete_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AutoComplete)(\u0275\u0275directiveInject(OverlayService), \u0275\u0275directiveInject(NgZone));
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _AutoComplete,
+    selectors: [["p-autoComplete"], ["p-autocomplete"], ["p-auto-complete"]],
+    contentQueries: function AutoComplete_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c010, 5);
+        \u0275\u0275contentQuery(dirIndex, _c111, 5);
+        \u0275\u0275contentQuery(dirIndex, _c24, 5);
+        \u0275\u0275contentQuery(dirIndex, _c34, 5);
+        \u0275\u0275contentQuery(dirIndex, _c44, 5);
+        \u0275\u0275contentQuery(dirIndex, _c54, 5);
+        \u0275\u0275contentQuery(dirIndex, _c64, 5);
+        \u0275\u0275contentQuery(dirIndex, _c74, 5);
+        \u0275\u0275contentQuery(dirIndex, _c84, 5);
+        \u0275\u0275contentQuery(dirIndex, _c94, 5);
+        \u0275\u0275contentQuery(dirIndex, _c104, 5);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.itemTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.emptyTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.headerTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.footerTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.selectedItemTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.groupTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.loaderTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.removeIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.loadingIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.clearIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.dropdownIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    viewQuery: function AutoComplete_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c113, 5);
+        \u0275\u0275viewQuery(_c123, 5);
+        \u0275\u0275viewQuery(_c133, 5);
+        \u0275\u0275viewQuery(_c143, 5);
+        \u0275\u0275viewQuery(_c152, 5);
+        \u0275\u0275viewQuery(_c162, 5);
+        \u0275\u0275viewQuery(_c172, 5);
+        \u0275\u0275viewQuery(_c182, 5);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.containerEL = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.inputEL = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.multiInputEl = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.multiContainerEL = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.dropdownButton = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.itemsViewChild = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.scroller = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.overlayViewChild = _t.first);
+      }
+    },
+    inputs: {
+      minLength: [2, "minLength", "minLength", numberAttribute],
+      delay: [2, "delay", "delay", numberAttribute],
+      style: "style",
+      panelStyle: "panelStyle",
+      styleClass: "styleClass",
+      panelStyleClass: "panelStyleClass",
+      inputStyle: "inputStyle",
+      inputId: "inputId",
+      inputStyleClass: "inputStyleClass",
+      placeholder: "placeholder",
+      readonly: [2, "readonly", "readonly", booleanAttribute],
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      scrollHeight: "scrollHeight",
+      lazy: [2, "lazy", "lazy", booleanAttribute],
+      virtualScroll: [2, "virtualScroll", "virtualScroll", booleanAttribute],
+      virtualScrollItemSize: [2, "virtualScrollItemSize", "virtualScrollItemSize", numberAttribute],
+      virtualScrollOptions: "virtualScrollOptions",
+      maxlength: [2, "maxlength", "maxlength", (value) => numberAttribute(value, null)],
+      name: "name",
+      required: [2, "required", "required", booleanAttribute],
+      size: "size",
+      appendTo: "appendTo",
+      autoHighlight: [2, "autoHighlight", "autoHighlight", booleanAttribute],
+      forceSelection: [2, "forceSelection", "forceSelection", booleanAttribute],
+      type: "type",
+      autoZIndex: [2, "autoZIndex", "autoZIndex", booleanAttribute],
+      baseZIndex: [2, "baseZIndex", "baseZIndex", numberAttribute],
+      ariaLabel: "ariaLabel",
+      dropdownAriaLabel: "dropdownAriaLabel",
+      ariaLabelledBy: "ariaLabelledBy",
+      dropdownIcon: "dropdownIcon",
+      unique: [2, "unique", "unique", booleanAttribute],
+      group: [2, "group", "group", booleanAttribute],
+      completeOnFocus: [2, "completeOnFocus", "completeOnFocus", booleanAttribute],
+      showClear: [2, "showClear", "showClear", booleanAttribute],
+      field: "field",
+      dropdown: [2, "dropdown", "dropdown", booleanAttribute],
+      showEmptyMessage: [2, "showEmptyMessage", "showEmptyMessage", booleanAttribute],
+      dropdownMode: "dropdownMode",
+      multiple: [2, "multiple", "multiple", booleanAttribute],
+      tabindex: [2, "tabindex", "tabindex", numberAttribute],
+      dataKey: "dataKey",
+      emptyMessage: "emptyMessage",
+      showTransitionOptions: "showTransitionOptions",
+      hideTransitionOptions: "hideTransitionOptions",
+      autofocus: [2, "autofocus", "autofocus", booleanAttribute],
+      autocomplete: "autocomplete",
+      optionGroupChildren: "optionGroupChildren",
+      optionGroupLabel: "optionGroupLabel",
+      overlayOptions: "overlayOptions",
+      suggestions: "suggestions",
+      itemSize: "itemSize",
+      optionLabel: "optionLabel",
+      optionValue: "optionValue",
+      id: "id",
+      searchMessage: "searchMessage",
+      emptySelectionMessage: "emptySelectionMessage",
+      selectionMessage: "selectionMessage",
+      autoOptionFocus: [2, "autoOptionFocus", "autoOptionFocus", booleanAttribute],
+      selectOnFocus: [2, "selectOnFocus", "selectOnFocus", booleanAttribute],
+      searchLocale: [2, "searchLocale", "searchLocale", booleanAttribute],
+      optionDisabled: "optionDisabled",
+      focusOnHover: [2, "focusOnHover", "focusOnHover", booleanAttribute],
+      typeahead: [2, "typeahead", "typeahead", booleanAttribute],
+      variant: "variant",
+      fluid: [2, "fluid", "fluid", booleanAttribute]
+    },
+    outputs: {
+      completeMethod: "completeMethod",
+      onSelect: "onSelect",
+      onUnselect: "onUnselect",
+      onFocus: "onFocus",
+      onBlur: "onBlur",
+      onDropdownClick: "onDropdownClick",
+      onClear: "onClear",
+      onKeyUp: "onKeyUp",
+      onShow: "onShow",
+      onHide: "onHide",
+      onLazyLoad: "onLazyLoad"
+    },
+    features: [\u0275\u0275ProvidersFeature([AUTOCOMPLETE_VALUE_ACCESSOR, AutoCompleteStyle]), \u0275\u0275InheritDefinitionFeature],
+    decls: 11,
+    vars: 15,
+    consts: [["container", ""], ["overlay", ""], ["content", ""], ["focusInput", ""], ["multiContainer", ""], ["token", ""], ["removeicon", ""], ["ddBtn", ""], ["buildInItems", ""], ["scroller", ""], ["loader", ""], ["items", ""], ["empty", ""], [2, "position", "relative", 3, "click", "ngClass", "ngStyle"], ["pInputText", "", "aria-autocomplete", "list", "role", "combobox", 3, "pAutoFocus", "ngClass", "ngStyle", "class", "type", "variant", "autocomplete", "required", "name", "pSize", "tabindex", "readonly", "disabled", "fluid", "input", "keydown", "change", "focus", "blur", "paste", "keyup", 4, "ngIf"], [4, "ngIf"], ["role", "listbox", 3, "ngClass", "tabindex", "focus", "blur", "keydown", 4, "ngIf"], ["type", "button", "class", "p-autocomplete-dropdown", "pRipple", "", 3, "disabled", "click", 4, "ngIf"], [3, "visibleChange", "onAnimationStart", "onHide", "visible", "options", "target", "appendTo", "showTransitionOptions", "hideTransitionOptions"], ["pInputText", "", "aria-autocomplete", "list", "role", "combobox", 3, "input", "keydown", "change", "focus", "blur", "paste", "keyup", "pAutoFocus", "ngClass", "ngStyle", "type", "variant", "autocomplete", "required", "name", "pSize", "tabindex", "readonly", "disabled", "fluid"], [3, "styleClass", "click", 4, "ngIf"], ["class", "p-autocomplete-clear-icon", 3, "click", 4, "ngIf"], [3, "click", "styleClass"], [1, "p-autocomplete-clear-icon", 3, "click"], [4, "ngTemplateOutlet"], ["role", "listbox", 3, "focus", "blur", "keydown", "ngClass", "tabindex"], ["role", "option", 3, "ngClass", 4, "ngFor", "ngForOf"], ["role", "option", 1, "p-autocomplete-input-chip"], ["role", "combobox", "aria-autocomplete", "list", 3, "input", "keydown", "change", "focus", "blur", "paste", "keyup", "pAutoFocus", "ngClass", "ngStyle", "autocomplete", "required", "tabindex", "readonly", "disabled"], ["role", "option", 3, "ngClass"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["styleClass", "p-autocomplete-chip", 3, "label", "removable", "onRemove", 4, "ngIf"], ["styleClass", "p-autocomplete-chip", 3, "onRemove", "label", "removable"], [1, "p-autocomplete-chip-icon", 3, "click"], [3, "styleClass"], [3, "styleClass", "spin", 4, "ngIf"], ["class", "p-autocomplete-loader pi-spin ", 4, "ngIf"], [3, "styleClass", "spin"], [1, "p-autocomplete-loader", "pi-spin"], ["type", "button", "pRipple", "", 1, "p-autocomplete-dropdown", 3, "click", "disabled"], [3, "ngClass", 4, "ngIf"], [3, "ngClass"], [3, "ngClass", "ngStyle"], [1, "p-autocomplete-list-container"], [3, "items", "style", "itemSize", "autoSize", "lazy", "options", "onLazyLoad", 4, "ngIf"], ["role", "status", "aria-live", "polite", 1, "p-hidden-accessible"], [3, "onLazyLoad", "items", "itemSize", "autoSize", "lazy", "options"], ["role", "listbox", 1, "p-autocomplete-list", 3, "ngClass"], ["ngFor", "", 3, "ngForOf"], ["class", "p-autocomplete-empty-message", "role", "option", 3, "ngStyle", 4, "ngIf"], ["role", "option", 1, "p-autocomplete-option-group", 3, "ngStyle"], ["pRipple", "", "role", "option", 3, "click", "mouseenter", "ngStyle", "ngClass"], ["role", "option", 1, "p-autocomplete-empty-message", 3, "ngStyle"], [4, "ngIf", "ngIfElse"]],
+    template: function AutoComplete_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 13, 0);
+        \u0275\u0275listener("click", function AutoComplete_Template_div_click_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onContainerClick($event));
+        });
+        \u0275\u0275template(2, AutoComplete_input_2_Template, 2, 25, "input", 14)(3, AutoComplete_ng_container_3_Template, 3, 2, "ng-container", 15)(4, AutoComplete_ul_4_Template, 6, 26, "ul", 16)(5, AutoComplete_ng_container_5_Template, 3, 2, "ng-container", 15)(6, AutoComplete_button_6_Template, 4, 5, "button", 17);
+        \u0275\u0275elementStart(7, "p-overlay", 18, 1);
+        \u0275\u0275twoWayListener("visibleChange", function AutoComplete_Template_p_overlay_visibleChange_7_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          \u0275\u0275twoWayBindingSet(ctx.overlayVisible, $event) || (ctx.overlayVisible = $event);
+          return \u0275\u0275resetView($event);
+        });
+        \u0275\u0275listener("onAnimationStart", function AutoComplete_Template_p_overlay_onAnimationStart_7_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onOverlayAnimationStart($event));
+        })("onHide", function AutoComplete_Template_p_overlay_onHide_7_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.hide());
+        });
+        \u0275\u0275template(9, AutoComplete_ng_template_9_Template, 10, 11, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275classMap(ctx.styleClass);
+        \u0275\u0275property("ngClass", ctx.rootClass)("ngStyle", ctx.style);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.multiple);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.filled && !ctx.disabled && ctx.showClear && !ctx.loading);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.multiple);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.loading);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.dropdown);
+        \u0275\u0275advance();
+        \u0275\u0275twoWayProperty("visible", ctx.overlayVisible);
+        \u0275\u0275property("options", ctx.overlayOptions)("target", "@parent")("appendTo", ctx.appendTo)("showTransitionOptions", ctx.showTransitionOptions)("hideTransitionOptions", ctx.hideTransitionOptions);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgTemplateOutlet, NgStyle, Overlay, InputText, Ripple, Scroller, AutoFocus, TimesCircleIcon, SpinnerIcon, TimesIcon, ChevronDownIcon, Chip, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AutoComplete, [{
+    type: Component,
+    args: [{
+      selector: "p-autoComplete, p-autocomplete, p-auto-complete",
+      standalone: true,
+      imports: [CommonModule, Overlay, InputText, Ripple, Scroller, AutoFocus, TimesCircleIcon, SpinnerIcon, TimesIcon, ChevronDownIcon, Chip, SharedModule],
+      template: `
+        <div #container [ngClass]="rootClass" [ngStyle]="style" style="position: relative;" [class]="styleClass" (click)="onContainerClick($event)">
+            <input
+                *ngIf="!multiple"
+                #focusInput
+                [pAutoFocus]="autofocus"
+                pInputText
+                [ngClass]="'p-autocomplete-input'"
+                [ngStyle]="inputStyle"
+                [class]="inputStyleClass"
+                [type]="type"
+                [attr.value]="inputValue()"
+                [variant]="variant"
+                [attr.id]="inputId"
+                [autocomplete]="autocomplete"
+                [required]="required"
+                [name]="name"
+                aria-autocomplete="list"
+                role="combobox"
+                [attr.placeholder]="placeholder"
+                [pSize]="size"
+                [attr.maxlength]="maxlength"
+                [tabindex]="!disabled ? tabindex : -1"
+                [readonly]="readonly"
+                [disabled]="disabled"
+                [attr.aria-label]="ariaLabel"
+                [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-required]="required"
+                [attr.aria-expanded]="overlayVisible ?? false"
+                [attr.aria-controls]="overlayVisible ? id + '_list' : null"
+                [attr.aria-activedescendant]="focused ? focusedOptionId : undefined"
+                (input)="onInput($event)"
+                (keydown)="onKeyDown($event)"
+                (change)="onInputChange($event)"
+                (focus)="onInputFocus($event)"
+                (blur)="onInputBlur($event)"
+                (paste)="onInputPaste($event)"
+                (keyup)="onInputKeyUp($event)"
+                [fluid]="hasFluid"
+            />
+            <ng-container *ngIf="filled && !disabled && showClear && !loading">
+                <TimesIcon *ngIf="!clearIconTemplate && !_clearIconTemplate" [styleClass]="'p-autocomplete-clear-icon'" (click)="clear()" [attr.aria-hidden]="true" />
+                <span *ngIf="clearIconTemplate || _clearIconTemplate" class="p-autocomplete-clear-icon" (click)="clear()" [attr.aria-hidden]="true">
+                    <ng-template *ngTemplateOutlet="clearIconTemplate || _clearIconTemplate"></ng-template>
+                </span>
+            </ng-container>
+
+            <ul
+                *ngIf="multiple"
+                #multiContainer
+                [ngClass]="inputMultipleClass"
+                [tabindex]="-1"
+                role="listbox"
+                [attr.aria-orientation]="'horizontal'"
+                [attr.aria-activedescendant]="focused ? focusedMultipleOptionId : undefined"
+                (focus)="onMultipleContainerFocus($event)"
+                (blur)="onMultipleContainerBlur($event)"
+                (keydown)="onMultipleContainerKeyDown($event)"
+            >
+                <li
+                    #token
+                    *ngFor="let option of modelValue(); let i = index"
+                    [ngClass]="{ 'p-autocomplete-chip-item': true, 'p-focus': focusedMultipleOptionIndex() === i }"
+                    [attr.id]="id + '_multiple_option_' + i"
+                    role="option"
+                    [attr.aria-label]="getOptionLabel(option)"
+                    [attr.aria-setsize]="modelValue().length"
+                    [attr.aria-posinset]="i + 1"
+                    [attr.aria-selected]="true"
+                >
+                    <ng-container *ngTemplateOutlet="selectedItemTemplate || _selectedItemTemplate; context: { $implicit: option }"></ng-container>
+                    <p-chip styleClass="p-autocomplete-chip" *ngIf="!selectedItemTemplate && !_selectedItemTemplate" [label]="getOptionLabel(option)" [removable]="true" (onRemove)="!readonly ? removeOption($event, i) : ''">
+                        <ng-container *ngIf="!removeIconTemplate && !_removeIconTemplate">
+                            <ng-template #removeicon>
+                                <span class="p-autocomplete-chip-icon" (click)="!readonly ? removeOption($event, i) : ''">
+                                    <TimesCircleIcon [styleClass]="'p-autocomplete-chip-icon'" [attr.aria-hidden]="true" />
+                                </span>
+                            </ng-template>
+                        </ng-container>
+                    </p-chip>
+                    <span *ngIf="removeIconTemplate || _removeIconTemplate">
+                        <ng-template *ngTemplateOutlet="removeIconTemplate || _removeIconTemplate; context: { class: 'p-autocomplete-chip-icon', removeCallback: removeOption.bind(this), index: i }"></ng-template>
+                    </span>
+                </li>
+                <li class="p-autocomplete-input-chip" role="option">
+                    <input
+                        #focusInput
+                        [pAutoFocus]="autofocus"
+                        [ngClass]="inputClass"
+                        [ngStyle]="inputStyle"
+                        [class]="inputStyleClass"
+                        [attr.type]="type"
+                        [attr.id]="inputId"
+                        [autocomplete]="autocomplete"
+                        [required]="required"
+                        [attr.name]="name"
+                        role="combobox"
+                        [attr.placeholder]="!filled ? placeholder : null"
+                        aria-autocomplete="list"
+                        [attr.maxlength]="maxlength"
+                        [tabindex]="!disabled ? tabindex : -1"
+                        [readonly]="readonly"
+                        [disabled]="disabled"
+                        [attr.aria-label]="ariaLabel"
+                        [attr.aria-labelledby]="ariaLabelledBy"
+                        [attr.aria-required]="required"
+                        [attr.aria-expanded]="overlayVisible ?? false"
+                        [attr.aria-controls]="overlayVisible ? id + '_list' : null"
+                        [attr.aria-activedescendant]="focused ? focusedOptionId : undefined"
+                        (input)="onInput($event)"
+                        (keydown)="onKeyDown($event)"
+                        (change)="onInputChange($event)"
+                        (focus)="onInputFocus($event)"
+                        (blur)="onInputBlur($event)"
+                        (paste)="onInputPaste($event)"
+                        (keyup)="onInputKeyUp($event)"
+                    />
+                </li>
+            </ul>
+            <ng-container *ngIf="loading">
+                <SpinnerIcon *ngIf="!loadingIconTemplate && !_loadingIconTemplate" [styleClass]="'p-autocomplete-loader'" [spin]="true" [attr.aria-hidden]="true" />
+                <span *ngIf="loadingIconTemplate || _loadingIconTemplate" class="p-autocomplete-loader pi-spin " [attr.aria-hidden]="true">
+                    <ng-template *ngTemplateOutlet="loadingIconTemplate || _loadingIconTemplate"></ng-template>
+                </span>
+            </ng-container>
+            <button #ddBtn type="button" [attr.aria-label]="dropdownAriaLabel" class="p-autocomplete-dropdown" [disabled]="disabled" pRipple (click)="handleDropdownClick($event)" *ngIf="dropdown" [attr.tabindex]="tabindex">
+                <span *ngIf="dropdownIcon" [ngClass]="dropdownIcon" [attr.aria-hidden]="true"></span>
+                <ng-container *ngIf="!dropdownIcon">
+                    <ChevronDownIcon *ngIf="!dropdownIconTemplate && !_dropdownIconTemplate" />
+                    <ng-template *ngTemplateOutlet="dropdownIconTemplate || _dropdownIconTemplate"></ng-template>
+                </ng-container>
+            </button>
+            <p-overlay
+                #overlay
+                [(visible)]="overlayVisible"
+                [options]="overlayOptions"
+                [target]="'@parent'"
+                [appendTo]="appendTo"
+                [showTransitionOptions]="showTransitionOptions"
+                [hideTransitionOptions]="hideTransitionOptions"
+                (onAnimationStart)="onOverlayAnimationStart($event)"
+                (onHide)="hide()"
+            >
+                <ng-template #content>
+                    <div [ngClass]="panelClass" [ngStyle]="panelStyle" [class]="panelStyleClass">
+                        <ng-container *ngTemplateOutlet="headerTemplate || _headerTemplate"></ng-container>
+                        <div class="p-autocomplete-list-container" [style.max-height]="virtualScroll ? 'auto' : scrollHeight">
+                            <p-scroller
+                                *ngIf="virtualScroll"
+                                #scroller
+                                [items]="visibleOptions()"
+                                [style]="{ height: scrollHeight }"
+                                [itemSize]="virtualScrollItemSize || _itemSize"
+                                [autoSize]="true"
+                                [lazy]="lazy"
+                                (onLazyLoad)="onLazyLoad.emit($event)"
+                                [options]="virtualScrollOptions"
+                            >
+                                <ng-template #content let-items let-scrollerOptions="options">
+                                    <ng-container *ngTemplateOutlet="buildInItems; context: { $implicit: items, options: scrollerOptions }"></ng-container>
+                                </ng-template>
+                                <ng-container *ngIf="loaderTemplate || _loaderTemplate">
+                                    <ng-template #loader let-scrollerOptions="options">
+                                        <ng-container *ngTemplateOutlet="loaderTemplate || _loaderTemplate; context: { options: scrollerOptions }"></ng-container>
+                                    </ng-template>
+                                </ng-container>
+                            </p-scroller>
+                            <ng-container *ngIf="!virtualScroll">
+                                <ng-container *ngTemplateOutlet="buildInItems; context: { $implicit: visibleOptions(), options: {} }"></ng-container>
+                            </ng-container>
+                        </div>
+
+                        <ng-template #buildInItems let-items let-scrollerOptions="options">
+                            <ul #items class="p-autocomplete-list" [ngClass]="scrollerOptions.contentStyleClass" [style]="scrollerOptions.contentStyle" role="listbox" [attr.id]="id + '_list'" [attr.aria-label]="listLabel">
+                                <ng-template ngFor let-option [ngForOf]="items" let-i="index">
+                                    <ng-container *ngIf="isOptionGroup(option)">
+                                        <li [attr.id]="id + '_' + getOptionIndex(i, scrollerOptions)" class="p-autocomplete-option-group" [ngStyle]="{ height: scrollerOptions.itemSize + 'px' }" role="option">
+                                            <span *ngIf="!groupTemplate">{{ getOptionGroupLabel(option.optionGroup) }}</span>
+                                            <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: option.optionGroup }"></ng-container>
+                                        </li>
+                                    </ng-container>
+                                    <ng-container *ngIf="!isOptionGroup(option)">
+                                        <li
+                                            pRipple
+                                            [ngStyle]="{ height: scrollerOptions.itemSize + 'px' }"
+                                            [ngClass]="optionClass(option, i, scrollerOptions)"
+                                            [attr.id]="id + '_' + getOptionIndex(i, scrollerOptions)"
+                                            role="option"
+                                            [attr.aria-label]="getOptionLabel(option)"
+                                            [attr.aria-selected]="isSelected(option)"
+                                            [attr.aria-disabled]="isOptionDisabled(option)"
+                                            [attr.data-p-focused]="focusedOptionIndex() === getOptionIndex(i, scrollerOptions)"
+                                            [attr.aria-setsize]="ariaSetSize"
+                                            [attr.aria-posinset]="getAriaPosInset(getOptionIndex(i, scrollerOptions))"
+                                            (click)="onOptionSelect($event, option)"
+                                            (mouseenter)="onOptionMouseEnter($event, getOptionIndex(i, scrollerOptions))"
+                                        >
+                                            <span *ngIf="!itemTemplate && !_itemTemplate">{{ getOptionLabel(option) }}</span>
+                                            <ng-container
+                                                *ngTemplateOutlet="
+                                                    itemTemplate || _itemTemplate;
+                                                    context: {
+                                                        $implicit: option,
+                                                        index: scrollerOptions.getOptions ? scrollerOptions.getOptions(i) : i
+                                                    }
+                                                "
+                                            ></ng-container>
+                                        </li>
+                                    </ng-container>
+                                </ng-template>
+                                <li *ngIf="!items || (items && items.length === 0 && showEmptyMessage)" class="p-autocomplete-empty-message" [ngStyle]="{ height: scrollerOptions.itemSize + 'px' }" role="option">
+                                    <ng-container *ngIf="!emptyTemplate && !_emptyTemplate; else empty">
+                                        {{ searchResultMessageText }}
+                                    </ng-container>
+                                    <ng-container #empty *ngTemplateOutlet="emptyTemplate || _emptyTemplate"></ng-container>
+                                </li>
+                            </ul>
+                        </ng-template>
+                        <ng-container *ngTemplateOutlet="footerTemplate || _footerTemplate"></ng-container>
+                    </div>
+                    <span role="status" aria-live="polite" class="p-hidden-accessible">
+                        {{ selectedMessageText }}
+                    </span>
+                </ng-template>
+            </p-overlay>
+        </div>
+    `,
+      providers: [AUTOCOMPLETE_VALUE_ACCESSOR, AutoCompleteStyle],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None
+    }]
+  }], () => [{
+    type: OverlayService
+  }, {
+    type: NgZone
+  }], {
+    minLength: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    delay: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    style: [{
+      type: Input
+    }],
+    panelStyle: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    panelStyleClass: [{
+      type: Input
+    }],
+    inputStyle: [{
+      type: Input
+    }],
+    inputId: [{
+      type: Input
+    }],
+    inputStyleClass: [{
+      type: Input
+    }],
+    placeholder: [{
+      type: Input
+    }],
+    readonly: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    scrollHeight: [{
+      type: Input
+    }],
+    lazy: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    virtualScroll: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    virtualScrollItemSize: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    virtualScrollOptions: [{
+      type: Input
+    }],
+    maxlength: [{
+      type: Input,
+      args: [{
+        transform: (value) => numberAttribute(value, null)
+      }]
+    }],
+    name: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    size: [{
+      type: Input
+    }],
+    appendTo: [{
+      type: Input
+    }],
+    autoHighlight: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    forceSelection: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    type: [{
+      type: Input
+    }],
+    autoZIndex: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    baseZIndex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    ariaLabel: [{
+      type: Input
+    }],
+    dropdownAriaLabel: [{
+      type: Input
+    }],
+    ariaLabelledBy: [{
+      type: Input
+    }],
+    dropdownIcon: [{
+      type: Input
+    }],
+    unique: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    group: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    completeOnFocus: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    showClear: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    field: [{
+      type: Input
+    }],
+    dropdown: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    showEmptyMessage: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    dropdownMode: [{
+      type: Input
+    }],
+    multiple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    tabindex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    dataKey: [{
+      type: Input
+    }],
+    emptyMessage: [{
+      type: Input
+    }],
+    showTransitionOptions: [{
+      type: Input
+    }],
+    hideTransitionOptions: [{
+      type: Input
+    }],
+    autofocus: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    autocomplete: [{
+      type: Input
+    }],
+    optionGroupChildren: [{
+      type: Input
+    }],
+    optionGroupLabel: [{
+      type: Input
+    }],
+    overlayOptions: [{
+      type: Input
+    }],
+    suggestions: [{
+      type: Input
+    }],
+    itemSize: [{
+      type: Input
+    }],
+    optionLabel: [{
+      type: Input
+    }],
+    optionValue: [{
+      type: Input
+    }],
+    id: [{
+      type: Input
+    }],
+    searchMessage: [{
+      type: Input
+    }],
+    emptySelectionMessage: [{
+      type: Input
+    }],
+    selectionMessage: [{
+      type: Input
+    }],
+    autoOptionFocus: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    selectOnFocus: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    searchLocale: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    optionDisabled: [{
+      type: Input
+    }],
+    focusOnHover: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    typeahead: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    variant: [{
+      type: Input
+    }],
+    fluid: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    completeMethod: [{
+      type: Output
+    }],
+    onSelect: [{
+      type: Output
+    }],
+    onUnselect: [{
+      type: Output
+    }],
+    onFocus: [{
+      type: Output
+    }],
+    onBlur: [{
+      type: Output
+    }],
+    onDropdownClick: [{
+      type: Output
+    }],
+    onClear: [{
+      type: Output
+    }],
+    onKeyUp: [{
+      type: Output
+    }],
+    onShow: [{
+      type: Output
+    }],
+    onHide: [{
+      type: Output
+    }],
+    onLazyLoad: [{
+      type: Output
+    }],
+    containerEL: [{
+      type: ViewChild,
+      args: ["container"]
+    }],
+    inputEL: [{
+      type: ViewChild,
+      args: ["focusInput"]
+    }],
+    multiInputEl: [{
+      type: ViewChild,
+      args: ["multiIn"]
+    }],
+    multiContainerEL: [{
+      type: ViewChild,
+      args: ["multiContainer"]
+    }],
+    dropdownButton: [{
+      type: ViewChild,
+      args: ["ddBtn"]
+    }],
+    itemsViewChild: [{
+      type: ViewChild,
+      args: ["items"]
+    }],
+    scroller: [{
+      type: ViewChild,
+      args: ["scroller"]
+    }],
+    overlayViewChild: [{
+      type: ViewChild,
+      args: ["overlay"]
+    }],
+    itemTemplate: [{
+      type: ContentChild,
+      args: ["item"]
+    }],
+    emptyTemplate: [{
+      type: ContentChild,
+      args: ["empty"]
+    }],
+    headerTemplate: [{
+      type: ContentChild,
+      args: ["header"]
+    }],
+    footerTemplate: [{
+      type: ContentChild,
+      args: ["footer"]
+    }],
+    selectedItemTemplate: [{
+      type: ContentChild,
+      args: ["selecteditem"]
+    }],
+    groupTemplate: [{
+      type: ContentChild,
+      args: ["group"]
+    }],
+    loaderTemplate: [{
+      type: ContentChild,
+      args: ["loader"]
+    }],
+    removeIconTemplate: [{
+      type: ContentChild,
+      args: ["removeicon"]
+    }],
+    loadingIconTemplate: [{
+      type: ContentChild,
+      args: ["loadingicon"]
+    }],
+    clearIconTemplate: [{
+      type: ContentChild,
+      args: ["clearicon"]
+    }],
+    dropdownIconTemplate: [{
+      type: ContentChild,
+      args: ["dropdownicon"]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var AutoCompleteModule = class _AutoCompleteModule {
+  static \u0275fac = function AutoCompleteModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AutoCompleteModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _AutoCompleteModule,
+    imports: [AutoComplete],
+    exports: [AutoComplete, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [AutoComplete, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AutoCompleteModule, [{
+    type: NgModule,
+    args: [{
+      imports: [AutoComplete],
+      exports: [AutoComplete, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-password.mjs
+var _c011 = ["content"];
+var _c114 = ["footer"];
+var _c27 = ["header"];
+var _c35 = ["clearicon"];
+var _c45 = ["hideicon"];
+var _c55 = ["showicon"];
+var _c65 = ["input"];
+var _c75 = () => ({
+  class: "p-password-toggle-mask-icon p-password-mask-icon"
+});
+var _c85 = (a0, a1) => ({
+  showTransitionParams: a0,
+  hideTransitionParams: a1
+});
+var _c95 = (a0) => ({
+  value: "visible",
+  params: a0
+});
+var _c105 = (a0) => ({
+  width: a0
+});
+function Password_ng_container_5_TimesIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "TimesIcon", 8);
+    \u0275\u0275listener("click", function Password_ng_container_5_TimesIcon_1_Template_TimesIcon_click_0_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r3 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r3.clear());
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275attribute("data-pc-section", "clearIcon");
+  }
+}
+function Password_ng_container_5_3_ng_template_0_Template(rf, ctx) {
+}
+function Password_ng_container_5_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Password_ng_container_5_3_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Password_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Password_ng_container_5_TimesIcon_1_Template, 1, 1, "TimesIcon", 7);
+    \u0275\u0275elementStart(2, "span", 8);
+    \u0275\u0275listener("click", function Password_ng_container_5_Template_span_click_2_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.clear());
+    });
+    \u0275\u0275template(3, Password_ng_container_5_3_Template, 1, 0, null, 9);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r3.clearIconTemplate && !ctx_r3._clearIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275attribute("data-pc-section", "clearIcon");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r3.clearIconTemplate || ctx_r3._clearIconTemplate);
+  }
+}
+function Password_ng_container_6_ng_container_1_EyeSlashIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "EyeSlashIcon", 12);
+    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_1_EyeSlashIcon_1_Template_EyeSlashIcon_click_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r3 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275attribute("data-pc-section", "hideIcon");
+  }
+}
+function Password_ng_container_6_ng_container_1_span_2_1_ng_template_0_Template(rf, ctx) {
+}
+function Password_ng_container_6_ng_container_1_span_2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Password_ng_container_6_ng_container_1_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Password_ng_container_6_ng_container_1_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "span", 13);
+    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_1_span_2_Template_span_click_0_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r3 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
+    });
+    \u0275\u0275template(1, Password_ng_container_6_ng_container_1_span_2_1_Template, 1, 0, null, 14);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r3.hideIconTemplate || ctx_r3._hideIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction0(2, _c75));
+  }
+}
+function Password_ng_container_6_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Password_ng_container_6_ng_container_1_EyeSlashIcon_1_Template, 1, 1, "EyeSlashIcon", 10)(2, Password_ng_container_6_ng_container_1_span_2_Template, 2, 3, "span", 11);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r3.hideIconTemplate && !ctx_r3._hideIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r3.hideIconTemplate || ctx_r3._hideIconTemplate);
+  }
+}
+function Password_ng_container_6_ng_container_2_EyeIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "EyeIcon", 12);
+    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_2_EyeIcon_1_Template_EyeIcon_click_0_listener() {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r3 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275attribute("data-pc-section", "showIcon");
+  }
+}
+function Password_ng_container_6_ng_container_2_span_2_1_ng_template_0_Template(rf, ctx) {
+}
+function Password_ng_container_6_ng_container_2_span_2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Password_ng_container_6_ng_container_2_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Password_ng_container_6_ng_container_2_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "span", 13);
+    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_2_span_2_Template_span_click_0_listener() {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r3 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
+    });
+    \u0275\u0275template(1, Password_ng_container_6_ng_container_2_span_2_1_Template, 1, 0, null, 9);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r3.showIconTemplate || ctx_r3._showIconTemplate);
+  }
+}
+function Password_ng_container_6_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Password_ng_container_6_ng_container_2_EyeIcon_1_Template, 1, 1, "EyeIcon", 10)(2, Password_ng_container_6_ng_container_2_span_2_Template, 2, 1, "span", 11);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r3.showIconTemplate && !ctx_r3._showIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r3.showIconTemplate || ctx_r3._showIconTemplate);
+  }
+}
+function Password_ng_container_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Password_ng_container_6_ng_container_1_Template, 3, 2, "ng-container", 5)(2, Password_ng_container_6_ng_container_2_Template, 3, 2, "ng-container", 5);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r3.unmasked);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r3.unmasked);
+  }
+}
+function Password_div_7_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Password_div_7_ng_container_3_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Password_div_7_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, Password_div_7_ng_container_3_ng_container_1_Template, 1, 0, "ng-container", 9);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r3.contentTemplate || ctx_r3._contentTemplate);
+  }
+}
+function Password_div_7_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 17)(1, "div", 18);
+    \u0275\u0275element(2, "div", 3);
+    \u0275\u0275pipe(3, "mapper");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 19);
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275attribute("data-pc-section", "meter");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", \u0275\u0275pipeBind2(3, 6, ctx_r3.meter, ctx_r3.strengthClass))("ngStyle", \u0275\u0275pureFunction1(9, _c105, ctx_r3.meter ? ctx_r3.meter.width : ""));
+    \u0275\u0275attribute("data-pc-section", "meterLabel");
+    \u0275\u0275advance(2);
+    \u0275\u0275attribute("data-pc-section", "info");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r3.infoText);
+  }
+}
+function Password_div_7_ng_container_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Password_div_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 15, 1);
+    \u0275\u0275listener("click", function Password_div_7_Template_div_click_0_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.onOverlayClick($event));
+    })("@overlayAnimation.start", function Password_div_7_Template_div_animation_overlayAnimation_start_0_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.onAnimationStart($event));
+    })("@overlayAnimation.done", function Password_div_7_Template_div_animation_overlayAnimation_done_0_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.onAnimationEnd($event));
+    });
+    \u0275\u0275template(2, Password_div_7_ng_container_2_Template, 1, 0, "ng-container", 9)(3, Password_div_7_ng_container_3_Template, 2, 1, "ng-container", 16)(4, Password_div_7_ng_template_4_Template, 6, 11, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(6, Password_div_7_ng_container_6_Template, 1, 0, "ng-container", 9);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const content_r10 = \u0275\u0275reference(5);
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275property("@overlayAnimation", \u0275\u0275pureFunction1(9, _c95, \u0275\u0275pureFunction2(6, _c85, ctx_r3.showTransitionOptions, ctx_r3.hideTransitionOptions)));
+    \u0275\u0275attribute("data-pc-section", "panel");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r3.headerTemplate || ctx_r3._headerTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r3.contentTemplate || ctx_r3._contentTemplate)("ngIfElse", content_r10);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r3.footerTemplate || ctx_r3._footerTemplate);
+  }
+}
+var theme8 = ({
+  dt
+}) => `
+.p-password {
+    display: inline-flex;
+    position: relative;
+}
+
+.p-password .p-password-overlay {
+    min-width: 100%;
+}
+
+.p-password-meter {
+    height: ${dt("password.meter.height")};
+    background: ${dt("password.meter.background")};
+    border-radius: ${dt("password.meter.border.radius")};
+}
+
+.p-password-meter-label {
+    height: 100%;
+    width: 0;
+    transition: width 1s ease-in-out;
+    border-radius: ${dt("password.meter.border.radius")};
+}
+
+.p-password-meter-weak {
+    background: ${dt("password.strength.weak.background")};
+}
+
+.p-password-meter-medium {
+    background: ${dt("password.strength.medium.background")};
+}
+
+.p-password-meter-strong {
+    background: ${dt("password.strength.strong.background")};
+}
+
+.p-password-fluid {
+    display: flex;
+}
+
+.p-password-fluid .p-password-input {
+    width: 100%;
+}
+
+.p-password-input::-ms-reveal,
+.p-password-input::-ms-clear {
+    display: none;
+}
+
+.p-password-overlay {
+    position: absolute;
+    padding: ${dt("password.overlay.padding")};
+    background: ${dt("password.overlay.background")};
+    color: ${dt("password.overlay.color")};
+    border: 1px solid ${dt("password.overlay.border.color")};
+    box-shadow: ${dt("password.overlay.shadow")};
+    border-radius: ${dt("password.overlay.border.radius")};
+}
+
+.p-password-content {
+    display: flex;
+    flex-direction: column;
+    gap: ${dt("password.content.gap")};
+}
+
+.p-password-toggle-mask-icon {
+    inset-inline-end: ${dt("form.field.padding.x")};
+    color: ${dt("password.icon.color")};
+    position: absolute;
+    top: 50%;
+    margin-top: calc(-1 * calc(${dt("icon.size")} / 2));
+    width: ${dt("icon.size")};
+    height: ${dt("icon.size")};
+}
+
+.p-password:has(.p-password-toggle-mask-icon) .p-password-clear-icon,
+.p-password:has(.p-password-toggle-mask-icon) .p-password-input {
+    padding-inline-end: calc((${dt("form.field.padding.x")} * 2) + ${dt("icon.size")});
+}
+
+/* For PrimeNG */
+p-password.ng-invalid.ng-dirty .p-inputtext {
+    border-color: ${dt("inputtext.invalid.border.color")};
+}
+
+p-password.ng-invalid.ng-dirty .p-inputtext:enabled:focus {
+    border-color: ${dt("inputtext.focus.border.color")};
+}
+
+p-password.ng-invalid.ng-dirty .p-inputtext::placeholder {
+    color: ${dt("inputtext.invalid.placeholder.color")};
+}
+
+.p-password-clear-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+    cursor: pointer;
+    inset-inline-end: ${dt("form.field.padding.x")};
+    color: ${dt("form.field.icon.color")};
+}
+
+.p-password-fluid-directive {
+    width:100%
+}
+`;
+var inlineStyles3 = {
+  root: ({
+    instance
+  }) => ({
+    position: instance.appendTo === "self" ? "relative" : void 0
+  })
+};
+var classes8 = {
+  root: ({
+    instance
+  }) => ({
+    "p-password p-component p-inputwrapper": true,
+    "p-inputwrapper-filled": instance.filled(),
+    "p-variant-filled": 'instance.variant === "filled" || instance.config.inputVariant() === "filled" || instance.config.inputStyle() === "filled"',
+    "p-inputwrapper-focus": instance.focused,
+    "p-password-fluid": instance.hasFluid
+  }),
+  pcInput: "p-password-input",
+  maskIcon: "p-password-toggle-mask-icon p-password-mask-icon",
+  unmaskIcon: "p-password-toggle-mask-icon p-password-unmask-icon",
+  overlay: "p-password-overlay p-component",
+  content: "p-password-content",
+  meter: "p-password-meter",
+  meterLabel: ({
+    instance
+  }) => `p-password-meter-label ${instance.meter ? "p-password-meter-" + instance.meter.strength : ""}`,
+  meterText: "p-password-meter-text"
+};
+var PasswordStyle = class _PasswordStyle extends BaseStyle {
+  name = "password";
+  theme = theme8;
+  classes = classes8;
+  inlineStyles = inlineStyles3;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275PasswordStyle_BaseFactory;
+    return function PasswordStyle_Factory(__ngFactoryType__) {
+      return (\u0275PasswordStyle_BaseFactory || (\u0275PasswordStyle_BaseFactory = \u0275\u0275getInheritedFactory(_PasswordStyle)))(__ngFactoryType__ || _PasswordStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _PasswordStyle,
+    factory: _PasswordStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PasswordStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var PasswordClasses;
+(function(PasswordClasses2) {
+  PasswordClasses2["root"] = "p-password";
+  PasswordClasses2["pcInput"] = "p-password-input";
+  PasswordClasses2["maskIcon"] = "p-password-mask-icon";
+  PasswordClasses2["unmaskIcon"] = "p-password-unmask-icon";
+  PasswordClasses2["overlay"] = "p-password-overlay";
+  PasswordClasses2["meter"] = "p-password-meter";
+  PasswordClasses2["meterLabel"] = "p-password-meter-label";
+  PasswordClasses2["meterText"] = "p-password-meter-text";
+})(PasswordClasses || (PasswordClasses = {}));
+var PasswordDirective = class _PasswordDirective extends BaseComponent {
+  zone;
+  /**
+   * Text to prompt password entry. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  promptLabel = "Enter a password";
+  /**
+   * Text for a weak password. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  weakLabel = "Weak";
+  /**
+   * Text for a medium password. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  mediumLabel = "Medium";
+  /**
+   * Text for a strong password. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  strongLabel = "Strong";
+  /**
+   * Whether to show the strength indicator or not.
+   * @group Props
+   */
+  feedback = true;
+  /**
+   * Sets the visibility of the password field.
+   * @group Props
+   */
+  set showPassword(show) {
+    this.el.nativeElement.type = show ? "text" : "password";
+  }
+  /**
+   * Specifies the input variant of the component.
+   * @group Props
+   */
+  variant;
+  /**
+   * Spans 100% width of the container when enabled.
+   * @group Props
+   */
+  fluid = false;
+  panel;
+  meter;
+  info;
+  filled;
+  content;
+  label;
+  scrollHandler;
+  documentResizeListener;
+  _componentStyle = inject(PasswordStyle);
+  get hasFluid() {
+    const nativeElement = this.el.nativeElement;
+    const fluidComponent = nativeElement.closest("p-fluid");
+    return this.fluid || !!fluidComponent;
+  }
+  constructor(zone) {
+    super();
+    this.zone = zone;
+  }
+  ngDoCheck() {
+    this.updateFilledState();
+  }
+  onInput(e) {
+    this.updateFilledState();
+  }
+  updateFilledState() {
+    this.filled = this.el.nativeElement.value && this.el.nativeElement.value.length;
+  }
+  createPanel() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.panel = this.renderer.createElement("div");
+      this.renderer.addClass(this.panel, "p-password-overlay");
+      this.renderer.addClass(this.panel, "p-component");
+      this.content = this.renderer.createElement("div");
+      this.renderer.addClass(this.content, "p-password-content");
+      this.renderer.appendChild(this.panel, this.content);
+      this.meter = this.renderer.createElement("div");
+      this.renderer.addClass(this.meter, "p-password-meter");
+      this.renderer.appendChild(this.content, this.meter);
+      this.label = this.renderer.createElement("div");
+      this.renderer.addClass(this.label, "p-password-meter-label");
+      this.renderer.appendChild(this.meter, this.label);
+      this.info = this.renderer.createElement("div");
+      this.renderer.addClass(this.info, "p-password-meter-text");
+      this.renderer.setProperty(this.info, "textContent", this.promptLabel);
+      this.renderer.appendChild(this.content, this.info);
+      this.renderer.setStyle(this.panel, "minWidth", `${this.el.nativeElement.offsetWidth}px`);
+      this.renderer.appendChild(document.body, this.panel);
+      this.updateMeter();
+    }
+  }
+  showOverlay() {
+    if (this.feedback) {
+      if (!this.panel) {
+        this.createPanel();
+      }
+      this.renderer.setStyle(this.panel, "zIndex", String(++DomHandler.zindex));
+      this.renderer.setStyle(this.panel, "display", "block");
+      this.zone.runOutsideAngular(() => {
+        setTimeout(() => {
+          addClass(this.panel, "p-connected-overlay-visible");
+          this.bindScrollListener();
+          this.bindDocumentResizeListener();
+        }, 1);
+      });
+      absolutePosition(this.panel, this.el.nativeElement);
+    }
+  }
+  hideOverlay() {
+    if (this.feedback && this.panel) {
+      addClass(this.panel, "p-connected-overlay-hidden");
+      removeClass(this.panel, "p-connected-overlay-visible");
+      this.unbindScrollListener();
+      this.unbindDocumentResizeListener();
+      this.zone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.ngOnDestroy();
+        }, 150);
+      });
+    }
+  }
+  onFocus() {
+    this.showOverlay();
+  }
+  onBlur() {
+    this.hideOverlay();
+  }
+  labelSignal = signal("");
+  onKeyup(e) {
+    if (this.feedback) {
+      let value = e.target.value, label = null, meterPos = null;
+      if (value.length === 0) {
+        label = this.promptLabel;
+        meterPos = "0px 0px";
+      } else {
+        var score = this.testStrength(value);
+        if (score < 30) {
+          label = this.weakLabel;
+          meterPos = "0px -10px";
+        } else if (score >= 30 && score < 80) {
+          label = this.mediumLabel;
+          meterPos = "0px -20px";
+        } else if (score >= 80) {
+          label = this.strongLabel;
+          meterPos = "0px -30px";
+        }
+        this.labelSignal.set(label);
+        this.updateMeter();
+      }
+      if (!this.panel || !hasClass(this.panel, "p-connected-overlay-visible")) {
+        this.showOverlay();
+      }
+      this.renderer.setStyle(this.meter, "backgroundPosition", meterPos);
+      this.info.textContent = label;
+    }
+  }
+  updateMeter() {
+    if (this.labelSignal()) {
+      const label = this.labelSignal();
+      const strengthClass = this.strengthClass(label.toLowerCase());
+      const width = this.getWidth(label.toLowerCase());
+      this.renderer.addClass(this.meter, strengthClass);
+      this.renderer.setStyle(this.meter, "width", width);
+      this.info.textContent = label;
+    }
+  }
+  getWidth(label) {
+    return label === "weak" ? "33.33%" : label === "medium" ? "66.66%" : label === "strong" ? "100%" : "";
+  }
+  strengthClass(label) {
+    return `p-password-meter${label ? `-${label}` : ""}`;
+  }
+  testStrength(str) {
+    let grade = 0;
+    let val;
+    val = str.match("[0-9]");
+    grade += this.normalize(val ? val.length : 1 / 4, 1) * 25;
+    val = str.match("[a-zA-Z]");
+    grade += this.normalize(val ? val.length : 1 / 2, 3) * 10;
+    val = str.match("[!@#$%^&*?_~.,;=]");
+    grade += this.normalize(val ? val.length : 1 / 6, 1) * 35;
+    val = str.match("[A-Z]");
+    grade += this.normalize(val ? val.length : 1 / 6, 1) * 30;
+    grade *= str.length / 8;
+    return grade > 100 ? 100 : grade;
+  }
+  normalize(x2, y) {
+    let diff = x2 - y;
+    if (diff <= 0) return x2 / y;
+    else return 1 + 0.5 * (x2 / (x2 + y / 4));
+  }
+  get disabled() {
+    return this.el.nativeElement.disabled;
+  }
+  bindScrollListener() {
+    if (!this.scrollHandler) {
+      this.scrollHandler = new ConnectedOverlayScrollHandler(this.el.nativeElement, () => {
+        if (hasClass(this.panel, "p-connected-overlay-visible")) {
+          this.hideOverlay();
+        }
+      });
+    }
+    this.scrollHandler.bindScrollListener();
+  }
+  unbindScrollListener() {
+    if (this.scrollHandler) {
+      this.scrollHandler.unbindScrollListener();
+    }
+  }
+  bindDocumentResizeListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.documentResizeListener) {
+        const window2 = this.document.defaultView;
+        this.documentResizeListener = this.renderer.listen(window2, "resize", this.onWindowResize.bind(this));
+      }
+    }
+  }
+  unbindDocumentResizeListener() {
+    if (this.documentResizeListener) {
+      this.documentResizeListener();
+      this.documentResizeListener = null;
+    }
+  }
+  onWindowResize() {
+    if (!isTouchDevice()) {
+      this.hideOverlay();
+    }
+  }
+  ngOnDestroy() {
+    if (this.panel) {
+      if (this.scrollHandler) {
+        this.scrollHandler.destroy();
+        this.scrollHandler = null;
+      }
+      this.unbindDocumentResizeListener();
+      this.renderer.removeChild(this.document.body, this.panel);
+      this.panel = null;
+      this.meter = null;
+      this.info = null;
+    }
+    super.ngOnDestroy();
+  }
+  static \u0275fac = function PasswordDirective_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PasswordDirective)(\u0275\u0275directiveInject(NgZone));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _PasswordDirective,
+    selectors: [["", "pPassword", ""]],
+    hostAttrs: [1, "p-password", "p-inputtext", "p-component", "p-inputwrapper"],
+    hostVars: 6,
+    hostBindings: function PasswordDirective_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("input", function PasswordDirective_input_HostBindingHandler($event) {
+          return ctx.onInput($event);
+        })("focus", function PasswordDirective_focus_HostBindingHandler() {
+          return ctx.onFocus();
+        })("blur", function PasswordDirective_blur_HostBindingHandler() {
+          return ctx.onBlur();
+        })("keyup", function PasswordDirective_keyup_HostBindingHandler($event) {
+          return ctx.onKeyup($event);
+        });
+      }
+      if (rf & 2) {
+        \u0275\u0275classProp("p-inputwrapper-filled", ctx.filled)("p-variant-filled", ctx.variant === "filled" || ctx.config.inputStyle() === "filled" || ctx.config.inputVariant() === "filled")("p-password-fluid-directive", ctx.hasFluid);
+      }
+    },
+    inputs: {
+      promptLabel: "promptLabel",
+      weakLabel: "weakLabel",
+      mediumLabel: "mediumLabel",
+      strongLabel: "strongLabel",
+      feedback: [2, "feedback", "feedback", booleanAttribute],
+      showPassword: "showPassword",
+      variant: "variant",
+      fluid: [2, "fluid", "fluid", booleanAttribute]
+    },
+    features: [\u0275\u0275ProvidersFeature([PasswordStyle]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PasswordDirective, [{
+    type: Directive,
+    args: [{
+      selector: "[pPassword]",
+      standalone: true,
+      host: {
+        class: "p-password p-inputtext p-component p-inputwrapper",
+        "[class.p-inputwrapper-filled]": "filled",
+        "[class.p-variant-filled]": 'variant === "filled" || config.inputStyle() === "filled" || config.inputVariant() === "filled"',
+        "[class.p-password-fluid-directive]": "hasFluid"
+      },
+      providers: [PasswordStyle]
+    }]
+  }], () => [{
+    type: NgZone
+  }], {
+    promptLabel: [{
+      type: Input
+    }],
+    weakLabel: [{
+      type: Input
+    }],
+    mediumLabel: [{
+      type: Input
+    }],
+    strongLabel: [{
+      type: Input
+    }],
+    feedback: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    showPassword: [{
+      type: Input
+    }],
+    variant: [{
+      type: Input
+    }],
+    fluid: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    onInput: [{
+      type: HostListener,
+      args: ["input", ["$event"]]
+    }],
+    onFocus: [{
+      type: HostListener,
+      args: ["focus"]
+    }],
+    onBlur: [{
+      type: HostListener,
+      args: ["blur"]
+    }],
+    onKeyup: [{
+      type: HostListener,
+      args: ["keyup", ["$event"]]
+    }]
+  });
+})();
+var MapperPipe = class _MapperPipe {
+  transform(value, mapper, ...args) {
+    return mapper(value, ...args);
+  }
+  static \u0275fac = function MapperPipe_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MapperPipe)();
+  };
+  static \u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({
+    name: "mapper",
+    type: _MapperPipe,
+    pure: true
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MapperPipe, [{
+    type: Pipe,
+    args: [{
+      name: "mapper",
+      pure: true,
+      standalone: true
+    }]
+  }], null, null);
+})();
+var Password_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => Password),
+  multi: true
+};
+var Password = class _Password extends BaseComponent {
+  /**
+   * Defines a string that labels the input for accessibility.
+   * @group Props
+   */
+  ariaLabel;
+  /**
+   * Whether the component should span the full width of its parent.
+   * @group Props
+   */
+  fluid;
+  /**
+   * Specifies one or more IDs in the DOM that labels the input field.
+   * @group Props
+   */
+  ariaLabelledBy;
+  /**
+   * Label of the input for accessibility.
+   * @group Props
+   */
+  label;
+  /**
+   * Indicates whether the component is disabled or not.
+   * @group Props
+   */
+  disabled;
+  /**
+   * Text to prompt password entry. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  promptLabel;
+  /**
+   * Regex value for medium regex.
+   * @group Props
+   */
+  mediumRegex = "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})";
+  /**
+   * Regex value for strong regex.
+   * @group Props
+   */
+  strongRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})";
+  /**
+   * Text for a weak password. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  weakLabel;
+  /**
+   * Text for a medium password. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  mediumLabel;
+  /**
+   * specifies the maximum number of characters allowed in the input element.
+   * @group Props
+   */
+  maxLength;
+  /**
+   * Text for a strong password. Defaults to PrimeNG I18N API configuration.
+   * @group Props
+   */
+  strongLabel;
+  /**
+   * Identifier of the accessible input element.
+   * @group Props
+   */
+  inputId;
+  /**
+   * Whether to show the strength indicator or not.
+   * @group Props
+   */
+  feedback = true;
+  /**
+   * Id of the element or "body" for document where the overlay should be appended to.
+   * @group Props
+   */
+  appendTo;
+  /**
+   * Whether to show an icon to display the password as plain text.
+   * @group Props
+   */
+  toggleMask;
+  /**
+   * Defines the size of the component.
+   * @group Props
+   */
+  size;
+  /**
+   * Style class of the input field.
+   * @group Props
+   */
+  inputStyleClass;
+  /**
+   * Style class of the element.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Inline style of the component.
+   * @group Props
+   */
+  style;
+  /**
+   * Inline style of the input field.
+   * @group Props
+   */
+  inputStyle;
+  /**
+   * Transition options of the show animation.
+   * @group Props
+   */
+  showTransitionOptions = ".12s cubic-bezier(0, 0, 0.2, 1)";
+  /**
+   * Transition options of the hide animation.
+   * @group Props
+   */
+  hideTransitionOptions = ".1s linear";
+  /**
+   * Specify automated assistance in filling out password by browser.
+   * @group Props
+   */
+  autocomplete;
+  /**
+   * Advisory information to display on input.
+   * @group Props
+   */
+  placeholder;
+  /**
+   * When enabled, a clear icon is displayed to clear the value.
+   * @group Props
+   */
+  showClear = false;
+  /**
+   * When present, it specifies that the component should automatically get focus on load.
+   * @group Props
+   */
+  autofocus;
+  /**
+   * Specifies the input variant of the component.
+   * @group Props
+   */
+  variant;
+  /**
+   * Index of the element in tabbing order.
+   * @group Props
+   */
+  tabindex;
+  /**
+   * Callback to invoke when the component receives focus.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onFocus = new EventEmitter();
+  /**
+   * Callback to invoke when the component loses focus.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onBlur = new EventEmitter();
+  /**
+   * Callback to invoke when clear button is clicked.
+   * @group Emits
+   */
+  onClear = new EventEmitter();
+  input;
+  contentTemplate;
+  footerTemplate;
+  headerTemplate;
+  clearIconTemplate;
+  hideIconTemplate;
+  showIconTemplate;
+  templates;
+  _contentTemplate;
+  _footerTemplate;
+  _headerTemplate;
+  _clearIconTemplate;
+  _hideIconTemplate;
+  _showIconTemplate;
+  overlayVisible = false;
+  meter;
+  infoText;
+  focused = false;
+  unmasked = false;
+  mediumCheckRegExp;
+  strongCheckRegExp;
+  resizeListener;
+  scrollHandler;
+  overlay;
+  value = null;
+  onModelChange = () => {
+  };
+  onModelTouched = () => {
+  };
+  translationSubscription;
+  _componentStyle = inject(PasswordStyle);
+  get hasFluid() {
+    const nativeElement = this.el.nativeElement;
+    const fluidComponent = nativeElement.closest("p-fluid");
+    return this.fluid || !!fluidComponent;
+  }
+  overlayService = inject(OverlayService);
+  ngOnInit() {
+    super.ngOnInit();
+    this.infoText = this.promptText();
+    this.mediumCheckRegExp = new RegExp(this.mediumRegex);
+    this.strongCheckRegExp = new RegExp(this.strongRegex);
+    this.translationSubscription = this.config.translationObserver.subscribe(() => {
+      this.updateUI(this.value || "");
+    });
+  }
+  ngAfterContentInit() {
+    this.templates.forEach((item) => {
+      switch (item.getType()) {
+        case "content":
+          this._contentTemplate = item.template;
+          break;
+        case "header":
+          this._headerTemplate = item.template;
+          break;
+        case "footer":
+          this._footerTemplate = item.template;
+          break;
+        case "clearicon":
+          this._clearIconTemplate = item.template;
+          break;
+        case "hideicon":
+          this._hideIconTemplate = item.template;
+          break;
+        case "showicon":
+          this._showIconTemplate = item.template;
+          break;
+        default:
+          this._contentTemplate = item.template;
+          break;
+      }
+    });
+  }
+  onAnimationStart(event) {
+    switch (event.toState) {
+      case "visible":
+        this.overlay = event.element;
+        zindexutils.set("overlay", this.overlay, this.config.zIndex.overlay);
+        this.appendContainer();
+        this.alignOverlay();
+        this.bindScrollListener();
+        this.bindResizeListener();
+        break;
+      case "void":
+        this.unbindScrollListener();
+        this.unbindResizeListener();
+        this.overlay = null;
+        break;
+    }
+  }
+  onAnimationEnd(event) {
+    switch (event.toState) {
+      case "void":
+        zindexutils.clear(event.element);
+        break;
+    }
+  }
+  appendContainer() {
+    if (this.appendTo) {
+      if (this.appendTo === "body") this.renderer.appendChild(this.document.body, this.overlay);
+      else this.document.getElementById(this.appendTo).appendChild(this.overlay);
+    }
+  }
+  alignOverlay() {
+    if (this.appendTo) {
+      this.overlay.style.minWidth = getOuterWidth(this.input.nativeElement) + "px";
+      absolutePosition(this.overlay, this.input.nativeElement);
+    } else {
+      relativePosition(this.overlay, this.input.nativeElement);
+    }
+  }
+  onInput(event) {
+    this.value = event.target.value;
+    this.onModelChange(this.value);
+  }
+  onInputFocus(event) {
+    this.focused = true;
+    if (this.feedback) {
+      this.overlayVisible = true;
+    }
+    this.onFocus.emit(event);
+  }
+  onInputBlur(event) {
+    this.focused = false;
+    if (this.feedback) {
+      this.overlayVisible = false;
+    }
+    this.onModelTouched();
+    this.onBlur.emit(event);
+  }
+  onKeyUp(event) {
+    if (this.feedback) {
+      let value = event.target.value;
+      this.updateUI(value);
+      if (event.code === "Escape") {
+        this.overlayVisible && (this.overlayVisible = false);
+        return;
+      }
+      if (!this.overlayVisible) {
+        this.overlayVisible = true;
+      }
+    }
+  }
+  updateUI(value) {
+    let label = null;
+    let meter = null;
+    switch (this.testStrength(value)) {
+      case 1:
+        label = this.weakText();
+        meter = {
+          strength: "weak",
+          width: "33.33%"
+        };
+        break;
+      case 2:
+        label = this.mediumText();
+        meter = {
+          strength: "medium",
+          width: "66.66%"
+        };
+        break;
+      case 3:
+        label = this.strongText();
+        meter = {
+          strength: "strong",
+          width: "100%"
+        };
+        break;
+      default:
+        label = this.promptText();
+        meter = null;
+        break;
+    }
+    this.meter = meter;
+    this.infoText = label;
+  }
+  onMaskToggle() {
+    this.unmasked = !this.unmasked;
+  }
+  onOverlayClick(event) {
+    this.overlayService.add({
+      originalEvent: event,
+      target: this.el.nativeElement
+    });
+  }
+  testStrength(str) {
+    let level = 0;
+    if (this.strongCheckRegExp.test(str)) level = 3;
+    else if (this.mediumCheckRegExp.test(str)) level = 2;
+    else if (str.length) level = 1;
+    return level;
+  }
+  writeValue(value) {
+    if (value === void 0) this.value = null;
+    else this.value = value;
+    if (this.feedback) this.updateUI(this.value || "");
+    this.cd.markForCheck();
+  }
+  registerOnChange(fn) {
+    this.onModelChange = fn;
+  }
+  registerOnTouched(fn) {
+    this.onModelTouched = fn;
+  }
+  setDisabledState(val) {
+    this.disabled = val;
+    this.cd.markForCheck();
+  }
+  bindScrollListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.scrollHandler) {
+        this.scrollHandler = new ConnectedOverlayScrollHandler(this.input.nativeElement, () => {
+          if (this.overlayVisible) {
+            this.overlayVisible = false;
+          }
+        });
+      }
+      this.scrollHandler.bindScrollListener();
+    }
+  }
+  bindResizeListener() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.resizeListener) {
+        const window2 = this.document.defaultView;
+        this.resizeListener = this.renderer.listen(window2, "resize", () => {
+          if (this.overlayVisible && !isTouchDevice()) {
+            this.overlayVisible = false;
+          }
+        });
+      }
+    }
+  }
+  unbindScrollListener() {
+    if (this.scrollHandler) {
+      this.scrollHandler.unbindScrollListener();
+    }
+  }
+  unbindResizeListener() {
+    if (this.resizeListener) {
+      this.resizeListener();
+      this.resizeListener = null;
+    }
+  }
+  containerClass(toggleMask) {
+    return {
+      "p-password p-component p-inputwrapper": true,
+      "p-input-icon-right": toggleMask
+    };
+  }
+  get rootClass() {
+    return this._componentStyle.classes.root({
+      instance: this
+    });
+  }
+  inputFieldClass(disabled2) {
+    return {
+      "p-password-input": true,
+      "p-disabled": disabled2
+    };
+  }
+  strengthClass(meter) {
+    return `p-password-meter-label p-password-meter${meter?.strength ? `-${meter.strength}` : ""}`;
+  }
+  filled() {
+    return this.value != null && this.value.toString().length > 0;
+  }
+  promptText() {
+    return this.promptLabel || this.getTranslation(TranslationKeys.PASSWORD_PROMPT);
+  }
+  weakText() {
+    return this.weakLabel || this.getTranslation(TranslationKeys.WEAK);
+  }
+  mediumText() {
+    return this.mediumLabel || this.getTranslation(TranslationKeys.MEDIUM);
+  }
+  strongText() {
+    return this.strongLabel || this.getTranslation(TranslationKeys.STRONG);
+  }
+  restoreAppend() {
+    if (this.overlay && this.appendTo) {
+      if (this.appendTo === "body") this.renderer.removeChild(this.document.body, this.overlay);
+      else this.document.getElementById(this.appendTo).removeChild(this.overlay);
+    }
+  }
+  inputType(unmasked) {
+    return unmasked ? "text" : "password";
+  }
+  getTranslation(option) {
+    return this.config.getTranslation(option);
+  }
+  clear() {
+    this.value = null;
+    this.onModelChange(this.value);
+    this.writeValue(this.value);
+    this.onClear.emit();
+  }
+  ngOnDestroy() {
+    if (this.overlay) {
+      zindexutils.clear(this.overlay);
+      this.overlay = null;
+    }
+    this.restoreAppend();
+    this.unbindResizeListener();
+    if (this.scrollHandler) {
+      this.scrollHandler.destroy();
+      this.scrollHandler = null;
+    }
+    if (this.translationSubscription) {
+      this.translationSubscription.unsubscribe();
+    }
+    super.ngOnDestroy();
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Password_BaseFactory;
+    return function Password_Factory(__ngFactoryType__) {
+      return (\u0275Password_BaseFactory || (\u0275Password_BaseFactory = \u0275\u0275getInheritedFactory(_Password)))(__ngFactoryType__ || _Password);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Password,
+    selectors: [["p-password"]],
+    contentQueries: function Password_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, _c011, 4);
+        \u0275\u0275contentQuery(dirIndex, _c114, 4);
+        \u0275\u0275contentQuery(dirIndex, _c27, 4);
+        \u0275\u0275contentQuery(dirIndex, _c35, 4);
+        \u0275\u0275contentQuery(dirIndex, _c45, 4);
+        \u0275\u0275contentQuery(dirIndex, _c55, 4);
+        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.footerTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.headerTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.clearIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.hideIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.showIconTemplate = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
+      }
+    },
+    viewQuery: function Password_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c65, 5);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.input = _t.first);
+      }
+    },
+    inputs: {
+      ariaLabel: "ariaLabel",
+      fluid: [2, "fluid", "fluid", booleanAttribute],
+      ariaLabelledBy: "ariaLabelledBy",
+      label: "label",
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      promptLabel: "promptLabel",
+      mediumRegex: "mediumRegex",
+      strongRegex: "strongRegex",
+      weakLabel: "weakLabel",
+      mediumLabel: "mediumLabel",
+      maxLength: [2, "maxLength", "maxLength", numberAttribute],
+      strongLabel: "strongLabel",
+      inputId: "inputId",
+      feedback: [2, "feedback", "feedback", booleanAttribute],
+      appendTo: "appendTo",
+      toggleMask: [2, "toggleMask", "toggleMask", booleanAttribute],
+      size: "size",
+      inputStyleClass: "inputStyleClass",
+      styleClass: "styleClass",
+      style: "style",
+      inputStyle: "inputStyle",
+      showTransitionOptions: "showTransitionOptions",
+      hideTransitionOptions: "hideTransitionOptions",
+      autocomplete: "autocomplete",
+      placeholder: "placeholder",
+      showClear: [2, "showClear", "showClear", booleanAttribute],
+      autofocus: [2, "autofocus", "autofocus", booleanAttribute],
+      variant: "variant",
+      tabindex: [2, "tabindex", "tabindex", numberAttribute]
+    },
+    outputs: {
+      onFocus: "onFocus",
+      onBlur: "onBlur",
+      onClear: "onClear"
+    },
+    features: [\u0275\u0275ProvidersFeature([Password_VALUE_ACCESSOR, PasswordStyle]), \u0275\u0275InheritDefinitionFeature],
+    decls: 8,
+    vars: 34,
+    consts: [["input", ""], ["overlay", ""], ["content", ""], [3, "ngClass", "ngStyle"], ["pInputText", "", 3, "input", "focus", "blur", "keyup", "disabled", "pSize", "ngClass", "ngStyle", "value", "variant", "pAutoFocus"], [4, "ngIf"], ["class", "p-password-overlay p-component", 3, "click", 4, "ngIf"], ["class", "p-password-clear-icon", 3, "click", 4, "ngIf"], [1, "p-password-clear-icon", 3, "click"], [4, "ngTemplateOutlet"], ["class", "p-password-toggle-mask-icon p-password-mask-icon", 3, "click", 4, "ngIf"], [3, "click", 4, "ngIf"], [1, "p-password-toggle-mask-icon", "p-password-mask-icon", 3, "click"], [3, "click"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [1, "p-password-overlay", "p-component", 3, "click"], [4, "ngIf", "ngIfElse"], [1, "p-password-content"], [1, "p-password-meter"], [1, "p-password-meter-text"]],
+    template: function Password_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 3)(1, "input", 4, 0);
+        \u0275\u0275pipe(3, "mapper");
+        \u0275\u0275pipe(4, "mapper");
+        \u0275\u0275listener("input", function Password_Template_input_input_1_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onInput($event));
+        })("focus", function Password_Template_input_focus_1_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onInputFocus($event));
+        })("blur", function Password_Template_input_blur_1_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onInputBlur($event));
+        })("keyup", function Password_Template_input_keyup_1_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onKeyUp($event));
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(5, Password_ng_container_5_Template, 4, 3, "ng-container", 5)(6, Password_ng_container_6_Template, 3, 2, "ng-container", 5)(7, Password_div_7_Template, 7, 11, "div", 6);
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275classMap(ctx.styleClass);
+        \u0275\u0275property("ngClass", ctx.rootClass)("ngStyle", ctx.style);
+        \u0275\u0275attribute("data-pc-name", "password")("data-pc-section", "root");
+        \u0275\u0275advance();
+        \u0275\u0275classMap(ctx.inputStyleClass);
+        \u0275\u0275property("disabled", ctx.disabled)("pSize", ctx.size)("ngClass", \u0275\u0275pipeBind2(3, 28, ctx.disabled, ctx.inputFieldClass))("ngStyle", ctx.inputStyle)("value", ctx.value)("variant", ctx.variant)("pAutoFocus", ctx.autofocus);
+        \u0275\u0275attribute("label", ctx.label)("aria-label", ctx.ariaLabel)("aria-labelledBy", ctx.ariaLabelledBy)("id", ctx.inputId)("tabindex", ctx.tabindex)("type", \u0275\u0275pipeBind2(4, 31, ctx.unmasked, ctx.inputType))("placeholder", ctx.placeholder)("autocomplete", ctx.autocomplete)("maxlength", ctx.maxLength)("data-pc-section", "input");
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngIf", ctx.showClear && ctx.value != null);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.toggleMask);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.overlayVisible);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, InputText, AutoFocus, TimesIcon, EyeSlashIcon, EyeIcon, MapperPipe, SharedModule],
+    encapsulation: 2,
+    data: {
+      animation: [trigger("overlayAnimation", [transition(":enter", [style({
+        opacity: 0,
+        transform: "scaleY(0.8)"
+      }), animate("{{showTransitionParams}}")]), transition(":leave", [animate("{{hideTransitionParams}}", style({
+        opacity: 0
+      }))])])]
+    },
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Password, [{
+    type: Component,
+    args: [{
+      selector: "p-password",
+      standalone: true,
+      imports: [CommonModule, InputText, AutoFocus, TimesIcon, EyeSlashIcon, EyeIcon, MapperPipe, SharedModule],
+      template: `
+        <div [ngClass]="rootClass" [ngStyle]="style" [class]="styleClass" [attr.data-pc-name]="'password'" [attr.data-pc-section]="'root'">
+            <input
+                #input
+                [attr.label]="label"
+                [attr.aria-label]="ariaLabel"
+                [attr.aria-labelledBy]="ariaLabelledBy"
+                [attr.id]="inputId"
+                [attr.tabindex]="tabindex"
+                pInputText
+                [disabled]="disabled"
+                [pSize]="size"
+                [ngClass]="disabled | mapper: inputFieldClass"
+                [ngStyle]="inputStyle"
+                [class]="inputStyleClass"
+                [attr.type]="unmasked | mapper: inputType"
+                [attr.placeholder]="placeholder"
+                [attr.autocomplete]="autocomplete"
+                [value]="value"
+                [variant]="variant"
+                (input)="onInput($event)"
+                (focus)="onInputFocus($event)"
+                (blur)="onInputBlur($event)"
+                (keyup)="onKeyUp($event)"
+                [attr.maxlength]="maxLength"
+                [attr.data-pc-section]="'input'"
+                [pAutoFocus]="autofocus"
+            />
+            <ng-container *ngIf="showClear && value != null">
+                <TimesIcon *ngIf="!clearIconTemplate && !_clearIconTemplate" class="p-password-clear-icon" (click)="clear()" [attr.data-pc-section]="'clearIcon'" />
+                <span (click)="clear()" class="p-password-clear-icon" [attr.data-pc-section]="'clearIcon'">
+                    <ng-template *ngTemplateOutlet="clearIconTemplate || _clearIconTemplate"></ng-template>
+                </span>
+            </ng-container>
+
+            <ng-container *ngIf="toggleMask">
+                <ng-container *ngIf="unmasked">
+                    <EyeSlashIcon class="p-password-toggle-mask-icon p-password-mask-icon" *ngIf="!hideIconTemplate && !_hideIconTemplate" (click)="onMaskToggle()" [attr.data-pc-section]="'hideIcon'" />
+                    <span *ngIf="hideIconTemplate || _hideIconTemplate" (click)="onMaskToggle()">
+                        <ng-template *ngTemplateOutlet="hideIconTemplate || _hideIconTemplate; context: { class: 'p-password-toggle-mask-icon p-password-mask-icon' }"></ng-template>
+                    </span>
+                </ng-container>
+                <ng-container *ngIf="!unmasked">
+                    <EyeIcon *ngIf="!showIconTemplate && !_showIconTemplate" class="p-password-toggle-mask-icon p-password-mask-icon" (click)="onMaskToggle()" [attr.data-pc-section]="'showIcon'" />
+                    <span *ngIf="showIconTemplate || _showIconTemplate" (click)="onMaskToggle()">
+                        <ng-template *ngTemplateOutlet="showIconTemplate || _showIconTemplate"></ng-template>
+                    </span>
+                </ng-container>
+            </ng-container>
+
+            <div
+                #overlay
+                *ngIf="overlayVisible"
+                class="p-password-overlay p-component"
+                (click)="onOverlayClick($event)"
+                [@overlayAnimation]="{
+                    value: 'visible',
+                    params: { showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions }
+                }"
+                (@overlayAnimation.start)="onAnimationStart($event)"
+                (@overlayAnimation.done)="onAnimationEnd($event)"
+                [attr.data-pc-section]="'panel'"
+            >
+                <ng-container *ngTemplateOutlet="headerTemplate || _headerTemplate"></ng-container>
+                <ng-container *ngIf="contentTemplate || _contentTemplate; else content">
+                    <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
+                </ng-container>
+                <ng-template #content>
+                    <div class="p-password-content">
+                        <div class="p-password-meter" [attr.data-pc-section]="'meter'">
+                            <div [ngClass]="meter | mapper: strengthClass" [ngStyle]="{ width: meter ? meter.width : '' }" [attr.data-pc-section]="'meterLabel'"></div>
+                        </div>
+                        <div class="p-password-meter-text" [attr.data-pc-section]="'info'">{{ infoText }}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngTemplateOutlet="footerTemplate || _footerTemplate"></ng-container>
+            </div>
+        </div>
+    `,
+      animations: [trigger("overlayAnimation", [transition(":enter", [style({
+        opacity: 0,
+        transform: "scaleY(0.8)"
+      }), animate("{{showTransitionParams}}")]), transition(":leave", [animate("{{hideTransitionParams}}", style({
+        opacity: 0
+      }))])])],
+      providers: [Password_VALUE_ACCESSOR, PasswordStyle],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None
+    }]
+  }], null, {
+    ariaLabel: [{
+      type: Input
+    }],
+    fluid: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    ariaLabelledBy: [{
+      type: Input
+    }],
+    label: [{
+      type: Input
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    promptLabel: [{
+      type: Input
+    }],
+    mediumRegex: [{
+      type: Input
+    }],
+    strongRegex: [{
+      type: Input
+    }],
+    weakLabel: [{
+      type: Input
+    }],
+    mediumLabel: [{
+      type: Input
+    }],
+    maxLength: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    strongLabel: [{
+      type: Input
+    }],
+    inputId: [{
+      type: Input
+    }],
+    feedback: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    appendTo: [{
+      type: Input
+    }],
+    toggleMask: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    size: [{
+      type: Input
+    }],
+    inputStyleClass: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    style: [{
+      type: Input
+    }],
+    inputStyle: [{
+      type: Input
+    }],
+    showTransitionOptions: [{
+      type: Input
+    }],
+    hideTransitionOptions: [{
+      type: Input
+    }],
+    autocomplete: [{
+      type: Input
+    }],
+    placeholder: [{
+      type: Input
+    }],
+    showClear: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    autofocus: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    variant: [{
+      type: Input
+    }],
+    tabindex: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    onFocus: [{
+      type: Output
+    }],
+    onBlur: [{
+      type: Output
+    }],
+    onClear: [{
+      type: Output
+    }],
+    input: [{
+      type: ViewChild,
+      args: ["input"]
+    }],
+    contentTemplate: [{
+      type: ContentChild,
+      args: ["content", {
+        descendants: false
+      }]
+    }],
+    footerTemplate: [{
+      type: ContentChild,
+      args: ["footer", {
+        descendants: false
+      }]
+    }],
+    headerTemplate: [{
+      type: ContentChild,
+      args: ["header", {
+        descendants: false
+      }]
+    }],
+    clearIconTemplate: [{
+      type: ContentChild,
+      args: ["clearicon", {
+        descendants: false
+      }]
+    }],
+    hideIconTemplate: [{
+      type: ContentChild,
+      args: ["hideicon", {
+        descendants: false
+      }]
+    }],
+    showIconTemplate: [{
+      type: ContentChild,
+      args: ["showicon", {
+        descendants: false
+      }]
+    }],
+    templates: [{
+      type: ContentChildren,
+      args: [PrimeTemplate]
+    }]
+  });
+})();
+var PasswordModule = class _PasswordModule {
+  static \u0275fac = function PasswordModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PasswordModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _PasswordModule,
+    imports: [Password, PasswordDirective, SharedModule],
+    exports: [PasswordDirective, Password, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [Password, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PasswordModule, [{
+    type: NgModule,
+    args: [{
+      imports: [Password, PasswordDirective, SharedModule],
+      exports: [PasswordDirective, Password, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-keyfilter.mjs
+var KEYFILTER_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => KeyFilter),
+  multi: true
+};
+var DEFAULT_MASKS = {
+  pint: /^[\d]*$/,
+  int: /^[-]?[\d]*$/,
+  pnum: /^[\d\.]*$/,
+  money: /^[\d\.\s,]*$/,
+  num: /^[-]?[\d\.]*$/,
+  hex: /^[0-9a-f]*$/i,
+  email: /^[a-z0-9_\.\-@]*$/i,
+  alpha: /^[a-z_]*$/i,
+  alphanum: /^[a-z0-9_]*$/i
+};
+var KEYS = {
+  TAB: 9,
+  RETURN: 13,
+  ESC: 27,
+  BACKSPACE: 8,
+  DELETE: 46
+};
+var SAFARI_KEYS = {
+  63234: 37,
+  // left
+  63235: 39,
+  // right
+  63232: 38,
+  // up
+  63233: 40,
+  // down
+  63276: 33,
+  // page up
+  63277: 34,
+  // page down
+  63272: 46,
+  // delete
+  63273: 36,
+  // home
+  63275: 35
+  // end
+};
+var KeyFilter = class _KeyFilter {
+  document;
+  platformId;
+  el;
+  /**
+   * When enabled, instead of blocking keys, input is validated internally to test against the regular expression.
+   * @group Props
+   */
+  pValidateOnly;
+  /**
+   * Sets the pattern for key filtering.
+   * @group Props
+   */
+  set pattern(_pattern) {
+    this._pattern = _pattern;
+    if (_pattern instanceof RegExp) {
+      this.regex = _pattern;
+    } else if (_pattern in DEFAULT_MASKS) {
+      this.regex = DEFAULT_MASKS[_pattern];
+    } else {
+      this.regex = /./;
+    }
+  }
+  get pattern() {
+    return this._pattern;
+  }
+  /**
+   * Emits a value whenever the ngModel of the component changes.
+   * @param {(string | number)} modelValue - Custom model change event.
+   * @group Emits
+   */
+  ngModelChange = new EventEmitter();
+  regex = /./;
+  _pattern;
+  isAndroid;
+  lastValue;
+  constructor(document2, platformId, el) {
+    this.document = document2;
+    this.platformId = platformId;
+    this.el = el;
+    if (isPlatformBrowser(this.platformId)) {
+      this.isAndroid = isAndroid();
+    } else {
+      this.isAndroid = false;
+    }
+  }
+  isNavKeyPress(e) {
+    let k = e.keyCode;
+    k = getBrowser().safari ? SAFARI_KEYS[k] || k : k;
+    return k >= 33 && k <= 40 || k == KEYS.RETURN || k == KEYS.TAB || k == KEYS.ESC;
+  }
+  isSpecialKey(e) {
+    let k = e.keyCode || e.charCode;
+    return k == 9 || k == 13 || k == 27 || k == 16 || k == 17 || k >= 18 && k <= 20 || getBrowser().opera && !e.shiftKey && (k == 8 || k >= 33 && k <= 35 || k >= 36 && k <= 39 || k >= 44 && k <= 45);
+  }
+  getKey(e) {
+    let k = e.keyCode || e.charCode;
+    return getBrowser().safari ? SAFARI_KEYS[k] || k : k;
+  }
+  getCharCode(e) {
+    return e.charCode || e.keyCode || e.which;
+  }
+  findDelta(value, prevValue) {
+    let delta = "";
+    for (let i = 0; i < value.length; i++) {
+      let str = value.substr(0, i) + value.substr(i + value.length - prevValue.length);
+      if (str === prevValue) delta = value.substr(i, value.length - prevValue.length);
+    }
+    return delta;
+  }
+  isValidChar(c) {
+    return this.regex.test(c);
+  }
+  isValidString(str) {
+    for (let i = 0; i < str.length; i++) {
+      if (!this.isValidChar(str.substr(i, 1))) {
+        return false;
+      }
+    }
+    return true;
+  }
+  onInput(e) {
+    if (this.isAndroid && !this.pValidateOnly) {
+      let val = this.el.nativeElement.value;
+      let lastVal = this.lastValue || "";
+      let inserted = this.findDelta(val, lastVal);
+      let removed = this.findDelta(lastVal, val);
+      let pasted = inserted.length > 1 || !inserted && !removed;
+      if (pasted) {
+        if (!this.isValidString(val)) {
+          this.el.nativeElement.value = lastVal;
+          this.ngModelChange.emit(lastVal);
+        }
+      } else if (!removed) {
+        if (!this.isValidChar(inserted)) {
+          this.el.nativeElement.value = lastVal;
+          this.ngModelChange.emit(lastVal);
+        }
+      }
+      val = this.el.nativeElement.value;
+      if (this.isValidString(val)) {
+        this.lastValue = val;
+      }
+    }
+  }
+  onKeyPress(e) {
+    if (this.isAndroid || this.pValidateOnly) {
+      return;
+    }
+    let browser = getBrowser();
+    let k = this.getKey(e);
+    if (browser.mozilla && (e.ctrlKey || e.altKey)) {
+      return;
+    } else if (k == 17 || k == 18) {
+      return;
+    }
+    if (k == 13) {
+      return;
+    }
+    let c = this.getCharCode(e);
+    let cc = String.fromCharCode(c);
+    let ok = true;
+    if (!browser.mozilla && (this.isSpecialKey(e) || !cc)) {
+      return;
+    }
+    let existingValue = this.el.nativeElement.value || "";
+    let combinedValue = existingValue + cc;
+    ok = this.regex.test(combinedValue);
+    if (!ok) {
+      e.preventDefault();
+    }
+  }
+  onPaste(e) {
+    const clipboardData = e.clipboardData || this.document.defaultView.clipboardData.getData("text");
+    if (clipboardData) {
+      let pattern = /\{[0-9]+\}/;
+      const pastedText = clipboardData.getData("text");
+      if (pattern.test(this.regex.toString())) {
+        if (!this.regex.test(pastedText)) {
+          e.preventDefault();
+          return;
+        }
+      } else {
+        for (let char of pastedText.toString()) {
+          if (!this.regex.test(char)) {
+            e.preventDefault();
+            return;
+          }
+        }
+      }
+    }
+  }
+  validate(c) {
+    if (this.pValidateOnly) {
+      let value = this.el.nativeElement.value;
+      if (value && !this.regex.test(value)) {
+        return {
+          validatePattern: false
+        };
+      }
+    }
+  }
+  static \u0275fac = function KeyFilter_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _KeyFilter)(\u0275\u0275directiveInject(DOCUMENT), \u0275\u0275directiveInject(PLATFORM_ID), \u0275\u0275directiveInject(ElementRef));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _KeyFilter,
+    selectors: [["", "pKeyFilter", ""]],
+    hostBindings: function KeyFilter_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("input", function KeyFilter_input_HostBindingHandler($event) {
+          return ctx.onInput($event);
+        })("keypress", function KeyFilter_keypress_HostBindingHandler($event) {
+          return ctx.onKeyPress($event);
+        })("paste", function KeyFilter_paste_HostBindingHandler($event) {
+          return ctx.onPaste($event);
+        });
+      }
+    },
+    inputs: {
+      pValidateOnly: [2, "pValidateOnly", "pValidateOnly", booleanAttribute],
+      pattern: [0, "pKeyFilter", "pattern"]
+    },
+    outputs: {
+      ngModelChange: "ngModelChange"
+    },
+    features: [\u0275\u0275ProvidersFeature([KEYFILTER_VALIDATOR])]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(KeyFilter, [{
+    type: Directive,
+    args: [{
+      selector: "[pKeyFilter]",
+      standalone: true,
+      providers: [KEYFILTER_VALIDATOR]
+    }]
+  }], () => [{
+    type: Document,
+    decorators: [{
+      type: Inject,
+      args: [DOCUMENT]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Inject,
+      args: [PLATFORM_ID]
+    }]
+  }, {
+    type: ElementRef
+  }], {
+    pValidateOnly: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    pattern: [{
+      type: Input,
+      args: ["pKeyFilter"]
+    }],
+    ngModelChange: [{
+      type: Output
+    }],
+    onInput: [{
+      type: HostListener,
+      args: ["input", ["$event"]]
+    }],
+    onKeyPress: [{
+      type: HostListener,
+      args: ["keypress", ["$event"]]
+    }],
+    onPaste: [{
+      type: HostListener,
+      args: ["paste", ["$event"]]
+    }]
+  });
+})();
+var KeyFilterModule = class _KeyFilterModule {
+  static \u0275fac = function KeyFilterModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _KeyFilterModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _KeyFilterModule,
+    imports: [KeyFilter],
+    exports: [KeyFilter]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({});
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(KeyFilterModule, [{
+    type: NgModule,
+    args: [{
+      imports: [KeyFilter],
+      exports: [KeyFilter]
+    }]
+  }], null, null);
+})();
+
+// src/app/views/ia-assistant/services/export-github.service.ts
+var ExportGitHubService = class _ExportGitHubService {
+  fetchService = inject(FetchService);
+  token = "";
+  formatHtmlWithPrettier(html) {
+    return __async(this, null, function* () {
+      if (!navigator.languages) {
+        navigator.languages = ["en"];
+      }
+      try {
+        const [{ default: prettier }, parserHtml] = yield Promise.all([
+          import("./chunk-UKCQ235J.js"),
+          import("./chunk-2UKPKC67.js")
+        ]);
+        return prettier.format(html, {
+          parser: "html",
+          plugins: [parserHtml],
+          printWidth: Infinity,
+          tabWidth: 4,
+          useTabs: false,
+          htmlWhitespaceSensitivity: "css",
+          arrowParens: "always",
+          bracketSameLine: false,
+          bracketSpacing: false,
+          embeddedLanguageFormatting: "auto",
+          endOfLine: "crlf",
+          jsxSingleQuote: false,
+          objectWrap: "collapse",
+          ProseWrap: "never",
+          quoteProps: "consistent",
+          singleAttributePerLine: false,
+          singleQuote: false,
+          trailingComma: "none",
+          vueIndentScriptAndStyle: true
+        });
+      } catch (error) {
+        console.error("Prettier formatting error:", error);
+        return html;
+      }
+    });
+  }
+  formatDocumentAsJekyll(doc, url, owner, repo) {
+    return __async(this, null, function* () {
+      let layout = "default";
+      const title = doc.querySelector('meta[name="dcterms.title"]')?.content.trim() || doc.title.trim() || "";
+      const description = doc.querySelector('meta[name="description"]')?.content.trim() || "";
+      const subject = doc.querySelector('meta[name="dcterms.subject"]')?.content.trim() || "";
+      const keywords = doc.querySelector('meta[name="keywords"]')?.content.trim() || "";
+      const lang = doc.querySelector('meta[name="dcterms.language"]')?.content?.slice(0, 2) || "en";
+      const issued = doc.querySelector('meta[name="dcterms.issued"]')?.content || "";
+      const modified = doc.querySelector('meta[name="dcterms.modified"]')?.content || "";
+      const altLangPage = Array.from(doc.querySelectorAll('link[rel="alternate"]')).find((link) => link.getAttribute("hreflang") !== lang)?.href || "";
+      const crumbs = Array.from(doc.querySelectorAll("ol.breadcrumb li")).slice(1).map((li) => {
+        const a = li.querySelector("a");
+        if (!a)
+          return null;
+        const rawHref = a.getAttribute("href") || "";
+        return {
+          title: a.textContent?.trim() || "",
+          link: rawHref.startsWith("http") ? a.href : `https://www.canada.ca${a.getAttribute("href")}`
+        };
+      }).filter(Boolean);
+      const crumbsYaml = crumbs.map((crumb) => `  - title: "${crumb.title}"\r
+    link: "${crumb.link}"`).join("\r\n");
+      const auth = lang === "en" ? `auth:\r
+  type: "contextual"\r
+  label: "Sign in"\r
+  labelExtended: "CRA sign in"\r
+  link: "https://www.canada.ca/en/revenue-agency/services/e-services/cra-login-services.html"` : `auth:\r
+  type: "contextual"\r
+  label: "Se connecter"\r
+  labelExtended: "Se connecter \xE0 l'ARC"\r
+  link: "https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-ouverture-session-arc.html"`;
+      const mainEl = doc.querySelector("main");
+      let pageContent = "";
+      if (mainEl) {
+        mainEl.querySelectorAll("section.pagedetails").forEach((s2) => s2.remove());
+        mainEl.querySelectorAll("div.pagedetails").forEach((d) => d.remove());
+        mainEl.querySelectorAll('div[class^="mws"]').forEach((div) => {
+          while (div.firstChild) {
+            div.parentNode?.insertBefore(div.firstChild, div);
+          }
+          div.remove();
+        });
+        mainEl.querySelectorAll("*").forEach((el) => {
+          for (let attr of Array.from(el.attributes)) {
+            if (attr.value && attr.value.includes('"/')) {
+              attr.value = attr.value.replace(/"\//g, '"https://www.canada.ca/');
+            }
+            if (attr.value && attr.value.startsWith("/")) {
+              attr.value = `https://www.canada.ca${attr.value}`;
+            }
+          }
+        });
+        const h1s = doc.querySelectorAll("h1");
+        const hasSubway = doc.querySelector(".gc-subway");
+        const hasLeadAboveH1 = h1s[0]?.previousElementSibling?.matches("p.lead") || !!h1s[0]?.previousElementSibling?.querySelector?.("p.lead");
+        const hasHgroup = doc.querySelector("hgroup");
+        if (hasSubway || h1s.length > 1 || h1s[0] && h1s[0].textContent?.trim().replace("&nbsp;", " ") !== title || h1s[0]?.closest(".well") || hasLeadAboveH1 || hasHgroup) {
+          layout = "without-h1";
+        } else if (!mainEl.classList.contains("container")) {
+          layout = "no-container";
+        } else {
+          h1s[0]?.remove();
+        }
+        pageContent = mainEl.innerHTML.replace(/[ \t]+$/gm, "").replace(/\n{2,}/g, "\n").split("\n").map((line) => line.replace(/(\S)( {2,})/g, (m, first) => first + " ")).join("\n");
+      }
+      pageContent = yield this.formatHtmlWithPrettier(pageContent);
+      const frontMatter = `---\r
+layout: ${layout}\r
+title: "${title}"\r
+description: "${description}"\r
+subject: "${subject}"\r
+keywords: "${keywords}"\r
+${auth}\r
+altLangPage: "${altLangPage}"\r
+dateModified: ${modified}\r
+dateIssued: ${issued}\r
+breadcrumbs: # By default the Canada.ca crumbs is already set\r
+${crumbsYaml || "  []"}\r
+feedbackData:\r
+  section: "${title}"\r
+notedlinks:\r
+  - title: "${title}"\r
+    link: "${url}"\r
+  - title: "Repository sitemap"\r
+    link: "https://${owner}.github.io/${repo}/index.html"\r
+---\r
+\r
+${pageContent}`;
+      return frontMatter;
+    });
+  }
+  createConfigYaml(owner, repo, branch, token, existingFiles) {
+    return __async(this, null, function* () {
+      const content = `---
+# standard jekyll configuration
+content_editable: true
+baseurl: /${repo}
+url: https://${owner}.github.io
+repository: ${owner}/${repo}
+website: https://www.canada.ca/en.html
+
+# Remote theme, use the latest version
+remote_theme: wet-boew/gcweb-jekyll
+
+# Files excluded from Jekyll builds
+exclude:
+ - README.md
+ - Gemfile
+ - Gemfile.lock
+ - gcweb-jekyll.gemspec
+
+# Site settings
+assets: https://wet-boew.github.io/themes-dist
+creator:
+  en: "Canada Revenue Agency"
+  fr: "Agence du revenu du Canada"
+
+# Custom settings
+developerOptions: false
+devOptionsLocStore: "gitCRATemplateDevOptions"
+exitByURL: true
+exitPage:
+  en: "/${repo}/source/exit-intent-e.html"
+  fr: "/${repo}/source/exit-intent-f.html"
+externalOrigin: "https://www.canada.ca"
+modifiedLinkList: "/${repo}/source/data/exclude-redirect-links.json"
+relativeExternalLinks: false
+testBanner: true
+
+# Page front matter defaults
+defaults:
+  - scope:
+      path: "" # Ensure it's applied to all pages
+      type: pages
+    values:
+      layout: default
+      lang: en
+      share: true
+      sitemenu: true
+      sitesearch: true
+      feedback: true
+      feedbackData:
+        theme: "Taxes"
+      feedbackPath: https://www.canada.ca/etc/designs/canada/wet-boew/assets/feedback/page-feedback-en.html
+      privacyUrl: https://www.canada.ca/en/revenue-agency/corporate/privacy-notice.html
+      termsURL: https://www.canada.ca/en/transparency/terms.html
+      sitemenuPath: https://www.canada.ca/content/dam/canada/sitemenu/sitemenu-v2-en.html
+      contextualFooter:
+        title: "Canada Revenue Agency (CRA)"
+        links:
+          - text: "Contact the CRA"
+            url: "https://www.canada.ca/en/revenue-agency/corporate/contact-information.html"
+          - text: "Update your information"
+            url: "https://www.canada.ca/en/revenue-agency/services/update-information-cra.html"
+          - text: "About the CRA"
+            url: "https://www.canada.ca/en/revenue-agency/corporate/about-canada-revenue-agency-cra.html"
+      css:
+        - https://use.fontawesome.com/releases/v5.15.4/css/all.css
+        - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.css
+        - https://cra-design.github.io/core-prototype/source/css/testing-banner.css
+      script:
+        - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.js
+        - https://cra-design.github.io/core-prototype/source/scripts/external-link-detour.js
+        `;
+      try {
+        console.log(`Creating _config.yml for ${repo}`);
+        yield this.exportToGitHub(owner, repo, branch, "_config.yml", "_config.yml", content, token, existingFiles, false, false);
+      } catch (error) {
+        console.error(`Failed to create _config.yml for ${repo}:`, error);
+      }
+    });
+  }
+  createSitemap(owner, repo, branch, token, existingFiles) {
+    return __async(this, null, function* () {
+      const date = /* @__PURE__ */ new Date();
+      const today = date.toISOString().split("T")[0];
+      const content = `---
+testBanner: false
+title: "${repo} repository sitemap [GCWeb Jekyll pages]"
+dateModified: ${today}
+dateIssued: ${today}
+nositesearch: true
+nomenu: true
+breadcrumbs: false
+feedback: false
+share: false
+noFooterContextual: true
+noFooterCorporate: true
+noFooterMain: true
+---
+
+<div class="mrgn-tp-md brdr-bttm">
+    <div class="row">
+        <ul class="toc lst-spcd col-md-12">
+            <li class="col-md-4 col-sm-6"><a class="list-group-item active" data-exit="false" href="https://github.com/${owner}/${repo}/tree/main">GitHub repository</a></li>
+        </ul>
+    </div>
+</div>
+<ul>
+{% assign sitePages = site.pages | sort: "url" %}
+{% for p in sitePages %}
+    {% include sitemaplink.html url = p.url title = p.title %}
+    {% assign page_url = p.url | slice: 1, p.url.size %}
+    {% assign folder_path = page_url | split: "/" %}
+{% endfor %}
+</ul>`;
+      try {
+        console.log(`Creating sitemap for ${repo}`);
+        yield this.exportToGitHub(owner, repo, branch, "index.html", "index.html", content, token, existingFiles, false, false);
+      } catch (error) {
+        console.error(`Failed to create sitemap for ${repo}:`, error);
+      }
+    });
+  }
+  //Set up README.md <-- add mermaid chart to this
+  createInitialReadme(owner, repo, branch, token, existingFiles) {
+    return __async(this, null, function* () {
+      const filename = "README.md";
+      const date = /* @__PURE__ */ new Date();
+      const today = date.toISOString().split("T")[0];
+      date.setDate(date.getDate() - 14);
+      const startDate = date.toISOString().split("T")[0];
+      date.setDate(date.getDate() + 98);
+      const endDate = date.toISOString().split("T")[0];
+      const content = `# ${repo} COP
+
+*description of the COP*
+
+**COP timeframe** ${startDate} - ${endDate}
+
+## Overview
+
+This repository was created via the **Design Assistant**.  
+It contains the template files and in-scope pages needed to get started.
+
+GitHub Pages: [https://${owner}.github.io/${repo}](https://${owner}.github.io/${repo})
+
+---
+## Update procedures
+
+Add information on how to manage the repo here.
+
+---
+## Design phase roadmap:
+
+- [x] Initial content inventory and repo setup
+- [ ] Prototype: co-design navigation and content
+- [ ] SME review and accuracy check
+- [ ] Validation usability testing (including accessibility review)
+- [ ] Refine prototype (if required)
+- [ ] Spot check usability (if required)
+
+**Updated:**  ${today}
+`;
+      try {
+        console.log(`Creating initial README.md for ${repo}`);
+        yield this.exportToGitHub(owner, repo, branch, filename, filename, content, token, existingFiles, true, false);
+      } catch (error) {
+        console.error(`Failed to create README.md for ${repo}:`, error);
+      }
+    });
+  }
+  filesToCopy = [
+    "https://raw.githubusercontent.com/cra-design/core-prototype/main/_includes/header/header.html",
+    "https://raw.githubusercontent.com/cra-design/core-prototype/main/_includes/resources-inc/footer.html",
+    "https://raw.githubusercontent.com/cra-design/core-prototype/main/source/exit-intent-e.html",
+    "https://raw.githubusercontent.com/cra-design/core-prototype/main/404.html"
+  ];
+  copyCoreFiles(owner, repo, branch, token, existingFiles) {
+    return __async(this, null, function* () {
+      for (const file of this.filesToCopy) {
+        try {
+          const urlParts = new URL(file).pathname.split("/");
+          const destPath = urlParts.slice(4).join("/");
+          const response = yield this.fetchService.fetchWithRetry(file, "GET");
+          if (!response.ok)
+            throw new Error(`Failed to fetch: ${file}`);
+          const content = yield response.text();
+          yield this.exportToGitHub(owner, repo, branch, destPath, destPath.split("/").pop() || destPath, content, token, existingFiles, true, true);
+        } catch (error) {
+          console.error(`Error copying core file ${file}:`, error);
+        }
+      }
+    });
+  }
+  // Get list of public repos for an owner (user or org)
+  getRepoList(owner) {
+    return __async(this, null, function* () {
+      const type = yield this.getOwnerType(owner);
+      const url = type === "Organization" ? `https://api.github.com/orgs/${owner}/repos?per_page=100&type=public` : `https://api.github.com/users/${owner}/repos?per_page=100&type=public`;
+      const response = yield fetch(url, {
+        headers: {
+          "Accept": "application/vnd.github+json"
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to load repos: ${response.status}`);
+      }
+      return response.json();
+    });
+  }
+  // Determine if owner is a user or organization
+  getOwnerType(owner) {
+    return __async(this, null, function* () {
+      const response = yield fetch(`https://api.github.com/users/${owner}`, {
+        headers: { "Accept": "application/vnd.github+json" }
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch owner type for ${owner}: ${response.status}`);
+      }
+      const data = yield response.json();
+      return data.type;
+    });
+  }
+  //Check if repo exists
+  repoExists(owner, repo) {
+    return __async(this, null, function* () {
+      const response = yield fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+        headers: { "Accept": "application/vnd.github+json" }
+      });
+      return response.ok;
+    });
+  }
+  createRepo(owner, repo, branch, token) {
+    return __async(this, null, function* () {
+      console.log(`Repo ${owner}/${repo} not found. Creating...`);
+      const type = yield this.getOwnerType(owner);
+      const url = type === "Organization" ? `https://api.github.com/orgs/${owner}/repos` : `https://api.github.com/user/repos`;
+      const response = yield fetch(url, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github+json"
+        },
+        body: JSON.stringify({
+          name: repo,
+          private: false,
+          auto_init: true,
+          default_branch: branch,
+          description: "Repo created via design assistant",
+          homepage: `https://${owner}.github.io/${repo}/`
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to create repo: ${response.status}`);
+      }
+      console.log(`New repo "${repo}" created.`);
+      return response.json();
+    });
+  }
+  enablePages(owner, repo, branch, token) {
+    return __async(this, null, function* () {
+      const response = yield fetch(`https://api.github.com/repos/${owner}/${repo}/pages`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github+json"
+        },
+        body: JSON.stringify({
+          source: {
+            branch,
+            path: "/"
+          }
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to enable Pages: ${response.status}`);
+      }
+      console.log(`GitHub Pages enabled on ${branch} branch.`);
+      return response.json();
+    });
+  }
+  setupRepo(owner, repo, branch, token, existingFiles) {
+    return __async(this, null, function* () {
+      const exists = yield this.repoExists(owner, repo);
+      if (!exists) {
+        yield this.createRepo(owner, repo, branch, token);
+        yield this.enablePages(owner, repo, branch, token);
+        const existingFiles2 = yield this.getRepoTree(owner, repo, branch, token);
+        yield this.createInitialReadme(owner, repo, branch, token, existingFiles2);
+      } else {
+        console.log(`Repo ${owner}/${repo} already exists. Skipping creation.`);
+      }
+      yield this.copyCoreFiles(owner, repo, branch, token, existingFiles);
+      yield this.createConfigYaml(owner, repo, branch, token, existingFiles);
+    });
+  }
+  //Check for existing files in a repo
+  getRepoTree(owner, repo, branch, token) {
+    return __async(this, null, function* () {
+      const treeUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
+      const headers = {};
+      if (token)
+        headers["Authorization"] = `token ${token}`;
+      const response = yield fetch(treeUrl, { headers });
+      if (!response.ok) {
+        console.warn(`Failed to fetch repo tree: ${response.status}`);
+        return /* @__PURE__ */ new Map();
+      }
+      const data = yield response.json();
+      const fileMap = /* @__PURE__ */ new Map();
+      if (Array.isArray(data.tree)) {
+        for (const item of data.tree) {
+          if (item.type === "blob") {
+            fileMap.set(item.path, item.sha);
+          }
+        }
+      }
+      return fileMap;
+    });
+  }
+  b64EncodeUnicode(str) {
+    const utf8Bytes = new TextEncoder().encode(str);
+    let binary = "";
+    utf8Bytes.forEach((b) => binary += String.fromCharCode(b));
+    return btoa(binary);
+  }
+  exportToGitHub(owner, repo, branch, path, filename, content, token, existingFiles, overwrite = false, copyFromCore = false) {
+    return __async(this, null, function* () {
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+      if (!overwrite && existingFiles?.has(path)) {
+        console.log(`Skipping ${path} (already exists, overwrite=false)`);
+        return { skipped: true, path, reason: "exists" };
+      }
+      let sha;
+      if (overwrite && existingFiles?.has(path)) {
+        sha = existingFiles.get(path);
+      }
+      const body = {
+        message: copyFromCore ? `Copy ${filename} from core-prototype (via Design Assistant)` : sha ? `Update ${filename} (via Design Assistant)` : `Add ${filename} (via Design Assistant)`,
+        content: this.b64EncodeUnicode(content),
+        branch
+      };
+      if (sha) {
+        body.sha = sha;
+      }
+      const response = yield fetch(url, {
+        method: "PUT",
+        headers: {
+          "Authorization": `token ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+      if (!response.ok) {
+        const error = yield response.json().catch(() => ({}));
+        throw new Error(`GitHub API error: ${response.status} ${error.message || ""}`);
+      }
+      return response.json();
+    });
+  }
+  static \u0275fac = function ExportGitHubService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ExportGitHubService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ExportGitHubService, factory: _ExportGitHubService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExportGitHubService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// src/app/views/ia-assistant/components/export-github.component.ts
+var _c012 = (a0) => ({ "ng-invalid ng-dirty": a0 });
+function ExportGithubComponent_ng_container_0_div_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 13)(1, "p");
+    \u0275\u0275text(2, "To push changes to a repository, you need a valid GitHub token. Your token works like a username and password, so keep it private and do not share it with anyone.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p");
+    \u0275\u0275text(4, "Follow these steps to create a new GitHub token:");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "ol")(6, "li");
+    \u0275\u0275text(7, "Go to your GitHub ");
+    \u0275\u0275elementStart(8, "strong");
+    \u0275\u0275text(9, "Settings");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(10, ".");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(11, "li");
+    \u0275\u0275text(12, "Select ");
+    \u0275\u0275elementStart(13, "strong");
+    \u0275\u0275text(14, "Developer settings");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(15, ".");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(16, "li");
+    \u0275\u0275text(17, "Click ");
+    \u0275\u0275elementStart(18, "strong");
+    \u0275\u0275text(19, "Personal Access Tokens");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(20, " > ");
+    \u0275\u0275elementStart(21, "strong");
+    \u0275\u0275text(22, "Fine-grained tokens");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(23, ".");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(24, "li");
+    \u0275\u0275text(25, "Click ");
+    \u0275\u0275elementStart(26, "strong");
+    \u0275\u0275text(27, "Generate new token");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(28, ".");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(29, "li");
+    \u0275\u0275text(30, "Give your token a ");
+    \u0275\u0275elementStart(31, "strong");
+    \u0275\u0275text(32, "unique name");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(33, " and a ");
+    \u0275\u0275elementStart(34, "strong");
+    \u0275\u0275text(35, "description");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(36, ".");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(37, "li");
+    \u0275\u0275text(38, "Under ");
+    \u0275\u0275elementStart(39, "strong");
+    \u0275\u0275text(40, "Resource owner");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(41, ", select either cra-design or your personal account.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(42, "li");
+    \u0275\u0275text(43, "Under ");
+    \u0275\u0275elementStart(44, "strong");
+    \u0275\u0275text(45, "Repository access");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(46, ", select ");
+    \u0275\u0275elementStart(47, "strong");
+    \u0275\u0275text(48, "All repositories");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(49, ".");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(50, "li");
+    \u0275\u0275text(51, "Add the necessary ");
+    \u0275\u0275elementStart(52, "strong");
+    \u0275\u0275text(53, "permissions");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(54, " for pushing changes to repositories: ");
+    \u0275\u0275elementStart(55, "ul")(56, "li")(57, "strong");
+    \u0275\u0275text(58, "Administration");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(59, " (Access: Read and write)");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(60, "li")(61, "strong");
+    \u0275\u0275text(62, "Contents");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(63, " (Access: Read and write)");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(64, "li")(65, "strong");
+    \u0275\u0275text(66, "Metadata");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(67, " (Access: Read-only)");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(68, "li")(69, "strong");
+    \u0275\u0275text(70, "Pages");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(71, " (Access: Read and write)");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(72, "li");
+    \u0275\u0275text(73, "Copy the generated token and enter it into the GitHub token field whenever you push changes to GitHub.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(74, "p")(75, "strong");
+    \u0275\u0275text(76, "Important:");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(77, " Keep this token secret. Treat it like a password.");
+    \u0275\u0275elementEnd()();
+  }
+}
+function ExportGithubComponent_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h2");
+    \u0275\u0275text(2, "Export to GitHub");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p");
+    \u0275\u0275text(4, "Export the current in-scope pages for your project to a GitHub repository. You can specify the owner, repository, branch, and provide a ");
+    \u0275\u0275elementStart(5, "p-button", 11);
+    \u0275\u0275listener("onClick", function ExportGithubComponent_ng_container_0_Template_p_button_onClick_5_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.showHelp = !ctx_r1.showHelp);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(6, " for authentication.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "p");
+    \u0275\u0275text(8, "The pages will be exported in Jekyll format. Redirects for the included pages are automatically set up, so you don't need to update links in your repo manually. If you create new pages directly in GitHub, remember to list them in your ");
+    \u0275\u0275elementStart(9, "code");
+    \u0275\u0275text(10, "/source/data/exclude-redirect-links.json");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(11, " file.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(12, ExportGithubComponent_ng_container_0_div_12_Template, 78, 0, "div", 12);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(5);
+    \u0275\u0275property("rounded", true)("text", true);
+    \u0275\u0275advance(7);
+    \u0275\u0275property("ngIf", ctx_r1.showHelp);
+  }
+}
+function ExportGithubComponent_p_message_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-message", 14);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.ownerError);
+  }
+}
+function ExportGithubComponent_p_iftalabel_17_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-iftalabel")(1, "p-password", 15);
+    \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_p_iftalabel_17_Template_p_password_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.exportGitHubService.token, $event) || (ctx_r1.exportGitHubService.token = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "label", 16);
+    \u0275\u0275text(3, "GitHub Token");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.exportGitHubService.token);
+  }
+}
+function ExportGithubComponent_p_fieldset_18_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "tr")(1, "th");
+    \u0275\u0275text(2, "File");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "th")(4, "span", 23);
+    \u0275\u0275text(5, " Status ");
+    \u0275\u0275elementStart(6, "p-button", 24);
+    \u0275\u0275listener("onClick", function ExportGithubComponent_p_fieldset_18_ng_template_2_Template_p_button_onClick_6_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.setAll("skip"));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "p-button", 25);
+    \u0275\u0275listener("onClick", function ExportGithubComponent_p_fieldset_18_ng_template_2_Template_p_button_onClick_7_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.setAll("update"));
+    });
+    \u0275\u0275elementEnd()()()();
+  }
+}
+function ExportGithubComponent_p_fieldset_18_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "tr")(1, "td");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "td")(4, "p-chip", 26);
+    \u0275\u0275listener("click", function ExportGithubComponent_p_fieldset_18_ng_template_3_Template_p_chip_click_4_listener() {
+      const file_r6 = \u0275\u0275restoreView(_r5).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView((file_r6.location === "skip" || file_r6.location === "update") && ctx_r1.toggleUpdate(file_r6));
+    });
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const file_r6 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(file_r6.path);
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("bg-primary-500", file_r6.location === "update")("bg-yellow-400", file_r6.location === "new page")("bg-blue-400", file_r6.location === "github only")("text-white", file_r6.location === "update" || file_r6.location === "github only")("text-black", file_r6.location === "new page")("cursor-pointer", file_r6.location === "skip" || file_r6.location === "update");
+    \u0275\u0275property("label", file_r6.location)("icon", ctx_r1.getIcon(file_r6.location));
+  }
+}
+function ExportGithubComponent_p_fieldset_18_p_button_4_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 27);
+    \u0275\u0275listener("onClick", function ExportGithubComponent_p_fieldset_18_p_button_4_Template_p_button_onClick_0_listener() {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.exportProjectToGitHub(ctx_r1.gitHubData().owner, ctx_r1.gitHubData().repo, ctx_r1.gitHubData().branch, ctx_r1.exportGitHubService.token, true));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("disabled", ctx_r1.iaData().iaTree.length === 0);
+  }
+}
+function ExportGithubComponent_p_fieldset_18_span_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 28);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate2(" ", ctx_r1.newCount(), " new and ", ctx_r1.updatedCount(), " updated pages ");
+  }
+}
+function ExportGithubComponent_p_fieldset_18_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-fieldset", 17)(1, "p-table", 18);
+    \u0275\u0275template(2, ExportGithubComponent_p_fieldset_18_ng_template_2_Template, 8, 0, "ng-template", 19)(3, ExportGithubComponent_p_fieldset_18_ng_template_3_Template, 5, 15, "ng-template", 20);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, ExportGithubComponent_p_fieldset_18_p_button_4_Template, 1, 1, "p-button", 21)(5, ExportGithubComponent_p_fieldset_18_span_5_Template, 2, 2, "span", 22);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("value", ctx_r1.filesTable());
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r1.mode === "export");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.mode === "export" && ctx_r1.filesTable().length);
+  }
+}
+var ExportGithubComponent = class _ExportGithubComponent {
+  iaState = inject(IaStateService);
+  exportGitHubService = inject(ExportGitHubService);
+  fetchService = inject(FetchService);
+  translate = inject(TranslateService);
+  mode = "export";
+  iaData = this.iaState.getIaData;
+  gitHubData = this.iaState.getGitHubData;
+  repos = [];
+  filteredRepos = [];
+  ownerError = "";
+  showHelp = false;
+  ngOnInit() {
+    return __async(this, null, function* () {
+      this.iaState.loadFromLocalStorage();
+      yield this.updateRepoList();
+      yield this.compareFiles(this.gitHubData().owner, this.gitHubData().repo, this.gitHubData().branch, this.exportGitHubService.token);
+    });
+  }
+  updateRepoList() {
+    return __async(this, null, function* () {
+      this.ownerError = "";
+      this.repos = [];
+      try {
+        const repos = yield this.exportGitHubService.getRepoList(this.gitHubData().owner);
+        this.repos = repos.map((r2) => r2.name);
+      } catch (error) {
+        if (error.message?.includes("404")) {
+          this.ownerError = `GitHub owner "${this.gitHubData().owner}" not found.`;
+        } else {
+          this.ownerError = `Failed to load repositories for "${this.gitHubData().owner}".`;
+        }
+      }
+    });
+  }
+  filterRepos(event) {
+    const query = event.query?.trim().toLowerCase() || "";
+    const startsWith = this.repos.filter((r2) => r2.toLowerCase().startsWith(query));
+    const includes = this.repos.filter((r2) => r2.toLowerCase().includes(query) && !r2.toLowerCase().startsWith(query));
+    this.filteredRepos = Array.from(/* @__PURE__ */ new Set([...startsWith, ...includes]));
+  }
+  ownerFilter = /^[a-zA-Z0-9-]*$/;
+  repoFilter = /^[a-zA-Z0-9-._]*$/;
+  branchFilter = /^[a-zA-Z0-9./-]*$/;
+  updateOwner() {
+    this.gitHubData().owner = this.gitHubData().owner.trim().toLowerCase().replace(/^[-]+|[-]+$/g, "").replace(/[-]{2,}/g, "-");
+    if (!this.gitHubData().owner) {
+      this.gitHubData().owner = "cra-design";
+    }
+  }
+  updateRepo() {
+    return __async(this, null, function* () {
+      this.gitHubData().repo = this.gitHubData().repo.trim().replace(/^[.-]+|[.-]+$/g, "").replace(/(\/|.)lock$/, "").replace(/[.]{2,}/g, ".").replace(/[-]{2,}/g, "-");
+    });
+  }
+  updateBranch() {
+    this.gitHubData().branch = this.gitHubData().branch.trim().replace(/^[./]+|[./]+$/g, "").replace(/(\/|.)lock$/, "").replace(/[.]{2,}/g, ".").replace(/\/{2,}/g, "/");
+    if (!this.gitHubData().branch) {
+      this.gitHubData().branch = "main";
+    }
+  }
+  //Get in-scope URLs and page content
+  getUrlandContent(node) {
+    return __async(this, null, function* () {
+      const pages = [];
+      if (node.data.isUserAdded && node.data.url) {
+        try {
+          const doc = yield this.fetchService.fetchContent(node.data.url, "prod");
+          const jekyllFormatted = yield this.exportGitHubService.formatDocumentAsJekyll(doc, node.data.url, this.gitHubData().owner, this.gitHubData().repo);
+          pages.push({ url: node.data.url, content: jekyllFormatted });
+        } catch (error) {
+          console.error(`Error fetching content for ${node.data.url}:`, error);
+        }
+      }
+      if (node.children) {
+        for (const child of node.children) {
+          const childPages = yield this.getUrlandContent(child);
+          pages.push(...childPages);
+        }
+      }
+      return pages;
+    });
+  }
+  exportProjectToGitHub(owner, repo, branch, token, overwrite = false) {
+    return __async(this, null, function* () {
+      this.iaState.setGitHubData({ owner, repo, branch });
+      this.iaState.saveToLocalStorage();
+      const nodes = this.iaState.getIaData().iaTree;
+      const pages = yield this.getUrlandContent(nodes[0]);
+      console.log("Exporting pages to GitHub:", pages);
+      function getCommonPrefix(urls2) {
+        const paths = urls2.map((url) => new URL(url).pathname.split("/").filter(Boolean));
+        const first = paths[0];
+        const prefix = [];
+        for (let i = 0; i < first.length; i++) {
+          const segment = first[i];
+          if (paths.every((p2) => p2[i] === segment)) {
+            prefix.push(segment);
+          } else {
+            break;
+          }
+        }
+        if (prefix.length) {
+          const last = prefix[prefix.length - 1];
+          if (/\.[a-z0-9]+$/i.test(last)) {
+            prefix.pop();
+          }
+        }
+        return "/" + prefix.join("/");
+      }
+      const urls = pages.map((page) => page.url);
+      const commonRoot = getCommonPrefix(urls);
+      console.log("Detected common root:", commonRoot);
+      const exportPages = pages.map((p2) => {
+        let path = new URL(p2.url).pathname;
+        path = path.replace(/^\/+/, "");
+        const lastSegment = path.split("/").pop() || "index.html";
+        return { url: p2.url, path, content: p2.content, filename: lastSegment };
+      });
+      console.log("Exporting pages to GitHub:", exportPages);
+      const existingFiles = yield this.exportGitHubService.getRepoTree(owner, repo, branch, token);
+      yield this.exportGitHubService.setupRepo(owner, repo, branch, token, existingFiles);
+      console.log("Repository setup complete.");
+      const redirects = [];
+      for (const page of exportPages) {
+        try {
+          const result = yield this.exportGitHubService.exportToGitHub(owner, repo, branch, page.path, page.filename, page.content, token, existingFiles, overwrite);
+          redirects.push({ origin: page.url, destination: `/${repo}/${page.path}` });
+        } catch (error) {
+          console.error(`Error exporting ${page.path}:`, error);
+        }
+      }
+      const redirectsJson = JSON.stringify(redirects, null, 2);
+      yield this.exportGitHubService.exportToGitHub(owner, repo, branch, "source/data/exclude-redirect-links.json", "exclude-redirect-links.json", redirectsJson, token, existingFiles, overwrite);
+      console.log("Page export complete.");
+    });
+  }
+  //Create file list
+  filesTable = signal([]);
+  updatedCount = computed(() => this.filesTable().filter((f) => f.location === "update").length);
+  newCount = computed(() => this.filesTable().filter((f) => f.location === "new page").length);
+  compareFiles(owner, repo, branch, token) {
+    return __async(this, null, function* () {
+      console.log("Compare!");
+      const nodes = this.iaState.getIaData().iaTree;
+      const pageData = yield this.getUrlandContent(nodes[0]);
+      const inScopePages = new Map(pageData.map((page) => [page.url.replace("https://www.canada.ca/", ""), page.content]));
+      const githubPages = yield this.exportGitHubService.getRepoTree(owner, repo, branch, token);
+      const githubFilePatterns = [
+        /^_config\.yml$/,
+        /^index\.html$/,
+        /^README\.md$/,
+        /^_includes\/header\/header\.html$/,
+        /^_includes\/resources-inc\/footer\.html$/,
+        /^source\/data\/exclude-redirect-links\.json$/,
+        /^source\/exit-intent-e\.html$/,
+        /^source\/exit-intent-f\.html$/,
+        /^404\.html$/,
+        /^en\/.*/,
+        // anything under /en/
+        /^fr\/.*/
+        // anything under /fr/
+      ];
+      const filteredGithubPages = new Map([...githubPages].filter(([path]) => githubFilePatterns.some((pattern) => pattern.test(path))));
+      const jekyllUpdateFiles = [
+        { path: "404.html", content: "<!-- 404 page -->" },
+        //copied from core-prototype
+        { path: "_includes/header/header.html", content: "<!-- header -->" },
+        //copied from core-prototype
+        { path: "_includes/resources-inc/footer.html", content: "<!-- footer -->" },
+        //copied from core-prototype
+        { path: "source/exit-intent-e.html", content: "<!-- exit intent - english -->" },
+        //copied from core-prototype
+        { path: "source/data/exclude-redirect-links.json", content: "<!-- redirects -->" }
+        //generated for all pages in repo
+      ];
+      const jekyllSkipFiles = [
+        { path: "_config.yml", content: "<!-- config -->" },
+        //genertated
+        { path: "README.md", content: "<!-- readme -->" }
+        //generated
+      ];
+      [...jekyllUpdateFiles, ...jekyllSkipFiles].forEach((file) => {
+        inScopePages.set(file.path, file.content);
+      });
+      const allPaths = /* @__PURE__ */ new Set([
+        ...inScopePages.keys(),
+        ...filteredGithubPages.keys()
+      ]);
+      console.log(allPaths);
+      const table = [];
+      for (const path of allPaths) {
+        const inExport = inScopePages.has(path);
+        const inGitHub = filteredGithubPages.has(path);
+        const isAutoUpdateFile = jekyllUpdateFiles.some((f) => f.path === path);
+        const isAlwaysSkipFile = jekyllSkipFiles.some((f) => f.path === path);
+        let location;
+        if (inExport && inGitHub) {
+          if (isAutoUpdateFile)
+            location = "update";
+          else if (isAlwaysSkipFile)
+            location = "skip";
+          else
+            location = "skip";
+        } else if (inExport)
+          location = "new page";
+        else
+          location = "github only";
+        table.push({ path, location });
+      }
+      this.filesTable.set(table);
+    });
+  }
+  getIcon(location) {
+    switch (location) {
+      case "skip":
+        return "pi pi-angle-double-right";
+      case "update":
+        return "pi pi-sync";
+      case "new page":
+        return "pi pi-file-plus";
+      case "github only":
+        return "pi pi-github";
+      default:
+        return "";
+    }
+  }
+  toggleUpdate(file) {
+    if (file.location === "skip") {
+      file.location = "update";
+    } else if (file.location === "update") {
+      file.location = "skip";
+    }
+    this.filesTable.set([...this.filesTable()]);
+  }
+  setAll(target) {
+    const updated = this.filesTable().map((file) => {
+      if (file.location === "skip" || file.location === "update") {
+        return __spreadProps(__spreadValues({}, file), { location: target });
+      }
+      return file;
+    });
+    this.filesTable.set(updated);
+  }
+  static \u0275fac = function ExportGithubComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ExportGithubComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExportGithubComponent, selectors: [["ca-export-github"]], inputs: { mode: "mode" }, decls: 19, vars: 15, consts: [[4, "ngIf"], ["legend", "GitHub settings"], [1, "flex", "flex-column", "gap-2"], [1, "flex", "flex-column", "gap-1"], ["type", "text", "id", "owner", "pInputText", "", "pSize", "small", "fluid", "", "maxlength", "39", 3, "ngModelChange", "blur", "ngModel", "pKeyFilter", "ngClass"], ["for", "repo"], ["severity", "error", "variant", "simple", "size", "small", 4, "ngIf"], ["id", "repo", "pSize", "small", "maxlength", "100", "fluid", "", 3, "ngModelChange", "input", "onBlur", "completeMethod", "ngModel", "suggestions", "dropdown", "pKeyFilter"], ["type", "text", "id", "branch", "pInputText", "", "pSize", "small", "fluid", "", 3, "ngModelChange", "blur", "ngModel", "pKeyFilter"], ["for", "branch"], ["legend", "Files to export", 4, "ngIf"], ["icon", "pi pi-question-circle", "styleClass", "-m-3 nohover", "iconPos", "right", "severity", "help", "label", "GitHub token", 3, "onClick", "rounded", "text"], ["class", "text-sm mt-2", 4, "ngIf"], [1, "text-sm", "mt-2"], ["severity", "error", "variant", "simple", "size", "small"], ["feedback", "false", "id", "token", "pSize", "small", "fluid", "", 3, "ngModelChange", "ngModel"], ["for", "token"], ["legend", "Files to export"], ["size", "small", 3, "value"], ["pTemplate", "header", "stripedRows", ""], ["pTemplate", "body"], ["styleClass", "mt-3", "icon", "pi pi-github", "label", "Export to GitHub", "severity", "primary", 3, "disabled", "onClick", 4, "ngIf"], ["class", "text-color-secondary", 4, "ngIf"], [1, "flex", "flex-row", "align-items-center", "gap-2"], ["icon", "pi pi-angle-double-right", "pTooltip", "Skip all", "tooltipPosition", "top", "size", "small", "severity", "secondary", 3, "onClick"], ["icon", "pi pi-sync", "pTooltip", "Update all", "tooltipPosition", "top", "size", "small", "severity", "primary", 3, "onClick"], [1, "capitalize", "font-bold", "center-chip", "w-9rem", "p-1", 3, "click", "label", "icon"], ["styleClass", "mt-3", "icon", "pi pi-github", "label", "Export to GitHub", "severity", "primary", 3, "onClick", "disabled"], [1, "text-color-secondary"]], template: function ExportGithubComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275template(0, ExportGithubComponent_ng_container_0_Template, 13, 3, "ng-container", 0);
+      \u0275\u0275elementStart(1, "p-fieldset", 1)(2, "div", 2)(3, "div", 3)(4, "p-iftalabel")(5, "input", 4);
+      \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_Template_input_ngModelChange_5_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.gitHubData().owner, $event) || (ctx.gitHubData().owner = $event);
+        return $event;
+      });
+      \u0275\u0275listener("blur", function ExportGithubComponent_Template_input_blur_5_listener() {
+        ctx.updateOwner();
+        return ctx.updateRepoList();
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "label", 5);
+      \u0275\u0275text(7, "Owner");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(8, ExportGithubComponent_p_message_8_Template, 2, 1, "p-message", 6);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(9, "p-iftalabel")(10, "p-autocomplete", 7);
+      \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_Template_p_autocomplete_ngModelChange_10_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.gitHubData().repo, $event) || (ctx.gitHubData().repo = $event);
+        return $event;
+      });
+      \u0275\u0275listener("input", function ExportGithubComponent_Template_p_autocomplete_input_10_listener() {
+        return ctx.updateRepo();
+      })("onBlur", function ExportGithubComponent_Template_p_autocomplete_onBlur_10_listener() {
+        return ctx.compareFiles(ctx.gitHubData().owner, ctx.gitHubData().repo, ctx.gitHubData().branch, ctx.exportGitHubService.token);
+      })("completeMethod", function ExportGithubComponent_Template_p_autocomplete_completeMethod_10_listener($event) {
+        return ctx.filterRepos($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(11, "label", 5);
+      \u0275\u0275text(12, "Repository");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(13, "p-iftalabel")(14, "input", 8);
+      \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_Template_input_ngModelChange_14_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.gitHubData().branch, $event) || (ctx.gitHubData().branch = $event);
+        return $event;
+      });
+      \u0275\u0275listener("blur", function ExportGithubComponent_Template_input_blur_14_listener() {
+        return ctx.updateBranch();
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(15, "label", 9);
+      \u0275\u0275text(16, "Branch");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(17, ExportGithubComponent_p_iftalabel_17_Template, 4, 1, "p-iftalabel", 0);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(18, ExportGithubComponent_p_fieldset_18_Template, 6, 3, "p-fieldset", 10);
+    }
+    if (rf & 2) {
+      \u0275\u0275property("ngIf", ctx.mode === "export");
+      \u0275\u0275advance(5);
+      \u0275\u0275twoWayProperty("ngModel", ctx.gitHubData().owner);
+      \u0275\u0275property("pKeyFilter", ctx.ownerFilter)("ngClass", \u0275\u0275pureFunction1(13, _c012, ctx.ownerError));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", ctx.ownerError);
+      \u0275\u0275advance(2);
+      \u0275\u0275twoWayProperty("ngModel", ctx.gitHubData().repo);
+      \u0275\u0275property("suggestions", ctx.filteredRepos)("dropdown", true)("pKeyFilter", ctx.repoFilter);
+      \u0275\u0275advance(4);
+      \u0275\u0275twoWayProperty("ngModel", ctx.gitHubData().branch);
+      \u0275\u0275property("pKeyFilter", ctx.branchFilter);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", ctx.mode === "export");
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.mode === "export");
+    }
+  }, dependencies: [
+    CommonModule,
+    NgClass,
+    NgIf,
+    FormsModule,
+    DefaultValueAccessor,
+    NgControlStatus,
+    MaxLengthValidator,
+    NgModel,
+    TranslateModule,
+    TableModule,
+    Table,
+    PrimeTemplate,
+    IftaLabelModule,
+    IftaLabel,
+    InputTextModule,
+    InputText,
+    KeyFilterModule,
+    KeyFilter,
+    AutoCompleteModule,
+    AutoComplete,
+    PasswordModule,
+    Password,
+    ButtonModule,
+    Button,
+    MessageModule,
+    Message,
+    FieldsetModule,
+    Fieldset,
+    ChipModule,
+    Chip,
+    TooltipModule,
+    Tooltip
+  ], encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExportGithubComponent, [{
+    type: Component,
+    args: [{ selector: "ca-export-github", imports: [
+      CommonModule,
+      FormsModule,
+      TranslateModule,
+      TableModule,
+      IftaLabelModule,
+      InputTextModule,
+      KeyFilterModule,
+      AutoCompleteModule,
+      PasswordModule,
+      ButtonModule,
+      MessageModule,
+      FieldsetModule,
+      ChipModule,
+      TooltipModule
+    ], template: `<ng-container *ngIf="mode === 'export'">\r
+    <h2>Export to GitHub</h2>\r
+    <p>Export the current in-scope pages for your project to a GitHub repository. You can specify the owner, repository, branch, and provide a <p-button icon="pi pi-question-circle" (onClick)="showHelp = !showHelp" [rounded]="true" [text]="true" styleClass="-m-3 nohover" iconPos="right" severity="help" label="GitHub token"></p-button> for authentication.</p>\r
+    <p>The pages will be exported in Jekyll format. Redirects for the included pages are automatically set up, so you don't need to update links in your repo manually. If you create new pages directly in GitHub, remember to list them in your <code>/source/data/exclude-redirect-links.json</code> file.</p>\r
+\r
+\r
+    <div *ngIf="showHelp" class="text-sm mt-2">\r
+        <p>To push changes to a repository, you need a valid GitHub token. Your token works like a username and password, so keep it private and do not share it with anyone.</p>\r
+\r
+        <p>Follow these steps to create a new GitHub token:</p>\r
+\r
+        <ol>\r
+            <li>Go to your GitHub <strong>Settings</strong>.</li>\r
+            <li>Select <strong>Developer settings</strong>.</li>\r
+            <li>Click <strong>Personal Access Tokens</strong> &gt; <strong>Fine-grained tokens</strong>.</li>\r
+            <li>Click <strong>Generate new token</strong>.</li>\r
+            <li>Give your token a <strong>unique name</strong> and a <strong>description</strong>.</li>\r
+            <li>Under <strong>Resource owner</strong>, select either cra-design or your personal account.</li>\r
+            <li>Under <strong>Repository access</strong>, select <strong>All repositories</strong>.</li>\r
+            <li>Add the necessary <strong>permissions</strong> for pushing changes to repositories:\r
+                <ul>\r
+                    <li><strong>Administration</strong> (Access: Read and write)</li>\r
+                    <li><strong>Contents</strong> (Access: Read and write)</li>\r
+                    <li><strong>Metadata</strong> (Access: Read-only)</li>\r
+                    <li><strong>Pages</strong> (Access: Read and write)</li>\r
+                </ul>\r
+            </li>\r
+            <li>Copy the generated token and enter it into the GitHub token field whenever you push changes to GitHub.</li>\r
+        </ol>\r
+\r
+        <p><strong>Important:</strong> Keep this token secret. Treat it like a password.</p>\r
+\r
+    </div>\r
+</ng-container>\r
+\r
+<!--TODO: Generate link to repo and a bookmarklet for toggling between repo and Canada.ca-->\r
+<p-fieldset legend="GitHub settings">\r
+    <div class="flex flex-column gap-2">\r
+        <div class="flex flex-column gap-1">\r
+            <p-iftalabel>\r
+                <input type="text" id="owner" pInputText [(ngModel)]="gitHubData().owner" pSize="small" fluid (blur)="updateOwner();updateRepoList()" maxlength="39" [pKeyFilter]="ownerFilter" [ngClass]="{ 'ng-invalid ng-dirty': ownerError }" />\r
+                <label for="repo">Owner</label>\r
+            </p-iftalabel>\r
+            <p-message severity="error" variant="simple" size="small" *ngIf="ownerError">{{ownerError}}</p-message>\r
+        </div>\r
+        <p-iftalabel>\r
+            <p-autocomplete id="repo" [(ngModel)]="gitHubData().repo" [suggestions]="filteredRepos" (input)="updateRepo()" (onBlur)="compareFiles(gitHubData().owner,gitHubData().repo,gitHubData().branch,exportGitHubService.token)" (completeMethod)="filterRepos($event)" [dropdown]=true pSize="small" maxlength="100" [pKeyFilter]="repoFilter" fluid />\r
+            <label for="repo">Repository</label>\r
+        </p-iftalabel>\r
+        <p-iftalabel>\r
+            <input type="text" id="branch" pInputText [(ngModel)]="gitHubData().branch" pSize="small" fluid (blur)="updateBranch()" [pKeyFilter]="branchFilter" />\r
+            <label for="branch">Branch</label>\r
+        </p-iftalabel>\r
+        <p-iftalabel *ngIf="mode === 'export'">\r
+            <p-password feedback="false" id="token" [(ngModel)]="exportGitHubService.token" pSize="small" fluid />\r
+            <label for="token">GitHub Token</label>\r
+        </p-iftalabel>\r
+    </div>\r
+</p-fieldset>\r
+\r
+<p-fieldset legend="Files to export" *ngIf="mode === 'export'">\r
+    <p-table [value]="filesTable()" size="small">\r
+        <ng-template pTemplate="header" stripedRows>\r
+            <tr>\r
+                <th>File</th>\r
+                <th><span class="flex flex-row align-items-center gap-2">\r
+                        Status\r
+                        <p-button icon="pi pi-angle-double-right" pTooltip="Skip all" tooltipPosition="top" size="small" severity="secondary" (onClick)="setAll('skip')" />\r
+                        <p-button icon="pi pi-sync" pTooltip="Update all" tooltipPosition="top" size="small" severity="primary" (onClick)="setAll('update')" />\r
+                    </span>\r
+                </th>\r
+            </tr>\r
+        </ng-template>\r
+        <ng-template pTemplate="body" let-file>\r
+            <tr>\r
+                <td>{{ file.path }}</td>\r
+                <td>\r
+                    <p-chip [label]="file.location"\r
+                            [icon]="getIcon(file.location)"\r
+                            class="capitalize font-bold center-chip w-9rem p-1"\r
+                            [class.bg-primary-500]="file.location === 'update'"\r
+                            [class.bg-yellow-400]="file.location === 'new page'"\r
+                            [class.bg-blue-400]="file.location === 'github only'"\r
+                            [class.text-white]="file.location === 'update' || file.location === 'github only'"\r
+                            [class.text-black]="file.location === 'new page'"\r
+                            [class.cursor-pointer]="file.location === 'skip' || file.location === 'update'"\r
+                            (click)="(file.location === 'skip' || file.location === 'update') && toggleUpdate(file)"></p-chip>\r
+                </td>\r
+            </tr>\r
+        </ng-template>\r
+    </p-table>\r
+    <p-button *ngIf="mode === 'export'" styleClass="mt-3" icon="pi pi-github" label="Export to GitHub" severity="primary" (onClick)="exportProjectToGitHub(gitHubData().owner,gitHubData().repo,gitHubData().branch,exportGitHubService.token,true)" [disabled]="iaData().iaTree.length === 0" />\r
+    <span *ngIf="mode === 'export' && filesTable().length" class="text-color-secondary">\r
+        {{ newCount() }} new and {{ updatedCount() }} updated pages\r
+    </span>\r
+</p-fieldset>` }]
+  }], null, { mode: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExportGithubComponent, { className: "ExportGithubComponent", filePath: "src/app/views/ia-assistant/components/export-github.component.ts", lineNumber: 43 });
+})();
+
+// src/app/views/project-assistant/project-assistant.component.ts
+function ProjectAssistantComponent_p_card_10_ng_template_1_p_button_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 30);
+    \u0275\u0275listener("onClick", function ProjectAssistantComponent_p_card_10_ng_template_1_p_button_1_Template_p_button_onClick_0_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r3 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r3.showSave = true);
+    });
+    \u0275\u0275elementEnd();
+  }
+}
+function ProjectAssistantComponent_p_card_10_ng_template_1_p_button_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 31);
+    \u0275\u0275listener("onClick", function ProjectAssistantComponent_p_card_10_ng_template_1_p_button_2_Template_p_button_onClick_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r3 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r3.newProject());
+    });
+    \u0275\u0275elementEnd();
+  }
+}
+function ProjectAssistantComponent_p_card_10_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 26);
+    \u0275\u0275template(1, ProjectAssistantComponent_p_card_10_ng_template_1_p_button_1_Template, 1, 0, "p-button", 27)(2, ProjectAssistantComponent_p_card_10_ng_template_1_p_button_2_Template, 1, 0, "p-button", 28);
+    \u0275\u0275elementStart(3, "p-button", 29);
+    \u0275\u0275listener("onClick", function ProjectAssistantComponent_p_card_10_ng_template_1_Template_p_button_onClick_3_listener() {
+      \u0275\u0275restoreView(_r2);
+      const project_r6 = \u0275\u0275nextContext().ngIf;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.deleteProject(project_r6.key));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const project_r6 = \u0275\u0275nextContext().ngIf;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", project_r6.key === "autosave");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", project_r6.key != "autosave");
+  }
+}
+function ProjectAssistantComponent_p_card_10_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 32);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const project_r6 = \u0275\u0275nextContext().ngIf;
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, ctx_r3.getDisplayName(project_r6)), " ");
+  }
+}
+function ProjectAssistantComponent_p_card_10_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 33);
+    \u0275\u0275element(1, "i", 34);
+    \u0275\u0275elementStart(2, "span", 35);
+    \u0275\u0275text(3, "Saving project");
+    \u0275\u0275element(4, "span", 36);
+    \u0275\u0275elementEnd()();
+  }
+}
+function ProjectAssistantComponent_p_card_10_ng_template_4_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const project_r6 = \u0275\u0275nextContext(2).ngIf;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(project_r6.key);
+  }
+}
+function ProjectAssistantComponent_p_card_10_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 37)(1, "div", 38);
+    \u0275\u0275element(2, "i", 39);
+    \u0275\u0275template(3, ProjectAssistantComponent_p_card_10_ng_template_4_ng_container_3_Template, 2, 1, "ng-container", 40);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 38);
+    \u0275\u0275element(5, "i", 41);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 42);
+    \u0275\u0275element(8, "i", 43);
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const project_r6 = \u0275\u0275nextContext().ngIf;
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", project_r6.key !== "autosave");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Pages: ", project_r6.pages, " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Modified: ", ctx_r3.formatDate(project_r6.timestamp), " ");
+  }
+}
+function ProjectAssistantComponent_p_card_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p-card", 22);
+    \u0275\u0275template(1, ProjectAssistantComponent_p_card_10_ng_template_1_Template, 4, 2, "ng-template", 23)(2, ProjectAssistantComponent_p_card_10_ng_template_2_Template, 3, 3, "ng-template", 24)(3, ProjectAssistantComponent_p_card_10_div_3_Template, 5, 0, "div", 25)(4, ProjectAssistantComponent_p_card_10_ng_template_4_Template, 10, 3, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const projectActive_r7 = \u0275\u0275reference(5);
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r3.loadingKey)("ngIfElse", projectActive_r7);
+  }
+}
+function ProjectAssistantComponent_ng_container_25_div_2_ng_template_2_p_button_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r11 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 30);
+    \u0275\u0275listener("onClick", function ProjectAssistantComponent_ng_container_25_div_2_ng_template_2_p_button_1_Template_p_button_onClick_0_listener() {
+      \u0275\u0275restoreView(_r11);
+      const ctx_r3 = \u0275\u0275nextContext(4);
+      return \u0275\u0275resetView(ctx_r3.showSave = true);
+    });
+    \u0275\u0275elementEnd();
+  }
+}
+function ProjectAssistantComponent_ng_container_25_div_2_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 26);
+    \u0275\u0275template(1, ProjectAssistantComponent_ng_container_25_div_2_ng_template_2_p_button_1_Template, 1, 0, "p-button", 27);
+    \u0275\u0275elementStart(2, "p-button", 29);
+    \u0275\u0275listener("onClick", function ProjectAssistantComponent_ng_container_25_div_2_ng_template_2_Template_p_button_onClick_2_listener($event) {
+      \u0275\u0275restoreView(_r10);
+      const project_r9 = \u0275\u0275nextContext().$implicit;
+      const ctx_r3 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r3.deleteProject(project_r9.key, $event));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const project_r9 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", project_r9.key === "autosave");
+  }
+}
+function ProjectAssistantComponent_ng_container_25_div_2_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 32);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const project_r9 = \u0275\u0275nextContext().$implicit;
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, ctx_r3.getDisplayName(project_r9)), " ");
+  }
+}
+function ProjectAssistantComponent_ng_container_25_div_2_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 33);
+    \u0275\u0275element(1, "i", 34);
+    \u0275\u0275elementStart(2, "span", 35);
+    \u0275\u0275text(3, "Loading project");
+    \u0275\u0275element(4, "span", 36);
+    \u0275\u0275elementEnd()();
+  }
+}
+function ProjectAssistantComponent_ng_container_25_div_2_ng_template_5_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const project_r9 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(project_r9.key);
+  }
+}
+function ProjectAssistantComponent_ng_container_25_div_2_ng_template_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 37)(1, "div", 38);
+    \u0275\u0275element(2, "i", 39);
+    \u0275\u0275template(3, ProjectAssistantComponent_ng_container_25_div_2_ng_template_5_ng_container_3_Template, 2, 1, "ng-container", 40);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 38);
+    \u0275\u0275element(5, "i", 41);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 42);
+    \u0275\u0275element(8, "i", 43);
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const project_r9 = \u0275\u0275nextContext().$implicit;
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", project_r9.key !== "autosave");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Pages: ", project_r9.pages, " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Modified: ", ctx_r3.formatDate(project_r9.timestamp), " ");
+  }
+}
+function ProjectAssistantComponent_ng_container_25_div_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 45)(1, "p-card", 46);
+    \u0275\u0275listener("click", function ProjectAssistantComponent_ng_container_25_div_2_Template_p_card_click_1_listener() {
+      const project_r9 = \u0275\u0275restoreView(_r8).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r3.loadProject(project_r9.key));
+    });
+    \u0275\u0275template(2, ProjectAssistantComponent_ng_container_25_div_2_ng_template_2_Template, 3, 1, "ng-template", 23)(3, ProjectAssistantComponent_ng_container_25_div_2_ng_template_3_Template, 3, 3, "ng-template", 24)(4, ProjectAssistantComponent_ng_container_25_div_2_div_4_Template, 5, 0, "div", 25)(5, ProjectAssistantComponent_ng_container_25_div_2_ng_template_5_Template, 10, 3, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const project_r9 = ctx.$implicit;
+    const projectSaved_r12 = \u0275\u0275reference(6);
+    const ctx_r3 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r3.loadingKey === project_r9.key)("ngIfElse", projectSaved_r12);
+  }
+}
+function ProjectAssistantComponent_ng_container_25_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 4);
+    \u0275\u0275template(2, ProjectAssistantComponent_ng_container_25_div_2_Template, 7, 2, "div", 44);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r3.projects);
+  }
+}
+function ProjectAssistantComponent_ng_template_26_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 47);
+    \u0275\u0275text(1, "No saved projects.");
+    \u0275\u0275elementEnd();
   }
 }
 var ProjectAssistantComponent = class _ProjectAssistantComponent {
+  iaState = inject(IaStateService);
+  router = inject(Router);
+  exportItems = [];
+  constructor() {
+    this.loadProjects();
+    this.exportItems = [
+      {
+        label: "Export CSV (content inventory)",
+        icon: "pi pi-list-check",
+        command: () => {
+        },
+        disabled: true
+      },
+      {
+        label: "Export CSV (tree testing)",
+        icon: "pi pi-align-right",
+        command: () => {
+        },
+        disabled: true
+      },
+      {
+        separator: true
+      },
+      {
+        label: "Export JSON file",
+        icon: "pi pi-code",
+        command: () => {
+        },
+        disabled: true
+      }
+    ];
+  }
+  //Load all projects
+  allProjects = signal([]);
+  loadProjects() {
+    const projects = JSON.parse(localStorage.getItem("savedProjects") || "[]");
+    this.allProjects.set(projects);
+  }
+  //Track active project
+  activeProject = computed(() => {
+    const projects = this.allProjects();
+    return projects.length ? projects[0] : null;
+  });
+  //Other saved projects
+  savedProjects = computed(() => {
+    const active = this.activeProject();
+    return this.allProjects().filter((p2) => p2.key !== active?.key);
+  });
+  //Display formats
+  get projects() {
+    return this.savedProjects() || [];
+  }
+  getDisplayName(project) {
+    return project.key.replace(/-/g, " ").replace(/^\w/, (char) => char.toUpperCase());
+  }
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString("en-CA", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).replace(",", " at");
+  }
+  //Actions - load saved project, start new project, save autosave as project, delete a project
+  loadingKey = null;
+  loadProject(key) {
+    return __async(this, null, function* () {
+      this.loadingKey = key;
+      yield new Promise((resolve) => setTimeout(resolve, 600));
+      try {
+        this.iaState.saveToLocalStorage();
+        this.iaState.loadFromLocalStorage(key);
+        this.iaState.updateProjectList(key);
+        this.loadProjects();
+      } finally {
+        this.loadingKey = null;
+      }
+    });
+  }
+  newProject() {
+    this.iaState.saveToLocalStorage();
+    this.iaState.setActiveStep(1);
+    this.iaState.resetIaFlow();
+    this.iaState.saveToLocalStorage();
+    this.loadProjects();
+  }
+  showSave = false;
+  saveProject() {
+    console.log(this.iaState.getGitHubData().repo);
+    let savedAutoSave = false;
+    if (this.activeProject()?.key === "autosave" && this.iaState.getGitHubData().repo != "autosave") {
+      savedAutoSave = true;
+    }
+    this.iaState.saveToLocalStorage();
+    this.loadProjects();
+    if (savedAutoSave) {
+      this.deleteProject("autosave");
+    }
+  }
+  deleteProject(key, event) {
+    event?.stopPropagation();
+    const all = this.allProjects();
+    const isActive = key === this.activeProject()?.key;
+    localStorage.removeItem(key);
+    const updatedProjects = all.filter((p2) => p2.key !== key);
+    localStorage.setItem("savedProjects", JSON.stringify(updatedProjects));
+    this.allProjects.set(updatedProjects);
+    if (isActive) {
+      console.warn("Deleted the active project");
+      this.newProject();
+    }
+  }
   static \u0275fac = function ProjectAssistantComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ProjectAssistantComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProjectAssistantComponent, selectors: [["ca-project-assistant"]], decls: 14, vars: 9, consts: [[1, "container", "mx-auto", "px-4", "py-6"], ["id", "wb-cont", 1, "text-4xl", "font-bold", "mb-4"], [1, "mb-6"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "gap-4"], ["pTemplate", "header"], [1, "mb-4"], ["pTemplate", "footer"], [1, "p-4"], [1, "text-xl", "font-semibold"], [1, "flex", "justify-end"], ["icon", "pi pi-arrow-right", "iconPos", "right", 3, "label", "routerLink"]], template: function ProjectAssistantComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProjectAssistantComponent, selectors: [["ca-project-assistant"]], decls: 35, vars: 12, consts: [["none", ""], ["projectActive", ""], ["projectSaved", ""], ["id", "wb-cont"], [1, "grid"], [1, "col-12", "lg:col-4"], ["styleClass", "h-12rem", 4, "ngIf"], [1, "col-12", "xl:col-8"], ["legend", "Quick links", "styleClass", "h-13rem shadow-1 border-top-none surface-border lg:-mt-3"], [1, "flex", "flex-column", "align-items-stretch", "gap-2"], [1, "flex", "flex-row", "gap-2"], ["label", "Export to GitHub", "icon", "pi pi-github", "outlined", "", "styleClass", "secondary-outline", "fluid", "", 1, "flex", "flex-1", 3, "onClick", "model"], ["label", "Edit IA Tree", "icon", "pi pi-sitemap", "outlined", "", "styleClass", "secondary-outline", "fluid", "", 1, "flex", "flex-1", 3, "onClick"], ["label", "Generate Metadata", "icon", "pi pi-list", "outlined", "", "styleClass", "secondary-outline", "fluid", "", 1, "flex", "flex-1", 3, "onClick"], ["label", "Placeholder", "icon", "pi pi-list", "outlined", "", "styleClass", "secondary-outline", "fluid", "", "disabled", "", 1, "flex", "flex-1"], [4, "ngIf", "ngIfElse"], ["header", "Save project", "styleClass", "max-w-25rem", 3, "visibleChange", "modal", "visible"], [1, "text-color-secondary"], ["mode", "select"], [1, "flex", "justify-end", "gap-2", "mt-2"], ["label", "Cancel", "severity", "secondary", 3, "onClick"], ["label", "Save", 3, "onClick"], ["styleClass", "h-12rem"], ["pTemplate", "header"], ["pTemplate", "title"], ["class", "flex flex-row gap-2 justify-content-center mt-5", 4, "ngIf", "ngIfElse"], [1, "flex", "justify-content-end"], ["icon", "pi pi-save", "text", "", "rounded", "", "size", "small", "severity", "success", 3, "onClick", 4, "ngIf"], ["icon", "pi pi-minus", "text", "", "rounded", "", "size", "small", "severity", "secondary", 3, "onClick", 4, "ngIf"], ["icon", "pi pi-trash", "text", "", "rounded", "", "size", "small", "severity", "danger", 3, "onClick"], ["icon", "pi pi-save", "text", "", "rounded", "", "size", "small", "severity", "success", 3, "onClick"], ["icon", "pi pi-minus", "text", "", "rounded", "", "size", "small", "severity", "secondary", 3, "onClick"], [1, "text-xl", "font-bold", "-mt-5"], [1, "flex", "flex-row", "gap-2", "justify-content-center", "mt-5"], [1, "pi", "pi-spin", "pi-spinner", "text-primary-500", "text-2xl"], [1, "text-sm", "text-color-secondary"], [1, "loading-dots"], [1, "flex", "flex-column", "gap-2", "text-color-secondary"], [1, "text-sm"], [1, "pi", "pi-github", "mr-2"], [4, "ngIf"], [1, "pi", "pi-copy", "mr-2"], [1, "text-xs"], [1, "pi", "pi-clock", "mr-2"], ["class", "col-12 md:col-6 lg:col-4", 4, "ngFor", "ngForOf"], [1, "col-12", "md:col-6", "lg:col-4"], ["styleClass", "h-12rem", 1, "cursor-pointer", 3, "click"], [1, "text-color-secondary", "ml-2"]], template: function ProjectAssistantComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0)(1, "h1", 1);
-      \u0275\u0275text(2);
-      \u0275\u0275pipe(3, "translate");
+      const _r1 = \u0275\u0275getCurrentView();
+      \u0275\u0275elementStart(0, "h1", 3);
+      \u0275\u0275text(1);
+      \u0275\u0275pipe(2, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(4, "p", 2);
-      \u0275\u0275text(5);
-      \u0275\u0275pipe(6, "translate");
+      \u0275\u0275elementStart(3, "p");
+      \u0275\u0275text(4);
+      \u0275\u0275pipe(5, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(7, "div", 3)(8, "p-card");
-      \u0275\u0275template(9, ProjectAssistantComponent_ng_template_9_Template, 4, 3, "ng-template", 4);
-      \u0275\u0275elementStart(10, "p", 5);
-      \u0275\u0275text(11);
-      \u0275\u0275pipe(12, "translate");
+      \u0275\u0275elementStart(6, "h2");
+      \u0275\u0275text(7, "Active project");
       \u0275\u0275elementEnd();
-      \u0275\u0275template(13, ProjectAssistantComponent_ng_template_13_Template, 3, 5, "ng-template", 6);
+      \u0275\u0275elementStart(8, "div", 4)(9, "div", 5);
+      \u0275\u0275template(10, ProjectAssistantComponent_p_card_10_Template, 6, 2, "p-card", 6);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(11, "div", 7)(12, "p-fieldset", 8)(13, "div", 9)(14, "div", 10)(15, "p-splitbutton", 11);
+      \u0275\u0275listener("onClick", function ProjectAssistantComponent_Template_p_splitbutton_onClick_15_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.router.navigate(["/ia-assistant/github"]));
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(16, "p-button", 12);
+      \u0275\u0275listener("onClick", function ProjectAssistantComponent_Template_p_button_onClick_16_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.router.navigate(["/ia-assistant"]));
+      });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(17, "div", 10)(18, "p-button", 13);
+      \u0275\u0275listener("onClick", function ProjectAssistantComponent_Template_p_button_onClick_18_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.router.navigate(["/metadata-assistant"]));
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275element(19, "p-button", 14);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(20, "div", 10);
+      \u0275\u0275element(21, "p-button", 14)(22, "p-button", 14);
+      \u0275\u0275elementEnd()()()()();
+      \u0275\u0275elementStart(23, "h2");
+      \u0275\u0275text(24, "Saved projects");
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(25, ProjectAssistantComponent_ng_container_25_Template, 3, 1, "ng-container", 15)(26, ProjectAssistantComponent_ng_template_26_Template, 2, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      \u0275\u0275elementStart(28, "p-dialog", 16);
+      \u0275\u0275twoWayListener("visibleChange", function ProjectAssistantComponent_Template_p_dialog_visibleChange_28_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.showSave, $event) || (ctx.showSave = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275elementStart(29, "span", 17);
+      \u0275\u0275text(30, "Associate your project to a new or existing GitHub repo to save it for later. This step will not export any files to the repo and you can change it later. ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275element(31, "ca-export-github", 18);
+      \u0275\u0275elementStart(32, "div", 19)(33, "p-button", 20);
+      \u0275\u0275listener("onClick", function ProjectAssistantComponent_Template_p_button_onClick_33_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.showSave = false);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(34, "p-button", 21);
+      \u0275\u0275listener("onClick", function ProjectAssistantComponent_Template_p_button_onClick_34_listener() {
+        \u0275\u0275restoreView(_r1);
+        ctx.showSave = false;
+        return \u0275\u0275resetView(ctx.saveProject());
+      });
       \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 3, "title.project"));
+      const none_r13 = \u0275\u0275reference(27);
+      \u0275\u0275advance();
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 8, "title.project"));
       \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 5, "project.content"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 10, "project.description"));
       \u0275\u0275advance(6);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(12, 7, "metadata.cardDescription"));
+      \u0275\u0275property("ngIf", ctx.activeProject());
+      \u0275\u0275advance(5);
+      \u0275\u0275property("model", ctx.exportItems);
+      \u0275\u0275advance(10);
+      \u0275\u0275property("ngIf", ctx.projects.length > 0)("ngIfElse", none_r13);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("modal", true);
+      \u0275\u0275twoWayProperty("visible", ctx.showSave);
     }
-  }, dependencies: [TranslateModule, TranslatePipe, CommonModule, RouterModule, RouterLink, CardModule, Card, PrimeTemplate, ButtonModule, Button], encapsulation: 2 });
+  }, dependencies: [CommonModule, NgForOf, NgIf, TranslateModule, TranslatePipe, CardModule, Card, PrimeTemplate, ButtonModule, Button, DialogModule, Dialog, InputTextModule, FieldsetModule, Fieldset, SplitButtonModule, SplitButton, ExportGithubComponent], styles: ['\n\n.loading-dots[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 1em;\n  text-align: left;\n}\n.loading-dots[_ngcontent-%COMP%]::after {\n  content: "...";\n  animation: _ngcontent-%COMP%_dots 1s steps(5, end) infinite;\n}\n@keyframes _ngcontent-%COMP%_dots {\n  0% {\n    content: "";\n  }\n  20% {\n    content: ".";\n  }\n  40% {\n    content: "..";\n  }\n  60% {\n    content: "...";\n  }\n  80%, 100% {\n    content: "....";\n  }\n}\n[_nghost-%COMP%]     .p-splitbutton {\n  width: 100% !important;\n}\n[_nghost-%COMP%]     .p-splitbutton .p-button {\n  width: 100%;\n}\n[_nghost-%COMP%]     .p-splitbutton .p-splitbutton-dropdown {\n  width: 3rem;\n}\n/*# sourceMappingURL=project-assistant.component.css.map */'] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProjectAssistantComponent, [{
     type: Component,
-    args: [{ selector: "ca-project-assistant", standalone: true, imports: [TranslateModule, CommonModule, RouterModule, CardModule, ButtonModule], template: `<div class="container mx-auto px-4 py-6">\r
+    args: [{ selector: "ca-project-assistant", standalone: true, imports: [
+      CommonModule,
+      TranslateModule,
+      CardModule,
+      ButtonModule,
+      DialogModule,
+      InputTextModule,
+      FieldsetModule,
+      SplitButtonModule,
+      ExportGithubComponent
+    ], template: `<h1 id="wb-cont">{{ 'title.project' | translate}}</h1>\r
+<p>{{'project.description' | translate }}</p>\r
+\r
+<h2>Active project</h2>\r
+<div class="grid">\r
+  <div class="col-12 lg:col-4">\r
+\r
+    <p-card *ngIf="activeProject() as project" styleClass="h-12rem">\r
+\r
+      <ng-template pTemplate="header">\r
+        <div class="flex justify-content-end">\r
+          <p-button icon="pi pi-save" text rounded size="small" severity="success" (onClick)="showSave = true" *ngIf="project.key === 'autosave'" />\r
+          <p-button icon="pi pi-minus" text rounded size="small" severity="secondary" (onClick)="newProject()" *ngIf="project.key != 'autosave'" />\r
+          <p-button icon="pi pi-trash" text rounded size="small" severity="danger" (onClick)="deleteProject(project.key)" />\r
+        </div>\r
+      </ng-template>\r
+\r
+      <ng-template pTemplate="title">\r
+        <div class="text-xl font-bold -mt-5">\r
+          {{ getDisplayName(project) | translate }}\r
+        </div>\r
+      </ng-template>\r
+\r
+      <!--Loading-->\r
+      <div class="flex flex-row gap-2 justify-content-center mt-5"\r
+           *ngIf="loadingKey; else projectActive">\r
+        <i class="pi pi-spin pi-spinner text-primary-500 text-2xl"></i>\r
+        <span class="text-sm text-color-secondary">Saving project<span class="loading-dots"></span></span>\r
+      </div>\r
+\r
+      <!--Project details-->\r
+      <ng-template #projectActive>\r
+        <div class="flex flex-column gap-2 text-color-secondary">\r
+          <div class="text-sm">\r
+            <i class="pi pi-github mr-2"></i><ng-container *ngIf="project.key !== 'autosave'">{{ project.key }}</ng-container>\r
+          </div>\r
+          <div class="text-sm">\r
+            <i class="pi pi-copy mr-2"></i>Pages: {{ project.pages }}\r
+          </div>\r
+          <div class="text-xs">\r
+            <i class="pi pi-clock mr-2"></i>Modified: {{ formatDate(project.timestamp) }}\r
+          </div>\r
+        </div>\r
+      </ng-template>\r
+\r
+    </p-card>\r
+\r
+  </div>\r
+  <div class="col-12 xl:col-8">\r
+    <p-fieldset legend="Quick links" styleClass="h-13rem shadow-1 border-top-none surface-border lg:-mt-3">\r
+      <div class="flex flex-column align-items-stretch gap-2">\r
+        <div class="flex flex-row gap-2">\r
+          <p-splitbutton class="flex flex-1" label="Export to GitHub" icon="pi pi-github" outlined styleClass="secondary-outline" (onClick)="router.navigate(['/ia-assistant/github']);" [model]="exportItems" fluid />\r
+          <p-button class="flex flex-1" label="Edit IA Tree" icon="pi pi-sitemap" outlined styleClass="secondary-outline" (onClick)="router.navigate(['/ia-assistant']);" fluid />\r
+        </div>\r
+        <div class="flex flex-row gap-2">\r
+          <p-button class="flex flex-1" label="Generate Metadata" icon="pi pi-list" outlined styleClass="secondary-outline" (onClick)="router.navigate(['/metadata-assistant'])" fluid />\r
+          <p-button class="flex flex-1" label="Placeholder" icon="pi pi-list" outlined styleClass="secondary-outline" fluid disabled />\r
+        </div>\r
+        <div class="flex flex-row gap-2">\r
+          <p-button class="flex flex-1" label="Placeholder" icon="pi pi-list" outlined styleClass="secondary-outline" fluid disabled />\r
+          <p-button class="flex flex-1" label="Placeholder" icon="pi pi-list" outlined styleClass="secondary-outline" fluid disabled />\r
+        </div>\r
+      </div>\r
+    </p-fieldset>\r
+  </div>\r
+</div>\r
+\r
+<h2>Saved projects</h2>\r
+<ng-container *ngIf="projects.length > 0; else none">\r
+  <div class="grid">\r
+    <div class="col-12 md:col-6 lg:col-4" *ngFor="let project of projects">\r
+      <p-card class="cursor-pointer" styleClass="h-12rem" (click)="loadProject(project.key)">\r
+\r
+        <ng-template pTemplate="header">\r
+          <div class="flex justify-content-end">\r
+            <p-button icon="pi pi-save" text rounded size="small" severity="success" (onClick)="showSave = true" *ngIf="project.key === 'autosave'" />\r
+            <p-button icon="pi pi-trash" text rounded size="small" severity="danger" (onClick)="deleteProject(project.key, $event)" />\r
+          </div>\r
+        </ng-template>\r
+\r
+        <ng-template pTemplate="title">\r
+          <div class="text-xl font-bold -mt-5">\r
+            {{ getDisplayName(project) | translate }}\r
+          </div>\r
+        </ng-template>\r
+\r
+        <!--Loading-->\r
+        <div class="flex flex-row gap-2 justify-content-center mt-5"\r
+             *ngIf="loadingKey === project.key; else projectSaved">\r
+          <i class="pi pi-spin pi-spinner text-primary-500 text-2xl"></i>\r
+          <span class="text-sm text-color-secondary">Loading project<span class="loading-dots"></span></span>\r
+        </div>\r
+\r
+        <!--Project details-->\r
+        <ng-template #projectSaved>\r
+          <div class="flex flex-column gap-2 text-color-secondary">\r
+            <div class="text-sm">\r
+              <i class="pi pi-github mr-2"></i><ng-container *ngIf="project.key !== 'autosave'">{{ project.key }}</ng-container>\r
+            </div>\r
+            <div class="text-sm">\r
+              <i class="pi pi-copy mr-2"></i>Pages: {{ project.pages }}\r
+            </div>\r
+            <div class="text-xs">\r
+              <i class="pi pi-clock mr-2"></i>Modified: {{ formatDate(project.timestamp) }}\r
+            </div>\r
+          </div>\r
+        </ng-template>\r
+\r
+      </p-card>\r
+    </div>\r
+  </div>\r
+</ng-container>\r
+\r
+<ng-template #none>\r
+  <p class="text-color-secondary ml-2">No saved projects.</p>\r
+</ng-template>\r
+\r
+<p-dialog header="Save project" [modal]="true" [(visible)]="showSave" styleClass="max-w-25rem">\r
+  <span class="text-color-secondary">Associate your project to a new or existing GitHub repo to save it for later. This step will not export any files to the repo and you can change it later. </span>\r
+  <ca-export-github mode="select"></ca-export-github>\r
+  <div class="flex justify-end gap-2 mt-2">\r
+    <p-button label="Cancel" severity="secondary" (onClick)="showSave = false" />\r
+    <p-button label="Save" (onClick)="showSave = false;saveProject()" />\r
+  </div>\r
+</p-dialog>\r
+\r
+<!--div class="container mx-auto px-4 py-6">\r
   <h1 id="wb-cont" class="text-4xl font-bold mb-4">{{ 'title.project' | translate}}</h1>\r
   <p class="mb-6">{{'project.content' | translate }}</p>\r
   \r
@@ -19370,12 +28012,11 @@ var ProjectAssistantComponent = class _ProjectAssistantComponent {
       </ng-template>\r
     </p-card>\r
   </div>\r
-</div>\r
-` }]
-  }], null, null);
+</div-->`, styles: ['/* src/app/views/project-assistant/project-assistant.component.css */\n.loading-dots {\n  display: inline-block;\n  width: 1em;\n  text-align: left;\n}\n.loading-dots::after {\n  content: "...";\n  animation: dots 1s steps(5, end) infinite;\n}\n@keyframes dots {\n  0% {\n    content: "";\n  }\n  20% {\n    content: ".";\n  }\n  40% {\n    content: "..";\n  }\n  60% {\n    content: "...";\n  }\n  80%, 100% {\n    content: "....";\n  }\n}\n:host ::ng-deep .p-splitbutton {\n  width: 100% !important;\n}\n:host ::ng-deep .p-splitbutton .p-button {\n  width: 100%;\n}\n:host ::ng-deep .p-splitbutton .p-splitbutton-dropdown {\n  width: 3rem;\n}\n/*# sourceMappingURL=project-assistant.component.css.map */\n'] }]
+  }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProjectAssistantComponent, { className: "ProjectAssistantComponent", filePath: "src/app/views/project-assistant/project-assistant.component.ts", lineNumber: 15 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProjectAssistantComponent, { className: "ProjectAssistantComponent", filePath: "src/app/views/project-assistant/project-assistant.component.ts", lineNumber: 26 });
 })();
 
 // src/app/views/inventory-assistant/inventory-assistant.component.ts
@@ -20650,7 +29291,7 @@ var MetadataAssistantStateService = class _MetadataAssistantStateService {
 })();
 
 // node_modules/primeng/fesm2022/primeng-inputtextarea.mjs
-var theme5 = ({
+var theme9 = ({
   dt
 }) => `
 .p-textarea {
@@ -20717,7 +29358,7 @@ var theme5 = ({
 .p-textarea.ng-invalid.ng-dirty::placeholder {
     color: ${dt("textarea.invalid.placeholder.color")};
 }`;
-var classes5 = {
+var classes9 = {
   root: ({
     instance,
     props
@@ -20731,8 +29372,8 @@ var classes5 = {
 };
 var TextareaStyle = class _TextareaStyle extends BaseStyle {
   name = "textarea";
-  theme = theme5;
-  classes = classes5;
+  theme = theme9;
+  classes = classes9;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275TextareaStyle_BaseFactory;
     return function TextareaStyle_Factory(__ngFactoryType__) {
@@ -20940,571 +29581,6 @@ var Textarea2 = class _Textarea {
     args: [{
       imports: [InputTextarea],
       exports: [InputTextarea]
-    }]
-  }], null, null);
-})();
-
-// node_modules/primeng/fesm2022/primeng-chip.mjs
-var _c09 = ["removeicon"];
-var _c19 = ["*"];
-function Chip_img_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "img", 4);
-    \u0275\u0275listener("error", function Chip_img_1_Template_img_error_0_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.imageError($event));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("src", ctx_r1.image, \u0275\u0275sanitizeUrl)("alt", ctx_r1.alt);
-  }
-}
-function Chip_ng_template_2_span_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 6);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275classMap(ctx_r1.icon);
-    \u0275\u0275property("ngClass", "p-chip-icon");
-    \u0275\u0275attribute("data-pc-section", "icon");
-  }
-}
-function Chip_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Chip_ng_template_2_span_0_Template, 1, 4, "span", 5);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngIf", ctx_r1.icon);
-  }
-}
-function Chip_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 7);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275attribute("data-pc-section", "label");
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.label);
-  }
-}
-function Chip_ng_container_5_ng_container_1_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "span", 11);
-    \u0275\u0275listener("click", function Chip_ng_container_5_ng_container_1_span_1_Template_span_click_0_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.close($event));
-    })("keydown", function Chip_ng_container_5_ng_container_1_span_1_Template_span_keydown_0_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.onKeydown($event));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275classMap(ctx_r1.removeIcon);
-    \u0275\u0275property("ngClass", "p-chip-remove-icon");
-    \u0275\u0275attribute("data-pc-section", "removeicon")("aria-label", ctx_r1.removeAriaLabel);
-  }
-}
-function Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "TimesCircleIcon", 12);
-    \u0275\u0275listener("click", function Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template_TimesCircleIcon_click_0_listener($event) {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.close($event));
-    })("keydown", function Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template_TimesCircleIcon_keydown_0_listener($event) {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.onKeydown($event));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275classMap("p-chip-remove-icon");
-    \u0275\u0275attribute("data-pc-section", "removeicon")("aria-label", ctx_r1.removeAriaLabel);
-  }
-}
-function Chip_ng_container_5_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Chip_ng_container_5_ng_container_1_span_1_Template, 1, 5, "span", 9)(2, Chip_ng_container_5_ng_container_1_TimesCircleIcon_2_Template, 1, 4, "TimesCircleIcon", 10);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.removeIcon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.removeIcon);
-  }
-}
-function Chip_ng_container_5_span_2_1_ng_template_0_Template(rf, ctx) {
-}
-function Chip_ng_container_5_span_2_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Chip_ng_container_5_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function Chip_ng_container_5_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "span", 13);
-    \u0275\u0275listener("click", function Chip_ng_container_5_span_2_Template_span_click_0_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.close($event));
-    })("keydown", function Chip_ng_container_5_span_2_Template_span_keydown_0_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.onKeydown($event));
-    });
-    \u0275\u0275template(1, Chip_ng_container_5_span_2_1_Template, 1, 0, null, 14);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275attribute("data-pc-section", "removeicon")("aria-label", ctx_r1.removeAriaLabel);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.removeIconTemplate || ctx_r1._removeIconTemplate);
-  }
-}
-function Chip_ng_container_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Chip_ng_container_5_ng_container_1_Template, 3, 2, "ng-container", 3)(2, Chip_ng_container_5_span_2_Template, 2, 3, "span", 8);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.removeIconTemplate && !ctx_r1._removeIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.removeIconTemplate || ctx_r1._removeIconTemplate);
-  }
-}
-var theme6 = ({
-  dt
-}) => `
-.p-chip {
-    display: inline-flex;
-    align-items: center;
-    background: ${dt("chip.background")};
-    color: ${dt("chip.color")};
-    border-radius: ${dt("chip.border.radius")};
-    padding: ${dt("chip.padding.y")} ${dt("chip.padding.x")};
-    gap: ${dt("chip.gap")};
-}
-
-.p-chip-icon {
-    color: ${dt("chip.icon.color")};
-    font-size: ${dt("chip.icon.font.size")};
-    width: ${dt("chip.icon.size")};
-    height: ${dt("chip.icon.size")};
-}
-
-.p-chip-image {
-    border-radius: 50%;
-    width: ${dt("chip.image.width")};
-    height: ${dt("chip.image.height")};
-    margin-left: calc(-1 * ${dt("chip.padding.y")});
-}
-
-.p-chip:has(.p-chip-remove-icon) {
-    padding-inline-end: ${dt("chip.padding.y")};
-}
-
-.p-chip:has(.p-chip-image) {
-    padding-top: calc(${dt("chip.padding.y")} / 2);
-    padding-bottom: calc(${dt("chip.padding.y")} / 2);
-}
-
-.p-chip-remove-icon {
-    cursor: pointer;
-    font-size: ${dt("chip.remove.icon.font.size")};
-    width: ${dt("chip.remove.icon.size")};
-    height: ${dt("chip.remove.icon.size")};
-    color: ${dt("chip.remove.icon.color")};
-    border-radius: 50%;
-    transition: outline-color ${dt("chip.transition.duration")}, box-shadow ${dt("chip.transition.duration")};
-    outline-color: transparent;
-}
-
-.p-chip-remove-icon:focus-visible {
-    box-shadow: ${dt("chip.remove.icon.focus.ring.shadow")};
-    outline: ${dt("chip.remove.icon.focus.ring.width")} ${dt("chip.remove.icon.focus.ring.style")} ${dt("chip.remove.icon.focus.ring.color")};
-    outline-offset: ${dt("chip.remove.icon.focus.ring.offset")};
-}
-`;
-var classes6 = {
-  root: "p-chip p-component",
-  image: "p-chip-image",
-  icon: "p-chip-icon",
-  label: "p-chip-label",
-  removeIcon: "p-chip-remove-icon"
-};
-var ChipStyle = class _ChipStyle extends BaseStyle {
-  name = "chip";
-  theme = theme6;
-  classes = classes6;
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275ChipStyle_BaseFactory;
-    return function ChipStyle_Factory(__ngFactoryType__) {
-      return (\u0275ChipStyle_BaseFactory || (\u0275ChipStyle_BaseFactory = \u0275\u0275getInheritedFactory(_ChipStyle)))(__ngFactoryType__ || _ChipStyle);
-    };
-  })();
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _ChipStyle,
-    factory: _ChipStyle.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChipStyle, [{
-    type: Injectable
-  }], null, null);
-})();
-var ChipClasses;
-(function(ChipClasses2) {
-  ChipClasses2["root"] = "p-chip";
-  ChipClasses2["image"] = "p-chip-image";
-  ChipClasses2["icon"] = "p-chip-icon";
-  ChipClasses2["label"] = "p-chip-label";
-  ChipClasses2["removeIcon"] = "p-chip-remove-icon";
-})(ChipClasses || (ChipClasses = {}));
-var Chip = class _Chip extends BaseComponent {
-  /**
-   * Defines the text to display.
-   * @group Props
-   */
-  label;
-  /**
-   * Defines the icon to display.
-   * @group Props
-   */
-  icon;
-  /**
-   * Defines the image to display.
-   * @group Props
-   */
-  image;
-  /**
-   * Alt attribute of the image.
-   * @group Props
-   */
-  alt;
-  /**
-   * Inline style of the element.
-   * @group Props
-   */
-  style;
-  /**
-   * Class of the element.
-   * @group Props
-   */
-  styleClass;
-  /**
-   * Whether to display a remove icon.
-   * @group Props
-   */
-  removable = false;
-  /**
-   * Icon of the remove element.
-   * @group Props
-   */
-  removeIcon;
-  /**
-   * Callback to invoke when a chip is removed.
-   * @param {MouseEvent} event - Mouse event.
-   * @group Emits
-   */
-  onRemove = new EventEmitter();
-  /**
-   * This event is triggered if an error occurs while loading an image file.
-   * @param {Event} event - Browser event.
-   * @group Emits
-   */
-  onImageError = new EventEmitter();
-  visible = true;
-  get removeAriaLabel() {
-    return this.config.getTranslation(TranslationKeys.ARIA)["removeLabel"];
-  }
-  /**
-   * Used to pass all properties of the chipProps to the Chip component.
-   * @group Props
-   */
-  get chipProps() {
-    return this._chipProps;
-  }
-  set chipProps(val) {
-    this._chipProps = val;
-    if (val && typeof val === "object") {
-      Object.entries(val).forEach(([k, v]) => this[`_${k}`] !== v && (this[`_${k}`] = v));
-    }
-  }
-  _chipProps;
-  _componentStyle = inject(ChipStyle);
-  removeIconTemplate;
-  templates;
-  _removeIconTemplate;
-  ngAfterContentInit() {
-    this.templates.forEach((item) => {
-      switch (item.getType()) {
-        case "removeicon":
-          this._removeIconTemplate = item.template;
-          break;
-        default:
-          this._removeIconTemplate = item.template;
-          break;
-      }
-    });
-  }
-  ngOnChanges(simpleChanges) {
-    super.ngOnChanges(simpleChanges);
-    if (simpleChanges.chipProps && simpleChanges.chipProps.currentValue) {
-      const {
-        currentValue
-      } = simpleChanges.chipProps;
-      if (currentValue.label !== void 0) {
-        this.label = currentValue.label;
-      }
-      if (currentValue.icon !== void 0) {
-        this.icon = currentValue.icon;
-      }
-      if (currentValue.image !== void 0) {
-        this.image = currentValue.image;
-      }
-      if (currentValue.alt !== void 0) {
-        this.alt = currentValue.alt;
-      }
-      if (currentValue.style !== void 0) {
-        this.style = currentValue.style;
-      }
-      if (currentValue.styleClass !== void 0) {
-        this.styleClass = currentValue.styleClass;
-      }
-      if (currentValue.removable !== void 0) {
-        this.removable = currentValue.removable;
-      }
-      if (currentValue.removeIcon !== void 0) {
-        this.removeIcon = currentValue.removeIcon;
-      }
-    }
-  }
-  containerClass() {
-    let classes14 = "p-chip p-component";
-    if (this.styleClass) {
-      classes14 += ` ${this.styleClass}`;
-    }
-    return classes14;
-  }
-  close(event) {
-    this.visible = false;
-    this.onRemove.emit(event);
-  }
-  onKeydown(event) {
-    if (event.key === "Enter" || event.key === "Backspace") {
-      this.close(event);
-    }
-  }
-  imageError(event) {
-    this.onImageError.emit(event);
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275Chip_BaseFactory;
-    return function Chip_Factory(__ngFactoryType__) {
-      return (\u0275Chip_BaseFactory || (\u0275Chip_BaseFactory = \u0275\u0275getInheritedFactory(_Chip)))(__ngFactoryType__ || _Chip);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _Chip,
-    selectors: [["p-chip"]],
-    contentQueries: function Chip_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c09, 4);
-        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.removeIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
-      }
-    },
-    hostVars: 9,
-    hostBindings: function Chip_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("data-pc-name", "chip")("aria-label", ctx.label)("data-pc-section", "root");
-        \u0275\u0275styleMap(ctx.style);
-        \u0275\u0275classMap(ctx.containerClass());
-        \u0275\u0275styleProp("display", !ctx.visible && "none");
-      }
-    },
-    inputs: {
-      label: "label",
-      icon: "icon",
-      image: "image",
-      alt: "alt",
-      style: "style",
-      styleClass: "styleClass",
-      removable: [2, "removable", "removable", booleanAttribute],
-      removeIcon: "removeIcon",
-      chipProps: "chipProps"
-    },
-    outputs: {
-      onRemove: "onRemove",
-      onImageError: "onImageError"
-    },
-    features: [\u0275\u0275ProvidersFeature([ChipStyle]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature],
-    ngContentSelectors: _c19,
-    decls: 6,
-    vars: 4,
-    consts: [["iconTemplate", ""], ["class", "p-chip-image", 3, "src", "alt", "error", 4, "ngIf", "ngIfElse"], ["class", "p-chip-label", 4, "ngIf"], [4, "ngIf"], [1, "p-chip-image", 3, "error", "src", "alt"], [3, "class", "ngClass", 4, "ngIf"], [3, "ngClass"], [1, "p-chip-label"], ["tabindex", "0", "class", "p-chip-remove-icon", "role", "button", 3, "click", "keydown", 4, "ngIf"], ["tabindex", "0", "role", "button", 3, "class", "ngClass", "click", "keydown", 4, "ngIf"], ["tabindex", "0", "role", "button", 3, "class", "click", "keydown", 4, "ngIf"], ["tabindex", "0", "role", "button", 3, "click", "keydown", "ngClass"], ["tabindex", "0", "role", "button", 3, "click", "keydown"], ["tabindex", "0", "role", "button", 1, "p-chip-remove-icon", 3, "click", "keydown"], [4, "ngTemplateOutlet"]],
-    template: function Chip_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-        \u0275\u0275template(1, Chip_img_1_Template, 1, 2, "img", 1)(2, Chip_ng_template_2_Template, 1, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, Chip_div_4_Template, 2, 2, "div", 2)(5, Chip_ng_container_5_Template, 3, 2, "ng-container", 3);
-      }
-      if (rf & 2) {
-        const iconTemplate_r6 = \u0275\u0275reference(3);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.image)("ngIfElse", iconTemplate_r6);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", ctx.label);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.removable);
-      }
-    },
-    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, TimesCircleIcon, SharedModule],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Chip, [{
-    type: Component,
-    args: [{
-      selector: "p-chip",
-      standalone: true,
-      imports: [CommonModule, TimesCircleIcon, SharedModule],
-      template: `
-        <ng-content></ng-content>
-        <img class="p-chip-image" [src]="image" *ngIf="image; else iconTemplate" (error)="imageError($event)" [alt]="alt" />
-        <ng-template #iconTemplate><span *ngIf="icon" [class]="icon" [ngClass]="'p-chip-icon'" [attr.data-pc-section]="'icon'"></span></ng-template>
-        <div class="p-chip-label" *ngIf="label" [attr.data-pc-section]="'label'">{{ label }}</div>
-        <ng-container *ngIf="removable">
-            <ng-container *ngIf="!removeIconTemplate && !_removeIconTemplate">
-                <span
-                    tabindex="0"
-                    *ngIf="removeIcon"
-                    [class]="removeIcon"
-                    [ngClass]="'p-chip-remove-icon'"
-                    [attr.data-pc-section]="'removeicon'"
-                    (click)="close($event)"
-                    (keydown)="onKeydown($event)"
-                    [attr.aria-label]="removeAriaLabel"
-                    role="button"
-                ></span>
-                <TimesCircleIcon tabindex="0" *ngIf="!removeIcon" [class]="'p-chip-remove-icon'" [attr.data-pc-section]="'removeicon'" (click)="close($event)" (keydown)="onKeydown($event)" [attr.aria-label]="removeAriaLabel" role="button" />
-            </ng-container>
-            <span *ngIf="removeIconTemplate || _removeIconTemplate" tabindex="0" [attr.data-pc-section]="'removeicon'" class="p-chip-remove-icon" (click)="close($event)" (keydown)="onKeydown($event)" [attr.aria-label]="removeAriaLabel" role="button">
-                <ng-template *ngTemplateOutlet="removeIconTemplate || _removeIconTemplate"></ng-template>
-            </span>
-        </ng-container>
-    `,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      providers: [ChipStyle],
-      host: {
-        "[class]": "containerClass()",
-        "[style]": "style",
-        "[style.display]": '!visible && "none"',
-        "[attr.data-pc-name]": "'chip'",
-        "[attr.aria-label]": "label",
-        "[attr.data-pc-section]": "'root'"
-      }
-    }]
-  }], null, {
-    label: [{
-      type: Input
-    }],
-    icon: [{
-      type: Input
-    }],
-    image: [{
-      type: Input
-    }],
-    alt: [{
-      type: Input
-    }],
-    style: [{
-      type: Input
-    }],
-    styleClass: [{
-      type: Input
-    }],
-    removable: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    removeIcon: [{
-      type: Input
-    }],
-    onRemove: [{
-      type: Output
-    }],
-    onImageError: [{
-      type: Output
-    }],
-    chipProps: [{
-      type: Input
-    }],
-    removeIconTemplate: [{
-      type: ContentChild,
-      args: ["removeicon", {
-        descendants: false
-      }]
-    }],
-    templates: [{
-      type: ContentChildren,
-      args: [PrimeTemplate]
-    }]
-  });
-})();
-var ChipModule = class _ChipModule {
-  static \u0275fac = function ChipModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ChipModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _ChipModule,
-    imports: [Chip, SharedModule],
-    exports: [Chip, SharedModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [Chip, SharedModule, SharedModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChipModule, [{
-    type: NgModule,
-    args: [{
-      imports: [Chip, SharedModule],
-      exports: [Chip, SharedModule]
     }]
   }], null, null);
 })();
@@ -21860,8 +29936,8 @@ var UrlInputComponent = class _UrlInputComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-tag.mjs
-var _c010 = ["icon"];
-var _c110 = ["*"];
+var _c013 = ["icon"];
+var _c115 = ["*"];
 function Tag_ng_container_1_span_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "span", 4);
@@ -21902,7 +29978,7 @@ function Tag_span_2_Template(rf, ctx) {
     \u0275\u0275property("ngTemplateOutlet", ctx_r0.iconTemplate || ctx_r0._iconTemplate);
   }
 }
-var theme7 = ({
+var theme10 = ({
   dt
 }) => `
 .p-tag {
@@ -21958,7 +30034,7 @@ var theme7 = ({
     color: ${dt("tag.contrast.color")};
 }
 `;
-var classes7 = {
+var classes10 = {
   root: ({
     props
   }) => ["p-tag p-component", {
@@ -21975,8 +30051,8 @@ var classes7 = {
 };
 var TagStyle = class _TagStyle extends BaseStyle {
   name = "tag";
-  theme = theme7;
-  classes = classes7;
+  theme = theme10;
+  classes = classes10;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275TagStyle_BaseFactory;
     return function TagStyle_Factory(__ngFactoryType__) {
@@ -22051,17 +30127,17 @@ var Tag = class _Tag extends BaseComponent {
     });
   }
   containerClass() {
-    let classes14 = "p-tag p-component";
+    let classes16 = "p-tag p-component";
     if (this.severity) {
-      classes14 += ` p-tag-${this.severity}`;
+      classes16 += ` p-tag-${this.severity}`;
     }
     if (this.rounded) {
-      classes14 += " p-tag-rounded";
+      classes16 += " p-tag-rounded";
     }
     if (this.styleClass) {
-      classes14 += ` ${this.styleClass}`;
+      classes16 += ` ${this.styleClass}`;
     }
-    return classes14;
+    return classes16;
   }
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275Tag_BaseFactory;
@@ -22074,7 +30150,7 @@ var Tag = class _Tag extends BaseComponent {
     selectors: [["p-tag"]],
     contentQueries: function Tag_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c010, 4);
+        \u0275\u0275contentQuery(dirIndex, _c013, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -22099,7 +30175,7 @@ var Tag = class _Tag extends BaseComponent {
       rounded: [2, "rounded", "rounded", booleanAttribute]
     },
     features: [\u0275\u0275ProvidersFeature([TagStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c110,
+    ngContentSelectors: _c115,
     decls: 5,
     vars: 3,
     consts: [[4, "ngIf"], ["class", "p-tag-icon", 4, "ngIf"], [1, "p-tag-label"], ["class", "p-tag-icon", 3, "ngClass", 4, "ngIf"], [1, "p-tag-icon", 3, "ngClass"], [1, "p-tag-icon"], [4, "ngTemplateOutlet"]],
@@ -22442,7 +30518,7 @@ var DocumentUploadComponent = class _DocumentUploadComponent {
 })();
 
 // src/app/views/metadata-assistant/components/metadata-result/metadata-result.component.ts
-var _c011 = () => ({ "font-size": "0.75rem" });
+var _c014 = () => ({ "font-size": "0.75rem" });
 function MetadataResultComponent_div_0_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 6)(1, "div", 7);
@@ -22479,7 +30555,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_ng_template_1_Template(r
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(ctx_r0.getDomainFromUrl(result_r3.url));
     \u0275\u0275advance();
-    \u0275\u0275styleMap(\u0275\u0275pureFunction0(9, _c011));
+    \u0275\u0275styleMap(\u0275\u0275pureFunction0(9, _c014));
     \u0275\u0275property("value", result_r3.language === "en" ? \u0275\u0275pipeBind1(5, 5, "common.language.english") : \u0275\u0275pipeBind1(6, 7, "common.language.french"))("severity", result_r3.language === "en" ? "success" : "info");
   }
 }
@@ -24708,9 +32784,9 @@ var TestComponent = class _TestComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-stepper.mjs
-var _c012 = ["*"];
-var _c111 = ["content"];
-var _c23 = (a0, a1, a2) => ({
+var _c015 = ["*"];
+var _c116 = ["content"];
+var _c28 = (a0, a1, a2) => ({
   activateCallback: a0,
   value: a1,
   active: a2
@@ -24763,19 +32839,19 @@ function Step_Conditional_1_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.content || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(3, _c23, ctx_r1.onStepClick.bind(ctx_r1), ctx_r1.value(), ctx_r1.active()));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.content || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(3, _c28, ctx_r1.onStepClick.bind(ctx_r1), ctx_r1.value(), ctx_r1.active()));
     \u0275\u0275advance();
     \u0275\u0275conditional(ctx_r1.isSeparatorVisible() ? 1 : -1);
   }
 }
-var _c33 = (a0) => ({
+var _c36 = (a0) => ({
   transitionParams: a0
 });
-var _c43 = (a0) => ({
+var _c46 = (a0) => ({
   value: "visible",
   params: a0
 });
-var _c53 = (a0) => ({
+var _c56 = (a0) => ({
   value: "hidden",
   params: a0
 });
@@ -24795,10 +32871,10 @@ function StepPanel_Conditional_2_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r0.contentTemplate || ctx_r0._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(2, _c23, ctx_r0.updateValue.bind(ctx_r0), ctx_r0.value(), ctx_r0.active()));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r0.contentTemplate || ctx_r0._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction3(2, _c28, ctx_r0.updateValue.bind(ctx_r0), ctx_r0.value(), ctx_r0.active()));
   }
 }
-var theme8 = ({
+var theme11 = ({
   dt
 }) => `
 .p-steplist {
@@ -24985,7 +33061,7 @@ var theme8 = ({
     overflow: inherit;
 }
 `;
-var classes8 = {
+var classes11 = {
   root: ({
     props
   }) => ["p-stepper p-component", {
@@ -24995,8 +33071,8 @@ var classes8 = {
 };
 var StepperStyle = class _StepperStyle extends BaseStyle {
   name = "stepper";
-  theme = theme8;
-  classes = classes8;
+  theme = theme11;
+  classes = classes11;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275StepperStyle_BaseFactory;
     return function StepperStyle_Factory(__ngFactoryType__) {
@@ -25044,7 +33120,7 @@ var StepList = class _StepList extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c012,
+    ngContentSelectors: _c015,
     decls: 1,
     vars: 0,
     template: function StepList_Template(rf, ctx) {
@@ -25092,7 +33168,7 @@ var StepperSeparator = class _StepperSeparator extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c012,
+    ngContentSelectors: _c015,
     decls: 1,
     vars: 0,
     template: function StepperSeparator_Template(rf, ctx) {
@@ -25173,7 +33249,7 @@ var StepItem = class _StepItem extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c012,
+    ngContentSelectors: _c015,
     decls: 1,
     vars: 0,
     template: function StepItem_Template(rf, ctx) {
@@ -25268,7 +33344,7 @@ var Step = class _Step extends BaseComponent {
     selectors: [["p-step"]],
     contentQueries: function Step_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c111, 4);
+        \u0275\u0275contentQuery(dirIndex, _c116, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -25292,7 +33368,7 @@ var Step = class _Step extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c012,
+    ngContentSelectors: _c015,
     decls: 2,
     vars: 1,
     consts: [["type", "button", 1, "p-step-header", 3, "click", "tabindex", "disabled"], [1, "p-step-number"], [1, "p-step-title"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]],
@@ -25416,7 +33492,7 @@ var StepPanel = class _StepPanel extends BaseComponent {
     selectors: [["p-step-panel"]],
     contentQueries: function StepPanel_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c111, 5);
+        \u0275\u0275contentQuery(dirIndex, _c116, 5);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -25452,7 +33528,7 @@ var StepPanel = class _StepPanel extends BaseComponent {
       if (rf & 2) {
         \u0275\u0275conditional(ctx.isSeparatorVisible() ? 0 : -1);
         \u0275\u0275advance();
-        \u0275\u0275property("@content", ctx.isVertical() ? ctx.active() ? \u0275\u0275pureFunction1(5, _c43, \u0275\u0275pureFunction1(3, _c33, ctx.transitionOptions())) : \u0275\u0275pureFunction1(9, _c53, \u0275\u0275pureFunction1(7, _c33, ctx.transitionOptions())) : void 0);
+        \u0275\u0275property("@content", ctx.isVertical() ? ctx.active() ? \u0275\u0275pureFunction1(5, _c46, \u0275\u0275pureFunction1(3, _c36, ctx.transitionOptions())) : \u0275\u0275pureFunction1(9, _c56, \u0275\u0275pureFunction1(7, _c36, ctx.transitionOptions())) : void 0);
         \u0275\u0275advance();
         \u0275\u0275conditional(ctx.active() ? 2 : -1);
       }
@@ -25536,7 +33612,7 @@ var StepPanels = class _StepPanels extends BaseComponent {
       }
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c012,
+    ngContentSelectors: _c015,
     decls: 1,
     vars: 0,
     template: function StepPanels_Template(rf, ctx) {
@@ -25637,7 +33713,7 @@ var Stepper = class _Stepper extends BaseComponent {
       value: "valueChange"
     },
     features: [\u0275\u0275ProvidersFeature([StepperStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c012,
+    ngContentSelectors: _c015,
     decls: 1,
     vars: 0,
     template: function Stepper_Template(rf, ctx) {
@@ -25695,19 +33771,19 @@ var StepperModule = class _StepperModule {
 })();
 
 // node_modules/primeng/fesm2022/primeng-confirmpopup.mjs
-var _c013 = ["content"];
-var _c113 = ["accepticon"];
-var _c24 = ["rejecticon"];
-var _c34 = ["headless"];
-var _c44 = (a0, a1) => ({
+var _c016 = ["content"];
+var _c117 = ["accepticon"];
+var _c29 = ["rejecticon"];
+var _c37 = ["headless"];
+var _c47 = (a0, a1) => ({
   showTransitionParams: a0,
   hideTransitionParams: a1
 });
-var _c54 = (a0) => ({
+var _c57 = (a0) => ({
   value: "open",
   params: a0
 });
-var _c63 = (a0) => ({
+var _c66 = (a0) => ({
   $implicit: a0
 });
 function ConfirmPopup_div_0_ng_container_1_ng_container_1_Template(rf, ctx) {
@@ -25724,7 +33800,7 @@ function ConfirmPopup_div_0_ng_container_1_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.headlessTemplate || ctx_r1._headlessTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c63, ctx_r1.confirmation));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.headlessTemplate || ctx_r1._headlessTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c66, ctx_r1.confirmation));
   }
 }
 function ConfirmPopup_div_0_ng_template_2_ng_container_2_ng_container_1_Template(rf, ctx) {
@@ -25741,7 +33817,7 @@ function ConfirmPopup_div_0_ng_template_2_ng_container_2_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(3);
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c63, ctx_r1.confirmation));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c66, ctx_r1.confirmation));
   }
 }
 function ConfirmPopup_div_0_ng_template_2_ng_template_3_i_0_Template(rf, ctx) {
@@ -25888,12 +33964,12 @@ function ConfirmPopup_div_0_Template(rf, ctx) {
     const notHeadless_r6 = \u0275\u0275reference(3);
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classMap(ctx_r1.styleClass);
-    \u0275\u0275property("ngClass", "p-confirmpopup p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction1(10, _c54, \u0275\u0275pureFunction2(7, _c44, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
+    \u0275\u0275property("ngClass", "p-confirmpopup p-component")("ngStyle", ctx_r1.style)("@animation", \u0275\u0275pureFunction1(10, _c57, \u0275\u0275pureFunction2(7, _c47, ctx_r1.showTransitionOptions, ctx_r1.hideTransitionOptions)));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r1.headlessTemplate || ctx_r1._headlessTemplate)("ngIfElse", notHeadless_r6);
   }
 }
-var theme9 = ({
+var theme12 = ({
   dt
 }) => `
 .p-confirmpopup {
@@ -26002,7 +34078,7 @@ var theme9 = ({
     border-top-color: ${dt("confirmpopup.border.color")};
 }
 `;
-var classes9 = {
+var classes12 = {
   root: "p-confirmpopup p-component",
   content: "p-confirmpopup-content",
   icon: "p-confirmpopup-icon",
@@ -26013,8 +34089,8 @@ var classes9 = {
 };
 var ConfirmPopupStyle = class _ConfirmPopupStyle extends BaseStyle {
   name = "confirmpopup";
-  theme = theme9;
-  classes = classes9;
+  theme = theme12;
+  classes = classes12;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275ConfirmPopupStyle_BaseFactory;
     return function ConfirmPopupStyle_Factory(__ngFactoryType__) {
@@ -26365,10 +34441,10 @@ var ConfirmPopup = class _ConfirmPopup extends BaseComponent {
     selectors: [["p-confirmPopup"], ["p-confirmpopup"], ["p-confirm-popup"]],
     contentQueries: function ConfirmPopup_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c013, 4);
-        \u0275\u0275contentQuery(dirIndex, _c113, 4);
-        \u0275\u0275contentQuery(dirIndex, _c24, 4);
-        \u0275\u0275contentQuery(dirIndex, _c34, 4);
+        \u0275\u0275contentQuery(dirIndex, _c016, 4);
+        \u0275\u0275contentQuery(dirIndex, _c117, 4);
+        \u0275\u0275contentQuery(dirIndex, _c29, 4);
+        \u0275\u0275contentQuery(dirIndex, _c37, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -26611,341 +34687,6 @@ var ConfirmPopupModule = class _ConfirmPopupModule {
   }], null, null);
 })();
 
-// src/app/views/ia-assistant/services/ia-state.service.ts
-var IaStateService = class _IaStateService {
-  production = environment.production;
-  //Active step
-  activeStep = signal(1);
-  getActiveStep = computed(() => this.activeStep());
-  setActiveStep(step) {
-    this.activeStep.set(step);
-  }
-  // Step 1: Validate URLs
-  urlData = signal({
-    rawUrls: "",
-    includePrototypeLinks: false,
-    urlTotal: 0,
-    urlChecked: 0,
-    urlPercent: 0,
-    isValidating: false,
-    isValidated: false,
-    isOk: false,
-    urlPairs: []
-  });
-  getUrlData = computed(() => this.urlData());
-  setUrlData(partial) {
-    this.urlData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Step 2: Breadcrumbs
-  breadcrumbData = signal({
-    breadcrumbs: [],
-    rootPages: [],
-    progress: 0,
-    step: "",
-    hasBreakBeforeRoot: false,
-    hasBreakAfterRoot: false
-  });
-  getBreadcrumbData = computed(() => this.breadcrumbData());
-  setBreadcrumbData(partial) {
-    this.breadcrumbData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Step 3: Search criteria
-  searchData = signal({
-    rawTerms: "",
-    terms: []
-  });
-  getSearchData = computed(() => this.searchData());
-  setSearchData(partial) {
-    this.searchData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Parse raw terms into terms array
-  updateTerms() {
-    this.searchData().terms = this.searchData().rawTerms.split(/[\n;\t]+/).map((term) => term.trim()).filter(Boolean).map((term) => {
-      try {
-        if (term.startsWith("regex:")) {
-          const pattern = term.slice(6);
-          return new RegExp(pattern, "smi");
-        } else
-          return term.toLowerCase();
-      } catch (error) {
-        console.error(error);
-        return `invalid ${term}`;
-      }
-    });
-    this.searchData().terms = Array.from(new Set(this.searchData().terms));
-  }
-  // Step 4: IA tree
-  iaData = signal({
-    iaTree: [],
-    brokenLinks: [],
-    searchMatches: []
-  });
-  getIaData = computed(() => this.iaData());
-  setIaData(partial) {
-    this.iaData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Step 5: GitHub export (optional)
-  gitHubData = signal({
-    owner: "cra-design",
-    repo: "",
-    branch: "main"
-  });
-  getGitHubData = computed(() => this.gitHubData());
-  setGitHubData(partial) {
-    this.gitHubData.update((curr) => __spreadValues(__spreadValues({}, curr), partial));
-  }
-  // Reset
-  resetIaFlow(mode = "all") {
-    const step = this.activeStep();
-    if (step > 1) {
-      this.activeStep.set(step - 1);
-    }
-    if (step === 1) {
-      this.urlData.set({
-        rawUrls: mode === "all" ? "" : this.urlData().rawUrls,
-        includePrototypeLinks: false,
-        urlTotal: 0,
-        urlChecked: 0,
-        urlPercent: 0,
-        isValidating: false,
-        isValidated: false,
-        isOk: false,
-        urlPairs: []
-      });
-      this.gitHubData.set({ owner: "cra-design", repo: "", branch: "main" });
-    }
-    if (step <= 2) {
-      this.breadcrumbData.set({
-        breadcrumbs: [],
-        rootPages: [],
-        progress: 0,
-        step: "",
-        hasBreakBeforeRoot: false,
-        hasBreakAfterRoot: false
-      });
-    }
-    if (step <= 3) {
-      this.searchData.set({
-        rawTerms: "",
-        terms: []
-      });
-    }
-    if (step <= 4) {
-      this.iaData.set({
-        iaTree: [],
-        brokenLinks: [],
-        searchMatches: []
-      });
-    }
-    this.saveToLocalStorage();
-  }
-  // Get IA state
-  getIaState() {
-    return {
-      version: 0.1,
-      activeStep: this.activeStep(),
-      urlData: this.urlData(),
-      breadcrumbData: this.breadcrumbData(),
-      searchData: this.searchData(),
-      iaData: this.iaData(),
-      gitHubData: this.gitHubData()
-    };
-  }
-  // Save IA state to local storage (browser memory)
-  saveToLocalStorage() {
-    const state2 = this.getIaState();
-    const cleanTree = this.removeParents(state2.iaData.iaTree);
-    const cleanState = __spreadProps(__spreadValues({}, state2), {
-      iaData: __spreadProps(__spreadValues({}, state2.iaData), {
-        iaTree: cleanTree
-      })
-    });
-    console.log("Clean state:", cleanState);
-    localStorage.setItem("iaState", JSON.stringify(cleanState));
-    if (!this.production) {
-      console.groupCollapsed("IA State saved to localStorage");
-      console.log("Active step:", state2.activeStep);
-      console.log("--- URL Data ---");
-      console.table({
-        rawUrls: state2.urlData.rawUrls,
-        includePrototypeLinks: state2.urlData.includePrototypeLinks,
-        isValidating: state2.urlData.isValidating,
-        isValidated: state2.urlData.isValidated,
-        isOk: state2.urlData.isOk
-      });
-      console.log("URL Pairs:", state2.urlData.urlPairs);
-      console.log("--- Breadcrumb Data ---");
-      console.table({
-        breadcrumbProgress: state2.breadcrumbData.progress,
-        hasBreakBeforeRoot: state2.breadcrumbData.hasBreakBeforeRoot,
-        hasBreakAfterRoot: state2.breadcrumbData.hasBreakAfterRoot
-      });
-      console.log("Breadcrumbs:", state2.breadcrumbData.breadcrumbs);
-      console.log("Root Pages:", state2.breadcrumbData.rootPages);
-      console.log("--- Search Data ---");
-      console.log("Terms:", state2.searchData.terms);
-      console.log("--- IA Data ---");
-      console.log("IA Tree:", state2.iaData.iaTree);
-      console.log("Broken Links:", state2.iaData.brokenLinks);
-      console.log("Search Matches:", state2.iaData.searchMatches);
-      console.log("--- GitHub Data ---");
-      console.table({
-        owner: state2.gitHubData.owner,
-        repo: state2.gitHubData.repo,
-        branch: state2.gitHubData.branch
-      });
-      console.groupEnd();
-    }
-  }
-  removeParents(nodes) {
-    return nodes.map((node) => {
-      const _a = node, { parent } = _a, rest = __objRest(_a, ["parent"]);
-      return __spreadProps(__spreadValues({}, rest), {
-        children: node.children ? this.removeParents(node.children) : []
-      });
-    });
-  }
-  // Load from local storage (browser memory)
-  loadFromLocalStorage() {
-    const saved = localStorage.getItem("iaState");
-    if (!saved)
-      return;
-    const state2 = JSON.parse(saved);
-    this.activeStep.set(state2.activeStep);
-    this.urlData.set(state2.urlData);
-    this.breadcrumbData.set(state2.breadcrumbData);
-    this.searchData.set(state2.searchData);
-    this.iaData.set(state2.iaData);
-    this.gitHubData.set(state2.gitHubData);
-  }
-  // Export as JSON (for sharing with someone else)
-  exportIaState() {
-    const state2 = this.getIaState();
-    const cleanTree = this.removeParents(state2.iaData.iaTree);
-    const exportState = __spreadProps(__spreadValues({}, state2), {
-      searchData: {
-        rawTerms: state2.searchData.rawTerms
-      },
-      iaData: __spreadProps(__spreadValues({}, state2.iaData), {
-        iaTree: cleanTree
-      })
-    });
-    const data = JSON.stringify(exportState, null, 2);
-    const blob = new Blob([data], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "ia-state.json";
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-  // Import JSON
-  importIaState(event) {
-    const file = event.files?.[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const state2 = JSON.parse(reader.result);
-        if (state2.version !== 0.1) {
-          console.warn("Incompatible IA state version. Import skipped.");
-          return;
-        }
-        this.urlData.set(state2.urlData);
-        this.breadcrumbData.set(state2.breadcrumbData);
-        this.searchData.set(state2.searchData);
-        this.updateTerms();
-        this.iaData.set(state2.iaData);
-        this.gitHubData.set(state2.gitHubData || { owner: "cra-design", repo: "", branch: "main" });
-        this.saveToLocalStorage();
-        console.log("IA state successfully imported");
-      } catch (error) {
-        console.error("Invalid IA state file", error);
-      }
-    };
-    reader.readAsText(file);
-  }
-  // Export TreeNode as CSV
-  exportIaTreeAsCsv() {
-    const iaTree = this.iaData().iaTree;
-    const rows = [];
-    rows.push([
-      "Page Title (h1)",
-      "URL",
-      "Prototype URL",
-      "In scope",
-      "Orphaned",
-      "Parent URL",
-      "Old Parent URL",
-      "Status"
-    ].join(","));
-    const walk = (nodes, parentUrl = null) => {
-      for (const node of nodes) {
-        const data = node.data;
-        if (data.customStyleKey === "template") {
-          if (node.children?.length) {
-            walk(node.children, data.url);
-          }
-          continue;
-        }
-        let customStyle = "";
-        switch (data.customStyleKey) {
-          case "new":
-            customStyle = "New page";
-            break;
-          case "rot":
-            customStyle = "Remove ROT";
-            break;
-          case "move":
-            customStyle = "Page move";
-            break;
-          default:
-            customStyle = "";
-        }
-        if (data.originalParent && data.originalParent !== parentUrl && customStyle === "") {
-          customStyle = "Page move";
-        }
-        let oldParent = "";
-        if (data.originalParent && data.originalParent !== parentUrl) {
-          oldParent = data.originalParent;
-        }
-        rows.push([
-          `"${data.h1 || ""}"`,
-          data.url || "",
-          data.prototype || "",
-          data.isUserAdded ? "Yes" : "No",
-          data.notOrphan ? "No" : "Yes",
-          parentUrl || "",
-          oldParent || "",
-          customStyle || ""
-        ].join(","));
-        if (node.children?.length) {
-          walk(node.children, data.url);
-        }
-      }
-    };
-    walk(iaTree);
-    const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "ia-tree.csv";
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-  static \u0275fac = function IaStateService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _IaStateService)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _IaStateService, factory: _IaStateService.\u0275fac, providedIn: "root" });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IaStateService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
 // src/app/views/ia-assistant/components/link-list.component.ts
 function LinkListComponent_ng_container_0_ng_container_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -27139,7 +34880,7 @@ var LinkListComponent = class _LinkListComponent {
     </div>
   </div>
 </ng-container>
-  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/link-list.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;D:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/link-list.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=link-list.component.css.map */\n"] }]
   }], null, { labelKey: [{
     type: Input
   }], links: [{
@@ -28677,9 +36418,9 @@ var SearchCriteriaComponent = class _SearchCriteriaComponent {
 })();
 
 // node_modules/primeng/fesm2022/primeng-toggleswitch.mjs
-var _c014 = ["handle"];
-var _c114 = ["input"];
-var _c25 = (a0) => ({
+var _c017 = ["handle"];
+var _c118 = ["input"];
+var _c210 = (a0) => ({
   checked: a0
 });
 function ToggleSwitch_Conditional_5_ng_container_0_Template(rf, ctx) {
@@ -28693,10 +36434,10 @@ function ToggleSwitch_Conditional_5_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r1.handleTemplate || ctx_r1._handleTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c25, ctx_r1.checked()));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.handleTemplate || ctx_r1._handleTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c210, ctx_r1.checked()));
   }
 }
-var theme10 = ({
+var theme13 = ({
   dt
 }) => `
 .p-toggleswitch {
@@ -28812,12 +36553,12 @@ p-toggle-switch.ng-invalid.ng-dirty > .p-toggleswitch > .p-toggleswitch-slider,
 p-toggleswitch.ng-invalid.ng-dirty > .p-toggleswitch > .p-toggleswitch-slider {
     border-color: ${dt("toggleswitch.invalid.border.color")};
 }`;
-var inlineStyles2 = {
+var inlineStyles4 = {
   root: {
     position: "relative"
   }
 };
-var classes10 = {
+var classes13 = {
   root: ({
     instance
   }) => ({
@@ -28832,9 +36573,9 @@ var classes10 = {
 };
 var ToggleSwitchStyle = class _ToggleSwitchStyle extends BaseStyle {
   name = "toggleswitch";
-  theme = theme10;
-  classes = classes10;
-  inlineStyles = inlineStyles2;
+  theme = theme13;
+  classes = classes13;
+  inlineStyles = inlineStyles4;
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275ToggleSwitchStyle_BaseFactory;
     return function ToggleSwitchStyle_Factory(__ngFactoryType__) {
@@ -29008,7 +36749,7 @@ var ToggleSwitch = class _ToggleSwitch extends BaseComponent {
     selectors: [["p-toggleswitch"], ["p-toggleSwitch"], ["p-toggle-switch"]],
     contentQueries: function ToggleSwitch_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c014, 4);
+        \u0275\u0275contentQuery(dirIndex, _c017, 4);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
@@ -29019,7 +36760,7 @@ var ToggleSwitch = class _ToggleSwitch extends BaseComponent {
     },
     viewQuery: function ToggleSwitch_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c114, 5);
+        \u0275\u0275viewQuery(_c118, 5);
       }
       if (rf & 2) {
         let _t;
@@ -29576,9 +37317,9 @@ var IaTreeService = class _IaTreeService {
 })();
 
 // src/app/views/ia-assistant/components/ia-tree.component.ts
-var _c015 = ["chartContainer"];
-var _c115 = ["cm"];
-var _c26 = () => ({ "min-width": "50rem" });
+var _c018 = ["chartContainer"];
+var _c119 = ["cm"];
+var _c211 = () => ({ "min-width": "50rem" });
 function IaTreeComponent_ng_container_2_p_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "p");
@@ -29936,7 +37677,7 @@ function IaTreeComponent_ng_container_2_p_tabs_4_p_table_32_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("value", ctx_r1.iaData().brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c26));
+    \u0275\u0275property("value", ctx_r1.iaData().brokenLinks)("tableStyle", \u0275\u0275pureFunction0(2, _c211));
   }
 }
 function IaTreeComponent_ng_container_2_p_tabs_4_p_36_Template(rf, ctx) {
@@ -30581,8 +38322,8 @@ var IaTreeComponent = class _IaTreeComponent {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IaTreeComponent, selectors: [["ca-ia-tree"]], viewQuery: function IaTreeComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c015, 5);
-      \u0275\u0275viewQuery(_c115, 5);
+      \u0275\u0275viewQuery(_c018, 5);
+      \u0275\u0275viewQuery(_c119, 5);
     }
     if (rf & 2) {
       let _t;
@@ -30757,7 +38498,7 @@ var IaTreeComponent = class _IaTreeComponent {
             </p-tabpanel>\r
         </p-tabpanels>\r
     </p-tabs>\r
-</ng-container>`, styles: ["/* angular:styles/component:css;9a93770ea141d081e54eb414c0d33e6ca7cb03d141457e5b29bfd7a65f253928;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/ia-tree.component.ts */\n:host {\n  display: block;\n}\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n::ng-deep .transparent-toggle:hover {\n  background-color: var(--p-primary-50) !important;\n}\n::ng-deep .transparent-toggle {\n  background-color: unset !important;\n  border: none !important;\n}\n/*# sourceMappingURL=ia-tree.component.css.map */\n"] }]
+</ng-container>`, styles: ["/* angular:styles/component:css;9a93770ea141d081e54eb414c0d33e6ca7cb03d141457e5b29bfd7a65f253928;D:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/components/ia-tree.component.ts */\n:host {\n  display: block;\n}\n.ia-label {\n  white-space: pre-line;\n  display: inline-block;\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .p-tree li[class*=text-white] > .p-tree-node-content .ia-label {\n  color: #ffffff !important;\n}\n::ng-deep .p-tree li[class*=text-black] > .p-tree-node-content .ia-label {\n  color: #000000 !important;\n}\n::ng-deep .p-tree .p-tree-node-content:hover {\n  background-color: unset !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node a {\n  color: var(--text-color) !important;\n  text-decoration: none !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-white a {\n  color: #ffffff !important;\n}\n::ng-deep .ia-chart-container .p-organizationchart-node.text-black a {\n  color: #000000 !important;\n}\n::ng-deep .transparent-toggle:hover {\n  background-color: var(--p-primary-50) !important;\n}\n::ng-deep .transparent-toggle {\n  background-color: unset !important;\n  border: none !important;\n}\n/*# sourceMappingURL=ia-tree.component.css.map */\n"] }]
   }], () => [], { chartContainer: [{
     type: ViewChild,
     args: ["chartContainer"]
@@ -31236,1216 +38977,798 @@ var IaAssistantComponent = class _IaAssistantComponent {
 \r
         </p-step-panels>\r
     </p-stepper>\r
-</div>`, styles: ["/* angular:styles/component:css;59d84de9e62055b88cf35acb7b824d1f3f6cb65bf585bd8213d7e42f57354ff4;C:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/ia-assistant.component.ts */\n::ng-deep .upload-secondary-outline .p-button {\n  border: 1px solid var(--p-zinc-200) !important;\n  background-color: transparent !important;\n  color: var(--p-button-secondary-color);\n}\n::ng-deep .upload-secondary-outline .p-button:hover {\n  background-color: var(--p-button-outlined-secondary-hover-background);\n  color: var(--p-button-secondary-hover-color);\n}\n::ng-deep .upload-secondary-outline .p-button-label {\n  display: none;\n}\n/*# sourceMappingURL=ia-assistant.component.css.map */\n"] }]
+</div>`, styles: ["/* angular:styles/component:css;59d84de9e62055b88cf35acb7b824d1f3f6cb65bf585bd8213d7e42f57354ff4;D:/AmberDev/main-repo/content-assistant/src/app/views/ia-assistant/ia-assistant.component.ts */\n::ng-deep .upload-secondary-outline .p-button {\n  border: 1px solid var(--p-zinc-200) !important;\n  background-color: transparent !important;\n  color: var(--p-button-secondary-color);\n}\n::ng-deep .upload-secondary-outline .p-button:hover {\n  background-color: var(--p-button-outlined-secondary-hover-background);\n  color: var(--p-button-secondary-hover-color);\n}\n::ng-deep .upload-secondary-outline .p-button-label {\n  display: none;\n}\n/*# sourceMappingURL=ia-assistant.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IaAssistantComponent, { className: "IaAssistantComponent", filePath: "src/app/views/ia-assistant/ia-assistant.component.ts", lineNumber: 54 });
 })();
 
-// node_modules/primeng/fesm2022/primeng-autocomplete.mjs
-var _c016 = ["item"];
-var _c116 = ["empty"];
-var _c27 = ["header"];
-var _c35 = ["footer"];
-var _c45 = ["selecteditem"];
-var _c55 = ["group"];
-var _c64 = ["loader"];
-var _c73 = ["removeicon"];
-var _c83 = ["loadingicon"];
-var _c93 = ["clearicon"];
-var _c103 = ["dropdownicon"];
-var _c117 = ["container"];
-var _c123 = ["focusInput"];
-var _c133 = ["multiIn"];
-var _c143 = ["multiContainer"];
-var _c152 = ["ddBtn"];
-var _c162 = ["items"];
-var _c172 = ["scroller"];
-var _c182 = ["overlay"];
-var _c192 = (a0) => ({
-  "p-autocomplete-chip-item": true,
-  "p-focus": a0
-});
-var _c20 = (a0) => ({
-  $implicit: a0
-});
-var _c21 = (a0, a1) => ({
-  class: "p-autocomplete-chip-icon",
-  removeCallback: a0,
-  index: a1
-});
-var _c222 = (a0) => ({
-  height: a0
-});
-var _c232 = (a0, a1) => ({
-  $implicit: a0,
-  options: a1
-});
-var _c242 = (a0) => ({
-  options: a0
-});
-var _c252 = () => ({});
-var _c262 = (a0, a1) => ({
-  $implicit: a0,
-  index: a1
-});
-function AutoComplete_input_2_Template(rf, ctx) {
+// node_modules/primeng/fesm2022/primeng-avatar.mjs
+var _c019 = ["*"];
+function Avatar_span_1_Template(rf, ctx) {
   if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "input", 19, 3);
-    \u0275\u0275listener("input", function AutoComplete_input_2_Template_input_input_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInput($event));
-    })("keydown", function AutoComplete_input_2_Template_input_keydown_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onKeyDown($event));
-    })("change", function AutoComplete_input_2_Template_input_change_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputChange($event));
-    })("focus", function AutoComplete_input_2_Template_input_focus_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputFocus($event));
-    })("blur", function AutoComplete_input_2_Template_input_blur_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputBlur($event));
-    })("paste", function AutoComplete_input_2_Template_input_paste_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputPaste($event));
-    })("keyup", function AutoComplete_input_2_Template_input_keyup_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputKeyUp($event));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_26_0;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(ctx_r2.inputStyleClass);
-    \u0275\u0275property("pAutoFocus", ctx_r2.autofocus)("ngClass", "p-autocomplete-input")("ngStyle", ctx_r2.inputStyle)("type", ctx_r2.type)("variant", ctx_r2.variant)("autocomplete", ctx_r2.autocomplete)("required", ctx_r2.required)("name", ctx_r2.name)("pSize", ctx_r2.size)("tabindex", !ctx_r2.disabled ? ctx_r2.tabindex : -1)("readonly", ctx_r2.readonly)("disabled", ctx_r2.disabled)("fluid", ctx_r2.hasFluid);
-    \u0275\u0275attribute("value", ctx_r2.inputValue())("id", ctx_r2.inputId)("placeholder", ctx_r2.placeholder)("maxlength", ctx_r2.maxlength)("aria-label", ctx_r2.ariaLabel)("aria-labelledby", ctx_r2.ariaLabelledBy)("aria-required", ctx_r2.required)("aria-expanded", (tmp_26_0 = ctx_r2.overlayVisible) !== null && tmp_26_0 !== void 0 ? tmp_26_0 : false)("aria-controls", ctx_r2.overlayVisible ? ctx_r2.id + "_list" : null)("aria-activedescendant", ctx_r2.focused ? ctx_r2.focusedOptionId : void 0);
-  }
-}
-function AutoComplete_ng_container_3_TimesIcon_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "TimesIcon", 22);
-    \u0275\u0275listener("click", function AutoComplete_ng_container_3_TimesIcon_1_Template_TimesIcon_click_0_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.clear());
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275property("styleClass", "p-autocomplete-clear-icon");
-    \u0275\u0275attribute("aria-hidden", true);
-  }
-}
-function AutoComplete_ng_container_3_span_2_1_ng_template_0_Template(rf, ctx) {
-}
-function AutoComplete_ng_container_3_span_2_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AutoComplete_ng_container_3_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function AutoComplete_ng_container_3_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "span", 23);
-    \u0275\u0275listener("click", function AutoComplete_ng_container_3_span_2_Template_span_click_0_listener() {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.clear());
-    });
-    \u0275\u0275template(1, AutoComplete_ng_container_3_span_2_1_Template, 1, 0, null, 24);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275attribute("aria-hidden", true);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.clearIconTemplate || ctx_r2._clearIconTemplate);
-  }
-}
-function AutoComplete_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, AutoComplete_ng_container_3_TimesIcon_1_Template, 1, 2, "TimesIcon", 20)(2, AutoComplete_ng_container_3_span_2_Template, 2, 2, "span", 21);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.clearIconTemplate && !ctx_r2._clearIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.clearIconTemplate || ctx_r2._clearIconTemplate);
-  }
-}
-function AutoComplete_ul_4_li_2_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_ng_template_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "span", 33);
-    \u0275\u0275listener("click", function AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_ng_template_1_Template_span_click_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const i_r8 = \u0275\u0275nextContext(3).index;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(!ctx_r2.readonly ? ctx_r2.removeOption($event, i_r8) : "");
-    });
-    \u0275\u0275element(1, "TimesCircleIcon", 34);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275property("styleClass", "p-autocomplete-chip-icon");
-    \u0275\u0275attribute("aria-hidden", true);
-  }
-}
-function AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_ng_template_1_Template, 2, 2, "ng-template", null, 6, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementContainerEnd();
-  }
-}
-function AutoComplete_ul_4_li_2_p_chip_3_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-chip", 32);
-    \u0275\u0275listener("onRemove", function AutoComplete_ul_4_li_2_p_chip_3_Template_p_chip_onRemove_0_listener($event) {
-      \u0275\u0275restoreView(_r7);
-      const i_r8 = \u0275\u0275nextContext().index;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(!ctx_r2.readonly ? ctx_r2.removeOption($event, i_r8) : "");
-    });
-    \u0275\u0275template(1, AutoComplete_ul_4_li_2_p_chip_3_ng_container_1_Template, 3, 0, "ng-container", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const option_r10 = \u0275\u0275nextContext().$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("label", ctx_r2.getOptionLabel(option_r10))("removable", true);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.removeIconTemplate && !ctx_r2._removeIconTemplate);
-  }
-}
-function AutoComplete_ul_4_li_2_span_4_1_ng_template_0_Template(rf, ctx) {
-}
-function AutoComplete_ul_4_li_2_span_4_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AutoComplete_ul_4_li_2_span_4_1_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function AutoComplete_ul_4_li_2_span_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275template(1, AutoComplete_ul_4_li_2_span_4_1_Template, 1, 0, null, 30);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const i_r8 = \u0275\u0275nextContext().index;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.removeIconTemplate || ctx_r2._removeIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c21, ctx_r2.removeOption.bind(ctx_r2), i_r8));
-  }
-}
-function AutoComplete_ul_4_li_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 29, 5);
-    \u0275\u0275template(2, AutoComplete_ul_4_li_2_ng_container_2_Template, 1, 0, "ng-container", 30)(3, AutoComplete_ul_4_li_2_p_chip_3_Template, 2, 3, "p-chip", 31)(4, AutoComplete_ul_4_li_2_span_4_Template, 2, 5, "span", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const option_r10 = ctx.$implicit;
-    const i_r8 = ctx.index;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngClass", \u0275\u0275pureFunction1(10, _c192, ctx_r2.focusedMultipleOptionIndex() === i_r8));
-    \u0275\u0275attribute("id", ctx_r2.id + "_multiple_option_" + i_r8)("aria-label", ctx_r2.getOptionLabel(option_r10))("aria-setsize", ctx_r2.modelValue().length)("aria-posinset", i_r8 + 1)("aria-selected", true);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.selectedItemTemplate || ctx_r2._selectedItemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(12, _c20, option_r10));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.selectedItemTemplate && !ctx_r2._selectedItemTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.removeIconTemplate || ctx_r2._removeIconTemplate);
-  }
-}
-function AutoComplete_ul_4_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ul", 25, 4);
-    \u0275\u0275listener("focus", function AutoComplete_ul_4_Template_ul_focus_0_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onMultipleContainerFocus($event));
-    })("blur", function AutoComplete_ul_4_Template_ul_blur_0_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onMultipleContainerBlur($event));
-    })("keydown", function AutoComplete_ul_4_Template_ul_keydown_0_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onMultipleContainerKeyDown($event));
-    });
-    \u0275\u0275template(2, AutoComplete_ul_4_li_2_Template, 5, 14, "li", 26);
-    \u0275\u0275elementStart(3, "li", 27)(4, "input", 28, 3);
-    \u0275\u0275listener("input", function AutoComplete_ul_4_Template_input_input_4_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInput($event));
-    })("keydown", function AutoComplete_ul_4_Template_input_keydown_4_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onKeyDown($event));
-    })("change", function AutoComplete_ul_4_Template_input_change_4_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputChange($event));
-    })("focus", function AutoComplete_ul_4_Template_input_focus_4_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputFocus($event));
-    })("blur", function AutoComplete_ul_4_Template_input_blur_4_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputBlur($event));
-    })("paste", function AutoComplete_ul_4_Template_input_paste_4_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputPaste($event));
-    })("keyup", function AutoComplete_ul_4_Template_input_keyup_4_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onInputKeyUp($event));
-    });
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    let tmp_28_0;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngClass", ctx_r2.inputMultipleClass)("tabindex", -1);
-    \u0275\u0275attribute("aria-orientation", "horizontal")("aria-activedescendant", ctx_r2.focused ? ctx_r2.focusedMultipleOptionId : void 0);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r2.modelValue());
-    \u0275\u0275advance(2);
-    \u0275\u0275classMap(ctx_r2.inputStyleClass);
-    \u0275\u0275property("pAutoFocus", ctx_r2.autofocus)("ngClass", ctx_r2.inputClass)("ngStyle", ctx_r2.inputStyle)("autocomplete", ctx_r2.autocomplete)("required", ctx_r2.required)("tabindex", !ctx_r2.disabled ? ctx_r2.tabindex : -1)("readonly", ctx_r2.readonly)("disabled", ctx_r2.disabled);
-    \u0275\u0275attribute("type", ctx_r2.type)("id", ctx_r2.inputId)("name", ctx_r2.name)("placeholder", !ctx_r2.filled ? ctx_r2.placeholder : null)("maxlength", ctx_r2.maxlength)("aria-label", ctx_r2.ariaLabel)("aria-labelledby", ctx_r2.ariaLabelledBy)("aria-required", ctx_r2.required)("aria-expanded", (tmp_28_0 = ctx_r2.overlayVisible) !== null && tmp_28_0 !== void 0 ? tmp_28_0 : false)("aria-controls", ctx_r2.overlayVisible ? ctx_r2.id + "_list" : null)("aria-activedescendant", ctx_r2.focused ? ctx_r2.focusedOptionId : void 0);
-  }
-}
-function AutoComplete_ng_container_5_SpinnerIcon_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "SpinnerIcon", 37);
-  }
-  if (rf & 2) {
-    \u0275\u0275property("styleClass", "p-autocomplete-loader")("spin", true);
-    \u0275\u0275attribute("aria-hidden", true);
-  }
-}
-function AutoComplete_ng_container_5_span_2_1_ng_template_0_Template(rf, ctx) {
-}
-function AutoComplete_ng_container_5_span_2_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AutoComplete_ng_container_5_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function AutoComplete_ng_container_5_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 38);
-    \u0275\u0275template(1, AutoComplete_ng_container_5_span_2_1_Template, 1, 0, null, 24);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275attribute("aria-hidden", true);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.loadingIconTemplate || ctx_r2._loadingIconTemplate);
-  }
-}
-function AutoComplete_ng_container_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, AutoComplete_ng_container_5_SpinnerIcon_1_Template, 1, 3, "SpinnerIcon", 35)(2, AutoComplete_ng_container_5_span_2_Template, 2, 2, "span", 36);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.loadingIconTemplate && !ctx_r2._loadingIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.loadingIconTemplate || ctx_r2._loadingIconTemplate);
-  }
-}
-function AutoComplete_button_6_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "span", 41);
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngClass", ctx_r2.dropdownIcon);
-    \u0275\u0275attribute("aria-hidden", true);
-  }
-}
-function AutoComplete_button_6_ng_container_3_ChevronDownIcon_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "ChevronDownIcon");
-  }
-}
-function AutoComplete_button_6_ng_container_3_2_ng_template_0_Template(rf, ctx) {
-}
-function AutoComplete_button_6_ng_container_3_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AutoComplete_button_6_ng_container_3_2_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function AutoComplete_button_6_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, AutoComplete_button_6_ng_container_3_ChevronDownIcon_1_Template, 1, 0, "ChevronDownIcon", 15)(2, AutoComplete_button_6_ng_container_3_2_Template, 1, 0, null, 24);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.dropdownIconTemplate && !ctx_r2._dropdownIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.dropdownIconTemplate || ctx_r2._dropdownIconTemplate);
-  }
-}
-function AutoComplete_button_6_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r11 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 39, 7);
-    \u0275\u0275listener("click", function AutoComplete_button_6_Template_button_click_0_listener($event) {
-      \u0275\u0275restoreView(_r11);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.handleDropdownClick($event));
-    });
-    \u0275\u0275template(2, AutoComplete_button_6_span_2_Template, 1, 2, "span", 40)(3, AutoComplete_button_6_ng_container_3_Template, 3, 2, "ng-container", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275property("disabled", ctx_r2.disabled);
-    \u0275\u0275attribute("aria-label", ctx_r2.dropdownAriaLabel)("tabindex", ctx_r2.tabindex);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r2.dropdownIcon);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.dropdownIcon);
-  }
-}
-function AutoComplete_ng_template_9_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ng_template_9_p_scroller_3_ng_template_2_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ng_template_9_p_scroller_3_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AutoComplete_ng_template_9_p_scroller_3_ng_template_2_ng_container_0_Template, 1, 0, "ng-container", 30);
-  }
-  if (rf & 2) {
-    const items_r13 = ctx.$implicit;
-    const scrollerOptions_r14 = ctx.options;
-    \u0275\u0275nextContext(2);
-    const buildInItems_r15 = \u0275\u0275reference(6);
-    \u0275\u0275property("ngTemplateOutlet", buildInItems_r15)("ngTemplateOutletContext", \u0275\u0275pureFunction2(2, _c232, items_r13, scrollerOptions_r14));
-  }
-}
-function AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_ng_container_0_Template, 1, 0, "ng-container", 30);
-  }
-  if (rf & 2) {
-    const scrollerOptions_r16 = ctx.options;
-    const ctx_r2 = \u0275\u0275nextContext(4);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.loaderTemplate || ctx_r2._loaderTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c242, scrollerOptions_r16));
-  }
-}
-function AutoComplete_ng_template_9_p_scroller_3_ng_container_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, AutoComplete_ng_template_9_p_scroller_3_ng_container_4_ng_template_1_Template, 1, 4, "ng-template", null, 10, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementContainerEnd();
-  }
-}
-function AutoComplete_ng_template_9_p_scroller_3_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r12 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "p-scroller", 46, 9);
-    \u0275\u0275listener("onLazyLoad", function AutoComplete_ng_template_9_p_scroller_3_Template_p_scroller_onLazyLoad_0_listener($event) {
-      \u0275\u0275restoreView(_r12);
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.onLazyLoad.emit($event));
-    });
-    \u0275\u0275template(2, AutoComplete_ng_template_9_p_scroller_3_ng_template_2_Template, 1, 5, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(4, AutoComplete_ng_template_9_p_scroller_3_ng_container_4_Template, 3, 0, "ng-container", 15);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275styleMap(\u0275\u0275pureFunction1(8, _c222, ctx_r2.scrollHeight));
-    \u0275\u0275property("items", ctx_r2.visibleOptions())("itemSize", ctx_r2.virtualScrollItemSize || ctx_r2._itemSize)("autoSize", true)("lazy", ctx_r2.lazy)("options", ctx_r2.virtualScrollOptions);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r2.loaderTemplate || ctx_r2._loaderTemplate);
-  }
-}
-function AutoComplete_ng_template_9_ng_container_4_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ng_template_9_ng_container_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, AutoComplete_ng_template_9_ng_container_4_ng_container_1_Template, 1, 0, "ng-container", 30);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275nextContext();
-    const buildInItems_r15 = \u0275\u0275reference(6);
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", buildInItems_r15)("ngTemplateOutletContext", \u0275\u0275pureFunction2(3, _c232, ctx_r2.visibleOptions(), \u0275\u0275pureFunction0(2, _c252)));
-  }
-}
-function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275elementStart(0, "span", 3);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const option_r17 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(3);
+    const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r2.getOptionGroupLabel(option_r17.optionGroup));
+    \u0275\u0275textInterpolate(ctx_r0.label);
   }
 }
-function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_ng_container_3_Template(rf, ctx) {
+function Avatar_ng_template_2_span_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "li", 50);
-    \u0275\u0275template(2, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_span_2_Template, 2, 1, "span", 15)(3, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_ng_container_3_Template, 1, 0, "ng-container", 30);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
+    \u0275\u0275element(0, "span", 5);
   }
   if (rf & 2) {
-    const ctx_r17 = \u0275\u0275nextContext();
-    const option_r17 = ctx_r17.$implicit;
-    const i_r19 = ctx_r17.index;
-    const scrollerOptions_r20 = \u0275\u0275nextContext().options;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(5, _c222, scrollerOptions_r20.itemSize + "px"));
-    \u0275\u0275attribute("id", ctx_r2.id + "_" + ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.groupTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.groupTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction1(7, _c20, option_r17.optionGroup));
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275classMap(ctx_r0.icon);
+    \u0275\u0275property("ngClass", "p-avatar-icon");
   }
 }
-function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_span_2_Template(rf, ctx) {
+function Avatar_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    \u0275\u0275template(0, Avatar_ng_template_2_span_0_Template, 1, 3, "span", 4);
   }
   if (rf & 2) {
-    const option_r17 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r2.getOptionLabel(option_r17));
+    const ctx_r0 = \u0275\u0275nextContext();
+    const imageTemplate_r2 = \u0275\u0275reference(5);
+    \u0275\u0275property("ngIf", ctx_r0.icon)("ngIfElse", imageTemplate_r2);
   }
 }
-function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_ng_container_3_Template(rf, ctx) {
+function Avatar_ng_template_4_img_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r21 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "li", 51);
-    \u0275\u0275listener("click", function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template_li_click_1_listener($event) {
-      \u0275\u0275restoreView(_r21);
-      const option_r17 = \u0275\u0275nextContext().$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r2.onOptionSelect($event, option_r17));
-    })("mouseenter", function AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template_li_mouseenter_1_listener($event) {
-      \u0275\u0275restoreView(_r21);
-      const i_r19 = \u0275\u0275nextContext().index;
-      const scrollerOptions_r20 = \u0275\u0275nextContext().options;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.onOptionMouseEnter($event, ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20)));
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "img", 7);
+    \u0275\u0275listener("error", function Avatar_ng_template_4_img_0_Template_img_error_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.imageError($event));
     });
-    \u0275\u0275template(2, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_span_2_Template, 2, 1, "span", 15)(3, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_ng_container_3_Template, 1, 0, "ng-container", 30);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r17 = \u0275\u0275nextContext();
-    const option_r17 = ctx_r17.$implicit;
-    const i_r19 = ctx_r17.index;
-    const scrollerOptions_r20 = \u0275\u0275nextContext().options;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(12, _c222, scrollerOptions_r20.itemSize + "px"))("ngClass", ctx_r2.optionClass(option_r17, i_r19, scrollerOptions_r20));
-    \u0275\u0275attribute("id", ctx_r2.id + "_" + ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20))("aria-label", ctx_r2.getOptionLabel(option_r17))("aria-selected", ctx_r2.isSelected(option_r17))("aria-disabled", ctx_r2.isOptionDisabled(option_r17))("data-p-focused", ctx_r2.focusedOptionIndex() === ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20))("aria-setsize", ctx_r2.ariaSetSize)("aria-posinset", ctx_r2.getAriaPosInset(ctx_r2.getOptionIndex(i_r19, scrollerOptions_r20)));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.itemTemplate && !ctx_r2._itemTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.itemTemplate || ctx_r2._itemTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction2(14, _c262, option_r17, scrollerOptions_r20.getOptions ? scrollerOptions_r20.getOptions(i_r19) : i_r19));
-  }
-}
-function AutoComplete_ng_template_9_ng_template_5_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_0_Template, 4, 9, "ng-container", 15)(1, AutoComplete_ng_template_9_ng_template_5_ng_template_2_ng_container_1_Template, 4, 17, "ng-container", 15);
-  }
-  if (rf & 2) {
-    const option_r17 = ctx.$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("ngIf", ctx_r2.isOptionGroup(option_r17));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.isOptionGroup(option_r17));
-  }
-}
-function AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(4);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r2.searchResultMessageText, " ");
-  }
-}
-function AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0, null, 12);
-  }
-}
-function AutoComplete_ng_template_9_ng_template_5_li_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 52);
-    \u0275\u0275template(1, AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_1_Template, 2, 1, "ng-container", 53)(2, AutoComplete_ng_template_9_ng_template_5_li_3_ng_container_2_Template, 2, 0, "ng-container", 24);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const scrollerOptions_r20 = \u0275\u0275nextContext().options;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngStyle", \u0275\u0275pureFunction1(4, _c222, scrollerOptions_r20.itemSize + "px"));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.emptyTemplate && !ctx_r2._emptyTemplate)("ngIfElse", ctx_r2.empty);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.emptyTemplate || ctx_r2._emptyTemplate);
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("src", ctx_r0.image, \u0275\u0275sanitizeUrl);
+    \u0275\u0275attribute("aria-label", ctx_r0.ariaLabel);
   }
 }
-function AutoComplete_ng_template_9_ng_template_5_Template(rf, ctx) {
+function Avatar_ng_template_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 47, 11);
-    \u0275\u0275template(2, AutoComplete_ng_template_9_ng_template_5_ng_template_2_Template, 2, 2, "ng-template", 48)(3, AutoComplete_ng_template_9_ng_template_5_li_3_Template, 3, 6, "li", 49);
-    \u0275\u0275elementEnd();
+    \u0275\u0275template(0, Avatar_ng_template_4_img_0_Template, 1, 2, "img", 6);
   }
   if (rf & 2) {
-    const items_r22 = ctx.$implicit;
-    const scrollerOptions_r20 = ctx.options;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275styleMap(scrollerOptions_r20.contentStyle);
-    \u0275\u0275property("ngClass", scrollerOptions_r20.contentStyleClass);
-    \u0275\u0275attribute("id", ctx_r2.id + "_list")("aria-label", ctx_r2.listLabel);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", items_r22);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !items_r22 || items_r22 && items_r22.length === 0 && ctx_r2.showEmptyMessage);
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngIf", ctx_r0.image);
   }
 }
-function AutoComplete_ng_template_9_ng_container_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function AutoComplete_ng_template_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 42);
-    \u0275\u0275template(1, AutoComplete_ng_template_9_ng_container_1_Template, 1, 0, "ng-container", 24);
-    \u0275\u0275elementStart(2, "div", 43);
-    \u0275\u0275template(3, AutoComplete_ng_template_9_p_scroller_3_Template, 5, 10, "p-scroller", 44)(4, AutoComplete_ng_template_9_ng_container_4_Template, 2, 6, "ng-container", 15);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(5, AutoComplete_ng_template_9_ng_template_5_Template, 4, 7, "ng-template", null, 8, \u0275\u0275templateRefExtractor)(7, AutoComplete_ng_template_9_ng_container_7_Template, 1, 0, "ng-container", 24);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "span", 45);
-    \u0275\u0275text(9);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(ctx_r2.panelStyleClass);
-    \u0275\u0275property("ngClass", ctx_r2.panelClass)("ngStyle", ctx_r2.panelStyle);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.headerTemplate || ctx_r2._headerTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275styleProp("max-height", ctx_r2.virtualScroll ? "auto" : ctx_r2.scrollHeight);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.virtualScroll);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.virtualScroll);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.footerTemplate || ctx_r2._footerTemplate);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", ctx_r2.selectedMessageText, " ");
-  }
-}
-var theme11 = ({
+var theme14 = ({
   dt
 }) => `
-.p-autocomplete {
+.p-avatar {
     display: inline-flex;
-}
-
-.p-autocomplete-loader {
-    position: absolute;
-    top: 50%;
-    margin-top: -0.5rem;
-    inset-inline-end: ${dt("autocomplete.padding.x")};
-}
-
-.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-loader {
-    inset-inline-end: calc(${dt("autocomplete.dropdown.width")} + ${dt("autocomplete.padding.x")});
-}
-
-.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-input {
-    flex: 1 1 auto;
-    width: 1%;
-}
-
-.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-input,
-.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-input-multiple {
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-}
-
-.p-autocomplete-dropdown {
-    cursor: pointer;
-    display: inline-flex;
-    user-select: none;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    position: relative;
-    width: ${dt("autocomplete.dropdown.width")};
-    border-start-end-radius: ${dt("autocomplete.dropdown.border.radius")};
-    border-end-end-radius: ${dt("autocomplete.dropdown.border.radius")};
-    background: ${dt("autocomplete.dropdown.background")};
-    border: 1px solid ${dt("autocomplete.dropdown.border.color")};
-    border-inline-start: 0 none;
-    color: ${dt("autocomplete.dropdown.color")};
-    transition: background ${dt("autocomplete.transition.duration")}, color ${dt("autocomplete.transition.duration")}, border-color ${dt("autocomplete.transition.duration")}, outline-color ${dt("autocomplete.transition.duration")}, box-shadow ${dt("autocomplete.transition.duration")};
-    outline-color: transparent;
+    width: ${dt("avatar.width")};
+    height: ${dt("avatar.height")};
+    font-size: ${dt("avatar.font.size")};
+    color: ${dt("avatar.color")};
+    background: ${dt("avatar.background")};
+    border-radius: ${dt("avatar.border.radius")};
 }
 
-.p-autocomplete-dropdown:not(:disabled):hover {
-    background: ${dt("autocomplete.dropdown.hover.background")};
-    border-color: ${dt("autocomplete.dropdown.hover.border.color")};
-    color: ${dt("autocomplete.dropdown.hover.color")};
+.p-avatar-image {
+    background: transparent;
 }
 
-.p-autocomplete-dropdown:not(:disabled):active {
-    background: ${dt("autocomplete.dropdown.active.background")};
-    border-color: ${dt("autocomplete.dropdown.active.border.color")};
-    color: ${dt("autocomplete.dropdown.active.color")};
+.p-avatar-circle {
+    border-radius: 50%;
 }
 
-.p-autocomplete-dropdown:focus-visible {
-    box-shadow: ${dt("autocomplete.dropdown.focus.ring.shadow")};
-    outline: ${dt("autocomplete.dropdown.focus.ring.width")} ${dt("autocomplete.dropdown.focus.ring.style")} ${dt("autocomplete.dropdown.focus.ring.color")};
-    outline-offset: ${dt("autocomplete.dropdown.focus.ring.offset")};
+.p-avatar-circle img {
+    border-radius: 50%;
 }
 
-.p-autocomplete .p-autocomplete-overlay {
-    min-width: 100%;
+.p-avatar-icon {
+    font-size: ${dt("avatar.icon.size")};
+    width: ${dt("avatar.icon.size")};
+    height: ${dt("avatar.icon.size")};
 }
 
-.p-autocomplete-overlay {
-    background: ${dt("autocomplete.overlay.background")};
-    color: ${dt("autocomplete.overlay.color")};
-    border: 1px solid ${dt("autocomplete.overlay.border.color")};
-    border-radius: ${dt("autocomplete.overlay.border.radius")};
-    box-shadow: ${dt("autocomplete.overlay.shadow")};
+.p-avatar img {
+    width: 100%;
+    height: 100%;
 }
 
-.p-autocomplete-list-container {
-    overflow: auto;
+.p-avatar-lg {
+    width: ${dt("avatar.lg.width")};
+    height: ${dt("avatar.lg.width")};
+    font-size: ${dt("avatar.lg.font.size")};
 }
 
-.p-autocomplete-list {
-    margin: 0;
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: ${dt("autocomplete.list.gap")};
-    padding: ${dt("autocomplete.list.padding")};
+.p-avatar-lg .p-avatar-icon {
+    font-size: ${dt("avatar.lg.icon.size")};
+    width: ${dt("avatar.lg.icon.size")};
+    height: ${dt("avatar.lg.icon.size")};
 }
 
-.p-autocomplete-option {
-    cursor: pointer;
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
+.p-avatar-xl {
+    width: ${dt("avatar.xl.width")};
+    height: ${dt("avatar.xl.width")};
+    font-size: ${dt("avatar.xl.font.size")};
+}
+
+.p-avatar-xl .p-avatar-icon {
+    font-size: ${dt("avatar.xl.font.size")};
+    width: ${dt("avatar.xl.icon.size")};
+    height: ${dt("avatar.xl.icon.size")};
+}
+
+.p-avatar-group {
     display: flex;
     align-items: center;
-    padding: ${dt("autocomplete.option.padding")};
-    border: 0 none;
-    color: ${dt("autocomplete.option.color")};
-    background: transparent;
-    transition: background ${dt("autocomplete.transition.duration")}, color ${dt("autocomplete.transition.duration")}, border-color ${dt("autocomplete.transition.duration")};
-    border-radius: ${dt("autocomplete.option.border.radius")};
 }
 
-.p-autocomplete-option:not(.p-autocomplete-option-selected):not(.p-disabled).p-focus {
-    background: ${dt("autocomplete.option.focus.background")};
-    color: ${dt("autocomplete.option.focus.color")};
+.p-avatar-group .p-avatar + .p-avatar {
+    margin-inline-start: ${dt("avatar.group.offset")};
 }
 
-.p-autocomplete-option-selected {
-    background: ${dt("autocomplete.option.selected.background")};
-    color: ${dt("autocomplete.option.selected.color")};
+.p-avatar-group .p-avatar {
+    border: 2px solid ${dt("avatar.group.border.color")};
 }
 
-.p-autocomplete-option-selected.p-focus {
-    background: ${dt("autocomplete.option.selected.focus.background")};
-    color: ${dt("autocomplete.option.selected.focus.color")};
+.p-avatar-group .p-avatar-lg + .p-avatar-lg {
+    margin-inline-start: ${dt("avatar.lg.group.offset")};
 }
 
-.p-autocomplete-option-group {
-    margin: 0;
-    padding: ${dt("autocomplete.option.group.padding")};
-    color: ${dt("autocomplete.option.group.color")};
-    background: ${dt("autocomplete.option.group.background")};
-    font-weight: ${dt("autocomplete.option.group.font.weight")};
+.p-avatar-group .p-avatar-xl + .p-avatar-xl {
+    margin-inline-start: ${dt("avatar.xl.group.offset")};
 }
-
-.p-autocomplete-input-multiple {
-    margin: 0;
-    list-style-type: none;
-    cursor: text;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: calc(${dt("autocomplete.padding.y")} / 2) ${dt("autocomplete.padding.x")};
-    gap: calc(${dt("autocomplete.padding.y")} / 2);
-    color: ${dt("autocomplete.color")};
-    background: ${dt("autocomplete.background")};
-    border: 1px solid ${dt("autocomplete.border.color")};
-    border-radius: ${dt("autocomplete.border.radius")};
-    width: 100%;
-    transition: background ${dt("autocomplete.transition.duration")}, color ${dt("autocomplete.transition.duration")}, border-color ${dt("autocomplete.transition.duration")}, outline-color ${dt("autocomplete.transition.duration")}, box-shadow ${dt("autocomplete.transition.duration")};
-    outline-color: transparent;
-    box-shadow: ${dt("autocomplete.shadow")};
-}
-
-.p-autocomplete:not(.p-disabled):hover .p-autocomplete-input-multiple {
-    border-color: ${dt("autocomplete.hover.border.color")};
-}
-
-.p-autocomplete:not(.p-disabled).p-focus .p-autocomplete-input-multiple {
-    border-color: ${dt("autocomplete.focus.border.color")};
-    box-shadow: ${dt("autocomplete.focus.ring.shadow")};
-    outline: ${dt("autocomplete.focus.ring.width")} ${dt("autocomplete.focus.ring.style")} ${dt("autocomplete.focus.ring.color")};
-    outline-offset: ${dt("autocomplete.focus.ring.offset")};
-}
-
-.p-autocomplete.p-invalid .p-autocomplete-input-multiple {
-    border-color: ${dt("autocomplete.invalid.border.color")};
-}
-
-.p-variant-filled.p-autocomplete-input-multiple {
-    background: ${dt("autocomplete.filled.background")};
-}
-
-.p-autocomplete:not(.p-disabled):hover .p-variant-filled.p-autocomplete-input-multiple {
-    background: ${dt("autocomplete.filled.hover.background")};
-}
-
-.p-autocomplete:not(.p-disabled).p-focus .p-variant-filled.p-autocomplete-input-multiple  {
-    background: ${dt("autocomplete.filled.focus.background")};
-}
-
-.p-autocomplete.p-disabled {
-    opacity: 1;
-}
-
-.p-autocomplete.p-disabled .p-autocomplete-input-multiple {
-    opacity: 1;
-    background: ${dt("autocomplete.disabled.background")};
-    color: ${dt("autocomplete.disabled.color")};
-}
-
-.p-autocomplete-chip.p-chip {
-    padding-block-start: calc(${dt("autocomplete.padding.y")} / 2);
-    padding-block-end: calc(${dt("autocomplete.padding.y")} / 2);
-    border-radius: ${dt("autocomplete.chip.border.radius")};
-}
-
-.p-autocomplete-input-multiple:has(.p-autocomplete-chip) {
-    padding-inline-start: calc(${dt("autocomplete.padding.y")} / 2);
-    padding-inline-end: calc(${dt("autocomplete.padding.y")} / 2);
-}
-
-.p-autocomplete-chip-item.p-focus .p-autocomplete-chip {
-    background: ${dt("autocomplete.chip.focus.background")};
-    color: ${dt("autocomplete.chip.focus.color")};
-}
-
-.p-autocomplete-input-chip {
-    flex: 1 1 auto;
-    display: inline-flex;
-    padding-block-start: calc(${dt("autocomplete.padding.y")} / 2);
-    padding-block-end: calc(${dt("autocomplete.padding.y")} / 2);
-}
-
-.p-autocomplete-input-chip input {
-    border: 0 none;
-    outline: 0 none;
-    background: transparent;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    border-radius: 0;
-    width: 100%;
-    font-family: inherit;
-    font-feature-settings: inherit;
-    font-size: 1rem;
-    color: inherit;
-}
-
-.p-autocomplete-input-chip input::placeholder {
-    color: ${dt("autocomplete.placeholder.color")};
-}
-
-.p-autocomplete-empty-message {
-    padding: ${dt("autocomplete.empty.message.padding")};
-}
-
-.p-autocomplete-fluid {
-    display: flex;
-}
-
-.p-autocomplete-fluid:has(.p-autocomplete-dropdown) .p-autocomplete-input {
-    width: 1%;
-}
-
-.p-autocomplete:has(.p-inputtext-sm) .p-autocomplete-dropdown {
-    width: ${dt("autocomplete.dropdown.sm.width")};
-}
-
-.p-autocomplete:has(.p-inputtext-sm) .p-autocomplete-dropdown .p-icon {
-    font-size: ${dt("form.field.sm.font.size")};
-    width: ${dt("form.field.sm.font.size")};
-    height: ${dt("form.field.sm.font.size")};
-}
-
-.p-autocomplete:has(.p-inputtext-lg) .p-autocomplete-dropdown {
-    width: ${dt("autocomplete.dropdown.lg.width")};
-}
-
-.p-autocomplete:has(.p-inputtext-lg) .p-autocomplete-dropdown .p-icon {
-    font-size: ${dt("form.field.lg.font.size")};
-    width: ${dt("form.field.lg.font.size")};
-    height: ${dt("form.field.lg.font.size")};
-}
-
-.p-autocomplete-clear-icon {
-    position: absolute;
-    top: 50%;
-    margin-top: -0.5rem;
-    cursor: pointer;
-    right: ${dt("autocomplete.padding.x")};
-    color: ${dt("autocomplete.dropdown.color")};
-}
-
-.p-autocomplete:has(.p-autocomplete-dropdown) .p-autocomplete-clear-icon {
-    right: calc(${dt("autocomplete.padding.x")} + ${dt("autocomplete.dropdown.width")});
-}
-p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input,
-p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input-multiple,
-p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input,
-p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input-multiple
-p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input,
-p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input-multiple {
-    border-color: ${dt("autocomplete.invalid.border.color")};
-}
-p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input:enabled:focus,
-p-autoComplete.ng-invalid.ng-dirty:not(.p-disabled).p-focus .p-autocomplete-input-multiple,
-p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input:enabled:focus,
-p-auto-complete.ng-invalid.ng-dirty:not(.p-disabled).p-focus .p-autocomplete-input-multiple,
-p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input:enabled:focus,
-p-autocomplete.ng-invalid.ng-dirty:not(.p-disabled).p-focus .p-autocomplete-input-multiple {
-    border-color: ${dt("autocomplete.focus.border.color")};
-}
-p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input-chip input::placeholder,
-p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input-chip input::placeholder,
-p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input-chip input::placeholder {
-    color: ${dt("autocomplete.invalid.placeholder.color")};
-}
-
-p-autoComplete.ng-invalid.ng-dirty .p-autocomplete-input::placeholder,
-p-auto-complete.ng-invalid.ng-dirty .p-autocomplete-input::placeholder,
-p-autocomplete.ng-invalid.ng-dirty .p-autocomplete-input::placeholder {
-    color: ${dt("autocomplete.invalid.placeholder.color")};
-}`;
-var inlineStyles3 = {
-  root: {
-    position: "relative"
-  }
-};
-var classes11 = {
+`;
+var classes14 = {
   root: ({
-    instance
-  }) => ({
-    "p-autocomplete p-component p-inputwrapper": true,
-    "p-disabled": instance.disabled,
-    "p-focus": instance.focused,
-    "p-inputwrapper-filled": instance.filled,
-    "p-inputwrapper-focus": instance.focused && !instance.disabled || instance.autofocus || instance.overlayVisible,
-    "p-autocomplete-open": instance.overlayVisible,
-    "p-autocomplete-clearable": instance.showClear && !instance.disabled,
-    // 'p-invalid': instance.invalid,
-    "p-autocomplete-fluid": instance.hasFluid
-  }),
-  pcInput: "p-autocomplete-input",
-  inputMultiple: ({
-    instance
-  }) => ({
-    "p-autocomplete-input-multiple": true,
-    "p-variant-filled": (instance.variant ?? (instance.config.inputStyle() || instance.config.inputVariant())) === "filled"
-  }),
-  chipItem: ({
-    instance,
-    i
-  }) => ["p-autocomplete-chip-item", {
-    "p-focus": instance.focusedMultipleOptionIndex === i
+    props
+  }) => ["p-avatar p-component", {
+    "p-avatar-image": props.image != null,
+    "p-avatar-circle": props.shape === "circle",
+    "p-avatar-lg": props.size === "large",
+    "p-avatar-xl": props.size === "xlarge"
   }],
-  pcChip: "p-autocomplete-chip",
-  chipIcon: "p-autocomplete-chip-icon",
-  inputChip: "p-autocomplete-input-chip",
-  loader: "p-autocomplete-loader",
-  dropdown: "p-autocomplete-dropdown",
-  overlay: "p-autocomplete-overlay p-component",
-  list: "p-autocomplete-list",
-  optionGroup: "p-autocomplete-option-group",
-  option: ({
-    instance,
-    option,
-    i,
-    getItemOptions
-  }) => ({
-    "p-autocomplete-option": true,
-    "p-autocomplete-option-selected": instance.isSelected(option),
-    "p-focus": instance.focusedOptionIndex === instance.getOptionIndex(i, getItemOptions),
-    "p-disabled": instance.isOptionDisabled(option)
-  }),
-  emptyMessage: "p-autocomplete-empty-message"
+  label: "p-avatar-label",
+  icon: "p-avatar-icon"
 };
-var AutoCompleteStyle = class _AutoCompleteStyle extends BaseStyle {
-  name = "autocomplete";
-  theme = theme11;
-  classes = classes11;
-  inlineStyles = inlineStyles3;
+var AvatarStyle = class _AvatarStyle extends BaseStyle {
+  name = "avatar";
+  theme = theme14;
+  classes = classes14;
   static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275AutoCompleteStyle_BaseFactory;
-    return function AutoCompleteStyle_Factory(__ngFactoryType__) {
-      return (\u0275AutoCompleteStyle_BaseFactory || (\u0275AutoCompleteStyle_BaseFactory = \u0275\u0275getInheritedFactory(_AutoCompleteStyle)))(__ngFactoryType__ || _AutoCompleteStyle);
+    let \u0275AvatarStyle_BaseFactory;
+    return function AvatarStyle_Factory(__ngFactoryType__) {
+      return (\u0275AvatarStyle_BaseFactory || (\u0275AvatarStyle_BaseFactory = \u0275\u0275getInheritedFactory(_AvatarStyle)))(__ngFactoryType__ || _AvatarStyle);
     };
   })();
   static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _AutoCompleteStyle,
-    factory: _AutoCompleteStyle.\u0275fac
+    token: _AvatarStyle,
+    factory: _AvatarStyle.\u0275fac
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AutoCompleteStyle, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AvatarStyle, [{
     type: Injectable
   }], null, null);
 })();
-var AutoCompleteClasses;
-(function(AutoCompleteClasses2) {
-  AutoCompleteClasses2["root"] = "p-autocomplete";
-  AutoCompleteClasses2["pcInput"] = "p-autocomplete-input";
-  AutoCompleteClasses2["inputMultiple"] = "p-autocomplete-input-multiple";
-  AutoCompleteClasses2["chipItem"] = "p-autocomplete-chip-item";
-  AutoCompleteClasses2["pcChip"] = "p-autocomplete-chip";
-  AutoCompleteClasses2["chipIcon"] = "p-autocomplete-chip-icon";
-  AutoCompleteClasses2["inputChip"] = "p-autocomplete-input-chip";
-  AutoCompleteClasses2["loader"] = "p-autocomplete-loader";
-  AutoCompleteClasses2["dropdown"] = "p-autocomplete-dropdown";
-  AutoCompleteClasses2["panel"] = "p-autocomplete-overlay";
-  AutoCompleteClasses2["list"] = "p-autocomplete-list";
-  AutoCompleteClasses2["optionGroup"] = "p-autocomplete-option-group";
-  AutoCompleteClasses2["option"] = "p-autocomplete-option";
-  AutoCompleteClasses2["emptyMessage"] = "p-autocomplete-empty-message";
-})(AutoCompleteClasses || (AutoCompleteClasses = {}));
-var AUTOCOMPLETE_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => AutoComplete),
-  multi: true
+var AvatarClasses;
+(function(AvatarClasses2) {
+  AvatarClasses2["root"] = "p-avatar";
+  AvatarClasses2["label"] = "p-avatar-label";
+  AvatarClasses2["icon"] = "p-avatar-icon";
+})(AvatarClasses || (AvatarClasses = {}));
+var Avatar = class _Avatar extends BaseComponent {
+  /**
+   * Defines the text to display.
+   * @group Props
+   */
+  label;
+  /**
+   * Defines the icon to display.
+   * @group Props
+   */
+  icon;
+  /**
+   * Defines the image to display.
+   * @group Props
+   */
+  image;
+  /**
+   * Size of the element.
+   * @group Props
+   */
+  size = "normal";
+  /**
+   * Shape of the element.
+   * @group Props
+   */
+  shape = "square";
+  /**
+   * Inline style of the element.
+   * @group Props
+   */
+  style;
+  /**
+   * Class of the element.
+   * @group Props
+   */
+  styleClass;
+  /**
+   * Establishes a string value that labels the component.
+   * @group Props
+   */
+  ariaLabel;
+  /**
+   * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+   * @group Props
+   */
+  ariaLabelledBy;
+  /**
+   * This event is triggered if an error occurs while loading an image file.
+   * @param {Event} event - Browser event.
+   * @group Emits
+   */
+  onImageError = new EventEmitter();
+  _componentStyle = inject(AvatarStyle);
+  imageError(event) {
+    this.onImageError.emit(event);
+  }
+  get hostClass() {
+    return this.styleClass;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Avatar_BaseFactory;
+    return function Avatar_Factory(__ngFactoryType__) {
+      return (\u0275Avatar_BaseFactory || (\u0275Avatar_BaseFactory = \u0275\u0275getInheritedFactory(_Avatar)))(__ngFactoryType__ || _Avatar);
+    };
+  })();
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _Avatar,
+    selectors: [["p-avatar"]],
+    hostVars: 19,
+    hostBindings: function Avatar_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("data-pc-name", "avatar")("aria-label", ctx.ariaLabel)("aria-labelledby", ctx.ariaLabelledBy);
+        \u0275\u0275styleMap(ctx.style);
+        \u0275\u0275classMap(ctx.hostClass);
+        \u0275\u0275classProp("p-avatar", true)("p-component", true)("p-avatar-circle", ctx.shape === "circle")("p-avatar-lg", ctx.size === "large")("p-avatar-xl", ctx.size === "xlarge")("p-avatar-image", ctx.image != null);
+      }
+    },
+    inputs: {
+      label: "label",
+      icon: "icon",
+      image: "image",
+      size: "size",
+      shape: "shape",
+      style: "style",
+      styleClass: "styleClass",
+      ariaLabel: "ariaLabel",
+      ariaLabelledBy: "ariaLabelledBy"
+    },
+    outputs: {
+      onImageError: "onImageError"
+    },
+    features: [\u0275\u0275ProvidersFeature([AvatarStyle]), \u0275\u0275InheritDefinitionFeature],
+    ngContentSelectors: _c019,
+    decls: 6,
+    vars: 2,
+    consts: [["iconTemplate", ""], ["imageTemplate", ""], ["class", "p-avatar-text", 4, "ngIf", "ngIfElse"], [1, "p-avatar-text"], [3, "class", "ngClass", 4, "ngIf", "ngIfElse"], [3, "ngClass"], [3, "src", "error", 4, "ngIf"], [3, "error", "src"]],
+    template: function Avatar_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+        \u0275\u0275template(1, Avatar_span_1_Template, 2, 1, "span", 2)(2, Avatar_ng_template_2_Template, 1, 2, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, Avatar_ng_template_4_Template, 1, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const iconTemplate_r4 = \u0275\u0275reference(3);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.label)("ngIfElse", iconTemplate_r4);
+      }
+    },
+    dependencies: [CommonModule, NgClass, NgIf, SharedModule],
+    encapsulation: 2,
+    changeDetection: 0
+  });
 };
-var AutoComplete = class _AutoComplete extends BaseComponent {
-  overlayService;
-  zone;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Avatar, [{
+    type: Component,
+    args: [{
+      selector: "p-avatar",
+      standalone: true,
+      imports: [CommonModule, SharedModule],
+      template: `
+        <ng-content></ng-content>
+        <span class="p-avatar-text" *ngIf="label; else iconTemplate">{{ label }}</span>
+        <ng-template #iconTemplate><span [class]="icon" [ngClass]="'p-avatar-icon'" *ngIf="icon; else imageTemplate"></span></ng-template>
+        <ng-template #imageTemplate> <img [src]="image" *ngIf="image" (error)="imageError($event)" [attr.aria-label]="ariaLabel" /></ng-template>
+    `,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      host: {
+        "[class.p-avatar]": "true",
+        "[class.p-component]": "true",
+        "[class.p-avatar-circle]": 'shape === "circle"',
+        "[class.p-avatar-lg]": 'size === "large"',
+        "[class.p-avatar-xl]": 'size === "xlarge"',
+        "[class.p-avatar-image]": "image != null",
+        "[attr.data-pc-name]": '"avatar"',
+        "[attr.aria-label]": "ariaLabel",
+        "[attr.aria-labelledby]": "ariaLabelledBy",
+        "[style]": "style"
+      },
+      providers: [AvatarStyle]
+    }]
+  }], null, {
+    label: [{
+      type: Input
+    }],
+    icon: [{
+      type: Input
+    }],
+    image: [{
+      type: Input
+    }],
+    size: [{
+      type: Input
+    }],
+    shape: [{
+      type: Input
+    }],
+    style: [{
+      type: Input
+    }],
+    styleClass: [{
+      type: Input
+    }],
+    ariaLabel: [{
+      type: Input
+    }],
+    ariaLabelledBy: [{
+      type: Input
+    }],
+    onImageError: [{
+      type: Output
+    }],
+    hostClass: [{
+      type: HostBinding,
+      args: ["class"]
+    }]
+  });
+})();
+var AvatarModule = class _AvatarModule {
+  static \u0275fac = function AvatarModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AvatarModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _AvatarModule,
+    imports: [Avatar, SharedModule],
+    exports: [Avatar, SharedModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [Avatar, SharedModule, SharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AvatarModule, [{
+    type: NgModule,
+    args: [{
+      imports: [Avatar, SharedModule],
+      exports: [Avatar, SharedModule]
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-sidebar.mjs
+var _c020 = ["maskRef"];
+var _c120 = ["container"];
+var _c212 = ["closeButton"];
+var _c38 = ["*"];
+var _c48 = (a0, a1) => ({
+  transform: a0,
+  transition: a1
+});
+var _c58 = (a0) => ({
+  value: "visible",
+  params: a0
+});
+function Sidebar_div_0_Conditional_3_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Sidebar_div_0_Conditional_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Sidebar_div_0_Conditional_3_ng_container_0_Template, 1, 0, "ng-container", 4);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.headlessTemplate || ctx_r1._headlessTemplate);
+  }
+}
+function Sidebar_div_0_Conditional_4_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Sidebar_div_0_Conditional_4_p_button_2_TimesIcon_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "TimesIcon");
+  }
+  if (rf & 2) {
+    \u0275\u0275attribute("data-pc-section", "closeicon");
+  }
+}
+function Sidebar_div_0_Conditional_4_p_button_2_span_2_1_ng_template_0_Template(rf, ctx) {
+}
+function Sidebar_div_0_Conditional_4_p_button_2_span_2_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275template(0, Sidebar_div_0_Conditional_4_p_button_2_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
+  }
+}
+function Sidebar_div_0_Conditional_4_p_button_2_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 10);
+    \u0275\u0275template(1, Sidebar_div_0_Conditional_4_p_button_2_span_2_1_Template, 1, 0, null, 4);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(4);
+    \u0275\u0275attribute("data-pc-section", "closeicon");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.closeIconTemplate || ctx_r1._closeIconTemplate);
+  }
+}
+function Sidebar_div_0_Conditional_4_p_button_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "p-button", 8);
+    \u0275\u0275listener("onClick", function Sidebar_div_0_Conditional_4_p_button_2_Template_p_button_onClick_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.close($event));
+    })("keydown.enter", function Sidebar_div_0_Conditional_4_p_button_2_Template_p_button_keydown_enter_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.close($event));
+    });
+    \u0275\u0275template(1, Sidebar_div_0_Conditional_4_p_button_2_TimesIcon_1_Template, 1, 1, "TimesIcon", 7)(2, Sidebar_div_0_Conditional_4_p_button_2_span_2_Template, 2, 2, "span", 9);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275property("ngClass", ctx_r1.cx("closeButton"))("buttonProps", ctx_r1.closeButtonProps)("ariaLabel", ctx_r1.ariaCloseLabel);
+    \u0275\u0275attribute("data-pc-section", "closebutton")("data-pc-group-section", "iconcontainer");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.closeIconTemplate && !ctx_r1._closeIconTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.closeIconTemplate || ctx_r1._closeIconTemplate);
+  }
+}
+function Sidebar_div_0_Conditional_4_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Sidebar_div_0_Conditional_4_ng_container_6_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainer(0);
+  }
+}
+function Sidebar_div_0_Conditional_4_ng_container_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 5);
+    \u0275\u0275template(2, Sidebar_div_0_Conditional_4_ng_container_6_ng_container_2_Template, 1, 0, "ng-container", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", ctx_r1.cx("footer"));
+    \u0275\u0275attribute("data-pc-section", "footer");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.footerTemplate || ctx_r1._footerTemplate);
+  }
+}
+function Sidebar_div_0_Conditional_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 5);
+    \u0275\u0275template(1, Sidebar_div_0_Conditional_4_ng_container_1_Template, 1, 0, "ng-container", 4)(2, Sidebar_div_0_Conditional_4_p_button_2_Template, 3, 7, "p-button", 6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 5);
+    \u0275\u0275projection(4);
+    \u0275\u0275template(5, Sidebar_div_0_Conditional_4_ng_container_5_Template, 1, 0, "ng-container", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(6, Sidebar_div_0_Conditional_4_ng_container_6_Template, 3, 3, "ng-container", 7);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("ngClass", ctx_r1.cx("header"));
+    \u0275\u0275attribute("data-pc-section", "header");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.headerTemplate || ctx_r1._headerTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.showCloseIcon);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", ctx_r1.cx("content"));
+    \u0275\u0275attribute("data-pc-section", "content");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngTemplateOutlet", ctx_r1.contentTemplate || ctx_r1._contentTemplate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.footerTemplate || ctx_r1._footerTemplate);
+  }
+}
+function Sidebar_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 2, 0);
+    \u0275\u0275listener("@panelState.start", function Sidebar_div_0_Template_div_animation_panelState_start_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onAnimationStart($event));
+    })("@panelState.done", function Sidebar_div_0_Template_div_animation_panelState_done_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onAnimationEnd($event));
+    })("click", function Sidebar_div_0_Template_div_click_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.maskClickListener($event));
+    });
+    \u0275\u0275elementStart(2, "div", 3);
+    \u0275\u0275listener("keydown", function Sidebar_div_0_Template_div_keydown_2_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onKeyDown($event));
+    });
+    \u0275\u0275template(3, Sidebar_div_0_Conditional_3_Template, 1, 1, "ng-container")(4, Sidebar_div_0_Conditional_4_Template, 7, 8);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275styleMap(ctx_r1.maskStyle);
+    \u0275\u0275property("ngClass", ctx_r1.cx("mask"))("ngStyle", ctx_r1.sx("mask"))("@panelState", \u0275\u0275pureFunction1(15, _c58, \u0275\u0275pureFunction2(12, _c48, ctx_r1.transformOptions, ctx_r1.transitionOptions)));
+    \u0275\u0275attribute("data-pc-name", "mask")("data-pc-section", "mask");
+    \u0275\u0275advance(2);
+    \u0275\u0275classMap(ctx_r1.styleClass);
+    \u0275\u0275property("ngClass", ctx_r1.cx("root"));
+    \u0275\u0275attribute("data-pc-section", "root");
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r1.headlessTemplate || ctx_r1._headlessTemplate ? 3 : 4);
+  }
+}
+var theme15 = ({
+  dt
+}) => `
+
+.p-drawer {
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    transform: translate3d(0px, 0px, 0px);
+    position: relative;
+    transition: transform 0.3s;
+    background: ${dt("drawer.background")};
+    color: ${dt("drawer.color")};
+    border: 1px solid ${dt("drawer.border.color")};
+    box-shadow: ${dt("drawer.shadow")};
+}
+
+.p-drawer-content {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: ${dt("drawer.content.padding")};
+}
+
+.p-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    padding: ${dt("drawer.header.padding")};
+}
+
+.p-drawer-footer {
+    padding: ${dt("drawer.header.padding")};
+}
+
+.p-drawer-title {
+    font-weight: ${dt("drawer.title.font.weight")};
+    font-size: ${dt("drawer.title.font.size")};
+}
+
+.p-drawer-full .p-drawer {
+    transition: none;
+    transform: none;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100%;
+    top: 0px !important;
+    left: 0px !important;
+    border-width: 1px;
+}
+
+/* PrimeVue animations
+
+.p-drawer-left .p-drawer-enter-from,
+.p-drawer-left .p-drawer-leave-to {
+    transform: translateX(-100%);
+}
+
+.p-drawer-right .p-drawer-enter-from,
+.p-drawer-right .p-drawer-leave-to {
+    transform: translateX(100%);
+}
+
+.p-drawer-top .p-drawer-enter-from,
+.p-drawer-top .p-drawer-leave-to {
+    transform: translateY(-100%);
+}
+
+.p-drawer-bottom .p-drawer-enter-from,
+.p-drawer-bottom .p-drawer-leave-to {
+    transform: translateY(100%);
+}
+
+.p-drawer-full .p-drawer-enter-from,
+.p-drawer-full .p-drawer-leave-to {
+    opacity: 0;
+}
+
+.p-drawer-full .p-drawer-enter-active,
+.p-drawer-full .p-drawer-leave-active {
+    transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+*/
+
+.p-drawer-left .p-drawer {
+    align-self: start;
+    width: 20rem;
+    height: 100%;
+    border-right-width: 1px;
+}
+
+.p-drawer-right .p-drawer {
+    align-self: end;
+    width: 20rem;
+    height: 100%;
+    border-left-width: 1px;
+}
+
+.p-drawer-top .p-drawer {
+
+    height: 10rem;
+    width: 100%;
+    border-bottom-width: 1px;
+}
+
+.p-drawer-bottom .p-drawer {
+    height: 10rem;
+    width: 100%;
+    border-top-width: 1px;
+}
+
+.p-drawer-left .p-drawer-content,
+.p-drawer-right .p-drawer-content,
+.p-drawer-top .p-drawer-content,
+.p-drawer-bottom .p-drawer-content {
+    width: 100%;
+    height: 100%;
+}
+
+.p-drawer-open {
+    display: flex;
+}
+
+.p-drawer-top {
+    justify-content: flex-start;
+}
+
+.p-drawer-bottom {
+    justify-content: flex-end;
+}
+`;
+var inlineStyles5 = {
+  mask: ({
+    instance
+  }) => ({
+    position: "fixed",
+    height: "100%",
+    width: "100%",
+    left: 0,
+    top: 0,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: instance.position === "top" ? "flex-start" : instance.position === "bottom" ? "flex-end" : "center"
+  })
+};
+var classes15 = {
+  mask: ({
+    instance
+  }) => ({
+    "p-drawer-mask": true,
+    "p-overlay-mask p-overlay-mask-enter": instance.modal,
+    "p-drawer-open": instance.containerVisible,
+    "p-drawer-full": instance.fullScreen,
+    [`p-drawer-${instance.position}`]: !!instance.position
+  }),
+  root: ({
+    instance
+  }) => ({
+    "p-drawer p-component": true,
+    "p-drawer-full": instance.fullScreen
+  }),
+  header: "p-drawer-header",
+  title: "p-drawer-title",
+  pcCloseButton: "p-drawer-close-button",
+  content: "p-drawer-content",
+  footer: "p-drawer-footer"
+};
+var DrawerStyle = class _DrawerStyle extends BaseStyle {
+  name = "drawer";
+  theme = theme15;
+  classes = classes15;
+  inlineStyles = inlineStyles5;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275DrawerStyle_BaseFactory;
+    return function DrawerStyle_Factory(__ngFactoryType__) {
+      return (\u0275DrawerStyle_BaseFactory || (\u0275DrawerStyle_BaseFactory = \u0275\u0275getInheritedFactory(_DrawerStyle)))(__ngFactoryType__ || _DrawerStyle);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _DrawerStyle,
+    factory: _DrawerStyle.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DrawerStyle, [{
+    type: Injectable
+  }], null, null);
+})();
+var showAnimation = animation([style({
+  transform: "{{transform}}",
+  opacity: 0
+}), animate("{{transition}}")]);
+var hideAnimation = animation([animate("{{transition}}", style({
+  transform: "{{transform}}",
+  opacity: 0
+}))]);
+var Sidebar = class _Sidebar extends BaseComponent {
   /**
-   * Minimum number of characters to initiate a search.
+   *  Target element to attach the dialog, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
    * @group Props
    */
-  minLength = 1;
+  appendTo = "body";
   /**
-   * Delay between keystrokes to wait before sending a query.
+   * Whether to block scrolling of the document when sidebar is active.
    * @group Props
    */
-  delay = 300;
+  blockScroll = false;
   /**
    * Inline style of the component.
    * @group Props
    */
   style;
   /**
-   * Inline style of the overlay panel element.
-   * @group Props
-   */
-  panelStyle;
-  /**
    * Style class of the component.
    * @group Props
    */
   styleClass;
   /**
-   * Style class of the overlay panel element.
+   * Aria label of the close icon.
    * @group Props
    */
-  panelStyleClass;
-  /**
-   * Inline style of the input field.
-   * @group Props
-   */
-  inputStyle;
-  /**
-   * Identifier of the focus input to match a label defined for the component.
-   * @group Props
-   */
-  inputId;
-  /**
-   * Inline style of the input field.
-   * @group Props
-   */
-  inputStyleClass;
-  /**
-   * Hint text for the input field.
-   * @group Props
-   */
-  placeholder;
-  /**
-   * When present, it specifies that the input cannot be typed.
-   * @group Props
-   */
-  readonly;
-  /**
-   * When present, it specifies that the component should be disabled.
-   * @group Props
-   */
-  disabled;
-  /**
-   * Maximum height of the suggestions panel.
-   * @group Props
-   */
-  scrollHeight = "200px";
-  /**
-   * Defines if data is loaded and interacted with in lazy manner.
-   * @group Props
-   */
-  lazy = false;
-  /**
-   * Whether the data should be loaded on demand during scroll.
-   * @group Props
-   */
-  virtualScroll;
-  /**
-   * Height of an item in the list for VirtualScrolling.
-   * @group Props
-   */
-  virtualScrollItemSize;
-  /**
-   * Whether to use the scroller feature. The properties of scroller component can be used like an object in it.
-   * @group Props
-   */
-  virtualScrollOptions;
-  /**
-   * Maximum number of character allows in the input field.
-   * @group Props
-   */
-  maxlength;
-  /**
-   * Name of the input element.
-   * @group Props
-   */
-  name;
-  /**
-   * When present, it specifies that an input field must be filled out before submitting the form.
-   * @group Props
-   */
-  required;
-  /**
-   * Defines the size of the component.
-   * @group Props
-   */
-  size;
-  /**
-   * Target element to attach the overlay, valid values are "body" or a local ng-template variable of another element (note: use binding with brackets for template variables, e.g. [appendTo]="mydiv" for a div element having #mydiv as variable name).
-   * @group Props
-   */
-  appendTo;
-  /**
-   * When enabled, highlights the first item in the list by default.
-   * @group Props
-   */
-  autoHighlight;
-  /**
-   * When present, autocomplete clears the manual input if it does not match of the suggestions to force only accepting values from the suggestions.
-   * @group Props
-   */
-  forceSelection;
-  /**
-   * Type of the input, defaults to "text".
-   * @group Props
-   */
-  type = "text";
+  ariaCloseLabel;
   /**
    * Whether to automatically manage layering.
    * @group Props
@@ -32457,1670 +39780,425 @@ var AutoComplete = class _AutoComplete extends BaseComponent {
    */
   baseZIndex = 0;
   /**
-   * Defines a string that labels the input for accessibility.
+   * Whether an overlay mask is displayed behind the sidebar.
    * @group Props
    */
-  ariaLabel;
+  modal = true;
   /**
-   * Defines a string that labels the dropdown button for accessibility.
+   * Used to pass all properties of the ButtonProps to the Button component.
    * @group Props
    */
-  dropdownAriaLabel;
+  closeButtonProps;
   /**
-   * Specifies one or more IDs in the DOM that labels the input field.
+   * Whether to dismiss sidebar on click of the mask.
    * @group Props
    */
-  ariaLabelledBy;
+  dismissible = true;
   /**
-   * Icon class of the dropdown icon.
+   * Whether to display the close icon.
    * @group Props
    */
-  dropdownIcon;
+  showCloseIcon = true;
   /**
-   * Ensures uniqueness of selected items on multiple mode.
+   * Specifies if pressing escape key should hide the sidebar.
    * @group Props
    */
-  unique = true;
+  closeOnEscape = true;
   /**
-   * Whether to display options as grouped when nested options are provided.
+   * Transition options of the animation.
    * @group Props
    */
-  group;
+  transitionOptions = "150ms cubic-bezier(0, 0, 0.2, 1)";
   /**
-   * Whether to run a query when input receives focus.
+   * Specifies the visibility of the dialog.
    * @group Props
    */
-  completeOnFocus = false;
-  /**
-   * When enabled, a clear icon is displayed to clear the value.
-   * @group Props
-   */
-  showClear = false;
-  /**
-   * Field of a suggested object to resolve and display.
-   * @group Props
-   * @deprecated use optionLabel property instead
-   */
-  field;
-  /**
-   * Displays a button next to the input field when enabled.
-   * @group Props
-   */
-  dropdown;
-  /**
-   * Whether to show the empty message or not.
-   * @group Props
-   */
-  showEmptyMessage = true;
-  /**
-   * Specifies the behavior dropdown button. Default "blank" mode sends an empty string and "current" mode sends the input value.
-   * @group Props
-   */
-  dropdownMode = "blank";
-  /**
-   * Specifies if multiple values can be selected.
-   * @group Props
-   */
-  multiple;
-  /**
-   * Index of the element in tabbing order.
-   * @group Props
-   */
-  tabindex;
-  /**
-   * A property to uniquely identify a value in options.
-   * @group Props
-   */
-  dataKey;
-  /**
-   * Text to display when there is no data. Defaults to global value in i18n translation configuration.
-   * @group Props
-   */
-  emptyMessage;
-  /**
-   * Transition options of the show animation.
-   * @group Props
-   */
-  showTransitionOptions = ".12s cubic-bezier(0, 0, 0.2, 1)";
-  /**
-   * Transition options of the hide animation.
-   * @group Props
-   */
-  hideTransitionOptions = ".1s linear";
-  /**
-   * When present, it specifies that the component should automatically get focus on load.
-   * @group Props
-   */
-  autofocus;
-  /**
-   * Used to define a string that autocomplete attribute the current element.
-   * @group Props
-   */
-  autocomplete = "off";
-  /**
-   * Name of the options field of an option group.
-   * @group Props
-   */
-  optionGroupChildren = "items";
-  /**
-   * Name of the label field of an option group.
-   * @group Props
-   */
-  optionGroupLabel = "label";
-  /**
-   * Options for the overlay element.
-   * @group Props
-   */
-  overlayOptions;
-  /**
-   * An array of suggestions to display.
-   * @group Props
-   */
-  get suggestions() {
-    return this._suggestions();
+  get visible() {
+    return this._visible;
   }
-  set suggestions(value) {
-    this._suggestions.set(value);
-    this.handleSuggestionsChange();
+  set visible(val) {
+    this._visible = val;
   }
   /**
-   * Element dimensions of option for virtual scrolling.
+   * Specifies the position of the sidebar, valid values are "left", "right", "bottom" and "top".
    * @group Props
-   * @deprecated use virtualScrollItemSize property instead.
    */
-  get itemSize() {
-    return this._itemSize;
+  get position() {
+    return this._position;
   }
-  set itemSize(val) {
-    this._itemSize = val;
-    console.log("The itemSize property is deprecated, use virtualScrollItemSize property instead.");
+  set position(value) {
+    this._position = value;
+    switch (value) {
+      case "left":
+        this.transformOptions = "translate3d(-100%, 0px, 0px)";
+        break;
+      case "right":
+        this.transformOptions = "translate3d(100%, 0px, 0px)";
+        break;
+      case "bottom":
+        this.transformOptions = "translate3d(0px, 100%, 0px)";
+        break;
+      case "top":
+        this.transformOptions = "translate3d(0px, -100%, 0px)";
+        break;
+    }
   }
   /**
-   * Property name or getter function to use as the label of an option.
+   * Adds a close icon to the header to hide the dialog.
    * @group Props
    */
-  optionLabel;
+  get fullScreen() {
+    return this._fullScreen;
+  }
+  set fullScreen(value) {
+    this._fullScreen = value;
+    if (value) this.transformOptions = "none";
+  }
+  maskStyle;
   /**
-   * Property name or getter function to use as the value of an option.
-   * @group Props
-   */
-  optionValue;
-  /**
-   * Unique identifier of the component.
-   * @group Props
-   */
-  id;
-  /**
-   * Text to display when the search is active. Defaults to global value in i18n translation configuration.
-   * @group Props
-   * @defaultValue '{0} results are available'
-   */
-  searchMessage;
-  /**
-   * Text to display when filtering does not return any results. Defaults to global value in i18n translation configuration.
-   * @group Props
-   * @defaultValue 'No selected item'
-   */
-  emptySelectionMessage;
-  /**
-   * Text to be displayed in hidden accessible field when options are selected. Defaults to global value in i18n translation configuration.
-   * @group Props
-   * @defaultValue '{0} items selected'
-   */
-  selectionMessage;
-  /**
-   * Whether to focus on the first visible or selected element when the overlay panel is shown.
-   * @group Props
-   */
-  autoOptionFocus = false;
-  /**
-   * When enabled, the focused option is selected.
-   * @group Props
-   */
-  selectOnFocus;
-  /**
-   * Locale to use in searching. The default locale is the host environment's current locale.
-   * @group Props
-   */
-  searchLocale;
-  /**
-   * Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.
-   * @group Props
-   */
-  optionDisabled;
-  /**
-   * When enabled, the hovered option will be focused.
-   * @group Props
-   */
-  focusOnHover = true;
-  /**
-   * Whether typeahead is active or not.
-   * @defaultValue true
-   * @group Props
-   */
-  typeahead = true;
-  /**
-   * Specifies the input variant of the component.
-   * @group Props
-   */
-  variant;
-  /**
-   * Spans 100% width of the container when enabled.
-   * @group Props
-   */
-  fluid = false;
-  /**
-   * Callback to invoke to search for suggestions.
-   * @param {AutoCompleteCompleteEvent} event - Custom complete event.
-   * @group Emits
-   */
-  completeMethod = new EventEmitter();
-  /**
-   * Callback to invoke when a suggestion is selected.
-   * @param {AutoCompleteSelectEvent} event - custom select event.
-   * @group Emits
-   */
-  onSelect = new EventEmitter();
-  /**
-   * Callback to invoke when a selected value is removed.
-   * @param {AutoCompleteUnselectEvent} event - custom unselect event.
-   * @group Emits
-   */
-  onUnselect = new EventEmitter();
-  /**
-   * Callback to invoke when the component receives focus.
-   * @param {Event} event - Browser event.
-   * @group Emits
-   */
-  onFocus = new EventEmitter();
-  /**
-   * Callback to invoke when the component loses focus.
-   * @param {Event} event - Browser event.
-   * @group Emits
-   */
-  onBlur = new EventEmitter();
-  /**
-   * Callback to invoke to when dropdown button is clicked.
-   * @param {AutoCompleteDropdownClickEvent} event - custom dropdown click event.
-   * @group Emits
-   */
-  onDropdownClick = new EventEmitter();
-  /**
-   * Callback to invoke when clear button is clicked.
-   * @param {Event} event - Browser event.
-   * @group Emits
-   */
-  onClear = new EventEmitter();
-  /**
-   * Callback to invoke on input key up.
-   * @param {KeyboardEvent} event - Keyboard event.
-   * @group Emits
-   */
-  onKeyUp = new EventEmitter();
-  /**
-   * Callback to invoke on overlay is shown.
-   * @param {Event} event - Browser event.
+   * Callback to invoke when dialog is shown.
    * @group Emits
    */
   onShow = new EventEmitter();
   /**
-   * Callback to invoke on overlay is hidden.
-   * @param {Event} event - Browser event.
+   * Callback to invoke when dialog is hidden.
    * @group Emits
    */
   onHide = new EventEmitter();
   /**
-   * Callback to invoke on lazy load data.
-   * @param {AutoCompleteLazyLoadEvent} event - Lazy load event.
+   * Callback to invoke when dialog visibility is changed.
+   * @param {boolean} value - Visible value.
    * @group Emits
    */
-  onLazyLoad = new EventEmitter();
-  containerEL;
-  inputEL;
-  multiInputEl;
-  multiContainerEL;
-  dropdownButton;
-  itemsViewChild;
-  scroller;
-  overlayViewChild;
-  _itemSize;
-  itemsWrapper;
+  visibleChange = new EventEmitter();
+  maskRef;
+  containerViewChild;
+  closeButtonViewChild;
+  initialized;
+  _visible;
+  _position = "left";
+  _fullScreen = false;
+  container;
+  transformOptions = "translate3d(-100%, 0px, 0px)";
+  mask;
+  documentEscapeListener;
+  _componentStyle = inject(DrawerStyle);
   /**
-   * Custom item template.
-   * @group Templates
-   */
-  itemTemplate;
-  /**
-   * Custom empty message template.
-   * @group Templates
-   */
-  emptyTemplate;
-  /**
-   * Custom header template.
-   * @group Templates
+   * Header template.
+   * @group Props
    */
   headerTemplate;
   /**
-   * Custom footer template.
-   * @group Templates
+   * Footer template.
+   * @group Props
    */
   footerTemplate;
   /**
-   * Custom selected item template.
-   * @group Templates
+   *
+   * Close icon template.
+   * @group Props
    */
-  selectedItemTemplate;
+  closeIconTemplate;
   /**
-   * Custom group item template.
-   * @group Templates
+   * Headless template.
+   * @group Props
    */
-  groupTemplate;
+  headlessTemplate;
   /**
-   * Custom loader template.
-   * @group Templates
+   * Headless template.
+   * @group Props
    */
-  loaderTemplate;
-  /**
-   * Custom remove icon template.
-   * @group Templates
-   */
-  removeIconTemplate;
-  /**
-   * Custom loading icon template.
-   * @group Templates
-   */
-  loadingIconTemplate;
-  /**
-   * Custom clear icon template.
-   * @group Templates
-   */
-  clearIconTemplate;
-  /**
-   * Custom dropdown icon template.
-   * @group Templates
-   */
-  dropdownIconTemplate;
-  primeng = inject(PrimeNG);
-  value;
-  _suggestions = signal(null);
-  onModelChange = () => {
-  };
-  onModelTouched = () => {
-  };
-  timeout;
-  overlayVisible;
-  suggestionsUpdated;
-  highlightOption;
-  highlightOptionChanged;
-  focused = false;
-  _filled;
-  get filled() {
-    return this._filled;
-  }
-  set filled(value) {
-    this._filled = value;
-  }
-  loading;
-  scrollHandler;
-  listId;
-  searchTimeout;
-  dirty = false;
-  _itemTemplate;
-  _groupTemplate;
-  _selectedItemTemplate;
-  _headerTemplate;
-  _emptyTemplate;
-  _footerTemplate;
-  _loaderTemplate;
-  _removeIconTemplate;
-  _loadingIconTemplate;
-  _clearIconTemplate;
-  _dropdownIconTemplate;
-  modelValue = signal(null);
-  focusedMultipleOptionIndex = signal(-1);
-  focusedOptionIndex = signal(-1);
-  _componentStyle = inject(AutoCompleteStyle);
-  visibleOptions = computed(() => {
-    return this.group ? this.flatOptions(this._suggestions()) : this._suggestions() || [];
-  });
-  inputValue = computed(() => {
-    const modelValue = this.modelValue();
-    const selectedOption = this.optionValueSelected ? (this.suggestions || []).find((item) => resolveFieldData(item, this.optionValue) === modelValue) : modelValue;
-    if (isNotEmpty(modelValue)) {
-      if (typeof modelValue === "object" || this.optionValueSelected) {
-        const label = this.getOptionLabel(selectedOption);
-        return label != null ? label : modelValue;
-      } else {
-        return modelValue;
-      }
-    } else {
-      return "";
-    }
-  });
-  get focusedMultipleOptionId() {
-    return this.focusedMultipleOptionIndex() !== -1 ? `${this.id}_multiple_option_${this.focusedMultipleOptionIndex()}` : null;
-  }
-  get focusedOptionId() {
-    return this.focusedOptionIndex() !== -1 ? `${this.id}_${this.focusedOptionIndex()}` : null;
-  }
-  get rootClass() {
-    return this._componentStyle.classes.root({
-      instance: this
-    });
-  }
-  get inputMultipleClass() {
-    return this._componentStyle.classes.inputMultiple({
-      instance: this
-    });
-  }
-  get panelClass() {
-    return {
-      "p-autocomplete-overlay p-component": true,
-      "p-input-filled": this.config.inputStyle() === "filled" || this.config.inputVariant() === "filled",
-      "p-ripple-disabled": this.config.ripple() === false
-    };
-  }
-  get inputClass() {
-    return {
-      "p-autocomplete-input": !this.multiple,
-      "p-autocomplete-dd-input": this.dropdown
-    };
-  }
-  get searchResultMessageText() {
-    return isNotEmpty(this.visibleOptions()) && this.overlayVisible ? this.searchMessageText.replaceAll("{0}", this.visibleOptions().length) : this.emptySearchMessageText;
-  }
-  get searchMessageText() {
-    return this.searchMessage || this.config.translation.searchMessage || "";
-  }
-  get emptySearchMessageText() {
-    return this.emptyMessage || this.config.translation.emptySearchMessage || "";
-  }
-  get selectionMessageText() {
-    return this.selectionMessage || this.config.translation.selectionMessage || "";
-  }
-  get emptySelectionMessageText() {
-    return this.emptySelectionMessage || this.config.translation.emptySelectionMessage || "";
-  }
-  get selectedMessageText() {
-    return this.hasSelectedOption() ? this.selectionMessageText.replaceAll("{0}", this.multiple ? this.modelValue().length : "1") : this.emptySelectionMessageText;
-  }
-  get ariaSetSize() {
-    return this.visibleOptions().filter((option) => !this.isOptionGroup(option)).length;
-  }
-  get listLabel() {
-    return this.config.getTranslation(TranslationKeys.ARIA)["listLabel"];
-  }
-  get virtualScrollerDisabled() {
-    return !this.virtualScroll;
-  }
-  get optionValueSelected() {
-    return typeof this.modelValue() === "string" && this.optionValue;
-  }
-  chipItemClass(index) {
-    return this._componentStyle.classes.chipItem({
-      instance: this,
-      i: index
-    });
-  }
-  optionClass(option, i, scrollerOptions) {
-    return {
-      "p-autocomplete-option": true,
-      "p-autocomplete-option-selected": this.isSelected(option),
-      "p-focus": this.focusedOptionIndex() === this.getOptionIndex(i, scrollerOptions),
-      "p-disabled": this.isOptionDisabled(option)
-    };
-  }
-  constructor(overlayService, zone) {
-    super();
-    this.overlayService = overlayService;
-    this.zone = zone;
-    effect(() => {
-      this.filled = isNotEmpty(this.modelValue());
-    });
-  }
-  ngOnInit() {
-    super.ngOnInit();
-    this.id = this.id || uuid("pn_id_");
-    this.cd.detectChanges();
-  }
+  contentTemplate;
   templates;
+  _headerTemplate;
+  _footerTemplate;
+  _contentTemplate;
+  _closeIconTemplate;
+  _headlessTemplate;
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
+    this.initialized = true;
+  }
+  ngOnChanges(changes) {
+    super.ngOnChanges(changes);
+    const key = Object.keys(changes).find((k) => k.includes("Template"));
+    if (key) {
+      this[`_${key}`] = changes[key].currentValue;
+    }
+  }
   ngAfterContentInit() {
-    this.templates.forEach((item) => {
+    this.templates?.forEach((item) => {
       switch (item.getType()) {
-        case "item":
-          this._itemTemplate = item.template;
-          break;
-        case "group":
-          this._groupTemplate = item.template;
-          break;
-        case "selecteditem":
-          this._selectedItemTemplate = item.template;
-          break;
-        case "selectedItem":
-          this._selectedItemTemplate = item.template;
+        case "content":
+          this._contentTemplate = item.template;
           break;
         case "header":
           this._headerTemplate = item.template;
           break;
-        case "empty":
-          this._emptyTemplate = item.template;
-          break;
         case "footer":
           this._footerTemplate = item.template;
           break;
-        case "loader":
-          this._loaderTemplate = item.template;
+        case "closeicon":
+          this._closeIconTemplate = item.template;
           break;
-        case "removetokenicon":
-          this._removeIconTemplate = item.template;
-          break;
-        case "loadingicon":
-          this._loadingIconTemplate = item.template;
-          break;
-        case "clearicon":
-          this._clearIconTemplate = item.template;
-          break;
-        case "dropdownicon":
-          this._dropdownIconTemplate = item.template;
+        case "headless":
+          this._headlessTemplate = item.template;
           break;
         default:
-          this._itemTemplate = item.template;
+          this._contentTemplate = item.template;
           break;
       }
     });
   }
-  ngAfterViewChecked() {
-    if (this.suggestionsUpdated && this.overlayViewChild) {
-      this.zone.runOutsideAngular(() => {
-        setTimeout(() => {
-          if (this.overlayViewChild) {
-            this.overlayViewChild.alignOverlay();
-          }
-        }, 1);
-        this.suggestionsUpdated = false;
-      });
-    }
-  }
-  handleSuggestionsChange() {
-    if (this.loading) {
-      this._suggestions()?.length > 0 || this.showEmptyMessage || !!this.emptyTemplate ? this.show() : this.hide();
-      const focusedOptionIndex = this.overlayVisible && this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
-      this.focusedOptionIndex.set(focusedOptionIndex);
-      this.suggestionsUpdated = true;
-      this.loading = false;
-      this.cd.markForCheck();
-    }
-  }
-  flatOptions(options) {
-    return (options || []).reduce((result, option, index) => {
-      result.push({
-        optionGroup: option,
-        group: true,
-        index
-      });
-      const optionGroupChildren = this.getOptionGroupChildren(option);
-      optionGroupChildren && optionGroupChildren.forEach((o2) => result.push(o2));
-      return result;
-    }, []);
-  }
-  isOptionGroup(option) {
-    return this.optionGroupLabel && option.optionGroup && option.group;
-  }
-  findFirstOptionIndex() {
-    return this.visibleOptions().findIndex((option) => this.isValidOption(option));
-  }
-  findLastOptionIndex() {
-    return findLastIndex(this.visibleOptions(), (option) => this.isValidOption(option));
-  }
-  findFirstFocusedOptionIndex() {
-    const selectedIndex = this.findSelectedOptionIndex();
-    return selectedIndex < 0 ? this.findFirstOptionIndex() : selectedIndex;
-  }
-  findLastFocusedOptionIndex() {
-    const selectedIndex = this.findSelectedOptionIndex();
-    return selectedIndex < 0 ? this.findLastOptionIndex() : selectedIndex;
-  }
-  findSelectedOptionIndex() {
-    return this.hasSelectedOption() ? this.visibleOptions().findIndex((option) => this.isValidSelectedOption(option)) : -1;
-  }
-  findNextOptionIndex(index) {
-    const matchedOptionIndex = index < this.visibleOptions().length - 1 ? this.visibleOptions().slice(index + 1).findIndex((option) => this.isValidOption(option)) : -1;
-    return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : index;
-  }
-  findPrevOptionIndex(index) {
-    const matchedOptionIndex = index > 0 ? findLastIndex(this.visibleOptions().slice(0, index), (option) => this.isValidOption(option)) : -1;
-    return matchedOptionIndex > -1 ? matchedOptionIndex : index;
-  }
-  isValidSelectedOption(option) {
-    return this.isValidOption(option) && this.isSelected(option);
-  }
-  isValidOption(option) {
-    return option && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
-  }
-  isOptionDisabled(option) {
-    return this.optionDisabled ? resolveFieldData(option, this.optionDisabled) : false;
-  }
-  isSelected(option) {
-    if (this.multiple) {
-      return this.unique ? this.modelValue()?.find((model2) => equals(model2, this.getOptionValue(option), this.equalityKey())) : false;
-    }
-    return equals(this.modelValue(), this.getOptionValue(option), this.equalityKey());
-  }
-  isOptionMatched(option, value) {
-    return this.isValidOption(option) && this.getOptionLabel(option).toLocaleLowerCase(this.searchLocale) === value.toLocaleLowerCase(this.searchLocale);
-  }
-  isInputClicked(event) {
-    return event.target === this.inputEL.nativeElement;
-  }
-  isDropdownClicked(event) {
-    return this.dropdownButton?.nativeElement ? event.target === this.dropdownButton.nativeElement || this.dropdownButton.nativeElement.contains(event.target) : false;
-  }
-  equalityKey() {
-    return this.dataKey;
-  }
-  onContainerClick(event) {
-    if (this.disabled || this.loading || this.isInputClicked(event) || this.isDropdownClicked(event)) {
-      return;
-    }
-    if (!this.overlayViewChild || !this.overlayViewChild.overlayViewChild?.nativeElement.contains(event.target)) {
-      focus(this.inputEL.nativeElement);
-    }
-  }
-  handleDropdownClick(event) {
-    let query = void 0;
-    if (this.overlayVisible) {
-      this.hide(true);
-    } else {
-      focus(this.inputEL.nativeElement);
-      query = this.inputEL.nativeElement.value;
-      if (this.dropdownMode === "blank") this.search(event, "", "dropdown");
-      else if (this.dropdownMode === "current") this.search(event, query, "dropdown");
-    }
-    this.onDropdownClick.emit({
-      originalEvent: event,
-      query
-    });
-  }
-  onInput(event) {
-    if (this.typeahead) {
-      if (this.searchTimeout) {
-        clearTimeout(this.searchTimeout);
-      }
-      let query = event.target.value;
-      if (this.maxlength !== null) {
-        query = query.split("").slice(0, this.maxlength).join("");
-      }
-      if (!this.multiple && !this.forceSelection) {
-        this.updateModel(query);
-      }
-      if (query.length === 0 && !this.multiple) {
-        this.onClear.emit();
-        setTimeout(() => {
-          this.hide();
-        }, this.delay / 2);
-      } else {
-        if (query.length >= this.minLength) {
-          this.focusedOptionIndex.set(-1);
-          this.searchTimeout = setTimeout(() => {
-            this.search(event, query, "input");
-          }, this.delay);
-        } else {
-          this.hide();
-        }
-      }
-    }
-  }
-  onInputChange(event) {
-    if (this.forceSelection) {
-      let valid = false;
-      if (this.visibleOptions()) {
-        const matchedValue = this.visibleOptions().find((option) => this.isOptionMatched(option, this.inputEL.nativeElement.value || ""));
-        if (matchedValue !== void 0) {
-          valid = true;
-          !this.isSelected(matchedValue) && this.onOptionSelect(event, matchedValue);
-        }
-      }
-      if (!valid) {
-        this.inputEL.nativeElement.value = "";
-        !this.multiple && this.updateModel(null);
-      }
-    }
-  }
-  onInputFocus(event) {
-    if (this.disabled) {
-      return;
-    }
-    if (!this.dirty && this.completeOnFocus) {
-      this.search(event, event.target.value, "focus");
-    }
-    this.dirty = true;
-    this.focused = true;
-    const focusedOptionIndex = this.focusedOptionIndex() !== -1 ? this.focusedOptionIndex() : this.overlayVisible && this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
-    this.focusedOptionIndex.set(focusedOptionIndex);
-    this.overlayVisible && this.scrollInView(this.focusedOptionIndex());
-    this.onFocus.emit(event);
-  }
-  onMultipleContainerFocus(event) {
-    if (this.disabled) {
-      return;
-    }
-    this.focused = true;
-  }
-  onMultipleContainerBlur(event) {
-    this.focusedMultipleOptionIndex.set(-1);
-    this.focused = false;
-  }
-  onMultipleContainerKeyDown(event) {
-    if (this.disabled) {
-      event.preventDefault();
-      return;
-    }
-    switch (event.code) {
-      case "ArrowLeft":
-        this.onArrowLeftKeyOnMultiple(event);
-        break;
-      case "ArrowRight":
-        this.onArrowRightKeyOnMultiple(event);
-        break;
-      case "Backspace":
-        this.onBackspaceKeyOnMultiple(event);
-        break;
-      default:
-        break;
-    }
-  }
-  onInputBlur(event) {
-    this.dirty = false;
-    this.focused = false;
-    this.focusedOptionIndex.set(-1);
-    this.onModelTouched();
-    this.onBlur.emit(event);
-  }
-  onInputPaste(event) {
-    this.onKeyDown(event);
-  }
-  onInputKeyUp(event) {
-    this.onKeyUp.emit(event);
-  }
   onKeyDown(event) {
-    if (this.disabled) {
-      event.preventDefault();
-      return;
-    }
-    switch (event.code) {
-      case "ArrowDown":
-        this.onArrowDownKey(event);
-        break;
-      case "ArrowUp":
-        this.onArrowUpKey(event);
-        break;
-      case "ArrowLeft":
-        this.onArrowLeftKey(event);
-        break;
-      case "ArrowRight":
-        this.onArrowRightKey(event);
-        break;
-      case "Home":
-        this.onHomeKey(event);
-        break;
-      case "End":
-        this.onEndKey(event);
-        break;
-      case "PageDown":
-        this.onPageDownKey(event);
-        break;
-      case "PageUp":
-        this.onPageUpKey(event);
-        break;
-      case "Enter":
-      case "NumpadEnter":
-        this.onEnterKey(event);
-        break;
-      case "Escape":
-        this.onEscapeKey(event);
-        break;
-      case "Tab":
-        this.onTabKey(event);
-        break;
-      case "Backspace":
-        this.onBackspaceKey(event);
-        break;
-      case "ShiftLeft":
-      case "ShiftRight":
-        break;
-      default:
-        break;
+    if (event.code === "Escape") {
+      this.hide(false);
     }
   }
-  onArrowDownKey(event) {
-    if (!this.overlayVisible) {
-      return;
+  show() {
+    if (this.autoZIndex) {
+      zindexutils.set("modal", this.container, this.baseZIndex || this.config.zIndex.modal);
     }
-    const optionIndex = this.focusedOptionIndex() !== -1 ? this.findNextOptionIndex(this.focusedOptionIndex()) : this.findFirstFocusedOptionIndex();
-    this.changeFocusedOptionIndex(event, optionIndex);
-    event.preventDefault();
-    event.stopPropagation();
+    this.onShow.emit({});
+    this.visibleChange.emit(true);
   }
-  onArrowUpKey(event) {
-    if (!this.overlayVisible) {
-      return;
-    }
-    if (event.altKey) {
-      if (this.focusedOptionIndex() !== -1) {
-        this.onOptionSelect(event, this.visibleOptions()[this.focusedOptionIndex()]);
-      }
-      this.overlayVisible && this.hide();
-      event.preventDefault();
-    } else {
-      const optionIndex = this.focusedOptionIndex() !== -1 ? this.findPrevOptionIndex(this.focusedOptionIndex()) : this.findLastFocusedOptionIndex();
-      this.changeFocusedOptionIndex(event, optionIndex);
-      event.preventDefault();
-      event.stopPropagation();
+  hide(emit = true) {
+    if (emit) {
+      this.onHide.emit({});
     }
   }
-  get hasFluid() {
-    const nativeElement = this.el.nativeElement;
-    const fluidComponent = nativeElement.closest("p-fluid");
-    return this.fluid || !!fluidComponent;
-  }
-  onArrowLeftKey(event) {
-    const target = event.currentTarget;
-    this.focusedOptionIndex.set(-1);
-    if (this.multiple) {
-      if (isEmpty(target.value) && this.hasSelectedOption()) {
-        focus(this.multiContainerEL.nativeElement);
-        this.focusedMultipleOptionIndex.set(this.modelValue().length);
-      } else {
-        event.stopPropagation();
-      }
-    }
-  }
-  onArrowRightKey(event) {
-    this.focusedOptionIndex.set(-1);
-    this.multiple && event.stopPropagation();
-  }
-  onHomeKey(event) {
-    const {
-      currentTarget
-    } = event;
-    const len = currentTarget.value.length;
-    currentTarget.setSelectionRange(0, event.shiftKey ? len : 0);
-    this.focusedOptionIndex.set(-1);
+  close(event) {
+    this.hide();
+    this.visibleChange.emit(false);
     event.preventDefault();
   }
-  onEndKey(event) {
-    const {
-      currentTarget
-    } = event;
-    const len = currentTarget.value.length;
-    currentTarget.setSelectionRange(event.shiftKey ? 0 : len, len);
-    this.focusedOptionIndex.set(-1);
-    event.preventDefault();
-  }
-  onPageDownKey(event) {
-    this.scrollInView(this.visibleOptions().length - 1);
-    event.preventDefault();
-  }
-  onPageUpKey(event) {
-    this.scrollInView(0);
-    event.preventDefault();
-  }
-  onEnterKey(event) {
-    if (!this.typeahead) {
-      if (this.multiple) {
-        this.updateModel([...this.modelValue() || [], event.target.value]);
-        this.inputEL.nativeElement.value = "";
-      }
+  maskClickListener(event) {
+    if (this.dismissible) {
+      this.close(event);
     }
-    if (!this.overlayVisible) {
-      this.onArrowDownKey(event);
-    } else {
-      if (this.focusedOptionIndex() !== -1) {
-        this.onOptionSelect(event, this.visibleOptions()[this.focusedOptionIndex()]);
-      }
-      this.hide();
-    }
-    event.preventDefault();
-  }
-  onEscapeKey(event) {
-    this.overlayVisible && this.hide(true);
-    event.preventDefault();
-  }
-  onTabKey(event) {
-    if (this.focusedOptionIndex() !== -1) {
-      this.onOptionSelect(event, this.visibleOptions()[this.focusedOptionIndex()]);
-    }
-    this.overlayVisible && this.hide();
-  }
-  onBackspaceKey(event) {
-    if (this.multiple) {
-      if (isNotEmpty(this.modelValue()) && !this.inputEL.nativeElement.value) {
-        const removedValue = this.modelValue()[this.modelValue().length - 1];
-        const newValue = this.modelValue().slice(0, -1);
-        this.updateModel(newValue);
-        this.onUnselect.emit({
-          originalEvent: event,
-          value: removedValue
-        });
-      }
-      event.stopPropagation();
-    }
-    if (!this.multiple && this.showClear && this.findSelectedOptionIndex() != -1) {
-      this.clear();
+    if (this.blockScroll) {
+      blockBodyScroll();
     }
   }
-  onArrowLeftKeyOnMultiple(event) {
-    const optionIndex = this.focusedMultipleOptionIndex() < 1 ? 0 : this.focusedMultipleOptionIndex() - 1;
-    this.focusedMultipleOptionIndex.set(optionIndex);
-  }
-  onArrowRightKeyOnMultiple(event) {
-    let optionIndex = this.focusedMultipleOptionIndex();
-    optionIndex++;
-    this.focusedMultipleOptionIndex.set(optionIndex);
-    if (optionIndex > this.modelValue().length - 1) {
-      this.focusedMultipleOptionIndex.set(-1);
-      focus(this.inputEL.nativeElement);
+  onAnimationStart(event) {
+    switch (event.toState) {
+      case "visible":
+        this.container = event.element;
+        this.appendContainer();
+        this.show();
+        if (this.closeOnEscape) {
+          this.bindDocumentEscapeListener();
+        }
+        break;
     }
   }
-  onBackspaceKeyOnMultiple(event) {
-    if (this.focusedMultipleOptionIndex() !== -1) {
-      this.removeOption(event, this.focusedMultipleOptionIndex());
+  onAnimationEnd(event) {
+    switch (event.toState) {
+      case "void":
+        this.hide(false);
+        zindexutils.clear(this.container);
+        this.unbindGlobalListeners();
+        break;
     }
   }
-  onOptionSelect(event, option, isHide = true) {
-    const value = this.getOptionValue(option);
-    if (this.multiple) {
-      this.inputEL.nativeElement.value = "";
-      if (!this.isSelected(option)) {
-        this.updateModel([...this.modelValue() || [], value]);
-      }
-    } else {
-      this.updateModel(value);
-    }
-    this.onSelect.emit({
-      originalEvent: event,
-      value: option
-    });
-    isHide && this.hide(true);
-  }
-  onOptionMouseEnter(event, index) {
-    if (this.focusOnHover) {
-      this.changeFocusedOptionIndex(event, index);
+  appendContainer() {
+    if (this.appendTo) {
+      return this.appendTo === "body" ? this.renderer.appendChild(this.document.body, this.container) : appendChild(this.appendTo, this.container);
     }
   }
-  search(event, query, source) {
-    if (query === void 0 || query === null) {
-      return;
-    }
-    if (source === "input" && query.trim().length === 0) {
-      return;
-    }
-    this.loading = true;
-    this.completeMethod.emit({
-      originalEvent: event,
-      query
-    });
-  }
-  removeOption(event, index) {
-    event.stopPropagation();
-    const removedOption = this.modelValue()[index];
-    const value = this.modelValue().filter((_, i) => i !== index);
-    this.updateModel(value);
-    this.onUnselect.emit({
-      originalEvent: event,
-      value: removedOption
-    });
-    focus(this.inputEL.nativeElement);
-  }
-  updateModel(value) {
-    this.value = value;
-    this.modelValue.set(value);
-    this.onModelChange(value);
-    this.updateInputValue();
-    this.cd.markForCheck();
-  }
-  updateInputValue() {
-    if (this.inputEL && this.inputEL.nativeElement) {
-      if (!this.multiple) {
-        this.inputEL.nativeElement.value = this.inputValue();
-      } else {
-        this.inputEL.nativeElement.value = "";
-      }
-    }
-  }
-  autoUpdateModel() {
-    if ((this.selectOnFocus || this.autoHighlight) && this.autoOptionFocus && !this.hasSelectedOption()) {
-      const focusedOptionIndex = this.findFirstFocusedOptionIndex();
-      this.focusedOptionIndex.set(focusedOptionIndex);
-      this.onOptionSelect(null, this.visibleOptions()[this.focusedOptionIndex()], false);
-    }
-  }
-  scrollInView(index = -1) {
-    const id = index !== -1 ? `${this.id}_${index}` : this.focusedOptionId;
-    if (this.itemsViewChild && this.itemsViewChild.nativeElement) {
-      const element = findSingle(this.itemsViewChild.nativeElement, `li[id="${id}"]`);
-      if (element) {
-        element.scrollIntoView && element.scrollIntoView({
-          block: "nearest",
-          inline: "nearest"
-        });
-      } else if (!this.virtualScrollerDisabled) {
-        setTimeout(() => {
-          this.virtualScroll && this.scroller?.scrollToIndex(index !== -1 ? index : this.focusedOptionIndex());
-        }, 0);
-      }
-    }
-  }
-  changeFocusedOptionIndex(event, index) {
-    if (this.focusedOptionIndex() !== index) {
-      this.focusedOptionIndex.set(index);
-      this.scrollInView();
-      if (this.selectOnFocus) {
-        this.onOptionSelect(event, this.visibleOptions()[index], false);
-      }
-    }
-  }
-  show(isFocus = false) {
-    this.dirty = true;
-    this.overlayVisible = true;
-    const focusedOptionIndex = this.focusedOptionIndex() !== -1 ? this.focusedOptionIndex() : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
-    this.focusedOptionIndex.set(focusedOptionIndex);
-    isFocus && focus(this.inputEL.nativeElement);
-    if (isFocus) {
-      focus(this.inputEL.nativeElement);
-    }
-    this.onShow.emit();
-    this.cd.markForCheck();
-  }
-  hide(isFocus = false) {
-    const _hide = () => {
-      this.dirty = isFocus;
-      this.overlayVisible = false;
-      this.focusedOptionIndex.set(-1);
-      isFocus && focus(this.inputEL.nativeElement);
-      this.onHide.emit();
-      this.cd.markForCheck();
-    };
-    setTimeout(() => {
-      _hide();
-    }, 0);
-  }
-  clear() {
-    this.updateModel(null);
-    this.inputEL.nativeElement.value = "";
-    this.onClear.emit();
-  }
-  writeValue(value) {
-    this.value = value;
-    this.modelValue.set(value);
-    this.updateInputValue();
-    this.cd.markForCheck();
-  }
-  hasSelectedOption() {
-    return isNotEmpty(this.modelValue());
-  }
-  getAriaPosInset(index) {
-    return (this.optionGroupLabel ? index - this.visibleOptions().slice(0, index).filter((option) => this.isOptionGroup(option)).length : index) + 1;
-  }
-  getOptionLabel(option) {
-    return this.field || this.optionLabel ? resolveFieldData(option, this.field || this.optionLabel) : option && option.label != void 0 ? option.label : option;
-  }
-  getOptionValue(option) {
-    return this.optionValue ? resolveFieldData(option, this.optionValue) : option && option.value != void 0 ? option.value : option;
-  }
-  getOptionIndex(index, scrollerOptions) {
-    return this.virtualScrollerDisabled ? index : scrollerOptions && scrollerOptions.getItemOptions(index)["index"];
-  }
-  getOptionGroupLabel(optionGroup) {
-    return this.optionGroupLabel ? resolveFieldData(optionGroup, this.optionGroupLabel) : optionGroup && optionGroup.label != void 0 ? optionGroup.label : optionGroup;
-  }
-  getOptionGroupChildren(optionGroup) {
-    return this.optionGroupChildren ? resolveFieldData(optionGroup, this.optionGroupChildren) : optionGroup.items;
-  }
-  registerOnChange(fn) {
-    this.onModelChange = fn;
-  }
-  registerOnTouched(fn) {
-    this.onModelTouched = fn;
-  }
-  setDisabledState(val) {
-    this.disabled = val;
-    this.cd.markForCheck();
-  }
-  onOverlayAnimationStart(event) {
-    if (event.toState === "visible") {
-      this.itemsWrapper = findSingle(this.overlayViewChild.overlayViewChild?.nativeElement, this.virtualScroll ? ".p-scroller" : ".p-autocomplete-panel");
-      if (this.virtualScroll) {
-        this.scroller?.setContentEl(this.itemsViewChild?.nativeElement);
-        this.scroller.viewInit();
-      }
-      if (this.visibleOptions() && this.visibleOptions().length) {
-        if (this.virtualScroll) {
-          const selectedIndex = this.modelValue() ? this.focusedOptionIndex() : -1;
-          if (selectedIndex !== -1) {
-            this.scroller?.scrollToIndex(selectedIndex);
-          }
-        } else {
-          let selectedListItem = findSingle(this.itemsWrapper, ".p-autocomplete-item.p-highlight");
-          if (selectedListItem) {
-            selectedListItem.scrollIntoView({
-              block: "nearest",
-              inline: "center"
-            });
-          }
+  bindDocumentEscapeListener() {
+    const documentTarget = this.el ? this.el.nativeElement.ownerDocument : this.document;
+    this.documentEscapeListener = this.renderer.listen(documentTarget, "keydown", (event) => {
+      if (event.which == 27) {
+        if (parseInt(this.container.style.zIndex) === zindexutils.get(this.container)) {
+          this.close(event);
         }
       }
+    });
+  }
+  unbindDocumentEscapeListener() {
+    if (this.documentEscapeListener) {
+      this.documentEscapeListener();
+      this.documentEscapeListener = null;
     }
+  }
+  unbindGlobalListeners() {
+    this.unbindDocumentEscapeListener();
   }
   ngOnDestroy() {
-    if (this.scrollHandler) {
-      this.scrollHandler.destroy();
-      this.scrollHandler = null;
+    this.initialized = false;
+    if (this.appendTo && this.container) {
+      this.renderer.appendChild(this.el.nativeElement, this.container);
     }
+    if (this.container && this.autoZIndex) {
+      zindexutils.clear(this.container);
+    }
+    this.container = null;
+    this.unbindGlobalListeners();
     super.ngOnDestroy();
   }
-  static \u0275fac = function AutoComplete_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _AutoComplete)(\u0275\u0275directiveInject(OverlayService), \u0275\u0275directiveInject(NgZone));
-  };
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275Sidebar_BaseFactory;
+    return function Sidebar_Factory(__ngFactoryType__) {
+      return (\u0275Sidebar_BaseFactory || (\u0275Sidebar_BaseFactory = \u0275\u0275getInheritedFactory(_Sidebar)))(__ngFactoryType__ || _Sidebar);
+    };
+  })();
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _AutoComplete,
-    selectors: [["p-autoComplete"], ["p-autocomplete"], ["p-auto-complete"]],
-    contentQueries: function AutoComplete_ContentQueries(rf, ctx, dirIndex) {
+    type: _Sidebar,
+    selectors: [["p-sidebar"]],
+    contentQueries: function Sidebar_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c016, 5);
-        \u0275\u0275contentQuery(dirIndex, _c116, 5);
-        \u0275\u0275contentQuery(dirIndex, _c27, 5);
-        \u0275\u0275contentQuery(dirIndex, _c35, 5);
-        \u0275\u0275contentQuery(dirIndex, _c45, 5);
-        \u0275\u0275contentQuery(dirIndex, _c55, 5);
-        \u0275\u0275contentQuery(dirIndex, _c64, 5);
-        \u0275\u0275contentQuery(dirIndex, _c73, 5);
-        \u0275\u0275contentQuery(dirIndex, _c83, 5);
-        \u0275\u0275contentQuery(dirIndex, _c93, 5);
-        \u0275\u0275contentQuery(dirIndex, _c103, 5);
         \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
       }
       if (rf & 2) {
         let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.itemTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.emptyTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.headerTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.footerTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.selectedItemTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.groupTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.loaderTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.removeIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.loadingIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.clearIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.dropdownIconTemplate = _t.first);
         \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
       }
     },
-    viewQuery: function AutoComplete_Query(rf, ctx) {
+    viewQuery: function Sidebar_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c117, 5);
-        \u0275\u0275viewQuery(_c123, 5);
-        \u0275\u0275viewQuery(_c133, 5);
-        \u0275\u0275viewQuery(_c143, 5);
-        \u0275\u0275viewQuery(_c152, 5);
-        \u0275\u0275viewQuery(_c162, 5);
-        \u0275\u0275viewQuery(_c172, 5);
-        \u0275\u0275viewQuery(_c182, 5);
+        \u0275\u0275viewQuery(_c020, 5);
+        \u0275\u0275viewQuery(_c120, 5);
+        \u0275\u0275viewQuery(_c212, 5);
       }
       if (rf & 2) {
         let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.containerEL = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.inputEL = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.multiInputEl = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.multiContainerEL = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.dropdownButton = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.itemsViewChild = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.scroller = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.overlayViewChild = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.maskRef = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.containerViewChild = _t.first);
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.closeButtonViewChild = _t.first);
       }
     },
     inputs: {
-      minLength: [2, "minLength", "minLength", numberAttribute],
-      delay: [2, "delay", "delay", numberAttribute],
-      style: "style",
-      panelStyle: "panelStyle",
-      styleClass: "styleClass",
-      panelStyleClass: "panelStyleClass",
-      inputStyle: "inputStyle",
-      inputId: "inputId",
-      inputStyleClass: "inputStyleClass",
-      placeholder: "placeholder",
-      readonly: [2, "readonly", "readonly", booleanAttribute],
-      disabled: [2, "disabled", "disabled", booleanAttribute],
-      scrollHeight: "scrollHeight",
-      lazy: [2, "lazy", "lazy", booleanAttribute],
-      virtualScroll: [2, "virtualScroll", "virtualScroll", booleanAttribute],
-      virtualScrollItemSize: [2, "virtualScrollItemSize", "virtualScrollItemSize", numberAttribute],
-      virtualScrollOptions: "virtualScrollOptions",
-      maxlength: [2, "maxlength", "maxlength", (value) => numberAttribute(value, null)],
-      name: "name",
-      required: [2, "required", "required", booleanAttribute],
-      size: "size",
       appendTo: "appendTo",
-      autoHighlight: [2, "autoHighlight", "autoHighlight", booleanAttribute],
-      forceSelection: [2, "forceSelection", "forceSelection", booleanAttribute],
-      type: "type",
+      blockScroll: [2, "blockScroll", "blockScroll", booleanAttribute],
+      style: "style",
+      styleClass: "styleClass",
+      ariaCloseLabel: "ariaCloseLabel",
       autoZIndex: [2, "autoZIndex", "autoZIndex", booleanAttribute],
       baseZIndex: [2, "baseZIndex", "baseZIndex", numberAttribute],
-      ariaLabel: "ariaLabel",
-      dropdownAriaLabel: "dropdownAriaLabel",
-      ariaLabelledBy: "ariaLabelledBy",
-      dropdownIcon: "dropdownIcon",
-      unique: [2, "unique", "unique", booleanAttribute],
-      group: [2, "group", "group", booleanAttribute],
-      completeOnFocus: [2, "completeOnFocus", "completeOnFocus", booleanAttribute],
-      showClear: [2, "showClear", "showClear", booleanAttribute],
-      field: "field",
-      dropdown: [2, "dropdown", "dropdown", booleanAttribute],
-      showEmptyMessage: [2, "showEmptyMessage", "showEmptyMessage", booleanAttribute],
-      dropdownMode: "dropdownMode",
-      multiple: [2, "multiple", "multiple", booleanAttribute],
-      tabindex: [2, "tabindex", "tabindex", numberAttribute],
-      dataKey: "dataKey",
-      emptyMessage: "emptyMessage",
-      showTransitionOptions: "showTransitionOptions",
-      hideTransitionOptions: "hideTransitionOptions",
-      autofocus: [2, "autofocus", "autofocus", booleanAttribute],
-      autocomplete: "autocomplete",
-      optionGroupChildren: "optionGroupChildren",
-      optionGroupLabel: "optionGroupLabel",
-      overlayOptions: "overlayOptions",
-      suggestions: "suggestions",
-      itemSize: "itemSize",
-      optionLabel: "optionLabel",
-      optionValue: "optionValue",
-      id: "id",
-      searchMessage: "searchMessage",
-      emptySelectionMessage: "emptySelectionMessage",
-      selectionMessage: "selectionMessage",
-      autoOptionFocus: [2, "autoOptionFocus", "autoOptionFocus", booleanAttribute],
-      selectOnFocus: [2, "selectOnFocus", "selectOnFocus", booleanAttribute],
-      searchLocale: [2, "searchLocale", "searchLocale", booleanAttribute],
-      optionDisabled: "optionDisabled",
-      focusOnHover: [2, "focusOnHover", "focusOnHover", booleanAttribute],
-      typeahead: [2, "typeahead", "typeahead", booleanAttribute],
-      variant: "variant",
-      fluid: [2, "fluid", "fluid", booleanAttribute]
+      modal: [2, "modal", "modal", booleanAttribute],
+      closeButtonProps: "closeButtonProps",
+      dismissible: [2, "dismissible", "dismissible", booleanAttribute],
+      showCloseIcon: [2, "showCloseIcon", "showCloseIcon", booleanAttribute],
+      closeOnEscape: [2, "closeOnEscape", "closeOnEscape", booleanAttribute],
+      transitionOptions: "transitionOptions",
+      visible: "visible",
+      position: "position",
+      fullScreen: "fullScreen",
+      maskStyle: "maskStyle",
+      headerTemplate: "headerTemplate",
+      footerTemplate: "footerTemplate",
+      closeIconTemplate: "closeIconTemplate",
+      headlessTemplate: "headlessTemplate",
+      contentTemplate: "contentTemplate"
     },
     outputs: {
-      completeMethod: "completeMethod",
-      onSelect: "onSelect",
-      onUnselect: "onUnselect",
-      onFocus: "onFocus",
-      onBlur: "onBlur",
-      onDropdownClick: "onDropdownClick",
-      onClear: "onClear",
-      onKeyUp: "onKeyUp",
       onShow: "onShow",
       onHide: "onHide",
-      onLazyLoad: "onLazyLoad"
+      visibleChange: "visibleChange"
     },
-    features: [\u0275\u0275ProvidersFeature([AUTOCOMPLETE_VALUE_ACCESSOR, AutoCompleteStyle]), \u0275\u0275InheritDefinitionFeature],
-    decls: 11,
-    vars: 15,
-    consts: [["container", ""], ["overlay", ""], ["content", ""], ["focusInput", ""], ["multiContainer", ""], ["token", ""], ["removeicon", ""], ["ddBtn", ""], ["buildInItems", ""], ["scroller", ""], ["loader", ""], ["items", ""], ["empty", ""], [2, "position", "relative", 3, "click", "ngClass", "ngStyle"], ["pInputText", "", "aria-autocomplete", "list", "role", "combobox", 3, "pAutoFocus", "ngClass", "ngStyle", "class", "type", "variant", "autocomplete", "required", "name", "pSize", "tabindex", "readonly", "disabled", "fluid", "input", "keydown", "change", "focus", "blur", "paste", "keyup", 4, "ngIf"], [4, "ngIf"], ["role", "listbox", 3, "ngClass", "tabindex", "focus", "blur", "keydown", 4, "ngIf"], ["type", "button", "class", "p-autocomplete-dropdown", "pRipple", "", 3, "disabled", "click", 4, "ngIf"], [3, "visibleChange", "onAnimationStart", "onHide", "visible", "options", "target", "appendTo", "showTransitionOptions", "hideTransitionOptions"], ["pInputText", "", "aria-autocomplete", "list", "role", "combobox", 3, "input", "keydown", "change", "focus", "blur", "paste", "keyup", "pAutoFocus", "ngClass", "ngStyle", "type", "variant", "autocomplete", "required", "name", "pSize", "tabindex", "readonly", "disabled", "fluid"], [3, "styleClass", "click", 4, "ngIf"], ["class", "p-autocomplete-clear-icon", 3, "click", 4, "ngIf"], [3, "click", "styleClass"], [1, "p-autocomplete-clear-icon", 3, "click"], [4, "ngTemplateOutlet"], ["role", "listbox", 3, "focus", "blur", "keydown", "ngClass", "tabindex"], ["role", "option", 3, "ngClass", 4, "ngFor", "ngForOf"], ["role", "option", 1, "p-autocomplete-input-chip"], ["role", "combobox", "aria-autocomplete", "list", 3, "input", "keydown", "change", "focus", "blur", "paste", "keyup", "pAutoFocus", "ngClass", "ngStyle", "autocomplete", "required", "tabindex", "readonly", "disabled"], ["role", "option", 3, "ngClass"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["styleClass", "p-autocomplete-chip", 3, "label", "removable", "onRemove", 4, "ngIf"], ["styleClass", "p-autocomplete-chip", 3, "onRemove", "label", "removable"], [1, "p-autocomplete-chip-icon", 3, "click"], [3, "styleClass"], [3, "styleClass", "spin", 4, "ngIf"], ["class", "p-autocomplete-loader pi-spin ", 4, "ngIf"], [3, "styleClass", "spin"], [1, "p-autocomplete-loader", "pi-spin"], ["type", "button", "pRipple", "", 1, "p-autocomplete-dropdown", 3, "click", "disabled"], [3, "ngClass", 4, "ngIf"], [3, "ngClass"], [3, "ngClass", "ngStyle"], [1, "p-autocomplete-list-container"], [3, "items", "style", "itemSize", "autoSize", "lazy", "options", "onLazyLoad", 4, "ngIf"], ["role", "status", "aria-live", "polite", 1, "p-hidden-accessible"], [3, "onLazyLoad", "items", "itemSize", "autoSize", "lazy", "options"], ["role", "listbox", 1, "p-autocomplete-list", 3, "ngClass"], ["ngFor", "", 3, "ngForOf"], ["class", "p-autocomplete-empty-message", "role", "option", 3, "ngStyle", 4, "ngIf"], ["role", "option", 1, "p-autocomplete-option-group", 3, "ngStyle"], ["pRipple", "", "role", "option", 3, "click", "mouseenter", "ngStyle", "ngClass"], ["role", "option", 1, "p-autocomplete-empty-message", 3, "ngStyle"], [4, "ngIf", "ngIfElse"]],
-    template: function AutoComplete_Template(rf, ctx) {
+    features: [\u0275\u0275ProvidersFeature([DrawerStyle]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c38,
+    decls: 1,
+    vars: 1,
+    consts: [["maskRef", ""], [3, "ngClass", "ngStyle", "style", "click", 4, "ngIf"], [3, "click", "ngClass", "ngStyle"], [3, "keydown", "ngClass"], [4, "ngTemplateOutlet"], [3, "ngClass"], [3, "ngClass", "buttonProps", "ariaLabel", "onClick", "keydown.enter", 4, "ngIf"], [4, "ngIf"], [3, "onClick", "keydown.enter", "ngClass", "buttonProps", "ariaLabel"], ["class", "p-sidebar-close-icon", 4, "ngIf"], [1, "p-sidebar-close-icon"]],
+    template: function Sidebar_Template(rf, ctx) {
       if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 13, 0);
-        \u0275\u0275listener("click", function AutoComplete_Template_div_click_0_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onContainerClick($event));
-        });
-        \u0275\u0275template(2, AutoComplete_input_2_Template, 2, 25, "input", 14)(3, AutoComplete_ng_container_3_Template, 3, 2, "ng-container", 15)(4, AutoComplete_ul_4_Template, 6, 26, "ul", 16)(5, AutoComplete_ng_container_5_Template, 3, 2, "ng-container", 15)(6, AutoComplete_button_6_Template, 4, 5, "button", 17);
-        \u0275\u0275elementStart(7, "p-overlay", 18, 1);
-        \u0275\u0275twoWayListener("visibleChange", function AutoComplete_Template_p_overlay_visibleChange_7_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          \u0275\u0275twoWayBindingSet(ctx.overlayVisible, $event) || (ctx.overlayVisible = $event);
-          return \u0275\u0275resetView($event);
-        });
-        \u0275\u0275listener("onAnimationStart", function AutoComplete_Template_p_overlay_onAnimationStart_7_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onOverlayAnimationStart($event));
-        })("onHide", function AutoComplete_Template_p_overlay_onHide_7_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.hide());
-        });
-        \u0275\u0275template(9, AutoComplete_ng_template_9_Template, 10, 11, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
-        \u0275\u0275elementEnd()();
+        \u0275\u0275projectionDef();
+        \u0275\u0275template(0, Sidebar_div_0_Template, 5, 17, "div", 1);
       }
       if (rf & 2) {
-        \u0275\u0275classMap(ctx.styleClass);
-        \u0275\u0275property("ngClass", ctx.rootClass)("ngStyle", ctx.style);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.multiple);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.filled && !ctx.disabled && ctx.showClear && !ctx.loading);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.multiple);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.loading);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.dropdown);
-        \u0275\u0275advance();
-        \u0275\u0275twoWayProperty("visible", ctx.overlayVisible);
-        \u0275\u0275property("options", ctx.overlayOptions)("target", "@parent")("appendTo", ctx.appendTo)("showTransitionOptions", ctx.showTransitionOptions)("hideTransitionOptions", ctx.hideTransitionOptions);
+        \u0275\u0275property("ngIf", ctx.visible);
       }
     },
-    dependencies: [CommonModule, NgClass, NgForOf, NgIf, NgTemplateOutlet, NgStyle, Overlay, InputText, Ripple, Scroller, AutoFocus, TimesCircleIcon, SpinnerIcon, TimesIcon, ChevronDownIcon, Chip, SharedModule],
+    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, SharedModule, TimesIcon, ButtonModule, Button],
     encapsulation: 2,
+    data: {
+      animation: [trigger("panelState", [transition("void => visible", [useAnimation(showAnimation)]), transition("visible => void", [useAnimation(hideAnimation)])])]
+    },
     changeDetection: 0
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AutoComplete, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Sidebar, [{
     type: Component,
     args: [{
-      selector: "p-autoComplete, p-autocomplete, p-auto-complete",
+      selector: "p-sidebar",
       standalone: true,
-      imports: [CommonModule, Overlay, InputText, Ripple, Scroller, AutoFocus, TimesCircleIcon, SpinnerIcon, TimesIcon, ChevronDownIcon, Chip, SharedModule],
+      imports: [CommonModule, SharedModule, TimesIcon, ButtonModule],
       template: `
-        <div #container [ngClass]="rootClass" [ngStyle]="style" style="position: relative;" [class]="styleClass" (click)="onContainerClick($event)">
-            <input
-                *ngIf="!multiple"
-                #focusInput
-                [pAutoFocus]="autofocus"
-                pInputText
-                [ngClass]="'p-autocomplete-input'"
-                [ngStyle]="inputStyle"
-                [class]="inputStyleClass"
-                [type]="type"
-                [attr.value]="inputValue()"
-                [variant]="variant"
-                [attr.id]="inputId"
-                [autocomplete]="autocomplete"
-                [required]="required"
-                [name]="name"
-                aria-autocomplete="list"
-                role="combobox"
-                [attr.placeholder]="placeholder"
-                [pSize]="size"
-                [attr.maxlength]="maxlength"
-                [tabindex]="!disabled ? tabindex : -1"
-                [readonly]="readonly"
-                [disabled]="disabled"
-                [attr.aria-label]="ariaLabel"
-                [attr.aria-labelledby]="ariaLabelledBy"
-                [attr.aria-required]="required"
-                [attr.aria-expanded]="overlayVisible ?? false"
-                [attr.aria-controls]="overlayVisible ? id + '_list' : null"
-                [attr.aria-activedescendant]="focused ? focusedOptionId : undefined"
-                (input)="onInput($event)"
-                (keydown)="onKeyDown($event)"
-                (change)="onInputChange($event)"
-                (focus)="onInputFocus($event)"
-                (blur)="onInputBlur($event)"
-                (paste)="onInputPaste($event)"
-                (keyup)="onInputKeyUp($event)"
-                [fluid]="hasFluid"
-            />
-            <ng-container *ngIf="filled && !disabled && showClear && !loading">
-                <TimesIcon *ngIf="!clearIconTemplate && !_clearIconTemplate" [styleClass]="'p-autocomplete-clear-icon'" (click)="clear()" [attr.aria-hidden]="true" />
-                <span *ngIf="clearIconTemplate || _clearIconTemplate" class="p-autocomplete-clear-icon" (click)="clear()" [attr.aria-hidden]="true">
-                    <ng-template *ngTemplateOutlet="clearIconTemplate || _clearIconTemplate"></ng-template>
-                </span>
-            </ng-container>
-
-            <ul
-                *ngIf="multiple"
-                #multiContainer
-                [ngClass]="inputMultipleClass"
-                [tabindex]="-1"
-                role="listbox"
-                [attr.aria-orientation]="'horizontal'"
-                [attr.aria-activedescendant]="focused ? focusedMultipleOptionId : undefined"
-                (focus)="onMultipleContainerFocus($event)"
-                (blur)="onMultipleContainerBlur($event)"
-                (keydown)="onMultipleContainerKeyDown($event)"
-            >
-                <li
-                    #token
-                    *ngFor="let option of modelValue(); let i = index"
-                    [ngClass]="{ 'p-autocomplete-chip-item': true, 'p-focus': focusedMultipleOptionIndex() === i }"
-                    [attr.id]="id + '_multiple_option_' + i"
-                    role="option"
-                    [attr.aria-label]="getOptionLabel(option)"
-                    [attr.aria-setsize]="modelValue().length"
-                    [attr.aria-posinset]="i + 1"
-                    [attr.aria-selected]="true"
-                >
-                    <ng-container *ngTemplateOutlet="selectedItemTemplate || _selectedItemTemplate; context: { $implicit: option }"></ng-container>
-                    <p-chip styleClass="p-autocomplete-chip" *ngIf="!selectedItemTemplate && !_selectedItemTemplate" [label]="getOptionLabel(option)" [removable]="true" (onRemove)="!readonly ? removeOption($event, i) : ''">
-                        <ng-container *ngIf="!removeIconTemplate && !_removeIconTemplate">
-                            <ng-template #removeicon>
-                                <span class="p-autocomplete-chip-icon" (click)="!readonly ? removeOption($event, i) : ''">
-                                    <TimesCircleIcon [styleClass]="'p-autocomplete-chip-icon'" [attr.aria-hidden]="true" />
-                                </span>
-                            </ng-template>
-                        </ng-container>
-                    </p-chip>
-                    <span *ngIf="removeIconTemplate || _removeIconTemplate">
-                        <ng-template *ngTemplateOutlet="removeIconTemplate || _removeIconTemplate; context: { class: 'p-autocomplete-chip-icon', removeCallback: removeOption.bind(this), index: i }"></ng-template>
-                    </span>
-                </li>
-                <li class="p-autocomplete-input-chip" role="option">
-                    <input
-                        #focusInput
-                        [pAutoFocus]="autofocus"
-                        [ngClass]="inputClass"
-                        [ngStyle]="inputStyle"
-                        [class]="inputStyleClass"
-                        [attr.type]="type"
-                        [attr.id]="inputId"
-                        [autocomplete]="autocomplete"
-                        [required]="required"
-                        [attr.name]="name"
-                        role="combobox"
-                        [attr.placeholder]="!filled ? placeholder : null"
-                        aria-autocomplete="list"
-                        [attr.maxlength]="maxlength"
-                        [tabindex]="!disabled ? tabindex : -1"
-                        [readonly]="readonly"
-                        [disabled]="disabled"
-                        [attr.aria-label]="ariaLabel"
-                        [attr.aria-labelledby]="ariaLabelledBy"
-                        [attr.aria-required]="required"
-                        [attr.aria-expanded]="overlayVisible ?? false"
-                        [attr.aria-controls]="overlayVisible ? id + '_list' : null"
-                        [attr.aria-activedescendant]="focused ? focusedOptionId : undefined"
-                        (input)="onInput($event)"
-                        (keydown)="onKeyDown($event)"
-                        (change)="onInputChange($event)"
-                        (focus)="onInputFocus($event)"
-                        (blur)="onInputBlur($event)"
-                        (paste)="onInputPaste($event)"
-                        (keyup)="onInputKeyUp($event)"
-                    />
-                </li>
-            </ul>
-            <ng-container *ngIf="loading">
-                <SpinnerIcon *ngIf="!loadingIconTemplate && !_loadingIconTemplate" [styleClass]="'p-autocomplete-loader'" [spin]="true" [attr.aria-hidden]="true" />
-                <span *ngIf="loadingIconTemplate || _loadingIconTemplate" class="p-autocomplete-loader pi-spin " [attr.aria-hidden]="true">
-                    <ng-template *ngTemplateOutlet="loadingIconTemplate || _loadingIconTemplate"></ng-template>
-                </span>
-            </ng-container>
-            <button #ddBtn type="button" [attr.aria-label]="dropdownAriaLabel" class="p-autocomplete-dropdown" [disabled]="disabled" pRipple (click)="handleDropdownClick($event)" *ngIf="dropdown" [attr.tabindex]="tabindex">
-                <span *ngIf="dropdownIcon" [ngClass]="dropdownIcon" [attr.aria-hidden]="true"></span>
-                <ng-container *ngIf="!dropdownIcon">
-                    <ChevronDownIcon *ngIf="!dropdownIconTemplate && !_dropdownIconTemplate" />
-                    <ng-template *ngTemplateOutlet="dropdownIconTemplate || _dropdownIconTemplate"></ng-template>
-                </ng-container>
-            </button>
-            <p-overlay
-                #overlay
-                [(visible)]="overlayVisible"
-                [options]="overlayOptions"
-                [target]="'@parent'"
-                [appendTo]="appendTo"
-                [showTransitionOptions]="showTransitionOptions"
-                [hideTransitionOptions]="hideTransitionOptions"
-                (onAnimationStart)="onOverlayAnimationStart($event)"
-                (onHide)="hide()"
-            >
-                <ng-template #content>
-                    <div [ngClass]="panelClass" [ngStyle]="panelStyle" [class]="panelStyleClass">
+        <div
+            #maskRef
+            *ngIf="visible"
+            [ngClass]="cx('mask')"
+            [ngStyle]="sx('mask')"
+            [style]="maskStyle"
+            [@panelState]="{ value: 'visible', params: { transform: transformOptions, transition: transitionOptions } }"
+            (@panelState.start)="onAnimationStart($event)"
+            (@panelState.done)="onAnimationEnd($event)"
+            [attr.data-pc-name]="'mask'"
+            [attr.data-pc-section]="'mask'"
+            (click)="maskClickListener($event)"
+        >
+            <div [ngClass]="cx('root')" [class]="styleClass" [attr.data-pc-section]="'root'" (keydown)="onKeyDown($event)">
+                @if (headlessTemplate || _headlessTemplate) {
+                    <ng-container *ngTemplateOutlet="headlessTemplate || _headlessTemplate"></ng-container>
+                } @else {
+                    <div [ngClass]="cx('header')" [attr.data-pc-section]="'header'">
                         <ng-container *ngTemplateOutlet="headerTemplate || _headerTemplate"></ng-container>
-                        <div class="p-autocomplete-list-container" [style.max-height]="virtualScroll ? 'auto' : scrollHeight">
-                            <p-scroller
-                                *ngIf="virtualScroll"
-                                #scroller
-                                [items]="visibleOptions()"
-                                [style]="{ height: scrollHeight }"
-                                [itemSize]="virtualScrollItemSize || _itemSize"
-                                [autoSize]="true"
-                                [lazy]="lazy"
-                                (onLazyLoad)="onLazyLoad.emit($event)"
-                                [options]="virtualScrollOptions"
-                            >
-                                <ng-template #content let-items let-scrollerOptions="options">
-                                    <ng-container *ngTemplateOutlet="buildInItems; context: { $implicit: items, options: scrollerOptions }"></ng-container>
-                                </ng-template>
-                                <ng-container *ngIf="loaderTemplate || _loaderTemplate">
-                                    <ng-template #loader let-scrollerOptions="options">
-                                        <ng-container *ngTemplateOutlet="loaderTemplate || _loaderTemplate; context: { options: scrollerOptions }"></ng-container>
-                                    </ng-template>
-                                </ng-container>
-                            </p-scroller>
-                            <ng-container *ngIf="!virtualScroll">
-                                <ng-container *ngTemplateOutlet="buildInItems; context: { $implicit: visibleOptions(), options: {} }"></ng-container>
-                            </ng-container>
-                        </div>
-
-                        <ng-template #buildInItems let-items let-scrollerOptions="options">
-                            <ul #items class="p-autocomplete-list" [ngClass]="scrollerOptions.contentStyleClass" [style]="scrollerOptions.contentStyle" role="listbox" [attr.id]="id + '_list'" [attr.aria-label]="listLabel">
-                                <ng-template ngFor let-option [ngForOf]="items" let-i="index">
-                                    <ng-container *ngIf="isOptionGroup(option)">
-                                        <li [attr.id]="id + '_' + getOptionIndex(i, scrollerOptions)" class="p-autocomplete-option-group" [ngStyle]="{ height: scrollerOptions.itemSize + 'px' }" role="option">
-                                            <span *ngIf="!groupTemplate">{{ getOptionGroupLabel(option.optionGroup) }}</span>
-                                            <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: option.optionGroup }"></ng-container>
-                                        </li>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isOptionGroup(option)">
-                                        <li
-                                            pRipple
-                                            [ngStyle]="{ height: scrollerOptions.itemSize + 'px' }"
-                                            [ngClass]="optionClass(option, i, scrollerOptions)"
-                                            [attr.id]="id + '_' + getOptionIndex(i, scrollerOptions)"
-                                            role="option"
-                                            [attr.aria-label]="getOptionLabel(option)"
-                                            [attr.aria-selected]="isSelected(option)"
-                                            [attr.aria-disabled]="isOptionDisabled(option)"
-                                            [attr.data-p-focused]="focusedOptionIndex() === getOptionIndex(i, scrollerOptions)"
-                                            [attr.aria-setsize]="ariaSetSize"
-                                            [attr.aria-posinset]="getAriaPosInset(getOptionIndex(i, scrollerOptions))"
-                                            (click)="onOptionSelect($event, option)"
-                                            (mouseenter)="onOptionMouseEnter($event, getOptionIndex(i, scrollerOptions))"
-                                        >
-                                            <span *ngIf="!itemTemplate && !_itemTemplate">{{ getOptionLabel(option) }}</span>
-                                            <ng-container
-                                                *ngTemplateOutlet="
-                                                    itemTemplate || _itemTemplate;
-                                                    context: {
-                                                        $implicit: option,
-                                                        index: scrollerOptions.getOptions ? scrollerOptions.getOptions(i) : i
-                                                    }
-                                                "
-                                            ></ng-container>
-                                        </li>
-                                    </ng-container>
-                                </ng-template>
-                                <li *ngIf="!items || (items && items.length === 0 && showEmptyMessage)" class="p-autocomplete-empty-message" [ngStyle]="{ height: scrollerOptions.itemSize + 'px' }" role="option">
-                                    <ng-container *ngIf="!emptyTemplate && !_emptyTemplate; else empty">
-                                        {{ searchResultMessageText }}
-                                    </ng-container>
-                                    <ng-container #empty *ngTemplateOutlet="emptyTemplate || _emptyTemplate"></ng-container>
-                                </li>
-                            </ul>
-                        </ng-template>
-                        <ng-container *ngTemplateOutlet="footerTemplate || _footerTemplate"></ng-container>
+                        <p-button
+                            *ngIf="showCloseIcon"
+                            [ngClass]="cx('closeButton')"
+                            (onClick)="close($event)"
+                            (keydown.enter)="close($event)"
+                            [buttonProps]="closeButtonProps"
+                            [ariaLabel]="ariaCloseLabel"
+                            [attr.data-pc-section]="'closebutton'"
+                            [attr.data-pc-group-section]="'iconcontainer'"
+                        >
+                            <TimesIcon *ngIf="!closeIconTemplate && !_closeIconTemplate" [attr.data-pc-section]="'closeicon'" />
+                            <span *ngIf="closeIconTemplate || _closeIconTemplate" class="p-sidebar-close-icon" [attr.data-pc-section]="'closeicon'">
+                                <ng-template *ngTemplateOutlet="closeIconTemplate || _closeIconTemplate"></ng-template>
+                            </span>
+                        </p-button>
                     </div>
-                    <span role="status" aria-live="polite" class="p-hidden-accessible">
-                        {{ selectedMessageText }}
-                    </span>
-                </ng-template>
-            </p-overlay>
+
+                    <div [ngClass]="cx('content')" [attr.data-pc-section]="'content'">
+                        <ng-content></ng-content>
+                        <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
+                    </div>
+
+                    <ng-container *ngIf="footerTemplate || _footerTemplate">
+                        <div [ngClass]="cx('footer')" [attr.data-pc-section]="'footer'">
+                            <ng-container *ngTemplateOutlet="footerTemplate || _footerTemplate"></ng-container>
+                        </div>
+                    </ng-container>
+                }
+            </div>
         </div>
     `,
-      providers: [AUTOCOMPLETE_VALUE_ACCESSOR, AutoCompleteStyle],
+      animations: [trigger("panelState", [transition("void => visible", [useAnimation(showAnimation)]), transition("visible => void", [useAnimation(hideAnimation)])])],
       changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None
+      encapsulation: ViewEncapsulation.None,
+      providers: [DrawerStyle]
     }]
-  }], () => [{
-    type: OverlayService
-  }, {
-    type: NgZone
-  }], {
-    minLength: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
+  }], null, {
+    appendTo: [{
+      type: Input
     }],
-    delay: [{
+    blockScroll: [{
       type: Input,
       args: [{
-        transform: numberAttribute
+        transform: booleanAttribute
       }]
     }],
     style: [{
       type: Input
     }],
-    panelStyle: [{
-      type: Input
-    }],
     styleClass: [{
       type: Input
     }],
-    panelStyleClass: [{
-      type: Input
-    }],
-    inputStyle: [{
-      type: Input
-    }],
-    inputId: [{
-      type: Input
-    }],
-    inputStyleClass: [{
-      type: Input
-    }],
-    placeholder: [{
-      type: Input
-    }],
-    readonly: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    disabled: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    scrollHeight: [{
-      type: Input
-    }],
-    lazy: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    virtualScroll: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    virtualScrollItemSize: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    virtualScrollOptions: [{
-      type: Input
-    }],
-    maxlength: [{
-      type: Input,
-      args: [{
-        transform: (value) => numberAttribute(value, null)
-      }]
-    }],
-    name: [{
-      type: Input
-    }],
-    required: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    size: [{
-      type: Input
-    }],
-    appendTo: [{
-      type: Input
-    }],
-    autoHighlight: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    forceSelection: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    type: [{
+    ariaCloseLabel: [{
       type: Input
     }],
     autoZIndex: [{
@@ -34135,191 +40213,47 @@ var AutoComplete = class _AutoComplete extends BaseComponent {
         transform: numberAttribute
       }]
     }],
-    ariaLabel: [{
-      type: Input
-    }],
-    dropdownAriaLabel: [{
-      type: Input
-    }],
-    ariaLabelledBy: [{
-      type: Input
-    }],
-    dropdownIcon: [{
-      type: Input
-    }],
-    unique: [{
+    modal: [{
       type: Input,
       args: [{
         transform: booleanAttribute
       }]
     }],
-    group: [{
+    closeButtonProps: [{
+      type: Input
+    }],
+    dismissible: [{
       type: Input,
       args: [{
         transform: booleanAttribute
       }]
     }],
-    completeOnFocus: [{
+    showCloseIcon: [{
       type: Input,
       args: [{
         transform: booleanAttribute
       }]
     }],
-    showClear: [{
+    closeOnEscape: [{
       type: Input,
       args: [{
         transform: booleanAttribute
       }]
     }],
-    field: [{
+    transitionOptions: [{
       type: Input
     }],
-    dropdown: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    showEmptyMessage: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    dropdownMode: [{
+    visible: [{
       type: Input
     }],
-    multiple: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    tabindex: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    dataKey: [{
+    position: [{
       type: Input
     }],
-    emptyMessage: [{
+    fullScreen: [{
       type: Input
     }],
-    showTransitionOptions: [{
+    maskStyle: [{
       type: Input
-    }],
-    hideTransitionOptions: [{
-      type: Input
-    }],
-    autofocus: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    autocomplete: [{
-      type: Input
-    }],
-    optionGroupChildren: [{
-      type: Input
-    }],
-    optionGroupLabel: [{
-      type: Input
-    }],
-    overlayOptions: [{
-      type: Input
-    }],
-    suggestions: [{
-      type: Input
-    }],
-    itemSize: [{
-      type: Input
-    }],
-    optionLabel: [{
-      type: Input
-    }],
-    optionValue: [{
-      type: Input
-    }],
-    id: [{
-      type: Input
-    }],
-    searchMessage: [{
-      type: Input
-    }],
-    emptySelectionMessage: [{
-      type: Input
-    }],
-    selectionMessage: [{
-      type: Input
-    }],
-    autoOptionFocus: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    selectOnFocus: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    searchLocale: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    optionDisabled: [{
-      type: Input
-    }],
-    focusOnHover: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    typeahead: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    variant: [{
-      type: Input
-    }],
-    fluid: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    completeMethod: [{
-      type: Output
-    }],
-    onSelect: [{
-      type: Output
-    }],
-    onUnselect: [{
-      type: Output
-    }],
-    onFocus: [{
-      type: Output
-    }],
-    onBlur: [{
-      type: Output
-    }],
-    onDropdownClick: [{
-      type: Output
-    }],
-    onClear: [{
-      type: Output
-    }],
-    onKeyUp: [{
-      type: Output
     }],
     onShow: [{
       type: Output
@@ -34327,84 +40261,35 @@ var AutoComplete = class _AutoComplete extends BaseComponent {
     onHide: [{
       type: Output
     }],
-    onLazyLoad: [{
+    visibleChange: [{
       type: Output
     }],
-    containerEL: [{
+    maskRef: [{
+      type: ViewChild,
+      args: ["maskRef"]
+    }],
+    containerViewChild: [{
       type: ViewChild,
       args: ["container"]
     }],
-    inputEL: [{
+    closeButtonViewChild: [{
       type: ViewChild,
-      args: ["focusInput"]
-    }],
-    multiInputEl: [{
-      type: ViewChild,
-      args: ["multiIn"]
-    }],
-    multiContainerEL: [{
-      type: ViewChild,
-      args: ["multiContainer"]
-    }],
-    dropdownButton: [{
-      type: ViewChild,
-      args: ["ddBtn"]
-    }],
-    itemsViewChild: [{
-      type: ViewChild,
-      args: ["items"]
-    }],
-    scroller: [{
-      type: ViewChild,
-      args: ["scroller"]
-    }],
-    overlayViewChild: [{
-      type: ViewChild,
-      args: ["overlay"]
-    }],
-    itemTemplate: [{
-      type: ContentChild,
-      args: ["item"]
-    }],
-    emptyTemplate: [{
-      type: ContentChild,
-      args: ["empty"]
+      args: ["closeButton"]
     }],
     headerTemplate: [{
-      type: ContentChild,
-      args: ["header"]
+      type: Input
     }],
     footerTemplate: [{
-      type: ContentChild,
-      args: ["footer"]
+      type: Input
     }],
-    selectedItemTemplate: [{
-      type: ContentChild,
-      args: ["selecteditem"]
+    closeIconTemplate: [{
+      type: Input
     }],
-    groupTemplate: [{
-      type: ContentChild,
-      args: ["group"]
+    headlessTemplate: [{
+      type: Input
     }],
-    loaderTemplate: [{
-      type: ContentChild,
-      args: ["loader"]
-    }],
-    removeIconTemplate: [{
-      type: ContentChild,
-      args: ["removeicon"]
-    }],
-    loadingIconTemplate: [{
-      type: ContentChild,
-      args: ["loadingicon"]
-    }],
-    clearIconTemplate: [{
-      type: ContentChild,
-      args: ["clearicon"]
-    }],
-    dropdownIconTemplate: [{
-      type: ContentChild,
-      args: ["dropdownicon"]
+    contentTemplate: [{
+      type: Input
     }],
     templates: [{
       type: ContentChildren,
@@ -34412,3704 +40297,1722 @@ var AutoComplete = class _AutoComplete extends BaseComponent {
     }]
   });
 })();
-var AutoCompleteModule = class _AutoCompleteModule {
-  static \u0275fac = function AutoCompleteModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _AutoCompleteModule)();
+var SidebarModule = class _SidebarModule {
+  static \u0275fac = function SidebarModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _SidebarModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _AutoCompleteModule,
-    imports: [AutoComplete],
-    exports: [AutoComplete, SharedModule]
+    type: _SidebarModule,
+    imports: [Sidebar, SharedModule],
+    exports: [Sidebar, SharedModule]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [AutoComplete, SharedModule]
+    imports: [Sidebar, SharedModule, SharedModule]
   });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AutoCompleteModule, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SidebarModule, [{
     type: NgModule,
     args: [{
-      imports: [AutoComplete],
-      exports: [AutoComplete, SharedModule]
+      imports: [Sidebar, SharedModule],
+      exports: [Sidebar, SharedModule]
     }]
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-password.mjs
-var _c017 = ["content"];
-var _c118 = ["footer"];
-var _c28 = ["header"];
-var _c36 = ["clearicon"];
-var _c46 = ["hideicon"];
-var _c56 = ["showicon"];
-var _c65 = ["input"];
-var _c74 = () => ({
-  class: "p-password-toggle-mask-icon p-password-mask-icon"
-});
-var _c84 = (a0, a1) => ({
-  showTransitionParams: a0,
-  hideTransitionParams: a1
-});
-var _c94 = (a0) => ({
-  value: "visible",
-  params: a0
-});
-var _c104 = (a0) => ({
-  width: a0
-});
-function Password_ng_container_5_TimesIcon_1_Template(rf, ctx) {
+// src/app/views/journey-map/journey-map.component.ts
+var _c021 = () => ({ width: "450px" });
+var _c121 = () => ({ width: "400px" });
+var _c213 = (a0, a1) => ({ "border-indigo-500 bg-indigo-50 text-indigo-700": a0, "border-gray-200 hover:surface-100": a1 });
+var _c39 = (a0, a1) => ({ "border-green-500 bg-green-50 text-green-700": a0, "border-gray-200 hover:surface-100": a1 });
+var _c49 = () => ({ width: "500px" });
+var _c59 = (a0, a1) => ({ "border-red-200 text-red-700": a0, "border-indigo-200 text-indigo-700": a1 });
+var _c67 = (a0, a1, a2) => ({ "pi-check-circle text-green-500": a0, "pi-times-circle text-red-500": a1, "pi-minus-circle text-gray-400": a2 });
+var _c76 = (a0, a1) => ({ "surface-card border-green-200 shadow-1": a0, "surface-0 border-indigo-200 border-dashed": a1 });
+var _c86 = (a0, a1, a2) => ({ "pi-star-fill text-indigo-400": a0, "pi-star-fill text-green-500": a1, "pi-user text-gray-400": a2 });
+var _c96 = (a0, a1) => ({ "text-700": a0, "text-500 font-italic": a1 });
+var _c106 = (a0, a1, a2) => ({ "pi-smile text-green-500": a0, "pi-thumbs-down text-red-500": a1, "pi-circle text-gray-400": a2 });
+function JourneyMapComponent_button_27_Template(rf, ctx) {
   if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "TimesIcon", 8);
-    \u0275\u0275listener("click", function Password_ng_container_5_TimesIcon_1_Template_TimesIcon_click_0_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r3 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r3.clear());
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 62);
+    \u0275\u0275listener("click", function JourneyMapComponent_button_27_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.showRecentInputs = true);
     });
     \u0275\u0275elementEnd();
   }
-  if (rf & 2) {
-    \u0275\u0275attribute("data-pc-section", "clearIcon");
-  }
 }
-function Password_ng_container_5_3_ng_template_0_Template(rf, ctx) {
-}
-function Password_ng_container_5_3_Template(rf, ctx) {
+function JourneyMapComponent_div_54_div_26_div_15_div_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, Password_ng_container_5_3_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function Password_ng_container_5_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Password_ng_container_5_TimesIcon_1_Template, 1, 1, "TimesIcon", 7);
-    \u0275\u0275elementStart(2, "span", 8);
-    \u0275\u0275listener("click", function Password_ng_container_5_Template_span_click_2_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.clear());
-    });
-    \u0275\u0275template(3, Password_ng_container_5_3_Template, 1, 0, null, 9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
+    \u0275\u0275elementStart(0, "div", 102);
+    \u0275\u0275element(1, "i", 103);
+    \u0275\u0275elementStart(2, "span");
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r3.clearIconTemplate && !ctx_r3._clearIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275attribute("data-pc-section", "clearIcon");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r3.clearIconTemplate || ctx_r3._clearIconTemplate);
+    const pp_r4 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(pp_r4);
   }
 }
-function Password_ng_container_6_ng_container_1_EyeSlashIcon_1_Template(rf, ctx) {
+function JourneyMapComponent_div_54_div_26_div_15_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "EyeSlashIcon", 12);
-    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_1_EyeSlashIcon_1_Template_EyeSlashIcon_click_0_listener() {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r3 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
-    });
+    \u0275\u0275elementStart(0, "div", 25);
+    \u0275\u0275template(1, JourneyMapComponent_div_54_div_26_div_15_div_1_Template, 4, 1, "div", 101);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275attribute("data-pc-section", "hideIcon");
+    const step_r5 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", step_r5.painPoints);
   }
 }
-function Password_ng_container_6_ng_container_1_span_2_1_ng_template_0_Template(rf, ctx) {
-}
-function Password_ng_container_6_ng_container_1_span_2_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Password_ng_container_6_ng_container_1_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function Password_ng_container_6_ng_container_1_span_2_Template(rf, ctx) {
+function JourneyMapComponent_div_54_div_26_div_23_div_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "span", 13);
-    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_1_span_2_Template_span_click_0_listener() {
+    \u0275\u0275elementStart(0, "div", 108)(1, "button", 109);
+    \u0275\u0275listener("click", function JourneyMapComponent_div_54_div_26_div_23_div_4_Template_button_click_1_listener() {
       \u0275\u0275restoreView(_r6);
-      const ctx_r3 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
-    });
-    \u0275\u0275template(1, Password_ng_container_6_ng_container_1_span_2_1_Template, 1, 0, null, 14);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r3.hideIconTemplate || ctx_r3._hideIconTemplate)("ngTemplateOutletContext", \u0275\u0275pureFunction0(2, _c74));
-  }
-}
-function Password_ng_container_6_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Password_ng_container_6_ng_container_1_EyeSlashIcon_1_Template, 1, 1, "EyeSlashIcon", 10)(2, Password_ng_container_6_ng_container_1_span_2_Template, 2, 3, "span", 11);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r3.hideIconTemplate && !ctx_r3._hideIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r3.hideIconTemplate || ctx_r3._hideIconTemplate);
-  }
-}
-function Password_ng_container_6_ng_container_2_EyeIcon_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "EyeIcon", 12);
-    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_2_EyeIcon_1_Template_EyeIcon_click_0_listener() {
-      \u0275\u0275restoreView(_r7);
-      const ctx_r3 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
+      const opt_r7 = \u0275\u0275nextContext().$implicit;
+      const step_r5 = \u0275\u0275nextContext().$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.handleApprove(step_r5.id, opt_r7.id));
     });
     \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275attribute("data-pc-section", "showIcon");
-  }
-}
-function Password_ng_container_6_ng_container_2_span_2_1_ng_template_0_Template(rf, ctx) {
-}
-function Password_ng_container_6_ng_container_2_span_2_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275template(0, Password_ng_container_6_ng_container_2_span_2_1_ng_template_0_Template, 0, 0, "ng-template");
-  }
-}
-function Password_ng_container_6_ng_container_2_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "span", 13);
-    \u0275\u0275listener("click", function Password_ng_container_6_ng_container_2_span_2_Template_span_click_0_listener() {
-      \u0275\u0275restoreView(_r8);
-      const ctx_r3 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r3.onMaskToggle());
+    \u0275\u0275elementStart(2, "button", 110);
+    \u0275\u0275listener("click", function JourneyMapComponent_div_54_div_26_div_23_div_4_Template_button_click_2_listener() {
+      \u0275\u0275restoreView(_r6);
+      const opt_r7 = \u0275\u0275nextContext().$implicit;
+      const step_r5 = \u0275\u0275nextContext().$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.handleReject(step_r5.id, opt_r7.id));
     });
-    \u0275\u0275template(1, Password_ng_container_6_ng_container_2_span_2_1_Template, 1, 0, null, 9);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r3.showIconTemplate || ctx_r3._showIconTemplate);
-  }
-}
-function Password_ng_container_6_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Password_ng_container_6_ng_container_2_EyeIcon_1_Template, 1, 1, "EyeIcon", 10)(2, Password_ng_container_6_ng_container_2_span_2_Template, 2, 1, "span", 11);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r3.showIconTemplate && !ctx_r3._showIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r3.showIconTemplate || ctx_r3._showIconTemplate);
-  }
-}
-function Password_ng_container_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Password_ng_container_6_ng_container_1_Template, 3, 2, "ng-container", 5)(2, Password_ng_container_6_ng_container_2_Template, 3, 2, "ng-container", 5);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r3.unmasked);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r3.unmasked);
-  }
-}
-function Password_div_7_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Password_div_7_ng_container_3_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Password_div_7_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Password_div_7_ng_container_3_ng_container_1_Template, 1, 0, "ng-container", 9);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r3.contentTemplate || ctx_r3._contentTemplate);
-  }
-}
-function Password_div_7_ng_template_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 17)(1, "div", 18);
-    \u0275\u0275element(2, "div", 3);
-    \u0275\u0275pipe(3, "mapper");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 19);
-    \u0275\u0275text(5);
     \u0275\u0275elementEnd()();
   }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275attribute("data-pc-section", "meter");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngClass", \u0275\u0275pipeBind2(3, 6, ctx_r3.meter, ctx_r3.strengthClass))("ngStyle", \u0275\u0275pureFunction1(9, _c104, ctx_r3.meter ? ctx_r3.meter.width : ""));
-    \u0275\u0275attribute("data-pc-section", "meterLabel");
-    \u0275\u0275advance(2);
-    \u0275\u0275attribute("data-pc-section", "info");
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r3.infoText);
-  }
 }
-function Password_div_7_ng_container_6_Template(rf, ctx) {
+function JourneyMapComponent_div_54_div_26_div_23_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Password_div_7_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 15, 1);
-    \u0275\u0275listener("click", function Password_div_7_Template_div_click_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.onOverlayClick($event));
-    })("@overlayAnimation.start", function Password_div_7_Template_div_animation_overlayAnimation_start_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.onAnimationStart($event));
-    })("@overlayAnimation.done", function Password_div_7_Template_div_animation_overlayAnimation_done_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.onAnimationEnd($event));
-    });
-    \u0275\u0275template(2, Password_div_7_ng_container_2_Template, 1, 0, "ng-container", 9)(3, Password_div_7_ng_container_3_Template, 2, 1, "ng-container", 16)(4, Password_div_7_ng_template_4_Template, 6, 11, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(6, Password_div_7_ng_container_6_Template, 1, 0, "ng-container", 9);
+    \u0275\u0275elementStart(0, "div", 104);
+    \u0275\u0275element(1, "i", 105);
+    \u0275\u0275elementStart(2, "span", 106);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, JourneyMapComponent_div_54_div_26_div_23_div_4_Template, 3, 0, "div", 107);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const content_r10 = \u0275\u0275reference(5);
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275property("@overlayAnimation", \u0275\u0275pureFunction1(9, _c94, \u0275\u0275pureFunction2(6, _c84, ctx_r3.showTransitionOptions, ctx_r3.hideTransitionOptions)));
-    \u0275\u0275attribute("data-pc-section", "panel");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r3.headerTemplate || ctx_r3._headerTemplate);
+    const opt_r7 = ctx.$implicit;
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(5, _c76, opt_r7.status === "approved", opt_r7.status === "pending"));
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r3.contentTemplate || ctx_r3._contentTemplate)("ngIfElse", content_r10);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r3.footerTemplate || ctx_r3._footerTemplate);
-  }
-}
-var theme12 = ({
-  dt
-}) => `
-.p-password {
-    display: inline-flex;
-    position: relative;
-}
-
-.p-password .p-password-overlay {
-    min-width: 100%;
-}
-
-.p-password-meter {
-    height: ${dt("password.meter.height")};
-    background: ${dt("password.meter.background")};
-    border-radius: ${dt("password.meter.border.radius")};
-}
-
-.p-password-meter-label {
-    height: 100%;
-    width: 0;
-    transition: width 1s ease-in-out;
-    border-radius: ${dt("password.meter.border.radius")};
-}
-
-.p-password-meter-weak {
-    background: ${dt("password.strength.weak.background")};
-}
-
-.p-password-meter-medium {
-    background: ${dt("password.strength.medium.background")};
-}
-
-.p-password-meter-strong {
-    background: ${dt("password.strength.strong.background")};
-}
-
-.p-password-fluid {
-    display: flex;
-}
-
-.p-password-fluid .p-password-input {
-    width: 100%;
-}
-
-.p-password-input::-ms-reveal,
-.p-password-input::-ms-clear {
-    display: none;
-}
-
-.p-password-overlay {
-    position: absolute;
-    padding: ${dt("password.overlay.padding")};
-    background: ${dt("password.overlay.background")};
-    color: ${dt("password.overlay.color")};
-    border: 1px solid ${dt("password.overlay.border.color")};
-    box-shadow: ${dt("password.overlay.shadow")};
-    border-radius: ${dt("password.overlay.border.radius")};
-}
-
-.p-password-content {
-    display: flex;
-    flex-direction: column;
-    gap: ${dt("password.content.gap")};
-}
-
-.p-password-toggle-mask-icon {
-    inset-inline-end: ${dt("form.field.padding.x")};
-    color: ${dt("password.icon.color")};
-    position: absolute;
-    top: 50%;
-    margin-top: calc(-1 * calc(${dt("icon.size")} / 2));
-    width: ${dt("icon.size")};
-    height: ${dt("icon.size")};
-}
-
-.p-password:has(.p-password-toggle-mask-icon) .p-password-clear-icon,
-.p-password:has(.p-password-toggle-mask-icon) .p-password-input {
-    padding-inline-end: calc((${dt("form.field.padding.x")} * 2) + ${dt("icon.size")});
-}
-
-/* For PrimeNG */
-p-password.ng-invalid.ng-dirty .p-inputtext {
-    border-color: ${dt("inputtext.invalid.border.color")};
-}
-
-p-password.ng-invalid.ng-dirty .p-inputtext:enabled:focus {
-    border-color: ${dt("inputtext.focus.border.color")};
-}
-
-p-password.ng-invalid.ng-dirty .p-inputtext::placeholder {
-    color: ${dt("inputtext.invalid.placeholder.color")};
-}
-
-.p-password-clear-icon {
-    position: absolute;
-    top: 50%;
-    margin-top: -0.5rem;
-    cursor: pointer;
-    inset-inline-end: ${dt("form.field.padding.x")};
-    color: ${dt("form.field.icon.color")};
-}
-
-.p-password-fluid-directive {
-    width:100%
-}
-`;
-var inlineStyles4 = {
-  root: ({
-    instance
-  }) => ({
-    position: instance.appendTo === "self" ? "relative" : void 0
-  })
-};
-var classes12 = {
-  root: ({
-    instance
-  }) => ({
-    "p-password p-component p-inputwrapper": true,
-    "p-inputwrapper-filled": instance.filled(),
-    "p-variant-filled": 'instance.variant === "filled" || instance.config.inputVariant() === "filled" || instance.config.inputStyle() === "filled"',
-    "p-inputwrapper-focus": instance.focused,
-    "p-password-fluid": instance.hasFluid
-  }),
-  pcInput: "p-password-input",
-  maskIcon: "p-password-toggle-mask-icon p-password-mask-icon",
-  unmaskIcon: "p-password-toggle-mask-icon p-password-unmask-icon",
-  overlay: "p-password-overlay p-component",
-  content: "p-password-content",
-  meter: "p-password-meter",
-  meterLabel: ({
-    instance
-  }) => `p-password-meter-label ${instance.meter ? "p-password-meter-" + instance.meter.strength : ""}`,
-  meterText: "p-password-meter-text"
-};
-var PasswordStyle = class _PasswordStyle extends BaseStyle {
-  name = "password";
-  theme = theme12;
-  classes = classes12;
-  inlineStyles = inlineStyles4;
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275PasswordStyle_BaseFactory;
-    return function PasswordStyle_Factory(__ngFactoryType__) {
-      return (\u0275PasswordStyle_BaseFactory || (\u0275PasswordStyle_BaseFactory = \u0275\u0275getInheritedFactory(_PasswordStyle)))(__ngFactoryType__ || _PasswordStyle);
-    };
-  })();
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _PasswordStyle,
-    factory: _PasswordStyle.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PasswordStyle, [{
-    type: Injectable
-  }], null, null);
-})();
-var PasswordClasses;
-(function(PasswordClasses2) {
-  PasswordClasses2["root"] = "p-password";
-  PasswordClasses2["pcInput"] = "p-password-input";
-  PasswordClasses2["maskIcon"] = "p-password-mask-icon";
-  PasswordClasses2["unmaskIcon"] = "p-password-unmask-icon";
-  PasswordClasses2["overlay"] = "p-password-overlay";
-  PasswordClasses2["meter"] = "p-password-meter";
-  PasswordClasses2["meterLabel"] = "p-password-meter-label";
-  PasswordClasses2["meterText"] = "p-password-meter-text";
-})(PasswordClasses || (PasswordClasses = {}));
-var PasswordDirective = class _PasswordDirective extends BaseComponent {
-  zone;
-  /**
-   * Text to prompt password entry. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  promptLabel = "Enter a password";
-  /**
-   * Text for a weak password. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  weakLabel = "Weak";
-  /**
-   * Text for a medium password. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  mediumLabel = "Medium";
-  /**
-   * Text for a strong password. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  strongLabel = "Strong";
-  /**
-   * Whether to show the strength indicator or not.
-   * @group Props
-   */
-  feedback = true;
-  /**
-   * Sets the visibility of the password field.
-   * @group Props
-   */
-  set showPassword(show) {
-    this.el.nativeElement.type = show ? "text" : "password";
-  }
-  /**
-   * Specifies the input variant of the component.
-   * @group Props
-   */
-  variant;
-  /**
-   * Spans 100% width of the container when enabled.
-   * @group Props
-   */
-  fluid = false;
-  panel;
-  meter;
-  info;
-  filled;
-  content;
-  label;
-  scrollHandler;
-  documentResizeListener;
-  _componentStyle = inject(PasswordStyle);
-  get hasFluid() {
-    const nativeElement = this.el.nativeElement;
-    const fluidComponent = nativeElement.closest("p-fluid");
-    return this.fluid || !!fluidComponent;
-  }
-  constructor(zone) {
-    super();
-    this.zone = zone;
-  }
-  ngDoCheck() {
-    this.updateFilledState();
-  }
-  onInput(e) {
-    this.updateFilledState();
-  }
-  updateFilledState() {
-    this.filled = this.el.nativeElement.value && this.el.nativeElement.value.length;
-  }
-  createPanel() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.panel = this.renderer.createElement("div");
-      this.renderer.addClass(this.panel, "p-password-overlay");
-      this.renderer.addClass(this.panel, "p-component");
-      this.content = this.renderer.createElement("div");
-      this.renderer.addClass(this.content, "p-password-content");
-      this.renderer.appendChild(this.panel, this.content);
-      this.meter = this.renderer.createElement("div");
-      this.renderer.addClass(this.meter, "p-password-meter");
-      this.renderer.appendChild(this.content, this.meter);
-      this.label = this.renderer.createElement("div");
-      this.renderer.addClass(this.label, "p-password-meter-label");
-      this.renderer.appendChild(this.meter, this.label);
-      this.info = this.renderer.createElement("div");
-      this.renderer.addClass(this.info, "p-password-meter-text");
-      this.renderer.setProperty(this.info, "textContent", this.promptLabel);
-      this.renderer.appendChild(this.content, this.info);
-      this.renderer.setStyle(this.panel, "minWidth", `${this.el.nativeElement.offsetWidth}px`);
-      this.renderer.appendChild(document.body, this.panel);
-      this.updateMeter();
-    }
-  }
-  showOverlay() {
-    if (this.feedback) {
-      if (!this.panel) {
-        this.createPanel();
-      }
-      this.renderer.setStyle(this.panel, "zIndex", String(++DomHandler.zindex));
-      this.renderer.setStyle(this.panel, "display", "block");
-      this.zone.runOutsideAngular(() => {
-        setTimeout(() => {
-          addClass(this.panel, "p-connected-overlay-visible");
-          this.bindScrollListener();
-          this.bindDocumentResizeListener();
-        }, 1);
-      });
-      absolutePosition(this.panel, this.el.nativeElement);
-    }
-  }
-  hideOverlay() {
-    if (this.feedback && this.panel) {
-      addClass(this.panel, "p-connected-overlay-hidden");
-      removeClass(this.panel, "p-connected-overlay-visible");
-      this.unbindScrollListener();
-      this.unbindDocumentResizeListener();
-      this.zone.runOutsideAngular(() => {
-        setTimeout(() => {
-          this.ngOnDestroy();
-        }, 150);
-      });
-    }
-  }
-  onFocus() {
-    this.showOverlay();
-  }
-  onBlur() {
-    this.hideOverlay();
-  }
-  labelSignal = signal("");
-  onKeyup(e) {
-    if (this.feedback) {
-      let value = e.target.value, label = null, meterPos = null;
-      if (value.length === 0) {
-        label = this.promptLabel;
-        meterPos = "0px 0px";
-      } else {
-        var score = this.testStrength(value);
-        if (score < 30) {
-          label = this.weakLabel;
-          meterPos = "0px -10px";
-        } else if (score >= 30 && score < 80) {
-          label = this.mediumLabel;
-          meterPos = "0px -20px";
-        } else if (score >= 80) {
-          label = this.strongLabel;
-          meterPos = "0px -30px";
-        }
-        this.labelSignal.set(label);
-        this.updateMeter();
-      }
-      if (!this.panel || !hasClass(this.panel, "p-connected-overlay-visible")) {
-        this.showOverlay();
-      }
-      this.renderer.setStyle(this.meter, "backgroundPosition", meterPos);
-      this.info.textContent = label;
-    }
-  }
-  updateMeter() {
-    if (this.labelSignal()) {
-      const label = this.labelSignal();
-      const strengthClass = this.strengthClass(label.toLowerCase());
-      const width = this.getWidth(label.toLowerCase());
-      this.renderer.addClass(this.meter, strengthClass);
-      this.renderer.setStyle(this.meter, "width", width);
-      this.info.textContent = label;
-    }
-  }
-  getWidth(label) {
-    return label === "weak" ? "33.33%" : label === "medium" ? "66.66%" : label === "strong" ? "100%" : "";
-  }
-  strengthClass(label) {
-    return `p-password-meter${label ? `-${label}` : ""}`;
-  }
-  testStrength(str) {
-    let grade = 0;
-    let val;
-    val = str.match("[0-9]");
-    grade += this.normalize(val ? val.length : 1 / 4, 1) * 25;
-    val = str.match("[a-zA-Z]");
-    grade += this.normalize(val ? val.length : 1 / 2, 3) * 10;
-    val = str.match("[!@#$%^&*?_~.,;=]");
-    grade += this.normalize(val ? val.length : 1 / 6, 1) * 35;
-    val = str.match("[A-Z]");
-    grade += this.normalize(val ? val.length : 1 / 6, 1) * 30;
-    grade *= str.length / 8;
-    return grade > 100 ? 100 : grade;
-  }
-  normalize(x2, y) {
-    let diff = x2 - y;
-    if (diff <= 0) return x2 / y;
-    else return 1 + 0.5 * (x2 / (x2 + y / 4));
-  }
-  get disabled() {
-    return this.el.nativeElement.disabled;
-  }
-  bindScrollListener() {
-    if (!this.scrollHandler) {
-      this.scrollHandler = new ConnectedOverlayScrollHandler(this.el.nativeElement, () => {
-        if (hasClass(this.panel, "p-connected-overlay-visible")) {
-          this.hideOverlay();
-        }
-      });
-    }
-    this.scrollHandler.bindScrollListener();
-  }
-  unbindScrollListener() {
-    if (this.scrollHandler) {
-      this.scrollHandler.unbindScrollListener();
-    }
-  }
-  bindDocumentResizeListener() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (!this.documentResizeListener) {
-        const window2 = this.document.defaultView;
-        this.documentResizeListener = this.renderer.listen(window2, "resize", this.onWindowResize.bind(this));
-      }
-    }
-  }
-  unbindDocumentResizeListener() {
-    if (this.documentResizeListener) {
-      this.documentResizeListener();
-      this.documentResizeListener = null;
-    }
-  }
-  onWindowResize() {
-    if (!isTouchDevice()) {
-      this.hideOverlay();
-    }
-  }
-  ngOnDestroy() {
-    if (this.panel) {
-      if (this.scrollHandler) {
-        this.scrollHandler.destroy();
-        this.scrollHandler = null;
-      }
-      this.unbindDocumentResizeListener();
-      this.renderer.removeChild(this.document.body, this.panel);
-      this.panel = null;
-      this.meter = null;
-      this.info = null;
-    }
-    super.ngOnDestroy();
-  }
-  static \u0275fac = function PasswordDirective_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _PasswordDirective)(\u0275\u0275directiveInject(NgZone));
-  };
-  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
-    type: _PasswordDirective,
-    selectors: [["", "pPassword", ""]],
-    hostAttrs: [1, "p-password", "p-inputtext", "p-component", "p-inputwrapper"],
-    hostVars: 6,
-    hostBindings: function PasswordDirective_HostBindings(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275listener("input", function PasswordDirective_input_HostBindingHandler($event) {
-          return ctx.onInput($event);
-        })("focus", function PasswordDirective_focus_HostBindingHandler() {
-          return ctx.onFocus();
-        })("blur", function PasswordDirective_blur_HostBindingHandler() {
-          return ctx.onBlur();
-        })("keyup", function PasswordDirective_keyup_HostBindingHandler($event) {
-          return ctx.onKeyup($event);
-        });
-      }
-      if (rf & 2) {
-        \u0275\u0275classProp("p-inputwrapper-filled", ctx.filled)("p-variant-filled", ctx.variant === "filled" || ctx.config.inputStyle() === "filled" || ctx.config.inputVariant() === "filled")("p-password-fluid-directive", ctx.hasFluid);
-      }
-    },
-    inputs: {
-      promptLabel: "promptLabel",
-      weakLabel: "weakLabel",
-      mediumLabel: "mediumLabel",
-      strongLabel: "strongLabel",
-      feedback: [2, "feedback", "feedback", booleanAttribute],
-      showPassword: "showPassword",
-      variant: "variant",
-      fluid: [2, "fluid", "fluid", booleanAttribute]
-    },
-    features: [\u0275\u0275ProvidersFeature([PasswordStyle]), \u0275\u0275InheritDefinitionFeature]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PasswordDirective, [{
-    type: Directive,
-    args: [{
-      selector: "[pPassword]",
-      standalone: true,
-      host: {
-        class: "p-password p-inputtext p-component p-inputwrapper",
-        "[class.p-inputwrapper-filled]": "filled",
-        "[class.p-variant-filled]": 'variant === "filled" || config.inputStyle() === "filled" || config.inputVariant() === "filled"',
-        "[class.p-password-fluid-directive]": "hasFluid"
-      },
-      providers: [PasswordStyle]
-    }]
-  }], () => [{
-    type: NgZone
-  }], {
-    promptLabel: [{
-      type: Input
-    }],
-    weakLabel: [{
-      type: Input
-    }],
-    mediumLabel: [{
-      type: Input
-    }],
-    strongLabel: [{
-      type: Input
-    }],
-    feedback: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    showPassword: [{
-      type: Input
-    }],
-    variant: [{
-      type: Input
-    }],
-    fluid: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    onInput: [{
-      type: HostListener,
-      args: ["input", ["$event"]]
-    }],
-    onFocus: [{
-      type: HostListener,
-      args: ["focus"]
-    }],
-    onBlur: [{
-      type: HostListener,
-      args: ["blur"]
-    }],
-    onKeyup: [{
-      type: HostListener,
-      args: ["keyup", ["$event"]]
-    }]
-  });
-})();
-var MapperPipe = class _MapperPipe {
-  transform(value, mapper, ...args) {
-    return mapper(value, ...args);
-  }
-  static \u0275fac = function MapperPipe_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MapperPipe)();
-  };
-  static \u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({
-    name: "mapper",
-    type: _MapperPipe,
-    pure: true
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MapperPipe, [{
-    type: Pipe,
-    args: [{
-      name: "mapper",
-      pure: true,
-      standalone: true
-    }]
-  }], null, null);
-})();
-var Password_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => Password),
-  multi: true
-};
-var Password = class _Password extends BaseComponent {
-  /**
-   * Defines a string that labels the input for accessibility.
-   * @group Props
-   */
-  ariaLabel;
-  /**
-   * Whether the component should span the full width of its parent.
-   * @group Props
-   */
-  fluid;
-  /**
-   * Specifies one or more IDs in the DOM that labels the input field.
-   * @group Props
-   */
-  ariaLabelledBy;
-  /**
-   * Label of the input for accessibility.
-   * @group Props
-   */
-  label;
-  /**
-   * Indicates whether the component is disabled or not.
-   * @group Props
-   */
-  disabled;
-  /**
-   * Text to prompt password entry. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  promptLabel;
-  /**
-   * Regex value for medium regex.
-   * @group Props
-   */
-  mediumRegex = "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})";
-  /**
-   * Regex value for strong regex.
-   * @group Props
-   */
-  strongRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})";
-  /**
-   * Text for a weak password. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  weakLabel;
-  /**
-   * Text for a medium password. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  mediumLabel;
-  /**
-   * specifies the maximum number of characters allowed in the input element.
-   * @group Props
-   */
-  maxLength;
-  /**
-   * Text for a strong password. Defaults to PrimeNG I18N API configuration.
-   * @group Props
-   */
-  strongLabel;
-  /**
-   * Identifier of the accessible input element.
-   * @group Props
-   */
-  inputId;
-  /**
-   * Whether to show the strength indicator or not.
-   * @group Props
-   */
-  feedback = true;
-  /**
-   * Id of the element or "body" for document where the overlay should be appended to.
-   * @group Props
-   */
-  appendTo;
-  /**
-   * Whether to show an icon to display the password as plain text.
-   * @group Props
-   */
-  toggleMask;
-  /**
-   * Defines the size of the component.
-   * @group Props
-   */
-  size;
-  /**
-   * Style class of the input field.
-   * @group Props
-   */
-  inputStyleClass;
-  /**
-   * Style class of the element.
-   * @group Props
-   */
-  styleClass;
-  /**
-   * Inline style of the component.
-   * @group Props
-   */
-  style;
-  /**
-   * Inline style of the input field.
-   * @group Props
-   */
-  inputStyle;
-  /**
-   * Transition options of the show animation.
-   * @group Props
-   */
-  showTransitionOptions = ".12s cubic-bezier(0, 0, 0.2, 1)";
-  /**
-   * Transition options of the hide animation.
-   * @group Props
-   */
-  hideTransitionOptions = ".1s linear";
-  /**
-   * Specify automated assistance in filling out password by browser.
-   * @group Props
-   */
-  autocomplete;
-  /**
-   * Advisory information to display on input.
-   * @group Props
-   */
-  placeholder;
-  /**
-   * When enabled, a clear icon is displayed to clear the value.
-   * @group Props
-   */
-  showClear = false;
-  /**
-   * When present, it specifies that the component should automatically get focus on load.
-   * @group Props
-   */
-  autofocus;
-  /**
-   * Specifies the input variant of the component.
-   * @group Props
-   */
-  variant;
-  /**
-   * Index of the element in tabbing order.
-   * @group Props
-   */
-  tabindex;
-  /**
-   * Callback to invoke when the component receives focus.
-   * @param {Event} event - Browser event.
-   * @group Emits
-   */
-  onFocus = new EventEmitter();
-  /**
-   * Callback to invoke when the component loses focus.
-   * @param {Event} event - Browser event.
-   * @group Emits
-   */
-  onBlur = new EventEmitter();
-  /**
-   * Callback to invoke when clear button is clicked.
-   * @group Emits
-   */
-  onClear = new EventEmitter();
-  input;
-  contentTemplate;
-  footerTemplate;
-  headerTemplate;
-  clearIconTemplate;
-  hideIconTemplate;
-  showIconTemplate;
-  templates;
-  _contentTemplate;
-  _footerTemplate;
-  _headerTemplate;
-  _clearIconTemplate;
-  _hideIconTemplate;
-  _showIconTemplate;
-  overlayVisible = false;
-  meter;
-  infoText;
-  focused = false;
-  unmasked = false;
-  mediumCheckRegExp;
-  strongCheckRegExp;
-  resizeListener;
-  scrollHandler;
-  overlay;
-  value = null;
-  onModelChange = () => {
-  };
-  onModelTouched = () => {
-  };
-  translationSubscription;
-  _componentStyle = inject(PasswordStyle);
-  get hasFluid() {
-    const nativeElement = this.el.nativeElement;
-    const fluidComponent = nativeElement.closest("p-fluid");
-    return this.fluid || !!fluidComponent;
-  }
-  overlayService = inject(OverlayService);
-  ngOnInit() {
-    super.ngOnInit();
-    this.infoText = this.promptText();
-    this.mediumCheckRegExp = new RegExp(this.mediumRegex);
-    this.strongCheckRegExp = new RegExp(this.strongRegex);
-    this.translationSubscription = this.config.translationObserver.subscribe(() => {
-      this.updateUI(this.value || "");
-    });
-  }
-  ngAfterContentInit() {
-    this.templates.forEach((item) => {
-      switch (item.getType()) {
-        case "content":
-          this._contentTemplate = item.template;
-          break;
-        case "header":
-          this._headerTemplate = item.template;
-          break;
-        case "footer":
-          this._footerTemplate = item.template;
-          break;
-        case "clearicon":
-          this._clearIconTemplate = item.template;
-          break;
-        case "hideicon":
-          this._hideIconTemplate = item.template;
-          break;
-        case "showicon":
-          this._showIconTemplate = item.template;
-          break;
-        default:
-          this._contentTemplate = item.template;
-          break;
-      }
-    });
-  }
-  onAnimationStart(event) {
-    switch (event.toState) {
-      case "visible":
-        this.overlay = event.element;
-        zindexutils.set("overlay", this.overlay, this.config.zIndex.overlay);
-        this.appendContainer();
-        this.alignOverlay();
-        this.bindScrollListener();
-        this.bindResizeListener();
-        break;
-      case "void":
-        this.unbindScrollListener();
-        this.unbindResizeListener();
-        this.overlay = null;
-        break;
-    }
-  }
-  onAnimationEnd(event) {
-    switch (event.toState) {
-      case "void":
-        zindexutils.clear(event.element);
-        break;
-    }
-  }
-  appendContainer() {
-    if (this.appendTo) {
-      if (this.appendTo === "body") this.renderer.appendChild(this.document.body, this.overlay);
-      else this.document.getElementById(this.appendTo).appendChild(this.overlay);
-    }
-  }
-  alignOverlay() {
-    if (this.appendTo) {
-      this.overlay.style.minWidth = getOuterWidth(this.input.nativeElement) + "px";
-      absolutePosition(this.overlay, this.input.nativeElement);
-    } else {
-      relativePosition(this.overlay, this.input.nativeElement);
-    }
-  }
-  onInput(event) {
-    this.value = event.target.value;
-    this.onModelChange(this.value);
-  }
-  onInputFocus(event) {
-    this.focused = true;
-    if (this.feedback) {
-      this.overlayVisible = true;
-    }
-    this.onFocus.emit(event);
-  }
-  onInputBlur(event) {
-    this.focused = false;
-    if (this.feedback) {
-      this.overlayVisible = false;
-    }
-    this.onModelTouched();
-    this.onBlur.emit(event);
-  }
-  onKeyUp(event) {
-    if (this.feedback) {
-      let value = event.target.value;
-      this.updateUI(value);
-      if (event.code === "Escape") {
-        this.overlayVisible && (this.overlayVisible = false);
-        return;
-      }
-      if (!this.overlayVisible) {
-        this.overlayVisible = true;
-      }
-    }
-  }
-  updateUI(value) {
-    let label = null;
-    let meter = null;
-    switch (this.testStrength(value)) {
-      case 1:
-        label = this.weakText();
-        meter = {
-          strength: "weak",
-          width: "33.33%"
-        };
-        break;
-      case 2:
-        label = this.mediumText();
-        meter = {
-          strength: "medium",
-          width: "66.66%"
-        };
-        break;
-      case 3:
-        label = this.strongText();
-        meter = {
-          strength: "strong",
-          width: "100%"
-        };
-        break;
-      default:
-        label = this.promptText();
-        meter = null;
-        break;
-    }
-    this.meter = meter;
-    this.infoText = label;
-  }
-  onMaskToggle() {
-    this.unmasked = !this.unmasked;
-  }
-  onOverlayClick(event) {
-    this.overlayService.add({
-      originalEvent: event,
-      target: this.el.nativeElement
-    });
-  }
-  testStrength(str) {
-    let level = 0;
-    if (this.strongCheckRegExp.test(str)) level = 3;
-    else if (this.mediumCheckRegExp.test(str)) level = 2;
-    else if (str.length) level = 1;
-    return level;
-  }
-  writeValue(value) {
-    if (value === void 0) this.value = null;
-    else this.value = value;
-    if (this.feedback) this.updateUI(this.value || "");
-    this.cd.markForCheck();
-  }
-  registerOnChange(fn) {
-    this.onModelChange = fn;
-  }
-  registerOnTouched(fn) {
-    this.onModelTouched = fn;
-  }
-  setDisabledState(val) {
-    this.disabled = val;
-    this.cd.markForCheck();
-  }
-  bindScrollListener() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (!this.scrollHandler) {
-        this.scrollHandler = new ConnectedOverlayScrollHandler(this.input.nativeElement, () => {
-          if (this.overlayVisible) {
-            this.overlayVisible = false;
-          }
-        });
-      }
-      this.scrollHandler.bindScrollListener();
-    }
-  }
-  bindResizeListener() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (!this.resizeListener) {
-        const window2 = this.document.defaultView;
-        this.resizeListener = this.renderer.listen(window2, "resize", () => {
-          if (this.overlayVisible && !isTouchDevice()) {
-            this.overlayVisible = false;
-          }
-        });
-      }
-    }
-  }
-  unbindScrollListener() {
-    if (this.scrollHandler) {
-      this.scrollHandler.unbindScrollListener();
-    }
-  }
-  unbindResizeListener() {
-    if (this.resizeListener) {
-      this.resizeListener();
-      this.resizeListener = null;
-    }
-  }
-  containerClass(toggleMask) {
-    return {
-      "p-password p-component p-inputwrapper": true,
-      "p-input-icon-right": toggleMask
-    };
-  }
-  get rootClass() {
-    return this._componentStyle.classes.root({
-      instance: this
-    });
-  }
-  inputFieldClass(disabled2) {
-    return {
-      "p-password-input": true,
-      "p-disabled": disabled2
-    };
-  }
-  strengthClass(meter) {
-    return `p-password-meter-label p-password-meter${meter?.strength ? `-${meter.strength}` : ""}`;
-  }
-  filled() {
-    return this.value != null && this.value.toString().length > 0;
-  }
-  promptText() {
-    return this.promptLabel || this.getTranslation(TranslationKeys.PASSWORD_PROMPT);
-  }
-  weakText() {
-    return this.weakLabel || this.getTranslation(TranslationKeys.WEAK);
-  }
-  mediumText() {
-    return this.mediumLabel || this.getTranslation(TranslationKeys.MEDIUM);
-  }
-  strongText() {
-    return this.strongLabel || this.getTranslation(TranslationKeys.STRONG);
-  }
-  restoreAppend() {
-    if (this.overlay && this.appendTo) {
-      if (this.appendTo === "body") this.renderer.removeChild(this.document.body, this.overlay);
-      else this.document.getElementById(this.appendTo).removeChild(this.overlay);
-    }
-  }
-  inputType(unmasked) {
-    return unmasked ? "text" : "password";
-  }
-  getTranslation(option) {
-    return this.config.getTranslation(option);
-  }
-  clear() {
-    this.value = null;
-    this.onModelChange(this.value);
-    this.writeValue(this.value);
-    this.onClear.emit();
-  }
-  ngOnDestroy() {
-    if (this.overlay) {
-      zindexutils.clear(this.overlay);
-      this.overlay = null;
-    }
-    this.restoreAppend();
-    this.unbindResizeListener();
-    if (this.scrollHandler) {
-      this.scrollHandler.destroy();
-      this.scrollHandler = null;
-    }
-    if (this.translationSubscription) {
-      this.translationSubscription.unsubscribe();
-    }
-    super.ngOnDestroy();
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275Password_BaseFactory;
-    return function Password_Factory(__ngFactoryType__) {
-      return (\u0275Password_BaseFactory || (\u0275Password_BaseFactory = \u0275\u0275getInheritedFactory(_Password)))(__ngFactoryType__ || _Password);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _Password,
-    selectors: [["p-password"]],
-    contentQueries: function Password_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c017, 4);
-        \u0275\u0275contentQuery(dirIndex, _c118, 4);
-        \u0275\u0275contentQuery(dirIndex, _c28, 4);
-        \u0275\u0275contentQuery(dirIndex, _c36, 4);
-        \u0275\u0275contentQuery(dirIndex, _c46, 4);
-        \u0275\u0275contentQuery(dirIndex, _c56, 4);
-        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.footerTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.headerTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.clearIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.hideIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.showIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
-      }
-    },
-    viewQuery: function Password_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c65, 5);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.input = _t.first);
-      }
-    },
-    inputs: {
-      ariaLabel: "ariaLabel",
-      fluid: [2, "fluid", "fluid", booleanAttribute],
-      ariaLabelledBy: "ariaLabelledBy",
-      label: "label",
-      disabled: [2, "disabled", "disabled", booleanAttribute],
-      promptLabel: "promptLabel",
-      mediumRegex: "mediumRegex",
-      strongRegex: "strongRegex",
-      weakLabel: "weakLabel",
-      mediumLabel: "mediumLabel",
-      maxLength: [2, "maxLength", "maxLength", numberAttribute],
-      strongLabel: "strongLabel",
-      inputId: "inputId",
-      feedback: [2, "feedback", "feedback", booleanAttribute],
-      appendTo: "appendTo",
-      toggleMask: [2, "toggleMask", "toggleMask", booleanAttribute],
-      size: "size",
-      inputStyleClass: "inputStyleClass",
-      styleClass: "styleClass",
-      style: "style",
-      inputStyle: "inputStyle",
-      showTransitionOptions: "showTransitionOptions",
-      hideTransitionOptions: "hideTransitionOptions",
-      autocomplete: "autocomplete",
-      placeholder: "placeholder",
-      showClear: [2, "showClear", "showClear", booleanAttribute],
-      autofocus: [2, "autofocus", "autofocus", booleanAttribute],
-      variant: "variant",
-      tabindex: [2, "tabindex", "tabindex", numberAttribute]
-    },
-    outputs: {
-      onFocus: "onFocus",
-      onBlur: "onBlur",
-      onClear: "onClear"
-    },
-    features: [\u0275\u0275ProvidersFeature([Password_VALUE_ACCESSOR, PasswordStyle]), \u0275\u0275InheritDefinitionFeature],
-    decls: 8,
-    vars: 34,
-    consts: [["input", ""], ["overlay", ""], ["content", ""], [3, "ngClass", "ngStyle"], ["pInputText", "", 3, "input", "focus", "blur", "keyup", "disabled", "pSize", "ngClass", "ngStyle", "value", "variant", "pAutoFocus"], [4, "ngIf"], ["class", "p-password-overlay p-component", 3, "click", 4, "ngIf"], ["class", "p-password-clear-icon", 3, "click", 4, "ngIf"], [1, "p-password-clear-icon", 3, "click"], [4, "ngTemplateOutlet"], ["class", "p-password-toggle-mask-icon p-password-mask-icon", 3, "click", 4, "ngIf"], [3, "click", 4, "ngIf"], [1, "p-password-toggle-mask-icon", "p-password-mask-icon", 3, "click"], [3, "click"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [1, "p-password-overlay", "p-component", 3, "click"], [4, "ngIf", "ngIfElse"], [1, "p-password-content"], [1, "p-password-meter"], [1, "p-password-meter-text"]],
-    template: function Password_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 3)(1, "input", 4, 0);
-        \u0275\u0275pipe(3, "mapper");
-        \u0275\u0275pipe(4, "mapper");
-        \u0275\u0275listener("input", function Password_Template_input_input_1_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onInput($event));
-        })("focus", function Password_Template_input_focus_1_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onInputFocus($event));
-        })("blur", function Password_Template_input_blur_1_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onInputBlur($event));
-        })("keyup", function Password_Template_input_keyup_1_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onKeyUp($event));
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(5, Password_ng_container_5_Template, 4, 3, "ng-container", 5)(6, Password_ng_container_6_Template, 3, 2, "ng-container", 5)(7, Password_div_7_Template, 7, 11, "div", 6);
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        \u0275\u0275classMap(ctx.styleClass);
-        \u0275\u0275property("ngClass", ctx.rootClass)("ngStyle", ctx.style);
-        \u0275\u0275attribute("data-pc-name", "password")("data-pc-section", "root");
-        \u0275\u0275advance();
-        \u0275\u0275classMap(ctx.inputStyleClass);
-        \u0275\u0275property("disabled", ctx.disabled)("pSize", ctx.size)("ngClass", \u0275\u0275pipeBind2(3, 28, ctx.disabled, ctx.inputFieldClass))("ngStyle", ctx.inputStyle)("value", ctx.value)("variant", ctx.variant)("pAutoFocus", ctx.autofocus);
-        \u0275\u0275attribute("label", ctx.label)("aria-label", ctx.ariaLabel)("aria-labelledBy", ctx.ariaLabelledBy)("id", ctx.inputId)("tabindex", ctx.tabindex)("type", \u0275\u0275pipeBind2(4, 31, ctx.unmasked, ctx.inputType))("placeholder", ctx.placeholder)("autocomplete", ctx.autocomplete)("maxlength", ctx.maxLength)("data-pc-section", "input");
-        \u0275\u0275advance(4);
-        \u0275\u0275property("ngIf", ctx.showClear && ctx.value != null);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.toggleMask);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.overlayVisible);
-      }
-    },
-    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, InputText, AutoFocus, TimesIcon, EyeSlashIcon, EyeIcon, MapperPipe, SharedModule],
-    encapsulation: 2,
-    data: {
-      animation: [trigger("overlayAnimation", [transition(":enter", [style({
-        opacity: 0,
-        transform: "scaleY(0.8)"
-      }), animate("{{showTransitionParams}}")]), transition(":leave", [animate("{{hideTransitionParams}}", style({
-        opacity: 0
-      }))])])]
-    },
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Password, [{
-    type: Component,
-    args: [{
-      selector: "p-password",
-      standalone: true,
-      imports: [CommonModule, InputText, AutoFocus, TimesIcon, EyeSlashIcon, EyeIcon, MapperPipe, SharedModule],
-      template: `
-        <div [ngClass]="rootClass" [ngStyle]="style" [class]="styleClass" [attr.data-pc-name]="'password'" [attr.data-pc-section]="'root'">
-            <input
-                #input
-                [attr.label]="label"
-                [attr.aria-label]="ariaLabel"
-                [attr.aria-labelledBy]="ariaLabelledBy"
-                [attr.id]="inputId"
-                [attr.tabindex]="tabindex"
-                pInputText
-                [disabled]="disabled"
-                [pSize]="size"
-                [ngClass]="disabled | mapper: inputFieldClass"
-                [ngStyle]="inputStyle"
-                [class]="inputStyleClass"
-                [attr.type]="unmasked | mapper: inputType"
-                [attr.placeholder]="placeholder"
-                [attr.autocomplete]="autocomplete"
-                [value]="value"
-                [variant]="variant"
-                (input)="onInput($event)"
-                (focus)="onInputFocus($event)"
-                (blur)="onInputBlur($event)"
-                (keyup)="onKeyUp($event)"
-                [attr.maxlength]="maxLength"
-                [attr.data-pc-section]="'input'"
-                [pAutoFocus]="autofocus"
-            />
-            <ng-container *ngIf="showClear && value != null">
-                <TimesIcon *ngIf="!clearIconTemplate && !_clearIconTemplate" class="p-password-clear-icon" (click)="clear()" [attr.data-pc-section]="'clearIcon'" />
-                <span (click)="clear()" class="p-password-clear-icon" [attr.data-pc-section]="'clearIcon'">
-                    <ng-template *ngTemplateOutlet="clearIconTemplate || _clearIconTemplate"></ng-template>
-                </span>
-            </ng-container>
-
-            <ng-container *ngIf="toggleMask">
-                <ng-container *ngIf="unmasked">
-                    <EyeSlashIcon class="p-password-toggle-mask-icon p-password-mask-icon" *ngIf="!hideIconTemplate && !_hideIconTemplate" (click)="onMaskToggle()" [attr.data-pc-section]="'hideIcon'" />
-                    <span *ngIf="hideIconTemplate || _hideIconTemplate" (click)="onMaskToggle()">
-                        <ng-template *ngTemplateOutlet="hideIconTemplate || _hideIconTemplate; context: { class: 'p-password-toggle-mask-icon p-password-mask-icon' }"></ng-template>
-                    </span>
-                </ng-container>
-                <ng-container *ngIf="!unmasked">
-                    <EyeIcon *ngIf="!showIconTemplate && !_showIconTemplate" class="p-password-toggle-mask-icon p-password-mask-icon" (click)="onMaskToggle()" [attr.data-pc-section]="'showIcon'" />
-                    <span *ngIf="showIconTemplate || _showIconTemplate" (click)="onMaskToggle()">
-                        <ng-template *ngTemplateOutlet="showIconTemplate || _showIconTemplate"></ng-template>
-                    </span>
-                </ng-container>
-            </ng-container>
-
-            <div
-                #overlay
-                *ngIf="overlayVisible"
-                class="p-password-overlay p-component"
-                (click)="onOverlayClick($event)"
-                [@overlayAnimation]="{
-                    value: 'visible',
-                    params: { showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions }
-                }"
-                (@overlayAnimation.start)="onAnimationStart($event)"
-                (@overlayAnimation.done)="onAnimationEnd($event)"
-                [attr.data-pc-section]="'panel'"
-            >
-                <ng-container *ngTemplateOutlet="headerTemplate || _headerTemplate"></ng-container>
-                <ng-container *ngIf="contentTemplate || _contentTemplate; else content">
-                    <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
-                </ng-container>
-                <ng-template #content>
-                    <div class="p-password-content">
-                        <div class="p-password-meter" [attr.data-pc-section]="'meter'">
-                            <div [ngClass]="meter | mapper: strengthClass" [ngStyle]="{ width: meter ? meter.width : '' }" [attr.data-pc-section]="'meterLabel'"></div>
-                        </div>
-                        <div class="p-password-meter-text" [attr.data-pc-section]="'info'">{{ infoText }}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngTemplateOutlet="footerTemplate || _footerTemplate"></ng-container>
-            </div>
-        </div>
-    `,
-      animations: [trigger("overlayAnimation", [transition(":enter", [style({
-        opacity: 0,
-        transform: "scaleY(0.8)"
-      }), animate("{{showTransitionParams}}")]), transition(":leave", [animate("{{hideTransitionParams}}", style({
-        opacity: 0
-      }))])])],
-      providers: [Password_VALUE_ACCESSOR, PasswordStyle],
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None
-    }]
-  }], null, {
-    ariaLabel: [{
-      type: Input
-    }],
-    fluid: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    ariaLabelledBy: [{
-      type: Input
-    }],
-    label: [{
-      type: Input
-    }],
-    disabled: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    promptLabel: [{
-      type: Input
-    }],
-    mediumRegex: [{
-      type: Input
-    }],
-    strongRegex: [{
-      type: Input
-    }],
-    weakLabel: [{
-      type: Input
-    }],
-    mediumLabel: [{
-      type: Input
-    }],
-    maxLength: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    strongLabel: [{
-      type: Input
-    }],
-    inputId: [{
-      type: Input
-    }],
-    feedback: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    appendTo: [{
-      type: Input
-    }],
-    toggleMask: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    size: [{
-      type: Input
-    }],
-    inputStyleClass: [{
-      type: Input
-    }],
-    styleClass: [{
-      type: Input
-    }],
-    style: [{
-      type: Input
-    }],
-    inputStyle: [{
-      type: Input
-    }],
-    showTransitionOptions: [{
-      type: Input
-    }],
-    hideTransitionOptions: [{
-      type: Input
-    }],
-    autocomplete: [{
-      type: Input
-    }],
-    placeholder: [{
-      type: Input
-    }],
-    showClear: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    autofocus: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    variant: [{
-      type: Input
-    }],
-    tabindex: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    onFocus: [{
-      type: Output
-    }],
-    onBlur: [{
-      type: Output
-    }],
-    onClear: [{
-      type: Output
-    }],
-    input: [{
-      type: ViewChild,
-      args: ["input"]
-    }],
-    contentTemplate: [{
-      type: ContentChild,
-      args: ["content", {
-        descendants: false
-      }]
-    }],
-    footerTemplate: [{
-      type: ContentChild,
-      args: ["footer", {
-        descendants: false
-      }]
-    }],
-    headerTemplate: [{
-      type: ContentChild,
-      args: ["header", {
-        descendants: false
-      }]
-    }],
-    clearIconTemplate: [{
-      type: ContentChild,
-      args: ["clearicon", {
-        descendants: false
-      }]
-    }],
-    hideIconTemplate: [{
-      type: ContentChild,
-      args: ["hideicon", {
-        descendants: false
-      }]
-    }],
-    showIconTemplate: [{
-      type: ContentChild,
-      args: ["showicon", {
-        descendants: false
-      }]
-    }],
-    templates: [{
-      type: ContentChildren,
-      args: [PrimeTemplate]
-    }]
-  });
-})();
-var PasswordModule = class _PasswordModule {
-  static \u0275fac = function PasswordModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _PasswordModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _PasswordModule,
-    imports: [Password, PasswordDirective, SharedModule],
-    exports: [PasswordDirective, Password, SharedModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [Password, SharedModule, SharedModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PasswordModule, [{
-    type: NgModule,
-    args: [{
-      imports: [Password, PasswordDirective, SharedModule],
-      exports: [PasswordDirective, Password, SharedModule]
-    }]
-  }], null, null);
-})();
-
-// node_modules/primeng/fesm2022/primeng-keyfilter.mjs
-var KEYFILTER_VALIDATOR = {
-  provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => KeyFilter),
-  multi: true
-};
-var DEFAULT_MASKS = {
-  pint: /^[\d]*$/,
-  int: /^[-]?[\d]*$/,
-  pnum: /^[\d\.]*$/,
-  money: /^[\d\.\s,]*$/,
-  num: /^[-]?[\d\.]*$/,
-  hex: /^[0-9a-f]*$/i,
-  email: /^[a-z0-9_\.\-@]*$/i,
-  alpha: /^[a-z_]*$/i,
-  alphanum: /^[a-z0-9_]*$/i
-};
-var KEYS = {
-  TAB: 9,
-  RETURN: 13,
-  ESC: 27,
-  BACKSPACE: 8,
-  DELETE: 46
-};
-var SAFARI_KEYS = {
-  63234: 37,
-  // left
-  63235: 39,
-  // right
-  63232: 38,
-  // up
-  63233: 40,
-  // down
-  63276: 33,
-  // page up
-  63277: 34,
-  // page down
-  63272: 46,
-  // delete
-  63273: 36,
-  // home
-  63275: 35
-  // end
-};
-var KeyFilter = class _KeyFilter {
-  document;
-  platformId;
-  el;
-  /**
-   * When enabled, instead of blocking keys, input is validated internally to test against the regular expression.
-   * @group Props
-   */
-  pValidateOnly;
-  /**
-   * Sets the pattern for key filtering.
-   * @group Props
-   */
-  set pattern(_pattern) {
-    this._pattern = _pattern;
-    if (_pattern instanceof RegExp) {
-      this.regex = _pattern;
-    } else if (_pattern in DEFAULT_MASKS) {
-      this.regex = DEFAULT_MASKS[_pattern];
-    } else {
-      this.regex = /./;
-    }
-  }
-  get pattern() {
-    return this._pattern;
-  }
-  /**
-   * Emits a value whenever the ngModel of the component changes.
-   * @param {(string | number)} modelValue - Custom model change event.
-   * @group Emits
-   */
-  ngModelChange = new EventEmitter();
-  regex = /./;
-  _pattern;
-  isAndroid;
-  lastValue;
-  constructor(document2, platformId, el) {
-    this.document = document2;
-    this.platformId = platformId;
-    this.el = el;
-    if (isPlatformBrowser(this.platformId)) {
-      this.isAndroid = isAndroid();
-    } else {
-      this.isAndroid = false;
-    }
-  }
-  isNavKeyPress(e) {
-    let k = e.keyCode;
-    k = getBrowser().safari ? SAFARI_KEYS[k] || k : k;
-    return k >= 33 && k <= 40 || k == KEYS.RETURN || k == KEYS.TAB || k == KEYS.ESC;
-  }
-  isSpecialKey(e) {
-    let k = e.keyCode || e.charCode;
-    return k == 9 || k == 13 || k == 27 || k == 16 || k == 17 || k >= 18 && k <= 20 || getBrowser().opera && !e.shiftKey && (k == 8 || k >= 33 && k <= 35 || k >= 36 && k <= 39 || k >= 44 && k <= 45);
-  }
-  getKey(e) {
-    let k = e.keyCode || e.charCode;
-    return getBrowser().safari ? SAFARI_KEYS[k] || k : k;
-  }
-  getCharCode(e) {
-    return e.charCode || e.keyCode || e.which;
-  }
-  findDelta(value, prevValue) {
-    let delta = "";
-    for (let i = 0; i < value.length; i++) {
-      let str = value.substr(0, i) + value.substr(i + value.length - prevValue.length);
-      if (str === prevValue) delta = value.substr(i, value.length - prevValue.length);
-    }
-    return delta;
-  }
-  isValidChar(c) {
-    return this.regex.test(c);
-  }
-  isValidString(str) {
-    for (let i = 0; i < str.length; i++) {
-      if (!this.isValidChar(str.substr(i, 1))) {
-        return false;
-      }
-    }
-    return true;
-  }
-  onInput(e) {
-    if (this.isAndroid && !this.pValidateOnly) {
-      let val = this.el.nativeElement.value;
-      let lastVal = this.lastValue || "";
-      let inserted = this.findDelta(val, lastVal);
-      let removed = this.findDelta(lastVal, val);
-      let pasted = inserted.length > 1 || !inserted && !removed;
-      if (pasted) {
-        if (!this.isValidString(val)) {
-          this.el.nativeElement.value = lastVal;
-          this.ngModelChange.emit(lastVal);
-        }
-      } else if (!removed) {
-        if (!this.isValidChar(inserted)) {
-          this.el.nativeElement.value = lastVal;
-          this.ngModelChange.emit(lastVal);
-        }
-      }
-      val = this.el.nativeElement.value;
-      if (this.isValidString(val)) {
-        this.lastValue = val;
-      }
-    }
-  }
-  onKeyPress(e) {
-    if (this.isAndroid || this.pValidateOnly) {
-      return;
-    }
-    let browser = getBrowser();
-    let k = this.getKey(e);
-    if (browser.mozilla && (e.ctrlKey || e.altKey)) {
-      return;
-    } else if (k == 17 || k == 18) {
-      return;
-    }
-    if (k == 13) {
-      return;
-    }
-    let c = this.getCharCode(e);
-    let cc = String.fromCharCode(c);
-    let ok = true;
-    if (!browser.mozilla && (this.isSpecialKey(e) || !cc)) {
-      return;
-    }
-    let existingValue = this.el.nativeElement.value || "";
-    let combinedValue = existingValue + cc;
-    ok = this.regex.test(combinedValue);
-    if (!ok) {
-      e.preventDefault();
-    }
-  }
-  onPaste(e) {
-    const clipboardData = e.clipboardData || this.document.defaultView.clipboardData.getData("text");
-    if (clipboardData) {
-      let pattern = /\{[0-9]+\}/;
-      const pastedText = clipboardData.getData("text");
-      if (pattern.test(this.regex.toString())) {
-        if (!this.regex.test(pastedText)) {
-          e.preventDefault();
-          return;
-        }
-      } else {
-        for (let char of pastedText.toString()) {
-          if (!this.regex.test(char)) {
-            e.preventDefault();
-            return;
-          }
-        }
-      }
-    }
-  }
-  validate(c) {
-    if (this.pValidateOnly) {
-      let value = this.el.nativeElement.value;
-      if (value && !this.regex.test(value)) {
-        return {
-          validatePattern: false
-        };
-      }
-    }
-  }
-  static \u0275fac = function KeyFilter_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _KeyFilter)(\u0275\u0275directiveInject(DOCUMENT), \u0275\u0275directiveInject(PLATFORM_ID), \u0275\u0275directiveInject(ElementRef));
-  };
-  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
-    type: _KeyFilter,
-    selectors: [["", "pKeyFilter", ""]],
-    hostBindings: function KeyFilter_HostBindings(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275listener("input", function KeyFilter_input_HostBindingHandler($event) {
-          return ctx.onInput($event);
-        })("keypress", function KeyFilter_keypress_HostBindingHandler($event) {
-          return ctx.onKeyPress($event);
-        })("paste", function KeyFilter_paste_HostBindingHandler($event) {
-          return ctx.onPaste($event);
-        });
-      }
-    },
-    inputs: {
-      pValidateOnly: [2, "pValidateOnly", "pValidateOnly", booleanAttribute],
-      pattern: [0, "pKeyFilter", "pattern"]
-    },
-    outputs: {
-      ngModelChange: "ngModelChange"
-    },
-    features: [\u0275\u0275ProvidersFeature([KEYFILTER_VALIDATOR])]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(KeyFilter, [{
-    type: Directive,
-    args: [{
-      selector: "[pKeyFilter]",
-      standalone: true,
-      providers: [KEYFILTER_VALIDATOR]
-    }]
-  }], () => [{
-    type: Document,
-    decorators: [{
-      type: Inject,
-      args: [DOCUMENT]
-    }]
-  }, {
-    type: void 0,
-    decorators: [{
-      type: Inject,
-      args: [PLATFORM_ID]
-    }]
-  }, {
-    type: ElementRef
-  }], {
-    pValidateOnly: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    pattern: [{
-      type: Input,
-      args: ["pKeyFilter"]
-    }],
-    ngModelChange: [{
-      type: Output
-    }],
-    onInput: [{
-      type: HostListener,
-      args: ["input", ["$event"]]
-    }],
-    onKeyPress: [{
-      type: HostListener,
-      args: ["keypress", ["$event"]]
-    }],
-    onPaste: [{
-      type: HostListener,
-      args: ["paste", ["$event"]]
-    }]
-  });
-})();
-var KeyFilterModule = class _KeyFilterModule {
-  static \u0275fac = function KeyFilterModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _KeyFilterModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _KeyFilterModule,
-    imports: [KeyFilter],
-    exports: [KeyFilter]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({});
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(KeyFilterModule, [{
-    type: NgModule,
-    args: [{
-      imports: [KeyFilter],
-      exports: [KeyFilter]
-    }]
-  }], null, null);
-})();
-
-// node_modules/primeng/fesm2022/primeng-fieldset.mjs
-var _c018 = ["header"];
-var _c119 = ["expandicon"];
-var _c29 = ["collapseicon"];
-var _c37 = ["content"];
-var _c47 = ["*", [["p-header"]]];
-var _c57 = ["*", "p-header"];
-var _c66 = (a0, a1) => ({
-  "p-fieldset p-component": true,
-  "p-fieldset-toggleable": a0,
-  "p-fieldset-expanded": a1
-});
-var _c75 = (a0) => ({
-  transitionParams: a0,
-  height: "0"
-});
-var _c85 = (a0) => ({
-  value: "hidden",
-  params: a0
-});
-var _c95 = (a0) => ({
-  transitionParams: a0,
-  height: "*"
-});
-var _c105 = (a0) => ({
-  value: "visible",
-  params: a0
-});
-function Fieldset_ng_container_2_ng_container_2_PlusIcon_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "PlusIcon", 11);
-  }
-  if (rf & 2) {
-    \u0275\u0275property("styleClass", "p-fieldset-toggler");
-    \u0275\u0275attribute("data-pc-section", "togglericon");
-  }
-}
-function Fieldset_ng_container_2_ng_container_2_span_2_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Fieldset_ng_container_2_ng_container_2_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 12);
-    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_2_span_2_ng_container_1_Template, 1, 0, "ng-container", 6);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275attribute("data-pc-section", "togglericon");
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction3(8, _c86, opt_r7.source === "ai" && opt_r7.status !== "approved", opt_r7.source === "ai" && opt_r7.status === "approved", opt_r7.source === "user"));
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.expandIconTemplate || ctx_r2._expandIconTemplate);
-  }
-}
-function Fieldset_ng_container_2_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_2_PlusIcon_1_Template, 1, 2, "PlusIcon", 9)(2, Fieldset_ng_container_2_ng_container_2_span_2_Template, 2, 2, "span", 10);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(12, _c96, opt_r7.status === "approved", opt_r7.status === "pending"));
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.expandIconTemplate && !ctx_r2._expandIconTemplate);
+    \u0275\u0275textInterpolate(opt_r7.text);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.expandIconTemplate || ctx_r2._expandIconTemplate);
+    \u0275\u0275property("ngIf", opt_r7.status === "pending");
   }
 }
-function Fieldset_ng_container_2_ng_container_3_MinusIcon_1_Template(rf, ctx) {
+function JourneyMapComponent_div_54_div_26_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "MinusIcon", 11);
-  }
-  if (rf & 2) {
-    \u0275\u0275property("styleClass", "p-fieldset-toggler");
-    \u0275\u0275attribute("aria-hidden", true)("data-pc-section", "togglericon");
-  }
-}
-function Fieldset_ng_container_2_ng_container_3_span_2_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Fieldset_ng_container_2_ng_container_3_span_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 12);
-    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_3_span_2_ng_container_1_Template, 1, 0, "ng-container", 6);
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 80)(1, "div", 81)(2, "div", 82)(3, "span", 51);
+    \u0275\u0275text(4);
     \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275attribute("data-pc-section", "togglericon");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.collapseIconTemplate || ctx_r2._collapseIconTemplate);
-  }
-}
-function Fieldset_ng_container_2_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, Fieldset_ng_container_2_ng_container_3_MinusIcon_1_Template, 1, 3, "MinusIcon", 9)(2, Fieldset_ng_container_2_ng_container_3_span_2_Template, 2, 2, "span", 10);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.collapseIconTemplate && !ctx_r2._collapseIconTemplate);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.collapseIconTemplate || ctx_r2._collapseIconTemplate);
-  }
-}
-function Fieldset_ng_container_2_ng_container_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Fieldset_ng_container_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "button", 7);
-    \u0275\u0275listener("click", function Fieldset_ng_container_2_Template_button_click_1_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.toggle($event));
-    })("keydown", function Fieldset_ng_container_2_Template_button_keydown_1_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onKeyDown($event));
-    });
-    \u0275\u0275template(2, Fieldset_ng_container_2_ng_container_2_Template, 3, 2, "ng-container", 8)(3, Fieldset_ng_container_2_ng_container_3_Template, 3, 2, "ng-container", 8)(4, Fieldset_ng_container_2_ng_container_4_Template, 1, 0, "ng-container", 6);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    const legendContent_r4 = \u0275\u0275reference(4);
-    \u0275\u0275advance();
-    \u0275\u0275attribute("id", ctx_r2.id + "_header")("aria-controls", ctx_r2.id + "_content")("aria-expanded", !ctx_r2.collapsed)("aria-label", ctx_r2.buttonAriaLabel);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.collapsed);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.collapsed);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", legendContent_r4);
-  }
-}
-function Fieldset_ng_template_3_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-function Fieldset_ng_template_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 13);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-    \u0275\u0275projection(2, 1);
-    \u0275\u0275template(3, Fieldset_ng_template_3_ng_container_3_Template, 1, 0, "ng-container", 6);
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275attribute("data-pc-section", "legendtitle");
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r2.legend);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngTemplateOutlet", ctx_r2.headerTemplate || ctx_r2._headerTemplate);
-  }
-}
-function Fieldset_ng_container_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainer(0);
-  }
-}
-var theme13 = ({
-  dt
-}) => `
-.p-fieldset {
-    background: ${dt("fieldset.background")};
-    border: 1px solid ${dt("fieldset.border.color")};
-    border-radius: ${dt("fieldset.border.radius")};
-    color: ${dt("fieldset.color")};
-    padding:  ${dt("fieldset.padding")};
-    margin: 0;
-}
-
-.p-fieldset-legend {
-    background: ${dt("fieldset.legend.background")};
-    border-radius: ${dt("fieldset.legend.border.radius")};
-    border-width: ${dt("fieldset.legend.border.width")};
-    border-style: solid;
-    border-color: ${dt("fieldset.legend.border.color")};
-    color: ${dt("fieldset.legend.color")};
-    padding: ${dt("fieldset.legend.padding")};
-    transition: background ${dt("fieldset.transition.duration")}, color ${dt("fieldset.transition.duration")}, outline-color ${dt("fieldset.transition.duration")}, box-shadow ${dt("fieldset.transition.duration")};
-}
-
-.p-fieldset-toggleable > .p-fieldset-legend {
-    padding: 0;
-}
-
-.p-fieldset-toggle-button {
-    cursor: pointer;
-    user-select: none;
-    overflow: hidden;
-    position: relative;
-    text-decoration: none;
-    display: flex;
-    gap: ${dt("fieldset.legend.gap")};
-    align-items: center;
-    justify-content: center;
-    padding: ${dt("fieldset.legend.padding")};
-    background: transparent;
-    border: 0 none;
-    border-radius: ${dt("fieldset.legend.border.radius")};
-    transition: background ${dt("fieldset.transition.duration")}, color ${dt("fieldset.transition.duration")}, outline-color ${dt("fieldset.transition.duration")}, box-shadow ${dt("fieldset.transition.duration")};
-    outline-color: transparent;
-}
-
-.p-fieldset-legend-label {
-    font-weight: ${dt("fieldset.legend.font.weight")};
-}
-
-.p-fieldset-toggle-button:focus-visible {
-    box-shadow: ${dt("fieldset.legend.focus.ring.shadow")};
-    outline: ${dt("fieldset.legend.focus.ring.width")} ${dt("fieldset.legend.focus.ring.style")} ${dt("fieldset.legend.focus.ring.color")};
-    outline-offset: ${dt("fieldset.legend.focus.ring.offset")};
-}
-
-.p-fieldset-toggleable > .p-fieldset-legend:hover {
-    color: ${dt("fieldset.legend.hover.color")};
-    background: ${dt("fieldset.legend.hover.background")};
-}
-
-.p-fieldset-toggle-icon {
-    color: ${dt("fieldset.toggle.icon.color")};
-    transition: color ${dt("fieldset.transition.duration")};
-}
-
-.p-fieldset-toggleable > .p-fieldset-legend:hover .p-fieldset-toggle-icon {
-    color: ${dt("fieldset.toggle.icon.hover.color")};
-}
-
-.p-fieldset .p-fieldset-content {
-    padding: ${dt("fieldset.content.padding")};
-}
-
-/* For PrimeNG */
-.p-fieldset-toggleable.p-fieldset-expanded > .p-fieldset-content-container:not(.ng-animating) {
-    overflow: visible
-}
-
-.p-fieldset-toggleable .p-fieldset-content-container {
-    overflow: hidden;
-}
-`;
-var classes13 = {
-  root: ({
-    props
-  }) => ["p-fieldset p-component", {
-    "p-fieldset-toggleable": props.toggleable
-  }],
-  legend: "p-fieldset-legend",
-  legendLabel: "p-fieldset-legend-label",
-  toggleButton: "p-fieldset-toggle-button",
-  toggleIcon: "p-fieldset-toggle-icon",
-  contentContainer: "p-fieldset-content-container",
-  content: "p-fieldset-content"
-};
-var FieldsetStyle = class _FieldsetStyle extends BaseStyle {
-  name = "fieldset";
-  theme = theme13;
-  classes = classes13;
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275FieldsetStyle_BaseFactory;
-    return function FieldsetStyle_Factory(__ngFactoryType__) {
-      return (\u0275FieldsetStyle_BaseFactory || (\u0275FieldsetStyle_BaseFactory = \u0275\u0275getInheritedFactory(_FieldsetStyle)))(__ngFactoryType__ || _FieldsetStyle);
-    };
-  })();
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _FieldsetStyle,
-    factory: _FieldsetStyle.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FieldsetStyle, [{
-    type: Injectable
-  }], null, null);
-})();
-var FieldsetClasses;
-(function(FieldsetClasses2) {
-  FieldsetClasses2["root"] = "p-fieldset";
-  FieldsetClasses2["legend"] = "p-fieldset-legend";
-  FieldsetClasses2["legendLabel"] = "p-fieldset-legend-label";
-  FieldsetClasses2["toggleIcon"] = "p-fieldset-toggle-icon";
-  FieldsetClasses2["contentContainer"] = "p-fieldset-content-container";
-  FieldsetClasses2["content"] = "p-fieldset-content";
-})(FieldsetClasses || (FieldsetClasses = {}));
-var Fieldset = class _Fieldset extends BaseComponent {
-  /**
-   * Header text of the fieldset.
-   * @group Props
-   */
-  legend;
-  /**
-   * When specified, content can toggled by clicking the legend.
-   * @group Props
-   * @defaultValue false
-   */
-  toggleable;
-  /**
-   * Defines the default visibility state of the content.
-   * * @group Props
-   */
-  collapsed = false;
-  /**
-   * Inline style of the component.
-   * @group Props
-   */
-  style;
-  /**
-   * Style class of the component.
-   * @group Props
-   */
-  styleClass;
-  /**
-   * Transition options of the panel animation.
-   * @group Props
-   */
-  transitionOptions = "400ms cubic-bezier(0.86, 0, 0.07, 1)";
-  /**
-   * Emits when the collapsed state changes.
-   * @param {boolean} value - New value.
-   * @group Emits
-   */
-  collapsedChange = new EventEmitter();
-  /**
-   * Callback to invoke before panel toggle.
-   * @param {PanelBeforeToggleEvent} event - Custom toggle event
-   * @group Emits
-   */
-  onBeforeToggle = new EventEmitter();
-  /**
-   * Callback to invoke after panel toggle.
-   * @param {PanelAfterToggleEvent} event - Custom toggle event
-   * @group Emits
-   */
-  onAfterToggle = new EventEmitter();
-  get id() {
-    return uuid("pn_id_");
-  }
-  get buttonAriaLabel() {
-    return this.legend;
-  }
-  animating;
-  _componentStyle = inject(FieldsetStyle);
-  /**
-   * Defines the header template.
-   * @group Templates
-   */
-  headerTemplate;
-  /**
-   * Defines the expandicon template.
-   * @group Templates
-   */
-  expandIconTemplate;
-  /**
-   * Defines the collapseicon template.
-   * @group Templates
-   */
-  collapseIconTemplate;
-  /**
-   * Defines the content template.
-   * @group Templates
-   */
-  contentTemplate;
-  toggle(event) {
-    if (this.animating) {
-      return false;
-    }
-    this.animating = true;
-    this.onBeforeToggle.emit({
-      originalEvent: event,
-      collapsed: this.collapsed
-    });
-    if (this.collapsed) this.expand();
-    else this.collapse();
-    this.onAfterToggle.emit({
-      originalEvent: event,
-      collapsed: this.collapsed
-    });
-    event.preventDefault();
-  }
-  onKeyDown(event) {
-    if (event.code === "Enter" || event.code === "Space") {
-      this.toggle(event);
-      event.preventDefault();
-    }
-  }
-  expand() {
-    this.collapsed = false;
-    this.collapsedChange.emit(this.collapsed);
-  }
-  collapse() {
-    this.collapsed = true;
-    this.collapsedChange.emit(this.collapsed);
-  }
-  getBlockableElement() {
-    return this.el.nativeElement.children[0];
-  }
-  onToggleDone() {
-    this.animating = false;
-  }
-  _headerTemplate;
-  _expandIconTemplate;
-  _collapseIconTemplate;
-  _contentTemplate;
-  templates;
-  ngAfterContentInit() {
-    this.templates.forEach((item) => {
-      switch (item.getType()) {
-        case "header":
-          this._headerTemplate = item.template;
-          break;
-        case "expandicon":
-          this._expandIconTemplate = item.template;
-          break;
-        case "collapseicon":
-          this._collapseIconTemplate = item.template;
-          break;
-        case "content":
-          this._contentTemplate = item.template;
-          break;
-      }
-    });
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275Fieldset_BaseFactory;
-    return function Fieldset_Factory(__ngFactoryType__) {
-      return (\u0275Fieldset_BaseFactory || (\u0275Fieldset_BaseFactory = \u0275\u0275getInheritedFactory(_Fieldset)))(__ngFactoryType__ || _Fieldset);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _Fieldset,
-    selectors: [["p-fieldset"]],
-    contentQueries: function Fieldset_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c018, 4);
-        \u0275\u0275contentQuery(dirIndex, _c119, 4);
-        \u0275\u0275contentQuery(dirIndex, _c29, 4);
-        \u0275\u0275contentQuery(dirIndex, _c37, 4);
-        \u0275\u0275contentQuery(dirIndex, PrimeTemplate, 4);
-      }
-      if (rf & 2) {
-        let _t;
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.headerTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.expandIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.collapseIconTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentTemplate = _t.first);
-        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templates = _t);
-      }
-    },
-    inputs: {
-      legend: "legend",
-      toggleable: [2, "toggleable", "toggleable", booleanAttribute],
-      collapsed: [2, "collapsed", "collapsed", booleanAttribute],
-      style: "style",
-      styleClass: "styleClass",
-      transitionOptions: "transitionOptions"
-    },
-    outputs: {
-      collapsedChange: "collapsedChange",
-      onBeforeToggle: "onBeforeToggle",
-      onAfterToggle: "onAfterToggle"
-    },
-    features: [\u0275\u0275ProvidersFeature([FieldsetStyle]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c57,
-    decls: 9,
-    vars: 28,
-    consts: [["legendContent", ""], [3, "ngClass", "ngStyle"], [1, "p-fieldset-legend"], [4, "ngIf", "ngIfElse"], ["role", "region", 1, "p-fieldset-content-container"], [1, "p-fieldset-content"], [4, "ngTemplateOutlet"], ["tabindex", "0", "role", "button", 1, "p-fieldset-toggle-button", 3, "click", "keydown"], [4, "ngIf"], [3, "styleClass", 4, "ngIf"], ["class", "p-fieldset-toggler", 4, "ngIf"], [3, "styleClass"], [1, "p-fieldset-toggler"], [1, "p-fieldset-legend-label"]],
-    template: function Fieldset_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275projectionDef(_c47);
-        \u0275\u0275elementStart(0, "fieldset", 1)(1, "legend", 2);
-        \u0275\u0275template(2, Fieldset_ng_container_2_Template, 5, 7, "ng-container", 3)(3, Fieldset_ng_template_3_Template, 4, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(5, "div", 4);
-        \u0275\u0275listener("@fieldsetContent.done", function Fieldset_Template_div_animation_fieldsetContent_done_5_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onToggleDone());
-        });
-        \u0275\u0275elementStart(6, "div", 5);
-        \u0275\u0275projection(7);
-        \u0275\u0275template(8, Fieldset_ng_container_8_Template, 1, 0, "ng-container", 6);
-        \u0275\u0275elementEnd()()();
-      }
-      if (rf & 2) {
-        const legendContent_r4 = \u0275\u0275reference(4);
-        \u0275\u0275classMap(ctx.styleClass);
-        \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(17, _c66, ctx.toggleable, !ctx.collapsed && ctx.toggleable))("ngStyle", ctx.style);
-        \u0275\u0275attribute("id", ctx.id)("data-pc-name", "fieldset")("data-pc-section", "root");
-        \u0275\u0275advance();
-        \u0275\u0275attribute("data-pc-section", "legend");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.toggleable)("ngIfElse", legendContent_r4);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("@fieldsetContent", ctx.collapsed ? \u0275\u0275pureFunction1(22, _c85, \u0275\u0275pureFunction1(20, _c75, ctx.transitionOptions)) : \u0275\u0275pureFunction1(26, _c105, \u0275\u0275pureFunction1(24, _c95, ctx.animating ? ctx.transitionOptions : "0ms")));
-        \u0275\u0275attribute("id", ctx.id + "_content")("aria-labelledby", ctx.id + "_header")("aria-hidden", ctx.collapsed)("data-pc-section", "toggleablecontent");
-        \u0275\u0275advance();
-        \u0275\u0275attribute("data-pc-section", "content");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngTemplateOutlet", ctx.contentTemplate || ctx._contentTemplate);
-      }
-    },
-    dependencies: [CommonModule, NgClass, NgIf, NgTemplateOutlet, NgStyle, ButtonModule, MinusIcon, PlusIcon, SharedModule],
-    encapsulation: 2,
-    data: {
-      animation: [trigger("fieldsetContent", [state("hidden", style({
-        height: "0"
-      })), state("visible", style({
-        height: "*"
-      })), transition("visible <=> hidden", [animate("{{transitionParams}}")]), transition("void => *", animate(0))])]
-    },
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Fieldset, [{
-    type: Component,
-    args: [{
-      selector: "p-fieldset",
-      standalone: true,
-      imports: [CommonModule, ButtonModule, MinusIcon, PlusIcon, SharedModule],
-      template: `
-        <fieldset
-            [attr.id]="id"
-            [ngClass]="{
-                'p-fieldset p-component': true,
-                'p-fieldset-toggleable': toggleable,
-                'p-fieldset-expanded': !collapsed && toggleable
-            }"
-            [ngStyle]="style"
-            [class]="styleClass"
-            [attr.data-pc-name]="'fieldset'"
-            [attr.data-pc-section]="'root'"
-        >
-            <legend class="p-fieldset-legend" [attr.data-pc-section]="'legend'">
-                <ng-container *ngIf="toggleable; else legendContent">
-                    <button
-                        [attr.id]="id + '_header'"
-                        tabindex="0"
-                        role="button"
-                        [attr.aria-controls]="id + '_content'"
-                        [attr.aria-expanded]="!collapsed"
-                        [attr.aria-label]="buttonAriaLabel"
-                        (click)="toggle($event)"
-                        (keydown)="onKeyDown($event)"
-                        class="p-fieldset-toggle-button"
-                    >
-                        <ng-container *ngIf="collapsed">
-                            <PlusIcon *ngIf="!expandIconTemplate && !_expandIconTemplate" [styleClass]="'p-fieldset-toggler'" [attr.data-pc-section]="'togglericon'" />
-                            <span *ngIf="expandIconTemplate || _expandIconTemplate" class="p-fieldset-toggler" [attr.data-pc-section]="'togglericon'">
-                                <ng-container *ngTemplateOutlet="expandIconTemplate || _expandIconTemplate"></ng-container>
-                            </span>
-                        </ng-container>
-                        <ng-container *ngIf="!collapsed">
-                            <MinusIcon *ngIf="!collapseIconTemplate && !_collapseIconTemplate" [styleClass]="'p-fieldset-toggler'" [attr.aria-hidden]="true" [attr.data-pc-section]="'togglericon'" />
-                            <span *ngIf="collapseIconTemplate || _collapseIconTemplate" class="p-fieldset-toggler" [attr.data-pc-section]="'togglericon'">
-                                <ng-container *ngTemplateOutlet="collapseIconTemplate || _collapseIconTemplate"></ng-container>
-                            </span>
-                        </ng-container>
-                        <ng-container *ngTemplateOutlet="legendContent"></ng-container>
-                    </button>
-                </ng-container>
-                <ng-template #legendContent>
-                    <span class="p-fieldset-legend-label" [attr.data-pc-section]="'legendtitle'">{{ legend }}</span>
-                    <ng-content select="p-header"></ng-content>
-                    <ng-container *ngTemplateOutlet="headerTemplate || _headerTemplate"></ng-container>
-                </ng-template>
-            </legend>
-            <div
-                [attr.id]="id + '_content'"
-                role="region"
-                class="p-fieldset-content-container"
-                [@fieldsetContent]="collapsed ? { value: 'hidden', params: { transitionParams: transitionOptions, height: '0' } } : { value: 'visible', params: { transitionParams: animating ? transitionOptions : '0ms', height: '*' } }"
-                [attr.aria-labelledby]="id + '_header'"
-                [attr.aria-hidden]="collapsed"
-                [attr.data-pc-section]="'toggleablecontent'"
-                (@fieldsetContent.done)="onToggleDone()"
-            >
-                <div class="p-fieldset-content" [attr.data-pc-section]="'content'">
-                    <ng-content></ng-content>
-                    <ng-container *ngTemplateOutlet="contentTemplate || _contentTemplate"></ng-container>
-                </div>
-            </div>
-        </fieldset>
-    `,
-      animations: [trigger("fieldsetContent", [state("hidden", style({
-        height: "0"
-      })), state("visible", style({
-        height: "*"
-      })), transition("visible <=> hidden", [animate("{{transitionParams}}")]), transition("void => *", animate(0))])],
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      providers: [FieldsetStyle]
-    }]
-  }], null, {
-    legend: [{
-      type: Input
-    }],
-    toggleable: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    collapsed: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    style: [{
-      type: Input
-    }],
-    styleClass: [{
-      type: Input
-    }],
-    transitionOptions: [{
-      type: Input
-    }],
-    collapsedChange: [{
-      type: Output
-    }],
-    onBeforeToggle: [{
-      type: Output
-    }],
-    onAfterToggle: [{
-      type: Output
-    }],
-    headerTemplate: [{
-      type: ContentChild,
-      args: ["header", {
-        descendants: false
-      }]
-    }],
-    expandIconTemplate: [{
-      type: ContentChild,
-      args: ["expandicon", {
-        descendants: false
-      }]
-    }],
-    collapseIconTemplate: [{
-      type: ContentChild,
-      args: ["collapseicon", {
-        descendants: false
-      }]
-    }],
-    contentTemplate: [{
-      type: ContentChild,
-      args: ["content", {
-        descendants: false
-      }]
-    }],
-    templates: [{
-      type: ContentChildren,
-      args: [PrimeTemplate]
-    }]
-  });
-})();
-var FieldsetModule = class _FieldsetModule {
-  static \u0275fac = function FieldsetModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _FieldsetModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _FieldsetModule,
-    imports: [Fieldset, SharedModule],
-    exports: [Fieldset, SharedModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [Fieldset, SharedModule, SharedModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FieldsetModule, [{
-    type: NgModule,
-    args: [{
-      imports: [Fieldset, SharedModule],
-      exports: [Fieldset, SharedModule]
-    }]
-  }], null, null);
-})();
-
-// src/app/views/ia-assistant/services/export-github.service.ts
-var ExportGitHubService = class _ExportGitHubService {
-  fetchService = inject(FetchService);
-  formatHtmlWithPrettier(html) {
-    return __async(this, null, function* () {
-      if (!navigator.languages) {
-        navigator.languages = ["en"];
-      }
-      try {
-        const [{ default: prettier }, parserHtml] = yield Promise.all([
-          import("./chunk-UKCQ235J.js"),
-          import("./chunk-2UKPKC67.js")
-        ]);
-        return prettier.format(html, {
-          parser: "html",
-          plugins: [parserHtml],
-          printWidth: Infinity,
-          tabWidth: 4,
-          useTabs: false,
-          htmlWhitespaceSensitivity: "css",
-          arrowParens: "always",
-          bracketSameLine: false,
-          bracketSpacing: false,
-          embeddedLanguageFormatting: "auto",
-          endOfLine: "crlf",
-          jsxSingleQuote: false,
-          objectWrap: "collapse",
-          ProseWrap: "never",
-          quoteProps: "consistent",
-          singleAttributePerLine: false,
-          singleQuote: false,
-          trailingComma: "none",
-          vueIndentScriptAndStyle: true
-        });
-      } catch (error) {
-        console.error("Prettier formatting error:", error);
-        return html;
-      }
-    });
-  }
-  formatDocumentAsJekyll(doc, url, owner, repo) {
-    return __async(this, null, function* () {
-      let layout = "default";
-      const title = doc.querySelector('meta[name="dcterms.title"]')?.content.trim() || doc.title.trim() || "";
-      const description = doc.querySelector('meta[name="description"]')?.content.trim() || "";
-      const subject = doc.querySelector('meta[name="dcterms.subject"]')?.content.trim() || "";
-      const keywords = doc.querySelector('meta[name="keywords"]')?.content.trim() || "";
-      const lang = doc.querySelector('meta[name="dcterms.language"]')?.content?.slice(0, 2) || "en";
-      const issued = doc.querySelector('meta[name="dcterms.issued"]')?.content || "";
-      const modified = doc.querySelector('meta[name="dcterms.modified"]')?.content || "";
-      const altLangPage = Array.from(doc.querySelectorAll('link[rel="alternate"]')).find((link) => link.getAttribute("hreflang") !== lang)?.href || "";
-      const crumbs = Array.from(doc.querySelectorAll("ol.breadcrumb li")).slice(1).map((li) => {
-        const a = li.querySelector("a");
-        if (!a)
-          return null;
-        const rawHref = a.getAttribute("href") || "";
-        return {
-          title: a.textContent?.trim() || "",
-          link: rawHref.startsWith("http") ? a.href : `https://www.canada.ca${a.getAttribute("href")}`
-        };
-      }).filter(Boolean);
-      const crumbsYaml = crumbs.map((crumb) => `  - title: "${crumb.title}"\r
-    link: "${crumb.link}"`).join("\r\n");
-      const auth = lang === "en" ? `auth:\r
-  type: "contextual"\r
-  label: "Sign in"\r
-  labelExtended: "CRA sign in"\r
-  link: "https://www.canada.ca/en/revenue-agency/services/e-services/cra-login-services.html"` : `auth:\r
-  type: "contextual"\r
-  label: "Se connecter"\r
-  labelExtended: "Se connecter \xE0 l'ARC"\r
-  link: "https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-ouverture-session-arc.html"`;
-      const mainEl = doc.querySelector("main");
-      let pageContent = "";
-      if (mainEl) {
-        mainEl.querySelectorAll("section.pagedetails").forEach((s2) => s2.remove());
-        mainEl.querySelectorAll("div.pagedetails").forEach((d) => d.remove());
-        mainEl.querySelectorAll('div[class^="mws"]').forEach((div) => {
-          while (div.firstChild) {
-            div.parentNode?.insertBefore(div.firstChild, div);
-          }
-          div.remove();
-        });
-        mainEl.querySelectorAll("*").forEach((el) => {
-          for (let attr of Array.from(el.attributes)) {
-            if (attr.value && attr.value.includes('"/')) {
-              attr.value = attr.value.replace(/"\//g, '"https://www.canada.ca/');
-            }
-            if (attr.value && attr.value.startsWith("/")) {
-              attr.value = `https://www.canada.ca${attr.value}`;
-            }
-          }
-        });
-        const h1s = doc.querySelectorAll("h1");
-        const hasSubway = doc.querySelector(".gc-subway");
-        const hasLeadAboveH1 = h1s[0]?.previousElementSibling?.matches("p.lead") || !!h1s[0]?.previousElementSibling?.querySelector?.("p.lead");
-        const hasHgroup = doc.querySelector("hgroup");
-        if (hasSubway || h1s.length > 1 || h1s[0] && h1s[0].textContent?.trim().replace("&nbsp;", " ") !== title || h1s[0]?.closest(".well") || hasLeadAboveH1 || hasHgroup) {
-          layout = "without-h1";
-        } else if (!mainEl.classList.contains("container")) {
-          layout = "no-container";
-        } else {
-          h1s[0]?.remove();
-        }
-        pageContent = mainEl.innerHTML.replace(/[ \t]+$/gm, "").replace(/\n{2,}/g, "\n").split("\n").map((line) => line.replace(/(\S)( {2,})/g, (m, first) => first + " ")).join("\n");
-      }
-      pageContent = yield this.formatHtmlWithPrettier(pageContent);
-      const frontMatter = `---\r
-layout: ${layout}\r
-title: "${title}"\r
-description: "${description}"\r
-subject: "${subject}"\r
-keywords: "${keywords}"\r
-${auth}\r
-altLangPage: "${altLangPage}"\r
-dateModified: ${modified}\r
-dateIssued: ${issued}\r
-breadcrumbs: # By default the Canada.ca crumbs is already set\r
-${crumbsYaml || "  []"}\r
-feedbackData:\r
-  section: "${title}"\r
-notedlinks:\r
-  - title: "${title}"\r
-    link: "${url}"\r
-  - title: "Repository sitemap"\r
-    link: "https://${owner}.github.io/${repo}/index.html"\r
----\r
-\r
-${pageContent}`;
-      return frontMatter;
-    });
-  }
-  createConfigYaml(owner, repo, branch, token, existingFiles) {
-    return __async(this, null, function* () {
-      const content = `---
-# standard jekyll configuration
-content_editable: true
-baseurl: /${repo}
-url: https://${owner}.github.io
-repository: ${owner}/${repo}
-website: https://www.canada.ca/en.html
-
-# Remote theme, use the latest version
-remote_theme: wet-boew/gcweb-jekyll
-
-# Files excluded from Jekyll builds
-exclude:
- - README.md
- - Gemfile
- - Gemfile.lock
- - gcweb-jekyll.gemspec
-
-# Site settings
-assets: https://wet-boew.github.io/themes-dist
-creator:
-  en: "Canada Revenue Agency"
-  fr: "Agence du revenu du Canada"
-
-# Custom settings
-developerOptions: false
-devOptionsLocStore: "gitCRATemplateDevOptions"
-exitByURL: true
-exitPage:
-  en: "/${repo}/source/exit-intent-e.html"
-  fr: "/${repo}/source/exit-intent-f.html"
-externalOrigin: "https://www.canada.ca"
-modifiedLinkList: "/${repo}/source/data/exclude-redirect-links.json"
-relativeExternalLinks: false
-testBanner: true
-
-# Page front matter defaults
-defaults:
-  - scope:
-      path: "" # Ensure it's applied to all pages
-      type: pages
-    values:
-      layout: default
-      lang: en
-      share: true
-      sitemenu: true
-      sitesearch: true
-      feedback: true
-      feedbackData:
-        theme: "Taxes"
-      feedbackPath: https://www.canada.ca/etc/designs/canada/wet-boew/assets/feedback/page-feedback-en.html
-      privacyUrl: https://www.canada.ca/en/revenue-agency/corporate/privacy-notice.html
-      termsURL: https://www.canada.ca/en/transparency/terms.html
-      sitemenuPath: https://www.canada.ca/content/dam/canada/sitemenu/sitemenu-v2-en.html
-      contextualFooter:
-        title: "Canada Revenue Agency (CRA)"
-        links:
-          - text: "Contact the CRA"
-            url: "https://www.canada.ca/en/revenue-agency/corporate/contact-information.html"
-          - text: "Update your information"
-            url: "https://www.canada.ca/en/revenue-agency/services/update-information-cra.html"
-          - text: "About the CRA"
-            url: "https://www.canada.ca/en/revenue-agency/corporate/about-canada-revenue-agency-cra.html"
-      css:
-        - https://use.fontawesome.com/releases/v5.15.4/css/all.css
-        - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.css
-        - https://cra-design.github.io/core-prototype/source/css/testing-banner.css
-      script:
-        - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.js
-        - https://cra-design.github.io/core-prototype/source/scripts/external-link-detour.js
-        `;
-      try {
-        console.log(`Creating _config.yml for ${repo}`);
-        yield this.exportToGitHub(owner, repo, branch, "_config.yml", "_config.yml", content, token, existingFiles, false, false);
-      } catch (error) {
-        console.error(`Failed to create _config.yml for ${repo}:`, error);
-      }
-    });
-  }
-  createSitemap(owner, repo, branch, token, existingFiles) {
-    return __async(this, null, function* () {
-      const date = /* @__PURE__ */ new Date();
-      const today = date.toISOString().split("T")[0];
-      const content = `---
-testBanner: false
-title: "${repo} repository sitemap [GCWeb Jekyll pages]"
-dateModified: ${today}
-dateIssued: ${today}
-nositesearch: true
-nomenu: true
-breadcrumbs: false
-feedback: false
-share: false
-noFooterContextual: true
-noFooterCorporate: true
-noFooterMain: true
----
-
-<div class="mrgn-tp-md brdr-bttm">
-    <div class="row">
-        <ul class="toc lst-spcd col-md-12">
-            <li class="col-md-4 col-sm-6"><a class="list-group-item active" data-exit="false" href="https://github.com/${owner}/${repo}/tree/main">GitHub repository</a></li>
-        </ul>
-    </div>
-</div>
-<ul>
-{% assign sitePages = site.pages | sort: "url" %}
-{% for p in sitePages %}
-    {% include sitemaplink.html url = p.url title = p.title %}
-    {% assign page_url = p.url | slice: 1, p.url.size %}
-    {% assign folder_path = page_url | split: "/" %}
-{% endfor %}
-</ul>`;
-      try {
-        console.log(`Creating sitemap for ${repo}`);
-        yield this.exportToGitHub(owner, repo, branch, "index.html", "index.html", content, token, existingFiles, false, false);
-      } catch (error) {
-        console.error(`Failed to create sitemap for ${repo}:`, error);
-      }
-    });
-  }
-  //Set up README.md <-- add mermaid chart to this
-  createInitialReadme(owner, repo, branch, token, existingFiles) {
-    return __async(this, null, function* () {
-      const filename = "README.md";
-      const date = /* @__PURE__ */ new Date();
-      const today = date.toISOString().split("T")[0];
-      date.setDate(date.getDate() - 14);
-      const startDate = date.toISOString().split("T")[0];
-      date.setDate(date.getDate() + 98);
-      const endDate = date.toISOString().split("T")[0];
-      const content = `# ${repo} COP
-
-*description of the COP*
-
-**COP timeframe** ${startDate} - ${endDate}
-
-## Overview
-
-This repository was created via the **Design Assistant**.  
-It contains the template files and in-scope pages needed to get started.
-
-GitHub Pages: [https://${owner}.github.io/${repo}](https://${owner}.github.io/${repo})
-
----
-## Update procedures
-
-Add information on how to manage the repo here.
-
----
-## Design phase roadmap:
-
-- [x] Initial content inventory and repo setup
-- [ ] Prototype: co-design navigation and content
-- [ ] SME review and accuracy check
-- [ ] Validation usability testing (including accessibility review)
-- [ ] Refine prototype (if required)
-- [ ] Spot check usability (if required)
-
-**Updated:**  ${today}
-`;
-      try {
-        console.log(`Creating initial README.md for ${repo}`);
-        yield this.exportToGitHub(owner, repo, branch, filename, filename, content, token, existingFiles, true, false);
-      } catch (error) {
-        console.error(`Failed to create README.md for ${repo}:`, error);
-      }
-    });
-  }
-  filesToCopy = [
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/_includes/header/header.html",
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/_includes/resources-inc/footer.html",
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/source/exit-intent-e.html",
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/404.html"
-  ];
-  copyCoreFiles(owner, repo, branch, token, existingFiles) {
-    return __async(this, null, function* () {
-      for (const file of this.filesToCopy) {
-        try {
-          const urlParts = new URL(file).pathname.split("/");
-          const destPath = urlParts.slice(4).join("/");
-          const response = yield this.fetchService.fetchWithRetry(file, "GET");
-          if (!response.ok)
-            throw new Error(`Failed to fetch: ${file}`);
-          const content = yield response.text();
-          yield this.exportToGitHub(owner, repo, branch, destPath, destPath.split("/").pop() || destPath, content, token, existingFiles, true, true);
-        } catch (error) {
-          console.error(`Error copying core file ${file}:`, error);
-        }
-      }
-    });
-  }
-  // Get list of public repos for an owner (user or org)
-  getRepoList(owner) {
-    return __async(this, null, function* () {
-      const type = yield this.getOwnerType(owner);
-      const url = type === "Organization" ? `https://api.github.com/orgs/${owner}/repos?per_page=100&type=public` : `https://api.github.com/users/${owner}/repos?per_page=100&type=public`;
-      const response = yield fetch(url, {
-        headers: {
-          "Accept": "application/vnd.github+json"
-        }
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to load repos: ${response.status}`);
-      }
-      return response.json();
-    });
-  }
-  // Determine if owner is a user or organization
-  getOwnerType(owner) {
-    return __async(this, null, function* () {
-      const response = yield fetch(`https://api.github.com/users/${owner}`, {
-        headers: { "Accept": "application/vnd.github+json" }
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to fetch owner type for ${owner}: ${response.status}`);
-      }
-      const data = yield response.json();
-      return data.type;
-    });
-  }
-  //Check if repo exists
-  repoExists(owner, repo) {
-    return __async(this, null, function* () {
-      const response = yield fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-        headers: { "Accept": "application/vnd.github+json" }
-      });
-      return response.ok;
-    });
-  }
-  createRepo(owner, repo, branch, token) {
-    return __async(this, null, function* () {
-      console.log(`Repo ${owner}/${repo} not found. Creating...`);
-      const type = yield this.getOwnerType(owner);
-      const url = type === "Organization" ? `https://api.github.com/orgs/${owner}/repos` : `https://api.github.com/user/repos`;
-      const response = yield fetch(url, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/vnd.github+json"
-        },
-        body: JSON.stringify({
-          name: repo,
-          private: false,
-          auto_init: true,
-          default_branch: branch,
-          description: "Repo created via design assistant",
-          homepage: `https://${owner}.github.io/${repo}/`
-        })
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to create repo: ${response.status}`);
-      }
-      console.log(`New repo "${repo}" created.`);
-      return response.json();
-    });
-  }
-  enablePages(owner, repo, branch, token) {
-    return __async(this, null, function* () {
-      const response = yield fetch(`https://api.github.com/repos/${owner}/${repo}/pages`, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/vnd.github+json"
-        },
-        body: JSON.stringify({
-          source: {
-            branch,
-            path: "/"
-          }
-        })
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to enable Pages: ${response.status}`);
-      }
-      console.log(`GitHub Pages enabled on ${branch} branch.`);
-      return response.json();
-    });
-  }
-  setupRepo(owner, repo, branch, token, existingFiles) {
-    return __async(this, null, function* () {
-      const exists = yield this.repoExists(owner, repo);
-      if (!exists) {
-        yield this.createRepo(owner, repo, branch, token);
-        yield this.enablePages(owner, repo, branch, token);
-        const existingFiles2 = yield this.getRepoTree(owner, repo, branch, token);
-        yield this.createInitialReadme(owner, repo, branch, token, existingFiles2);
-      } else {
-        console.log(`Repo ${owner}/${repo} already exists. Skipping creation.`);
-      }
-      yield this.copyCoreFiles(owner, repo, branch, token, existingFiles);
-      yield this.createConfigYaml(owner, repo, branch, token, existingFiles);
-    });
-  }
-  //Check for existing files in a repo
-  getRepoTree(owner, repo, branch, token) {
-    return __async(this, null, function* () {
-      const treeUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
-      const response = yield fetch(treeUrl, {
-        headers: { Authorization: `token ${token}` }
-      });
-      if (!response.ok) {
-        console.warn(`Failed to fetch repo tree: ${response.status}`);
-        return /* @__PURE__ */ new Map();
-      }
-      const data = yield response.json();
-      const fileMap = /* @__PURE__ */ new Map();
-      if (Array.isArray(data.tree)) {
-        for (const item of data.tree) {
-          if (item.type === "blob") {
-            fileMap.set(item.path, item.sha);
-          }
-        }
-      }
-      return fileMap;
-    });
-  }
-  b64EncodeUnicode(str) {
-    const utf8Bytes = new TextEncoder().encode(str);
-    let binary = "";
-    utf8Bytes.forEach((b) => binary += String.fromCharCode(b));
-    return btoa(binary);
-  }
-  exportToGitHub(owner, repo, branch, path, filename, content, token, existingFiles, overwrite = false, copyFromCore = false) {
-    return __async(this, null, function* () {
-      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-      if (!overwrite && existingFiles?.has(path)) {
-        console.log(`Skipping ${path} (already exists, overwrite=false)`);
-        return { skipped: true, path, reason: "exists" };
-      }
-      let sha;
-      if (overwrite && existingFiles?.has(path)) {
-        sha = existingFiles.get(path);
-      }
-      const body = {
-        message: copyFromCore ? `Copy ${filename} from core-prototype (via Design Assistant)` : sha ? `Update ${filename} (via Design Assistant)` : `Add ${filename} (via Design Assistant)`,
-        content: this.b64EncodeUnicode(content),
-        branch
-      };
-      if (sha) {
-        body.sha = sha;
-      }
-      const response = yield fetch(url, {
-        method: "PUT",
-        headers: {
-          "Authorization": `token ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-      });
-      if (!response.ok) {
-        const error = yield response.json().catch(() => ({}));
-        throw new Error(`GitHub API error: ${response.status} ${error.message || ""}`);
-      }
-      return response.json();
-    });
-  }
-  static \u0275fac = function ExportGitHubService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ExportGitHubService)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ExportGitHubService, factory: _ExportGitHubService.\u0275fac, providedIn: "root" });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExportGitHubService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
-// src/app/views/ia-assistant/components/export-github.component.ts
-var _c019 = (a0) => ({ "ng-invalid ng-dirty": a0 });
-function ExportGithubComponent_div_11_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14)(1, "p");
-    \u0275\u0275text(2, "To push changes to a repository, you need a valid GitHub token. Your token works like a username and password, so keep it private and do not share it with anyone.");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "p");
-    \u0275\u0275text(4, "Follow these steps to create a new GitHub token:");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "ol")(6, "li");
-    \u0275\u0275text(7, "Go to your GitHub ");
-    \u0275\u0275elementStart(8, "strong");
-    \u0275\u0275text(9, "Settings");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(10, ".");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "li");
-    \u0275\u0275text(12, "Select ");
-    \u0275\u0275elementStart(13, "strong");
-    \u0275\u0275text(14, "Developer settings");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(15, ".");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "li");
-    \u0275\u0275text(17, "Click ");
-    \u0275\u0275elementStart(18, "strong");
-    \u0275\u0275text(19, "Personal Access Tokens");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(20, " > ");
-    \u0275\u0275elementStart(21, "strong");
-    \u0275\u0275text(22, "Fine-grained tokens");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(23, ".");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(24, "li");
-    \u0275\u0275text(25, "Click ");
-    \u0275\u0275elementStart(26, "strong");
-    \u0275\u0275text(27, "Generate new token");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(28, ".");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(29, "li");
-    \u0275\u0275text(30, "Give your token a ");
-    \u0275\u0275elementStart(31, "strong");
-    \u0275\u0275text(32, "unique name");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(33, " and a ");
-    \u0275\u0275elementStart(34, "strong");
-    \u0275\u0275text(35, "description");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(36, ".");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(37, "li");
-    \u0275\u0275text(38, "Under ");
-    \u0275\u0275elementStart(39, "strong");
-    \u0275\u0275text(40, "Resource owner");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(41, ", select either cra-design or your personal account.");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(42, "li");
-    \u0275\u0275text(43, "Under ");
-    \u0275\u0275elementStart(44, "strong");
-    \u0275\u0275text(45, "Repository access");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(46, ", select ");
-    \u0275\u0275elementStart(47, "strong");
-    \u0275\u0275text(48, "All repositories");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(49, ".");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(50, "li");
-    \u0275\u0275text(51, "Add the necessary ");
-    \u0275\u0275elementStart(52, "strong");
-    \u0275\u0275text(53, "permissions");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(54, " for pushing changes to repositories: ");
-    \u0275\u0275elementStart(55, "ul")(56, "li")(57, "strong");
-    \u0275\u0275text(58, "Administration");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(59, " (Access: Read and write)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(60, "li")(61, "strong");
-    \u0275\u0275text(62, "Contents");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(63, " (Access: Read and write)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(64, "li")(65, "strong");
-    \u0275\u0275text(66, "Metadata");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(67, " (Access: Read-only)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(68, "li")(69, "strong");
-    \u0275\u0275text(70, "Pages");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(71, " (Access: Read and write)");
+    \u0275\u0275elementStart(5, "div", 83);
+    \u0275\u0275element(6, "i", 84);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(72, "li");
-    \u0275\u0275text(73, "Copy the generated token and enter it into the GitHub token field whenever you push changes to GitHub.");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(74, "p")(75, "strong");
-    \u0275\u0275text(76, "Important:");
+    \u0275\u0275elementStart(7, "div", 85)(8, "div", 86);
+    \u0275\u0275element(9, "i", 87);
     \u0275\u0275elementEnd();
-    \u0275\u0275text(77, " Keep this token secret. Treat it like a password.");
+    \u0275\u0275elementStart(10, "div", 88)(11, "div", 89);
+    \u0275\u0275text(12);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "p", 90);
+    \u0275\u0275text(14);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(15, JourneyMapComponent_div_54_div_26_div_15_Template, 2, 1, "div", 91);
     \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(16, "div", 92)(17, "div", 93)(18, "div", 94);
+    \u0275\u0275element(19, "i", 95);
+    \u0275\u0275elementStart(20, "span");
+    \u0275\u0275text(21, "Improvements");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(22, "div", 96);
+    \u0275\u0275template(23, JourneyMapComponent_div_54_div_26_div_23_Template, 5, 15, "div", 97);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(24, "div", 98)(25, "div", 34)(26, "input", 99, 0);
+    \u0275\u0275listener("keydown.enter", function JourneyMapComponent_div_54_div_26_Template_input_keydown_enter_26_listener() {
+      const step_r5 = \u0275\u0275restoreView(_r3).$implicit;
+      const manualOptInput_r8 = \u0275\u0275reference(27);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(manualOptInput_r8.value ? ctx_r1.handleAddManual(step_r5.id, manualOptInput_r8) : null);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(28, "button", 100);
+    \u0275\u0275listener("click", function JourneyMapComponent_div_54_div_26_Template_button_click_28_listener() {
+      const step_r5 = \u0275\u0275restoreView(_r3).$implicit;
+      const manualOptInput_r8 = \u0275\u0275reference(27);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(manualOptInput_r8.value ? ctx_r1.handleAddManual(step_r5.id, manualOptInput_r8) : null);
+    });
+    \u0275\u0275elementEnd()()()()()();
+  }
+  if (rf & 2) {
+    const step_r5 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(7, _c59, step_r5.sentiment === "negative", step_r5.sentiment !== "negative"));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(step_r5.action);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction3(10, _c67, step_r5.sentiment === "positive", step_r5.sentiment === "negative", step_r5.sentiment === "neutral"));
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(step_r5.step || "System Response");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(step_r5.systemResponse);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", step_r5.painPoints.length > 0);
+    \u0275\u0275advance(8);
+    \u0275\u0275property("ngForOf", step_r5.opportunities);
   }
 }
-function ExportGithubComponent_p_message_19_Template(rf, ctx) {
+function JourneyMapComponent_div_54_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p-message", 15);
+    \u0275\u0275elementStart(0, "div", 63)(1, "div", 64)(2, "div")(3, "h2", 65);
+    \u0275\u0275text(4, "Journey Map");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "p", 66);
+    \u0275\u0275text(6, "Visualizing user interactions and current experiences.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(7, "div", 67)(8, "span", 68);
+    \u0275\u0275element(9, "span", 69);
+    \u0275\u0275text(10, " Pain Point");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(11, "span", 68);
+    \u0275\u0275element(12, "i", 70);
+    \u0275\u0275text(13, " AI Suggestion");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(14, "div", 71)(15, "div", 72)(16, "div", 73)(17, "div", 74);
+    \u0275\u0275text(18, "User Action");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(19, "div", 75);
+    \u0275\u0275text(20, "Current Experience");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(21, "div", 75);
+    \u0275\u0275text(22, "Content Opportunities");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(23, "div", 76);
+    \u0275\u0275element(24, "div", 77)(25, "div", 78);
+    \u0275\u0275template(26, JourneyMapComponent_div_54_div_26_Template, 29, 14, "div", 79);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(26);
+    \u0275\u0275property("ngForOf", ctx_r1.journeySteps);
+  }
+}
+function JourneyMapComponent_div_55_li_19_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 123);
+    \u0275\u0275element(1, "span", 124);
+    \u0275\u0275elementStart(2, "span", 125);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const goal_r9 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(goal_r9);
+  }
+}
+function JourneyMapComponent_div_55_li_24_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 123);
+    \u0275\u0275element(1, "span", 126);
+    \u0275\u0275elementStart(2, "span", 125);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const frust_r10 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(frust_r10);
+  }
+}
+function JourneyMapComponent_div_55_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 63)(1, "h2", 111);
+    \u0275\u0275text(2, "User Persona");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p", 112);
+    \u0275\u0275text(4, "Target audience profile.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 47)(6, "div", 113)(7, "div", 114);
+    \u0275\u0275element(8, "p-avatar", 115);
+    \u0275\u0275elementStart(9, "h3", 116);
+    \u0275\u0275text(10);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(11, "p", 117);
+    \u0275\u0275text(12);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(13, "div", 118)(14, "div", 119)(15, "div", 120)(16, "h4", 121);
+    \u0275\u0275text(17, "Goals & Needs");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(18, "ul", 7);
+    \u0275\u0275template(19, JourneyMapComponent_div_55_li_19_Template, 4, 1, "li", 122);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(20, "div", 120)(21, "h4", 121);
+    \u0275\u0275text(22, "Pain Points & Frustrations");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(23, "ul", 7);
+    \u0275\u0275template(24, JourneyMapComponent_div_55_li_24_Template, 4, 1, "li", 122);
+    \u0275\u0275elementEnd()()()()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(10);
+    \u0275\u0275textInterpolate(ctx_r1.persona.role);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r1.persona.demographics);
+    \u0275\u0275advance(7);
+    \u0275\u0275property("ngForOf", ctx_r1.persona.goals);
+    \u0275\u0275advance(5);
+    \u0275\u0275property("ngForOf", ctx_r1.persona.frustrations);
+  }
+}
+function JourneyMapComponent_div_56_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 128)(1, "div", 129)(2, "div", 130)(3, "h4", 131);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "p", 132);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(7, "div", 133);
+    \u0275\u0275elementStart(8, "div", 134)(9, "span", 135);
+    \u0275\u0275text(10, "Scenario");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(11, "p", 136);
+    \u0275\u0275text(12);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const task_r11 = ctx.$implicit;
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(task_r11.title);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(task_r11.description);
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1('"', task_r11.scenario, '"');
+  }
+}
+function JourneyMapComponent_div_56_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 63)(1, "h2", 111);
+    \u0275\u0275text(2, "Task Analysis");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p", 112);
+    \u0275\u0275text(4, "Breakdown of user tasks and scenarios.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 119);
+    \u0275\u0275template(6, JourneyMapComponent_div_56_div_6_Template, 13, 3, "div", 127);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275property("ngForOf", ctx_r1.tasks);
+  }
+}
+function JourneyMapComponent_div_57_div_6_li_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 147);
+    \u0275\u0275element(1, "span", 148);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ac_r12 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", ac_r12, " ");
+  }
+}
+function JourneyMapComponent_div_57_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 138)(1, "div", 139)(2, "div", 140)(3, "h3", 141);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(5, "p-tag", 142);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "div", 143)(7, "p", 144);
+    \u0275\u0275text(8);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(9, "div")(10, "h4", 145);
+    \u0275\u0275text(11, "Acceptance Criteria");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "ul", 7);
+    \u0275\u0275template(13, JourneyMapComponent_div_57_div_6_li_13_Template, 3, 1, "li", 146);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const story_r13 = ctx.$implicit;
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(story_r13.title);
+    \u0275\u0275advance();
+    \u0275\u0275property("value", story_r13.painPointRef || "General");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1('"', story_r13.story, '"');
+    \u0275\u0275advance(5);
+    \u0275\u0275property("ngForOf", story_r13.acceptance);
+  }
+}
+function JourneyMapComponent_div_57_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 63)(1, "h2", 111);
+    \u0275\u0275text(2, "User Stories");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p", 112);
+    \u0275\u0275text(4, "Agile user stories mapped to identified pain points.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 47);
+    \u0275\u0275template(6, JourneyMapComponent_div_57_div_6_Template, 14, 4, "div", 137);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275property("ngForOf", ctx_r1.userStories);
+  }
+}
+function JourneyMapComponent_div_58_div_8_span_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 161);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
+    const fb_r15 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r0.ownerError);
+    \u0275\u0275textInterpolate(fb_r15.url);
   }
 }
-var ExportGithubComponent = class _ExportGithubComponent {
-  iaState = inject(IaStateService);
-  exportGitHubService = inject(ExportGitHubService);
-  fetchService = inject(FetchService);
-  translate = inject(TranslateService);
-  iaData = this.iaState.getIaData;
-  gitHubData = this.iaState.getGitHubData;
-  repos = [];
-  filteredRepos = [];
-  ownerError = "";
-  showHelp = false;
-  userToken = "";
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this.iaState.loadFromLocalStorage();
-      yield this.updateRepoList();
+function JourneyMapComponent_div_58_div_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 155)(1, "div", 156)(2, "div", 157)(3, "span", 158);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, JourneyMapComponent_div_58_div_8_span_5_Template, 2, 1, "span", 159);
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(6, "i", 84);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "p", 160);
+    \u0275\u0275text(8);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const fb_r15 = ctx.$implicit;
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(fb_r15.page);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", fb_r15.url);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", \u0275\u0275pureFunction3(4, _c106, fb_r15.sentiment === "positive", fb_r15.sentiment === "negative", fb_r15.sentiment === "neutral"));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(fb_r15.comment);
+  }
+}
+function JourneyMapComponent_div_58_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r14 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 149)(1, "div", 150)(2, "div", 123)(3, "span", 51);
+    \u0275\u0275text(4, "Recent Inputs");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(5, "p-badge", 151);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "button", 152);
+    \u0275\u0275listener("click", function JourneyMapComponent_div_58_Template_button_click_6_listener() {
+      \u0275\u0275restoreView(_r14);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.showRecentInputs = false);
     });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(7, "div", 153);
+    \u0275\u0275template(8, JourneyMapComponent_div_58_div_8_Template, 9, 8, "div", 154);
+    \u0275\u0275elementEnd()();
   }
-  updateRepoList() {
-    return __async(this, null, function* () {
-      this.ownerError = "";
-      this.repos = [];
-      try {
-        const repos = yield this.exportGitHubService.getRepoList(this.gitHubData().owner);
-        this.repos = repos.map((r2) => r2.name);
-      } catch (error) {
-        if (error.message?.includes("404")) {
-          this.ownerError = `GitHub owner "${this.gitHubData().owner}" not found.`;
-        } else {
-          this.ownerError = `Failed to load repositories for "${this.gitHubData().owner}".`;
-        }
-      }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(5);
+    \u0275\u0275property("value", ctx_r1.feedbackData.length.toString());
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", ctx_r1.feedbackData);
+  }
+}
+function JourneyMapComponent_div_73_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 162);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.aiError);
+  }
+}
+function JourneyMapComponent_div_74_button_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r16 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 167);
+    \u0275\u0275listener("click", function JourneyMapComponent_div_74_button_6_Template_button_click_0_listener() {
+      const point_r17 = \u0275\u0275restoreView(_r16).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.handleAddPrediction(point_r17));
     });
+    \u0275\u0275element(1, "i", 168);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
   }
-  filterRepos(event) {
-    const query = event.query?.trim().toLowerCase() || "";
-    const startsWith = this.repos.filter((r2) => r2.toLowerCase().startsWith(query));
-    const includes = this.repos.filter((r2) => r2.toLowerCase().includes(query) && !r2.toLowerCase().startsWith(query));
-    this.filteredRepos = Array.from(/* @__PURE__ */ new Set([...startsWith, ...includes]));
+  if (rf & 2) {
+    const point_r17 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", point_r17, " ");
   }
-  ownerFilter = /^[a-zA-Z0-9-]*$/;
-  repoFilter = /^[a-zA-Z0-9-._]*$/;
-  branchFilter = /^[a-zA-Z0-9./-]*$/;
-  updateOwner() {
-    this.gitHubData().owner = this.gitHubData().owner.trim().toLowerCase().replace(/^[-]+|[-]+$/g, "").replace(/[-]{2,}/g, "-");
-    if (!this.gitHubData().owner) {
-      this.gitHubData().owner = "cra-design";
-    }
+}
+function JourneyMapComponent_div_74_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 163)(1, "div", 164);
+    \u0275\u0275element(2, "i", 165);
+    \u0275\u0275elementStart(3, "span");
+    \u0275\u0275text(4, "Suggested Pain Points");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(5, "div", 25);
+    \u0275\u0275template(6, JourneyMapComponent_div_74_button_6_Template, 3, 1, "button", 166);
+    \u0275\u0275elementEnd()();
   }
-  updateRepo() {
-    this.gitHubData().repo = this.gitHubData().repo.trim().replace(/^[.-]+|[.-]+$/g, "").replace(/(\/|.)lock$/, "").replace(/[.]{2,}/g, ".").replace(/[-]{2,}/g, "-");
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275property("ngForOf", ctx_r1.predictedPoints);
   }
-  updateBranch() {
-    this.gitHubData().branch = this.gitHubData().branch.trim().replace(/^[./]+|[./]+$/g, "").replace(/(\/|.)lock$/, "").replace(/[.]{2,}/g, ".").replace(/\/{2,}/g, "/");
-    if (!this.gitHubData().branch) {
-      this.gitHubData().branch = "main";
-    }
+}
+function JourneyMapComponent_ng_template_79_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i");
+    \u0275\u0275text(1);
   }
-  //Get in-scope URLs and page content
-  getUrlandContent(node) {
-    return __async(this, null, function* () {
-      const pages = [];
-      if (node.data.isUserAdded && node.data.url) {
-        try {
-          const doc = yield this.fetchService.fetchContent(node.data.url, "prod");
-          const jekyllFormatted = yield this.exportGitHubService.formatDocumentAsJekyll(doc, node.data.url, this.gitHubData().owner, this.gitHubData().repo);
-          pages.push({ url: node.data.url, content: jekyllFormatted });
-        } catch (error) {
-          console.error(`Error fetching content for ${node.data.url}:`, error);
-        }
-      }
-      if (node.children) {
-        for (const child of node.children) {
-          const childPages = yield this.getUrlandContent(child);
-          pages.push(...childPages);
-        }
-      }
-      return pages;
+  if (rf & 2) {
+    const item_r18 = ctx.$implicit;
+    \u0275\u0275classMap(item_r18.icon + " mr-2");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", item_r18.label, " ");
+  }
+}
+function JourneyMapComponent_ng_template_84_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r19 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 169);
+    \u0275\u0275listener("click", function JourneyMapComponent_ng_template_84_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r19);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleAddFeedback());
     });
+    \u0275\u0275elementEnd();
   }
-  exportProjectToGitHub(owner, repo, branch, token, overwrite = false) {
-    return __async(this, null, function* () {
-      this.iaState.setGitHubData({ owner, repo, branch });
-      this.iaState.saveToLocalStorage();
-      const nodes = this.iaState.getIaData().iaTree;
-      const pages = yield this.getUrlandContent(nodes[0]);
-      console.log("Exporting pages to GitHub:", pages);
-      function getCommonPrefix(urls2) {
-        const paths = urls2.map((url) => new URL(url).pathname.split("/").filter(Boolean));
-        const first = paths[0];
-        const prefix = [];
-        for (let i = 0; i < first.length; i++) {
-          const segment = first[i];
-          if (paths.every((p2) => p2[i] === segment)) {
-            prefix.push(segment);
-          } else {
-            break;
-          }
-        }
-        if (prefix.length) {
-          const last = prefix[prefix.length - 1];
-          if (/\.[a-z0-9]+$/i.test(last)) {
-            prefix.pop();
-          }
-        }
-        return "/" + prefix.join("/");
-      }
-      const urls = pages.map((page) => page.url);
-      const commonRoot = getCommonPrefix(urls);
-      console.log("Detected common root:", commonRoot);
-      const exportPages = pages.map((p2) => {
-        let path = new URL(p2.url).pathname;
-        if (path.startsWith(commonRoot)) {
-          path = path.slice(commonRoot.length);
-        }
-        path = path.replace(/^\/+/, "");
-        const lastSegment = path.split("/").pop() || "index.html";
-        return { url: p2.url, path, content: p2.content, filename: lastSegment };
-      });
-      console.log("Exporting pages to GitHub:", exportPages);
-      const existingFiles = yield this.exportGitHubService.getRepoTree(owner, repo, branch, token);
-      yield this.exportGitHubService.setupRepo(owner, repo, branch, token, existingFiles);
-      console.log("Repository setup complete.");
-      const redirects = [];
-      for (const page of exportPages) {
-        try {
-          const result = yield this.exportGitHubService.exportToGitHub(owner, repo, branch, page.path, page.filename, page.content, token, existingFiles, overwrite);
-          redirects.push({ origin: page.url, destination: `/${repo}/${page.path}` });
-        } catch (error) {
-          console.error(`Error exporting ${page.path}:`, error);
-        }
-      }
-      const redirectsJson = JSON.stringify(redirects, null, 2);
-      yield this.exportGitHubService.exportToGitHub(owner, repo, branch, "source/data/exclude-redirect-links.json", "exclude-redirect-links.json", redirectsJson, token, existingFiles, overwrite);
-      console.log("Page export complete.");
+}
+function JourneyMapComponent_ng_template_114_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r20 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 170);
+    \u0275\u0275listener("click", function JourneyMapComponent_ng_template_114_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r20);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.showSettingsModal = false);
     });
+    \u0275\u0275elementEnd();
   }
-  static \u0275fac = function ExportGithubComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ExportGithubComponent)();
+}
+function JourneyMapComponent_ng_template_116_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 171);
+    \u0275\u0275element(1, "i", 172);
+    \u0275\u0275elementStart(2, "span", 173);
+    \u0275\u0275text(3, "AI Project Generator");
+    \u0275\u0275elementEnd()();
+  }
+}
+function JourneyMapComponent_div_124_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 174);
+    \u0275\u0275element(1, "i", 175);
+    \u0275\u0275elementStart(2, "span", 176);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.generatorError);
+  }
+}
+function JourneyMapComponent_ng_template_125_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r21 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 177);
+    \u0275\u0275listener("click", function JourneyMapComponent_ng_template_125_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r21);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleGenerateDashboard());
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("label", ctx_r1.isGenerating ? "Generating..." : "Generate Dashboard")("icon", ctx_r1.isGenerating ? "pi pi-spin pi-spinner" : "pi pi-star-fill")("disabled", !ctx_r1.generatorContext || ctx_r1.isGenerating);
+  }
+}
+var DEFAULT_GEMINI_MODEL = "gemini-2.5-flash-preview-09-2025";
+var DEFAULT_OPENAI_MODEL = "gpt-4-turbo-preview";
+var INITIAL_PERSONA = {
+  role: "Prospective Homebuyer",
+  demographics: "Canadian Resident, Age 25-40, First-time buyer",
+  goals: [
+    "Find FHSA contribution limits",
+    "Plan savings effectively for first home",
+    "Maximize tax benefits"
+  ],
+  frustrations: [
+    "Unclear contribution deadlines",
+    "Confusion about carry-forward rules",
+    "Lack of quick reference PDF guides",
+    "Complex language regarding 'contribution room'"
+  ]
+};
+var INITIAL_JOURNEY_STEPS = [
+  {
+    id: 1,
+    step: "Access FHSA Information",
+    actor: "User",
+    action: "Searches for contribution limits",
+    systemResponse: "Shows $40,000 limit info",
+    sentiment: "neutral",
+    painPoints: ["Confusion about deadlines"],
+    opportunities: [
+      { id: "opt1", text: "Add a bold 'Key Deadlines' callout box", source: "ai", status: "pending" },
+      { id: "opt2", text: "Link to 'Carry-forward' explainer video", source: "ai", status: "pending" }
+    ]
+  },
+  {
+    id: 2,
+    step: "Review Details",
+    actor: "User",
+    action: "Reads about participation room",
+    systemResponse: "Provides general text blocks",
+    sentiment: "negative",
+    painPoints: ["Lack of quick reference materials"],
+    opportunities: [
+      { id: "opt3", text: "Create a downloadable 1-page PDF summary", source: "ai", status: "approved" }
+    ]
+  },
+  {
+    id: 3,
+    step: "Navigate to Contribution",
+    actor: "User",
+    action: "Clicks detailed guidelines",
+    systemResponse: "Navigates to contribution details page",
+    sentiment: "neutral",
+    painPoints: [],
+    opportunities: []
+  },
+  {
+    id: 4,
+    step: "Analyze Rules",
+    actor: "User",
+    action: "Checks timing rules",
+    systemResponse: "Shows rules about non-business days",
+    sentiment: "negative",
+    painPoints: ["Uncertainty about contribution timing"],
+    opportunities: [
+      { id: "opt4", text: "Add a 'Contribution Date Calculator' widget", source: "ai", status: "pending" }
+    ]
+  },
+  {
+    id: 5,
+    step: "Specific Scenarios",
+    actor: "User",
+    action: "Looks for spousal info",
+    systemResponse: "Generic info provided",
+    sentiment: "negative",
+    painPoints: ["Inquiries about spousal accounts"],
+    opportunities: [
+      { id: "opt5", text: "Rewrite spousal section with clear 'If/Then' examples", source: "user", status: "approved" }
+    ]
+  }
+];
+var INITIAL_TASKS = [
+  { title: "Check Tax Filing Deadlines", description: "Find info about deadlines and specific tax credits.", scenario: "Freelancer ensuring timely filing." },
+  { title: "Access Tax Forms", description: "Download forms, guides, or publications.", scenario: "Small business owner needing T2125 form." },
+  { title: "Find Contact Information", description: "Locate phone numbers or office locations.", scenario: "Urgent questions requiring representative assistance." },
+  { title: "Understand Rights", description: "Learn about taxpayer rights and audit processes.", scenario: "User received notice of audit." }
+];
+var INITIAL_USER_STORIES = [
+  {
+    title: "Confusion about Limits",
+    story: "As a prospective homebuyer, I want to find out my FHSA limit so that I can plan my savings.",
+    acceptance: ["Navigate to FHSA page", "Find clear 2024 limit", "Clarify carry-forward rules"],
+    painPointRef: "Pain Point 1, 2"
+  },
+  {
+    title: "Quick Reference Guide",
+    story: "As a user, I want a downloadable PDF summary so that I can reference rules offline.",
+    acceptance: ["Locate PDF link", "Download accurate summary"],
+    painPointRef: "Pain Point 3"
+  }
+];
+var JourneyMapComponent = class _JourneyMapComponent {
+  // State
+  activeView = "journey";
+  mobileSidebarVisible = false;
+  showFeedbackModal = false;
+  showSettingsModal = false;
+  showGeneratorModal = false;
+  showRecentInputs = true;
+  // Data
+  persona = INITIAL_PERSONA;
+  journeySteps = INITIAL_JOURNEY_STEPS;
+  tasks = INITIAL_TASKS;
+  userStories = INITIAL_USER_STORIES;
+  feedbackData = [];
+  // Forms & Config
+  newFeedback = {
+    page: INITIAL_JOURNEY_STEPS[0].step,
+    url: "",
+    sentiment: "negative",
+    comment: ""
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExportGithubComponent, selectors: [["ca-export-github"]], decls: 33, vars: 17, consts: [["icon", "pi pi-question-circle", "styleClass", "-m-3 nohover", "iconPos", "right", "severity", "help", "label", "GitHub token", 3, "onClick", "rounded", "text"], ["class", "text-sm mt-2", 4, "ngIf"], ["legend", "Export settings"], [1, "flex", "flex-column", "gap-2"], [1, "flex", "flex-column", "gap-1"], ["type", "text", "id", "owner", "pInputText", "", "pSize", "small", "fluid", "", "maxlength", "39", 3, "ngModelChange", "blur", "ngModel", "pKeyFilter", "ngClass"], ["for", "repo"], ["severity", "error", "variant", "simple", "size", "small", 4, "ngIf"], ["id", "repo", "pSize", "small", "maxlength", "100", "fluid", "", 3, "ngModelChange", "input", "completeMethod", "ngModel", "suggestions", "dropdown", "pKeyFilter"], ["type", "text", "id", "branch", "pInputText", "", "pSize", "small", "fluid", "", 3, "ngModelChange", "blur", "ngModel", "pKeyFilter"], ["for", "branch"], ["feedback", "false", "id", "token", "pSize", "small", "fluid", "", 3, "ngModelChange", "ngModel"], ["for", "token"], ["icon", "pi pi-github", "label", "Export to GitHub", "severity", "primary", 3, "onClick", "disabled"], [1, "text-sm", "mt-2"], ["severity", "error", "variant", "simple", "size", "small"]], template: function ExportGithubComponent_Template(rf, ctx) {
+  llmConfig = {
+    provider: "gemini",
+    apiKey: "",
+    model: DEFAULT_GEMINI_MODEL
+  };
+  generatorContext = "";
+  isGenerating = false;
+  generatorError = null;
+  isAnalyzing = false;
+  predictedPoints = [];
+  aiError = null;
+  sentimentOptions = [
+    { label: "Positive", value: "positive", icon: "pi pi-smile" },
+    { label: "Neutral", value: "neutral", icon: "pi pi-circle" },
+    { label: "Negative", value: "negative", icon: "pi pi-thumbs-down" }
+  ];
+  messageService = inject(MessageService);
+  http = inject(HttpClient);
+  ngOnInit() {
+    if (this.journeySteps.length > 0) {
+      this.newFeedback.page = this.journeySteps[0].step;
+    }
+  }
+  // --- Methods ---
+  handleApprove(stepId, optId) {
+    const step = this.journeySteps.find((s2) => s2.id === stepId);
+    if (step) {
+      const opt = step.opportunities.find((o2) => o2.id === optId);
+      if (opt)
+        opt.status = "approved";
+    }
+  }
+  handleReject(stepId, optId) {
+    const step = this.journeySteps.find((s2) => s2.id === stepId);
+    if (step) {
+      step.opportunities = step.opportunities.filter((o2) => o2.id !== optId);
+    }
+  }
+  handleAddManual(stepId, input2) {
+    const text2 = input2.value.trim();
+    if (!text2)
+      return;
+    const step = this.journeySteps.find((s2) => s2.id === stepId);
+    if (step) {
+      step.opportunities.push({
+        id: Date.now(),
+        text: text2,
+        source: "user",
+        status: "approved"
+      });
+      input2.value = "";
+    }
+  }
+  handleAnalyzeUrl() {
+    return __async(this, null, function* () {
+      if (!this.newFeedback.url)
+        return;
+      this.isAnalyzing = true;
+      this.predictedPoints = [];
+      this.aiError = null;
+      const prompt = `
+      You are a Senior UX Researcher.
+      Analyze the user experience for the following URL or Page Title: "${this.newFeedback.url}".
+      Predict 3-5 distinct, specific user pain points or usability frictions common for this type of page.
+      
+      Return ONLY a JSON object with the following structure:
+      { "predictions": ["prediction 1", "prediction 2", "prediction 3"] }
+    `;
+      try {
+        const data = yield this.fetchLLM(prompt, "json");
+        if (data?.predictions) {
+          this.predictedPoints = data.predictions.map((p2) => `Detected: ${p2}`);
+        } else {
+          this.aiError = "No specific pain points detected.";
+        }
+      } catch (error) {
+        console.error("LLM Analysis Failed:", error);
+        this.aiError = `Unable to analyze. ${error.message || "Unknown Error"}`;
+      } finally {
+        this.isAnalyzing = false;
+      }
+    });
+  }
+  handleAddPrediction(text2) {
+    const prefix = this.newFeedback.comment ? "\n" : "";
+    this.newFeedback.comment += `${prefix}[AI Detected] ${text2}`;
+  }
+  handleAddFeedback() {
+    const feedbackItem = __spreadValues({
+      id: Date.now()
+    }, this.newFeedback);
+    this.feedbackData = [feedbackItem, ...this.feedbackData];
+    this.showRecentInputs = true;
+    if (this.newFeedback.sentiment === "negative") {
+      const step = this.journeySteps.find((s2) => s2.step === this.newFeedback.page);
+      if (step) {
+        step.painPoints.push(this.newFeedback.comment);
+      }
+    }
+    this.showFeedbackModal = false;
+    this.messageService.add({ severity: "success", summary: "Success", detail: "Feedback added to dashboard" });
+    this.newFeedback = {
+      page: this.journeySteps[0].step,
+      url: "",
+      sentiment: "negative",
+      comment: ""
+    };
+    this.predictedPoints = [];
+    this.aiError = null;
+  }
+  handleGenerateDashboard() {
+    return __async(this, null, function* () {
+      if (!this.generatorContext)
+        return;
+      this.isGenerating = true;
+      this.generatorError = null;
+      const prompt = `
+      You are a Product Designer and UX Strategist.
+      Generate a complete Customer Experience (CX) dashboard dataset based on the following context or topic: "${this.generatorContext}".
+      
+      You need to generate 4 distinct sections of data:
+      1. Persona: A detailed user persona relevant to this context.
+      2. Journey Map: A 5-step user journey sequence with actions, system responses, pain points, AND content opportunities.
+      3. Task Analysis: 4 key user tasks with scenarios.
+      4. User Stories: 2-3 agile user stories with acceptance criteria.
+
+      Return ONLY a JSON object with this exact schema:
+      {
+        "persona": {
+          "role": "string",
+          "demographics": "string",
+          "goals": ["string", "string"],
+          "frustrations": ["string", "string"]
+        },
+        "journey": [
+          {
+            "step": "string (Step Name/Page Title)",
+            "action": "string (User Action)",
+            "systemResponse": "string (System Response)",
+            "sentiment": "positive" | "neutral" | "negative",
+            "painPoints": ["string"],
+            "opportunities": ["string (Proposed content change or fix)"]
+          }
+        ],
+        "tasks": [
+          { "title": "string", "description": "string", "scenario": "string" }
+        ],
+        "stories": [
+          { "title": "string", "story": "As a [role], I want [action] so that [benefit]", "acceptance": ["string"], "painPointRef": "string" }
+        ]
+      }
+    `;
+      try {
+        const data = yield this.fetchLLM(prompt, "json");
+        if (data.persona)
+          this.persona = data.persona;
+        if (data.journey) {
+          this.journeySteps = data.journey.map((s2, i) => __spreadProps(__spreadValues({
+            id: i
+          }, s2), {
+            opportunities: (s2.opportunities || []).map((optText, optIdx) => ({
+              id: `gen-${i}-${optIdx}`,
+              text: optText,
+              source: "ai",
+              status: "pending"
+            }))
+          }));
+          if (this.journeySteps.length > 0)
+            this.newFeedback.page = this.journeySteps[0].step;
+        }
+        if (data.tasks)
+          this.tasks = data.tasks;
+        if (data.stories)
+          this.userStories = data.stories;
+        this.showGeneratorModal = false;
+        this.generatorContext = "";
+        this.messageService.add({ severity: "success", summary: "Generated", detail: "Dashboard updated with new project data" });
+      } catch (error) {
+        console.error("Dashboard Generation Failed:", error);
+        this.generatorError = `Failed to generate dashboard. ${error.message}`;
+      } finally {
+        this.isGenerating = false;
+      }
+    });
+  }
+  // --- LLM Service Logic ---
+  fetchLLM(promptText, mode = "json") {
+    return __async(this, null, function* () {
+      let endpoint, payload, headers;
+      if (this.llmConfig.provider === "openai") {
+        endpoint = "https://api.openai.com/v1/chat/completions";
+        headers = {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${this.llmConfig.apiKey}`
+        };
+        payload = {
+          model: DEFAULT_OPENAI_MODEL,
+          messages: [{ role: "user", content: promptText }],
+          response_format: mode === "json" ? { type: "json_object" } : void 0
+        };
+      } else {
+        const keyToUse = this.llmConfig.apiKey || "";
+        endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_GEMINI_MODEL}:generateContent?key=${keyToUse}`;
+        headers = { "Content-Type": "application/json" };
+        payload = {
+          contents: [{ parts: [{ text: promptText }] }],
+          generationConfig: mode === "json" ? { responseMimeType: "application/json" } : void 0
+        };
+      }
+      try {
+        const response = yield fetch(endpoint, {
+          method: "POST",
+          headers,
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+          const errText = yield response.text();
+          throw new Error(`API Error (${response.status}): ${errText}`);
+        }
+        const data = yield response.json();
+        let textContent;
+        if (this.llmConfig.provider === "openai") {
+          textContent = data.choices?.[0]?.message?.content;
+        } else {
+          textContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        }
+        if (!textContent)
+          throw new Error("No content generated from LLM.");
+        return mode === "json" ? JSON.parse(textContent) : textContent;
+      } catch (error) {
+        throw error;
+      }
+    });
+  }
+  static \u0275fac = function JourneyMapComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _JourneyMapComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _JourneyMapComponent, selectors: [["app-cx-dashboard"]], features: [\u0275\u0275ProvidersFeature([MessageService])], decls: 126, vars: 63, consts: [["manualOptInput", ""], [1, "flex", "h-screen", "surface-ground", "font-family"], [1, "hidden", "md:flex", "flex-column", "w-18rem", "surface-section", "border-right-1", "surface-border", "h-full", "fixed", "z-2"], [1, "p-4", "border-bottom-1", "surface-border", "flex", "align-items-center", "gap-2"], [1, "pi", "pi-th-large", "text-indigo-600", "text-2xl"], [1, "font-bold", "text-xl", "text-indigo-600"], [1, "flex-1", "overflow-y-auto", "p-3"], [1, "list-none", "p-0", "m-0", "flex", "flex-column", "gap-2"], ["pButton", "", 1, "p-button-text", "w-full", "justify-content-start", 3, "click"], [1, "pi", "pi-map", "mr-2"], [1, "pi", "pi-users", "mr-2"], [1, "pi", "pi-list", "mr-2"], [1, "pi", "pi-file", "mr-2"], [1, "p-3", "border-top-1", "surface-border", "flex", "flex-column", "gap-2"], ["pButton", "", "label", "AI Generator", "icon", "pi pi-bolt", 1, "p-button-outlined", "p-button-warning", "w-full", 3, "click"], ["pButton", "", "label", "Input Feedback", "icon", "pi pi-plus", 1, "w-full", 3, "click"], ["pButton", "", "label", "Show Recent Inputs", "icon", "pi pi-history", "class", "p-button-text p-button-secondary w-full text-sm", 3, "click", 4, "ngIf"], ["pButton", "", "label", "Configuration", "icon", "pi pi-cog", 1, "p-button-text", "p-button-secondary", "w-full", 3, "click"], [1, "md:hidden", "fixed", "top-0", "left-0", "right-0", "surface-section", "border-bottom-1", "surface-border", "p-3", "flex", "justify-content-between", "align-items-center", "z-3"], [1, "font-bold", "text-indigo-600", "text-lg"], ["pButton", "", "icon", "pi pi-bars", 1, "p-button-text", 3, "click"], [3, "visibleChange", "visible", "fullScreen"], [1, "flex", "flex-column", "h-full"], [1, "flex-1"], ["pButton", "", 1, "p-button-text", "w-full", "justify-content-start", "mb-2", 3, "click"], [1, "flex", "flex-column", "gap-2"], ["pButton", "", "label", "Config", "icon", "pi pi-cog", 1, "p-button-text", "p-button-secondary", "w-full", 3, "click"], [1, "flex-1", "md:ml-18rem", "p-4", "md:p-6", "pt-7", "md:pt-6", "overflow-y-auto", "relative"], ["class", "fadein animation-duration-300", 4, "ngIf"], ["class", "fixed bottom-0 right-0 m-4 w-20rem border-round-xl shadow-6 overflow-hidden z-5 animation-duration-300 slide-in-up surface-overlay border-1 surface-border", 4, "ngIf"], ["header", "Input Feedback", 3, "visibleChange", "visible", "modal", "draggable", "resizable"], [1, "flex", "flex-column", "gap-3", "pt-2"], [1, "block", "font-medium", "mb-2", "text-700"], ["optionLabel", "step", "optionValue", "step", "styleClass", "w-full", "appendTo", "body", 3, "ngModelChange", "options", "ngModel"], [1, "p-inputgroup"], [1, "p-inputgroup-addon"], [1, "pi", "pi-link"], ["type", "text", "pInputText", "", "placeholder", "https://example.com/page", 3, "ngModelChange", "ngModel"], ["pButton", "", "icon", "pi", 1, "p-button-outlined", 3, "click", "icon", "label", "disabled"], ["class", "bg-red-50 text-red-600 p-2 border-round text-sm", 4, "ngIf"], ["class", "bg-blue-50 p-3 border-round border-1 border-blue-100", 4, "ngIf"], ["optionLabel", "label", "optionValue", "value", "styleClass", "w-full flex", 3, "ngModelChange", "options", "ngModel"], ["pInputTextarea", "", "rows", "4", "placeholder", "Describe the feedback...", 1, "w-full", 3, "ngModelChange", "ngModel"], ["pTemplate", "footer"], ["header", "AI Configuration", 3, "visibleChange", "visible", "modal", "draggable", "resizable"], [1, "flex", "flex-column", "gap-4", "pt-2"], [1, "block", "font-bold", "mb-2", "text-700"], [1, "grid"], [1, "col-6"], [1, "p-3", "border-round", "border-2", "cursor-pointer", "text-center", "transition-colors", 3, "click", "ngClass"], [1, "pi", "pi-star-fill", "text-xl", "mb-2", "block"], [1, "font-medium", "text-sm"], [1, "pi", "pi-globe", "text-xl", "mb-2", "block"], [1, "pi", "pi-key"], ["type", "password", "pInputText", "", 3, "ngModelChange", "placeholder", "ngModel"], [1, "text-500", "block", "mt-1"], [1, "surface-50", "p-2", "border-round", "text-xs", "text-500", "border-1", "surface-border"], ["styleClass", "custom-header-dialog", 3, "visibleChange", "visible", "modal", "draggable", "resizable", "header"], ["pTemplate", "header"], [1, "text-sm", "text-600", "m-0"], ["pInputTextarea", "", "rows", "5", "placeholder", "e.g., Applying for a Passport online...", 1, "w-full", 3, "ngModelChange", "ngModel"], ["class", "bg-red-50 text-red-700 p-3 border-round flex align-items-center gap-2", 4, "ngIf"], ["pButton", "", "label", "Show Recent Inputs", "icon", "pi pi-history", 1, "p-button-text", "p-button-secondary", "w-full", "text-sm", 3, "click"], [1, "fadein", "animation-duration-300"], [1, "flex", "justify-content-between", "align-items-center", "mb-4"], [1, "text-2xl", "font-bold", "text-900", "m-0"], [1, "text-500", "m-0"], [1, "hidden", "md:flex", "gap-3"], [1, "flex", "align-items-center", "text-sm", "text-600"], [1, "w-1rem", "h-1rem", "bg-orange-100", "border-1", "border-orange-300", "border-round", "mr-2"], [1, "pi", "pi-star-fill", "text-indigo-500", "mr-2"], [1, "card", "surface-card", "p-4", "border-round", "shadow-1", "overflow-x-auto"], [1, "min-w-max"], [1, "grid", "grid-nogutter", "surface-50", "p-3", "border-round", "mb-4", "font-bold", "text-700", "text-center"], [1, "col-4"], [1, "col-4", "border-left-1", "surface-border"], [1, "flex", "flex-column", "gap-5", "relative"], [1, "absolute", "top-0", "bottom-0", "left-33", "w-1", "border-left-1", "border-dashed", "surface-border", 2, "left", "33.33%"], [1, "absolute", "top-0", "bottom-0", "left-66", "w-1", "border-left-1", "border-dashed", "surface-border", 2, "left", "66.66%"], ["class", "grid grid-nogutter align-items-stretch z-1 relative", 4, "ngFor", "ngForOf"], [1, "grid", "grid-nogutter", "align-items-stretch", "z-1", "relative"], [1, "col-4", "px-3", "flex", "align-items-center", "justify-content-center"], [1, "p-3", "border-round", "shadow-1", "w-10", "text-center", "surface-card", "border-1", 3, "ngClass"], [1, "mt-2"], [1, "pi", 3, "ngClass"], [1, "col-4", "px-3", "relative"], [1, "absolute", "top-50", "left-0", "-ml-2", "text-300", 2, "margin-top", "-0.5rem"], [1, "pi", "pi-arrow-right"], [1, "surface-50", "p-3", "border-round", "border-1", "surface-border", "h-full", "text-sm"], [1, "font-bold", "text-800", "mb-2"], [1, "text-600", "m-0", "mb-3", "line-height-3"], ["class", "flex flex-column gap-2", 4, "ngIf"], [1, "col-4", "px-3", "h-full"], [1, "bg-indigo-50", "p-3", "border-round", "border-1", "border-indigo-100", "h-full", "flex", "flex-column", "text-sm"], [1, "flex", "align-items-center", "gap-2", "font-semibold", "text-indigo-900", "mb-3"], [1, "pi", "pi-info-circle"], [1, "flex", "flex-column", "gap-2", "flex-grow-1"], ["class", "p-2 border-round border-1 flex gap-2 align-items-start transition-colors", 3, "ngClass", 4, "ngFor", "ngForOf"], [1, "mt-3", "pt-2", "border-top-1", "border-indigo-100"], ["type", "text", "pInputText", "", "placeholder", "Add idea...", 1, "p-inputtext-sm", 3, "keydown.enter"], ["type", "button", "pButton", "", "icon", "pi pi-plus", 1, "p-button-indigo", 3, "click"], ["class", "flex align-items-start gap-2 bg-orange-50 border-1 border-orange-200 p-2 border-round text-xs text-orange-800", 4, "ngFor", "ngForOf"], [1, "flex", "align-items-start", "gap-2", "bg-orange-50", "border-1", "border-orange-200", "p-2", "border-round", "text-xs", "text-orange-800"], [1, "pi", "pi-exclamation-circle", "mt-1"], [1, "p-2", "border-round", "border-1", "flex", "gap-2", "align-items-start", "transition-colors", 3, "ngClass"], [1, "pi", "mt-1", 3, "ngClass"], [1, "text-xs", "flex-grow-1", 3, "ngClass"], ["class", "flex gap-1", 4, "ngIf"], [1, "flex", "gap-1"], ["pButton", "", "icon", "pi pi-check", 1, "p-button-rounded", "p-button-text", "p-button-success", "p-0", "w-2rem", "h-2rem", 3, "click"], ["pButton", "", "icon", "pi pi-times", 1, "p-button-rounded", "p-button-text", "p-button-danger", "p-0", "w-2rem", "h-2rem", 3, "click"], [1, "text-2xl", "font-bold", "text-900", "mb-2"], [1, "text-500", "mb-4"], [1, "col-12", "md:col-4"], [1, "card", "surface-card", "p-4", "border-round", "shadow-1", "text-center"], ["icon", "pi pi-user", "size", "xlarge", "shape", "circle", "styleClass", "bg-indigo-50 text-indigo-500 mb-3"], [1, "text-xl", "font-bold", "m-0", "text-800"], [1, "text-500", "mt-2"], [1, "col-12", "md:col-8"], [1, "flex", "flex-column", "gap-3"], [1, "card", "surface-card", "p-4", "border-round", "shadow-1"], [1, "m-0", "mb-3", "text-800"], ["class", "flex align-items-center gap-2", 4, "ngFor", "ngForOf"], [1, "flex", "align-items-center", "gap-2"], [1, "w-1rem", "h-1rem", "border-circle", "bg-green-400"], [1, "text-700"], [1, "w-1rem", "h-1rem", "border-circle", "bg-red-400"], ["class", "card surface-card p-4 border-round shadow-1 hover:shadow-3 transition-shadow transition-duration-200", 4, "ngFor", "ngForOf"], [1, "card", "surface-card", "p-4", "border-round", "shadow-1", "hover:shadow-3", "transition-shadow", "transition-duration-200"], [1, "flex", "flex-column", "md:flex-row", "gap-4", "align-items-start"], [1, "md:w-4"], [1, "text-lg", "font-bold", "m-0", "text-800"], [1, "text-500", "mt-1"], [1, "hidden", "md:block", "w-1px", "bg-gray-200", "align-self-stretch"], [1, "md:w-8", "bg-blue-50", "p-3", "border-round", "border-1", "border-blue-100"], [1, "text-xs", "font-bold", "text-blue-600", "uppercase", "tracking-wide", "mb-1", "block"], [1, "text-sm", "text-700", "font-italic", "m-0"], ["class", "col-12 md:col-6 flex", 4, "ngFor", "ngForOf"], [1, "col-12", "md:col-6", "flex"], [1, "card", "surface-card", "p-4", "border-round", "shadow-1", "flex", "flex-column", "w-full"], [1, "flex", "justify-content-between", "align-items-start", "mb-3"], [1, "font-bold", "text-800", "m-0"], ["severity", "warning", 3, "value"], [1, "bg-gray-50", "p-3", "border-round", "border-1", "border-gray-200", "mb-3", "flex-grow-1"], [1, "text-700", "font-medium", "m-0", "line-height-3"], [1, "text-xs", "font-bold", "text-500", "uppercase", "mb-2"], ["class", "flex align-items-center gap-2 text-sm text-600", 4, "ngFor", "ngForOf"], [1, "flex", "align-items-center", "gap-2", "text-sm", "text-600"], [1, "w-1", "h-1", "border-circle", "bg-gray-400"], [1, "fixed", "bottom-0", "right-0", "m-4", "w-20rem", "border-round-xl", "shadow-6", "overflow-hidden", "z-5", "animation-duration-300", "slide-in-up", "surface-overlay", "border-1", "surface-border"], [1, "bg-gray-900", "text-white", "px-3", "py-2", "flex", "justify-content-between", "align-items-center"], ["styleClass", "bg-gray-700", 3, "value"], ["pButton", "", "icon", "pi pi-times", 1, "p-button-rounded", "p-button-text", "p-button-plain", "text-white", "h-2rem", "w-2rem", 3, "click"], [1, "max-h-15rem", "overflow-y-auto", "p-3", "flex", "flex-column", "gap-3", "bg-white"], ["class", "border-bottom-1 surface-border pb-2", 4, "ngFor", "ngForOf"], [1, "border-bottom-1", "surface-border", "pb-2"], [1, "flex", "justify-content-between", "mb-1"], [1, "overflow-hidden", "text-overflow-ellipsis", "white-space-nowrap", "w-9"], [1, "font-semibold", "text-700", "block", "text-sm"], ["class", "text-xs text-indigo-500 block text-overflow-ellipsis overflow-hidden", 4, "ngIf"], [1, "text-500", "text-xs", "m-0", "white-space-pre-line"], [1, "text-xs", "text-indigo-500", "block", "text-overflow-ellipsis", "overflow-hidden"], [1, "bg-red-50", "text-red-600", "p-2", "border-round", "text-sm"], [1, "bg-blue-50", "p-3", "border-round", "border-1", "border-blue-100"], [1, "flex", "align-items-center", "gap-2", "mb-2", "text-sm", "font-semibold", "text-700"], [1, "pi", "pi-star-fill", "text-orange-500"], ["pButton", "", "class", "p-button-outlined p-button-secondary p-button-sm text-left justify-content-start p-2 text-xs bg-white", 3, "click", 4, "ngFor", "ngForOf"], ["pButton", "", 1, "p-button-outlined", "p-button-secondary", "p-button-sm", "text-left", "justify-content-start", "p-2", "text-xs", "bg-white", 3, "click"], [1, "pi", "pi-plus", "mr-2", "opacity-50"], ["pButton", "", "label", "Add Feedback", 1, "w-full", 3, "click"], ["pButton", "", "label", "Save Configuration", 1, "w-full", "p-button-secondary", 3, "click"], [1, "flex", "align-items-center", "gap-2", "text-orange-500"], [1, "pi", "pi-bolt", "text-xl"], [1, "font-bold", "text-lg"], [1, "bg-red-50", "text-red-700", "p-3", "border-round", "flex", "align-items-center", "gap-2"], [1, "pi", "pi-exclamation-circle"], [1, "text-sm"], ["pButton", "", 1, "w-full", "p-button-warning", 3, "click", "label", "icon", "disabled"]], template: function JourneyMapComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "h2");
-      \u0275\u0275text(1, "Export to GitHub");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "p");
-      \u0275\u0275text(3, "Export the current in-scope pages for your project to a GitHub repository. You can specify the owner, repository, branch, and provide a ");
-      \u0275\u0275elementStart(4, "p-button", 0);
-      \u0275\u0275listener("onClick", function ExportGithubComponent_Template_p_button_onClick_4_listener() {
-        return ctx.showHelp = !ctx.showHelp;
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(5, " for authentication.");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "p");
-      \u0275\u0275text(7, "The pages will be exported in Jekyll format. Redirects for the included pages are automatically set up, so you don't need to update links in your repo manually. If you create new pages directly in GitHub, remember to list them in your ");
-      \u0275\u0275elementStart(8, "code");
-      \u0275\u0275text(9, "/source/data/exclude-redirect-links.json");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(10, " file.");
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(11, ExportGithubComponent_div_11_Template, 78, 0, "div", 1);
-      \u0275\u0275elementStart(12, "p-fieldset", 2)(13, "div", 3)(14, "div", 4)(15, "p-iftalabel")(16, "input", 5);
-      \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_Template_input_ngModelChange_16_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.gitHubData().owner, $event) || (ctx.gitHubData().owner = $event);
-        return $event;
-      });
-      \u0275\u0275listener("blur", function ExportGithubComponent_Template_input_blur_16_listener() {
-        ctx.updateOwner();
-        return ctx.updateRepoList();
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(17, "label", 6);
-      \u0275\u0275text(18, "Owner");
+      \u0275\u0275elementStart(0, "div", 1)(1, "div", 2)(2, "div", 3);
+      \u0275\u0275element(3, "i", 4);
+      \u0275\u0275elementStart(4, "span", 5);
+      \u0275\u0275text(5, "CX Visualizer");
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(19, ExportGithubComponent_p_message_19_Template, 2, 1, "p-message", 7);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(20, "p-iftalabel")(21, "p-autocomplete", 8);
-      \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_Template_p_autocomplete_ngModelChange_21_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.gitHubData().repo, $event) || (ctx.gitHubData().repo = $event);
-        return $event;
+      \u0275\u0275elementStart(6, "div", 6)(7, "ul", 7)(8, "li")(9, "button", 8);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_9_listener() {
+        return ctx.activeView = "journey";
       });
-      \u0275\u0275listener("input", function ExportGithubComponent_Template_p_autocomplete_input_21_listener() {
-        return ctx.updateRepo();
-      })("completeMethod", function ExportGithubComponent_Template_p_autocomplete_completeMethod_21_listener($event) {
-        return ctx.filterRepos($event);
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(22, "label", 6);
-      \u0275\u0275text(23, "Repository");
+      \u0275\u0275element(10, "i", 9);
+      \u0275\u0275text(11, " Journey Map ");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(24, "p-iftalabel")(25, "input", 9);
-      \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_Template_input_ngModelChange_25_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.gitHubData().branch, $event) || (ctx.gitHubData().branch = $event);
-        return $event;
+      \u0275\u0275elementStart(12, "li")(13, "button", 8);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_13_listener() {
+        return ctx.activeView = "persona";
       });
-      \u0275\u0275listener("blur", function ExportGithubComponent_Template_input_blur_25_listener() {
-        return ctx.updateBranch();
+      \u0275\u0275element(14, "i", 10);
+      \u0275\u0275text(15, " Personas ");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(16, "li")(17, "button", 8);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_17_listener() {
+        return ctx.activeView = "tasks";
+      });
+      \u0275\u0275element(18, "i", 11);
+      \u0275\u0275text(19, " Task Analysis ");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(20, "li")(21, "button", 8);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_21_listener() {
+        return ctx.activeView = "stories";
+      });
+      \u0275\u0275element(22, "i", 12);
+      \u0275\u0275text(23, " User Stories ");
+      \u0275\u0275elementEnd()()()();
+      \u0275\u0275elementStart(24, "div", 13)(25, "button", 14);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_25_listener() {
+        return ctx.showGeneratorModal = true;
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(26, "label", 10);
-      \u0275\u0275text(27, "Branch");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(28, "p-iftalabel")(29, "p-password", 11);
-      \u0275\u0275twoWayListener("ngModelChange", function ExportGithubComponent_Template_p_password_ngModelChange_29_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.userToken, $event) || (ctx.userToken = $event);
-        return $event;
+      \u0275\u0275elementStart(26, "button", 15);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_26_listener() {
+        return ctx.showFeedbackModal = true;
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(30, "label", 12);
-      \u0275\u0275text(31, "GitHub Token");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(32, "p-button", 13);
-      \u0275\u0275listener("onClick", function ExportGithubComponent_Template_p_button_onClick_32_listener() {
-        return ctx.exportProjectToGitHub(ctx.gitHubData().owner, ctx.gitHubData().repo, ctx.gitHubData().branch, ctx.userToken, true);
+      \u0275\u0275template(27, JourneyMapComponent_button_27_Template, 1, 0, "button", 16);
+      \u0275\u0275elementStart(28, "button", 17);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_28_listener() {
+        return ctx.showSettingsModal = true;
       });
       \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(29, "div", 18)(30, "span", 19);
+      \u0275\u0275text(31, "CX Visualizer");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(32, "button", 20);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_32_listener() {
+        return ctx.mobileSidebarVisible = true;
+      });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(33, "p-sidebar", 21);
+      \u0275\u0275twoWayListener("visibleChange", function JourneyMapComponent_Template_p_sidebar_visibleChange_33_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.mobileSidebarVisible, $event) || (ctx.mobileSidebarVisible = $event);
+        return $event;
+      });
+      \u0275\u0275elementStart(34, "div", 22)(35, "div", 23)(36, "button", 24);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_36_listener() {
+        ctx.activeView = "journey";
+        return ctx.mobileSidebarVisible = false;
+      });
+      \u0275\u0275element(37, "i", 9);
+      \u0275\u0275text(38, " Journey Map");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(39, "button", 24);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_39_listener() {
+        ctx.activeView = "persona";
+        return ctx.mobileSidebarVisible = false;
+      });
+      \u0275\u0275element(40, "i", 10);
+      \u0275\u0275text(41, " Personas");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(42, "button", 24);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_42_listener() {
+        ctx.activeView = "tasks";
+        return ctx.mobileSidebarVisible = false;
+      });
+      \u0275\u0275element(43, "i", 11);
+      \u0275\u0275text(44, " Task Analysis");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(45, "button", 24);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_45_listener() {
+        ctx.activeView = "stories";
+        return ctx.mobileSidebarVisible = false;
+      });
+      \u0275\u0275element(46, "i", 12);
+      \u0275\u0275text(47, " User Stories");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(48, "div", 25)(49, "button", 14);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_49_listener() {
+        ctx.showGeneratorModal = true;
+        return ctx.mobileSidebarVisible = false;
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(50, "button", 15);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_50_listener() {
+        ctx.showFeedbackModal = true;
+        return ctx.mobileSidebarVisible = false;
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(51, "button", 26);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_51_listener() {
+        ctx.showSettingsModal = true;
+        return ctx.mobileSidebarVisible = false;
+      });
+      \u0275\u0275elementEnd()()()();
+      \u0275\u0275elementStart(52, "main", 27);
+      \u0275\u0275element(53, "p-toast");
+      \u0275\u0275template(54, JourneyMapComponent_div_54_Template, 27, 1, "div", 28)(55, JourneyMapComponent_div_55_Template, 25, 4, "div", 28)(56, JourneyMapComponent_div_56_Template, 7, 1, "div", 28)(57, JourneyMapComponent_div_57_Template, 7, 1, "div", 28)(58, JourneyMapComponent_div_58_Template, 9, 2, "div", 29);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(59, "p-dialog", 30);
+      \u0275\u0275twoWayListener("visibleChange", function JourneyMapComponent_Template_p_dialog_visibleChange_59_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.showFeedbackModal, $event) || (ctx.showFeedbackModal = $event);
+        return $event;
+      });
+      \u0275\u0275elementStart(60, "div", 31)(61, "div")(62, "label", 32);
+      \u0275\u0275text(63, "Related Page / Step");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(64, "p-dropdown", 33);
+      \u0275\u0275twoWayListener("ngModelChange", function JourneyMapComponent_Template_p_dropdown_ngModelChange_64_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.newFeedback.page, $event) || (ctx.newFeedback.page = $event);
+        return $event;
+      });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(65, "div")(66, "label", 32);
+      \u0275\u0275text(67, "Page URL (Optional Analysis)");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(68, "div", 34)(69, "span", 35);
+      \u0275\u0275element(70, "i", 36);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(71, "input", 37);
+      \u0275\u0275twoWayListener("ngModelChange", function JourneyMapComponent_Template_input_ngModelChange_71_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.newFeedback.url, $event) || (ctx.newFeedback.url = $event);
+        return $event;
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(72, "button", 38);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_button_click_72_listener() {
+        return ctx.handleAnalyzeUrl();
+      });
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275template(73, JourneyMapComponent_div_73_Template, 2, 1, "div", 39)(74, JourneyMapComponent_div_74_Template, 7, 1, "div", 40);
+      \u0275\u0275elementStart(75, "div")(76, "label", 32);
+      \u0275\u0275text(77, "Sentiment");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(78, "p-selectButton", 41);
+      \u0275\u0275twoWayListener("ngModelChange", function JourneyMapComponent_Template_p_selectButton_ngModelChange_78_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.newFeedback.sentiment, $event) || (ctx.newFeedback.sentiment = $event);
+        return $event;
+      });
+      \u0275\u0275template(79, JourneyMapComponent_ng_template_79_Template, 2, 3, "ng-template");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(80, "div")(81, "label", 32);
+      \u0275\u0275text(82, "Feedback");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(83, "textarea", 42);
+      \u0275\u0275twoWayListener("ngModelChange", function JourneyMapComponent_Template_textarea_ngModelChange_83_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.newFeedback.comment, $event) || (ctx.newFeedback.comment = $event);
+        return $event;
+      });
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275template(84, JourneyMapComponent_ng_template_84_Template, 1, 0, "ng-template", 43);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(85, "p-dialog", 44);
+      \u0275\u0275twoWayListener("visibleChange", function JourneyMapComponent_Template_p_dialog_visibleChange_85_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.showSettingsModal, $event) || (ctx.showSettingsModal = $event);
+        return $event;
+      });
+      \u0275\u0275elementStart(86, "div", 45)(87, "div")(88, "label", 46);
+      \u0275\u0275text(89, "LLM Provider");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(90, "div", 47)(91, "div", 48)(92, "div", 49);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_div_click_92_listener() {
+        return ctx.llmConfig.provider = "gemini";
+      });
+      \u0275\u0275element(93, "i", 50);
+      \u0275\u0275elementStart(94, "span", 51);
+      \u0275\u0275text(95, "Google Gemini");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(96, "div", 48)(97, "div", 49);
+      \u0275\u0275listener("click", function JourneyMapComponent_Template_div_click_97_listener() {
+        return ctx.llmConfig.provider = "openai";
+      });
+      \u0275\u0275element(98, "i", 52);
+      \u0275\u0275elementStart(99, "span", 51);
+      \u0275\u0275text(100, "OpenAI");
+      \u0275\u0275elementEnd()()()()();
+      \u0275\u0275elementStart(101, "div")(102, "label", 46);
+      \u0275\u0275text(103, "API Key");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(104, "div", 34)(105, "span", 35);
+      \u0275\u0275element(106, "i", 53);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(107, "input", 54);
+      \u0275\u0275twoWayListener("ngModelChange", function JourneyMapComponent_Template_input_ngModelChange_107_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.llmConfig.apiKey, $event) || (ctx.llmConfig.apiKey = $event);
+        return $event;
+      });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(108, "small", 55);
+      \u0275\u0275text(109);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(110, "div", 56)(111, "strong");
+      \u0275\u0275text(112, "Current Model:");
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(113);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(114, JourneyMapComponent_ng_template_114_Template, 1, 0, "ng-template", 43);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(115, "p-dialog", 57);
+      \u0275\u0275twoWayListener("visibleChange", function JourneyMapComponent_Template_p_dialog_visibleChange_115_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.showGeneratorModal, $event) || (ctx.showGeneratorModal = $event);
+        return $event;
+      });
+      \u0275\u0275template(116, JourneyMapComponent_ng_template_116_Template, 4, 0, "ng-template", 58);
+      \u0275\u0275elementStart(117, "div", 31)(118, "p", 59);
+      \u0275\u0275text(119, "Enter a topic, user goal, or URL context. The AI will generate a Persona, Journey Map, Task List, and User Stories for you.");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(120, "div")(121, "label", 46);
+      \u0275\u0275text(122, "Project Context");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(123, "textarea", 60);
+      \u0275\u0275twoWayListener("ngModelChange", function JourneyMapComponent_Template_textarea_ngModelChange_123_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.generatorContext, $event) || (ctx.generatorContext = $event);
+        return $event;
+      });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275template(124, JourneyMapComponent_div_124_Template, 4, 1, "div", 61);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(125, JourneyMapComponent_ng_template_125_Template, 1, 3, "ng-template", 43);
+      \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
+      \u0275\u0275advance(9);
+      \u0275\u0275classProp("surface-100", ctx.activeView === "journey");
       \u0275\u0275advance(4);
-      \u0275\u0275property("rounded", true)("text", true);
-      \u0275\u0275advance(7);
-      \u0275\u0275property("ngIf", ctx.showHelp);
+      \u0275\u0275classProp("surface-100", ctx.activeView === "persona");
+      \u0275\u0275advance(4);
+      \u0275\u0275classProp("surface-100", ctx.activeView === "tasks");
+      \u0275\u0275advance(4);
+      \u0275\u0275classProp("surface-100", ctx.activeView === "stories");
+      \u0275\u0275advance(6);
+      \u0275\u0275property("ngIf", ctx.feedbackData.length > 0 && !ctx.showRecentInputs);
+      \u0275\u0275advance(6);
+      \u0275\u0275twoWayProperty("visible", ctx.mobileSidebarVisible);
+      \u0275\u0275property("fullScreen", true);
+      \u0275\u0275advance(21);
+      \u0275\u0275property("ngIf", ctx.activeView === "journey");
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.activeView === "persona");
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.activeView === "tasks");
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.activeView === "stories");
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.feedbackData.length > 0 && ctx.showRecentInputs);
+      \u0275\u0275advance();
+      \u0275\u0275styleMap(\u0275\u0275pureFunction0(54, _c021));
+      \u0275\u0275twoWayProperty("visible", ctx.showFeedbackModal);
+      \u0275\u0275property("modal", true)("draggable", false)("resizable", false);
       \u0275\u0275advance(5);
-      \u0275\u0275twoWayProperty("ngModel", ctx.gitHubData().owner);
-      \u0275\u0275property("pKeyFilter", ctx.ownerFilter)("ngClass", \u0275\u0275pureFunction1(15, _c019, ctx.ownerError));
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", ctx.ownerError);
+      \u0275\u0275property("options", ctx.journeySteps);
+      \u0275\u0275twoWayProperty("ngModel", ctx.newFeedback.page);
+      \u0275\u0275advance(7);
+      \u0275\u0275twoWayProperty("ngModel", ctx.newFeedback.url);
+      \u0275\u0275advance();
+      \u0275\u0275property("icon", ctx.isAnalyzing ? "pi-spin pi-spinner" : "pi-search")("label", ctx.isAnalyzing ? "Scanning" : "Analyze")("disabled", !ctx.newFeedback.url || ctx.isAnalyzing);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.aiError);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.predictedPoints.length > 0);
+      \u0275\u0275advance(4);
+      \u0275\u0275property("options", ctx.sentimentOptions);
+      \u0275\u0275twoWayProperty("ngModel", ctx.newFeedback.sentiment);
+      \u0275\u0275advance(5);
+      \u0275\u0275twoWayProperty("ngModel", ctx.newFeedback.comment);
       \u0275\u0275advance(2);
-      \u0275\u0275twoWayProperty("ngModel", ctx.gitHubData().repo);
-      \u0275\u0275property("suggestions", ctx.filteredRepos)("dropdown", true)("pKeyFilter", ctx.repoFilter);
+      \u0275\u0275styleMap(\u0275\u0275pureFunction0(55, _c121));
+      \u0275\u0275twoWayProperty("visible", ctx.showSettingsModal);
+      \u0275\u0275property("modal", true)("draggable", false)("resizable", false);
+      \u0275\u0275advance(7);
+      \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(56, _c213, ctx.llmConfig.provider === "gemini", ctx.llmConfig.provider !== "gemini"));
+      \u0275\u0275advance(5);
+      \u0275\u0275property("ngClass", \u0275\u0275pureFunction2(59, _c39, ctx.llmConfig.provider === "openai", ctx.llmConfig.provider !== "openai"));
+      \u0275\u0275advance(10);
+      \u0275\u0275property("placeholder", ctx.llmConfig.provider === "gemini" ? "Gemini Key" : "OpenAI Key");
+      \u0275\u0275twoWayProperty("ngModel", ctx.llmConfig.apiKey);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate1(" ", ctx.llmConfig.provider === "gemini" ? "Leave blank to use default system key." : "API Key required for OpenAI.", " ");
       \u0275\u0275advance(4);
-      \u0275\u0275twoWayProperty("ngModel", ctx.gitHubData().branch);
-      \u0275\u0275property("pKeyFilter", ctx.branchFilter);
-      \u0275\u0275advance(4);
-      \u0275\u0275twoWayProperty("ngModel", ctx.userToken);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("disabled", ctx.iaData().iaTree.length === 0);
+      \u0275\u0275textInterpolate1(" ", ctx.llmConfig.provider === "gemini" ? "gemini-2.5-flash-preview" : "gpt-4-turbo", " ");
+      \u0275\u0275advance(2);
+      \u0275\u0275styleMap(\u0275\u0275pureFunction0(62, _c49));
+      \u0275\u0275twoWayProperty("visible", ctx.showGeneratorModal);
+      \u0275\u0275property("modal", true)("draggable", false)("resizable", false)("header", "AI Project Generator");
+      \u0275\u0275advance(8);
+      \u0275\u0275twoWayProperty("ngModel", ctx.generatorContext);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.generatorError);
     }
   }, dependencies: [
     CommonModule,
     NgClass,
+    NgForOf,
     NgIf,
     FormsModule,
     DefaultValueAccessor,
     NgControlStatus,
-    MaxLengthValidator,
     NgModel,
-    TranslateModule,
-    TableModule,
-    IftaLabelModule,
-    IftaLabel,
+    CardModule,
+    PrimeTemplate,
+    ButtonModule,
+    ButtonDirective,
     InputTextModule,
     InputText,
-    KeyFilterModule,
-    KeyFilter,
-    AutoCompleteModule,
-    AutoComplete,
-    PasswordModule,
-    Password,
-    ButtonModule,
-    Button,
-    MessageModule,
-    Message,
-    FieldsetModule,
-    Fieldset
-  ], encapsulation: 2 });
+    TextareaModule,
+    Textarea,
+    DropdownModule,
+    Dropdown,
+    DialogModule,
+    Dialog,
+    TagModule,
+    Tag,
+    SelectButtonModule,
+    SelectButton,
+    ToastModule,
+    Toast,
+    PanelModule,
+    AvatarModule,
+    Avatar,
+    DividerModule,
+    BadgeModule,
+    Badge,
+    SidebarModule,
+    Sidebar
+  ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n.h-screen[_ngcontent-%COMP%] {\n  height: 100vh;\n}\n.fadein[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_fadein 0.3s forwards;\n}\n@keyframes _ngcontent-%COMP%_fadein {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes _ngcontent-%COMP%_slideinup {\n  from {\n    transform: translateY(100%);\n    opacity: 0;\n  }\n  to {\n    transform: translateY(0);\n    opacity: 1;\n  }\n}\n.slide-in-up[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_slideinup 0.3s ease-out forwards;\n}\n.custom-header-dialog[_ngcontent-%COMP%]   .p-dialog-header[_ngcontent-%COMP%] {\n  background: #fff7ed;\n}\n/*# sourceMappingURL=journey-map.component.css.map */"] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExportGithubComponent, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(JourneyMapComponent, [{
     type: Component,
-    args: [{ selector: "ca-export-github", imports: [
+    args: [{ selector: "app-cx-dashboard", standalone: true, imports: [
       CommonModule,
       FormsModule,
-      TranslateModule,
-      TableModule,
-      IftaLabelModule,
-      InputTextModule,
-      KeyFilterModule,
-      AutoCompleteModule,
-      PasswordModule,
+      CardModule,
       ButtonModule,
-      MessageModule,
-      FieldsetModule
-    ], template: `<h2>Export to GitHub</h2>\r
-<p>Export the current in-scope pages for your project to a GitHub repository. You can specify the owner, repository, branch, and provide a <p-button icon="pi pi-question-circle" (onClick)="showHelp = !showHelp" [rounded]="true" [text]="true" styleClass="-m-3 nohover" iconPos="right" severity="help" label="GitHub token"></p-button> for authentication.</p>\r
-<p>The pages will be exported in Jekyll format. Redirects for the included pages are automatically set up, so you don't need to update links in your repo manually. If you create new pages directly in GitHub, remember to list them in your <code>/source/data/exclude-redirect-links.json</code> file.</p>\r
-\r
-\r
-<div *ngIf="showHelp" class="text-sm mt-2">\r
-    <p>To push changes to a repository, you need a valid GitHub token. Your token works like a username and password, so keep it private and do not share it with anyone.</p>\r
-\r
-    <p>Follow these steps to create a new GitHub token:</p>\r
-\r
-    <ol>\r
-        <li>Go to your GitHub <strong>Settings</strong>.</li>\r
-        <li>Select <strong>Developer settings</strong>.</li>\r
-        <li>Click <strong>Personal Access Tokens</strong> &gt; <strong>Fine-grained tokens</strong>.</li>\r
-        <li>Click <strong>Generate new token</strong>.</li>\r
-        <li>Give your token a <strong>unique name</strong> and a <strong>description</strong>.</li>\r
-        <li>Under <strong>Resource owner</strong>, select either cra-design or your personal account.</li>\r
-        <li>Under <strong>Repository access</strong>, select <strong>All repositories</strong>.</li>\r
-        <li>Add the necessary <strong>permissions</strong> for pushing changes to repositories:\r
-            <ul>\r
-                <li><strong>Administration</strong> (Access: Read and write)</li>\r
-                <li><strong>Contents</strong> (Access: Read and write)</li>\r
-                <li><strong>Metadata</strong> (Access: Read-only)</li>\r
-                <li><strong>Pages</strong> (Access: Read and write)</li>\r
-            </ul>\r
-        </li>\r
-        <li>Copy the generated token and enter it into the GitHub token field whenever you push changes to GitHub.</li>\r
-    </ol>\r
-\r
-    <p><strong>Important:</strong> Keep this token secret. Treat it like a password.</p>\r
-\r
-</div>\r
-\r
-<!--TODO: Generate link to repo and a bookmarklet for toggling between repo and Canada.ca-->\r
-<p-fieldset legend="Export settings">\r
-    <div class="flex flex-column gap-2">\r
-        <div class="flex flex-column gap-1">\r
-            <p-iftalabel>\r
-                <input type="text" id="owner" pInputText [(ngModel)]="gitHubData().owner" pSize="small" fluid (blur)="updateOwner();updateRepoList()" maxlength="39" [pKeyFilter]="ownerFilter" [ngClass]="{ 'ng-invalid ng-dirty': ownerError }" />\r
-                <label for="repo">Owner</label>\r
-            </p-iftalabel>\r
-            <p-message severity="error" variant="simple" size="small" *ngIf="ownerError">{{ownerError}}</p-message>\r
-        </div>\r
-        <p-iftalabel>\r
-            <p-autocomplete id="repo" [(ngModel)]="gitHubData().repo" [suggestions]="filteredRepos" (input)="updateRepo()" (completeMethod)="filterRepos($event)" [dropdown]=true pSize="small" maxlength="100" [pKeyFilter]="repoFilter" fluid />\r
-            <label for="repo">Repository</label>\r
-        </p-iftalabel>\r
-        <p-iftalabel>\r
-            <input type="text" id="branch" pInputText [(ngModel)]="gitHubData().branch" pSize="small" fluid (blur)="updateBranch()" [pKeyFilter]="branchFilter" />\r
-            <label for="branch">Branch</label>\r
-        </p-iftalabel>\r
-        <p-iftalabel>\r
-            <p-password feedback="false" id="token" [(ngModel)]="userToken" pSize="small" fluid />\r
-            <label for="token">GitHub Token</label>\r
-        </p-iftalabel>\r
-        <p-button icon="pi pi-github" label="Export to GitHub" severity="primary" (onClick)="exportProjectToGitHub(gitHubData().owner,gitHubData().repo,gitHubData().branch,userToken,true)" [disabled]="iaData().iaTree.length === 0" />\r
-    </div>\r
-</p-fieldset>` }]
+      InputTextModule,
+      TextareaModule,
+      DropdownModule,
+      DialogModule,
+      TagModule,
+      SelectButtonModule,
+      ToastModule,
+      PanelModule,
+      AvatarModule,
+      DividerModule,
+      BadgeModule,
+      SidebarModule
+    ], providers: [MessageService], template: `
+    <div class="flex h-screen surface-ground font-family">
+      <!-- Sidebar Navigation (Desktop) -->
+      <div class="hidden md:flex flex-column w-18rem surface-section border-right-1 surface-border h-full fixed z-2">
+        <div class="p-4 border-bottom-1 surface-border flex align-items-center gap-2">
+          <i class="pi pi-th-large text-indigo-600 text-2xl"></i>
+          <span class="font-bold text-xl text-indigo-600">CX Visualizer</span>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-3">
+          <ul class="list-none p-0 m-0 flex flex-column gap-2">
+            <li>
+              <button pButton class="p-button-text w-full justify-content-start" [class.surface-100]="activeView === 'journey'" (click)="activeView = 'journey'">
+                <i class="pi pi-map mr-2"></i> Journey Map
+              </button>
+            </li>
+            <li>
+              <button pButton class="p-button-text w-full justify-content-start" [class.surface-100]="activeView === 'persona'" (click)="activeView = 'persona'">
+                <i class="pi pi-users mr-2"></i> Personas
+              </button>
+            </li>
+            <li>
+              <button pButton class="p-button-text w-full justify-content-start" [class.surface-100]="activeView === 'tasks'" (click)="activeView = 'tasks'">
+                <i class="pi pi-list mr-2"></i> Task Analysis
+              </button>
+            </li>
+            <li>
+              <button pButton class="p-button-text w-full justify-content-start" [class.surface-100]="activeView === 'stories'" (click)="activeView = 'stories'">
+                <i class="pi pi-file mr-2"></i> User Stories
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="p-3 border-top-1 surface-border flex flex-column gap-2">
+          <button pButton label="AI Generator" icon="pi pi-bolt" class="p-button-outlined p-button-warning w-full" (click)="showGeneratorModal = true"></button>
+          <button pButton label="Input Feedback" icon="pi pi-plus" class="w-full" (click)="showFeedbackModal = true"></button>
+          
+          <button *ngIf="feedbackData.length > 0 && !showRecentInputs" 
+            pButton label="Show Recent Inputs" icon="pi pi-history" 
+            class="p-button-text p-button-secondary w-full text-sm" 
+            (click)="showRecentInputs = true">
+          </button>
+
+          <button pButton label="Configuration" icon="pi pi-cog" class="p-button-text p-button-secondary w-full" (click)="showSettingsModal = true"></button>
+        </div>
+      </div>
+
+      <!-- Mobile Header -->
+      <div class="md:hidden fixed top-0 left-0 right-0 surface-section border-bottom-1 surface-border p-3 flex justify-content-between align-items-center z-3">
+        <span class="font-bold text-indigo-600 text-lg">CX Visualizer</span>
+        <button pButton icon="pi pi-bars" class="p-button-text" (click)="mobileSidebarVisible = true"></button>
+      </div>
+
+      <!-- Mobile Sidebar -->
+      <p-sidebar [(visible)]="mobileSidebarVisible" [fullScreen]="true">
+        <div class="flex flex-column h-full">
+           <div class="flex-1">
+              <button pButton class="p-button-text w-full justify-content-start mb-2" (click)="activeView = 'journey'; mobileSidebarVisible = false"><i class="pi pi-map mr-2"></i> Journey Map</button>
+              <button pButton class="p-button-text w-full justify-content-start mb-2" (click)="activeView = 'persona'; mobileSidebarVisible = false"><i class="pi pi-users mr-2"></i> Personas</button>
+              <button pButton class="p-button-text w-full justify-content-start mb-2" (click)="activeView = 'tasks'; mobileSidebarVisible = false"><i class="pi pi-list mr-2"></i> Task Analysis</button>
+              <button pButton class="p-button-text w-full justify-content-start mb-2" (click)="activeView = 'stories'; mobileSidebarVisible = false"><i class="pi pi-file mr-2"></i> User Stories</button>
+           </div>
+           <div class="flex flex-column gap-2">
+              <button pButton label="AI Generator" icon="pi pi-bolt" class="p-button-outlined p-button-warning w-full" (click)="showGeneratorModal = true; mobileSidebarVisible = false"></button>
+              <button pButton label="Input Feedback" icon="pi pi-plus" class="w-full" (click)="showFeedbackModal = true; mobileSidebarVisible = false"></button>
+              <button pButton label="Config" icon="pi pi-cog" class="p-button-text p-button-secondary w-full" (click)="showSettingsModal = true; mobileSidebarVisible = false"></button>
+           </div>
+        </div>
+      </p-sidebar>
+
+      <!-- Main Content -->
+      <main class="flex-1 md:ml-18rem p-4 md:p-6 pt-7 md:pt-6 overflow-y-auto relative">
+        <p-toast></p-toast>
+
+        <!-- Journey Map View -->
+        <div *ngIf="activeView === 'journey'" class="fadein animation-duration-300">
+          <div class="flex justify-content-between align-items-center mb-4">
+            <div>
+              <h2 class="text-2xl font-bold text-900 m-0">Journey Map</h2>
+              <p class="text-500 m-0">Visualizing user interactions and current experiences.</p>
+            </div>
+            <div class="hidden md:flex gap-3">
+              <span class="flex align-items-center text-sm text-600"><span class="w-1rem h-1rem bg-orange-100 border-1 border-orange-300 border-round mr-2"></span> Pain Point</span>
+              <span class="flex align-items-center text-sm text-600"><i class="pi pi-star-fill text-indigo-500 mr-2"></i> AI Suggestion</span>
+            </div>
+          </div>
+
+          <!-- Swimlane Table Look-alike using CSS Grid/Flex -->
+          <div class="card surface-card p-4 border-round shadow-1 overflow-x-auto">
+            <div class="min-w-max">
+              <!-- Header -->
+              <div class="grid grid-nogutter surface-50 p-3 border-round mb-4 font-bold text-700 text-center">
+                <div class="col-4">User Action</div>
+                <div class="col-4 border-left-1 surface-border">Current Experience</div>
+                <div class="col-4 border-left-1 surface-border">Content Opportunities</div>
+              </div>
+
+              <!-- Steps -->
+              <div class="flex flex-column gap-5 relative">
+                <!-- Vertical Lines (Simulated) -->
+                <div class="absolute top-0 bottom-0 left-33 w-1 border-left-1 border-dashed surface-border" style="left: 33.33%"></div>
+                <div class="absolute top-0 bottom-0 left-66 w-1 border-left-1 border-dashed surface-border" style="left: 66.66%"></div>
+
+                <div *ngFor="let step of journeySteps" class="grid grid-nogutter align-items-stretch z-1 relative">
+                  
+                  <!-- User Column -->
+                  <div class="col-4 px-3 flex align-items-center justify-content-center">
+                    <div class="p-3 border-round shadow-1 w-10 text-center surface-card border-1"
+                         [ngClass]="{'border-red-200 text-red-700': step.sentiment === 'negative', 'border-indigo-200 text-indigo-700': step.sentiment !== 'negative'}">
+                      <span class="font-medium text-sm">{{ step.action }}</span>
+                      <div class="mt-2">
+                        <i class="pi" [ngClass]="{'pi-check-circle text-green-500': step.sentiment === 'positive', 'pi-times-circle text-red-500': step.sentiment === 'negative', 'pi-minus-circle text-gray-400': step.sentiment === 'neutral'}"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- System/Current Experience Column -->
+                  <div class="col-4 px-3 relative">
+                    <!-- Arrow -->
+                    <div class="absolute top-50 left-0 -ml-2 text-300" style="margin-top: -0.5rem;"><i class="pi pi-arrow-right"></i></div>
+                    
+                    <div class="surface-50 p-3 border-round border-1 surface-border h-full text-sm">
+                      <div class="font-bold text-800 mb-2">{{ step.step || 'System Response' }}</div>
+                      <p class="text-600 m-0 mb-3 line-height-3">{{ step.systemResponse }}</p>
+                      
+                      <div *ngIf="step.painPoints.length > 0" class="flex flex-column gap-2">
+                        <div *ngFor="let pp of step.painPoints" class="flex align-items-start gap-2 bg-orange-50 border-1 border-orange-200 p-2 border-round text-xs text-orange-800">
+                          <i class="pi pi-exclamation-circle mt-1"></i>
+                          <span>{{ pp }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Opportunities Column -->
+                  <div class="col-4 px-3 h-full">
+                    <div class="bg-indigo-50 p-3 border-round border-1 border-indigo-100 h-full flex flex-column text-sm">
+                      <div class="flex align-items-center gap-2 font-semibold text-indigo-900 mb-3">
+                        <i class="pi pi-info-circle"></i>
+                        <span>Improvements</span>
+                      </div>
+
+                      <div class="flex flex-column gap-2 flex-grow-1">
+                        <div *ngFor="let opt of step.opportunities" 
+                             class="p-2 border-round border-1 flex gap-2 align-items-start transition-colors"
+                             [ngClass]="{'surface-card border-green-200 shadow-1': opt.status === 'approved', 'surface-0 border-indigo-200 border-dashed': opt.status === 'pending'}">
+                          <i class="pi mt-1" [ngClass]="{'pi-star-fill text-indigo-400': opt.source === 'ai' && opt.status !== 'approved', 'pi-star-fill text-green-500': opt.source === 'ai' && opt.status === 'approved', 'pi-user text-gray-400': opt.source === 'user'}"></i>
+                          
+                          <span class="text-xs flex-grow-1" [ngClass]="{'text-700': opt.status === 'approved', 'text-500 font-italic': opt.status === 'pending'}">{{ opt.text }}</span>
+
+                          <div *ngIf="opt.status === 'pending'" class="flex gap-1">
+                            <button pButton icon="pi pi-check" class="p-button-rounded p-button-text p-button-success p-0 w-2rem h-2rem" (click)="handleApprove(step.id, opt.id)"></button>
+                            <button pButton icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger p-0 w-2rem h-2rem" (click)="handleReject(step.id, opt.id)"></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="mt-3 pt-2 border-top-1 border-indigo-100">
+                        <div class="p-inputgroup">
+                          <input type="text" pInputText placeholder="Add idea..." class="p-inputtext-sm" #manualOptInput (keydown.enter)="manualOptInput.value ? handleAddManual(step.id, manualOptInput) : null">
+                          <button type="button" pButton icon="pi pi-plus" class="p-button-indigo" (click)="manualOptInput.value ? handleAddManual(step.id, manualOptInput) : null"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Persona View -->
+        <div *ngIf="activeView === 'persona'" class="fadein animation-duration-300">
+          <h2 class="text-2xl font-bold text-900 mb-2">User Persona</h2>
+          <p class="text-500 mb-4">Target audience profile.</p>
+          
+          <div class="grid">
+            <div class="col-12 md:col-4">
+              <div class="card surface-card p-4 border-round shadow-1 text-center">
+                <p-avatar icon="pi pi-user" size="xlarge" shape="circle" styleClass="bg-indigo-50 text-indigo-500 mb-3"></p-avatar>
+                <h3 class="text-xl font-bold m-0 text-800">{{ persona.role }}</h3>
+                <p class="text-500 mt-2">{{ persona.demographics }}</p>
+              </div>
+            </div>
+            <div class="col-12 md:col-8">
+              <div class="flex flex-column gap-3">
+                <div class="card surface-card p-4 border-round shadow-1">
+                  <h4 class="m-0 mb-3 text-800">Goals & Needs</h4>
+                  <ul class="list-none p-0 m-0 flex flex-column gap-2">
+                    <li *ngFor="let goal of persona.goals" class="flex align-items-center gap-2">
+                      <span class="w-1rem h-1rem border-circle bg-green-400"></span>
+                      <span class="text-700">{{ goal }}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card surface-card p-4 border-round shadow-1">
+                  <h4 class="m-0 mb-3 text-800">Pain Points & Frustrations</h4>
+                  <ul class="list-none p-0 m-0 flex flex-column gap-2">
+                    <li *ngFor="let frust of persona.frustrations" class="flex align-items-center gap-2">
+                      <span class="w-1rem h-1rem border-circle bg-red-400"></span>
+                      <span class="text-700">{{ frust }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task Analysis View -->
+        <div *ngIf="activeView === 'tasks'" class="fadein animation-duration-300">
+          <h2 class="text-2xl font-bold text-900 mb-2">Task Analysis</h2>
+          <p class="text-500 mb-4">Breakdown of user tasks and scenarios.</p>
+          
+          <div class="flex flex-column gap-3">
+            <div *ngFor="let task of tasks" class="card surface-card p-4 border-round shadow-1 hover:shadow-3 transition-shadow transition-duration-200">
+              <div class="flex flex-column md:flex-row gap-4 align-items-start">
+                <div class="md:w-4">
+                  <h4 class="text-lg font-bold m-0 text-800">{{ task.title }}</h4>
+                  <p class="text-500 mt-1">{{ task.description }}</p>
+                </div>
+                <div class="hidden md:block w-1px bg-gray-200 align-self-stretch"></div>
+                <div class="md:w-8 bg-blue-50 p-3 border-round border-1 border-blue-100">
+                  <span class="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1 block">Scenario</span>
+                  <p class="text-sm text-700 font-italic m-0">"{{ task.scenario }}"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Stories View -->
+        <div *ngIf="activeView === 'stories'" class="fadein animation-duration-300">
+          <h2 class="text-2xl font-bold text-900 mb-2">User Stories</h2>
+          <p class="text-500 mb-4">Agile user stories mapped to identified pain points.</p>
+          
+          <div class="grid">
+            <div *ngFor="let story of userStories" class="col-12 md:col-6 flex">
+              <div class="card surface-card p-4 border-round shadow-1 flex flex-column w-full">
+                <div class="flex justify-content-between align-items-start mb-3">
+                  <h3 class="font-bold text-800 m-0">{{ story.title }}</h3>
+                  <p-tag [value]="story.painPointRef || 'General'" severity="warning"></p-tag>
+                </div>
+                <div class="bg-gray-50 p-3 border-round border-1 border-gray-200 mb-3 flex-grow-1">
+                  <p class="text-700 font-medium m-0 line-height-3">"{{ story.story }}"</p>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-500 uppercase mb-2">Acceptance Criteria</h4>
+                  <ul class="list-none p-0 m-0 flex flex-column gap-2">
+                    <li *ngFor="let ac of story.acceptance" class="flex align-items-center gap-2 text-sm text-600">
+                      <span class="w-1 h-1 border-circle bg-gray-400"></span>
+                      {{ ac }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Inputs Floating Panel -->
+        <div *ngIf="feedbackData.length > 0 && showRecentInputs" class="fixed bottom-0 right-0 m-4 w-20rem border-round-xl shadow-6 overflow-hidden z-5 animation-duration-300 slide-in-up surface-overlay border-1 surface-border">
+          <div class="bg-gray-900 text-white px-3 py-2 flex justify-content-between align-items-center">
+            <div class="flex align-items-center gap-2">
+              <span class="font-medium text-sm">Recent Inputs</span>
+              <p-badge [value]="feedbackData.length.toString()" styleClass="bg-gray-700"></p-badge>
+            </div>
+            <button pButton icon="pi pi-times" class="p-button-rounded p-button-text p-button-plain text-white h-2rem w-2rem" (click)="showRecentInputs = false"></button>
+          </div>
+          <div class="max-h-15rem overflow-y-auto p-3 flex flex-column gap-3 bg-white">
+            <div *ngFor="let fb of feedbackData" class="border-bottom-1 surface-border pb-2">
+              <div class="flex justify-content-between mb-1">
+                <div class="overflow-hidden text-overflow-ellipsis white-space-nowrap w-9">
+                  <span class="font-semibold text-700 block text-sm">{{ fb.page }}</span>
+                  <span *ngIf="fb.url" class="text-xs text-indigo-500 block text-overflow-ellipsis overflow-hidden">{{ fb.url }}</span>
+                </div>
+                <i class="pi" [ngClass]="{'pi-smile text-green-500': fb.sentiment === 'positive', 'pi-thumbs-down text-red-500': fb.sentiment === 'negative', 'pi-circle text-gray-400': fb.sentiment === 'neutral'}"></i>
+              </div>
+              <p class="text-500 text-xs m-0 white-space-pre-line">{{ fb.comment }}</p>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Input Feedback Modal -->
+      <p-dialog header="Input Feedback" [(visible)]="showFeedbackModal" [modal]="true" [style]="{width: '450px'}" [draggable]="false" [resizable]="false">
+        <div class="flex flex-column gap-3 pt-2">
+          <div>
+            <label class="block font-medium mb-2 text-700">Related Page / Step</label>
+            <p-dropdown [options]="journeySteps" optionLabel="step" optionValue="step" [(ngModel)]="newFeedback.page" styleClass="w-full" appendTo="body"></p-dropdown>
+          </div>
+
+          <div>
+            <label class="block font-medium mb-2 text-700">Page URL (Optional Analysis)</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-link"></i></span>
+              <input type="text" pInputText placeholder="https://example.com/page" [(ngModel)]="newFeedback.url">
+              <button pButton icon="pi" [icon]="isAnalyzing ? 'pi-spin pi-spinner' : 'pi-search'" [label]="isAnalyzing ? 'Scanning' : 'Analyze'" (click)="handleAnalyzeUrl()" [disabled]="!newFeedback.url || isAnalyzing" class="p-button-outlined"></button>
+            </div>
+          </div>
+
+          <!-- AI Predictions -->
+          <div *ngIf="aiError" class="bg-red-50 text-red-600 p-2 border-round text-sm">{{ aiError }}</div>
+          <div *ngIf="predictedPoints.length > 0" class="bg-blue-50 p-3 border-round border-1 border-blue-100">
+            <div class="flex align-items-center gap-2 mb-2 text-sm font-semibold text-700">
+              <i class="pi pi-star-fill text-orange-500"></i>
+              <span>Suggested Pain Points</span>
+            </div>
+            <div class="flex flex-column gap-2">
+              <button *ngFor="let point of predictedPoints" pButton class="p-button-outlined p-button-secondary p-button-sm text-left justify-content-start p-2 text-xs bg-white" (click)="handleAddPrediction(point)">
+                <i class="pi pi-plus mr-2 opacity-50"></i> {{ point }}
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-medium mb-2 text-700">Sentiment</label>
+            <p-selectButton [options]="sentimentOptions" [(ngModel)]="newFeedback.sentiment" optionLabel="label" optionValue="value" styleClass="w-full flex">
+               <ng-template let-item>
+                   <i [class]="item.icon + ' mr-2'"></i> {{item.label}}
+               </ng-template>
+            </p-selectButton>
+          </div>
+
+          <div>
+            <label class="block font-medium mb-2 text-700">Feedback</label>
+            <textarea pInputTextarea rows="4" class="w-full" placeholder="Describe the feedback..." [(ngModel)]="newFeedback.comment"></textarea>
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <button pButton label="Add Feedback" class="w-full" (click)="handleAddFeedback()"></button>
+        </ng-template>
+      </p-dialog>
+
+      <!-- Settings Modal -->
+      <p-dialog header="AI Configuration" [(visible)]="showSettingsModal" [modal]="true" [style]="{width: '400px'}" [draggable]="false" [resizable]="false">
+        <div class="flex flex-column gap-4 pt-2">
+          <div>
+            <label class="block font-bold mb-2 text-700">LLM Provider</label>
+            <div class="grid">
+              <div class="col-6">
+                <div class="p-3 border-round border-2 cursor-pointer text-center transition-colors"
+                     [ngClass]="{'border-indigo-500 bg-indigo-50 text-indigo-700': llmConfig.provider === 'gemini', 'border-gray-200 hover:surface-100': llmConfig.provider !== 'gemini'}"
+                     (click)="llmConfig.provider = 'gemini'">
+                  <i class="pi pi-star-fill text-xl mb-2 block"></i>
+                  <span class="font-medium text-sm">Google Gemini</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="p-3 border-round border-2 cursor-pointer text-center transition-colors"
+                     [ngClass]="{'border-green-500 bg-green-50 text-green-700': llmConfig.provider === 'openai', 'border-gray-200 hover:surface-100': llmConfig.provider !== 'openai'}"
+                     (click)="llmConfig.provider = 'openai'">
+                  <i class="pi pi-globe text-xl mb-2 block"></i>
+                  <span class="font-medium text-sm">OpenAI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-bold mb-2 text-700">API Key</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+              <input type="password" pInputText [placeholder]="llmConfig.provider === 'gemini' ? 'Gemini Key' : 'OpenAI Key'" [(ngModel)]="llmConfig.apiKey">
+            </div>
+            <small class="text-500 block mt-1">
+              {{ llmConfig.provider === 'gemini' ? "Leave blank to use default system key." : "API Key required for OpenAI." }}
+            </small>
+          </div>
+
+          <div class="surface-50 p-2 border-round text-xs text-500 border-1 surface-border">
+            <strong>Current Model:</strong> {{ llmConfig.provider === 'gemini' ? 'gemini-2.5-flash-preview' : 'gpt-4-turbo' }}
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <button pButton label="Save Configuration" class="w-full p-button-secondary" (click)="showSettingsModal = false"></button>
+        </ng-template>
+      </p-dialog>
+
+      <!-- AI Generator Modal -->
+      <p-dialog [(visible)]="showGeneratorModal" [modal]="true" [style]="{width: '500px'}" [draggable]="false" [resizable]="false" [header]="'AI Project Generator'" styleClass="custom-header-dialog">
+        <ng-template pTemplate="header">
+           <div class="flex align-items-center gap-2 text-orange-500">
+             <i class="pi pi-bolt text-xl"></i>
+             <span class="font-bold text-lg">AI Project Generator</span>
+           </div>
+        </ng-template>
+        
+        <div class="flex flex-column gap-3 pt-2">
+          <p class="text-sm text-600 m-0">Enter a topic, user goal, or URL context. The AI will generate a Persona, Journey Map, Task List, and User Stories for you.</p>
+          
+          <div>
+            <label class="block font-bold mb-2 text-700">Project Context</label>
+            <textarea pInputTextarea rows="5" class="w-full" placeholder="e.g., Applying for a Passport online..." [(ngModel)]="generatorContext"></textarea>
+          </div>
+
+          <div *ngIf="generatorError" class="bg-red-50 text-red-700 p-3 border-round flex align-items-center gap-2">
+            <i class="pi pi-exclamation-circle"></i>
+            <span class="text-sm">{{ generatorError }}</span>
+          </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <button pButton [label]="isGenerating ? 'Generating...' : 'Generate Dashboard'" [icon]="isGenerating ? 'pi pi-spin pi-spinner' : 'pi pi-star-fill'" 
+                  class="w-full p-button-warning" [disabled]="!generatorContext || isGenerating" (click)="handleGenerateDashboard()"></button>
+        </ng-template>
+      </p-dialog>
+
+    </div>
+  `, styles: ["/* angular:styles/component:css;7a0ea03dd2114b7195f66dc38532833e016b34ae40e35295a4bc35d07883b8f4;D:/AmberDev/main-repo/content-assistant/src/app/views/journey-map/journey-map.component.ts */\n:host {\n  display: block;\n}\n.h-screen {\n  height: 100vh;\n}\n.fadein {\n  animation: fadein 0.3s forwards;\n}\n@keyframes fadein {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes slideinup {\n  from {\n    transform: translateY(100%);\n    opacity: 0;\n  }\n  to {\n    transform: translateY(0);\n    opacity: 1;\n  }\n}\n.slide-in-up {\n  animation: slideinup 0.3s ease-out forwards;\n}\n.custom-header-dialog .p-dialog-header {\n  background: #fff7ed;\n}\n/*# sourceMappingURL=journey-map.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExportGithubComponent, { className: "ExportGithubComponent", filePath: "src/app/views/ia-assistant/components/export-github.component.ts", lineNumber: 35 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(JourneyMapComponent, { className: "JourneyMapComponent", filePath: "src/app/views/journey-map/journey-map.component.ts", lineNumber: 632 });
 })();
 
 // src/app/app.routes.ts
@@ -38131,7 +42034,7 @@ var routes = [
       }
       return true;
     }],
-    loadComponent: () => import("./chunk-DJPKTPTK.js").then((m) => m.PageAssistantCompareComponent)
+    loadComponent: () => import("./chunk-KVTF7AFV.js").then((m) => m.PageAssistantCompareComponent)
   },
   {
     path: "page-assistant/share",
@@ -38191,6 +42094,11 @@ var routes = [
   {
     path: "test",
     component: TestComponent,
+    title: "title.test"
+  },
+  {
+    path: "journey-map",
+    component: JourneyMapComponent,
     title: "title.test"
   },
   {
@@ -38262,7 +42170,7 @@ var ApiResetComponent = class _ApiResetComponent {
     args: [{ selector: "ca-api-reset", imports: [TranslateModule, ButtonModule], template: `
     <p-button icon="pi pi-key" [label]="'apiKey.change' | translate" [rounded]="true" outlined severity="secondary"
     id="api-key-reset-btn" class="my-2 api-button" styleClass="surface-border api-button-size" (click)="this.localStore.removeData('apiKey');" />
-  `, styles: ["/* angular:styles/component:css;3a79632ccf9b2a1bf9b85450cd9ee1a91b4c6a930bfce5ba9d88905c12f7b962;C:/AmberDev/main-repo/content-assistant/src/app/template/api-reset.component.ts */\n::ng-deep .api-button-size {\n  width: 13rem !important;\n}\n@media (max-width: 768px) {\n  ::ng-deep .api-button-size {\n    width: auto !important;\n    padding: 10px !important;\n  }\n  ::ng-deep .api-button .p-button-label {\n    display: none;\n  }\n}\n::ng-deep .api-button:hover .p-button-icon {\n  color: var(--p-primary-400) !important;\n}\n::ng-deep html.dark-mode .api-button:hover .p-button-icon {\n  color: var(--p-primary-200) !important;\n}\n/*# sourceMappingURL=api-reset.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;3a79632ccf9b2a1bf9b85450cd9ee1a91b4c6a930bfce5ba9d88905c12f7b962;D:/AmberDev/main-repo/content-assistant/src/app/template/api-reset.component.ts */\n::ng-deep .api-button-size {\n  width: 13rem !important;\n}\n@media (max-width: 768px) {\n  ::ng-deep .api-button-size {\n    width: auto !important;\n    padding: 10px !important;\n  }\n  ::ng-deep .api-button .p-button-label {\n    display: none;\n  }\n}\n::ng-deep .api-button:hover .p-button-icon {\n  color: var(--p-primary-400) !important;\n}\n::ng-deep html.dark-mode .api-button:hover .p-button-icon {\n  color: var(--p-primary-200) !important;\n}\n/*# sourceMappingURL=api-reset.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
@@ -38270,7 +42178,7 @@ var ApiResetComponent = class _ApiResetComponent {
 })();
 
 // src/app/template/header.component.ts
-function HeaderComponent_ca_api_reset_6_Template(rf, ctx) {
+function HeaderComponent_ca_api_reset_8_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "ca-api-reset");
   }
@@ -38279,6 +42187,13 @@ var HeaderComponent = class _HeaderComponent {
   translate = inject(TranslateService);
   localStore = inject(LocalStorageService);
   theme = inject(ThemeService);
+  iaState = inject(IaStateService);
+  router = inject(Router);
+  get project() {
+    const repo = this.iaState.getGitHubData().repo;
+    const display = repo ? repo.replace(/-/g, " ").replace(/^\w/, (char) => char.toUpperCase()) : this.translate.instant("project.save");
+    return `${this.translate.instant("project.display")} ${display}`;
+  }
   get logoSrc() {
     return this.theme.darkMode() ? "cra-logo-dark.png" : "cra-logo.png";
   }
@@ -38300,41 +42215,52 @@ var HeaderComponent = class _HeaderComponent {
     this.translate.use(oppLang);
     this.localStore.saveData("lang", oppLang);
   }
+  goToProject() {
+    this.iaState.saveToLocalStorage();
+    this.router.navigate(["/project-assistant"]);
+  }
   static \u0275fac = function HeaderComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _HeaderComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeaderComponent, selectors: [["ca-header"]], decls: 11, vars: 14, consts: [["id", "header", 1, "pb-2"], [1, "flex", "align-items-center", "hidden", "md:block"], ["id", "cra-logo", "priority", "true", 1, "img-fluid", "fip-colour", "w-28rem", 3, "src", "alt"], [1, "flex", "align-items-center", "gap-3"], [4, "ngIf"], ["offIcon", "pi pi-moon", "offLabel", "", "onIcon", "pi pi-sun", "onLabel", "", "ariaLabel", "Toggle between dark and light mode", 1, "p-button-rounded", "p-button-secondary", "p-button-outlined", "p-button-sm", "surface-border", "pr-0", "darkmode-toggle", 3, "click", "ngModel"], ["styleClass", "underline text-blue-600 hover:text-blue-700 nohover w-5rem", "severity", "secondary", 3, "onClick", "rounded", "text", "label", "ariaLabel"]], template: function HeaderComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeaderComponent, selectors: [["ca-header"]], decls: 13, vars: 15, consts: [["id", "header", 1, "pb-2"], [1, "flex", "align-items-center", "hidden", "md:block"], ["id", "cra-logo", "priority", "true", 1, "img-fluid", "fip-colour", "w-28rem", 3, "src", "alt"], [1, "flex", "align-items-center", "gap-3"], ["rounded", "", "outlined", "", "severity", "primary", "styleClass", "border-dashed surface-border", 3, "onClick", "label"], [4, "ngIf"], ["rounded", "", "outlined", "", "size", "small", "severity", "secondary", "styleClass", "darkmode-toggle surface-border", "ariaLabel", "Toggle between dark and light mode", 3, "onClick", "icon"], ["rounded", "", "text", "", "styleClass", "underline text-blue-600 hover:text-blue-700 nohover w-5rem", "severity", "secondary", 3, "onClick", "label", "ariaLabel"]], template: function HeaderComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "header", 0)(1, "p-toolbar")(2, "div", 1);
       \u0275\u0275element(3, "img", 2);
       \u0275\u0275pipe(4, "translate");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "div", 3);
-      \u0275\u0275template(6, HeaderComponent_ca_api_reset_6_Template, 1, 0, "ca-api-reset", 4);
-      \u0275\u0275elementStart(7, "p-togglebutton", 5);
-      \u0275\u0275listener("click", function HeaderComponent_Template_p_togglebutton_click_7_listener() {
+      \u0275\u0275elementStart(5, "div", 3)(6, "p-button", 4);
+      \u0275\u0275pipe(7, "translate");
+      \u0275\u0275listener("onClick", function HeaderComponent_Template_p_button_onClick_6_listener() {
+        return ctx.goToProject();
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(8, HeaderComponent_ca_api_reset_8_Template, 1, 0, "ca-api-reset", 5);
+      \u0275\u0275elementStart(9, "p-button", 6);
+      \u0275\u0275listener("onClick", function HeaderComponent_Template_p_button_onClick_9_listener() {
         return ctx.theme.toggle();
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(8, "p-button", 6);
-      \u0275\u0275pipe(9, "translate");
-      \u0275\u0275pipe(10, "translate");
-      \u0275\u0275listener("onClick", function HeaderComponent_Template_p_button_onClick_8_listener() {
+      \u0275\u0275elementStart(10, "p-button", 7);
+      \u0275\u0275pipe(11, "translate");
+      \u0275\u0275pipe(12, "translate");
+      \u0275\u0275listener("onClick", function HeaderComponent_Template_p_button_onClick_10_listener() {
         return ctx.selectLanguage();
       });
       \u0275\u0275elementEnd()()()();
     }
     if (rf & 2) {
       \u0275\u0275advance(3);
-      \u0275\u0275property("src", ctx.logoSrc, \u0275\u0275sanitizeUrl)("alt", \u0275\u0275pipeBind1(4, 8, "CRA"));
+      \u0275\u0275property("src", ctx.logoSrc, \u0275\u0275sanitizeUrl)("alt", \u0275\u0275pipeBind1(4, 7, "CRA"));
       \u0275\u0275advance(3);
+      \u0275\u0275property("label", \u0275\u0275pipeBind1(7, 9, ctx.project));
+      \u0275\u0275advance(2);
       \u0275\u0275property("ngIf", ctx.localStore.getData("apiKey") !== null);
       \u0275\u0275advance();
-      \u0275\u0275property("ngModel", ctx.theme.darkMode());
+      \u0275\u0275property("icon", ctx.theme.icon());
       \u0275\u0275advance();
-      \u0275\u0275property("rounded", true)("text", true)("label", \u0275\u0275pipeBind1(9, 10, "opp.lang"))("ariaLabel", \u0275\u0275pipeBind1(10, 12, "opp.lang"));
+      \u0275\u0275property("label", \u0275\u0275pipeBind1(11, 11, "opp.lang"))("ariaLabel", \u0275\u0275pipeBind1(12, 13, "opp.lang"));
     }
-  }, dependencies: [CommonModule, NgIf, FormsModule, NgControlStatus, NgModel, TranslateModule, TranslatePipe, ToolbarModule, Toolbar, ButtonModule, Button, ToggleButtonModule, ToggleButton, ApiResetComponent], styles: ["\n\n  .p-toolbar {\n  background-color: transparent !important;\n  border: none !important;\n}\nheader[_ngcontent-%COMP%] {\n  border-bottom-style: solid;\n  border-bottom-color: var(--p-gray-400);\n  border-width: 1px;\n  margin-top: -4rem;\n}\n  .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-cyan-400) !important;\n}\n  html.dark-mode .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-amber-400) !important;\n}\n/*# sourceMappingURL=header.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, FormsModule, TranslateModule, TranslatePipe, ToolbarModule, Toolbar, ButtonModule, Button, ToggleButtonModule, ApiResetComponent], styles: ["\n\n  .p-toolbar {\n  background-color: transparent !important;\n  border: none !important;\n}\nheader[_ngcontent-%COMP%] {\n  border-bottom-style: solid;\n  border-bottom-color: var(--p-gray-400);\n  border-width: 1px;\n  margin-top: -4rem;\n}\n  .darkmode-toggle:hover .p-button-icon {\n  color: var(--p-cyan-400) !important;\n}\n  html.dark-mode .darkmode-toggle:hover .p-button-icon {\n  color: var(--p-amber-400) !important;\n}\n/*# sourceMappingURL=header.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HeaderComponent, [{
@@ -38352,43 +42278,37 @@ var HeaderComponent = class _HeaderComponent {
       />
     </div>
     <div class="flex align-items-center gap-3">
+
+      <p-button (onClick)="goToProject()" rounded outlined severity="primary" styleClass="border-dashed surface-border" [label]="project | translate"></p-button>
+
       <ca-api-reset
         *ngIf="this.localStore.getData('apiKey') !== null">
       </ca-api-reset>
 
-      <p-togglebutton
-        offIcon="pi pi-moon"
-        offLabel=""
-        onIcon="pi pi-sun"
-        onLabel=""
-        class="p-button-rounded p-button-secondary p-button-outlined p-button-sm surface-border pr-0 darkmode-toggle"
-        [ngModel] = "theme.darkMode()"
-        (click)="theme.toggle()"
-        ariaLabel="Toggle between dark and light mode">
-      </p-togglebutton>
+      <p-button (onClick)="theme.toggle()" rounded outlined size="small" severity="secondary" [icon]="theme.icon()" styleClass="darkmode-toggle surface-border"  ariaLabel="Toggle between dark and light mode"></p-button>
 
-      <p-button (onClick)="selectLanguage()" [rounded]="true" [text]="true" styleClass="underline text-blue-600 hover:text-blue-700 nohover w-5rem" severity="secondary" [label]="'opp.lang' | translate" [ariaLabel]="'opp.lang' | translate"></p-button>
+      <p-button (onClick)="selectLanguage()" rounded text styleClass="underline text-blue-600 hover:text-blue-700 nohover w-5rem" severity="secondary" [label]="'opp.lang' | translate" [ariaLabel]="'opp.lang' | translate"></p-button>
 
     </div>
   </p-toolbar>
 </header>
-  `, styles: ["/* angular:styles/component:css;607ff6dd9fa2de823f98ca3db927b4c2688fafc0a7c156a199ce40df64b470ce;C:/AmberDev/main-repo/content-assistant/src/app/template/header.component.ts */\n::ng-deep .p-toolbar {\n  background-color: transparent !important;\n  border: none !important;\n}\nheader {\n  border-bottom-style: solid;\n  border-bottom-color: var(--p-gray-400);\n  border-width: 1px;\n  margin-top: -4rem;\n}\n::ng-deep .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-cyan-400) !important;\n}\n::ng-deep html.dark-mode .darkmode-toggle:hover .p-togglebutton-icon {\n  color: var(--p-amber-400) !important;\n}\n/*# sourceMappingURL=header.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;e992d0220d8014662a34d6bbd390e6d18a472faf96c08badf44a3626bf397ba7;D:/AmberDev/main-repo/content-assistant/src/app/template/header.component.ts */\n::ng-deep .p-toolbar {\n  background-color: transparent !important;\n  border: none !important;\n}\nheader {\n  border-bottom-style: solid;\n  border-bottom-color: var(--p-gray-400);\n  border-width: 1px;\n  margin-top: -4rem;\n}\n::ng-deep .darkmode-toggle:hover .p-button-icon {\n  color: var(--p-cyan-400) !important;\n}\n::ng-deep html.dark-mode .darkmode-toggle:hover .p-button-icon {\n  color: var(--p-amber-400) !important;\n}\n/*# sourceMappingURL=header.component.css.map */\n"] }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeaderComponent, { className: "HeaderComponent", filePath: "src/app/template/header.component.ts", lineNumber: 73 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeaderComponent, { className: "HeaderComponent", filePath: "src/app/template/header.component.ts", lineNumber: 69 });
 })();
 
 // src/app/template/sidebar.component.ts
-var _c020 = () => ["/"];
-var _c120 = () => ["/page-assistant"];
-var _c210 = () => ["/image-assistant"];
-var _c38 = () => ["/translation-assistant"];
-var _c48 = () => ["/ia-assistant"];
-var _c58 = () => ["/inventory-assistant"];
-var _c67 = () => ["/metadata-assistant"];
-var _c76 = () => ["/llm-evaluation"];
-var _c86 = () => ["/about-us"];
+var _c022 = () => ["/"];
+var _c124 = () => ["/page-assistant"];
+var _c214 = () => ["/image-assistant"];
+var _c310 = () => ["/translation-assistant"];
+var _c410 = () => ["/ia-assistant"];
+var _c510 = () => ["/inventory-assistant"];
+var _c68 = () => ["/metadata-assistant"];
+var _c77 = () => ["/llm-evaluation"];
+var _c87 = () => ["/about-us"];
 var SidebarComponent = class _SidebarComponent {
   // Section toggle state
   isExpanded = {
@@ -38524,7 +42444,7 @@ var SidebarComponent = class _SidebarComponent {
     }
     if (rf & 2) {
       \u0275\u0275advance(5);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(65, _c020));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(65, _c022));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 37, "title.landing"));
       \u0275\u0275advance(3);
@@ -38536,15 +42456,15 @@ var SidebarComponent = class _SidebarComponent {
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.main);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(66, _c120));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(66, _c124));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(24, 41, "menu.page"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(67, _c210));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(67, _c214));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(30, 43, "menu.image"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(68, _c38));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(68, _c310));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(36, 45, "menu.translation"));
       \u0275\u0275advance(3);
@@ -38556,15 +42476,15 @@ var SidebarComponent = class _SidebarComponent {
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.project);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(69, _c48));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(69, _c410));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(50, 49, "menu.ia"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(70, _c58));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(70, _c510));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(56, 51, "menu.inventory"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(71, _c67));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(71, _c68));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(62, 53, "menu.metadata"));
       \u0275\u0275advance(3);
@@ -38576,13 +42496,13 @@ var SidebarComponent = class _SidebarComponent {
       \u0275\u0275advance();
       \u0275\u0275classProp("hidden", !ctx.isExpanded.monitoring);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(72, _c76));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(72, _c77));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(76, 57, "menu.llmEvaluation"));
       \u0275\u0275advance(3);
       \u0275\u0275classProp("hidden", !ctx.isExpanded.info);
       \u0275\u0275advance();
-      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(73, _c86));
+      \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(73, _c87));
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(84, 59, "menu.about"));
       \u0275\u0275advance(2);
@@ -38744,7 +42664,7 @@ var FooterComponent = class _FooterComponent {
     </div>
   </p-toolbar>
 </footer>
-  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;C:/AmberDev/main-repo/content-assistant/src/app/template/footer.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=footer.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;219558ef63f119a92210704329b58a3cdceaa4fb296db559e672f74512827dc7;D:/AmberDev/main-repo/content-assistant/src/app/template/footer.component.ts */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=footer.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
