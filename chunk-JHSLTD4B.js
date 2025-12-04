@@ -40144,7 +40144,7 @@ var FetchService = class _FetchService {
       for (let attempt = 1; attempt <= retries; attempt++) {
         yield this.simulateDelay(delay);
         try {
-          const response = mode === "HEAD" ? yield fetch(url, { method: "HEAD", cache: "no-store" }) : yield fetch(url);
+          const response = mode === "HEAD" ? yield fetch(url, { method: "HEAD" }) : yield fetch(url);
           if (response.ok)
             return response;
           else {
@@ -98672,4 +98672,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-ZZXWIPZV.js.map
+//# sourceMappingURL=chunk-JHSLTD4B.js.map
