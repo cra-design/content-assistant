@@ -1327,7 +1327,7 @@ var Action = class extends Subscription {
   constructor(scheduler, work) {
     super();
   }
-  schedule(state2, delay = 0) {
+  schedule(state2, delay2 = 0) {
     return this;
   }
 };
@@ -1360,7 +1360,7 @@ var AsyncAction = class extends Action {
     this.work = work;
     this.pending = false;
   }
-  schedule(state2, delay = 0) {
+  schedule(state2, delay2 = 0) {
     var _a;
     if (this.closed) {
       return this;
@@ -1369,18 +1369,18 @@ var AsyncAction = class extends Action {
     const id = this.id;
     const scheduler = this.scheduler;
     if (id != null) {
-      this.id = this.recycleAsyncId(scheduler, id, delay);
+      this.id = this.recycleAsyncId(scheduler, id, delay2);
     }
     this.pending = true;
-    this.delay = delay;
-    this.id = (_a = this.id) !== null && _a !== void 0 ? _a : this.requestAsyncId(scheduler, this.id, delay);
+    this.delay = delay2;
+    this.id = (_a = this.id) !== null && _a !== void 0 ? _a : this.requestAsyncId(scheduler, this.id, delay2);
     return this;
   }
-  requestAsyncId(scheduler, _id, delay = 0) {
-    return intervalProvider.setInterval(scheduler.flush.bind(scheduler, this), delay);
+  requestAsyncId(scheduler, _id, delay2 = 0) {
+    return intervalProvider.setInterval(scheduler.flush.bind(scheduler, this), delay2);
   }
-  recycleAsyncId(_scheduler, id, delay = 0) {
-    if (delay != null && this.delay === delay && this.pending === false) {
+  recycleAsyncId(_scheduler, id, delay2 = 0) {
+    if (delay2 != null && this.delay === delay2 && this.pending === false) {
       return id;
     }
     if (id != null) {
@@ -1388,12 +1388,12 @@ var AsyncAction = class extends Action {
     }
     return void 0;
   }
-  execute(state2, delay) {
+  execute(state2, delay2) {
     if (this.closed) {
       return new Error("executing a cancelled action");
     }
     this.pending = false;
-    const error = this._execute(state2, delay);
+    const error = this._execute(state2, delay2);
     if (error) {
       return error;
     } else if (this.pending === false && this.id != null) {
@@ -1441,8 +1441,8 @@ var Scheduler = class _Scheduler {
     this.schedulerActionCtor = schedulerActionCtor;
     this.now = now;
   }
-  schedule(work, delay = 0, state2) {
-    return new this.schedulerActionCtor(this, work).schedule(state2, delay);
+  schedule(work, delay2 = 0, state2) {
+    return new this.schedulerActionCtor(this, work).schedule(state2, delay2);
   }
 };
 Scheduler.now = dateTimestampProvider.now;
@@ -1773,15 +1773,15 @@ function process(asyncIterable, subscriber) {
 }
 
 // node_modules/rxjs/dist/esm/internal/util/executeSchedule.js
-function executeSchedule(parentSubscription, scheduler, work, delay = 0, repeat = false) {
+function executeSchedule(parentSubscription, scheduler, work, delay2 = 0, repeat = false) {
   const scheduleSubscription = scheduler.schedule(function() {
     work();
     if (repeat) {
-      parentSubscription.add(this.schedule(null, delay));
+      parentSubscription.add(this.schedule(null, delay2));
     } else {
       this.unsubscribe();
     }
-  }, delay);
+  }, delay2);
   parentSubscription.add(scheduleSubscription);
   if (!repeat) {
     return scheduleSubscription;
@@ -1789,16 +1789,16 @@ function executeSchedule(parentSubscription, scheduler, work, delay = 0, repeat 
 }
 
 // node_modules/rxjs/dist/esm/internal/operators/observeOn.js
-function observeOn(scheduler, delay = 0) {
+function observeOn(scheduler, delay2 = 0) {
   return operate((source, subscriber) => {
-    source.subscribe(createOperatorSubscriber(subscriber, (value) => executeSchedule(subscriber, scheduler, () => subscriber.next(value), delay), () => executeSchedule(subscriber, scheduler, () => subscriber.complete(), delay), (err) => executeSchedule(subscriber, scheduler, () => subscriber.error(err), delay)));
+    source.subscribe(createOperatorSubscriber(subscriber, (value) => executeSchedule(subscriber, scheduler, () => subscriber.next(value), delay2), () => executeSchedule(subscriber, scheduler, () => subscriber.complete(), delay2), (err) => executeSchedule(subscriber, scheduler, () => subscriber.error(err), delay2)));
   });
 }
 
 // node_modules/rxjs/dist/esm/internal/operators/subscribeOn.js
-function subscribeOn(scheduler, delay = 0) {
+function subscribeOn(scheduler, delay2 = 0) {
   return operate((source, subscriber) => {
-    subscriber.add(scheduler.schedule(() => source.subscribe(subscriber), delay));
+    subscriber.add(scheduler.schedule(() => source.subscribe(subscriber), delay2));
   });
 }
 
@@ -1993,7 +1993,7 @@ function timeout(config2, schedulerArg) {
     let timerSubscription;
     let lastValue = null;
     let seen = 0;
-    const startTimer = (delay) => {
+    const startTimer = (delay2) => {
       timerSubscription = executeSchedule(subscriber, scheduler, () => {
         try {
           originalSourceSubscription.unsubscribe();
@@ -2005,7 +2005,7 @@ function timeout(config2, schedulerArg) {
         } catch (err) {
           subscriber.error(err);
         }
-      }, delay);
+      }, delay2);
     };
     originalSourceSubscription = source.subscribe(createOperatorSubscriber(subscriber, (value) => {
       timerSubscription === null || timerSubscription === void 0 ? void 0 : timerSubscription.unsubscribe();
@@ -2378,6 +2378,32 @@ function take(count) {
   });
 }
 
+// node_modules/rxjs/dist/esm/internal/operators/ignoreElements.js
+function ignoreElements() {
+  return operate((source, subscriber) => {
+    source.subscribe(createOperatorSubscriber(subscriber, noop));
+  });
+}
+
+// node_modules/rxjs/dist/esm/internal/operators/mapTo.js
+function mapTo(value) {
+  return map(() => value);
+}
+
+// node_modules/rxjs/dist/esm/internal/operators/delayWhen.js
+function delayWhen(delayDurationSelector, subscriptionDelay) {
+  if (subscriptionDelay) {
+    return (source) => concat(subscriptionDelay.pipe(take(1), ignoreElements()), source.pipe(delayWhen(delayDurationSelector)));
+  }
+  return mergeMap((value, index) => innerFrom(delayDurationSelector(value, index)).pipe(take(1), mapTo(value)));
+}
+
+// node_modules/rxjs/dist/esm/internal/operators/delay.js
+function delay(due, scheduler = asyncScheduler) {
+  const duration = timer(due, scheduler);
+  return delayWhen(() => duration);
+}
+
 // node_modules/rxjs/dist/esm/internal/operators/throwIfEmpty.js
 function throwIfEmpty(errorFactory = defaultErrorFactory) {
   return operate((source, subscriber) => {
@@ -2445,7 +2471,7 @@ function retry(configOrCount = Infinity) {
   }
   const {
     count = Infinity,
-    delay,
+    delay: delay2,
     resetOnSuccess = false
   } = config2;
   return count <= 0 ? identity : operate((source, subscriber) => {
@@ -2469,8 +2495,8 @@ function retry(configOrCount = Infinity) {
               syncUnsub = true;
             }
           };
-          if (delay != null) {
-            const notifier = typeof delay === "number" ? timer(delay) : innerFrom(delay(err, soFar));
+          if (delay2 != null) {
+            const notifier = typeof delay2 === "number" ? timer(delay2) : innerFrom(delay2(err, soFar));
             const notifierSubscriber = createOperatorSubscriber(subscriber, () => {
               notifierSubscriber.unsubscribe();
               resub();
@@ -14404,14 +14430,14 @@ var IdleScheduler = class _IdleScheduler {
     })
   );
 };
-function onTimer(delay) {
-  return (callback, injector) => scheduleTimerTrigger(delay, callback, injector);
+function onTimer(delay2) {
+  return (callback, injector) => scheduleTimerTrigger(delay2, callback, injector);
 }
-function scheduleTimerTrigger(delay, callback, injector) {
+function scheduleTimerTrigger(delay2, callback, injector) {
   const scheduler = injector.get(TimerScheduler);
   const ngZone = injector.get(NgZone);
   const cleanupFn = () => scheduler.remove(callback);
-  scheduler.add(delay, callback, ngZone);
+  scheduler.add(delay2, callback, ngZone);
   return cleanupFn;
 }
 var TimerScheduler = class _TimerScheduler {
@@ -14432,9 +14458,9 @@ var TimerScheduler = class _TimerScheduler {
   // the current callback invocation. The shape of this list is the same
   // as the shape of the `current` list.
   deferred = [];
-  add(delay, callback, ngZone) {
+  add(delay2, callback, ngZone) {
     const target = this.executingCallbacks ? this.deferred : this.current;
-    this.addToQueue(target, Date.now() + delay, callback);
+    this.addToQueue(target, Date.now() + delay2, callback);
     this.scheduleTimer(ngZone);
   }
   remove(callback) {
@@ -16897,39 +16923,39 @@ function \u0275\u0275deferHydrateOnImmediate() {
     triggerHydrationFromBlockName(injector, ssrUniqueId);
   }
 }
-function \u0275\u0275deferOnTimer(delay) {
+function \u0275\u0275deferOnTimer(delay2) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
-    trackTriggerForDebugging(lView[TVIEW], tNode, `on timer(${delay}ms)`);
+    trackTriggerForDebugging(lView[TVIEW], tNode, `on timer(${delay2}ms)`);
   }
   if (!shouldAttachTrigger(0, lView, tNode)) return;
-  scheduleDelayedTrigger(onTimer(delay));
+  scheduleDelayedTrigger(onTimer(delay2));
 }
-function \u0275\u0275deferPrefetchOnTimer(delay) {
+function \u0275\u0275deferPrefetchOnTimer(delay2) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
-    trackTriggerForDebugging(lView[TVIEW], tNode, `prefetch on timer(${delay}ms)`);
+    trackTriggerForDebugging(lView[TVIEW], tNode, `prefetch on timer(${delay2}ms)`);
   }
   if (!shouldAttachTrigger(1, lView, tNode)) return;
-  scheduleDelayedPrefetching(onTimer(delay));
+  scheduleDelayedPrefetching(onTimer(delay2));
 }
-function \u0275\u0275deferHydrateOnTimer(delay) {
+function \u0275\u0275deferHydrateOnTimer(delay2) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
-    trackTriggerForDebugging(lView[TVIEW], tNode, `hydrate on timer(${delay}ms)`);
+    trackTriggerForDebugging(lView[TVIEW], tNode, `hydrate on timer(${delay2}ms)`);
   }
   if (!shouldAttachTrigger(2, lView, tNode)) return;
   const hydrateTriggers = getHydrateTriggers(getTView(), tNode);
   hydrateTriggers.set(5, {
-    delay
+    delay: delay2
   });
   if (false) {
     triggerDeferBlock(2, lView, tNode);
   } else {
-    scheduleDelayedHydrating(onTimer(delay), lView, tNode);
+    scheduleDelayedHydrating(onTimer(delay2), lView, tNode);
   }
 }
 function \u0275\u0275deferOnHover(triggerIndex, walkUpTimes) {
@@ -24393,8 +24419,8 @@ var NoopAnimationPlayer = class {
   _position = 0;
   parentPlayer = null;
   totalTime;
-  constructor(duration = 0, delay = 0) {
-    this.totalTime = duration + delay;
+  constructor(duration = 0, delay2 = 0) {
+    this.totalTime = duration + delay2;
   }
   _onFinish() {
     if (!this._finished) {
@@ -24632,6 +24658,7 @@ export {
   concatMap,
   defaultIfEmpty,
   take,
+  delay,
   finalize,
   first,
   takeLast,
@@ -24881,4 +24908,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-7IV2XZGV.js.map
+//# sourceMappingURL=chunk-PTIZR2XT.js.map

@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["src/app/views/image-assistant/components/image-result/image-result.component.css"],
-  "sourcesContent": [".result-container {\r\n  margin-bottom: 2rem;\r\n}\r\n\r\n.result-image {\r\n  max-height: 200px;\r\n  width: auto;\r\n  border: 1px solid var(--surface-border);\r\n  margin-bottom: 1rem;\r\n  display: block;\r\n  border-radius: var(--border-radius);\r\n}\r\n\r\n.result-columns {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\r\n  gap: 2rem;\r\n}\r\n\r\n@media (max-width: 768px) {\r\n  .result-columns {\r\n    grid-template-columns: 1fr;\r\n    gap: 1rem;\r\n  }\r\n}\r\n\r\n.result-column {\r\n  background-color: var(--surface-50);\r\n  padding: 1rem;\r\n  border-radius: var(--border-radius);\r\n}\r\n\r\n.collapsible-container {\r\n  margin: 0.5rem 0;\r\n}\r\n\r\n.processing-message {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem;\r\n}\r\n\r\n.copy-button {\r\n  margin-top: 0.5rem;\r\n}\r\n"],
-  "mappings": ";AAAA,CAAC;AACC,iBAAe;AACjB;AAEA,CAAC;AACC,cAAY;AACZ,SAAO;AACP,UAAQ,IAAI,MAAM,IAAI;AACtB,iBAAe;AACf,WAAS;AACT,iBAAe,IAAI;AACrB;AAEA,CAAC;AACC,WAAS;AACT,yBAAuB,IAAI;AAC3B,OAAK;AACP;AAEA,OAAO,CAAC,SAAS,EAAE;AACjB,GAPD;AAQG,2BAAuB;AACvB,SAAK;AACP;AACF;AAEA,CAAC;AACC,oBAAkB,IAAI;AACtB,WAAS;AACT,iBAAe,IAAI;AACrB;AAEA,CAAC;AACC,UAAQ,OAAO;AACjB;AAEA,CAAC;AACC,WAAS;AACT,eAAa;AACb,OAAK;AACP;AAEA,CAAC;AACC,cAAY;AACd;",
+  "sources": [],
+  "sourcesContent": [],
+  "mappings": "",
   "names": []
 }

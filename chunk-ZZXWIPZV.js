@@ -232,7 +232,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7IV2XZGV.js";
+} from "./chunk-PTIZR2XT.js";
 import {
   __async,
   __commonJS,
@@ -40152,7 +40152,8 @@ var FetchService = class _FetchService {
               console.warn(`Fetch attempt #${attempt}. Status: ${response.status}. Method: ${mode}`);
             }
             if (attempt < retries) {
-              yield this.delay(50);
+              const backoffDelay = Math.pow(2, attempt - 1) * 200;
+              yield this.delay(backoffDelay);
               continue;
             }
             if (suppressErrors)
@@ -40161,7 +40162,8 @@ var FetchService = class _FetchService {
           }
         } catch (error) {
           if (attempt < retries) {
-            yield this.delay(50);
+            const backoffDelay = Math.pow(2, attempt - 1) * 200;
+            yield this.delay(backoffDelay);
             continue;
           }
           if (suppressErrors === true)
@@ -40184,9 +40186,12 @@ var FetchService = class _FetchService {
       return new DOMParser().parseFromString(html, "text/html");
     });
   }
-  fetchStatus(url, hostMode = "both", retries = 3, delay = "none") {
+  fetchStatus(url, hostMode = "both", retries = 3, delay = "none", delayBetweenRequests = 50) {
     return __async(this, null, function* () {
       url = this.validateHost(url, hostMode);
+      if (delayBetweenRequests > 0) {
+        yield this.delay(delayBetweenRequests);
+      }
       return this.fetchWithRetry(url, "HEAD", retries, delay);
     });
   }
@@ -98667,4 +98672,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-U3JBCNDX.js.map
+//# sourceMappingURL=chunk-ZZXWIPZV.js.map

@@ -178,7 +178,7 @@ import {
   unblockBodyScroll,
   uuid,
   zindexutils
-} from "./chunk-U3JBCNDX.js";
+} from "./chunk-ZZXWIPZV.js";
 import {
   ANIMATION_MODULE_TYPE,
   BehaviorSubject,
@@ -218,6 +218,7 @@ import {
   computed,
   contentChild,
   contentChildren,
+  delay,
   effect,
   forwardRef,
   from,
@@ -307,7 +308,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7IV2XZGV.js";
+} from "./chunk-PTIZR2XT.js";
 import {
   __async,
   __objRest,
@@ -420,7 +421,7 @@ var AsyncAnimationRendererFactory = class _AsyncAnimationRendererFactory {
    * @internal
    */
   loadImpl() {
-    const loadFn = () => this.moduleImpl ?? import("./chunk-YQNFOA3U.js").then((m) => m);
+    const loadFn = () => this.moduleImpl ?? import("./chunk-JLPI4FBN.js").then((m) => m);
     let moduleImplPromise;
     if (this.loadingSchedulerFn) {
       moduleImplPromise = this.loadingSchedulerFn(loadFn);
@@ -7997,11 +7998,26 @@ var ImageProcessorService = class _ImageProcessorService {
   MAX_IMAGE_SIZE = 1024;
   // Max width/height for resizing
   OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
-  // --- UPDATED: New Translation Model and specific prompt ---
-  TRANSLATION_MODEL_FOR_CRA = "mistralai/mistral-small-3.2-24b-instruct:free";
-  // Using Mistral Small for reliable free translation
+  KEY_LIMIT_ERROR_CODE = "KEY_LIMIT_EXCEEDED";
+  // Internal error code for rate limits
+  // Translation models with fallback for rate limit handling
+  TRANSLATION_MODELS = [
+    "anthropic/claude-3.5-sonnet",
+    // Best for translation - WMT24 winner
+    "openai/gpt-4o-mini",
+    // Cost-effective paid model
+    "google/gemini-2.0-flash-exp:free",
+    // Free, fast, good multilingual
+    "meta-llama/llama-3.3-70b-instruct:free",
+    // Free fallback
+    "google/gemma-3-27b-it:free",
+    // Free fallback
+    "openai/gpt-oss-20b:free"
+    // Free fallback
+  ];
   http = inject(HttpClient);
   apiKeyService = inject(ApiKeyService);
+  translate = inject(TranslateService);
   /**
    * Main method to analyze an image file using OpenRouter's vision API with fallback support.
    * @param file The image file to analyze.
@@ -8009,14 +8025,15 @@ var ImageProcessorService = class _ImageProcessorService {
    * @param identifier A unique identifier for logging (e.g., file name).
    * @param isPdfPage Whether this image is from a PDF page (for different prompting).
    * @param fallbackModels Optional array of fallback model IDs to try if primary fails.
+   * @param selectedTranslationModel Optional selected translation model (uses fallback array if not provided).
    * @returns An Observable emitting the analysis result.
    */
-  analyzeImage(file, selectedVisionModel, identifier, isPdfPage = false, fallbackModels = []) {
+  analyzeImage(file, selectedVisionModel, identifier, isPdfPage = false, fallbackModels = [], selectedTranslationModel) {
     console.log("ImageProcessorService.analyzeImage called with:", file.name, selectedVisionModel);
     const apiKey = this.apiKeyService.getCurrentKey();
     if (!apiKey) {
       console.error("No API key found");
-      return throwError(() => new Error("OpenRouter API Key is missing. Please provide it."));
+      return throwError(() => new Error(this.translate.instant("image.error.apiKeyMissing")));
     }
     console.log("API key found, loading image...");
     return this.loadImage(file).pipe(map((img) => {
@@ -8031,7 +8048,7 @@ var ImageProcessorService = class _ImageProcessorService {
       if (visionResult.error || !visionResult.english) {
         return from([visionResult]);
       }
-      return this.translateToFrench(visionResult.english, apiKey, identifier).pipe(map((frenchText) => ({
+      return this.translateToFrench(visionResult.english, apiKey, identifier, selectedTranslationModel).pipe(map((frenchText) => ({
         english: visionResult.english,
         french: frenchText,
         error: null,
@@ -8040,27 +8057,28 @@ var ImageProcessorService = class _ImageProcessorService {
         // Keep the image
       })), catchError((translateError) => {
         console.error(`Translation error for ${identifier}:`, translateError);
+        const errorMsg = translateError.message || this.translate.instant("image.error.unknown");
         return from([{
           english: visionResult.english,
-          french: `[Translation Error: ${translateError.message || "Unknown error"}]`,
+          french: this.translate.instant("image.error.translationError", { error: errorMsg }),
           error: translateError.message,
           imageBase64: visionResult.imageBase64
         }]);
       }));
     }), catchError((error) => {
       console.error(`Error in image analysis pipeline for ${identifier}:`, error);
-      if (error.message === "KEY_LIMIT_EXCEEDED") {
+      if (error.message === this.KEY_LIMIT_ERROR_CODE) {
         return from([{
           english: null,
           french: null,
-          error: "KEY_LIMIT_EXCEEDED",
+          error: this.KEY_LIMIT_ERROR_CODE,
           imageBase64: null
         }]);
       }
       return from([{
         english: null,
         french: null,
-        error: error.message || "Unknown error",
+        error: error.message || this.translate.instant("image.error.unknown"),
         imageBase64: null
       }]);
     }));
@@ -8075,12 +8093,12 @@ var ImageProcessorService = class _ImageProcessorService {
           observer.complete();
         };
         img.onerror = () => {
-          observer.error(new Error(`Failed to load image '${file.name}'.`));
+          observer.error(new Error(this.translate.instant("image.error.failedToLoadImage", { fileName: file.name })));
         };
         img.src = e.target?.result;
       };
       reader.onerror = () => {
-        observer.error(new Error(`Failed to read file '${file.name}'.`));
+        observer.error(new Error(this.translate.instant("image.error.failedToReadFile", { fileName: file.name })));
       };
       reader.readAsDataURL(file);
     });
@@ -8102,7 +8120,7 @@ var ImageProcessorService = class _ImageProcessorService {
     canvas.height = height;
     const ctx = canvas.getContext("2d");
     if (!ctx) {
-      throw new Error("Could not get 2D context from canvas for image resizing.");
+      throw new Error(this.translate.instant("image.error.canvasContext"));
     }
     ctx.drawImage(img, 0, 0, width, height);
     return canvas.toDataURL("image/png");
@@ -8116,7 +8134,7 @@ var ImageProcessorService = class _ImageProcessorService {
       return from([{
         english: null,
         french: null,
-        error: "All vision models failed due to rate limits or errors"
+        error: this.translate.instant("image.error.allVisionModelsFailed")
       }]);
     }
     const currentModel = models[attemptIndex];
@@ -8134,7 +8152,7 @@ var ImageProcessorService = class _ImageProcessorService {
       return from([{
         english: null,
         french: null,
-        error: error.error || error.message || "All vision models failed"
+        error: error.error || error.message || this.translate.instant("image.error.allVisionModelsFailed")
       }]);
     }));
   }
@@ -8190,7 +8208,7 @@ var ImageProcessorService = class _ImageProcessorService {
       const englishText = response?.choices?.[0]?.message?.content?.trim();
       if (!englishText) {
         console.warn(`No content or unexpected structure from vision model for ${identifier}. Response:`, response);
-        throw new Error("No content returned from vision model.");
+        throw new Error(this.translate.instant("image.error.noContentFromVision"));
       }
       return { english: englishText, french: null, error: null };
     }), catchError((error) => {
@@ -8201,29 +8219,105 @@ var ImageProcessorService = class _ImageProcessorService {
         errorMessage += ` - ${error.error}`;
       }
       if (error.status === 403 && errorMessage.toLowerCase().includes("key limit exceeded")) {
-        errorMessage = "KEY_LIMIT_EXCEEDED";
+        errorMessage = this.KEY_LIMIT_ERROR_CODE;
       }
       console.error(`Error in vision API call for ${identifier}:`, errorMessage, error);
       return from([{ english: null, french: null, error: errorMessage }]);
     }));
   }
-  translateToFrench(text2, apiKey, identifier) {
+  translateToFrench(text2, apiKey, identifier, selectedModel) {
     if (!text2) {
       console.log(`Skipping translation for empty text: ${identifier}`);
       return from([""]);
     }
+    if (selectedModel) {
+      console.log(`Using user-selected translation model: ${selectedModel} for ${identifier}`);
+      return this.callTranslationAPI(text2, apiKey, selectedModel, identifier).pipe(catchError((error) => {
+        console.error(`Error with selected translation model ${selectedModel} for ${identifier}:`, error);
+        if (error.status === 403 && error.error?.error?.message?.toLowerCase().includes("key limit exceeded")) {
+          return throwError(() => new Error(this.KEY_LIMIT_ERROR_CODE));
+        }
+        const status = error.status || "Network Error";
+        const statusText = error.statusText || this.translate.instant("image.error.unknown");
+        const errorMessage = this.translate.instant("image.error.translationApiError", { status, statusText });
+        return throwError(() => new Error(errorMessage));
+      }));
+    }
+    return this.translateWithFallback(text2, apiKey, identifier, 0);
+  }
+  callTranslationAPI(text2, apiKey, model2, identifier) {
     const systemPrompt = `You are a professional translator for the Canada Revenue Agency (CRA).
-                          Your task is to translate the following English text into clear, concise, and accurate Canadian French,
-                          using official CRA terminology and tone where applicable.
-                          CRITICAL INSTRUCTION: Provide ONLY the direct translation. DO NOT include any explanations, notes,
-                          disclaimers, or additional commentary of any kind. DO NOT include phrases like 'Here is the translation:'.
-                          DO NOT wrap your response in quotes. Simply translate the text directly.`;
+Your task is to translate the following English text into clear, concise, and accurate Canadian French,
+using official CRA terminology and tone where applicable.
+
+CRITICAL INSTRUCTIONS:
+- Provide ONLY the direct translation
+- DO NOT include any explanations, notes, disclaimers, or additional commentary of any kind
+- DO NOT include phrases like 'Here is the translation:'
+- DO NOT wrap your response in quotes
+- DO NOT show your reasoning or train of thought
+- Simply translate the text directly`;
     const messages = [
       { "role": "system", "content": systemPrompt },
       { "role": "user", "content": text2 }
     ];
     const payload = {
-      model: this.TRANSLATION_MODEL_FOR_CRA,
+      model: model2,
+      messages,
+      temperature: 0.1,
+      max_tokens: Math.max(500, Math.ceil(text2.length * 2.5)),
+      top_p: 0.9
+    };
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json"
+    });
+    return this.http.post(this.OPENROUTER_API_URL, payload, { headers }).pipe(timeout(9e4), retry({ count: 1, delay: 2e3 }), map((response) => {
+      console.log(`Translation response for ${identifier}:`, response);
+      if (!response || !response.choices || !Array.isArray(response.choices) || response.choices.length === 0) {
+        console.error(`Invalid response structure from translation model for ${identifier}:`, response);
+        throw new Error(this.translate.instant("image.error.invalidTranslationResponse"));
+      }
+      const message = response.choices[0]?.message;
+      let translation = message?.content || message?.reasoning || "";
+      if (!translation || typeof translation !== "string") {
+        console.error(`No content in translation response for ${identifier}. Full response:`, JSON.stringify(response, null, 2));
+        throw new Error(this.translate.instant("image.error.emptyTranslationContent"));
+      }
+      translation = translation.trim();
+      if (!translation) {
+        console.error(`Translation content is empty after trimming for ${identifier}`);
+        throw new Error(this.translate.instant("image.error.emptyTranslationContent"));
+      }
+      translation = translation.replace(/^Voici la traduction\s*:\s*/i, "");
+      translation = translation.replace(/^Translation\s*:\s*/i, "");
+      translation = translation.replace(/^Here is the translation\s*:\s*/i, "");
+      return translation;
+    }));
+  }
+  translateWithFallback(text2, apiKey, identifier, attemptIndex) {
+    if (attemptIndex >= this.TRANSLATION_MODELS.length) {
+      return throwError(() => new Error(this.translate.instant("image.error.allTranslationModelsFailed")));
+    }
+    const translationModel = this.TRANSLATION_MODELS[attemptIndex];
+    console.log(`Attempting translation with model: ${translationModel} for ${identifier} (attempt ${attemptIndex + 1}/${this.TRANSLATION_MODELS.length})`);
+    const systemPrompt = `You are a professional translator for the Canada Revenue Agency (CRA).
+Your task is to translate the following English text into clear, concise, and accurate Canadian French,
+using official CRA terminology and tone where applicable.
+
+CRITICAL INSTRUCTIONS:
+- Provide ONLY the direct translation
+- DO NOT include any explanations, notes, disclaimers, or additional commentary of any kind
+- DO NOT include phrases like 'Here is the translation:'
+- DO NOT wrap your response in quotes
+- DO NOT show your reasoning or train of thought
+- Simply translate the text directly`;
+    const messages = [
+      { "role": "system", "content": systemPrompt },
+      { "role": "user", "content": text2 }
+    ];
+    const payload = {
+      model: translationModel,
       messages,
       temperature: 0.1,
       max_tokens: Math.max(500, Math.ceil(text2.length * 2.5)),
@@ -8242,17 +8336,18 @@ var ImageProcessorService = class _ImageProcessorService {
         console.log(`Translation response for ${identifier}:`, response);
         if (!response || !response.choices || !Array.isArray(response.choices) || response.choices.length === 0) {
           console.error(`Invalid response structure from translation model for ${identifier}:`, response);
-          throw new Error("Invalid response structure from translation model.");
+          throw new Error(this.translate.instant("image.error.invalidTranslationResponse"));
         }
-        let translation = response.choices[0]?.message?.content;
+        const message = response.choices[0]?.message;
+        let translation = message?.content || message?.reasoning || "";
         if (!translation || typeof translation !== "string") {
           console.error(`No content in translation response for ${identifier}. Full response:`, JSON.stringify(response, null, 2));
-          throw new Error("Translation model returned empty content.");
+          throw new Error(this.translate.instant("image.error.emptyTranslationContent"));
         }
         translation = translation.trim();
         if (!translation) {
           console.error(`Translation content is empty after trimming for ${identifier}`);
-          throw new Error("Translation model returned empty content after trimming.");
+          throw new Error(this.translate.instant("image.error.emptyTranslationContent"));
         }
         translation = translation.replace(/^Voici la traduction\s*:\s*/i, "");
         translation = translation.replace(/^Translation\s*:\s*/i, "");
@@ -8260,13 +8355,23 @@ var ImageProcessorService = class _ImageProcessorService {
         return translation;
       }),
       catchError((error) => {
-        let errorMessage = `Translation API Error (${error.status || "Network Error"}): ${error.statusText || "Unknown Error"}`;
-        if (error.error && error.error.error && error.error.error.message) {
-          errorMessage += ` - ${error.error.error.message}`;
+        console.warn(`Translation model ${translationModel} failed for ${identifier}:`, error);
+        if (this.isRateLimitError(error)) {
+          console.log(`Rate limit detected for ${translationModel}, trying next model...`);
+          return this.translateWithFallback(text2, apiKey, identifier, attemptIndex + 1);
+        }
+        if (attemptIndex < this.TRANSLATION_MODELS.length - 1) {
+          console.log(`Error with ${translationModel}, trying next model...`);
+          return this.translateWithFallback(text2, apiKey, identifier, attemptIndex + 1);
         }
         if (error.status === 403 && error.error?.error?.message?.toLowerCase().includes("key limit exceeded")) {
-          errorMessage = "KEY_LIMIT_EXCEEDED";
+          const errorMessage2 = this.KEY_LIMIT_ERROR_CODE;
+          console.error(`Error translating text for ${identifier}:`, errorMessage2, error);
+          return throwError(() => new Error(errorMessage2));
         }
+        const status = error.status || "Network Error";
+        const statusText = error.statusText || this.translate.instant("image.error.unknown");
+        const errorMessage = this.translate.instant("image.error.translationApiError", { status, statusText });
         console.error(`Error translating text for ${identifier}:`, errorMessage, error);
         return throwError(() => new Error(errorMessage));
       })
@@ -8320,7 +8425,9 @@ var ImageAssistantStateService = class _ImageAssistantStateService {
     filesInProgress: 0,
     processedCount: 0,
     progressText: "",
-    showProgressArea: false
+    showProgressArea: false,
+    selectedTranslationModel: "anthropic/claude-3.5-sonnet"
+    // Default to best translation model
   });
   state$ = this.stateSubject.asObservable();
   getCurrentState() {
@@ -8344,13 +8451,19 @@ var ImageAssistantStateService = class _ImageAssistantStateService {
     }
   }
   resetState() {
+    const currentState = this.stateSubject.value;
     this.stateSubject.next({
       results: {},
       filesInProgress: 0,
       processedCount: 0,
       progressText: "",
-      showProgressArea: false
+      showProgressArea: false,
+      selectedTranslationModel: currentState.selectedTranslationModel
+      // Preserve selected model
     });
+  }
+  setSelectedTranslationModel(model2) {
+    this.updateState({ selectedTranslationModel: model2 });
   }
   incrementProcessedCount() {
     const currentState = this.stateSubject.value;
@@ -8372,6 +8485,7 @@ var ImageAssistantStateService = class _ImageAssistantStateService {
 
 // src/app/services/pdf-converter.service.ts
 var PdfConverterService = class _PdfConverterService {
+  translate = inject(TranslateService);
   pdfjsLib = null;
   isInitialized = false;
   /**
@@ -8400,7 +8514,7 @@ var PdfConverterService = class _PdfConverterService {
     return __async(this, null, function* () {
       yield this.initializePdfJs();
       if (!this.pdfjsLib) {
-        throw new Error("PDF.js library failed to initialize");
+        throw new Error(this.translate.instant("pdf.error.failedToInitialize"));
       }
       const arrayBuffer = yield file.arrayBuffer();
       const pdf = yield this.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -8411,7 +8525,7 @@ var PdfConverterService = class _PdfConverterService {
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
         if (!context) {
-          throw new Error("Failed to get canvas context");
+          throw new Error(this.translate.instant("pdf.error.failedToGetContext"));
         }
         canvas.height = viewport.height;
         canvas.width = viewport.width;
@@ -8518,7 +8632,7 @@ var FileUploadComponent = class _FileUploadComponent {
       let _t;
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.fileUpload = _t.first);
     }
-  }, outputs: { filesSelected: "filesSelected" }, decls: 8, vars: 11, consts: [["fileUpload", ""], ["name", "files[]", "accept", "image/png,image/jpeg,image/jpg,application/pdf", 3, "onSelect", "multiple", "auto", "customUpload", "showUploadButton", "showCancelButton", "chooseLabel"], ["pTemplate", "content"], [1, "upload-content"], [1, "pi", "pi-cloud-upload", "upload-icon"], [1, "upload-title"], [1, "upload-description"], [1, "upload-formats"]], template: function FileUploadComponent_Template(rf, ctx) {
+  }, outputs: { filesSelected: "filesSelected" }, decls: 8, vars: 11, consts: [["fileUpload", ""], ["name", "files[]", "accept", "image/png,image/jpeg,image/jpg,application/pdf", 3, "onSelect", "multiple", "auto", "customUpload", "showUploadButton", "showCancelButton", "chooseLabel"], ["pTemplate", "content"], [1, "w-full"], [1, "pi", "pi-cloud-upload", "text-5xl", "text-primary", "mb-3", "block"], [1, "text-lg", "mb-2"], [1, "text-color-secondary", "mb-2"], [1, "text-sm", "text-color-secondary"]], template: function FileUploadComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "fieldset")(1, "legend");
@@ -8540,7 +8654,7 @@ var FileUploadComponent = class _FileUploadComponent {
       \u0275\u0275advance(2);
       \u0275\u0275property("multiple", true)("auto", false)("customUpload", true)("showUploadButton", false)("showCancelButton", false)("chooseLabel", \u0275\u0275pipeBind1(6, 9, "image.upload.chooseLabel"));
     }
-  }, dependencies: [CommonModule, TranslateModule, TranslatePipe, FileUploadModule, FileUpload, PrimeTemplate, CardModule], styles: ["\n\nfieldset[_ngcontent-%COMP%] {\n  border: none;\n  padding: 0;\n  margin: 0;\n}\nlegend[_ngcontent-%COMP%] {\n  font-weight: 600;\n  margin-bottom: 0.5rem;\n  color: var(--text-color);\n}\n[_nghost-%COMP%]     .p-fileupload {\n  margin-top: 1rem;\n}\n[_nghost-%COMP%]     .p-fileupload-content {\n  border: 2px dashed var(--surface-border);\n  border-radius: var(--border-radius);\n  padding: 3rem 2rem;\n  text-align: center;\n  background: var(--surface-card);\n  transition: all 0.3s ease;\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n[_nghost-%COMP%]     .p-fileupload-content:hover {\n  border-color: var(--primary-color);\n  background-color: var(--surface-50);\n}\n[_nghost-%COMP%]     .p-fileupload-buttonbar {\n  display: none;\n}\n.upload-content[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.upload-icon[_ngcontent-%COMP%] {\n  font-size: 3rem;\n  color: var(--primary-color);\n  margin-bottom: 1rem;\n  display: block;\n}\n.upload-title[_ngcontent-%COMP%] {\n  margin-bottom: 0.5rem;\n  font-size: 1.1rem;\n}\n.upload-description[_ngcontent-%COMP%] {\n  color: var(--text-color-secondary);\n  margin-bottom: 0.5rem;\n}\n.upload-formats[_ngcontent-%COMP%] {\n  font-size: 0.875rem;\n  color: var(--text-color-secondary);\n}\n/*# sourceMappingURL=file-upload.component.css.map */"] });
+  }, dependencies: [CommonModule, TranslateModule, TranslatePipe, FileUploadModule, FileUpload, PrimeTemplate, CardModule], styles: ["\n\n[_nghost-%COMP%]     .p-fileupload {\n  margin-top: 1rem;\n}\n[_nghost-%COMP%]     .p-fileupload-content {\n  border: 2px dashed var(--surface-border);\n  border-radius: var(--border-radius);\n  padding: 3rem 2rem;\n  text-align: center;\n  background: var(--surface-card);\n  transition: all 0.3s ease;\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n[_nghost-%COMP%]     .p-fileupload-content:hover {\n  border-color: var(--primary-color);\n  background-color: var(--surface-50);\n}\n[_nghost-%COMP%]     .p-fileupload-buttonbar {\n  display: none;\n}\n/*# sourceMappingURL=file-upload.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FileUploadComponent, [{
@@ -8561,22 +8675,22 @@ var FileUploadComponent = class _FileUploadComponent {
     [chooseLabel]="'image.upload.chooseLabel' | translate">\r
 \r
     <ng-template pTemplate="content">\r
-      <div class="upload-content">\r
-        <i class="pi pi-cloud-upload upload-icon"></i>\r
-        <p class="upload-title">\r
+      <div class="w-full">\r
+        <i class="pi pi-cloud-upload text-5xl text-primary mb-3 block"></i>\r
+        <p class="text-lg mb-2">\r
           <strong>{{ 'image.upload.title' | translate }}</strong>\r
         </p>\r
-        <p class="upload-description">\r
+        <p class="text-color-secondary mb-2">\r
           {{ 'image.upload.dragDropOrClick' | translate }}\r
         </p>\r
-        <p class="upload-formats">\r
+        <p class="text-sm text-color-secondary">\r
           {{ 'image.upload.accept' | translate }}\r
         </p>\r
       </div>\r
     </ng-template>\r
   </p-fileupload>\r
 </fieldset>\r
-`, styles: ["/* src/app/views/image-assistant/components/file-upload/file-upload.component.css */\nfieldset {\n  border: none;\n  padding: 0;\n  margin: 0;\n}\nlegend {\n  font-weight: 600;\n  margin-bottom: 0.5rem;\n  color: var(--text-color);\n}\n:host ::ng-deep .p-fileupload {\n  margin-top: 1rem;\n}\n:host ::ng-deep .p-fileupload-content {\n  border: 2px dashed var(--surface-border);\n  border-radius: var(--border-radius);\n  padding: 3rem 2rem;\n  text-align: center;\n  background: var(--surface-card);\n  transition: all 0.3s ease;\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n:host ::ng-deep .p-fileupload-content:hover {\n  border-color: var(--primary-color);\n  background-color: var(--surface-50);\n}\n:host ::ng-deep .p-fileupload-buttonbar {\n  display: none;\n}\n.upload-content {\n  width: 100%;\n}\n.upload-icon {\n  font-size: 3rem;\n  color: var(--primary-color);\n  margin-bottom: 1rem;\n  display: block;\n}\n.upload-title {\n  margin-bottom: 0.5rem;\n  font-size: 1.1rem;\n}\n.upload-description {\n  color: var(--text-color-secondary);\n  margin-bottom: 0.5rem;\n}\n.upload-formats {\n  font-size: 0.875rem;\n  color: var(--text-color-secondary);\n}\n/*# sourceMappingURL=file-upload.component.css.map */\n"] }]
+`, styles: ["/* src/app/views/image-assistant/components/file-upload/file-upload.component.css */\n:host ::ng-deep .p-fileupload {\n  margin-top: 1rem;\n}\n:host ::ng-deep .p-fileupload-content {\n  border: 2px dashed var(--surface-border);\n  border-radius: var(--border-radius);\n  padding: 3rem 2rem;\n  text-align: center;\n  background: var(--surface-card);\n  transition: all 0.3s ease;\n  min-height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n:host ::ng-deep .p-fileupload-content:hover {\n  border-color: var(--primary-color);\n  background-color: var(--surface-50);\n}\n:host ::ng-deep .p-fileupload-buttonbar {\n  display: none;\n}\n/*# sourceMappingURL=file-upload.component.css.map */\n"] }]
   }], null, { filesSelected: [{
     type: Output
   }], fileUpload: [{
@@ -12049,7 +12163,6 @@ function SharedModelSelectorComponent_ng_template_3_Template(rf, ctx) {
   }
 }
 var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
-  translate;
   selectedModel = "";
   models = [];
   label = "common.modelSelector.label";
@@ -12063,9 +12176,7 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
   modelChange = new EventEmitter();
   localModels = [];
   destroy$ = new Subject();
-  constructor(translate) {
-    this.translate = translate;
-  }
+  translate = inject(TranslateService);
   ngOnInit() {
     this.initializeModels();
     this.translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe(() => {
@@ -12084,7 +12195,7 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
     }
   }
   onModelChange(event) {
-    const value = event.value || event;
+    const value = typeof event === "string" ? event : event.value;
     this.selectedModel = value;
     this.modelChange.emit(value);
   }
@@ -12097,9 +12208,9 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
     return selected?.description ? this.translate.instant(selected.description) : "";
   }
   static \u0275fac = function SharedModelSelectorComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _SharedModelSelectorComponent)(\u0275\u0275directiveInject(TranslateService));
+    return new (__ngFactoryType__ || _SharedModelSelectorComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SharedModelSelectorComponent, selectors: [["ca-shared-model-selector"]], inputs: { selectedModel: "selectedModel", models: "models", label: "label", showCard: "showCard", cardTitle: "cardTitle", disabled: "disabled", showTranslateOption: "showTranslateOption", translateToFrench: "translateToFrench" }, outputs: { translateChange: "translateChange", modelChange: "modelChange" }, decls: 5, vars: 2, consts: [["selectorContent", ""], [1, "model-selector-container"], [4, "ngIf"], ["pTemplate", "header"], [4, "ngTemplateOutlet"], [1, "flex", "align-items-center", "p-3"], [1, "pi", "pi-cog", "mr-2"], [1, "m-0"], [1, "model-selector-content"], [1, "field"], ["for", "model", 1, "block", "mb-2", "font-semibold"], ["optionLabel", "name", "optionValue", "value", "styleClass", "w-full", 3, "ngModelChange", "options", "ngModel", "disabled", "placeholder"], ["class", "block mt-2 text-500", 4, "ngIf"], ["class", "field mt-4", 4, "ngIf"], [1, "block", "mt-2", "text-500"], [1, "field", "mt-4"], [1, "flex", "align-items-center"], ["inputId", "translateToFrench", 3, "ngModelChange", "ngModel", "disabled", "binary"], ["for", "translateToFrench", 1, "ml-2", "cursor-pointer"], [1, "block", "mt-2", "ml-4", "text-500"]], template: function SharedModelSelectorComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SharedModelSelectorComponent, selectors: [["ca-shared-model-selector"]], inputs: { selectedModel: "selectedModel", models: "models", label: "label", showCard: "showCard", cardTitle: "cardTitle", disabled: "disabled", showTranslateOption: "showTranslateOption", translateToFrench: "translateToFrench" }, outputs: { translateChange: "translateChange", modelChange: "modelChange" }, decls: 5, vars: 2, consts: [["selectorContent", ""], [1, "w-full"], [4, "ngIf"], ["pTemplate", "header"], [4, "ngTemplateOutlet"], [1, "flex", "align-items-center", "p-3"], [1, "pi", "pi-cog", "mr-2"], [1, "m-0"], [1, "p-0"], [1, "field"], ["for", "model", 1, "block", "mb-2", "font-semibold"], ["optionLabel", "name", "optionValue", "value", "styleClass", "w-full", 3, "ngModelChange", "options", "ngModel", "disabled", "placeholder"], ["class", "block mt-2 text-color-secondary", 4, "ngIf"], ["class", "field mt-4", 4, "ngIf"], [1, "block", "mt-2", "text-color-secondary"], [1, "field", "mt-4"], [1, "flex", "align-items-center"], ["inputId", "translateToFrench", 3, "ngModelChange", "ngModel", "disabled", "binary"], ["for", "translateToFrench", 1, "ml-2", "cursor-pointer"], [1, "block", "mt-2", "ml-4", "text-color-secondary"]], template: function SharedModelSelectorComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 1);
       \u0275\u0275template(1, SharedModelSelectorComponent_p_card_1_Template, 3, 1, "p-card", 2)(2, SharedModelSelectorComponent_div_2_Template, 2, 1, "div", 2);
@@ -12112,7 +12223,7 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", !ctx.showCard);
     }
-  }, dependencies: [CommonModule, NgIf, NgTemplateOutlet, FormsModule, NgControlStatus, NgModel, TranslateModule, TranslatePipe, DropdownModule, Dropdown, PrimeTemplate, CardModule, Card, CheckboxModule, Checkbox], styles: ["\n\n.model-selector-container[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.model-selector-content[_ngcontent-%COMP%] {\n  padding: 0;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  color: var(--text-color);\n}\n[_nghost-%COMP%]     .p-dropdown {\n  width: 100%;\n  min-width: 300px;\n}\n.cursor-pointer[_ngcontent-%COMP%] {\n  cursor: pointer;\n}\n.text-500[_ngcontent-%COMP%] {\n  color: var(--text-color-secondary);\n}\n/*# sourceMappingURL=model-selector.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, NgTemplateOutlet, FormsModule, NgControlStatus, NgModel, TranslateModule, TranslatePipe, DropdownModule, Dropdown, PrimeTemplate, CardModule, Card, CheckboxModule, Checkbox], styles: ["\n\n[_nghost-%COMP%]     .p-dropdown {\n  width: 100%;\n  min-width: 300px;\n}\n/*# sourceMappingURL=model-selector.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SharedModelSelectorComponent, [{
@@ -12124,7 +12235,7 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
       DropdownModule,
       CardModule,
       CheckboxModule
-    ], template: `<div class="model-selector-container">\r
+    ], template: `<div class="w-full">\r
   <p-card *ngIf="showCard">\r
     <ng-template pTemplate="header">\r
       <div class="flex align-items-center p-3">\r
@@ -12132,32 +12243,32 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
         <h3 class="m-0">{{ cardTitle | translate }}</h3>\r
       </div>\r
     </ng-template>\r
-    \r
+\r
     <ng-container *ngTemplateOutlet="selectorContent"></ng-container>\r
   </p-card>\r
-  \r
+\r
   <div *ngIf="!showCard">\r
     <ng-container *ngTemplateOutlet="selectorContent"></ng-container>\r
   </div>\r
 </div>\r
 \r
 <ng-template #selectorContent>\r
-  <div class="model-selector-content">\r
+  <div class="p-0">\r
     <div class="field">\r
       <label for="model" class="block mb-2 font-semibold">\r
         {{ label | translate }}\r
       </label>\r
-      <p-dropdown \r
-        [options]="localModels" \r
+      <p-dropdown\r
+        [options]="localModels"\r
         [(ngModel)]="selectedModel"\r
         (ngModelChange)="onModelChange($event)"\r
-        optionLabel="name" \r
+        optionLabel="name"\r
         optionValue="value"\r
         [disabled]="disabled"\r
         styleClass="w-full"\r
         [placeholder]="'common.modelSelector.placeholder' | translate">\r
       </p-dropdown>\r
-      <small class="block mt-2 text-500" *ngIf="getModelDescription()">\r
+      <small class="block mt-2 text-color-secondary" *ngIf="getModelDescription()">\r
         {{ getModelDescription() }}\r
       </small>\r
     </div>\r
@@ -12165,7 +12276,7 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
     <!-- Translation option for metadata assistant -->\r
     <div class="field mt-4" *ngIf="showTranslateOption">\r
       <div class="flex align-items-center">\r
-        <p-checkbox \r
+        <p-checkbox\r
           [(ngModel)]="translateToFrench"\r
           (ngModelChange)="onTranslateChange($event)"\r
           [disabled]="disabled"\r
@@ -12176,13 +12287,13 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
           {{ 'metadata.modelSelector.translateToFrench' | translate }}\r
         </label>\r
       </div>\r
-      <small class="block mt-2 ml-4 text-500">\r
+      <small class="block mt-2 ml-4 text-color-secondary">\r
         {{ 'metadata.modelSelector.translateDescription' | translate }}\r
       </small>\r
     </div>\r
   </div>\r
-</ng-template>`, styles: ["/* src/app/components/model-selector/model-selector.component.css */\n.model-selector-container {\n  width: 100%;\n}\n.model-selector-content {\n  padding: 0;\n}\n.field label {\n  color: var(--text-color);\n}\n:host ::ng-deep .p-dropdown {\n  width: 100%;\n  min-width: 300px;\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.text-500 {\n  color: var(--text-color-secondary);\n}\n/*# sourceMappingURL=model-selector.component.css.map */\n"] }]
-  }], () => [{ type: TranslateService }], { selectedModel: [{
+</ng-template>`, styles: ["/* src/app/components/model-selector/model-selector.component.css */\n:host ::ng-deep .p-dropdown {\n  width: 100%;\n  min-width: 300px;\n}\n/*# sourceMappingURL=model-selector.component.css.map */\n"] }]
+  }], null, { selectedModel: [{
     type: Input
   }], models: [{
     type: Input
@@ -12205,7 +12316,7 @@ var SharedModelSelectorComponent = class _SharedModelSelectorComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SharedModelSelectorComponent, { className: "SharedModelSelectorComponent", filePath: "src/app/components/model-selector/model-selector.component.ts", lineNumber: 30 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SharedModelSelectorComponent, { className: "SharedModelSelectorComponent", filePath: "src/app/components/model-selector/model-selector.component.ts", lineNumber: 31 });
 })();
 
 // src/app/components/progress-indicator/progress-indicator.component.ts
@@ -12248,19 +12359,19 @@ var ProgressIndicatorComponent = class _ProgressIndicatorComponent {
   static \u0275fac = function ProgressIndicatorComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ProgressIndicatorComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProgressIndicatorComponent, selectors: [["ca-progress-indicator"]], inputs: { progressText: "progressText", processedCount: "processedCount", totalFiles: "totalFiles", showProgress: "showProgress", showSpinner: "showSpinner" }, decls: 1, vars: 1, consts: [["class", "progress-container", 4, "ngIf"], [1, "progress-container"], [1, "progress-text"], ["class", "spinner", 4, "ngIf"], [3, "value", "showValue"], [1, "spinner"]], template: function ProgressIndicatorComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProgressIndicatorComponent, selectors: [["ca-progress-indicator"]], inputs: { progressText: "progressText", processedCount: "processedCount", totalFiles: "totalFiles", showProgress: "showProgress", showSpinner: "showSpinner" }, decls: 1, vars: 1, consts: [["class", "mt-4 p-3 surface-100 border-round", 4, "ngIf"], [1, "mt-4", "p-3", "surface-100", "border-round"], [1, "flex", "align-items-center", "gap-2", "mb-3"], ["class", "spinner", 4, "ngIf"], [3, "value", "showValue"], [1, "spinner"]], template: function ProgressIndicatorComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275template(0, ProgressIndicatorComponent_div_0_Template, 6, 4, "div", 0);
     }
     if (rf & 2) {
       \u0275\u0275property("ngIf", ctx.showProgress);
     }
-  }, dependencies: [CommonModule, NgIf, ProgressBarModule, ProgressBar], styles: ["\n\n.progress-container[_ngcontent-%COMP%] {\n  margin-top: 1.5rem;\n  padding: 1rem;\n  background-color: #f8f9fa;\n  border-radius: 8px;\n}\n.progress-text[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  margin-bottom: 1rem;\n}\n.spinner[_ngcontent-%COMP%] {\n  width: 24px;\n  height: 24px;\n  border: 4px solid #ccc;\n  border-top-color: #a7a72e;\n  border-radius: 50%;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, ProgressBarModule, ProgressBar], styles: ["\n\n.spinner[_ngcontent-%COMP%] {\n  width: 24px;\n  height: 24px;\n  border: 4px solid var(--surface-300);\n  border-top-color: var(--primary-color);\n  border-radius: 50%;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProgressIndicatorComponent, [{
     type: Component,
-    args: [{ selector: "ca-progress-indicator", standalone: true, imports: [CommonModule, ProgressBarModule], template: '<div class="progress-container" *ngIf="showProgress">\r\n  <div class="progress-text">\r\n    <div class="spinner" *ngIf="showSpinner"></div>\r\n    <span>{{ progressText }}</span>\r\n  </div>\r\n  <p-progressBar [value]="progressValue" [showValue]="true"></p-progressBar>\r\n</div>', styles: ["/* angular:styles/component:css;3626b4fd80763a0a8c7fd3ac85e8e2b1a9ea83f9e1ae2febc71f6ef0fd0f4baa;D:/AmberDev/main-repo/content-assistant/src/app/components/progress-indicator/progress-indicator.component.ts */\n.progress-container {\n  margin-top: 1.5rem;\n  padding: 1rem;\n  background-color: #f8f9fa;\n  border-radius: 8px;\n}\n.progress-text {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  margin-bottom: 1rem;\n}\n.spinner {\n  width: 24px;\n  height: 24px;\n  border: 4px solid #ccc;\n  border-top-color: #a7a72e;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */\n"] }]
+    args: [{ selector: "ca-progress-indicator", standalone: true, imports: [CommonModule, ProgressBarModule], template: '<div class="mt-4 p-3 surface-100 border-round" *ngIf="showProgress">\r\n  <div class="flex align-items-center gap-2 mb-3">\r\n    <div class="spinner" *ngIf="showSpinner"></div>\r\n    <span>{{ progressText }}</span>\r\n  </div>\r\n  <p-progressBar [value]="progressValue" [showValue]="true"></p-progressBar>\r\n</div>', styles: ["/* angular:styles/component:css;c3bb16d0364923b6efed8b9b7d045d7b234b1302e11161c1b75c8078ba88866e;D:/AmberDev/main-repo/content-assistant/src/app/components/progress-indicator/progress-indicator.component.ts */\n.spinner {\n  width: 24px;\n  height: 24px;\n  border: 4px solid var(--surface-300);\n  border-top-color: var(--primary-color);\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n/*# sourceMappingURL=progress-indicator.component.css.map */\n"] }]
   }], null, { progressText: [{
     type: Input
   }], processedCount: [{
@@ -12274,7 +12385,7 @@ var ProgressIndicatorComponent = class _ProgressIndicatorComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProgressIndicatorComponent, { className: "ProgressIndicatorComponent", filePath: "src/app/components/progress-indicator/progress-indicator.component.ts", lineNumber: 40 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProgressIndicatorComponent, { className: "ProgressIndicatorComponent", filePath: "src/app/components/progress-indicator/progress-indicator.component.ts", lineNumber: 26 });
 })();
 
 // node_modules/primeng/fesm2022/primeng-divider.mjs
@@ -12848,7 +12959,7 @@ var ImageResultComponent = class _ImageResultComponent {
   static \u0275fac = function ImageResultComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ImageResultComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageResultComponent, selectors: [["ca-image-result"]], inputs: { result: "result" }, decls: 4, vars: 0, consts: [[1, "result-container"], ["pTemplate", "header"], ["pTemplate", "content"], ["severity", "error", 3, "text", 4, "ngIf"], ["class", "processing-message", 4, "ngIf"], [4, "ngIf"], ["severity", "error", 3, "text"], [1, "processing-message"], ["strokeWidth", "4"], ["class", "result-image", 3, "src", "alt", 4, "ngIf"], [1, "result-columns"], [1, "result-column"], [1, "collapsible-container"], [3, "innerHTML", 4, "ngIf"], ["styleClass", "p-button-text p-button-sm", 3, "label", "click", 4, "ngIf"], ["icon", "pi pi-copy", "styleClass", "p-button-secondary p-button-sm copy-button", 3, "label", "click", 4, "ngIf"], [1, "result-image", 3, "src", "alt"], [3, "innerHTML"], ["styleClass", "p-button-text p-button-sm", 3, "click", "label"], ["icon", "pi pi-copy", "styleClass", "p-button-secondary p-button-sm copy-button", 3, "click", "label"]], template: function ImageResultComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageResultComponent, selectors: [["ca-image-result"]], inputs: { result: "result" }, decls: 4, vars: 0, consts: [[1, "mb-4"], ["pTemplate", "header"], ["pTemplate", "content"], ["severity", "error", 3, "text", 4, "ngIf"], ["class", "flex align-items-center gap-3", 4, "ngIf"], [4, "ngIf"], ["severity", "error", 3, "text"], [1, "flex", "align-items-center", "gap-3"], ["strokeWidth", "4"], ["class", "max-h-13rem w-auto border-1 surface-border mb-3 block border-round", 3, "src", "alt", 4, "ngIf"], [1, "grid", "gap-4"], [1, "col-12", "md:col-6", "p-3", "surface-50", "border-round"], [1, "my-2"], [3, "innerHTML", 4, "ngIf"], ["styleClass", "p-button-text p-button-sm", 3, "label", "click", 4, "ngIf"], ["icon", "pi pi-copy", "styleClass", "p-button-secondary p-button-sm copy-button", 3, "label", "click", 4, "ngIf"], [1, "max-h-13rem", "w-auto", "border-1", "surface-border", "mb-3", "block", "border-round", 3, "src", "alt"], [3, "innerHTML"], ["styleClass", "p-button-text p-button-sm", 3, "click", "label"], ["icon", "pi pi-copy", "styleClass", "p-button-secondary p-button-sm copy-button", 3, "click", "label"]], template: function ImageResultComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "p-card");
       \u0275\u0275template(2, ImageResultComponent_ng_template_2_Template, 3, 6, "ng-template", 1)(3, ImageResultComponent_ng_template_3_Template, 3, 3, "ng-template", 2);
@@ -12869,7 +12980,7 @@ var ImageResultComponent = class _ImageResultComponent {
     Message,
     ProgressSpinnerModule,
     ProgressSpinner
-  ], styles: ["\n\n.result-container[_ngcontent-%COMP%] {\n  margin-bottom: 2rem;\n}\n.result-image[_ngcontent-%COMP%] {\n  max-height: 200px;\n  width: auto;\n  border: 1px solid var(--surface-border);\n  margin-bottom: 1rem;\n  display: block;\n  border-radius: var(--border-radius);\n}\n.result-columns[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n@media (max-width: 768px) {\n  .result-columns[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n    gap: 1rem;\n  }\n}\n.result-column[_ngcontent-%COMP%] {\n  background-color: var(--surface-50);\n  padding: 1rem;\n  border-radius: var(--border-radius);\n}\n.collapsible-container[_ngcontent-%COMP%] {\n  margin: 0.5rem 0;\n}\n.processing-message[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n}\n.copy-button[_ngcontent-%COMP%] {\n  margin-top: 0.5rem;\n}\n/*# sourceMappingURL=image-result.component.css.map */"] });
+  ], styles: ["\n\n/*# sourceMappingURL=image-result.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ImageResultComponent, [{
@@ -12882,7 +12993,7 @@ var ImageResultComponent = class _ImageResultComponent {
       DividerModule,
       MessageModule,
       ProgressSpinnerModule
-    ], template: `<div class="result-container">\r
+    ], template: `<div class="mb-4">\r
   <p-card>\r
     <ng-template pTemplate="header">\r
       <h4>{{ 'image.result.title' | translate: { fileName: result.fileName } }}</h4>\r
@@ -12897,7 +13008,7 @@ var ImageResultComponent = class _ImageResultComponent {
       </p-message>\r
       \r
       <!-- Processing state -->\r
-      <div *ngIf="result.status === 'processing'" class="processing-message">\r
+      <div *ngIf="result.status === 'processing'" class="flex align-items-center gap-3">\r
         <p-progressSpinner \r
           [style]="{width: '30px', height: '30px'}" \r
           strokeWidth="4">\r
@@ -12912,13 +13023,13 @@ var ImageResultComponent = class _ImageResultComponent {
           *ngIf="result.data.imageBase64"\r
           [src]="result.data.imageBase64"\r
           [alt]="'image.result.previewFor' | translate: { fileName: result.fileName }"\r
-          class="result-image">\r
+          class="max-h-13rem w-auto border-1 surface-border mb-3 block border-round">\r
         \r
-        <div class="result-columns">\r
+        <div class="grid gap-4">\r
           <!-- English Alt Text -->\r
-          <div class="result-column">\r
+          <div class="col-12 md:col-6 p-3 surface-50 border-round">\r
             <strong>{{ 'image.result.english' | translate }}</strong>\r
-            <div class="collapsible-container">\r
+            <div class="my-2">\r
               <div *ngIf="!result.showFullText">\r
                 {{ getTruncatedText(result.data.english) }}\r
                 <span *ngIf="shouldShowToggle(result.data.english)">...</span>\r
@@ -12943,9 +13054,9 @@ var ImageResultComponent = class _ImageResultComponent {
           </div>\r
           \r
           <!-- French Alt Text -->\r
-          <div class="result-column">\r
+          <div class="col-12 md:col-6 p-3 surface-50 border-round">\r
             <strong>{{ 'image.result.french' | translate }}</strong>\r
-            <div class="collapsible-container">\r
+            <div class="my-2">\r
               <div *ngIf="!result.showFullText">\r
                 {{ getTruncatedText(result.data.french) }}\r
                 <span *ngIf="shouldShowToggle(result.data.french)">...</span>\r
@@ -12972,7 +13083,7 @@ var ImageResultComponent = class _ImageResultComponent {
       </div>\r
     </ng-template>\r
   </p-card>\r
-</div>`, styles: ["/* src/app/views/image-assistant/components/image-result/image-result.component.css */\n.result-container {\n  margin-bottom: 2rem;\n}\n.result-image {\n  max-height: 200px;\n  width: auto;\n  border: 1px solid var(--surface-border);\n  margin-bottom: 1rem;\n  display: block;\n  border-radius: var(--border-radius);\n}\n.result-columns {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n@media (max-width: 768px) {\n  .result-columns {\n    grid-template-columns: 1fr;\n    gap: 1rem;\n  }\n}\n.result-column {\n  background-color: var(--surface-50);\n  padding: 1rem;\n  border-radius: var(--border-radius);\n}\n.collapsible-container {\n  margin: 0.5rem 0;\n}\n.processing-message {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n}\n.copy-button {\n  margin-top: 0.5rem;\n}\n/*# sourceMappingURL=image-result.component.css.map */\n"] }]
+</div>`, styles: ["/* src/app/views/image-assistant/components/image-result/image-result.component.css */\n/*# sourceMappingURL=image-result.component.css.map */\n"] }]
   }], null, { result: [{
     type: Input
   }] });
@@ -13065,37 +13176,37 @@ var CsvDownloadComponent = class _CsvDownloadComponent {
   static \u0275fac = function CsvDownloadComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _CsvDownloadComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CsvDownloadComponent, selectors: [["ca-csv-download"]], inputs: { results: "results" }, decls: 1, vars: 1, consts: [["class", "csv-download-container", 4, "ngIf"], [1, "csv-download-container"], ["icon", "pi pi-download", "styleClass", "my-2", 3, "label", "onClick", 4, "ngIf"], [4, "ngIf"], ["icon", "pi pi-download", "styleClass", "my-2", 3, "onClick", "label"]], template: function CsvDownloadComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CsvDownloadComponent, selectors: [["ca-csv-download"]], inputs: { results: "results" }, decls: 1, vars: 1, consts: [["class", "mt-5 p-3 surface-100 border-round", 4, "ngIf"], [1, "mt-5", "p-3", "surface-100", "border-round"], ["icon", "pi pi-download", "styleClass", "my-2", 3, "label", "onClick", 4, "ngIf"], [4, "ngIf"], ["icon", "pi pi-download", "styleClass", "my-2", 3, "onClick", "label"]], template: function CsvDownloadComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275template(0, CsvDownloadComponent_div_0_Template, 3, 2, "div", 0);
     }
     if (rf & 2) {
       \u0275\u0275property("ngIf", ctx.hasResults());
     }
-  }, dependencies: [CommonModule, NgIf, TranslateModule, TranslatePipe, ButtonModule, Button], styles: ["\n\n.csv-download-container[_ngcontent-%COMP%] {\n  margin-top: 2rem;\n  padding: 1rem;\n  background-color: var(--surface-100);\n  border-radius: 8px;\n}\n/*# sourceMappingURL=csv-download.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, TranslateModule, TranslatePipe, ButtonModule, Button], encapsulation: 2 });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CsvDownloadComponent, [{
     type: Component,
-    args: [{ selector: "ca-csv-download", standalone: true, imports: [CommonModule, TranslateModule, ButtonModule], template: `<div class="csv-download-container" *ngIf="hasResults()">\r
-  <p-button \r
+    args: [{ selector: "ca-csv-download", standalone: true, imports: [CommonModule, TranslateModule, ButtonModule], template: `<div class="mt-5 p-3 surface-100 border-round" *ngIf="hasResults()">\r
+  <p-button\r
     *ngIf="hasCompletedResults()"\r
     (onClick)="downloadCsv()"\r
     [label]="'image.csv.download' | translate"\r
     icon="pi pi-download"\r
     styleClass="my-2">\r
   </p-button>\r
-  \r
+\r
   <p *ngIf="shouldShowNoDataMessage()">\r
     {{ 'image.csv.noData' | translate }}\r
   </p>\r
-</div>`, styles: ["/* angular:styles/component:css;1c997a74d74a98c53de94cd1b23dcec12d9454b472a147986b6d5799e58fa7ae;D:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/components/csv-download/csv-download.component.ts */\n.csv-download-container {\n  margin-top: 2rem;\n  padding: 1rem;\n  background-color: var(--surface-100);\n  border-radius: 8px;\n}\n/*# sourceMappingURL=csv-download.component.css.map */\n"] }]
+</div>` }]
   }], null, { results: [{
     type: Input
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CsvDownloadComponent, { className: "CsvDownloadComponent", filePath: "src/app/views/image-assistant/components/csv-download/csv-download.component.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CsvDownloadComponent, { className: "CsvDownloadComponent", filePath: "src/app/views/image-assistant/components/csv-download/csv-download.component.ts", lineNumber: 14 });
 })();
 
 // src/app/views/image-assistant/image-assistant.component.ts
@@ -13125,61 +13236,81 @@ function ImageAssistantComponent_span_14_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "page.apiKey.notSet"), " ");
   }
 }
-function ImageAssistantComponent_ng_container_19_div_2_ca_image_result_1_Template(rf, ctx) {
+function ImageAssistantComponent_ng_container_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 11)(2, "ca-shared-model-selector", 4);
+    \u0275\u0275listener("modelChange", function ImageAssistantComponent_ng_container_18_Template_ca_shared_model_selector_modelChange_2_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onTranslationModelChange($event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const state_r3 = ctx.ngIf;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("selectedModel", state_r3.selectedTranslationModel)("models", ctx_r1.translationModels)("label", "image.translationModelSelector.modelLabel")("cardTitle", "image.translationModelSelector.title")("showCard", true)("showTranslateOption", false);
+  }
+}
+function ImageAssistantComponent_ng_container_21_div_2_ca_image_result_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "ca-image-result", 18);
   }
   if (rf & 2) {
-    const result_r2 = ctx.$implicit;
-    \u0275\u0275property("result", result_r2);
+    const result_r5 = ctx.$implicit;
+    \u0275\u0275property("result", result_r5);
   }
 }
-function ImageAssistantComponent_ng_container_19_div_2_Template(rf, ctx) {
+function ImageAssistantComponent_ng_container_21_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 13);
-    \u0275\u0275template(1, ImageAssistantComponent_ng_container_19_div_2_ca_image_result_1_Template, 1, 1, "ca-image-result", 14);
-    \u0275\u0275element(2, "ca-csv-download", 15);
-    \u0275\u0275elementStart(3, "div", 16)(4, "p-button", 17);
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 14);
+    \u0275\u0275template(1, ImageAssistantComponent_ng_container_21_div_2_ca_image_result_1_Template, 1, 1, "ca-image-result", 15);
+    \u0275\u0275element(2, "ca-csv-download", 16);
+    \u0275\u0275elementStart(3, "div", 11)(4, "p-button", 17);
     \u0275\u0275pipe(5, "translate");
     \u0275\u0275pipe(6, "translate");
-    \u0275\u0275listener("click", function ImageAssistantComponent_ng_container_19_div_2_Template_p_button_click_4_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.resetTool());
+    \u0275\u0275listener("click", function ImageAssistantComponent_ng_container_21_div_2_Template_p_button_click_4_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.resetTool());
     });
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    const state_r4 = \u0275\u0275nextContext().ngIf;
-    const ctx_r2 = \u0275\u0275nextContext();
+    const state_r6 = \u0275\u0275nextContext().ngIf;
+    const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r2.getResultsArray(state_r4.results));
+    \u0275\u0275property("ngForOf", ctx_r1.getResultsArray(state_r6.results));
     \u0275\u0275advance();
-    \u0275\u0275property("results", state_r4.results);
+    \u0275\u0275property("results", state_r6.results);
     \u0275\u0275advance(2);
     \u0275\u0275property("label", \u0275\u0275pipeBind1(5, 4, "image.reset.label"))("pTooltip", \u0275\u0275pipeBind1(6, 6, "image.reset.tooltip"));
   }
 }
-function ImageAssistantComponent_ng_container_19_Template(rf, ctx) {
+function ImageAssistantComponent_ng_container_21_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "ca-progress-indicator", 11);
-    \u0275\u0275template(2, ImageAssistantComponent_ng_container_19_div_2_Template, 7, 8, "div", 12);
+    \u0275\u0275element(1, "ca-progress-indicator", 12);
+    \u0275\u0275template(2, ImageAssistantComponent_ng_container_21_div_2_Template, 7, 8, "div", 13);
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
-    const state_r4 = ctx.ngIf;
-    const ctx_r2 = \u0275\u0275nextContext();
+    const state_r6 = ctx.ngIf;
+    const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("progressText", state_r4.progressText)("processedCount", state_r4.processedCount)("totalFiles", state_r4.filesInProgress)("showProgress", state_r4.showProgressArea);
+    \u0275\u0275property("progressText", state_r6.progressText)("processedCount", state_r6.processedCount)("totalFiles", state_r6.filesInProgress)("showProgress", state_r6.showProgressArea);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.getResultsArray(state_r4.results).length > 0);
+    \u0275\u0275property("ngIf", ctx_r1.getResultsArray(state_r6.results).length > 0);
   }
 }
 var ImageAssistantComponent = class _ImageAssistantComponent {
   // Processing State
-  selectedVisionModel = "qwen/qwen2.5-vl-32b-instruct:free";
+  selectedVisionModel = "qwen/qwen3-vl-8b-instruct";
   filesToProcess = [];
   state$;
   // Timing tracking
@@ -13187,14 +13318,14 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
   // Model options for the shared selector
   visionModels = [
     {
-      name: "image.model.qwen32",
-      value: "qwen/qwen2.5-vl-32b-instruct:free",
-      description: "image.model.qwen32Description"
+      name: "image.model.qwen3vl8b",
+      value: "qwen/qwen3-vl-8b-instruct",
+      description: "image.model.qwen3vl8bDescription"
     },
     {
-      name: "image.model.qwen72",
-      value: "qwen/qwen2.5-vl-72b-instruct:free",
-      description: "image.model.qwen72Description"
+      name: "image.model.qwen3vl30b",
+      value: "qwen/qwen3-vl-30b-a3b-instruct",
+      description: "image.model.qwen3vl30bDescription"
     },
     {
       name: "image.model.gemma",
@@ -13205,6 +13336,38 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
       name: "image.model.llama",
       value: "meta-llama/llama-3.2-11b-vision-instruct",
       description: "image.model.llamaDescription"
+    }
+  ];
+  translationModels = [
+    {
+      name: "image.translationModel.claude35Sonnet",
+      value: "anthropic/claude-3.5-sonnet",
+      description: "image.translationModel.claude35SonnetDescription"
+    },
+    {
+      name: "image.translationModel.gpt4oMini",
+      value: "openai/gpt-4o-mini",
+      description: "image.translationModel.gpt4oMiniDescription"
+    },
+    {
+      name: "image.translationModel.gemini20Flash",
+      value: "google/gemini-2.0-flash-exp:free",
+      description: "image.translationModel.gemini20FlashDescription"
+    },
+    {
+      name: "image.translationModel.llama33",
+      value: "meta-llama/llama-3.3-70b-instruct:free",
+      description: "image.translationModel.llama33Description"
+    },
+    {
+      name: "image.translationModel.gemma327b",
+      value: "google/gemma-3-27b-it:free",
+      description: "image.translationModel.gemma327bDescription"
+    },
+    {
+      name: "image.translationModel.gptOss20b",
+      value: "openai/gpt-oss-20b:free",
+      description: "image.translationModel.gptOss20bDescription"
     }
   ];
   subscriptions = [];
@@ -13232,8 +13395,6 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
   onFilesSelected(files) {
-    console.log("Files selected:", files);
-    console.time("Image processing time");
     this.processingStartTime = performance.now();
     this.filesToProcess = [];
     let actualFileCount = 0;
@@ -13265,6 +13426,9 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
     });
     this.stateService.resetState();
   }
+  onTranslationModelChange(model2) {
+    this.stateService.setSelectedTranslationModel(model2);
+  }
   processNextFile() {
     return __async(this, null, function* () {
       if (this.filesToProcess.length === 0) {
@@ -13295,10 +13459,8 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
       });
       try {
         if (file.type === "application/pdf") {
-          console.log("Converting PDF to images:", displayName);
           const images = yield this.pdfConverterService.convertPdfToImages(file);
           if (images.length > 0) {
-            console.log(`PDF has ${images.length} pages. Processing all pages...`);
             images.forEach((imageDataUrl, index) => {
               const pageFileName = `${displayName} - Page ${index + 1}`;
               const imageFile = this.pdfConverterService.dataUrlToFile(imageDataUrl, `${displayName}_page${index + 1}.png`);
@@ -13317,7 +13479,8 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
           }
         } else if (file.type.startsWith("image/")) {
           const fallbackModels = this.visionModels.map((m) => m.value).filter((m) => m !== this.selectedVisionModel);
-          this.imageProcessorService.analyzeImage(file, this.selectedVisionModel, displayName, isPdfPage, fallbackModels).subscribe({
+          const translationModel = this.stateService.getCurrentState().selectedTranslationModel;
+          this.imageProcessorService.analyzeImage(file, this.selectedVisionModel, displayName, isPdfPage, fallbackModels, translationModel).subscribe({
             next: (result) => {
               let errorMessage = result.error;
               if (errorMessage === "KEY_LIMIT_EXCEEDED") {
@@ -13391,7 +13554,6 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
     this.stateService.updateState({
       progressText: this.translate.instant("image.progress.complete", { count: state2.processedCount })
     });
-    console.timeEnd("Image processing time");
     const endTime = performance.now();
     const durationInSeconds = ((endTime - this.processingStartTime) / 1e3).toFixed(2);
     this.messageService.add({
@@ -13420,7 +13582,7 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
   static \u0275fac = function ImageAssistantComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ImageAssistantComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageAssistantComponent, selectors: [["ca-image-assistant"]], features: [\u0275\u0275ProvidersFeature([MessageService])], decls: 21, vars: 24, consts: [["id", "wb-cont"], [1, "api-key-status", "mb-4"], ["class", "text-green-600", 4, "ngIf"], ["class", "text-orange-600", 4, "ngIf"], [3, "modelChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption"], [3, "filesSelected"], [4, "ngIf"], [1, "text-green-600"], [1, "pi", "pi-check-circle"], [1, "text-orange-600"], [1, "pi", "pi-exclamation-circle"], [3, "progressText", "processedCount", "totalFiles", "showProgress"], ["class", "results-section", 4, "ngIf"], [1, "results-section"], [3, "result", 4, "ngFor", "ngForOf"], [3, "results"], [1, "mt-3"], ["icon", "pi pi-refresh", "severity", "secondary", 3, "click", "label", "pTooltip"], [3, "result"]], template: function ImageAssistantComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageAssistantComponent, selectors: [["ca-image-assistant"]], features: [\u0275\u0275ProvidersFeature([MessageService])], decls: 23, vars: 27, consts: [["id", "wb-cont"], [1, "mb-4"], ["class", "text-green-600", 4, "ngIf"], ["class", "text-orange-600", 4, "ngIf"], [3, "modelChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption"], [4, "ngIf"], [3, "filesSelected"], [1, "text-green-600"], [1, "pi", "pi-check-circle"], [1, "text-orange-600"], [1, "pi", "pi-exclamation-circle"], [1, "mt-3"], [3, "progressText", "processedCount", "totalFiles", "showProgress"], ["class", "mt-4", 4, "ngIf"], [1, "mt-4"], [3, "result", 4, "ngFor", "ngForOf"], [3, "results"], ["icon", "pi pi-refresh", "severity", "secondary", 3, "click", "label", "pTooltip"], [3, "result"]], template: function ImageAssistantComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275element(0, "p-toast");
       \u0275\u0275elementStart(1, "h1", 0);
@@ -13445,30 +13607,34 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
         return ctx.onModelChange($event);
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(18, "ca-file-upload", 5);
-      \u0275\u0275listener("filesSelected", function ImageAssistantComponent_Template_ca_file_upload_filesSelected_18_listener($event) {
+      \u0275\u0275template(18, ImageAssistantComponent_ng_container_18_Template, 3, 6, "ng-container", 5);
+      \u0275\u0275pipe(19, "async");
+      \u0275\u0275elementStart(20, "ca-file-upload", 6);
+      \u0275\u0275listener("filesSelected", function ImageAssistantComponent_Template_ca_file_upload_filesSelected_20_listener($event) {
         return ctx.onFilesSelected($event);
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275template(19, ImageAssistantComponent_ng_container_19_Template, 3, 5, "ng-container", 6);
-      \u0275\u0275pipe(20, "async");
+      \u0275\u0275template(21, ImageAssistantComponent_ng_container_21_Template, 3, 5, "ng-container", 5);
+      \u0275\u0275pipe(22, "async");
       \u0275\u0275elementEnd();
     }
     if (rf & 2) {
       \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 12, "title.image"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 13, "title.image"));
       \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 14, "image.description"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 15, "image.description"));
       \u0275\u0275advance(5);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(11, 16, "page.apiKey.status"));
+      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(11, 17, "page.apiKey.status"));
       \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(13, 18, ctx.apiKeyService.hasApiKey$));
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(13, 19, ctx.apiKeyService.hasApiKey$));
       \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(15, 20, ctx.apiKeyService.hasApiKey$) === false);
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(15, 21, ctx.apiKeyService.hasApiKey$) === false);
       \u0275\u0275advance(3);
       \u0275\u0275property("selectedModel", ctx.selectedVisionModel)("models", ctx.visionModels)("label", "image.model.label")("cardTitle", "image.model.title")("showCard", true)("showTranslateOption", false);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(20, 22, ctx.state$));
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(19, 23, ctx.state$));
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(22, 25, ctx.state$));
     }
   }, dependencies: [
     CommonModule,
@@ -13487,7 +13653,7 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
     ProgressIndicatorComponent,
     ImageResultComponent,
     CsvDownloadComponent
-  ], styles: ["\n\n.results-section[_ngcontent-%COMP%] {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=image-assistant.component.css.map */"] });
+  ], encapsulation: 2 });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ImageAssistantComponent, [{
@@ -13509,7 +13675,7 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
 <p>{{ 'image.description' | translate }}</p>\r
 \r
 <!-- API Key Status -->\r
-<section class="api-key-status mb-4">\r
+<section class="mb-4">\r
   <div>\r
     <strong>{{ 'page.apiKey.status' | translate }}</strong>\r
     <span *ngIf="apiKeyService.hasApiKey$ | async" class="text-green-600">\r
@@ -13533,7 +13699,22 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
     [showTranslateOption]="false"\r
     (modelChange)="onModelChange($event)">\r
   </ca-shared-model-selector>\r
-  \r
+\r
+  <!-- Translation Model Selector -->\r
+  <ng-container *ngIf="state$ | async as state">\r
+    <div class="mt-3">\r
+      <ca-shared-model-selector\r
+        [selectedModel]="state.selectedTranslationModel"\r
+        [models]="translationModels"\r
+        [label]="'image.translationModelSelector.modelLabel'"\r
+        [cardTitle]="'image.translationModelSelector.title'"\r
+        [showCard]="true"\r
+        [showTranslateOption]="false"\r
+        (modelChange)="onTranslationModelChange($event)">\r
+      </ca-shared-model-selector>\r
+    </div>\r
+  </ng-container>\r
+\r
   <!-- File Upload -->\r
   <ca-file-upload\r
     (filesSelected)="onFilesSelected($event)">\r
@@ -13549,7 +13730,7 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
     </ca-progress-indicator>\r
     \r
     <!-- Results Display -->\r
-    <div class="results-section" *ngIf="getResultsArray(state.results).length > 0">\r
+    <div class="mt-4" *ngIf="getResultsArray(state.results).length > 0">\r
       <ca-image-result \r
         *ngFor="let result of getResultsArray(state.results)"\r
         [result]="result">\r
@@ -13572,11 +13753,11 @@ var ImageAssistantComponent = class _ImageAssistantComponent {
       </div>\r
     </div>\r
   </ng-container>\r
-</section>`, styles: ["/* angular:styles/component:css;09dc9166e46b9e7aabdb069b1dc488d36e7e0913816855e9dc9912d983b17aa9;D:/AmberDev/main-repo/content-assistant/src/app/views/image-assistant/image-assistant.component.ts */\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=image-assistant.component.css.map */\n"] }]
+</section>` }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageAssistantComponent, { className: "ImageAssistantComponent", filePath: "src/app/views/image-assistant/image-assistant.component.ts", lineNumber: 47 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageAssistantComponent, { className: "ImageAssistantComponent", filePath: "src/app/views/image-assistant/image-assistant.component.ts", lineNumber: 43 });
 })();
 
 // node_modules/primeng/fesm2022/primeng-panel.mjs
@@ -28585,17 +28766,37 @@ var MetadataAssistantService = class _MetadataAssistantService {
   // 90 seconds with retry
   // Default fallback models in order of preference
   DEFAULT_FALLBACK_MODELS = [
-    "mistralai/mistral-small-3.2-24b-instruct:free",
+    "openai/gpt-4o-mini",
+    // Cost-effective, excellent performance
+    "google/gemini-2.0-flash-exp:free",
+    // Fast free option
     "meta-llama/llama-3.3-70b-instruct:free",
     "google/gemma-3-27b-it:free"
+  ];
+  // Translation models with fallback for rate limit handling
+  // Ordered by translation quality: Claude 3.5 Sonnet (best), GPT-4o mini (cost-effective), then free models
+  TRANSLATION_MODELS = [
+    "anthropic/claude-3.5-sonnet",
+    // Best for translation - WMT24 winner, 78% "good" rating
+    "openai/gpt-4o-mini",
+    // Cost-effective paid model - excellent French support
+    "google/gemini-2.0-flash-exp:free",
+    // Free, fast, good multilingual
+    "meta-llama/llama-3.3-70b-instruct:free",
+    // Free fallback
+    "google/gemma-3-27b-it:free",
+    // Free fallback
+    "openai/gpt-oss-20b:free"
+    // Free fallback
   ];
   http = inject(HttpClient);
   apiKeyService = inject(ApiKeyService);
   fileParseService = inject(FileParseService);
+  translate = inject(TranslateService);
   processUrls(options) {
     const results = [];
     const fallbackModels = options.fallbackModels || this.DEFAULT_FALLBACK_MODELS;
-    return from(options.urls).pipe(switchMap((url) => this.processUrl(url, options.model, options.translateToFrench, fallbackModels)), map((result) => {
+    return from(options.urls).pipe(switchMap((url) => this.processUrl(url, options.model, options.translateToFrench, fallbackModels, options.translationModel)), map((result) => {
       results.push(result);
       return results;
     }), catchError((error) => {
@@ -28603,10 +28804,10 @@ var MetadataAssistantService = class _MetadataAssistantService {
       return throwError(() => error);
     }));
   }
-  processUrl(url, model2, translateToFrench, fallbackModels) {
+  processUrl(url, model2, translateToFrench, fallbackModels, translationModel) {
     return this.scrapeUrl(url).pipe(switchMap((scrapedContent) => {
       if (!scrapedContent || scrapedContent.length < 50) {
-        return throwError(() => new Error("Content too short or invalid for processing"));
+        return throwError(() => new Error(this.translate.instant("metadata.errors.contentTooShort")));
       }
       const language = this.detectLanguage(scrapedContent);
       return this.generateMetadataWithFallback(scrapedContent, model2, language, fallbackModels).pipe(switchMap((metadata) => {
@@ -28620,7 +28821,7 @@ var MetadataAssistantService = class _MetadataAssistantService {
           fallbackUsed: metadata.fallbackUsed
         };
         if (translateToFrench && language === "en") {
-          return this.translateMetadata(metadata).pipe(map((translated) => __spreadProps(__spreadValues({}, result), {
+          return this.translateMetadata(metadata, translationModel).pipe(map((translated) => __spreadProps(__spreadValues({}, result), {
             frenchTranslatedDescription: translated.description,
             frenchTranslatedKeywords: translated.keywords
           })));
@@ -28633,10 +28834,10 @@ var MetadataAssistantService = class _MetadataAssistantService {
     try {
       const parsedUrl = new URL(url);
       if (!ALLOWED_HOSTS.has(parsedUrl.host)) {
-        return throwError(() => new Error(`Host not allowed: ${parsedUrl.host}. Only government domains are supported.`));
+        return throwError(() => new Error(this.translate.instant("metadata.errors.hostNotAllowed", { host: parsedUrl.host })));
       }
     } catch {
-      return throwError(() => new Error("Invalid URL format"));
+      return throwError(() => new Error(this.translate.instant("metadata.urlInput.errors.invalidFormat")));
     }
     return from(fetch(`${url}?_=${Date.now()}`, {
       method: "GET",
@@ -28644,7 +28845,7 @@ var MetadataAssistantService = class _MetadataAssistantService {
       cache: "no-cache"
     })).pipe(timeout(this.SCRAPING_TIMEOUT), switchMap((response) => {
       if (!response.ok) {
-        throw new Error(`Failed to fetch URL: HTTP ${response.status}`);
+        throw new Error(this.translate.instant("metadata.errors.failedToFetch", { status: response.status }));
       }
       return from(response.text());
     }), map((html) => this.extractTextContent(html)), catchError((error) => {
@@ -28652,7 +28853,7 @@ var MetadataAssistantService = class _MetadataAssistantService {
       if (error.message?.includes("Host not allowed")) {
         return throwError(() => error);
       }
-      return throwError(() => new Error(`Failed to scrape URL: ${error.message || "Unknown error"}`));
+      return throwError(() => new Error(this.translate.instant("metadata.errors.failedToScrape", { error: error.message || this.translate.instant("image.error.unknown") })));
     }));
   }
   extractTextContent(html) {
@@ -28823,7 +29024,7 @@ var MetadataAssistantService = class _MetadataAssistantService {
   }
   tryModelsInSequence(content, models, language, attemptIndex, primaryModel) {
     if (attemptIndex >= models.length) {
-      return throwError(() => new Error("All models failed due to rate limits or other errors"));
+      return throwError(() => new Error(this.translate.instant("metadata.errors.allModelsFailed")));
     }
     const currentModel = models[attemptIndex];
     const fallbackUsed = attemptIndex > 0;
@@ -28847,33 +29048,90 @@ var MetadataAssistantService = class _MetadataAssistantService {
   isRateLimitError(error) {
     if (!error)
       return false;
-    const errorMessage = error?.message || error?.toString() || "";
-    const errorLower = errorMessage.toLowerCase();
-    return errorLower.includes("rate limit") || errorLower.includes("quota exceeded") || errorLower.includes("too many requests") || errorLower.includes("429") || error?.status === 429;
+    const errorAny = error;
+    const errorMessage = errorAny.error?.error?.message || errorAny.message || "";
+    const errorLower = typeof errorMessage === "string" ? errorMessage.toLowerCase() : "";
+    return errorLower.includes("rate limit") || errorLower.includes("quota exceeded") || errorLower.includes("too many requests") || errorLower.includes("429") || errorLower.includes("key limit exceeded") || errorAny.status === 403 || errorAny.status === 429;
   }
   generateMetadata(content, model2, language) {
     const apiKey = this.apiKeyService.getCurrentKey();
     if (!apiKey) {
-      return throwError(() => new Error("API key not configured"));
+      return throwError(() => new Error(this.translate.instant("metadata.errors.noApiKey")));
     }
-    const descriptionPrompt = language === "en" ? `As a search engine optimization expert, analyze the following content carefully and provide a concise, complete summary suitable for a meta description in English. The summary MUST be highly relevant to the specific content provided and capture its main topic and purpose. Use topic-specific terms found in the content, write in full sentences, and ensure the summary ends concisely within 275 characters. IMPORTANT: Provide ONLY the meta description itself with NO additional commentary or explanations.
+    const descriptionPrompt = language === "en" ? `As a Canada Revenue Agency search engine optimization expert, analyze the following content carefully and provide a concise, complete summary suitable for a meta description in English. The summary MUST be highly relevant to the specific content provided and capture its main topic and purpose. Use topic-specific terms found in the content, write in full sentences, and ensure the summary ends concisely within 275 characters.
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY the meta description text itself
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO step-by-step analysis
+  \u2717 NO explanations of your approach
+  \u2717 NO preambles like "Here is..." or "The description is..."
+  \u2717 NO commentary about the content
+  \u2717 NO labels like "Summary:", "Meta description:", "Answer:", etc.
+  \u2717 NO train of thought or internal monologue
+  \u2717 NO markdown formatting, asterisks, or bold text
+- Simply output the meta description sentence(s) and nothing else
+- The first character of your response should be the first character of the meta description
 
 ${content}
 
-Summary:` : `En tant qu'expert en r\xE9f\xE9rencement, analysez attentivement le contenu suivant et fournissez un r\xE9sum\xE9 concis et complet adapt\xE9 \xE0 une m\xE9ta-description en fran\xE7ais. Le r\xE9sum\xE9 DOIT \xEAtre parfaitement adapt\xE9 au contenu sp\xE9cifique fourni. Utilisez des termes sp\xE9cifiques au sujet, \xE9crivez en phrases compl\xE8tes, et assurez-vous que le r\xE9sum\xE9 se termine de mani\xE8re concise dans les 275 caract\xE8res. IMPORTANT: Fournissez UNIQUEMENT la m\xE9ta-description elle-m\xEAme SANS commentaire suppl\xE9mentaire.
+Meta description (output text only):` : `En tant qu'expert en r\xE9f\xE9rencement de l'Agence du revenu du Canada, analysez attentivement le contenu suivant et fournissez un r\xE9sum\xE9 concis et complet adapt\xE9 \xE0 une m\xE9ta-description en fran\xE7ais. Le r\xE9sum\xE9 DOIT \xEAtre parfaitement adapt\xE9 au contenu sp\xE9cifique fourni. Utilisez des termes sp\xE9cifiques au sujet, \xE9crivez en phrases compl\xE8tes, et assurez-vous que le r\xE9sum\xE9 se termine de mani\xE8re concise dans les 275 caract\xE8res.
+
+\u26A0\uFE0F EXIGENCES CRITIQUES DE FORMAT DE SORTIE - LISEZ ATTENTIVEMENT:
+- Votre r\xE9ponse COMPL\xC8TE doit \xEAtre UNIQUEMENT le texte de la m\xE9ta-description
+- N'incluez AUCUN des \xE9l\xE9ments suivants:
+  \u2717 AUCUN raisonnement ou processus de r\xE9flexion
+  \u2717 AUCUNE analyse \xE9tape par \xE9tape
+  \u2717 AUCUNE explication de votre approche
+  \u2717 AUCUN pr\xE9ambule comme "Voici..." ou "La description est..."
+  \u2717 AUCUN commentaire sur le contenu
+  \u2717 AUCUNE \xE9tiquette comme "R\xE9sum\xE9:", "M\xE9ta-description:", "R\xE9ponse:", etc.
+  \u2717 AUCUNE cha\xEEne de pens\xE9e ou monologue interne
+  \u2717 AUCUN formatage markdown, ast\xE9risques ou texte en gras
+- Sortez simplement la ou les phrases de m\xE9ta-description et rien d'autre
+- Le premier caract\xE8re de votre r\xE9ponse doit \xEAtre le premier caract\xE8re de la m\xE9ta-description
 
 ${content}
 
-R\xE9sum\xE9:`;
-    const keywordsPrompt = language === "en" ? `As a search engine optimization expert, carefully analyze the following content and identify 10 meaningful, topic-specific meta keywords that are DIRECTLY EXTRACTED from or strongly implied by the content. IMPORTANT: Return ONLY a comma-separated list of keywords with absolutely NO additional notes or commentary. Exclude 'Canada Revenue Agency' from the keywords.
+M\xE9ta-description (texte uniquement):`;
+    const keywordsPrompt = language === "en" ? `As a Canada Revenue Agency search engine optimization expert, carefully analyze the following content and identify 10 meaningful, topic-specific meta keywords that are DIRECTLY EXTRACTED from or strongly implied by the content.
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY a comma-separated list of keywords
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO analysis or explanations
+  \u2717 NO preambles like "Here are..." or "The keywords are..."
+  \u2717 NO labels like "Keywords:", "Answer:", etc.
+  \u2717 NO numbering or bullet points
+  \u2717 NO train of thought
+  \u2717 NO markdown formatting or asterisks
+- Exclude 'Canada Revenue Agency' from the keywords
+- Simply output: keyword1, keyword2, keyword3, etc.
+- The first character of your response should be the first letter of the first keyword
 
 ${content}
 
-Keywords:` : `En tant qu'expert en optimisation pour les moteurs de recherche, analysez attentivement le contenu suivant et identifiez 10 mots-cl\xE9s m\xE9ta significatifs qui sont DIRECTEMENT EXTRAITS du contenu. IMPORTANT: Retournez UNIQUEMENT une liste de mots-cl\xE9s s\xE9par\xE9s par des virgules sans AUCUNE note suppl\xE9mentaire. Excluez 'Agence du revenu du Canada' des mots-cl\xE9s.
+Keywords (comma-separated list only):` : `En tant qu'expert en optimisation pour les moteurs de recherche de l'Agence du revenu du Canada, analysez attentivement le contenu suivant et identifiez 10 mots-cl\xE9s m\xE9ta significatifs qui sont DIRECTEMENT EXTRAITS du contenu.
+
+\u26A0\uFE0F EXIGENCES CRITIQUES DE FORMAT DE SORTIE - LISEZ ATTENTIVEMENT:
+- Votre r\xE9ponse COMPL\xC8TE doit \xEAtre UNIQUEMENT une liste de mots-cl\xE9s s\xE9par\xE9s par des virgules
+- N'incluez AUCUN des \xE9l\xE9ments suivants:
+  \u2717 AUCUN raisonnement ou processus de r\xE9flexion
+  \u2717 AUCUNE analyse ou explication
+  \u2717 AUCUN pr\xE9ambule comme "Voici..." ou "Les mots-cl\xE9s sont..."
+  \u2717 AUCUNE \xE9tiquette comme "Mots-cl\xE9s:", "R\xE9ponse:", etc.
+  \u2717 AUCUNE num\xE9rotation ou puces
+  \u2717 AUCUNE cha\xEEne de pens\xE9e
+  \u2717 AUCUN formatage markdown ou ast\xE9risques
+- Excluez 'Agence du revenu du Canada' des mots-cl\xE9s
+- Sortez simplement: mot-cl\xE91, mot-cl\xE92, mot-cl\xE93, etc.
+- Le premier caract\xE8re de votre r\xE9ponse doit \xEAtre la premi\xE8re lettre du premier mot-cl\xE9
 
 ${content}
 
-Mots-cl\xE9s:`;
+Mots-cl\xE9s (liste s\xE9par\xE9e par des virgules uniquement):`;
     return this.callOpenRouter(descriptionPrompt, model2, 200).pipe(switchMap((description) => {
       return this.callOpenRouter(keywordsPrompt, model2, 100).pipe(map((keywords) => ({
         description: this.cleanMetadataResponse(description),
@@ -28881,13 +29139,15 @@ Mots-cl\xE9s:`;
       })));
     }));
   }
-  translateMetadata(metadata) {
-    const apiKey = this.apiKeyService.getCurrentKey();
-    if (!apiKey) {
-      return throwError(() => new Error("API key not configured"));
+  translateMetadata(metadata, selectedModel) {
+    if (selectedModel) {
+      console.log(`Using user-selected translation model: ${selectedModel}`);
+      return this.translateWithModel(metadata, selectedModel);
     }
-    const translationModel = "mistralai/mistral-small-3.2-24b-instruct:free";
-    const descriptionPrompt = `You are a professional translator specializing in Canadian government content. Translate the following English meta description to French, maintaining the formal tone used by the Canada Revenue Agency (CRA). 
+    return this.translateWithFallback(metadata, 0);
+  }
+  translateWithModel(metadata, model2) {
+    const descriptionPrompt = `You are a professional translator specializing in Canadian government content. Translate the following English meta description to French, maintaining the formal tone used by the Canada Revenue Agency (CRA).
 
 Important CRA-specific terminology:
 - "Canada Revenue Agency" \u2192 "Agence du revenu du Canada"
@@ -28901,16 +29161,103 @@ Important CRA-specific terminology:
 - "tax-free savings account (TFSA)" \u2192 "compte d'\xE9pargne libre d'imp\xF4t (CELI)"
 - "registered retirement savings plan (RRSP)" \u2192 "r\xE9gime enregistr\xE9 d'\xE9pargne-retraite (REER)"
 
-IMPORTANT: Your response must contain ONLY the direct translation, with absolutely NO commentary, NO suggestions, NO explanations, and NO additional text of any kind. Return ONLY the translated text itself:
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY the French translation
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO explanations of translation choices
+  \u2717 NO preambles like "Here is..." or "The translation is..."
+  \u2717 NO labels like "French translation:", "Answer:", etc.
+  \u2717 NO commentary about the text
+  \u2717 NO train of thought
+  \u2717 NO markdown formatting or asterisks
+- Simply output the translated French text and nothing else
+- The first character of your response should be the first character of the French translation
 
 ${metadata.description}
 
-French translation:`;
-    const keywordsPrompt = `Translate each of these English keywords to French. IMPORTANT: Return ONLY the translated keywords in a comma-separated list. Provide absolutely NO commentary, NO suggestions, NO explanations, and NO additional text of any kind. Return ONLY a comma-separated list of the translated keywords:
+French translation (text only):`;
+    const keywordsPrompt = `Translate each of these English keywords to French.
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY a comma-separated list of French keywords
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO analysis or explanations
+  \u2717 NO preambles like "Here are..." or "The keywords are..."
+  \u2717 NO labels like "French keywords:", "Answer:", etc.
+  \u2717 NO train of thought
+  \u2717 NO markdown formatting or asterisks
+- Simply output: mot-cl\xE91, mot-cl\xE92, mot-cl\xE93, etc.
+- The first character of your response should be the first letter of the first keyword
 
 ${metadata.keywords}
 
-French keywords (comma-separated):`;
+French keywords (comma-separated list only):`;
+    return this.callOpenRouter(descriptionPrompt, model2, 200, this.TRANSLATION_TIMEOUT).pipe(
+      retry({ count: 1, delay: 2e3 }),
+      // Retry once after 2 seconds for cold starts
+      switchMap((description) => {
+        return this.callOpenRouter(keywordsPrompt, model2, 100, this.TRANSLATION_TIMEOUT).pipe(retry({ count: 1, delay: 2e3 }), map((keywords) => ({
+          description: this.cleanMetadataResponse(description),
+          keywords: this.cleanKeywordsResponse(keywords)
+        })));
+      })
+    );
+  }
+  translateWithFallback(metadata, attemptIndex) {
+    if (attemptIndex >= this.TRANSLATION_MODELS.length) {
+      return throwError(() => new Error(this.translate.instant("metadata.error.allTranslationModelsFailed")));
+    }
+    const translationModel = this.TRANSLATION_MODELS[attemptIndex];
+    console.log(`Attempting translation with model: ${translationModel} (attempt ${attemptIndex + 1}/${this.TRANSLATION_MODELS.length})`);
+    const descriptionPrompt = `You are a professional translator specializing in Canadian government content. Translate the following English meta description to French, maintaining the formal tone used by the Canada Revenue Agency (CRA).
+
+Important CRA-specific terminology:
+- "Canada Revenue Agency" \u2192 "Agence du revenu du Canada"
+- "income tax" \u2192 "imp\xF4t sur le revenu"
+- "benefits" \u2192 "prestations"
+- "tax return" \u2192 "d\xE9claration de revenus"
+- "GST/HST" \u2192 "TPS/TVH"
+- "business number" \u2192 "num\xE9ro d'entreprise"
+- "tax credit" \u2192 "cr\xE9dit d'imp\xF4t"
+- "deduction" \u2192 "d\xE9duction"
+- "tax-free savings account (TFSA)" \u2192 "compte d'\xE9pargne libre d'imp\xF4t (CELI)"
+- "registered retirement savings plan (RRSP)" \u2192 "r\xE9gime enregistr\xE9 d'\xE9pargne-retraite (REER)"
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY the French translation
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO explanations of translation choices
+  \u2717 NO preambles like "Here is..." or "The translation is..."
+  \u2717 NO labels like "French translation:", "Answer:", etc.
+  \u2717 NO commentary about the text
+  \u2717 NO train of thought
+  \u2717 NO markdown formatting or asterisks
+- Simply output the translated French text and nothing else
+- The first character of your response should be the first character of the French translation
+
+${metadata.description}
+
+French translation (text only):`;
+    const keywordsPrompt = `Translate each of these English keywords to French.
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY a comma-separated list of French keywords
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO analysis or explanations
+  \u2717 NO preambles like "Here are..." or "The keywords are..."
+  \u2717 NO labels like "French keywords:", "Answer:", etc.
+  \u2717 NO train of thought
+  \u2717 NO markdown formatting or asterisks
+- Simply output: mot-cl\xE91, mot-cl\xE92, mot-cl\xE93, etc.
+- The first character of your response should be the first letter of the first keyword
+
+${metadata.keywords}
+
+French keywords (comma-separated list only):`;
     return this.callOpenRouter(descriptionPrompt, translationModel, 200, this.TRANSLATION_TIMEOUT).pipe(
       retry({ count: 1, delay: 2e3 }),
       // Retry once after 2 seconds for cold starts
@@ -28919,13 +29266,25 @@ French keywords (comma-separated):`;
           description: this.cleanMetadataResponse(description),
           keywords: this.cleanKeywordsResponse(keywords)
         })));
+      }),
+      catchError((error) => {
+        console.warn(`Translation model ${translationModel} failed:`, error);
+        if (this.isRateLimitError(error)) {
+          console.log(`Rate limit detected for ${translationModel}, trying next model...`);
+          return this.translateWithFallback(metadata, attemptIndex + 1);
+        }
+        if (attemptIndex < this.TRANSLATION_MODELS.length - 1) {
+          console.log(`Error with ${translationModel}, trying next model...`);
+          return this.translateWithFallback(metadata, attemptIndex + 1);
+        }
+        return throwError(() => error);
       })
     );
   }
   callOpenRouter(prompt, model2, maxTokens, timeoutMs = this.API_TIMEOUT) {
     const apiKey = this.apiKeyService.getCurrentKey();
     if (!apiKey) {
-      return throwError(() => new Error("API key not configured"));
+      return throwError(() => new Error(this.translate.instant("metadata.errors.noApiKey")));
     }
     const headers = new HttpHeaders({
       "Authorization": `Bearer ${apiKey}`,
@@ -28933,36 +29292,97 @@ French keywords (comma-separated):`;
       "HTTP-Referer": "https://content-assistant.app",
       "X-Title": "Content Assistant"
     });
+    const systemMessage = {
+      role: "system",
+      content: "You are a precise metadata generator. Output ONLY the requested content with absolutely NO reasoning, NO explanations, NO thinking process, NO preamble, and NO additional commentary. Your response must contain ONLY the final answer."
+    };
     const payload = {
       model: model2,
-      messages: [{ role: "user", content: prompt }],
+      messages: [systemMessage, { role: "user", content: prompt }],
       max_tokens: maxTokens,
-      temperature: 0.3
+      temperature: 0.1,
+      // Lower temperature for more deterministic output
+      stop: ["Reasoning:", "Thoughts:", "Thinking:", "Analysis:", "Explanation:", "Step by step:", "Let me think", "First,", "To answer"]
+      // Stop tokens to prevent reasoning
     };
     return this.http.post(this.OPENROUTER_URL, payload, { headers }).pipe(timeout(timeoutMs), map((response) => {
-      if (response.choices && response.choices[0]?.message?.content) {
-        return response.choices[0].message.content;
+      if (response.error?.message) {
+        console.error("API returned error:", response.error.message);
+        throw new Error(response.error.message);
       }
-      throw new Error("Invalid response from API");
+      if (response.choices && response.choices[0]?.message) {
+        const message = response.choices[0].message;
+        let result = message.content || "";
+        if (result && result.trim()) {
+          result = this.stripReasoningFromResponse(result.trim());
+          return result;
+        }
+      }
+      console.error("Invalid API response structure:", JSON.stringify(response));
+      throw new Error(this.translate.instant("metadata.errors.invalidApiResponse"));
     }), catchError((error) => {
       console.error("OpenRouter API error:", error);
       const httpError = error;
       if (httpError.status === 429 || httpError.error?.error?.code === 429) {
         return throwError(() => {
-          const rateLimitError = new Error("Rate limit exceeded");
+          const rateLimitError = new Error(this.translate.instant("metadata.error.rateLimitExceeded"));
           rateLimitError.status = 429;
           rateLimitError.originalError = error;
           return rateLimitError;
         });
       }
-      const newError = new Error(httpError.error?.error?.message || httpError.message || "Failed to generate content");
+      if (httpError.status === 503) {
+        return throwError(() => {
+          const serviceError = new Error(this.translate.instant("metadata.errors.serviceUnavailable"));
+          serviceError.status = 503;
+          serviceError.originalError = error;
+          return serviceError;
+        });
+      }
+      if (httpError.status === 502) {
+        return throwError(() => {
+          const gatewayError = new Error(this.translate.instant("metadata.errors.gatewayError"));
+          gatewayError.status = 502;
+          gatewayError.originalError = error;
+          return gatewayError;
+        });
+      }
+      const errorMessage = httpError.error?.error?.message || httpError.message || this.translate.instant("metadata.errors.failedToGenerate");
+      const newError = new Error(errorMessage);
       newError.status = httpError.status;
       newError.originalError = error;
       return throwError(() => newError);
     }));
   }
-  cleanMetadataResponse(response) {
+  stripReasoningFromResponse(response) {
     let cleaned = response.trim();
+    const reasoningPatterns = [
+      /^(?:Reasoning|Thoughts?|Thinking|Analysis|Explanation|Step by step|Let me think|First,|To answer|Here's my reasoning):\s*/i,
+      /^(?:Certainly|Sure|Of course|Absolutely)[,!]?\s+(?:let me|I'll|I will)\s+/i,
+      /^(?:I|I'll|I will|Let me)\s+(?:analyze|think|consider|explain|provide|generate)\s+/i,
+      /\*\*(?:Reasoning|Thoughts?|Analysis|Explanation):\*\*[\s\S]*$/i,
+      /---\s*(?:Reasoning|Analysis|Explanation)[\s\S]*$/i
+    ];
+    for (const pattern of reasoningPatterns) {
+      cleaned = cleaned.replace(pattern, "");
+    }
+    cleaned = cleaned.replace(/\[(?:Reasoning|Thoughts?|Analysis)\][\s\S]*?\[\/(?:Reasoning|Thoughts?|Analysis)\]/gi, "");
+    cleaned = cleaned.replace(/#{1,6}\s+(?:Reasoning|Analysis|Explanation|Thoughts?)[\s\S]*?(?=\n#{1,6}|\n\n|$)/gi, "");
+    const splitPatterns = [
+      /(?:^|\n)(?:Final answer|Answer|Result|Output):\s*/i,
+      /(?:^|\n)(?:Meta )?(?:description|keywords):\s*/i
+    ];
+    for (const pattern of splitPatterns) {
+      const match = cleaned.match(pattern);
+      if (match && match.index !== void 0) {
+        cleaned = cleaned.substring(match.index + match[0].length);
+        break;
+      }
+    }
+    return cleaned.trim();
+  }
+  cleanMetadataResponse(response) {
+    let cleaned = this.stripReasoningFromResponse(response);
     if (cleaned.startsWith('"') && cleaned.endsWith('"')) {
       cleaned = cleaned.slice(1, -1);
     }
@@ -28974,13 +29394,18 @@ French keywords (comma-separated):`;
       "R\xE9sum\xE9:",
       "M\xE9ta-description:",
       "French translation:",
-      "Translation:"
+      "Translation:",
+      "Final answer:",
+      "Answer:",
+      "Result:",
+      "Output:"
     ];
     for (const prefix of prefixes) {
       if (cleaned.toLowerCase().startsWith(prefix.toLowerCase())) {
         cleaned = cleaned.substring(prefix.length).trim();
       }
     }
+    cleaned = cleaned.replace(/\*\*/g, "");
     if (cleaned.length > 275) {
       const lastPeriod = cleaned.lastIndexOf(".", 275);
       if (lastPeriod > 200) {
@@ -28992,7 +29417,7 @@ French keywords (comma-separated):`;
     return cleaned;
   }
   cleanKeywordsResponse(response) {
-    let cleaned = response.trim();
+    let cleaned = this.stripReasoningFromResponse(response);
     if (cleaned.startsWith('"') && cleaned.endsWith('"')) {
       cleaned = cleaned.slice(1, -1);
     }
@@ -29002,13 +29427,18 @@ French keywords (comma-separated):`;
       "Meta keywords:",
       "Mots-cl\xE9s:",
       "Voici les mots-cl\xE9s:",
-      "French keywords:"
+      "French keywords:",
+      "Final answer:",
+      "Answer:",
+      "Result:",
+      "Output:"
     ];
     for (const prefix of prefixes) {
       if (cleaned.toLowerCase().startsWith(prefix.toLowerCase())) {
         cleaned = cleaned.substring(prefix.length).trim();
       }
     }
+    cleaned = cleaned.replace(/\*\*/g, "");
     const keywords = cleaned.split(",").map((k) => k.trim()).filter((k) => k.length > 0);
     return keywords.join(", ");
   }
@@ -29016,16 +29446,120 @@ French keywords (comma-separated):`;
   processDocument(file) {
     return from(this.extractDocumentText(file)).pipe(switchMap((content) => {
       if (!content || content.length < 50) {
-        return throwError(() => new Error("Document content too short or invalid for processing"));
+        return throwError(() => new Error(this.translate.instant("metadata.errors.documentContentTooShort")));
       }
       return this.generateMetadataFromDocument(content);
+    }));
+  }
+  // New document processing methods for enhanced document upload
+  processEnglishDocument(file, model2, translationModel) {
+    return from(this.extractDocumentText(file)).pipe(switchMap((content) => {
+      if (!content || content.length < 50) {
+        return throwError(() => new Error(this.translate.instant("metadata.errors.documentContentTooShort")));
+      }
+      return this.generateMetadata(content, model2, "en").pipe(switchMap((englishMetadata) => {
+        return this.translateMetadata(englishMetadata, translationModel).pipe(map((frenchTranslation) => ({
+          englishMetadata,
+          frenchTranslation
+        })));
+      }));
+    }));
+  }
+  processFrenchDocument(file) {
+    return from(this.extractDocumentText(file)).pipe(switchMap((content) => {
+      if (!content || content.length < 50) {
+        return throwError(() => new Error(this.translate.instant("metadata.errors.documentContentTooShort")));
+      }
+      return this.generateMetadataFromDocument(content);
+    }));
+  }
+  processFrenchDocumentWithEnglishTranslation(file, model2, translationModel) {
+    return from(this.extractDocumentText(file)).pipe(switchMap((content) => {
+      if (!content || content.length < 50) {
+        return throwError(() => new Error(this.translate.instant("metadata.errors.documentContentTooShort")));
+      }
+      return this.generateMetadata(content, model2, "fr").pipe(switchMap((frenchMetadata) => {
+        return this.translateMetadataToEnglish(frenchMetadata, translationModel).pipe(map((englishTranslation) => ({
+          frenchMetadata,
+          englishTranslation
+        })));
+      }));
+    }));
+  }
+  translateMetadataToEnglish(metadata, selectedModel) {
+    const model2 = selectedModel || "anthropic/claude-3.5-sonnet";
+    console.log(`Translating French to English using model: ${model2}`);
+    const descriptionPrompt = `You are a professional translator specializing in Canadian government content. Translate the following French meta description to English, maintaining the formal tone used by the Canada Revenue Agency (CRA).
+
+Important CRA-specific terminology:
+- "Agence du revenu du Canada" \u2192 "Canada Revenue Agency"
+- "imp\xF4t sur le revenu" \u2192 "income tax"
+- "prestations" \u2192 "benefits"
+- "d\xE9claration de revenus" \u2192 "tax return"
+- "TPS/TVH" \u2192 "GST/HST"
+- "num\xE9ro d'entreprise" \u2192 "business number"
+- "cr\xE9dit d'imp\xF4t" \u2192 "tax credit"
+- "d\xE9duction" \u2192 "deduction"
+- "compte d'\xE9pargne libre d'imp\xF4t (CELI)" \u2192 "tax-free savings account (TFSA)"
+- "r\xE9gime enregistr\xE9 d'\xE9pargne-retraite (REER)" \u2192 "registered retirement savings plan (RRSP)"
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY the English translation
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO explanations of translation choices
+  \u2717 NO preambles like "Here is..." or "The translation is..."
+  \u2717 NO labels like "English translation:", "Answer:", etc.
+  \u2717 NO commentary about the text
+  \u2717 NO train of thought
+  \u2717 NO markdown formatting or asterisks
+- Simply output the translated English text and nothing else
+- The first character of your response should be the first character of the English translation
+
+${metadata.description}
+
+English translation (text only):`;
+    const keywordsPrompt = `Translate each of these French keywords to English.
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS - READ CAREFULLY:
+- Your ENTIRE response must be ONLY a comma-separated list of English keywords
+- Do NOT include ANY of the following:
+  \u2717 NO reasoning or thinking process
+  \u2717 NO analysis or explanations
+  \u2717 NO preambles like "Here are..." or "The keywords are..."
+  \u2717 NO labels like "English keywords:", "Answer:", etc.
+  \u2717 NO train of thought
+  \u2717 NO markdown formatting or asterisks
+- Simply output: keyword1, keyword2, keyword3, etc.
+- The first character of your response should be the first letter of the first keyword
+
+${metadata.keywords}
+
+English keywords (comma-separated list only):`;
+    return this.callOpenRouter(descriptionPrompt, model2, 200, this.TRANSLATION_TIMEOUT).pipe(retry({ count: 1, delay: 2e3 }), switchMap((description) => {
+      return this.callOpenRouter(keywordsPrompt, model2, 100, this.TRANSLATION_TIMEOUT).pipe(retry({ count: 1, delay: 2e3 }), map((keywords) => ({
+        description: this.cleanMetadataResponse(description),
+        keywords: this.cleanKeywordsResponse(keywords)
+      })));
+    }));
+  }
+  processBothDocuments(englishFile, frenchFile, model2) {
+    return this.processEnglishDocument(englishFile, model2).pipe(switchMap((englishResult) => {
+      return this.processFrenchDocument(frenchFile).pipe(switchMap((frenchDocMetadata) => {
+        return this.evaluateMetadata(englishResult.frenchTranslation, frenchDocMetadata).pipe(map((comparison) => ({
+          englishMetadata: englishResult.englishMetadata,
+          autoTranslatedFrench: englishResult.frenchTranslation,
+          frenchDocMetadata,
+          comparison
+        })));
+      }));
     }));
   }
   // New method for document tab - extracts text, detects language, generates metadata
   processDocumentForMetadata(file, model2) {
     return from(this.extractDocumentText(file)).pipe(switchMap((content) => {
       if (!content || content.length < 50) {
-        return throwError(() => new Error("Document content too short or invalid for processing"));
+        return throwError(() => new Error(this.translate.instant("metadata.errors.documentContentTooShort")));
       }
       const language = this.detectLanguage(content);
       if (language === "fr") {
@@ -29039,7 +29573,7 @@ French keywords (comma-separated):`;
             metaDescription: metadata.description,
             metaKeywords: metadata.keywords,
             language: "fr",
-            modelUsed: "mistralai/mistral-small-3.2-24b-instruct:free",
+            modelUsed: "anthropic/claude-3.5-sonnet",
             fallbackUsed: false
           }
         })));
@@ -29070,21 +29604,69 @@ French keywords (comma-separated):`;
   generateMetadataFromDocument(content) {
     const apiKey = this.apiKeyService.getCurrentKey();
     if (!apiKey) {
-      return throwError(() => new Error("API key not configured"));
+      return throwError(() => new Error(this.translate.instant("metadata.errors.noApiKey")));
     }
-    const descriptionPrompt = `En tant qu'expert en r\xE9f\xE9rencement, analysez attentivement le contenu suivant et fournissez un r\xE9sum\xE9 concis et complet adapt\xE9 \xE0 une m\xE9ta-description en fran\xE7ais. Le r\xE9sum\xE9 DOIT \xEAtre parfaitement adapt\xE9 au contenu sp\xE9cifique fourni. Utilisez des termes sp\xE9cifiques au sujet, \xE9crivez en phrases compl\xE8tes, et assurez-vous que le r\xE9sum\xE9 se termine de mani\xE8re concise dans les 275 caract\xE8res. IMPORTANT: Fournissez UNIQUEMENT la m\xE9ta-description elle-m\xEAme SANS commentaire suppl\xE9mentaire.
+    const descriptionPrompt = `En tant qu'expert en r\xE9f\xE9rencement de l'Agence du revenu du Canada, analysez attentivement le contenu suivant et fournissez un r\xE9sum\xE9 concis et complet adapt\xE9 \xE0 une m\xE9ta-description en fran\xE7ais. Le r\xE9sum\xE9 DOIT \xEAtre parfaitement adapt\xE9 au contenu sp\xE9cifique fourni. Utilisez des termes sp\xE9cifiques au sujet, \xE9crivez en phrases compl\xE8tes, et assurez-vous que le r\xE9sum\xE9 se termine de mani\xE8re concise dans les 275 caract\xE8res.
+
+\u26A0\uFE0F EXIGENCES CRITIQUES DE FORMAT DE SORTIE - LISEZ ATTENTIVEMENT:
+- Votre r\xE9ponse COMPL\xC8TE doit \xEAtre UNIQUEMENT le texte de la m\xE9ta-description
+- N'incluez AUCUN des \xE9l\xE9ments suivants:
+  \u2717 AUCUN raisonnement ou processus de r\xE9flexion
+  \u2717 AUCUNE analyse \xE9tape par \xE9tape
+  \u2717 AUCUNE explication de votre approche
+  \u2717 AUCUN pr\xE9ambule comme "Voici..." ou "La description est..."
+  \u2717 AUCUN commentaire sur le contenu
+  \u2717 AUCUNE \xE9tiquette comme "R\xE9sum\xE9:", "M\xE9ta-description:", "R\xE9ponse:", etc.
+  \u2717 AUCUNE cha\xEEne de pens\xE9e ou monologue interne
+  \u2717 AUCUN formatage markdown, ast\xE9risques ou texte en gras
+- Sortez simplement la ou les phrases de m\xE9ta-description et rien d'autre
+- Le premier caract\xE8re de votre r\xE9ponse doit \xEAtre le premier caract\xE8re de la m\xE9ta-description
 
 ${content}
 
-R\xE9sum\xE9:`;
-    const keywordsPrompt = `En tant qu'expert en optimisation pour les moteurs de recherche, analysez attentivement le contenu suivant et identifiez 10 mots-cl\xE9s m\xE9ta significatifs qui sont DIRECTEMENT EXTRAITS du contenu. IMPORTANT: Retournez UNIQUEMENT une liste de mots-cl\xE9s s\xE9par\xE9s par des virgules sans AUCUNE note suppl\xE9mentaire. Excluez 'Agence du revenu du Canada' des mots-cl\xE9s.
+M\xE9ta-description (texte uniquement):`;
+    const keywordsPrompt = `En tant qu'expert en optimisation pour les moteurs de recherche de l'Agence du revenu du Canada, analysez attentivement le contenu suivant et identifiez 10 mots-cl\xE9s m\xE9ta significatifs qui sont DIRECTEMENT EXTRAITS du contenu.
+
+\u26A0\uFE0F EXIGENCES CRITIQUES DE FORMAT DE SORTIE - LISEZ ATTENTIVEMENT:
+- Votre r\xE9ponse COMPL\xC8TE doit \xEAtre UNIQUEMENT une liste de mots-cl\xE9s s\xE9par\xE9s par des virgules
+- N'incluez AUCUN des \xE9l\xE9ments suivants:
+  \u2717 AUCUN raisonnement ou processus de r\xE9flexion
+  \u2717 AUCUNE analyse ou explication
+  \u2717 AUCUN pr\xE9ambule comme "Voici..." ou "Les mots-cl\xE9s sont..."
+  \u2717 AUCUNE \xE9tiquette comme "Mots-cl\xE9s:", "R\xE9ponse:", etc.
+  \u2717 AUCUNE num\xE9rotation ou puces
+  \u2717 AUCUNE cha\xEEne de pens\xE9e
+  \u2717 AUCUN formatage markdown ou ast\xE9risques
+- Excluez 'Agence du revenu du Canada' des mots-cl\xE9s
+- Sortez simplement: mot-cl\xE91, mot-cl\xE92, mot-cl\xE93, etc.
+- Le premier caract\xE8re de votre r\xE9ponse doit \xEAtre la premi\xE8re lettre du premier mot-cl\xE9
 
 ${content}
 
-Mots-cl\xE9s:`;
-    const model2 = "mistralai/mistral-small-3.2-24b-instruct:free";
-    return this.callOpenRouter(descriptionPrompt, model2, 200).pipe(switchMap((description) => {
-      return this.callOpenRouter(keywordsPrompt, model2, 100).pipe(map((keywords) => ({
+Mots-cl\xE9s (liste s\xE9par\xE9e par des virgules uniquement):`;
+    const model2 = "anthropic/claude-3.5-sonnet";
+    return this.callOpenRouter(descriptionPrompt, model2, 200).pipe(retry({
+      count: 2,
+      delay: (error, retryCount) => {
+        if (error.status === 503 || error.status === 502) {
+          const delayMs = 3e3 * Math.pow(2, retryCount - 1);
+          console.log(`Retrying after ${delayMs}ms due to ${error.status} error...`);
+          return of(error).pipe(delay(delayMs));
+        }
+        throw error;
+      }
+    }), switchMap((description) => {
+      return this.callOpenRouter(keywordsPrompt, model2, 100).pipe(retry({
+        count: 2,
+        delay: (error, retryCount) => {
+          if (error.status === 503 || error.status === 502) {
+            const delayMs = 3e3 * Math.pow(2, retryCount - 1);
+            console.log(`Retrying keywords after ${delayMs}ms due to ${error.status} error...`);
+            return of(error).pipe(delay(delayMs));
+          }
+          throw error;
+        }
+      }), map((keywords) => ({
         description: this.cleanMetadataResponse(description),
         keywords: this.cleanKeywordsResponse(keywords)
       })));
@@ -29093,7 +29675,7 @@ Mots-cl\xE9s:`;
   evaluateMetadata(translatedMetadata, documentMetadata) {
     const apiKey = this.apiKeyService.getCurrentKey();
     if (!apiKey) {
-      return throwError(() => new Error("API key not configured"));
+      return throwError(() => new Error(this.translate.instant("metadata.errors.noApiKey")));
     }
     const evaluationPrompt = `Vous \xEAtes un expert en optimisation pour les moteurs de recherche (SEO) pour l'Agence du revenu du Canada. Vous devez \xE9valuer deux versions de m\xE9tadonn\xE9es en fran\xE7ais et sugg\xE9rer la meilleure version finale.
 
@@ -29105,43 +29687,202 @@ VERSION 2 - G\xE9n\xE9r\xE9 \xE0 partir du document fran\xE7ais:
 Description: ${documentMetadata.description}
 Mots-cl\xE9s: ${documentMetadata.keywords}
 
-Analysez ces deux versions et fournissez:
-1. Une m\xE9ta-description finale sugg\xE9r\xE9e (maximum 275 caract\xE8res)
-2. Des mots-cl\xE9s m\xE9ta finaux sugg\xE9r\xE9s (format: liste s\xE9par\xE9e par des virgules)
-3. Une br\xE8ve justification de vos choix
+T\xE2che:
+1. Comparez les deux versions et identifiez les forces de chacune
+2. Cr\xE9ez une m\xE9ta-description finale optimale (maximum 275 caract\xE8res)
+3. Cr\xE9ez une liste de mots-cl\xE9s m\xE9ta finaux optimale (format: liste s\xE9par\xE9e par des virgules)
+4. Expliquez bri\xE8vement quelle version vous avez privil\xE9gi\xE9e et pourquoi (bas\xE9 sur: clart\xE9, pr\xE9cision terminologique, compl\xE9tude, pertinence du contenu)
 
-IMPORTANT: Votre r\xE9ponse DOIT \xEAtre structur\xE9e EXACTEMENT comme suit, sans texte suppl\xE9mentaire:
+\u26A0\uFE0F EXIGENCES CRITIQUES DE FORMAT DE SORTIE:
+- Votre r\xE9ponse COMPL\xC8TE doit contenir EXACTEMENT trois lignes
+- La PREMI\xC8RE ligne DOIT commencer par "DESCRIPTION:"
+- La DEUXI\xC8ME ligne DOIT commencer par "KEYWORDS:"
+- La TROISI\xC8ME ligne DOIT commencer par "RATIONALE:"
+- N'incluez AUCUN texte avant la premi\xE8re ligne "DESCRIPTION:"
+- N'incluez AUCUN raisonnement, AUCUNE pens\xE9e, AUCUNE analyse
+- N'incluez AUCUN texte apr\xE8s RATIONALE
 
-DESCRIPTION: [votre m\xE9ta-description sugg\xE9r\xE9e]
-KEYWORDS: [vos mots-cl\xE9s sugg\xE9r\xE9s]
-RATIONALE: [votre justification]`;
-    const model2 = "mistralai/mistral-small-3.2-24b-instruct:free";
-    return this.callOpenRouter(evaluationPrompt, model2, 400, this.TRANSLATION_TIMEOUT).pipe(retry({ count: 1, delay: 2e3 }), map((response) => this.parseEvaluationResponse(response)), catchError((error) => {
+Format EXACT requis (copiez cette structure):
+
+DESCRIPTION: [la m\xE9ta-description finale sugg\xE9r\xE9e, maximum 275 caract\xE8res]
+KEYWORDS: [les mots-cl\xE9s finaux sugg\xE9r\xE9s, s\xE9par\xE9s par des virgules]
+RATIONALE: [expliquez quelle version vous avez privil\xE9gi\xE9e et pourquoi, bas\xE9 sur: clart\xE9, pr\xE9cision terminologique, compl\xE9tude, ou combinaison]`;
+    const model2 = "anthropic/claude-3.5-sonnet";
+    return this.callOpenRouter(evaluationPrompt, model2, 500, this.TRANSLATION_TIMEOUT).pipe(retry({ count: 1, delay: 2e3 }), map((response) => {
+      console.log("===== RAW EVALUATION RESPONSE START =====");
+      console.log(response);
+      console.log("===== RAW EVALUATION RESPONSE END =====");
+      return this.parseEvaluationResponse(response);
+    }), switchMap((result) => {
+      const translationPrompt = `Translate the following text from French to English. Maintain the professional tone.
+
+\u26A0\uFE0F CRITICAL: Output ONLY the English translation, with no labels, preambles, or explanations.
+
+${result.rationale}
+
+English translation:`;
+      return this.callOpenRouter(translationPrompt, model2, 300, this.TRANSLATION_TIMEOUT).pipe(retry({ count: 1, delay: 2e3 }), map((englishRationale) => __spreadProps(__spreadValues({}, result), {
+        rationaleEnglish: this.cleanMetadataResponse(englishRationale)
+      })), catchError((error) => {
+        console.warn("Failed to translate rationale to English:", error);
+        return of(__spreadProps(__spreadValues({}, result), {
+          rationaleEnglish: result.rationale
+        }));
+      }));
+    }), catchError((error) => {
       console.error("Error evaluating metadata:", error);
       return throwError(() => error);
     }));
   }
+  evaluateMetadataEnglish(translatedMetadata, documentMetadata) {
+    const apiKey = this.apiKeyService.getCurrentKey();
+    if (!apiKey) {
+      return throwError(() => new Error(this.translate.instant("metadata.errors.noApiKey")));
+    }
+    const evaluationPrompt = `You are a search engine optimization (SEO) expert for the Canada Revenue Agency. You must evaluate two versions of English metadata and suggest the best final version.
+
+VERSION 1 - Translated from French:
+Description: ${translatedMetadata.description}
+Keywords: ${translatedMetadata.keywords}
+
+VERSION 2 - Generated from English document:
+Description: ${documentMetadata.description}
+Keywords: ${documentMetadata.keywords}
+
+Task:
+1. Compare the two versions and identify the strengths of each
+2. Create an optimal final meta description (maximum 275 characters)
+3. Create an optimal final meta keywords list (format: comma-separated list)
+4. Briefly explain which version you preferred and why (based on: clarity, terminological precision, completeness, content relevance)
+
+\u26A0\uFE0F CRITICAL OUTPUT FORMAT REQUIREMENTS:
+- Your COMPLETE response must contain EXACTLY three lines
+- The FIRST line MUST start with "DESCRIPTION:"
+- The SECOND line MUST start with "KEYWORDS:"
+- The THIRD line MUST start with "RATIONALE:"
+- Include NO text before the first "DESCRIPTION:" line
+- Include NO reasoning, NO thoughts, NO analysis
+- Include NO text after RATIONALE
+
+EXACT required format (copy this structure):
+
+DESCRIPTION: [the suggested final meta description, maximum 275 characters]
+KEYWORDS: [the suggested final keywords, comma-separated]
+RATIONALE: [explain which version you preferred and why, based on: clarity, terminological precision, completeness, or combination]`;
+    const model2 = "anthropic/claude-3.5-sonnet";
+    return this.callOpenRouter(evaluationPrompt, model2, 500, this.TRANSLATION_TIMEOUT).pipe(retry({ count: 1, delay: 2e3 }), map((response) => {
+      console.log("===== RAW EVALUATION RESPONSE (ENGLISH) START =====");
+      console.log(response);
+      console.log("===== RAW EVALUATION RESPONSE (ENGLISH) END =====");
+      const parsed = this.parseEvaluationResponse(response);
+      return __spreadProps(__spreadValues({}, parsed), {
+        rationaleEnglish: parsed.rationale
+      });
+    }), catchError((error) => {
+      console.error("Error evaluating metadata (English):", error);
+      return throwError(() => error);
+    }));
+  }
   parseEvaluationResponse(response) {
-    const lines = response.trim().split("\n");
+    const text2 = response.trim();
+    console.log("=== PARSING EVALUATION RESPONSE ===");
     let suggestedDescription = "";
     let suggestedKeywords = "";
     let rationale = "";
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-      if (trimmedLine.startsWith("DESCRIPTION:")) {
-        suggestedDescription = trimmedLine.substring("DESCRIPTION:".length).trim();
-      } else if (trimmedLine.startsWith("KEYWORDS:")) {
-        suggestedKeywords = trimmedLine.substring("KEYWORDS:".length).trim();
-      } else if (trimmedLine.startsWith("RATIONALE:")) {
-        rationale = trimmedLine.substring("RATIONALE:".length).trim();
+    const cleanedText = text2;
+    const hasDescriptionLabel = cleanedText.search(/DESCRIPTION:/i) !== -1;
+    console.log("Has DESCRIPTION: label?", hasDescriptionLabel);
+    if (!hasDescriptionLabel) {
+      console.log("No DESCRIPTION: label found, treating content before KEYWORDS: as description");
+    }
+    console.log("Text to parse (first 500 chars):", cleanedText.substring(0, 500));
+    if (hasDescriptionLabel) {
+      const descriptionMatch = cleanedText.match(/DESCRIPTION:\s*(.+?)(?=\s*KEYWORDS:)/is);
+      if (descriptionMatch && descriptionMatch[1]) {
+        suggestedDescription = descriptionMatch[1].trim();
+        console.log("Strategy 1 - Extracted description (with label):", suggestedDescription);
+      }
+    } else {
+      const descriptionMatch = cleanedText.match(/^(.+?)(?=\s*KEYWORDS:)/is);
+      if (descriptionMatch && descriptionMatch[1]) {
+        suggestedDescription = descriptionMatch[1].trim();
+        console.log("Strategy 1 - Extracted description (no label, before KEYWORDS:):", suggestedDescription);
       }
     }
-    suggestedDescription = this.cleanMetadataResponse(suggestedDescription);
-    suggestedKeywords = this.cleanKeywordsResponse(suggestedKeywords);
+    const keywordsMatch = cleanedText.match(/KEYWORDS:\s*(.+?)(?=\s*RATIONALE:)/is);
+    if (keywordsMatch && keywordsMatch[1]) {
+      suggestedKeywords = keywordsMatch[1].trim();
+      console.log("Strategy 1 - Extracted keywords:", suggestedKeywords);
+    }
+    const rationaleMatch = cleanedText.match(/RATIONALE:\s*(.+?)$/is);
+    if (rationaleMatch && rationaleMatch[1]) {
+      rationale = rationaleMatch[1].trim();
+      console.log("Strategy 1 - Extracted rationale:", rationale);
+    }
+    if (!suggestedDescription || !suggestedKeywords || !rationale) {
+      console.log("Strategy 1 incomplete, trying Strategy 2 (line-by-line)");
+      const lines = cleanedText.split("\n");
+      let beforeKeywords = true;
+      const descriptionLines = [];
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmedLine = line.trim();
+        if (trimmedLine.startsWith("KEYWORDS:")) {
+          beforeKeywords = false;
+          if (!suggestedKeywords) {
+            suggestedKeywords = trimmedLine.substring("KEYWORDS:".length).trim();
+            console.log("Strategy 2 - Line-by-line extracted keywords:", suggestedKeywords);
+          }
+        } else if (trimmedLine.startsWith("RATIONALE:")) {
+          if (!rationale) {
+            rationale = trimmedLine.substring("RATIONALE:".length).trim();
+            for (let j = i + 1; j < lines.length; j++) {
+              const nextLine = lines[j].trim();
+              if (nextLine && !nextLine.startsWith("DESCRIPTION:") && !nextLine.startsWith("KEYWORDS:")) {
+                rationale += " " + nextLine;
+              }
+            }
+            console.log("Strategy 2 - Line-by-line extracted rationale:", rationale);
+          }
+        } else if (trimmedLine.startsWith("DESCRIPTION:")) {
+          if (!suggestedDescription) {
+            suggestedDescription = trimmedLine.substring("DESCRIPTION:".length).trim();
+            console.log("Strategy 2 - Line-by-line extracted description:", suggestedDescription);
+          }
+        } else if (beforeKeywords && !suggestedDescription && trimmedLine) {
+          descriptionLines.push(trimmedLine);
+        }
+      }
+      if (!suggestedDescription && descriptionLines.length > 0) {
+        suggestedDescription = descriptionLines.join(" ");
+        console.log("Strategy 2 - Extracted description from lines before KEYWORDS:", suggestedDescription);
+      }
+    }
+    if (suggestedDescription) {
+      suggestedDescription = this.cleanMetadataResponse(suggestedDescription);
+    }
+    if (suggestedKeywords) {
+      suggestedKeywords = this.cleanKeywordsResponse(suggestedKeywords);
+    }
+    if (rationale) {
+      rationale = rationale.trim().replace(/^["']|["']$/g, "");
+    }
+    console.log("=== FINAL PARSED VALUES ===");
+    console.log("Description:", suggestedDescription || "EMPTY");
+    console.log("Keywords:", suggestedKeywords || "EMPTY");
+    console.log("Rationale:", rationale || "EMPTY");
+    if (!suggestedDescription)
+      console.error("\u274C Failed to extract description from response");
+    if (!suggestedKeywords)
+      console.error("\u274C Failed to extract keywords from response");
+    if (!rationale)
+      console.error("\u274C Failed to extract rationale from response");
     return {
-      suggestedDescription,
-      suggestedKeywords,
-      rationale: rationale || "No rationale provided"
+      suggestedDescription: suggestedDescription || this.translate.instant("metadata.results.noDescriptionProvided"),
+      suggestedKeywords: suggestedKeywords || this.translate.instant("metadata.results.noKeywordsProvided"),
+      rationale: rationale || this.translate.instant("metadata.results.noRationaleProvided"),
+      rationaleEnglish: ""
+      // Will be filled in by evaluateMetadata
     };
   }
   static \u0275fac = function MetadataAssistantService_Factory(__ngFactoryType__) {
@@ -29169,9 +29910,15 @@ var MetadataAssistantStateService = class _MetadataAssistantStateService {
     processedUrls: 0,
     results: [],
     error: null,
-    selectedModel: "mistralai/mistral-small-3.2-24b-instruct:free",
+    selectedModel: "qwen/qwen3-235b-a22b:free",
+    selectedTranslationModel: "anthropic/claude-3.5-sonnet",
+    // Default to best translation model
     translateToFrench: false,
-    documentProcessingIndex: null
+    documentProcessingIndex: null,
+    documentMode: "english-only",
+    englishDocument: null,
+    frenchDocument: null,
+    comparisonResult: null
   };
   stateSubject = new BehaviorSubject(this.initialState);
   state$ = this.stateSubject.asObservable();
@@ -29235,6 +29982,9 @@ var MetadataAssistantStateService = class _MetadataAssistantStateService {
   setSelectedModel(model2) {
     this.updateState({ selectedModel: model2 });
   }
+  setSelectedTranslationModel(model2) {
+    this.updateState({ selectedTranslationModel: model2 });
+  }
   setTranslateToFrench(translate) {
     this.updateState({ translateToFrench: translate });
   }
@@ -29275,6 +30025,32 @@ var MetadataAssistantStateService = class _MetadataAssistantStateService {
   }
   setDocumentProcessingIndex(index) {
     this.updateState({ documentProcessingIndex: index });
+  }
+  // New document mode management methods
+  setDocumentMode(mode) {
+    this.updateState({
+      documentMode: mode,
+      englishDocument: null,
+      frenchDocument: null,
+      comparisonResult: null
+    });
+  }
+  setEnglishDocument(file) {
+    this.updateState({ englishDocument: file });
+  }
+  setFrenchDocument(file) {
+    this.updateState({ frenchDocument: file });
+  }
+  setComparisonResult(result) {
+    this.updateState({ comparisonResult: result });
+  }
+  clearDocumentData() {
+    this.updateState({
+      documentMode: "english-only",
+      englishDocument: null,
+      frenchDocument: null,
+      comparisonResult: null
+    });
   }
   static \u0275fac = function MetadataAssistantStateService_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MetadataAssistantStateService)();
@@ -29759,7 +30535,7 @@ var UrlInputComponent = class _UrlInputComponent {
   static \u0275fac = function UrlInputComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _UrlInputComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UrlInputComponent, selectors: [["ca-url-input"]], inputs: { disabled: "disabled" }, outputs: { urlsChange: "urlsChange", urlInputChange: "urlInputChange" }, decls: 21, vars: 18, consts: [[1, "url-input-container"], ["pTemplate", "header"], [1, "url-input-content"], [1, "field"], ["for", "urls", 1, "block", "mb-2"], ["pInputTextarea", "", "id", "urls", 1, "w-full", 3, "ngModelChange", "ngModel", "disabled", "rows", "placeholder"], [1, "block", "mt-1", "text-500"], [1, "block", "mt-1", "text-400"], [1, "pi", "pi-info-circle", "mr-1"], [1, "url-validation", "mt-3"], ["class", "mb-2", 4, "ngIf"], [4, "ngIf"], [1, "flex", "align-items-center", "justify-content-between", "p-3"], [1, "m-0"], [1, "flex", "gap-2"], ["icon", "pi pi-times", "severity", "secondary", 3, "onClick", "label", "text", "disabled"], [1, "mb-2"], [1, "flex", "align-items-center", "gap-2", "mb-2"], [1, "pi", "pi-check-circle", "text-green-500"], [1, "font-semibold"], [1, "flex", "flex-wrap", "gap-2"], ["styleClass", "text-xs", 3, "label", 4, "ngFor", "ngForOf"], ["styleClass", "text-xs surface-200", 3, "label", 4, "ngIf"], ["styleClass", "text-xs", 3, "label"], ["styleClass", "text-xs surface-200", 3, "label"], ["severity", "warn", "styleClass", "w-full", 3, "text"], [1, "mt-2", "text-orange-600"], [1, "m-0", "pl-3"], ["class", "text-sm", 4, "ngFor", "ngForOf"], [1, "text-sm"], [1, "text-xs", "text-gray-500", "ml-2"]], template: function UrlInputComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UrlInputComponent, selectors: [["ca-url-input"]], inputs: { disabled: "disabled" }, outputs: { urlsChange: "urlsChange", urlInputChange: "urlInputChange" }, decls: 21, vars: 18, consts: [[1, "w-full"], ["pTemplate", "header"], [1, "p-0"], [1, "field"], ["for", "urls", 1, "block", "mb-2", "font-semibold"], ["pInputTextarea", "", "id", "urls", 1, "w-full", "line-height-3", 3, "ngModelChange", "ngModel", "disabled", "rows", "placeholder"], [1, "block", "mt-1", "text-500"], [1, "block", "mt-1", "text-400"], [1, "pi", "pi-info-circle", "mr-1"], [1, "p-3", "surface-50", "border-round", "mt-3"], ["class", "mb-2", 4, "ngIf"], [4, "ngIf"], [1, "flex", "align-items-center", "justify-content-between", "p-3"], [1, "m-0"], [1, "flex", "gap-2"], ["icon", "pi pi-times", "severity", "secondary", 3, "onClick", "label", "text", "disabled"], [1, "mb-2"], [1, "flex", "align-items-center", "gap-2", "mb-2"], [1, "pi", "pi-check-circle", "text-green-500"], [1, "font-semibold"], [1, "flex", "flex-wrap", "gap-2"], ["styleClass", "text-xs", 3, "label", 4, "ngFor", "ngForOf"], ["styleClass", "text-xs surface-200", 3, "label", 4, "ngIf"], ["styleClass", "text-xs", 3, "label"], ["styleClass", "text-xs surface-200", 3, "label"], ["severity", "warn", "styleClass", "w-full m-0", 3, "text"], [1, "mt-2", "text-orange-600"], [1, "m-0", "pl-3"], ["class", "text-sm", 4, "ngFor", "ngForOf"], [1, "text-sm"], [1, "text-xs", "text-gray-500", "ml-2"]], template: function UrlInputComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "p-card");
       \u0275\u0275template(2, UrlInputComponent_ng_template_2_Template, 7, 8, "ng-template", 1);
@@ -29826,7 +30602,7 @@ var UrlInputComponent = class _UrlInputComponent {
     Chip,
     MessageModule,
     Message
-  ], styles: ["\n\n.url-input-container[_ngcontent-%COMP%] {\n  width: 100%;\n}\n.url-input-content[_ngcontent-%COMP%] {\n  padding: 0;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  font-weight: 600;\n  color: var(--text-color);\n}\ntextarea[_ngcontent-%COMP%] {\n  font-family: monospace;\n  font-size: 0.9rem;\n  line-height: 1.5;\n}\n.url-validation[_ngcontent-%COMP%] {\n  padding: 1rem;\n  background-color: var(--surface-50);\n  border-radius: var(--border-radius);\n}\n[_nghost-%COMP%]     .p-chip {\n  font-size: 0.85rem;\n  padding: 0.25rem 0.5rem;\n}\n[_nghost-%COMP%]     .p-message {\n  margin: 0;\n}\n.text-400[_ngcontent-%COMP%] {\n  color: #9ca3af;\n  font-size: 0.875rem;\n}\n.text-gray-500[_ngcontent-%COMP%] {\n  color: #6b7280;\n}\n.text-orange-600[_ngcontent-%COMP%] {\n  color: #ea580c;\n}\n/*# sourceMappingURL=url-input.component.css.map */"] });
+  ], styles: ["\n\ntextarea[_ngcontent-%COMP%] {\n  font-family: monospace;\n}\n[_nghost-%COMP%]     .p-chip {\n  padding: 0.25rem 0.5rem;\n}\n/*# sourceMappingURL=url-input.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UrlInputComponent, [{
@@ -29840,13 +30616,13 @@ var UrlInputComponent = class _UrlInputComponent {
       CardModule,
       ChipModule,
       MessageModule
-    ], template: `<div class="url-input-container">\r
+    ], template: `<div class="w-full">\r
   <p-card>\r
     <ng-template pTemplate="header">\r
       <div class="flex align-items-center justify-content-between p-3">\r
         <h3 class="m-0">{{ 'metadata.urlInput.title' | translate }}</h3>\r
         <div class="flex gap-2">\r
-          <p-button \r
+          <p-button\r
             [label]="'metadata.urlInput.clear' | translate"\r
             icon="pi pi-times"\r
             severity="secondary"\r
@@ -29858,20 +30634,20 @@ var UrlInputComponent = class _UrlInputComponent {
       </div>\r
     </ng-template>\r
 \r
-    <div class="url-input-content">\r
+    <div class="p-0">\r
       <div class="field">\r
-        <label for="urls" class="block mb-2">\r
+        <label for="urls" class="block mb-2 font-semibold">\r
           {{ 'metadata.urlInput.label' | translate }}\r
         </label>\r
-        <textarea \r
-          pInputTextarea \r
+        <textarea\r
+          pInputTextarea\r
           id="urls"\r
           [(ngModel)]="urlText"\r
           (ngModelChange)="onTextChange()"\r
           [disabled]="disabled"\r
           [rows]="8"\r
           [placeholder]="'metadata.urlInput.placeholder' | translate"\r
-          class="w-full">\r
+          class="w-full line-height-3">\r
         </textarea>\r
         <small class="block mt-1 text-500">\r
           {{ 'metadata.urlInput.help' | translate }}\r
@@ -29882,7 +30658,7 @@ var UrlInputComponent = class _UrlInputComponent {
         </small>\r
       </div>\r
 \r
-      <div class="url-validation mt-3">\r
+      <div class="p-3 surface-50 border-round mt-3">\r
         <div *ngIf="validUrls.length > 0" class="mb-2">\r
           <div class="flex align-items-center gap-2 mb-2">\r
             <i class="pi pi-check-circle text-green-500"></i>\r
@@ -29905,10 +30681,10 @@ var UrlInputComponent = class _UrlInputComponent {
         </div>\r
 \r
         <div *ngIf="invalidUrls.length > 0">\r
-          <p-message \r
-            severity="warn" \r
+          <p-message\r
+            severity="warn"\r
             [text]="'metadata.urlInput.invalidUrls' | translate"\r
-            styleClass="w-full">\r
+            styleClass="w-full m-0">\r
           </p-message>\r
           <div class="mt-2 text-orange-600">\r
             <ul class="m-0 pl-3">\r
@@ -29922,7 +30698,7 @@ var UrlInputComponent = class _UrlInputComponent {
       </div>\r
     </div>\r
   </p-card>\r
-</div>`, styles: ["/* src/app/views/metadata-assistant/components/url-input/url-input.component.css */\n.url-input-container {\n  width: 100%;\n}\n.url-input-content {\n  padding: 0;\n}\n.field label {\n  font-weight: 600;\n  color: var(--text-color);\n}\ntextarea {\n  font-family: monospace;\n  font-size: 0.9rem;\n  line-height: 1.5;\n}\n.url-validation {\n  padding: 1rem;\n  background-color: var(--surface-50);\n  border-radius: var(--border-radius);\n}\n:host ::ng-deep .p-chip {\n  font-size: 0.85rem;\n  padding: 0.25rem 0.5rem;\n}\n:host ::ng-deep .p-message {\n  margin: 0;\n}\n.text-400 {\n  color: #9ca3af;\n  font-size: 0.875rem;\n}\n.text-gray-500 {\n  color: #6b7280;\n}\n.text-orange-600 {\n  color: #ea580c;\n}\n/*# sourceMappingURL=url-input.component.css.map */\n"] }]
+</div>`, styles: ["/* src/app/views/metadata-assistant/components/url-input/url-input.component.css */\ntextarea {\n  font-family: monospace;\n}\n:host ::ng-deep .p-chip {\n  padding: 0.25rem 0.5rem;\n}\n/*# sourceMappingURL=url-input.component.css.map */\n"] }]
   }], null, { disabled: [{
     type: Input
   }], urlsChange: [{
@@ -30287,234 +31063,711 @@ var TagModule = class _TagModule {
 // src/app/views/metadata-assistant/components/document-upload/document-upload.component.ts
 function DocumentUploadComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 7);
-    \u0275\u0275element(1, "i", 8);
-    \u0275\u0275elementStart(2, "h4", 9);
+    \u0275\u0275elementStart(0, "div", 8);
+    \u0275\u0275element(1, "i", 9);
+    \u0275\u0275elementStart(2, "h4", 10);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, "metadata.document.title"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, ctx_r0.simplifiedMode ? "metadata.document.frenchReviewTitle" : "metadata.document.title"));
   }
 }
-function DocumentUploadComponent_ng_container_8_Template(rf, ctx) {
+function DocumentUploadComponent_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 11)(1, "span", 12);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 13)(5, "div", 14)(6, "p-radiobutton", 15);
+    \u0275\u0275twoWayListener("ngModelChange", function DocumentUploadComponent_div_2_Template_p_radiobutton_ngModelChange_6_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.selectedMode, $event) || (ctx_r0.selectedMode = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function DocumentUploadComponent_div_2_Template_p_radiobutton_ngModelChange_6_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onModeChange());
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "label", 16);
+    \u0275\u0275text(8);
+    \u0275\u0275pipe(9, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "div", 14)(11, "p-radiobutton", 17);
+    \u0275\u0275twoWayListener("ngModelChange", function DocumentUploadComponent_div_2_Template_p_radiobutton_ngModelChange_11_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.selectedMode, $event) || (ctx_r0.selectedMode = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function DocumentUploadComponent_div_2_Template_p_radiobutton_ngModelChange_11_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onModeChange());
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "label", 18);
+    \u0275\u0275text(13);
+    \u0275\u0275pipe(14, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(15, "div", 14)(16, "p-radiobutton", 19);
+    \u0275\u0275twoWayListener("ngModelChange", function DocumentUploadComponent_div_2_Template_p_radiobutton_ngModelChange_16_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.selectedMode, $event) || (ctx_r0.selectedMode = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function DocumentUploadComponent_div_2_Template_p_radiobutton_ngModelChange_16_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onModeChange());
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(17, "label", 20);
+    \u0275\u0275text(18);
+    \u0275\u0275pipe(19, "translate");
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 7, "metadata.document.processingMode"), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.selectedMode);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 9, "metadata.document.mode.englishOnly"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.selectedMode);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(14, 11, "metadata.document.mode.frenchOnly"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.selectedMode);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 13, "metadata.document.mode.both"), " ");
+  }
+}
+function DocumentUploadComponent_div_3_ng_container_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "i", 10);
-    \u0275\u0275elementStart(2, "p", 11);
+    \u0275\u0275element(1, "i", 26);
+    \u0275\u0275elementStart(2, "p", 27);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "p-button", 12);
+    \u0275\u0275elementStart(4, "p-button", 28);
     \u0275\u0275pipe(5, "translate");
-    \u0275\u0275listener("onClick", function DocumentUploadComponent_ng_container_8_Template_p_button_onClick_4_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r3 = \u0275\u0275nextContext();
-      ctx_r3.clearFile();
+    \u0275\u0275listener("onClick", function DocumentUploadComponent_div_3_ng_container_7_Template_p_button_onClick_4_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      ctx_r0.clearEnglishFile();
       return \u0275\u0275resetView($event.stopPropagation());
     });
     \u0275\u0275elementEnd();
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
+    const ctx_r0 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r3.selectedFile.name);
+    \u0275\u0275textInterpolate(ctx_r0.englishFile.name);
     \u0275\u0275advance();
     \u0275\u0275property("label", \u0275\u0275pipeBind1(5, 3, "metadata.document.clearFile"))("outlined", true);
   }
 }
-function DocumentUploadComponent_ng_template_9_Template(rf, ctx) {
+function DocumentUploadComponent_div_3_ng_template_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "i", 13);
-    \u0275\u0275elementStart(1, "p", 14);
+    \u0275\u0275element(0, "i", 29);
+    \u0275\u0275elementStart(1, "p", 30);
     \u0275\u0275text(2);
     \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "metadata.document.dragDrop"));
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "metadata.document.dragDrop"), " ");
+  }
+}
+function DocumentUploadComponent_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 21)(1, "span", 22);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 23);
+    \u0275\u0275listener("click", function DocumentUploadComponent_div_3_Template_div_click_4_listener() {
+      \u0275\u0275restoreView(_r3);
+      const englishFileInput_r4 = \u0275\u0275reference(6);
+      return \u0275\u0275resetView(englishFileInput_r4.click());
+    })("keydown.enter", function DocumentUploadComponent_div_3_Template_div_keydown_enter_4_listener() {
+      \u0275\u0275restoreView(_r3);
+      const englishFileInput_r4 = \u0275\u0275reference(6);
+      return \u0275\u0275resetView(englishFileInput_r4.click());
+    })("keydown.space", function DocumentUploadComponent_div_3_Template_div_keydown_space_4_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const englishFileInput_r4 = \u0275\u0275reference(6);
+      englishFileInput_r4.click();
+      return \u0275\u0275resetView($event.preventDefault());
+    })("dragover", function DocumentUploadComponent_div_3_Template_div_dragover_4_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onEnglishDragOver($event));
+    })("dragleave", function DocumentUploadComponent_div_3_Template_div_dragleave_4_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onEnglishDragLeave($event));
+    })("drop", function DocumentUploadComponent_div_3_Template_div_drop_4_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onEnglishDrop($event));
+    });
+    \u0275\u0275elementStart(5, "input", 24, 0);
+    \u0275\u0275listener("click", function DocumentUploadComponent_div_3_Template_input_click_5_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onEnglishFileInputClick($event));
+    })("change", function DocumentUploadComponent_div_3_Template_input_change_5_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onEnglishFileSelected($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(7, DocumentUploadComponent_div_3_ng_container_7_Template, 6, 5, "ng-container", 25)(8, DocumentUploadComponent_div_3_ng_template_8_Template, 4, 3, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const englishDragArea_r6 = \u0275\u0275reference(9);
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 8, ctx_r0.getEnglishUploadLabel()), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("dragging", ctx_r0.isDraggingEnglish)("has-file", ctx_r0.englishFile);
+    \u0275\u0275advance();
+    \u0275\u0275property("disabled", ctx_r0.disabled);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r0.englishFile)("ngIfElse", englishDragArea_r6);
+  }
+}
+function DocumentUploadComponent_div_4_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 22);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, ctx_r0.getFrenchUploadLabel()), " ");
+  }
+}
+function DocumentUploadComponent_div_4_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275element(1, "i", 26);
+    \u0275\u0275elementStart(2, "p", 27);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p-button", 28);
+    \u0275\u0275pipe(5, "translate");
+    \u0275\u0275listener("onClick", function DocumentUploadComponent_div_4_ng_container_5_Template_p_button_onClick_4_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      ctx_r0.clearFrenchFile();
+      return \u0275\u0275resetView($event.stopPropagation());
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r0.frenchFile.name);
+    \u0275\u0275advance();
+    \u0275\u0275property("label", \u0275\u0275pipeBind1(5, 3, "metadata.document.clearFile"))("outlined", true);
+  }
+}
+function DocumentUploadComponent_div_4_ng_template_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "i", 29);
+    \u0275\u0275elementStart(1, "p", 30);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "metadata.document.dragDrop"), " ");
+  }
+}
+function DocumentUploadComponent_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275template(1, DocumentUploadComponent_div_4_span_1_Template, 3, 3, "span", 31);
+    \u0275\u0275elementStart(2, "div", 23);
+    \u0275\u0275listener("click", function DocumentUploadComponent_div_4_Template_div_click_2_listener() {
+      \u0275\u0275restoreView(_r7);
+      const frenchFileInput_r8 = \u0275\u0275reference(4);
+      return \u0275\u0275resetView(frenchFileInput_r8.click());
+    })("keydown.enter", function DocumentUploadComponent_div_4_Template_div_keydown_enter_2_listener() {
+      \u0275\u0275restoreView(_r7);
+      const frenchFileInput_r8 = \u0275\u0275reference(4);
+      return \u0275\u0275resetView(frenchFileInput_r8.click());
+    })("keydown.space", function DocumentUploadComponent_div_4_Template_div_keydown_space_2_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const frenchFileInput_r8 = \u0275\u0275reference(4);
+      frenchFileInput_r8.click();
+      return \u0275\u0275resetView($event.preventDefault());
+    })("dragover", function DocumentUploadComponent_div_4_Template_div_dragover_2_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onFrenchDragOver($event));
+    })("dragleave", function DocumentUploadComponent_div_4_Template_div_dragleave_2_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onFrenchDragLeave($event));
+    })("drop", function DocumentUploadComponent_div_4_Template_div_drop_2_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onFrenchDrop($event));
+    });
+    \u0275\u0275elementStart(3, "input", 24, 2);
+    \u0275\u0275listener("click", function DocumentUploadComponent_div_4_Template_input_click_3_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onFrenchFileInputClick($event));
+    })("change", function DocumentUploadComponent_div_4_Template_input_change_3_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onFrenchFileSelected($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, DocumentUploadComponent_div_4_ng_container_5_Template, 6, 5, "ng-container", 25)(6, DocumentUploadComponent_div_4_ng_template_6_Template, 4, 3, "ng-template", null, 3, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const frenchDragArea_r10 = \u0275\u0275reference(7);
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r0.simplifiedMode);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("dragging", ctx_r0.isDraggingFrench)("has-file", ctx_r0.frenchFile);
+    \u0275\u0275advance();
+    \u0275\u0275property("disabled", ctx_r0.disabled);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r0.frenchFile)("ngIfElse", frenchDragArea_r10);
+  }
+}
+function DocumentUploadComponent_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r11 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 32)(1, "div", 14)(2, "p-checkbox", 33);
+    \u0275\u0275twoWayListener("ngModelChange", function DocumentUploadComponent_div_5_Template_p_checkbox_ngModelChange_2_listener($event) {
+      \u0275\u0275restoreView(_r11);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.translateToOtherLanguage, $event) || (ctx_r0.translateToOtherLanguage = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function DocumentUploadComponent_div_5_Template_p_checkbox_ngModelChange_2_listener() {
+      \u0275\u0275restoreView(_r11);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onTranslateOptionChange());
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "label", 34);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.translateToOtherLanguage);
+    \u0275\u0275property("binary", true);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 3, ctx_r0.getTranslateLabel()), " ");
   }
 }
 var DocumentUploadComponent = class _DocumentUploadComponent {
   disabled = false;
-  fileSelected = new EventEmitter();
-  selectedFile = null;
-  isDragging = false;
-  onFileSelected(event) {
+  simplifiedMode = false;
+  // When true, hides mode selection and forces french-only
+  englishFileSelected = new EventEmitter();
+  frenchFileSelected = new EventEmitter();
+  modeChanged = new EventEmitter();
+  translateOptionChanged = new EventEmitter();
+  stateService = inject(MetadataAssistantStateService);
+  selectedMode = "english-only";
+  englishFile = null;
+  frenchFile = null;
+  isDraggingEnglish = false;
+  isDraggingFrench = false;
+  translateToOtherLanguage = false;
+  onModeChange() {
+    this.clearFiles();
+    this.translateToOtherLanguage = false;
+    this.modeChanged.emit(this.selectedMode);
+    this.stateService.setDocumentMode(this.selectedMode);
+  }
+  onTranslateOptionChange() {
+    this.translateOptionChanged.emit(this.translateToOtherLanguage);
+  }
+  shouldShowTranslateOption() {
+    return !this.simplifiedMode && (this.selectedMode === "english-only" || this.selectedMode === "french-only");
+  }
+  getTranslateLabel() {
+    return this.selectedMode === "english-only" ? "metadata.document.translateToFrench" : "metadata.document.translateToEnglish";
+  }
+  getFrenchUploadLabel() {
+    if (this.selectedMode === "both") {
+      return "metadata.document.uploadFrench";
+    } else if (this.selectedMode === "english-only" && this.translateToOtherLanguage) {
+      return "metadata.document.uploadFrenchOptional";
+    } else {
+      return "metadata.document.uploadEnglish";
+    }
+  }
+  getEnglishUploadLabel() {
+    if (this.selectedMode === "both") {
+      return "metadata.document.uploadEnglish";
+    } else if (this.selectedMode === "french-only" && this.translateToOtherLanguage) {
+      return "metadata.document.uploadEnglishOptional";
+    } else {
+      return "metadata.document.uploadEnglish";
+    }
+  }
+  // English file handlers
+  onEnglishFileSelected(event) {
     const input2 = event.target;
     if (input2.files && input2.files.length > 0) {
       const file = input2.files[0];
       if (this.isDocx(file)) {
-        this.selectedFile = file;
-        this.fileSelected.emit(this.selectedFile);
-      } else {
-        console.warn("Invalid file type. Please select a .docx file.");
+        this.englishFile = file;
+        this.englishFileSelected.emit(this.englishFile);
+        this.stateService.setEnglishDocument(this.englishFile);
       }
     }
     input2.value = "";
   }
-  onFileInputClick(event) {
+  onEnglishFileInputClick(event) {
     const input2 = event.target;
     input2.value = "";
   }
-  onDragOver(event) {
+  onEnglishDragOver(event) {
     event.preventDefault();
-    this.isDragging = true;
+    this.isDraggingEnglish = true;
   }
-  onDragLeave(event) {
+  onEnglishDragLeave(event) {
     event.preventDefault();
-    this.isDragging = false;
+    this.isDraggingEnglish = false;
   }
-  onDrop(event) {
+  onEnglishDrop(event) {
     event.preventDefault();
-    this.isDragging = false;
+    this.isDraggingEnglish = false;
     if (event.dataTransfer?.files.length) {
       const droppedFile = event.dataTransfer.files[0];
-      if (droppedFile.name.toLowerCase().endsWith(".docx")) {
-        this.selectedFile = droppedFile;
-        this.fileSelected.emit(this.selectedFile);
+      if (this.isDocx(droppedFile)) {
+        this.englishFile = droppedFile;
+        this.englishFileSelected.emit(this.englishFile);
+        this.stateService.setEnglishDocument(this.englishFile);
       }
     }
   }
+  clearEnglishFile() {
+    this.englishFile = null;
+    this.stateService.setEnglishDocument(null);
+  }
+  // French file handlers
+  onFrenchFileSelected(event) {
+    const input2 = event.target;
+    if (input2.files && input2.files.length > 0) {
+      const file = input2.files[0];
+      if (this.isDocx(file)) {
+        this.frenchFile = file;
+        this.frenchFileSelected.emit(this.frenchFile);
+        this.stateService.setFrenchDocument(this.frenchFile);
+      }
+    }
+    input2.value = "";
+  }
+  onFrenchFileInputClick(event) {
+    const input2 = event.target;
+    input2.value = "";
+  }
+  onFrenchDragOver(event) {
+    event.preventDefault();
+    this.isDraggingFrench = true;
+  }
+  onFrenchDragLeave(event) {
+    event.preventDefault();
+    this.isDraggingFrench = false;
+  }
+  onFrenchDrop(event) {
+    event.preventDefault();
+    this.isDraggingFrench = false;
+    if (event.dataTransfer?.files.length) {
+      const droppedFile = event.dataTransfer.files[0];
+      if (this.isDocx(droppedFile)) {
+        this.frenchFile = droppedFile;
+        this.frenchFileSelected.emit(this.frenchFile);
+        this.stateService.setFrenchDocument(this.frenchFile);
+      }
+    }
+  }
+  clearFrenchFile() {
+    this.frenchFile = null;
+    this.stateService.setFrenchDocument(null);
+  }
+  // Utility methods
   isDocx(file) {
     return file.name.toLowerCase().endsWith(".docx");
   }
-  clearFile() {
-    this.selectedFile = null;
+  clearFiles() {
+    this.clearEnglishFile();
+    this.clearFrenchFile();
+  }
+  canProcess() {
+    if (this.disabled)
+      return false;
+    switch (this.selectedMode) {
+      case "english-only":
+        return this.englishFile !== null;
+      case "french-only":
+        return this.frenchFile !== null;
+      case "both":
+        return this.englishFile !== null && this.frenchFile !== null;
+      default:
+        return false;
+    }
   }
   static \u0275fac = function DocumentUploadComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _DocumentUploadComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DocumentUploadComponent, selectors: [["ca-document-upload"]], inputs: { disabled: "disabled" }, outputs: { fileSelected: "fileSelected" }, decls: 11, vars: 8, consts: [["fileInput", ""], ["dragArea", ""], ["pTemplate", "header"], [1, "mb-3"], ["role", "button", "tabindex", "0", 1, "flex", "flex-column", "align-items-center", "justify-content-center", "p-3", "border-dashed", "border-round", "border-200", "surface-100", "hover:surface-200", "hover:border-primary-400", "transition-colors", "transition-duration-300", "cursor-pointer", "w-full", "min-h-12rem", 3, "click", "keydown.enter", "keydown.space", "dragover", "dragleave", "drop"], ["type", "file", "accept", ".docx", 2, "display", "none", 3, "click", "change", "disabled"], [4, "ngIf", "ngIfElse"], [1, "flex", "align-items-center", "p-3"], [1, "pi", "pi-file-word", "mr-2"], [1, "m-0"], [1, "pi", "pi-file-word", "text-blue-500", "text-4xl", "mb-2"], [1, "text-xl", "text-center", "mb-2"], ["icon", "pi pi-times", "severity", "secondary", "size", "small", 3, "onClick", "label", "outlined"], [1, "pi", "pi-upload", "border-2", "border-circle", "border-300", "p-3", "text-3xl", "text-color-secondary", "mb-2"], [1, "m-0", "text-center", "text-sm"]], template: function DocumentUploadComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DocumentUploadComponent, selectors: [["ca-document-upload"]], inputs: { disabled: "disabled", simplifiedMode: "simplifiedMode" }, outputs: { englishFileSelected: "englishFileSelected", frenchFileSelected: "frenchFileSelected", modeChanged: "modeChanged", translateOptionChanged: "translateOptionChanged" }, decls: 6, vars: 4, consts: [["englishFileInput", ""], ["englishDragArea", ""], ["frenchFileInput", ""], ["frenchDragArea", ""], ["pTemplate", "header"], ["class", "p-3 surface-50 border-round mb-4", 4, "ngIf"], ["class", "mb-4", 4, "ngIf"], ["class", "translation-option mt-3", 4, "ngIf"], [1, "flex", "align-items-center", "p-3"], [1, "pi", "pi-file-word", "mr-2"], [1, "m-0"], [1, "p-3", "surface-50", "border-round", "mb-4"], [1, "font-semibold", "text-lg", "mb-2", "block"], [1, "flex", "flex-column", "gap-3"], [1, "flex", "align-items-center"], ["name", "documentMode", "value", "english-only", "inputId", "mode-english", 3, "ngModelChange", "ngModel"], ["for", "mode-english", 1, "ml-2", "cursor-pointer"], ["name", "documentMode", "value", "french-only", "inputId", "mode-french", 3, "ngModelChange", "ngModel"], ["for", "mode-french", 1, "ml-2", "cursor-pointer"], ["name", "documentMode", "value", "both", "inputId", "mode-both", 3, "ngModelChange", "ngModel"], ["for", "mode-both", 1, "ml-2", "cursor-pointer"], [1, "mb-4"], [1, "font-semibold", "mb-2", "block"], ["role", "button", "tabindex", "0", 1, "upload-zone", "flex", "flex-column", "align-items-center", "justify-content-center", "p-4", "border-2", "border-dashed", "border-round", "surface-100", 3, "click", "keydown.enter", "keydown.space", "dragover", "dragleave", "drop"], ["type", "file", "accept", ".docx", 2, "display", "none", 3, "click", "change", "disabled"], [4, "ngIf", "ngIfElse"], [1, "pi", "pi-file-word", "text-4xl", "mb-2", "text-blue-500"], [1, "text-xl", "text-center", "mb-2", 2, "word-break", "break-word", "max-width", "90%"], ["icon", "pi pi-times", "severity", "secondary", "size", "small", 3, "onClick", "label", "outlined"], [1, "pi", "pi-upload", "text-5xl", "text-color-secondary", "border-2", "border-round-3xl", "p-4", "mb-3", 2, "border-color", "var(--surface-300)"], [1, "m-0", "text-center", "text-sm", "text-color-secondary"], ["class", "font-semibold mb-2 block", 4, "ngIf"], [1, "translation-option", "mt-3"], ["inputId", "translateOption", 3, "ngModelChange", "ngModel", "binary"], ["for", "translateOption", 1, "ml-2", "cursor-pointer"]], template: function DocumentUploadComponent_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "p-card");
-      \u0275\u0275template(1, DocumentUploadComponent_ng_template_1_Template, 5, 3, "ng-template", 2);
-      \u0275\u0275elementStart(2, "p", 3);
-      \u0275\u0275text(3);
-      \u0275\u0275pipe(4, "translate");
+      \u0275\u0275template(1, DocumentUploadComponent_ng_template_1_Template, 5, 3, "ng-template", 4)(2, DocumentUploadComponent_div_2_Template, 20, 15, "div", 5)(3, DocumentUploadComponent_div_3_Template, 10, 10, "div", 6)(4, DocumentUploadComponent_div_4_Template, 8, 8, "div", 6)(5, DocumentUploadComponent_div_5_Template, 6, 5, "div", 7);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "div", 4);
-      \u0275\u0275listener("click", function DocumentUploadComponent_Template_div_click_5_listener() {
-        \u0275\u0275restoreView(_r1);
-        const fileInput_r2 = \u0275\u0275reference(7);
-        return \u0275\u0275resetView(fileInput_r2.click());
-      })("keydown.enter", function DocumentUploadComponent_Template_div_keydown_enter_5_listener() {
-        \u0275\u0275restoreView(_r1);
-        const fileInput_r2 = \u0275\u0275reference(7);
-        return \u0275\u0275resetView(fileInput_r2.click());
-      })("keydown.space", function DocumentUploadComponent_Template_div_keydown_space_5_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        const fileInput_r2 = \u0275\u0275reference(7);
-        fileInput_r2.click();
-        return \u0275\u0275resetView($event.preventDefault());
-      })("dragover", function DocumentUploadComponent_Template_div_dragover_5_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.onDragOver($event));
-      })("dragleave", function DocumentUploadComponent_Template_div_dragleave_5_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.onDragLeave($event));
-      })("drop", function DocumentUploadComponent_Template_div_drop_5_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.onDrop($event));
-      });
-      \u0275\u0275elementStart(6, "input", 5, 0);
-      \u0275\u0275listener("click", function DocumentUploadComponent_Template_input_click_6_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.onFileInputClick($event));
-      })("change", function DocumentUploadComponent_Template_input_change_6_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.onFileSelected($event));
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(8, DocumentUploadComponent_ng_container_8_Template, 6, 5, "ng-container", 6)(9, DocumentUploadComponent_ng_template_9_Template, 4, 3, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-      \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
-      const dragArea_r5 = \u0275\u0275reference(10);
-      \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 6, "metadata.document.description"));
       \u0275\u0275advance(2);
-      \u0275\u0275classProp("border-primary-400", ctx.isDragging);
+      \u0275\u0275property("ngIf", !ctx.simplifiedMode);
       \u0275\u0275advance();
-      \u0275\u0275property("disabled", ctx.disabled);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("ngIf", ctx.selectedFile)("ngIfElse", dragArea_r5);
+      \u0275\u0275property("ngIf", !ctx.simplifiedMode && (ctx.selectedMode === "english-only" || ctx.selectedMode === "both" || ctx.selectedMode === "french-only" && ctx.translateToOtherLanguage));
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.simplifiedMode || ctx.selectedMode === "french-only" || ctx.selectedMode === "both" || ctx.selectedMode === "english-only" && ctx.translateToOtherLanguage);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.shouldShowTranslateOption());
     }
-  }, dependencies: [CommonModule, NgIf, TranslateModule, TranslatePipe, CardModule, Card, PrimeTemplate, ButtonModule, Button], styles: ["\n\n/*# sourceMappingURL=document-upload.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, FormsModule, NgControlStatus, NgModel, TranslateModule, TranslatePipe, CardModule, Card, PrimeTemplate, ButtonModule, Button, RadioButtonModule, RadioButton, CheckboxModule, Checkbox], styles: ["\n\n.upload-zone[_ngcontent-%COMP%] {\n  transition: all 0.3s ease;\n  cursor: pointer;\n  min-height: 200px;\n}\n.upload-zone[_ngcontent-%COMP%]:hover {\n  background-color: var(--surface-200);\n  border-color: var(--primary-color);\n}\n.upload-zone.dragging[_ngcontent-%COMP%] {\n  border-color: var(--primary-color);\n  background-color: var(--primary-50);\n}\n.upload-zone.has-file[_ngcontent-%COMP%] {\n  border-color: var(--green-500);\n  background-color: var(--green-50);\n}\n.dark-mode[_nghost-%COMP%]   .upload-zone[_ngcontent-%COMP%]:hover, .dark-mode   [_nghost-%COMP%]   .upload-zone[_ngcontent-%COMP%]:hover {\n  background-color: var(--surface-700);\n}\n.dark-mode[_nghost-%COMP%]   .upload-zone.has-file[_ngcontent-%COMP%], .dark-mode   [_nghost-%COMP%]   .upload-zone.has-file[_ngcontent-%COMP%] {\n  background-color: var(--green-900);\n  border-color: var(--green-400);\n}\n/*# sourceMappingURL=document-upload.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DocumentUploadComponent, [{
     type: Component,
     args: [{ selector: "ca-document-upload", standalone: true, imports: [
       CommonModule,
+      FormsModule,
       TranslateModule,
       CardModule,
-      ButtonModule
+      ButtonModule,
+      RadioButtonModule,
+      CheckboxModule
     ], template: `<p-card>\r
   <ng-template pTemplate="header">\r
     <div class="flex align-items-center p-3">\r
       <i class="pi pi-file-word mr-2"></i>\r
-      <h4 class="m-0">{{ 'metadata.document.title' | translate }}</h4>\r
+      <h4 class="m-0">{{ (simplifiedMode ? 'metadata.document.frenchReviewTitle' : 'metadata.document.title') | translate }}</h4>\r
     </div>\r
   </ng-template>\r
 \r
-  <p class="mb-3">{{ 'metadata.document.description' | translate }}</p>\r
+  <!-- Mode Selection (hidden in simplified mode) -->\r
+  <div class="p-3 surface-50 border-round mb-4" *ngIf="!simplifiedMode">\r
+    <span class="font-semibold text-lg mb-2 block">\r
+      {{ 'metadata.document.processingMode' | translate }}\r
+    </span>\r
 \r
-  <!-- Upload Section -->\r
-  <div\r
-    class="flex flex-column align-items-center justify-content-center p-3 border-dashed border-round border-200 surface-100 hover:surface-200 hover:border-primary-400 transition-colors transition-duration-300 cursor-pointer w-full min-h-12rem"\r
-    [class.border-primary-400]="isDragging"\r
-    role="button"\r
-    tabindex="0"\r
-    (click)="fileInput.click()"\r
-    (keydown.enter)="fileInput.click()"\r
-    (keydown.space)="fileInput.click(); $event.preventDefault()"\r
-    (dragover)="onDragOver($event)"\r
-    (dragleave)="onDragLeave($event)"\r
-    (drop)="onDrop($event)">\r
+    <div class="flex flex-column gap-3">\r
+      <div class="flex align-items-center">\r
+        <p-radiobutton\r
+          name="documentMode"\r
+          value="english-only"\r
+          [(ngModel)]="selectedMode"\r
+          (ngModelChange)="onModeChange()"\r
+          inputId="mode-english">\r
+        </p-radiobutton>\r
+        <label for="mode-english" class="ml-2 cursor-pointer">\r
+          {{ 'metadata.document.mode.englishOnly' | translate }}\r
+        </label>\r
+      </div>\r
 \r
-    <input\r
-      type="file"\r
-      accept=".docx"\r
-      #fileInput\r
-      style="display: none"\r
-      [disabled]="disabled"\r
-      (click)="onFileInputClick($event)"\r
-      (change)="onFileSelected($event)" />\r
+      <div class="flex align-items-center">\r
+        <p-radiobutton\r
+          name="documentMode"\r
+          value="french-only"\r
+          [(ngModel)]="selectedMode"\r
+          (ngModelChange)="onModeChange()"\r
+          inputId="mode-french">\r
+        </p-radiobutton>\r
+        <label for="mode-french" class="ml-2 cursor-pointer">\r
+          {{ 'metadata.document.mode.frenchOnly' | translate }}\r
+        </label>\r
+      </div>\r
 \r
-    <ng-container *ngIf="selectedFile; else dragArea">\r
-      <i class="pi pi-file-word text-blue-500 text-4xl mb-2"></i>\r
-      <p class="text-xl text-center mb-2">{{ selectedFile.name }}</p>\r
-      <p-button\r
-        [label]="'metadata.document.clearFile' | translate"\r
-        icon="pi pi-times"\r
-        severity="secondary"\r
-        [outlined]="true"\r
-        size="small"\r
-        (onClick)="clearFile(); $event.stopPropagation()">\r
-      </p-button>\r
-    </ng-container>\r
+      <div class="flex align-items-center">\r
+        <p-radiobutton\r
+          name="documentMode"\r
+          value="both"\r
+          [(ngModel)]="selectedMode"\r
+          (ngModelChange)="onModeChange()"\r
+          inputId="mode-both">\r
+        </p-radiobutton>\r
+        <label for="mode-both" class="ml-2 cursor-pointer">\r
+          {{ 'metadata.document.mode.both' | translate }}\r
+        </label>\r
+      </div>\r
+    </div>\r
+  </div>\r
 \r
-    <ng-template #dragArea>\r
-      <i class="pi pi-upload border-2 border-circle border-300 p-3 text-3xl text-color-secondary mb-2"></i>\r
-      <p class="m-0 text-center text-sm">{{ 'metadata.document.dragDrop' | translate }}</p>\r
-    </ng-template>\r
+  <!-- English Document Upload (shown for english-only, both modes, or french-only with translation enabled, hidden in simplified mode) -->\r
+  <div class="mb-4" *ngIf="!simplifiedMode && (selectedMode === 'english-only' || selectedMode === 'both' || (selectedMode === 'french-only' && translateToOtherLanguage))">\r
+    <span class="font-semibold mb-2 block">\r
+      {{ getEnglishUploadLabel() | translate }}\r
+    </span>\r
+\r
+    <div\r
+      class="upload-zone flex flex-column align-items-center justify-content-center p-4 border-2 border-dashed border-round surface-100"\r
+      [class.dragging]="isDraggingEnglish"\r
+      [class.has-file]="englishFile"\r
+      role="button"\r
+      tabindex="0"\r
+      (click)="englishFileInput.click()"\r
+      (keydown.enter)="englishFileInput.click()"\r
+      (keydown.space)="englishFileInput.click(); $event.preventDefault()"\r
+      (dragover)="onEnglishDragOver($event)"\r
+      (dragleave)="onEnglishDragLeave($event)"\r
+      (drop)="onEnglishDrop($event)">\r
+\r
+      <input\r
+        type="file"\r
+        accept=".docx"\r
+        #englishFileInput\r
+        style="display: none"\r
+        [disabled]="disabled"\r
+        (click)="onEnglishFileInputClick($event)"\r
+        (change)="onEnglishFileSelected($event)" />\r
+\r
+      <ng-container *ngIf="englishFile; else englishDragArea">\r
+        <i class="pi pi-file-word text-4xl mb-2 text-blue-500"></i>\r
+        <p class="text-xl text-center mb-2" style="word-break: break-word; max-width: 90%;">{{ englishFile.name }}</p>\r
+        <p-button\r
+          [label]="'metadata.document.clearFile' | translate"\r
+          icon="pi pi-times"\r
+          severity="secondary"\r
+          [outlined]="true"\r
+          size="small"\r
+          (onClick)="clearEnglishFile(); $event.stopPropagation()">\r
+        </p-button>\r
+      </ng-container>\r
+\r
+      <ng-template #englishDragArea>\r
+        <i class="pi pi-upload text-5xl text-color-secondary border-2 border-round-3xl p-4 mb-3" style="border-color: var(--surface-300);"></i>\r
+        <p class="m-0 text-center text-sm text-color-secondary">\r
+          {{ 'metadata.document.dragDrop' | translate }}\r
+        </p>\r
+      </ng-template>\r
+    </div>\r
+  </div>\r
+\r
+  <!-- French Document Upload (shown for french-only, both modes, or english-only with translation enabled, or always in simplified mode) -->\r
+  <div class="mb-4" *ngIf="simplifiedMode || selectedMode === 'french-only' || selectedMode === 'both' || (selectedMode === 'english-only' && translateToOtherLanguage)">\r
+    <span class="font-semibold mb-2 block" *ngIf="!simplifiedMode">\r
+      {{ getFrenchUploadLabel() | translate }}\r
+    </span>\r
+\r
+    <div\r
+      class="upload-zone flex flex-column align-items-center justify-content-center p-4 border-2 border-dashed border-round surface-100"\r
+      [class.dragging]="isDraggingFrench"\r
+      [class.has-file]="frenchFile"\r
+      role="button"\r
+      tabindex="0"\r
+      (click)="frenchFileInput.click()"\r
+      (keydown.enter)="frenchFileInput.click()"\r
+      (keydown.space)="frenchFileInput.click(); $event.preventDefault()"\r
+      (dragover)="onFrenchDragOver($event)"\r
+      (dragleave)="onFrenchDragLeave($event)"\r
+      (drop)="onFrenchDrop($event)">\r
+\r
+      <input\r
+        type="file"\r
+        accept=".docx"\r
+        #frenchFileInput\r
+        style="display: none"\r
+        [disabled]="disabled"\r
+        (click)="onFrenchFileInputClick($event)"\r
+        (change)="onFrenchFileSelected($event)" />\r
+\r
+      <ng-container *ngIf="frenchFile; else frenchDragArea">\r
+        <i class="pi pi-file-word text-4xl mb-2 text-blue-500"></i>\r
+        <p class="text-xl text-center mb-2" style="word-break: break-word; max-width: 90%;">{{ frenchFile.name }}</p>\r
+        <p-button\r
+          [label]="'metadata.document.clearFile' | translate"\r
+          icon="pi pi-times"\r
+          severity="secondary"\r
+          [outlined]="true"\r
+          size="small"\r
+          (onClick)="clearFrenchFile(); $event.stopPropagation()">\r
+        </p-button>\r
+      </ng-container>\r
+\r
+      <ng-template #frenchDragArea>\r
+        <i class="pi pi-upload text-5xl text-color-secondary border-2 border-round-3xl p-4 mb-3" style="border-color: var(--surface-300);"></i>\r
+        <p class="m-0 text-center text-sm text-color-secondary">\r
+          {{ 'metadata.document.dragDrop' | translate }}\r
+        </p>\r
+      </ng-template>\r
+    </div>\r
+  </div>\r
+\r
+  <!-- Translation Option (shown for english-only and french-only modes) -->\r
+  <div class="translation-option mt-3" *ngIf="shouldShowTranslateOption()">\r
+    <div class="flex align-items-center">\r
+      <p-checkbox\r
+        [(ngModel)]="translateToOtherLanguage"\r
+        (ngModelChange)="onTranslateOptionChange()"\r
+        [binary]="true"\r
+        inputId="translateOption">\r
+      </p-checkbox>\r
+      <label for="translateOption" class="ml-2 cursor-pointer">\r
+        {{ getTranslateLabel() | translate }}\r
+      </label>\r
+    </div>\r
   </div>\r
 </p-card>\r
-`, styles: ["/* src/app/views/metadata-assistant/components/document-upload/document-upload.component.css */\n/*# sourceMappingURL=document-upload.component.css.map */\n"] }]
+`, styles: ["/* src/app/views/metadata-assistant/components/document-upload/document-upload.component.css */\n.upload-zone {\n  transition: all 0.3s ease;\n  cursor: pointer;\n  min-height: 200px;\n}\n.upload-zone:hover {\n  background-color: var(--surface-200);\n  border-color: var(--primary-color);\n}\n.upload-zone.dragging {\n  border-color: var(--primary-color);\n  background-color: var(--primary-50);\n}\n.upload-zone.has-file {\n  border-color: var(--green-500);\n  background-color: var(--green-50);\n}\n:host-context(.dark-mode) .upload-zone:hover {\n  background-color: var(--surface-700);\n}\n:host-context(.dark-mode) .upload-zone.has-file {\n  background-color: var(--green-900);\n  border-color: var(--green-400);\n}\n/*# sourceMappingURL=document-upload.component.css.map */\n"] }]
   }], null, { disabled: [{
     type: Input
-  }], fileSelected: [{
+  }], simplifiedMode: [{
+    type: Input
+  }], englishFileSelected: [{
+    type: Output
+  }], frenchFileSelected: [{
+    type: Output
+  }], modeChanged: [{
+    type: Output
+  }], translateOptionChanged: [{
     type: Output
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DocumentUploadComponent, { className: "DocumentUploadComponent", filePath: "src/app/views/metadata-assistant/components/document-upload/document-upload.component.ts", lineNumber: 19 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DocumentUploadComponent, { className: "DocumentUploadComponent", filePath: "src/app/views/metadata-assistant/components/document-upload/document-upload.component.ts", lineNumber: 26 });
 })();
 
 // src/app/views/metadata-assistant/components/metadata-result/metadata-result.component.ts
@@ -30559,7 +31812,7 @@ function MetadataResultComponent_div_0_p_accordionTab_5_ng_template_1_Template(r
     \u0275\u0275property("value", result_r3.language === "en" ? \u0275\u0275pipeBind1(5, 5, "common.language.english") : \u0275\u0275pipeBind1(6, 7, "common.language.french"))("severity", result_r3.language === "en" ? "success" : "info");
   }
 }
-function MetadataResultComponent_div_0_p_accordionTab_5_div_36_Template(rf, ctx) {
+function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 31)(1, "h4", 32);
@@ -30572,82 +31825,188 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_36_Template(rf, ctx)
     \u0275\u0275pipe(9, "translate");
     \u0275\u0275elementStart(10, "span", 19);
     \u0275\u0275text(11);
+    \u0275\u0275pipe(12, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "p-button", 20);
-    \u0275\u0275pipe(13, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_36_Template_p_button_onClick_12_listener() {
+    \u0275\u0275elementStart(13, "p-button", 20);
+    \u0275\u0275pipe(14, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template_p_button_onClick_13_listener() {
       \u0275\u0275restoreView(_r4);
       const result_r3 = \u0275\u0275nextContext().$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.frenchTranslatedDescription));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "div", 21)(15, "code", 22);
-    \u0275\u0275text(16);
+    \u0275\u0275elementStart(15, "div", 21)(16, "code", 22);
+    \u0275\u0275text(17);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(17, "div", 34)(18, "div", 18)(19, "span", 14);
-    \u0275\u0275text(20);
-    \u0275\u0275pipe(21, "translate");
-    \u0275\u0275elementStart(22, "span", 19);
-    \u0275\u0275text(23);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(24, "p-button", 20);
+    \u0275\u0275elementStart(18, "div")(19, "div", 18)(20, "span", 14);
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "translate");
+    \u0275\u0275elementStart(23, "span", 19);
+    \u0275\u0275text(24);
     \u0275\u0275pipe(25, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_36_Template_p_button_onClick_24_listener() {
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(26, "p-button", 20);
+    \u0275\u0275pipe(27, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template_p_button_onClick_26_listener() {
       \u0275\u0275restoreView(_r4);
       const result_r3 = \u0275\u0275nextContext().$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.frenchTranslatedKeywords));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(26, "div", 21)(27, "code", 22);
-    \u0275\u0275text(28);
+    \u0275\u0275elementStart(28, "div", 21)(29, "code", 22);
+    \u0275\u0275text(30);
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
     const result_r3 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 13, "metadata.results.frenchTranslation"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 15, "metadata.results.frenchTranslation"), " ");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 15, "metadata.results.translatedDescription"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 17, "metadata.results.translatedDescription"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.frenchTranslatedDescription.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(13, 17, "metadata.results.copyToClipboard"));
+    \u0275\u0275textInterpolate2("(", result_r3.frenchTranslatedDescription.length, " ", \u0275\u0275pipeBind1(12, 19, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(14, 21, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate(result_r3.frenchTranslatedDescription);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(21, 19, "metadata.results.translatedKeywords"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(22, 23, "metadata.results.translatedKeywords"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.frenchTranslatedKeywords.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(25, 21, "metadata.results.copyToClipboard"));
+    \u0275\u0275textInterpolate2("(", result_r3.frenchTranslatedKeywords.length, " ", \u0275\u0275pipeBind1(25, 25, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(27, 27, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate(result_r3.frenchTranslatedKeywords);
   }
 }
-function MetadataResultComponent_div_0_p_accordionTab_5_div_37_Template(rf, ctx) {
+function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 35)(1, "ca-document-upload", 36);
-    \u0275\u0275listener("fileSelected", function MetadataResultComponent_div_0_p_accordionTab_5_div_37_Template_ca_document_upload_fileSelected_1_listener($event) {
+    \u0275\u0275elementStart(0, "div", 31)(1, "h4", 32);
+    \u0275\u0275element(2, "i", 33);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "span", 14);
+    \u0275\u0275text(8);
+    \u0275\u0275pipe(9, "translate");
+    \u0275\u0275elementStart(10, "span", 19);
+    \u0275\u0275text(11);
+    \u0275\u0275pipe(12, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(13, "p-button", 20);
+    \u0275\u0275pipe(14, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template_p_button_onClick_13_listener() {
       \u0275\u0275restoreView(_r5);
-      const i_r6 = \u0275\u0275nextContext().index;
+      const result_r3 = \u0275\u0275nextContext().$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r0.onDocumentFileSelected($event, i_r6));
+      return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.englishTranslatedDescription));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(15, "div", 21)(16, "code", 22);
+    \u0275\u0275text(17);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(18, "div")(19, "div", 18)(20, "span", 14);
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "translate");
+    \u0275\u0275elementStart(23, "span", 19);
+    \u0275\u0275text(24);
+    \u0275\u0275pipe(25, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(26, "p-button", 20);
+    \u0275\u0275pipe(27, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template_p_button_onClick_26_listener() {
+      \u0275\u0275restoreView(_r5);
+      const result_r3 = \u0275\u0275nextContext().$implicit;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.englishTranslatedKeywords));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(28, "div", 21)(29, "code", 22);
+    \u0275\u0275text(30);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const result_r3 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 15, "metadata.results.englishTranslation"), " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 17, "metadata.results.translatedDescription"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2("(", result_r3.englishTranslatedDescription.length, " ", \u0275\u0275pipeBind1(12, 19, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(14, 21, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(result_r3.englishTranslatedDescription);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(22, 23, "metadata.results.translatedKeywords"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2("(", result_r3.englishTranslatedKeywords.length, " ", \u0275\u0275pipeBind1(25, 25, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(27, 27, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(result_r3.englishTranslatedKeywords);
+  }
+}
+function MetadataResultComponent_div_0_p_accordionTab_5_div_40_div_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 1)(1, "p-button", 36);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_40_div_2_Template_p_button_onClick_1_listener() {
+      \u0275\u0275restoreView(_r8);
+      const i_r7 = \u0275\u0275nextContext(2).index;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.processDocument(i_r7));
     });
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const i_r6 = \u0275\u0275nextContext().index;
+    const i_r7 = \u0275\u0275nextContext(2).index;
     const ctx_r0 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("disabled", ctx_r0.isProcessingDocument(i_r6));
+    \u0275\u0275property("label", ctx_r0.isProcessingDocument(i_r7) ? \u0275\u0275pipeBind1(2, 3, "metadata.document.processing") : \u0275\u0275pipeBind1(3, 5, "metadata.document.processButton"))("disabled", ctx_r0.isProcessingDocument(i_r7))("loading", ctx_r0.isProcessingDocument(i_r7));
   }
 }
-function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template(rf, ctx) {
+function MetadataResultComponent_div_0_p_accordionTab_5_div_40_Template(rf, ctx) {
   if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 34)(1, "ca-document-upload", 35);
+    \u0275\u0275listener("englishFileSelected", function MetadataResultComponent_div_0_p_accordionTab_5_div_40_Template_ca_document_upload_englishFileSelected_1_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const i_r7 = \u0275\u0275nextContext().index;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.onDocumentFileSelected($event, i_r7));
+    })("frenchFileSelected", function MetadataResultComponent_div_0_p_accordionTab_5_div_40_Template_ca_document_upload_frenchFileSelected_1_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const i_r7 = \u0275\u0275nextContext().index;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.onFrenchDocumentFileSelected($event, i_r7));
+    })("modeChanged", function MetadataResultComponent_div_0_p_accordionTab_5_div_40_Template_ca_document_upload_modeChanged_1_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const i_r7 = \u0275\u0275nextContext().index;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.onDocumentModeChanged($event, i_r7));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(2, MetadataResultComponent_div_0_p_accordionTab_5_div_40_div_2_Template, 4, 7, "div", 0);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const i_r7 = \u0275\u0275nextContext().index;
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("disabled", ctx_r0.isProcessingDocument(i_r7))("simplifiedMode", ctx_r0.showTranslations);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.hasUploadedDocument(i_r7));
+  }
+}
+function MetadataResultComponent_div_0_p_accordionTab_5_div_41_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 37)(1, "h4", 32);
     \u0275\u0275element(2, "i", 38);
     \u0275\u0275text(3);
@@ -30658,136 +32017,290 @@ function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template(rf, ctx)
     \u0275\u0275pipe(9, "translate");
     \u0275\u0275elementStart(10, "span", 19);
     \u0275\u0275text(11);
+    \u0275\u0275pipe(12, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "p-button", 20);
-    \u0275\u0275pipe(13, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template_p_button_onClick_12_listener() {
-      \u0275\u0275restoreView(_r7);
+    \u0275\u0275elementStart(13, "p-button", 20);
+    \u0275\u0275pipe(14, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_41_Template_p_button_onClick_13_listener() {
+      \u0275\u0275restoreView(_r9);
       const result_r3 = \u0275\u0275nextContext().$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.documentMetadata.description));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "div", 21)(15, "code", 22);
-    \u0275\u0275text(16);
+    \u0275\u0275elementStart(15, "div", 21)(16, "code", 22);
+    \u0275\u0275text(17);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(17, "div", 34)(18, "div", 18)(19, "span", 14);
-    \u0275\u0275text(20);
-    \u0275\u0275pipe(21, "translate");
-    \u0275\u0275elementStart(22, "span", 19);
-    \u0275\u0275text(23);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(24, "p-button", 20);
+    \u0275\u0275elementStart(18, "div")(19, "div", 18)(20, "span", 14);
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "translate");
+    \u0275\u0275elementStart(23, "span", 19);
+    \u0275\u0275text(24);
     \u0275\u0275pipe(25, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template_p_button_onClick_24_listener() {
-      \u0275\u0275restoreView(_r7);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(26, "p-button", 20);
+    \u0275\u0275pipe(27, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_41_Template_p_button_onClick_26_listener() {
+      \u0275\u0275restoreView(_r9);
       const result_r3 = \u0275\u0275nextContext().$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.documentMetadata.keywords));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(26, "div", 21)(27, "code", 22);
-    \u0275\u0275text(28);
+    \u0275\u0275elementStart(28, "div", 21)(29, "code", 22);
+    \u0275\u0275text(30);
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
     const result_r3 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 13, "metadata.results.documentMetadata"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 15, "metadata.results.documentMetadata"), " ");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 15, "metadata.results.documentDescription"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 17, "metadata.results.documentDescription"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.documentMetadata.description.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(13, 17, "metadata.results.copyToClipboard"));
+    \u0275\u0275textInterpolate2("(", result_r3.documentMetadata.description.length, " ", \u0275\u0275pipeBind1(12, 19, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(14, 21, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate(result_r3.documentMetadata.description);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(21, 19, "metadata.results.documentKeywords"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(22, 23, "metadata.results.documentKeywords"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.documentMetadata.keywords.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(25, 21, "metadata.results.copyToClipboard"));
+    \u0275\u0275textInterpolate2("(", result_r3.documentMetadata.keywords.length, " ", \u0275\u0275pipeBind1(25, 25, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(27, 27, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate(result_r3.documentMetadata.keywords);
   }
 }
-function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template(rf, ctx) {
+function MetadataResultComponent_div_0_p_accordionTab_5_div_42_div_89_Template(rf, ctx) {
   if (rf & 1) {
-    const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 39)(1, "h4", 32);
-    \u0275\u0275element(2, "i", 40);
+    \u0275\u0275elementStart(0, "div", 13)(1, "div", 55)(2, "strong", 47);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 13)(6, "div", 18)(7, "span", 41);
-    \u0275\u0275text(8);
-    \u0275\u0275pipe(9, "translate");
-    \u0275\u0275elementStart(10, "span", 42);
-    \u0275\u0275text(11);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "p-button", 43);
+    \u0275\u0275elementStart(5, "div", 56)(6, "p", 57);
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const result_r3 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 2, "common.language.french"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(result_r3.evaluationResult.rationale);
+  }
+}
+function MetadataResultComponent_div_0_p_accordionTab_5_div_42_div_90_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div")(1, "div", 55)(2, "strong", 47);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(5, "div", 56)(6, "p", 57);
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const result_r3 = \u0275\u0275nextContext(2).$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 2, "common.language.english"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(result_r3.evaluationResult.rationaleEnglish);
+  }
+}
+function MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 39)(1, "p-card", 40);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementStart(3, "div", 41)(4, "h3", 42);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 43)(8, "div", 44)(9, "div", 45)(10, "div", 46)(11, "strong", 47);
+    \u0275\u0275text(12);
     \u0275\u0275pipe(13, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template_p_button_onClick_12_listener() {
-      \u0275\u0275restoreView(_r8);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "p-button", 20);
+    \u0275\u0275pipe(15, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template_p_button_onClick_14_listener() {
+      \u0275\u0275restoreView(_r10);
+      const result_r3 = \u0275\u0275nextContext().$implicit;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.frenchTranslatedDescription || result_r3.englishTranslatedDescription));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(16, "p", 48);
+    \u0275\u0275text(17);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(18, "span", 49);
+    \u0275\u0275text(19);
+    \u0275\u0275pipe(20, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(21, "div", 44)(22, "div", 45)(23, "div", 46)(24, "strong", 47);
+    \u0275\u0275text(25);
+    \u0275\u0275pipe(26, "translate");
+    \u0275\u0275pipe(27, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(28, "p-button", 20);
+    \u0275\u0275pipe(29, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template_p_button_onClick_28_listener() {
+      \u0275\u0275restoreView(_r10);
+      const result_r3 = \u0275\u0275nextContext().$implicit;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.documentMetadata.description));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(30, "p", 48);
+    \u0275\u0275text(31);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(32, "span", 49);
+    \u0275\u0275text(33);
+    \u0275\u0275pipe(34, "translate");
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(35, "div", 50)(36, "div", 46)(37, "strong", 51);
+    \u0275\u0275text(38);
+    \u0275\u0275pipe(39, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(40, "p-button", 20);
+    \u0275\u0275pipe(41, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template_p_button_onClick_40_listener() {
+      \u0275\u0275restoreView(_r10);
       const result_r3 = \u0275\u0275nextContext().$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.evaluationResult.suggestedDescription));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "div", 44)(15, "code", 22);
-    \u0275\u0275text(16);
+    \u0275\u0275elementStart(42, "p", 48);
+    \u0275\u0275text(43);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(44, "span", 49);
+    \u0275\u0275text(45);
+    \u0275\u0275pipe(46, "translate");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(17, "div", 13)(18, "div", 18)(19, "span", 41);
-    \u0275\u0275text(20);
-    \u0275\u0275pipe(21, "translate");
-    \u0275\u0275elementStart(22, "span", 42);
-    \u0275\u0275text(23);
+    \u0275\u0275elementStart(47, "div", 41)(48, "h3", 42);
+    \u0275\u0275text(49);
+    \u0275\u0275pipe(50, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(51, "div", 43)(52, "div", 44)(53, "div", 45)(54, "div", 46)(55, "strong", 47);
+    \u0275\u0275text(56);
+    \u0275\u0275pipe(57, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(58, "p-button", 20);
+    \u0275\u0275pipe(59, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template_p_button_onClick_58_listener() {
+      \u0275\u0275restoreView(_r10);
+      const result_r3 = \u0275\u0275nextContext().$implicit;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.frenchTranslatedKeywords || result_r3.englishTranslatedKeywords));
+    });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(24, "p-button", 43);
-    \u0275\u0275pipe(25, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template_p_button_onClick_24_listener() {
-      \u0275\u0275restoreView(_r8);
+    \u0275\u0275elementStart(60, "p", 52);
+    \u0275\u0275text(61);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(62, "div", 44)(63, "div", 45)(64, "div", 46)(65, "strong", 47);
+    \u0275\u0275text(66);
+    \u0275\u0275pipe(67, "translate");
+    \u0275\u0275pipe(68, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(69, "p-button", 20);
+    \u0275\u0275pipe(70, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template_p_button_onClick_69_listener() {
+      \u0275\u0275restoreView(_r10);
+      const result_r3 = \u0275\u0275nextContext().$implicit;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.documentMetadata.keywords));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(71, "p", 52);
+    \u0275\u0275text(72);
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(73, "div", 50)(74, "div", 46)(75, "strong", 51);
+    \u0275\u0275text(76);
+    \u0275\u0275pipe(77, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(78, "p-button", 20);
+    \u0275\u0275pipe(79, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template_p_button_onClick_78_listener() {
+      \u0275\u0275restoreView(_r10);
       const result_r3 = \u0275\u0275nextContext().$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.evaluationResult.suggestedKeywords));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(26, "div", 44)(27, "code", 22);
-    \u0275\u0275text(28);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(29, "div", 34)(30, "span", 45);
-    \u0275\u0275text(31);
-    \u0275\u0275pipe(32, "translate");
+    \u0275\u0275elementStart(80, "p", 48);
+    \u0275\u0275text(81);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(33, "div", 44)(34, "p", 46);
-    \u0275\u0275text(35);
-    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(82, "span", 49);
+    \u0275\u0275text(83);
+    \u0275\u0275pipe(84, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(85, "div")(86, "h3", 42);
+    \u0275\u0275text(87);
+    \u0275\u0275pipe(88, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(89, MetadataResultComponent_div_0_p_accordionTab_5_div_42_div_89_Template, 8, 4, "div", 53)(90, MetadataResultComponent_div_0_p_accordionTab_5_div_42_div_90_Template, 8, 4, "div", 54);
+    \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const result_r3 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("header", \u0275\u0275pipeBind1(2, 44, "metadata.comparison.title"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 46, "metadata.comparison.description"), " ");
+    \u0275\u0275advance(7);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(13, 48, "metadata.comparison.autoTranslated"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(15, 50, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 15, "metadata.results.evaluation"), " ");
+    \u0275\u0275textInterpolate(result_r3.frenchTranslatedDescription || result_r3.englishTranslatedDescription);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", (result_r3.frenchTranslatedDescription || result_r3.englishTranslatedDescription).length, " ", \u0275\u0275pipeBind1(20, 52, "common.chars"), " ");
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(result_r3.frenchTranslatedDescription ? \u0275\u0275pipeBind1(26, 54, "metadata.comparison.fromFrenchDoc") : \u0275\u0275pipeBind1(27, 56, "metadata.comparison.fromEnglishDoc"));
+    \u0275\u0275advance(3);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(29, 58, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(result_r3.documentMetadata.description);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", result_r3.documentMetadata.description.length, " ", \u0275\u0275pipeBind1(34, 60, "common.chars"), " ");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 17, "metadata.results.suggestedDescription"), " ");
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(39, 62, "metadata.comparison.suggestedDescription"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(41, 64, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.evaluationResult.suggestedDescription.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(13, 19, "metadata.results.copyToClipboard"));
-    \u0275\u0275advance(4);
     \u0275\u0275textInterpolate(result_r3.evaluationResult.suggestedDescription);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", result_r3.evaluationResult.suggestedDescription.length, " ", \u0275\u0275pipeBind1(46, 66, "common.chars"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(21, 21, "metadata.results.suggestedKeywords"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(50, 68, "metadata.comparison.keywords"), " ");
+    \u0275\u0275advance(7);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(57, 70, "metadata.comparison.autoTranslated"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(59, 72, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.evaluationResult.suggestedKeywords.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(25, 23, "metadata.results.copyToClipboard"));
+    \u0275\u0275textInterpolate(result_r3.frenchTranslatedKeywords || result_r3.englishTranslatedKeywords);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(result_r3.frenchTranslatedDescription ? \u0275\u0275pipeBind1(67, 74, "metadata.comparison.fromFrenchDoc") : \u0275\u0275pipeBind1(68, 76, "metadata.comparison.fromEnglishDoc"));
+    \u0275\u0275advance(3);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(70, 78, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(result_r3.documentMetadata.keywords);
     \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(77, 80, "metadata.comparison.suggestedKeywords"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(79, 82, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(result_r3.evaluationResult.suggestedKeywords);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(32, 25, "metadata.results.rationale"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", result_r3.evaluationResult.suggestedKeywords.length, " ", \u0275\u0275pipeBind1(84, 84, "common.chars"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(result_r3.evaluationResult.rationale);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(88, 86, "metadata.comparison.rationale"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", result_r3.evaluationResult.rationale);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", result_r3.evaluationResult.rationaleEnglish);
   }
 }
 function MetadataResultComponent_div_0_p_accordionTab_5_Template(rf, ctx) {
@@ -30815,69 +32328,73 @@ function MetadataResultComponent_div_0_p_accordionTab_5_Template(rf, ctx) {
     \u0275\u0275pipe(16, "translate");
     \u0275\u0275elementStart(17, "span", 19);
     \u0275\u0275text(18);
+    \u0275\u0275pipe(19, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(19, "p-button", 20);
-    \u0275\u0275pipe(20, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_Template_p_button_onClick_19_listener() {
+    \u0275\u0275elementStart(20, "p-button", 20);
+    \u0275\u0275pipe(21, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_Template_p_button_onClick_20_listener() {
       const result_r3 = \u0275\u0275restoreView(_r2).$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.metaDescription));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(21, "div", 21)(22, "code", 22);
-    \u0275\u0275text(23);
+    \u0275\u0275elementStart(22, "div", 21)(23, "code", 22);
+    \u0275\u0275text(24);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(24, "div", 13)(25, "div", 18)(26, "span", 14);
-    \u0275\u0275text(27);
-    \u0275\u0275pipe(28, "translate");
-    \u0275\u0275elementStart(29, "span", 19);
-    \u0275\u0275text(30);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(31, "p-button", 20);
+    \u0275\u0275elementStart(25, "div", 13)(26, "div", 18)(27, "span", 14);
+    \u0275\u0275text(28);
+    \u0275\u0275pipe(29, "translate");
+    \u0275\u0275elementStart(30, "span", 19);
+    \u0275\u0275text(31);
     \u0275\u0275pipe(32, "translate");
-    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_Template_p_button_onClick_31_listener() {
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(33, "p-button", 20);
+    \u0275\u0275pipe(34, "translate");
+    \u0275\u0275listener("onClick", function MetadataResultComponent_div_0_p_accordionTab_5_Template_p_button_onClick_33_listener() {
       const result_r3 = \u0275\u0275restoreView(_r2).$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.copyToClipboard(result_r3.metaKeywords));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(33, "div", 21)(34, "code", 22);
-    \u0275\u0275text(35);
+    \u0275\u0275elementStart(35, "div", 21)(36, "code", 22);
+    \u0275\u0275text(37);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(36, MetadataResultComponent_div_0_p_accordionTab_5_div_36_Template, 29, 23, "div", 23)(37, MetadataResultComponent_div_0_p_accordionTab_5_div_37_Template, 2, 1, "div", 24)(38, MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template, 29, 23, "div", 25)(39, MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template, 36, 27, "div", 26);
+    \u0275\u0275template(38, MetadataResultComponent_div_0_p_accordionTab_5_div_38_Template, 31, 29, "div", 23)(39, MetadataResultComponent_div_0_p_accordionTab_5_div_39_Template, 31, 29, "div", 23)(40, MetadataResultComponent_div_0_p_accordionTab_5_div_40_Template, 3, 3, "div", 24)(41, MetadataResultComponent_div_0_p_accordionTab_5_div_41_Template, 31, 29, "div", 25)(42, MetadataResultComponent_div_0_p_accordionTab_5_div_42_Template, 91, 88, "div", 26);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const result_r3 = ctx.$implicit;
-    const i_r6 = ctx.index;
+    const i_r7 = ctx.index;
     const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("selected", i_r6 === 0);
+    \u0275\u0275property("selected", i_r7 === 0);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 23, "metadata.results.url"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 26, "metadata.results.url"));
     \u0275\u0275advance(3);
     \u0275\u0275property("href", result_r3.url, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", result_r3.url, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(11, 25, "metadata.results.openInNewTab"));
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(11, 28, "metadata.results.openInNewTab"));
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(16, 27, "metadata.results.metaDescription"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(16, 30, "metadata.results.metaDescription"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.metaDescription.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(20, 29, "metadata.results.copyToClipboard"));
+    \u0275\u0275textInterpolate2("(", result_r3.metaDescription.length, " ", \u0275\u0275pipeBind1(19, 32, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(21, 34, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate(result_r3.metaDescription);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(28, 31, "metadata.results.metaKeywords"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(29, 36, "metadata.results.metaKeywords"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", result_r3.metaKeywords.length, " chars)");
-    \u0275\u0275advance();
-    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(32, 33, "metadata.results.copyToClipboard"));
+    \u0275\u0275textInterpolate2("(", result_r3.metaKeywords.length, " ", \u0275\u0275pipeBind1(32, 38, "common.chars"), ")");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(34, 40, "metadata.results.copyToClipboard"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate(result_r3.metaKeywords);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r0.showTranslations && result_r3.frenchTranslatedDescription);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.showTranslations && result_r3.englishTranslatedDescription);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r0.canUploadDocument(result_r3));
     \u0275\u0275advance();
@@ -30891,7 +32408,7 @@ function MetadataResultComponent_div_0_Template(rf, ctx) {
     \u0275\u0275elementStart(0, "div", 1)(1, "p-card");
     \u0275\u0275template(2, MetadataResultComponent_div_0_ng_template_2_Template, 8, 6, "ng-template", 2);
     \u0275\u0275elementStart(3, "div", 3)(4, "p-accordion", 4);
-    \u0275\u0275template(5, MetadataResultComponent_div_0_p_accordionTab_5_Template, 40, 35, "p-accordionTab", 5);
+    \u0275\u0275template(5, MetadataResultComponent_div_0_p_accordionTab_5_Template, 43, 42, "p-accordionTab", 5);
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
@@ -30909,6 +32426,7 @@ var MetadataResultComponent = class _MetadataResultComponent {
   processingIndex = null;
   documentSelected = new EventEmitter();
   expandedStates = {};
+  uploadedDocuments = {};
   toggleExpanded(index) {
     this.expandedStates[index] = !this.expandedStates[index];
   }
@@ -30938,16 +32456,33 @@ var MetadataResultComponent = class _MetadataResultComponent {
   onDocumentFileSelected(file, index) {
     this.documentSelected.emit({ file, index });
   }
+  onFrenchDocumentFileSelected(file, index) {
+    this.uploadedDocuments[index] = file;
+  }
+  onDocumentModeChanged(mode, index) {
+    console.log("Document mode changed for result index:", index, mode);
+  }
   canUploadDocument(result) {
-    return this.showTranslations && !!result.frenchTranslatedDescription && !!result.frenchTranslatedKeywords && !result.evaluationResult;
+    const hasFrenchTranslation = !!result.frenchTranslatedDescription && !!result.frenchTranslatedKeywords;
+    const hasEnglishTranslation = !!result.englishTranslatedDescription && !!result.englishTranslatedKeywords;
+    return this.showTranslations && (hasFrenchTranslation || hasEnglishTranslation) && !result.evaluationResult;
   }
   isProcessingDocument(index) {
     return this.isProcessing && this.processingIndex === index;
   }
+  hasUploadedDocument(index) {
+    return !!this.uploadedDocuments[index];
+  }
+  processDocument(index) {
+    const file = this.uploadedDocuments[index];
+    if (file) {
+      this.documentSelected.emit({ file, index });
+    }
+  }
   static \u0275fac = function MetadataResultComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MetadataResultComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MetadataResultComponent, selectors: [["ca-metadata-result"]], inputs: { results: "results", showTranslations: "showTranslations", isProcessing: "isProcessing", processingIndex: "processingIndex" }, outputs: { documentSelected: "documentSelected" }, decls: 1, vars: 1, consts: [["class", "metadata-results-container", 4, "ngIf"], [1, "metadata-results-container"], ["pTemplate", "header"], [1, "results-content"], [3, "multiple"], [3, "selected", 4, "ngFor", "ngForOf"], [1, "flex", "align-items-center", "justify-content-between", "p-3"], [1, "flex", "align-items-center"], [1, "pi", "pi-list", "mr-2"], [1, "m-0"], ["severity", "info", 3, "value"], [3, "selected"], [1, "result-content", "p-3"], [1, "field", "mb-3"], [1, "font-semibold", "text-500", "text-sm"], [1, "flex", "align-items-center", "gap-2", "mt-1"], ["target", "_blank", 1, "text-primary", "hover:underline", "text-sm", 3, "href"], ["icon", "pi pi-external-link", "size", "small", 3, "onClick", "text", "rounded", "pTooltip"], [1, "flex", "align-items-center", "justify-content-between", "mb-1"], [1, "text-xs", "text-400", "ml-1"], ["icon", "pi pi-copy", "size", "small", 3, "onClick", "text", "rounded", "pTooltip"], [1, "meta-content", "p-2", "surface-50", "border-round"], [1, "text-sm"], ["class", "translation-section mt-4 p-3 surface-100 border-round", 4, "ngIf"], ["class", "document-upload-section mt-4", 4, "ngIf"], ["class", "document-metadata-section mt-4 p-3 surface-100 border-round", 4, "ngIf"], ["class", "evaluation-section mt-4 p-3 border-round", "style", "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;", 4, "ngIf"], [1, "flex", "align-items-center", "justify-content-between", "w-full", "pr-2"], [1, "flex", "align-items-center", "gap-2"], [1, "font-semibold"], [3, "value", "severity"], [1, "translation-section", "mt-4", "p-3", "surface-100", "border-round"], [1, "flex", "align-items-center", "gap-2", "mb-3"], [1, "pi", "pi-language"], [1, "field"], [1, "document-upload-section", "mt-4"], [3, "fileSelected", "disabled"], [1, "document-metadata-section", "mt-4", "p-3", "surface-100", "border-round"], [1, "pi", "pi-file-word"], [1, "evaluation-section", "mt-4", "p-3", "border-round", 2, "background", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", "color", "white"], [1, "pi", "pi-check-circle"], [1, "font-semibold", "text-sm"], [1, "text-xs", "ml-1", "opacity-80"], ["icon", "pi pi-copy", "size", "small", "styleClass", "text-white", 3, "onClick", "text", "rounded", "pTooltip"], [1, "p-2", "border-round", 2, "background", "rgba(255,255,255,0.9)", "color", "#333"], [1, "font-semibold", "text-sm", "mb-1", "block"], [1, "text-sm", "m-0"]], template: function MetadataResultComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MetadataResultComponent, selectors: [["ca-metadata-result"]], inputs: { results: "results", showTranslations: "showTranslations", isProcessing: "isProcessing", processingIndex: "processingIndex" }, outputs: { documentSelected: "documentSelected" }, decls: 1, vars: 1, consts: [["class", "mt-3", 4, "ngIf"], [1, "mt-3"], ["pTemplate", "header"], [1, "results-content"], [3, "multiple"], [3, "selected", 4, "ngFor", "ngForOf"], [1, "flex", "align-items-center", "justify-content-between", "p-3"], [1, "flex", "align-items-center"], [1, "pi", "pi-list", "mr-2"], [1, "m-0"], ["severity", "info", 3, "value"], [3, "selected"], [1, "p-3"], [1, "mb-3"], [1, "font-semibold", "text-500", "text-sm"], [1, "flex", "align-items-center", "gap-2", "mt-1"], ["target", "_blank", 1, "text-primary", "text-sm", 3, "href"], ["icon", "pi pi-external-link", "size", "small", 3, "onClick", "text", "rounded", "pTooltip"], [1, "flex", "align-items-center", "justify-content-between", "mb-1"], [1, "text-xs", "text-400", "ml-1"], ["icon", "pi pi-copy", "size", "small", 3, "onClick", "text", "rounded", "pTooltip"], [1, "p-2", "surface-50", "border-round", 2, "word-break", "break-word"], [1, "text-sm"], ["class", "mt-4 p-3 surface-100 border-round border-left-3 border-primary", 4, "ngIf"], ["class", "document-upload-section mt-4", 4, "ngIf"], ["class", "document-metadata-section mt-4 p-3 surface-100 border-round", 4, "ngIf"], ["class", "evaluation-section mt-4", 4, "ngIf"], [1, "flex", "align-items-center", "justify-content-between", "w-full", "pr-2"], [1, "flex", "align-items-center", "gap-2"], [1, "font-semibold"], [3, "value", "severity"], [1, "mt-4", "p-3", "surface-100", "border-round", "border-left-3", "border-primary"], [1, "flex", "align-items-center", "gap-2", "mb-3"], [1, "pi", "pi-language"], [1, "document-upload-section", "mt-4"], [3, "englishFileSelected", "frenchFileSelected", "modeChanged", "disabled", "simplifiedMode"], ["icon", "pi pi-sparkles", "severity", "primary", "styleClass", "w-full", 3, "onClick", "label", "disabled", "loading"], [1, "document-metadata-section", "mt-4", "p-3", "surface-100", "border-round"], [1, "pi", "pi-file-word"], [1, "evaluation-section", "mt-4"], [3, "header"], [1, "mb-5"], [1, "text-xl", "font-semibold", "mb-3"], [1, "grid", "mb-3"], [1, "col-12", "md:col-6"], [1, "p-3", "border-round", "surface-50", "h-full"], [1, "flex", "align-items-center", "justify-content-between", "mb-2"], [1, "text-primary"], [1, "mb-2", "line-height-3"], [1, "text-sm", "text-color-secondary"], [1, "p-3", "border-round", "surface-100", "border-left-3", "border-primary"], [1, "text-lg"], [1, "mb-0", "line-height-3"], ["class", "mb-3", 4, "ngIf"], [4, "ngIf"], [1, "flex", "align-items-center", "gap-2", "mb-2"], [1, "p-3", "border-round", "surface-card"], [1, "mb-0", "line-height-3", "white-space-pre-wrap"]], template: function MetadataResultComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275template(0, MetadataResultComponent_div_0_Template, 6, 2, "div", 0);
     }
@@ -30974,7 +32509,7 @@ var MetadataResultComponent = class _MetadataResultComponent {
     TooltipModule,
     Tooltip,
     DocumentUploadComponent
-  ], styles: ['\n\n.metadata-results-container[_ngcontent-%COMP%] {\n  width: 100%;\n  margin-top: 1.5rem;\n}\n.results-content[_ngcontent-%COMP%] {\n  padding: 0;\n}\n.result-content[_ngcontent-%COMP%] {\n  padding: 1rem;\n}\n.field[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n.content-preview[_ngcontent-%COMP%] {\n  max-height: 400px;\n  overflow-y: auto;\n  font-family:\n    system-ui,\n    -apple-system,\n    sans-serif;\n  line-height: 1.6;\n}\n.meta-content[_ngcontent-%COMP%] {\n  font-family:\n    "Monaco",\n    "Courier New",\n    monospace;\n  word-break: break-word;\n}\n.keywords-container[_ngcontent-%COMP%] {\n  padding: 0.5rem;\n  background-color: var(--surface-50);\n  border-radius: var(--border-radius);\n}\n.translation-section[_ngcontent-%COMP%] {\n  border-left: 3px solid var(--primary-300);\n}\n.text-primary[_ngcontent-%COMP%] {\n  color: var(--primary-color);\n}\n.hover\\:underline[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.text-400[_ngcontent-%COMP%] {\n  color: var(--text-color-secondary);\n}\n.text-500[_ngcontent-%COMP%] {\n  color: var(--text-color);\n}\n[_nghost-%COMP%]     .p-accordion .p-accordion-header-link {\n  padding: 1rem;\n  background: var(--surface-50);\n  border: 1px solid var(--surface-200);\n  transition: all 0.2s;\n}\n[_nghost-%COMP%]     .p-accordion .p-accordion-header-link:hover {\n  background: var(--surface-100);\n}\n[_nghost-%COMP%]     .p-accordion .p-accordion-content {\n  padding: 0;\n  border: 1px solid var(--surface-200);\n  border-top: none;\n}\n[_nghost-%COMP%]     .p-chip {\n  background: var(--primary-100);\n  color: var(--primary-700);\n  font-size: 0.85rem;\n  padding: 0.25rem 0.5rem;\n}\n/*# sourceMappingURL=metadata-result.component.css.map */'] });
+  ], styles: ["\n\n/*# sourceMappingURL=metadata-result.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MetadataResultComponent, [{
@@ -30989,7 +32524,7 @@ var MetadataResultComponent = class _MetadataResultComponent {
       TagModule,
       TooltipModule,
       DocumentUploadComponent
-    ], template: `<div class="metadata-results-container" *ngIf="results && results.length > 0">\r
+    ], template: `<div class="mt-3" *ngIf="results && results.length > 0">\r
   <p-card>\r
     <ng-template pTemplate="header">\r
       <div class="flex align-items-center justify-content-between p-3">\r
@@ -31017,12 +32552,12 @@ var MetadataResultComponent = class _MetadataResultComponent {
             </div>\r
           </ng-template>\r
 \r
-          <div class="result-content p-3">\r
+          <div class="p-3">\r
             <!-- URL -->\r
-            <div class="field mb-3">\r
+            <div class="mb-3">\r
               <span class="font-semibold text-500 text-sm">{{ 'metadata.results.url' | translate }}</span>\r
               <div class="flex align-items-center gap-2 mt-1">\r
-                <a [href]="result.url" target="_blank" class="text-primary hover:underline text-sm">\r
+                <a [href]="result.url" target="_blank" class="text-primary text-sm">\r
                   {{ result.url }}\r
                 </a>\r
                 <p-button \r
@@ -31037,11 +32572,11 @@ var MetadataResultComponent = class _MetadataResultComponent {
             </div>\r
 \r
             <!-- Meta Description -->\r
-            <div class="field mb-3">\r
+            <div class="mb-3">\r
               <div class="flex align-items-center justify-content-between mb-1">\r
                 <span class="font-semibold text-500 text-sm">\r
                   {{ 'metadata.results.metaDescription' | translate }}\r
-                  <span class="text-xs text-400 ml-1">({{ result.metaDescription.length }} chars)</span>\r
+                  <span class="text-xs text-400 ml-1">({{ result.metaDescription.length }} {{ 'common.chars' | translate }})</span>\r
                 </span>\r
                 <p-button \r
                   icon="pi pi-copy" \r
@@ -31052,17 +32587,17 @@ var MetadataResultComponent = class _MetadataResultComponent {
                   [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
                 </p-button>\r
               </div>\r
-              <div class="meta-content p-2 surface-50 border-round">\r
+              <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
                 <code class="text-sm">{{ result.metaDescription }}</code>\r
               </div>\r
             </div>\r
 \r
             <!-- Meta Keywords -->\r
-            <div class="field mb-3">\r
+            <div class="mb-3">\r
               <div class="flex align-items-center justify-content-between mb-1">\r
                 <span class="font-semibold text-500 text-sm">\r
                   {{ 'metadata.results.metaKeywords' | translate }}\r
-                  <span class="text-xs text-400 ml-1">({{ result.metaKeywords.length }} chars)</span>\r
+                  <span class="text-xs text-400 ml-1">({{ result.metaKeywords.length }} {{ 'common.chars' | translate }})</span>\r
                 </span>\r
                 <p-button \r
                   icon="pi pi-copy" \r
@@ -31073,24 +32608,24 @@ var MetadataResultComponent = class _MetadataResultComponent {
                   [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
                 </p-button>\r
               </div>\r
-              <div class="meta-content p-2 surface-50 border-round">\r
+              <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
                 <code class="text-sm">{{ result.metaKeywords }}</code>\r
               </div>\r
             </div>\r
 \r
             <!-- French Translations (if available) -->\r
-            <div *ngIf="showTranslations && result.frenchTranslatedDescription" class="translation-section mt-4 p-3 surface-100 border-round">\r
+            <div *ngIf="showTranslations && result.frenchTranslatedDescription" class="mt-4 p-3 surface-100 border-round border-left-3 border-primary">\r
               <h4 class="flex align-items-center gap-2 mb-3">\r
                 <i class="pi pi-language"></i>\r
                 {{ 'metadata.results.frenchTranslation' | translate }}\r
               </h4>\r
 \r
               <!-- Translated Description -->\r
-              <div class="field mb-3">\r
+              <div class="mb-3">\r
                 <div class="flex align-items-center justify-content-between mb-1">\r
                   <span class="font-semibold text-500 text-sm">\r
                     {{ 'metadata.results.translatedDescription' | translate }}\r
-                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedDescription.length }} chars)</span>\r
+                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedDescription.length }} {{ 'common.chars' | translate }})</span>\r
                   </span>\r
                   <p-button\r
                     icon="pi pi-copy"\r
@@ -31101,17 +32636,17 @@ var MetadataResultComponent = class _MetadataResultComponent {
                     [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
                   </p-button>\r
                 </div>\r
-                <div class="meta-content p-2 surface-50 border-round">\r
+                <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
                   <code class="text-sm">{{ result.frenchTranslatedDescription }}</code>\r
                 </div>\r
               </div>\r
 \r
               <!-- Translated Keywords -->\r
-              <div class="field">\r
+              <div>\r
                 <div class="flex align-items-center justify-content-between mb-1">\r
                   <span class="font-semibold text-500 text-sm">\r
                     {{ 'metadata.results.translatedKeywords' | translate }}\r
-                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedKeywords!.length }} chars)</span>\r
+                    <span class="text-xs text-400 ml-1">({{ result.frenchTranslatedKeywords!.length }} {{ 'common.chars' | translate }})</span>\r
                   </span>\r
                   <p-button\r
                     icon="pi pi-copy"\r
@@ -31122,8 +32657,58 @@ var MetadataResultComponent = class _MetadataResultComponent {
                     [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
                   </p-button>\r
                 </div>\r
-                <div class="meta-content p-2 surface-50 border-round">\r
+                <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
                   <code class="text-sm">{{ result.frenchTranslatedKeywords }}</code>\r
+                </div>\r
+              </div>\r
+            </div>\r
+\r
+            <!-- English Translations (if available) -->\r
+            <div *ngIf="showTranslations && result.englishTranslatedDescription" class="mt-4 p-3 surface-100 border-round border-left-3 border-primary">\r
+              <h4 class="flex align-items-center gap-2 mb-3">\r
+                <i class="pi pi-language"></i>\r
+                {{ 'metadata.results.englishTranslation' | translate }}\r
+              </h4>\r
+\r
+              <!-- Translated Description -->\r
+              <div class="mb-3">\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-500 text-sm">\r
+                    {{ 'metadata.results.translatedDescription' | translate }}\r
+                    <span class="text-xs text-400 ml-1">({{ result.englishTranslatedDescription.length }} {{ 'common.chars' | translate }})</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    (onClick)="copyToClipboard(result.englishTranslatedDescription!)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
+                  <code class="text-sm">{{ result.englishTranslatedDescription }}</code>\r
+                </div>\r
+              </div>\r
+\r
+              <!-- Translated Keywords -->\r
+              <div>\r
+                <div class="flex align-items-center justify-content-between mb-1">\r
+                  <span class="font-semibold text-500 text-sm">\r
+                    {{ 'metadata.results.translatedKeywords' | translate }}\r
+                    <span class="text-xs text-400 ml-1">({{ result.englishTranslatedKeywords!.length }} {{ 'common.chars' | translate }})</span>\r
+                  </span>\r
+                  <p-button\r
+                    icon="pi pi-copy"\r
+                    [text]="true"\r
+                    [rounded]="true"\r
+                    size="small"\r
+                    (onClick)="copyToClipboard(result.englishTranslatedKeywords!)"\r
+                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                  </p-button>\r
+                </div>\r
+                <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
+                  <code class="text-sm">{{ result.englishTranslatedKeywords }}</code>\r
                 </div>\r
               </div>\r
             </div>\r
@@ -31132,8 +32717,24 @@ var MetadataResultComponent = class _MetadataResultComponent {
             <div *ngIf="canUploadDocument(result)" class="document-upload-section mt-4">\r
               <ca-document-upload\r
                 [disabled]="isProcessingDocument(i)"\r
-                (fileSelected)="onDocumentFileSelected($event, i)">\r
+                [simplifiedMode]="showTranslations"\r
+                (englishFileSelected)="onDocumentFileSelected($event, i)"\r
+                (frenchFileSelected)="onFrenchDocumentFileSelected($event, i)"\r
+                (modeChanged)="onDocumentModeChanged($event, i)">\r
               </ca-document-upload>\r
+\r
+              <!-- Process Button -->\r
+              <div class="mt-3" *ngIf="hasUploadedDocument(i)">\r
+                <p-button\r
+                  [label]="isProcessingDocument(i) ? ('metadata.document.processing' | translate) : ('metadata.document.processButton' | translate)"\r
+                  icon="pi pi-sparkles"\r
+                  [disabled]="isProcessingDocument(i)"\r
+                  [loading]="isProcessingDocument(i)"\r
+                  severity="primary"\r
+                  styleClass="w-full"\r
+                  (onClick)="processDocument(i)">\r
+                </p-button>\r
+              </div>\r
             </div>\r
 \r
             <!-- Document Metadata (if available) -->\r
@@ -31144,11 +32745,11 @@ var MetadataResultComponent = class _MetadataResultComponent {
               </h4>\r
 \r
               <!-- Document Description -->\r
-              <div class="field mb-3">\r
+              <div class="mb-3">\r
                 <div class="flex align-items-center justify-content-between mb-1">\r
                   <span class="font-semibold text-500 text-sm">\r
                     {{ 'metadata.results.documentDescription' | translate }}\r
-                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.description.length }} chars)</span>\r
+                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.description.length }} {{ 'common.chars' | translate }})</span>\r
                   </span>\r
                   <p-button\r
                     icon="pi pi-copy"\r
@@ -31159,17 +32760,17 @@ var MetadataResultComponent = class _MetadataResultComponent {
                     [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
                   </p-button>\r
                 </div>\r
-                <div class="meta-content p-2 surface-50 border-round">\r
+                <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
                   <code class="text-sm">{{ result.documentMetadata.description }}</code>\r
                 </div>\r
               </div>\r
 \r
               <!-- Document Keywords -->\r
-              <div class="field">\r
+              <div>\r
                 <div class="flex align-items-center justify-content-between mb-1">\r
                   <span class="font-semibold text-500 text-sm">\r
                     {{ 'metadata.results.documentKeywords' | translate }}\r
-                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.keywords.length }} chars)</span>\r
+                    <span class="text-xs text-400 ml-1">({{ result.documentMetadata.keywords.length }} {{ 'common.chars' | translate }})</span>\r
                   </span>\r
                   <p-button\r
                     icon="pi pi-copy"\r
@@ -31180,79 +32781,186 @@ var MetadataResultComponent = class _MetadataResultComponent {
                     [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
                   </p-button>\r
                 </div>\r
-                <div class="meta-content p-2 surface-50 border-round">\r
+                <div class="p-2 surface-50 border-round" style="word-break: break-word;">\r
                   <code class="text-sm">{{ result.documentMetadata.keywords }}</code>\r
                 </div>\r
               </div>\r
             </div>\r
 \r
             <!-- Evaluation Results (if available) -->\r
-            <div *ngIf="result.evaluationResult" class="evaluation-section mt-4 p-3 border-round" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">\r
-              <h4 class="flex align-items-center gap-2 mb-3">\r
-                <i class="pi pi-check-circle"></i>\r
-                {{ 'metadata.results.evaluation' | translate }}\r
-              </h4>\r
+            <div *ngIf="result.evaluationResult" class="evaluation-section mt-4">\r
+              <p-card [header]="'metadata.comparison.title' | translate">\r
 \r
-              <!-- Suggested Description -->\r
-              <div class="field mb-3">\r
-                <div class="flex align-items-center justify-content-between mb-1">\r
-                  <span class="font-semibold text-sm">\r
-                    {{ 'metadata.results.suggestedDescription' | translate }}\r
-                    <span class="text-xs ml-1 opacity-80">({{ result.evaluationResult.suggestedDescription.length }} chars)</span>\r
-                  </span>\r
-                  <p-button\r
-                    icon="pi pi-copy"\r
-                    [text]="true"\r
-                    [rounded]="true"\r
-                    size="small"\r
-                    styleClass="text-white"\r
-                    (onClick)="copyToClipboard(result.evaluationResult.suggestedDescription)"\r
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
-                  </p-button>\r
-                </div>\r
-                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">\r
-                  <code class="text-sm">{{ result.evaluationResult.suggestedDescription }}</code>\r
-                </div>\r
-              </div>\r
+                <!-- Description Comparison -->\r
+                <div class="mb-5">\r
+                  <h3 class="text-xl font-semibold mb-3">\r
+                    {{ 'metadata.comparison.description' | translate }}\r
+                  </h3>\r
 \r
-              <!-- Suggested Keywords -->\r
-              <div class="field mb-3">\r
-                <div class="flex align-items-center justify-content-between mb-1">\r
-                  <span class="font-semibold text-sm">\r
-                    {{ 'metadata.results.suggestedKeywords' | translate }}\r
-                    <span class="text-xs ml-1 opacity-80">({{ result.evaluationResult.suggestedKeywords.length }} chars)</span>\r
-                  </span>\r
-                  <p-button\r
-                    icon="pi pi-copy"\r
-                    [text]="true"\r
-                    [rounded]="true"\r
-                    size="small"\r
-                    styleClass="text-white"\r
-                    (onClick)="copyToClipboard(result.evaluationResult.suggestedKeywords)"\r
-                    [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
-                  </p-button>\r
-                </div>\r
-                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">\r
-                  <code class="text-sm">{{ result.evaluationResult.suggestedKeywords }}</code>\r
-                </div>\r
-              </div>\r
+                  <!-- Side-by-side comparison -->\r
+                  <div class="grid mb-3">\r
+                    <!-- Auto-Translated Version -->\r
+                    <div class="col-12 md:col-6">\r
+                      <div class="p-3 border-round surface-50 h-full">\r
+                        <div class="flex align-items-center justify-content-between mb-2">\r
+                          <strong class="text-primary">{{ 'metadata.comparison.autoTranslated' | translate }}</strong>\r
+                          <p-button\r
+                            icon="pi pi-copy"\r
+                            [text]="true"\r
+                            [rounded]="true"\r
+                            size="small"\r
+                            (onClick)="copyToClipboard(result.frenchTranslatedDescription || result.englishTranslatedDescription!)"\r
+                            [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                          </p-button>\r
+                        </div>\r
+                        <p class="mb-2 line-height-3">{{ result.frenchTranslatedDescription || result.englishTranslatedDescription }}</p>\r
+                        <span class="text-sm text-color-secondary">\r
+                          {{ (result.frenchTranslatedDescription || result.englishTranslatedDescription)!.length }} {{ 'common.chars' | translate }}\r
+                        </span>\r
+                      </div>\r
+                    </div>\r
 \r
-              <!-- Rationale -->\r
-              <div class="field">\r
-                <span class="font-semibold text-sm mb-1 block">\r
-                  {{ 'metadata.results.rationale' | translate }}\r
-                </span>\r
-                <div class="p-2 border-round" style="background: rgba(255,255,255,0.9); color: #333;">\r
-                  <p class="text-sm m-0">{{ result.evaluationResult.rationale }}</p>\r
+                    <!-- From Document -->\r
+                    <div class="col-12 md:col-6">\r
+                      <div class="p-3 border-round surface-50 h-full">\r
+                        <div class="flex align-items-center justify-content-between mb-2">\r
+                          <strong class="text-primary">{{ result.frenchTranslatedDescription ? ('metadata.comparison.fromFrenchDoc' | translate) : ('metadata.comparison.fromEnglishDoc' | translate) }}</strong>\r
+                          <p-button\r
+                            icon="pi pi-copy"\r
+                            [text]="true"\r
+                            [rounded]="true"\r
+                            size="small"\r
+                            (onClick)="copyToClipboard(result.documentMetadata!.description)"\r
+                            [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                          </p-button>\r
+                        </div>\r
+                        <p class="mb-2 line-height-3">{{ result.documentMetadata!.description }}</p>\r
+                        <span class="text-sm text-color-secondary">\r
+                          {{ result.documentMetadata!.description.length }} {{ 'common.chars' | translate }}\r
+                        </span>\r
+                      </div>\r
+                    </div>\r
+                  </div>\r
+\r
+                  <!-- AI Suggested Final Description -->\r
+                  <div class="p-3 border-round surface-100 border-left-3 border-primary">\r
+                    <div class="flex align-items-center justify-content-between mb-2">\r
+                      <strong class="text-lg">{{ 'metadata.comparison.suggestedDescription' | translate }}</strong>\r
+                      <p-button\r
+                        icon="pi pi-copy"\r
+                        [text]="true"\r
+                        [rounded]="true"\r
+                        size="small"\r
+                        (onClick)="copyToClipboard(result.evaluationResult.suggestedDescription)"\r
+                        [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                      </p-button>\r
+                    </div>\r
+                    <p class="mb-2 line-height-3">{{ result.evaluationResult.suggestedDescription }}</p>\r
+                    <span class="text-sm text-color-secondary">\r
+                      {{ result.evaluationResult.suggestedDescription.length }} {{ 'common.chars' | translate }}\r
+                    </span>\r
+                  </div>\r
                 </div>\r
-              </div>\r
+\r
+                <!-- Keywords Comparison -->\r
+                <div class="mb-5">\r
+                  <h3 class="text-xl font-semibold mb-3">\r
+                    {{ 'metadata.comparison.keywords' | translate }}\r
+                  </h3>\r
+\r
+                  <!-- Side-by-side comparison -->\r
+                  <div class="grid mb-3">\r
+                    <!-- Auto-Translated Version -->\r
+                    <div class="col-12 md:col-6">\r
+                      <div class="p-3 border-round surface-50 h-full">\r
+                        <div class="flex align-items-center justify-content-between mb-2">\r
+                          <strong class="text-primary">{{ 'metadata.comparison.autoTranslated' | translate }}</strong>\r
+                          <p-button\r
+                            icon="pi pi-copy"\r
+                            [text]="true"\r
+                            [rounded]="true"\r
+                            size="small"\r
+                            (onClick)="copyToClipboard(result.frenchTranslatedKeywords || result.englishTranslatedKeywords!)"\r
+                            [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                          </p-button>\r
+                        </div>\r
+                        <p class="mb-0 line-height-3">{{ result.frenchTranslatedKeywords || result.englishTranslatedKeywords }}</p>\r
+                      </div>\r
+                    </div>\r
+\r
+                    <!-- From Document -->\r
+                    <div class="col-12 md:col-6">\r
+                      <div class="p-3 border-round surface-50 h-full">\r
+                        <div class="flex align-items-center justify-content-between mb-2">\r
+                          <strong class="text-primary">{{ result.frenchTranslatedDescription ? ('metadata.comparison.fromFrenchDoc' | translate) : ('metadata.comparison.fromEnglishDoc' | translate) }}</strong>\r
+                          <p-button\r
+                            icon="pi pi-copy"\r
+                            [text]="true"\r
+                            [rounded]="true"\r
+                            size="small"\r
+                            (onClick)="copyToClipboard(result.documentMetadata!.keywords)"\r
+                            [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                          </p-button>\r
+                        </div>\r
+                        <p class="mb-0 line-height-3">{{ result.documentMetadata!.keywords }}</p>\r
+                      </div>\r
+                    </div>\r
+                  </div>\r
+\r
+                  <!-- AI Suggested Final Keywords -->\r
+                  <div class="p-3 border-round surface-100 border-left-3 border-primary">\r
+                    <div class="flex align-items-center justify-content-between mb-2">\r
+                      <strong class="text-lg">{{ 'metadata.comparison.suggestedKeywords' | translate }}</strong>\r
+                      <p-button\r
+                        icon="pi pi-copy"\r
+                        [text]="true"\r
+                        [rounded]="true"\r
+                        size="small"\r
+                        (onClick)="copyToClipboard(result.evaluationResult.suggestedKeywords)"\r
+                        [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+                      </p-button>\r
+                    </div>\r
+                    <p class="mb-2 line-height-3">{{ result.evaluationResult.suggestedKeywords }}</p>\r
+                    <span class="text-sm text-color-secondary">\r
+                      {{ result.evaluationResult.suggestedKeywords.length }} {{ 'common.chars' | translate }}\r
+                    </span>\r
+                  </div>\r
+                </div>\r
+\r
+                <!-- Rationale (Bilingual) -->\r
+                <div>\r
+                  <h3 class="text-xl font-semibold mb-3">\r
+                    {{ 'metadata.comparison.rationale' | translate }}\r
+                  </h3>\r
+\r
+                  <!-- French Rationale -->\r
+                  <div class="mb-3" *ngIf="result.evaluationResult.rationale">\r
+                    <div class="flex align-items-center gap-2 mb-2">\r
+                      <strong class="text-primary">{{ 'common.language.french' | translate }}</strong>\r
+                    </div>\r
+                    <div class="p-3 border-round surface-card">\r
+                      <p class="mb-0 line-height-3 white-space-pre-wrap">{{ result.evaluationResult.rationale }}</p>\r
+                    </div>\r
+                  </div>\r
+\r
+                  <!-- English Rationale -->\r
+                  <div *ngIf="result.evaluationResult.rationaleEnglish">\r
+                    <div class="flex align-items-center gap-2 mb-2">\r
+                      <strong class="text-primary">{{ 'common.language.english' | translate }}</strong>\r
+                    </div>\r
+                    <div class="p-3 border-round surface-card">\r
+                      <p class="mb-0 line-height-3 white-space-pre-wrap">{{ result.evaluationResult.rationaleEnglish }}</p>\r
+                    </div>\r
+                  </div>\r
+                </div>\r
+              </p-card>\r
             </div>\r
           </div>\r
         </p-accordionTab>\r
       </p-accordion>\r
     </div>\r
   </p-card>\r
-</div>`, styles: ['/* src/app/views/metadata-assistant/components/metadata-result/metadata-result.component.css */\n.metadata-results-container {\n  width: 100%;\n  margin-top: 1.5rem;\n}\n.results-content {\n  padding: 0;\n}\n.result-content {\n  padding: 1rem;\n}\n.field {\n  margin-bottom: 1rem;\n}\n.field label {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n.content-preview {\n  max-height: 400px;\n  overflow-y: auto;\n  font-family:\n    system-ui,\n    -apple-system,\n    sans-serif;\n  line-height: 1.6;\n}\n.meta-content {\n  font-family:\n    "Monaco",\n    "Courier New",\n    monospace;\n  word-break: break-word;\n}\n.keywords-container {\n  padding: 0.5rem;\n  background-color: var(--surface-50);\n  border-radius: var(--border-radius);\n}\n.translation-section {\n  border-left: 3px solid var(--primary-300);\n}\n.text-primary {\n  color: var(--primary-color);\n}\n.hover\\:underline:hover {\n  text-decoration: underline;\n}\n.text-400 {\n  color: var(--text-color-secondary);\n}\n.text-500 {\n  color: var(--text-color);\n}\n:host ::ng-deep .p-accordion .p-accordion-header-link {\n  padding: 1rem;\n  background: var(--surface-50);\n  border: 1px solid var(--surface-200);\n  transition: all 0.2s;\n}\n:host ::ng-deep .p-accordion .p-accordion-header-link:hover {\n  background: var(--surface-100);\n}\n:host ::ng-deep .p-accordion .p-accordion-content {\n  padding: 0;\n  border: 1px solid var(--surface-200);\n  border-top: none;\n}\n:host ::ng-deep .p-chip {\n  background: var(--primary-100);\n  color: var(--primary-700);\n  font-size: 0.85rem;\n  padding: 0.25rem 0.5rem;\n}\n/*# sourceMappingURL=metadata-result.component.css.map */\n'] }]
+</div>`, styles: ["/* src/app/views/metadata-assistant/components/metadata-result/metadata-result.component.css */\n/*# sourceMappingURL=metadata-result.component.css.map */\n"] }]
   }], null, { results: [{
     type: Input
   }], showTranslations: [{
@@ -31272,9 +32980,9 @@ var MetadataResultComponent = class _MetadataResultComponent {
 // src/app/views/metadata-assistant/components/csv-export/csv-export.component.ts
 function CsvExportComponent_div_0_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 17);
-    \u0275\u0275element(1, "i", 18);
-    \u0275\u0275elementStart(2, "h3", 19);
+    \u0275\u0275elementStart(0, "div", 9);
+    \u0275\u0275element(1, "i", 10);
+    \u0275\u0275elementStart(2, "h3", 11);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd()();
@@ -31284,69 +32992,30 @@ function CsvExportComponent_div_0_ng_template_2_Template(rf, ctx) {
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, "metadata.csv.title"));
   }
 }
-function CsvExportComponent_div_0_div_16_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 8)(1, "span", 9);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "span", 10);
-    \u0275\u0275text(5);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 2, "metadata.csv.withTranslations"));
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r1.getTranslatedResultsCount());
-  }
-}
 function CsvExportComponent_div_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 1)(1, "p-card");
     \u0275\u0275template(2, CsvExportComponent_div_0_ng_template_2_Template, 5, 3, "ng-template", 2);
-    \u0275\u0275elementStart(3, "div", 3)(4, "div", 4)(5, "p", 5);
-    \u0275\u0275text(6);
-    \u0275\u0275pipe(7, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(8, "div", 6)(9, "div", 7)(10, "div", 8)(11, "span", 9);
-    \u0275\u0275text(12);
-    \u0275\u0275pipe(13, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "span", 10);
-    \u0275\u0275text(15);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(16, CsvExportComponent_div_0_div_16_Template, 6, 4, "div", 11);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(17, "div", 12)(18, "p-button", 13);
-    \u0275\u0275listener("onClick", function CsvExportComponent_div_0_Template_p_button_onClick_18_listener() {
+    \u0275\u0275elementStart(3, "div", 3)(4, "div", 4)(5, "p-button", 5);
+    \u0275\u0275listener("onClick", function CsvExportComponent_div_0_Template_p_button_onClick_5_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.exportToCsv());
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(19, "div", 14)(20, "small", 15);
-    \u0275\u0275element(21, "i", 16);
-    \u0275\u0275text(22);
-    \u0275\u0275pipe(23, "translate");
+    \u0275\u0275elementStart(6, "div", 6)(7, "small", 7);
+    \u0275\u0275element(8, "i", 8);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
     \u0275\u0275elementEnd()()()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 6, "metadata.csv.description"), " ");
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(13, 8, "metadata.csv.totalUrls"));
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r1.results.length);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.includeTranslations);
-    \u0275\u0275advance(2);
+    \u0275\u0275advance(5);
     \u0275\u0275property("label", ctx_r1.getExportButtonLabel());
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(23, 10, "metadata.csv.note"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 2, "metadata.csv.note"), " ");
   }
 }
 var CsvExportComponent = class _CsvExportComponent {
@@ -31430,14 +33099,14 @@ var CsvExportComponent = class _CsvExportComponent {
   static \u0275fac = function CsvExportComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _CsvExportComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CsvExportComponent, selectors: [["ca-metadata-csv-export"]], inputs: { results: "results", includeTranslations: "includeTranslations" }, decls: 1, vars: 1, consts: [["class", "csv-export-container", 4, "ngIf"], [1, "csv-export-container"], ["pTemplate", "header"], [1, "export-content"], [1, "export-info", "mb-3"], [1, "text-sm", "text-500", "m-0"], [1, "export-stats", "mb-3", "p-3", "surface-100", "border-round"], [1, "flex", "align-items-center", "justify-content-between"], [1, "stat-item"], [1, "text-xs", "text-500", "block", "mb-1"], [1, "text-xl", "font-bold", "text-primary"], ["class", "stat-item", 4, "ngIf"], [1, "export-actions", "flex", "gap-2"], ["icon", "pi pi-file-export", "severity", "primary", 3, "onClick", "label"], [1, "export-note", "mt-3"], [1, "text-xs", "text-500"], [1, "pi", "pi-info-circle", "mr-1"], [1, "flex", "align-items-center", "p-3"], [1, "pi", "pi-download", "mr-2"], [1, "m-0"]], template: function CsvExportComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CsvExportComponent, selectors: [["ca-metadata-csv-export"]], inputs: { results: "results", includeTranslations: "includeTranslations" }, decls: 1, vars: 1, consts: [["class", "w-full mt-4", 4, "ngIf"], [1, "w-full", "mt-4"], ["pTemplate", "header"], [1, "p-0"], [1, "flex", "gap-2"], ["icon", "pi pi-file-export", "severity", "primary", 3, "onClick", "label"], [1, "pt-2", "border-top-1", "surface-border", "mt-3"], [1, "text-xs", "text-500"], [1, "pi", "pi-info-circle", "mr-1"], [1, "flex", "align-items-center", "p-3"], [1, "pi", "pi-download", "mr-2"], [1, "m-0"]], template: function CsvExportComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275template(0, CsvExportComponent_div_0_Template, 24, 12, "div", 0);
+      \u0275\u0275template(0, CsvExportComponent_div_0_Template, 11, 4, "div", 0);
     }
     if (rf & 2) {
       \u0275\u0275property("ngIf", ctx.results && ctx.results.length > 0);
     }
-  }, dependencies: [CommonModule, NgIf, TranslateModule, TranslatePipe, ButtonModule, Button, PrimeTemplate, CardModule, Card, TooltipModule], styles: ["\n\n.csv-export-container[_ngcontent-%COMP%] {\n  width: 100%;\n  margin-top: 1.5rem;\n}\n.export-content[_ngcontent-%COMP%] {\n  padding: 0;\n}\n.export-stats[_ngcontent-%COMP%] {\n  background: var(--surface-100);\n}\n.stat-item[_ngcontent-%COMP%] {\n  text-align: center;\n}\n.preview-table[_ngcontent-%COMP%] {\n  overflow-x: auto;\n}\n.preview-table[_ngcontent-%COMP%]   table[_ngcontent-%COMP%] {\n  font-size: 0.75rem;\n  table-layout: fixed;\n}\n.preview-table[_ngcontent-%COMP%]   th[_ngcontent-%COMP%] {\n  font-weight: 600;\n  color: var(--text-color);\n  background: var(--surface-100);\n}\n.preview-table[_ngcontent-%COMP%]   td[_ngcontent-%COMP%] {\n  color: var(--text-color-secondary);\n}\n.text-overflow-ellipsis[_ngcontent-%COMP%] {\n  text-overflow: ellipsis;\n}\n.white-space-nowrap[_ngcontent-%COMP%] {\n  white-space: nowrap;\n}\n.overflow-hidden[_ngcontent-%COMP%] {\n  overflow: hidden;\n}\n.export-actions[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 0.5rem;\n}\n.export-note[_ngcontent-%COMP%] {\n  padding-top: 0.5rem;\n  border-top: 1px solid var(--surface-200);\n}\n.text-primary[_ngcontent-%COMP%] {\n  color: var(--primary-color);\n}\n.border-bottom-1[_ngcontent-%COMP%] {\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n}\n.surface-border[_ngcontent-%COMP%] {\n  border-color: var(--surface-border);\n}\n/*# sourceMappingURL=csv-export.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, TranslateModule, TranslatePipe, ButtonModule, Button, PrimeTemplate, CardModule, Card, TooltipModule], styles: ["\n\n/*# sourceMappingURL=csv-export.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CsvExportComponent, [{
@@ -31448,7 +33117,7 @@ var CsvExportComponent = class _CsvExportComponent {
       ButtonModule,
       CardModule,
       TooltipModule
-    ], template: `<div class="csv-export-container" *ngIf="results && results.length > 0">\r
+    ], template: `<div class="w-full mt-4" *ngIf="results && results.length > 0">\r
   <p-card>\r
     <ng-template pTemplate="header">\r
       <div class="flex align-items-center p-3">\r
@@ -31457,27 +33126,8 @@ var CsvExportComponent = class _CsvExportComponent {
       </div>\r
     </ng-template>\r
 \r
-    <div class="export-content">\r
-      <div class="export-info mb-3">\r
-        <p class="text-sm text-500 m-0">\r
-          {{ 'metadata.csv.description' | translate }}\r
-        </p>\r
-      </div>\r
-\r
-      <div class="export-stats mb-3 p-3 surface-100 border-round">\r
-        <div class="flex align-items-center justify-content-between">\r
-          <div class="stat-item">\r
-            <span class="text-xs text-500 block mb-1">{{ 'metadata.csv.totalUrls' | translate }}</span>\r
-            <span class="text-xl font-bold text-primary">{{ results.length }}</span>\r
-          </div>\r
-          <div class="stat-item" *ngIf="includeTranslations">\r
-            <span class="text-xs text-500 block mb-1">{{ 'metadata.csv.withTranslations' | translate }}</span>\r
-            <span class="text-xl font-bold text-primary">{{ getTranslatedResultsCount() }}</span>\r
-          </div>\r
-        </div>\r
-      </div>\r
-\r
-      <div class="export-actions flex gap-2">\r
+    <div class="p-0">\r
+      <div class="flex gap-2">\r
         <p-button \r
           [label]="getExportButtonLabel()"\r
           icon="pi pi-file-export"\r
@@ -31486,7 +33136,7 @@ var CsvExportComponent = class _CsvExportComponent {
         </p-button>\r
       </div>\r
 \r
-      <div class="export-note mt-3">\r
+      <div class="pt-2 border-top-1 surface-border mt-3">\r
         <small class="text-xs text-500">\r
           <i class="pi pi-info-circle mr-1"></i>\r
           {{ 'metadata.csv.note' | translate }}\r
@@ -31494,7 +33144,7 @@ var CsvExportComponent = class _CsvExportComponent {
       </div>\r
     </div>\r
   </p-card>\r
-</div>`, styles: ["/* src/app/views/metadata-assistant/components/csv-export/csv-export.component.css */\n.csv-export-container {\n  width: 100%;\n  margin-top: 1.5rem;\n}\n.export-content {\n  padding: 0;\n}\n.export-stats {\n  background: var(--surface-100);\n}\n.stat-item {\n  text-align: center;\n}\n.preview-table {\n  overflow-x: auto;\n}\n.preview-table table {\n  font-size: 0.75rem;\n  table-layout: fixed;\n}\n.preview-table th {\n  font-weight: 600;\n  color: var(--text-color);\n  background: var(--surface-100);\n}\n.preview-table td {\n  color: var(--text-color-secondary);\n}\n.text-overflow-ellipsis {\n  text-overflow: ellipsis;\n}\n.white-space-nowrap {\n  white-space: nowrap;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.export-actions {\n  display: flex;\n  gap: 0.5rem;\n}\n.export-note {\n  padding-top: 0.5rem;\n  border-top: 1px solid var(--surface-200);\n}\n.text-primary {\n  color: var(--primary-color);\n}\n.border-bottom-1 {\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n}\n.surface-border {\n  border-color: var(--surface-border);\n}\n/*# sourceMappingURL=csv-export.component.css.map */\n"] }]
+</div>`, styles: ["/* src/app/views/metadata-assistant/components/csv-export/csv-export.component.css */\n/*# sourceMappingURL=csv-export.component.css.map */\n"] }]
   }], null, { results: [{
     type: Input
   }], includeTranslations: [{
@@ -31503,6 +33153,452 @@ var CsvExportComponent = class _CsvExportComponent {
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CsvExportComponent, { className: "CsvExportComponent", filePath: "src/app/views/metadata-assistant/components/csv-export/csv-export.component.ts", lineNumber: 22 });
+})();
+
+// src/app/views/metadata-assistant/components/metadata-comparison/metadata-comparison.component.ts
+function MetadataComparisonComponent_div_0_div_87_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 17)(1, "div", 18)(2, "strong", 9);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(5, "div", 19)(6, "p", 20);
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 2, "common.language.french"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.rationale);
+  }
+}
+function MetadataComparisonComponent_div_0_div_88_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div")(1, "div", 18)(2, "strong", 9);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(5, "div", 19)(6, "p", 20);
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 2, "common.language.english"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.rationaleEnglish);
+  }
+}
+function MetadataComparisonComponent_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div")(1, "p-card", 2);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementStart(3, "div", 3)(4, "h3", 4);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 5)(8, "div", 6)(9, "div", 7)(10, "div", 8)(11, "strong", 9);
+    \u0275\u0275text(12);
+    \u0275\u0275pipe(13, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "p-button", 10);
+    \u0275\u0275pipe(15, "translate");
+    \u0275\u0275listener("click", function MetadataComparisonComponent_div_0_Template_p_button_click_14_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.copyToClipboard(ctx_r1.comparisonData.autoTranslatedFrench.description, $event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(16, "p", 11);
+    \u0275\u0275text(17);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(18, "span", 12);
+    \u0275\u0275text(19);
+    \u0275\u0275pipe(20, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(21, "div", 6)(22, "div", 7)(23, "div", 8)(24, "strong", 9);
+    \u0275\u0275text(25);
+    \u0275\u0275pipe(26, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(27, "p-button", 10);
+    \u0275\u0275pipe(28, "translate");
+    \u0275\u0275listener("click", function MetadataComparisonComponent_div_0_Template_p_button_click_27_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.copyToClipboard(ctx_r1.comparisonData.frenchDocMetadata.description, $event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(29, "p", 11);
+    \u0275\u0275text(30);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(31, "span", 12);
+    \u0275\u0275text(32);
+    \u0275\u0275pipe(33, "translate");
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(34, "div", 13)(35, "div", 8)(36, "strong", 14);
+    \u0275\u0275text(37);
+    \u0275\u0275pipe(38, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(39, "p-button", 10);
+    \u0275\u0275pipe(40, "translate");
+    \u0275\u0275listener("click", function MetadataComparisonComponent_div_0_Template_p_button_click_39_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.copyToClipboard(ctx_r1.comparisonData.suggested.description, $event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(41, "p", 11);
+    \u0275\u0275text(42);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(43, "span", 12);
+    \u0275\u0275text(44);
+    \u0275\u0275pipe(45, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(46, "div", 3)(47, "h3", 4);
+    \u0275\u0275text(48);
+    \u0275\u0275pipe(49, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(50, "div", 5)(51, "div", 6)(52, "div", 7)(53, "div", 8)(54, "strong", 9);
+    \u0275\u0275text(55);
+    \u0275\u0275pipe(56, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(57, "p-button", 10);
+    \u0275\u0275pipe(58, "translate");
+    \u0275\u0275listener("click", function MetadataComparisonComponent_div_0_Template_p_button_click_57_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.copyToClipboard(ctx_r1.comparisonData.autoTranslatedFrench.keywords, $event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(59, "p", 15);
+    \u0275\u0275text(60);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(61, "div", 6)(62, "div", 7)(63, "div", 8)(64, "strong", 9);
+    \u0275\u0275text(65);
+    \u0275\u0275pipe(66, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(67, "p-button", 10);
+    \u0275\u0275pipe(68, "translate");
+    \u0275\u0275listener("click", function MetadataComparisonComponent_div_0_Template_p_button_click_67_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.copyToClipboard(ctx_r1.comparisonData.frenchDocMetadata.keywords, $event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(69, "p", 15);
+    \u0275\u0275text(70);
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(71, "div", 13)(72, "div", 8)(73, "strong", 14);
+    \u0275\u0275text(74);
+    \u0275\u0275pipe(75, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(76, "p-button", 10);
+    \u0275\u0275pipe(77, "translate");
+    \u0275\u0275listener("click", function MetadataComparisonComponent_div_0_Template_p_button_click_76_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.copyToClipboard(ctx_r1.comparisonData.suggested.keywords, $event));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(78, "p", 11);
+    \u0275\u0275text(79);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(80, "span", 12);
+    \u0275\u0275text(81);
+    \u0275\u0275pipe(82, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(83, "div")(84, "h3", 4);
+    \u0275\u0275text(85);
+    \u0275\u0275pipe(86, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(87, MetadataComparisonComponent_div_0_div_87_Template, 8, 4, "div", 16)(88, MetadataComparisonComponent_div_0_div_88_Template, 8, 4, "div", 0);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("header", \u0275\u0275pipeBind1(2, 44, "metadata.comparison.title"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 46, "metadata.comparison.description"), " ");
+    \u0275\u0275advance(7);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(13, 48, "metadata.comparison.autoTranslated"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(15, 50, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.autoTranslatedFrench.description);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", ctx_r1.comparisonData.autoTranslatedFrench.description.length, " ", \u0275\u0275pipeBind1(20, 52, "metadata.results.metaDescription"), " ");
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(26, 54, "metadata.comparison.fromFrenchDoc"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(28, 56, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.frenchDocMetadata.description);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", ctx_r1.comparisonData.frenchDocMetadata.description.length, " ", \u0275\u0275pipeBind1(33, 58, "metadata.results.metaDescription"), " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(38, 60, "metadata.comparison.suggestedDescription"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(40, 62, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.suggested.description);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", ctx_r1.comparisonData.suggested.description.length, " ", \u0275\u0275pipeBind1(45, 64, "metadata.results.metaDescription"), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(49, 66, "metadata.comparison.keywords"), " ");
+    \u0275\u0275advance(7);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(56, 68, "metadata.comparison.autoTranslated"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(58, 70, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.autoTranslatedFrench.keywords);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(66, 72, "metadata.comparison.fromFrenchDoc"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(68, 74, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.frenchDocMetadata.keywords);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(75, 76, "metadata.comparison.suggestedKeywords"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("text", true)("rounded", true)("pTooltip", \u0275\u0275pipeBind1(77, 78, "metadata.results.copyToClipboard"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.comparisonData.suggested.keywords);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", ctx_r1.comparisonData.suggested.keywords.length, " ", \u0275\u0275pipeBind1(82, 80, "common.chars"), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(86, 82, "metadata.comparison.rationale"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.comparisonData.rationale);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.comparisonData.rationaleEnglish);
+  }
+}
+function MetadataComparisonComponent_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21)(1, "p-card")(2, "p", 22);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 1, "metadata.comparison.noComparison"), " ");
+  }
+}
+var MetadataComparisonComponent = class _MetadataComparisonComponent {
+  comparisonData = null;
+  copyToClipboard(text2, event) {
+    event.stopPropagation();
+    navigator.clipboard.writeText(text2).then(() => {
+      console.log("Copied to clipboard:", text2);
+    }).catch((err) => {
+      console.error("Failed to copy text:", err);
+    });
+  }
+  static \u0275fac = function MetadataComparisonComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MetadataComparisonComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MetadataComparisonComponent, selectors: [["ca-metadata-comparison"]], inputs: { comparisonData: "comparisonData" }, decls: 2, vars: 2, consts: [[4, "ngIf"], ["class", "p-4 text-center", 4, "ngIf"], ["styleClass", "mb-4", 3, "header"], [1, "mb-5"], [1, "text-xl", "font-semibold", "mb-3"], [1, "grid", "mb-3"], [1, "col-12", "md:col-6"], [1, "p-3", "border-round", "surface-50", "h-full"], [1, "flex", "align-items-center", "justify-content-between", "mb-2"], [1, "text-primary"], ["icon", "pi pi-copy", "size", "small", 3, "click", "text", "rounded", "pTooltip"], [1, "mb-2", "line-height-3"], [1, "text-sm", "text-color-secondary"], [1, "p-3", "border-round", "surface-100", "border-left-3", "border-primary"], [1, "text-lg"], [1, "mb-0", "line-height-3"], ["class", "mb-3", 4, "ngIf"], [1, "mb-3"], [1, "flex", "align-items-center", "gap-2", "mb-2"], [1, "p-3", "border-round", "surface-card"], [1, "mb-0", "line-height-3", "white-space-pre-wrap"], [1, "p-4", "text-center"], [1, "text-color-secondary", "mb-0"]], template: function MetadataComparisonComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275template(0, MetadataComparisonComponent_div_0_Template, 89, 84, "div", 0)(1, MetadataComparisonComponent_div_1_Template, 5, 3, "div", 1);
+    }
+    if (rf & 2) {
+      \u0275\u0275property("ngIf", ctx.comparisonData);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.comparisonData);
+    }
+  }, dependencies: [CommonModule, NgIf, TranslateModule, TranslatePipe, CardModule, Card, AccordionModule, ButtonModule, Button, TooltipModule, Tooltip], styles: ["\n\n/*# sourceMappingURL=metadata-comparison.component.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MetadataComparisonComponent, [{
+    type: Component,
+    args: [{ selector: "ca-metadata-comparison", standalone: true, imports: [CommonModule, TranslateModule, CardModule, AccordionModule, ButtonModule, TooltipModule], template: `<div *ngIf="comparisonData">\r
+  <p-card [header]="'metadata.comparison.title' | translate" styleClass="mb-4">\r
+\r
+    <!-- Description Comparison -->\r
+    <div class="mb-5">\r
+      <h3 class="text-xl font-semibold mb-3">\r
+        {{ 'metadata.comparison.description' | translate }}\r
+      </h3>\r
+\r
+      <!-- Side-by-side comparison -->\r
+      <div class="grid mb-3">\r
+        <!-- Auto-Translated Version -->\r
+        <div class="col-12 md:col-6">\r
+          <div class="p-3 border-round surface-50 h-full">\r
+            <div class="flex align-items-center justify-content-between mb-2">\r
+              <strong class="text-primary">{{ 'metadata.comparison.autoTranslated' | translate }}</strong>\r
+              <p-button\r
+                icon="pi pi-copy"\r
+                [text]="true"\r
+                [rounded]="true"\r
+                size="small"\r
+                (click)="copyToClipboard(comparisonData.autoTranslatedFrench.description, $event)"\r
+                [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+              </p-button>\r
+            </div>\r
+            <p class="mb-2 line-height-3">{{ comparisonData.autoTranslatedFrench.description }}</p>\r
+            <span class="text-sm text-color-secondary">\r
+              {{ comparisonData.autoTranslatedFrench.description.length }} {{ 'metadata.results.metaDescription' | translate }}\r
+            </span>\r
+          </div>\r
+        </div>\r
+\r
+        <!-- From French Document -->\r
+        <div class="col-12 md:col-6">\r
+          <div class="p-3 border-round surface-50 h-full">\r
+            <div class="flex align-items-center justify-content-between mb-2">\r
+              <strong class="text-primary">{{ 'metadata.comparison.fromFrenchDoc' | translate }}</strong>\r
+              <p-button\r
+                icon="pi pi-copy"\r
+                [text]="true"\r
+                [rounded]="true"\r
+                size="small"\r
+                (click)="copyToClipboard(comparisonData.frenchDocMetadata.description, $event)"\r
+                [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+              </p-button>\r
+            </div>\r
+            <p class="mb-2 line-height-3">{{ comparisonData.frenchDocMetadata.description }}</p>\r
+            <span class="text-sm text-color-secondary">\r
+              {{ comparisonData.frenchDocMetadata.description.length }} {{ 'metadata.results.metaDescription' | translate }}\r
+            </span>\r
+          </div>\r
+        </div>\r
+      </div>\r
+\r
+      <!-- AI Suggested Final Description -->\r
+      <div class="p-3 border-round surface-100 border-left-3 border-primary">\r
+        <div class="flex align-items-center justify-content-between mb-2">\r
+          <strong class="text-lg">{{ 'metadata.comparison.suggestedDescription' | translate }}</strong>\r
+          <p-button\r
+            icon="pi pi-copy"\r
+            [text]="true"\r
+            [rounded]="true"\r
+            size="small"\r
+            (click)="copyToClipboard(comparisonData.suggested.description, $event)"\r
+            [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+          </p-button>\r
+        </div>\r
+        <p class="mb-2 line-height-3">{{ comparisonData.suggested.description }}</p>\r
+        <span class="text-sm text-color-secondary">\r
+          {{ comparisonData.suggested.description.length }} {{ 'metadata.results.metaDescription' | translate }}\r
+        </span>\r
+      </div>\r
+    </div>\r
+\r
+    <!-- Keywords Comparison -->\r
+    <div class="mb-5">\r
+      <h3 class="text-xl font-semibold mb-3">\r
+        {{ 'metadata.comparison.keywords' | translate }}\r
+      </h3>\r
+\r
+      <!-- Side-by-side comparison -->\r
+      <div class="grid mb-3">\r
+        <!-- Auto-Translated Version -->\r
+        <div class="col-12 md:col-6">\r
+          <div class="p-3 border-round surface-50 h-full">\r
+            <div class="flex align-items-center justify-content-between mb-2">\r
+              <strong class="text-primary">{{ 'metadata.comparison.autoTranslated' | translate }}</strong>\r
+              <p-button\r
+                icon="pi pi-copy"\r
+                [text]="true"\r
+                [rounded]="true"\r
+                size="small"\r
+                (click)="copyToClipboard(comparisonData.autoTranslatedFrench.keywords, $event)"\r
+                [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+              </p-button>\r
+            </div>\r
+            <p class="mb-0 line-height-3">{{ comparisonData.autoTranslatedFrench.keywords }}</p>\r
+          </div>\r
+        </div>\r
+\r
+        <!-- From French Document -->\r
+        <div class="col-12 md:col-6">\r
+          <div class="p-3 border-round surface-50 h-full">\r
+            <div class="flex align-items-center justify-content-between mb-2">\r
+              <strong class="text-primary">{{ 'metadata.comparison.fromFrenchDoc' | translate }}</strong>\r
+              <p-button\r
+                icon="pi pi-copy"\r
+                [text]="true"\r
+                [rounded]="true"\r
+                size="small"\r
+                (click)="copyToClipboard(comparisonData.frenchDocMetadata.keywords, $event)"\r
+                [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+              </p-button>\r
+            </div>\r
+            <p class="mb-0 line-height-3">{{ comparisonData.frenchDocMetadata.keywords }}</p>\r
+          </div>\r
+        </div>\r
+      </div>\r
+\r
+      <!-- AI Suggested Final Keywords -->\r
+      <div class="p-3 border-round surface-100 border-left-3 border-primary">\r
+        <div class="flex align-items-center justify-content-between mb-2">\r
+          <strong class="text-lg">{{ 'metadata.comparison.suggestedKeywords' | translate }}</strong>\r
+          <p-button\r
+            icon="pi pi-copy"\r
+            [text]="true"\r
+            [rounded]="true"\r
+            size="small"\r
+            (click)="copyToClipboard(comparisonData.suggested.keywords, $event)"\r
+            [pTooltip]="'metadata.results.copyToClipboard' | translate">\r
+          </p-button>\r
+        </div>\r
+        <p class="mb-2 line-height-3">{{ comparisonData.suggested.keywords }}</p>\r
+        <span class="text-sm text-color-secondary">\r
+          {{ comparisonData.suggested.keywords.length }} {{ 'common.chars' | translate }}\r
+        </span>\r
+      </div>\r
+    </div>\r
+\r
+    <!-- Rationale (Bilingual) -->\r
+    <div>\r
+      <h3 class="text-xl font-semibold mb-3">\r
+        {{ 'metadata.comparison.rationale' | translate }}\r
+      </h3>\r
+\r
+      <!-- French Rationale -->\r
+      <div class="mb-3" *ngIf="comparisonData.rationale">\r
+        <div class="flex align-items-center gap-2 mb-2">\r
+          <strong class="text-primary">{{ 'common.language.french' | translate }}</strong>\r
+        </div>\r
+        <div class="p-3 border-round surface-card">\r
+          <p class="mb-0 line-height-3 white-space-pre-wrap">{{ comparisonData.rationale }}</p>\r
+        </div>\r
+      </div>\r
+\r
+      <!-- English Rationale -->\r
+      <div *ngIf="comparisonData.rationaleEnglish">\r
+        <div class="flex align-items-center gap-2 mb-2">\r
+          <strong class="text-primary">{{ 'common.language.english' | translate }}</strong>\r
+        </div>\r
+        <div class="p-3 border-round surface-card">\r
+          <p class="mb-0 line-height-3 white-space-pre-wrap">{{ comparisonData.rationaleEnglish }}</p>\r
+        </div>\r
+      </div>\r
+    </div>\r
+  </p-card>\r
+</div>\r
+\r
+<div class="p-4 text-center" *ngIf="!comparisonData">\r
+  <p-card>\r
+    <p class="text-color-secondary mb-0">\r
+      {{ 'metadata.comparison.noComparison' | translate }}\r
+    </p>\r
+  </p-card>\r
+</div>\r
+`, styles: ["/* src/app/views/metadata-assistant/components/metadata-comparison/metadata-comparison.component.css */\n/*# sourceMappingURL=metadata-comparison.component.css.map */\n"] }]
+  }], null, { comparisonData: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MetadataComparisonComponent, { className: "MetadataComparisonComponent", filePath: "src/app/views/metadata-assistant/components/metadata-comparison/metadata-comparison.component.ts", lineNumber: 17 });
 })();
 
 // src/app/views/metadata-assistant/metadata-assistant.component.ts
@@ -31532,13 +33628,30 @@ function MetadataAssistantComponent_span_14_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "page.apiKey.notSet"), " ");
   }
 }
-function MetadataAssistantComponent_section_16_div_22_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_18_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 28)(1, "p-button", 29);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_div_22_Template_p_button_onClick_1_listener() {
+    \u0275\u0275elementStart(0, "div", 19)(1, "ca-shared-model-selector", 25);
+    \u0275\u0275listener("modelChange", function MetadataAssistantComponent_section_16_div_18_Template_ca_shared_model_selector_modelChange_1_listener($event) {
       \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onTranslationModelChange($event));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("selectedModel", ctx_r1.state.selectedTranslationModel)("models", ctx_r1.translationModels)("label", "metadata.translationModelSelector.modelLabel")("cardTitle", "metadata.translationModelSelector.title")("showCard", true)("showTranslateOption", false)("disabled", ctx_r1.state.isProcessing);
+  }
+}
+function MetadataAssistantComponent_section_16_div_23_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 27)(1, "p-button", 28);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_div_23_Template_p_button_onClick_1_listener() {
+      \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.reset());
     });
@@ -31549,10 +33662,10 @@ function MetadataAssistantComponent_section_16_div_22_Template(rf, ctx) {
     \u0275\u0275property("label", \u0275\u0275pipeBind1(2, 2, "metadata.button.reset"))("outlined", true);
   }
 }
-function MetadataAssistantComponent_section_16_div_24_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_25_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div");
-    \u0275\u0275element(1, "ca-progress-indicator", 30);
+    \u0275\u0275element(1, "ca-progress-indicator", 29);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -31561,10 +33674,10 @@ function MetadataAssistantComponent_section_16_div_24_Template(rf, ctx) {
     \u0275\u0275property("progressText", ctx_r1.getProgressText())("processedCount", ctx_r1.state.processedUrls)("totalFiles", ctx_r1.state.totalUrls)("showProgress", true)("showSpinner", ctx_r1.state.isProcessing);
   }
 }
-function MetadataAssistantComponent_section_16_div_25_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_26_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 19);
-    \u0275\u0275element(1, "p-message", 31);
+    \u0275\u0275element(1, "p-message", 30);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -31573,17 +33686,17 @@ function MetadataAssistantComponent_section_16_div_25_Template(rf, ctx) {
     \u0275\u0275property("text", ctx_r1.state.error);
   }
 }
-function MetadataAssistantComponent_section_16_div_26_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_27_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 32)(1, "ca-metadata-result", 33);
-    \u0275\u0275listener("documentSelected", function MetadataAssistantComponent_section_16_div_26_Template_ca_metadata_result_documentSelected_1_listener($event) {
-      \u0275\u0275restoreView(_r4);
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 31)(1, "ca-metadata-result", 32);
+    \u0275\u0275listener("documentSelected", function MetadataAssistantComponent_section_16_div_27_Template_ca_metadata_result_documentSelected_1_listener($event) {
+      \u0275\u0275restoreView(_r5);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.onDocumentSelected($event.file, $event.index));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275element(2, "ca-metadata-csv-export", 34);
+    \u0275\u0275element(2, "ca-metadata-csv-export", 33);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -31594,13 +33707,30 @@ function MetadataAssistantComponent_section_16_div_26_Template(rf, ctx) {
     \u0275\u0275property("results", ctx_r1.state.results)("includeTranslations", ctx_r1.state.translateToFrench);
   }
 }
-function MetadataAssistantComponent_section_16_div_40_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_34_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 28)(1, "p-button", 29);
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 19)(1, "ca-shared-model-selector", 25);
+    \u0275\u0275listener("modelChange", function MetadataAssistantComponent_section_16_div_34_Template_ca_shared_model_selector_modelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onTranslationModelChange($event));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("selectedModel", ctx_r1.state.selectedTranslationModel)("models", ctx_r1.translationModels)("label", "metadata.translationModelSelector.modelLabel")("cardTitle", ctx_r1.getTranslationModelSelectorTitle())("showCard", true)("showTranslateOption", false)("disabled", ctx_r1.state.isProcessing);
+  }
+}
+function MetadataAssistantComponent_section_16_div_42_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 27)(1, "p-button", 28);
     \u0275\u0275pipe(2, "translate");
-    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_div_40_Template_p_button_onClick_1_listener() {
-      \u0275\u0275restoreView(_r5);
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_div_42_Template_p_button_onClick_1_listener() {
+      \u0275\u0275restoreView(_r7);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.resetDocumentTab());
     });
@@ -31611,10 +33741,10 @@ function MetadataAssistantComponent_section_16_div_40_Template(rf, ctx) {
     \u0275\u0275property("label", \u0275\u0275pipeBind1(2, 2, "metadata.button.reset"))("outlined", true);
   }
 }
-function MetadataAssistantComponent_section_16_div_42_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_44_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div");
-    \u0275\u0275element(1, "ca-progress-indicator", 30);
+    \u0275\u0275element(1, "ca-progress-indicator", 29);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -31623,10 +33753,10 @@ function MetadataAssistantComponent_section_16_div_42_Template(rf, ctx) {
     \u0275\u0275property("progressText", ctx_r1.getProgressText())("processedCount", ctx_r1.state.processedUrls)("totalFiles", ctx_r1.state.totalUrls)("showProgress", true)("showSpinner", ctx_r1.state.isProcessing);
   }
 }
-function MetadataAssistantComponent_section_16_div_43_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_45_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 19);
-    \u0275\u0275element(1, "p-message", 31);
+    \u0275\u0275element(1, "p-message", 30);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -31635,7 +33765,7 @@ function MetadataAssistantComponent_section_16_div_43_Template(rf, ctx) {
     \u0275\u0275property("text", ctx_r1.state.error);
   }
 }
-function MetadataAssistantComponent_section_16_div_44_ng_template_2_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_46_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "strong");
     \u0275\u0275text(1);
@@ -31653,31 +33783,59 @@ function MetadataAssistantComponent_section_16_div_44_ng_template_2_Template(rf,
     \u0275\u0275textInterpolate1(" ", ctx_r1.documentLanguage === "en" ? \u0275\u0275pipeBind1(4, 4, "common.language.english") : \u0275\u0275pipeBind1(5, 6, "common.language.french"), " ");
   }
 }
-function MetadataAssistantComponent_section_16_div_44_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_46_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 19)(1, "p-message", 35);
-    \u0275\u0275template(2, MetadataAssistantComponent_section_16_div_44_ng_template_2_Template, 6, 8, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementStart(0, "div", 19)(1, "p-message", 34);
+    \u0275\u0275template(2, MetadataAssistantComponent_section_16_div_46_ng_template_2_Template, 6, 8, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
     \u0275\u0275elementEnd()();
   }
 }
-function MetadataAssistantComponent_section_16_div_45_Template(rf, ctx) {
+function MetadataAssistantComponent_section_16_div_47_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 32);
-    \u0275\u0275element(1, "ca-metadata-result", 36)(2, "ca-metadata-csv-export", 34);
+    \u0275\u0275elementStart(0, "div", 31);
+    \u0275\u0275element(1, "ca-metadata-comparison", 35);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("comparisonData", ctx_r1.state.comparisonResult);
+  }
+}
+function MetadataAssistantComponent_section_16_div_47_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 31)(1, "ca-metadata-result", 32);
+    \u0275\u0275listener("documentSelected", function MetadataAssistantComponent_section_16_div_47_Template_ca_metadata_result_documentSelected_1_listener($event) {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onDocumentUploadEvaluation($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(2, MetadataAssistantComponent_section_16_div_47_div_2_Template, 2, 1, "div", 6);
+    \u0275\u0275element(3, "ca-metadata-csv-export", 33);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("results", ctx_r1.documentResults)("showTranslations", false)("isProcessing", ctx_r1.state.isProcessing)("processingIndex", null);
+    \u0275\u0275property("results", ctx_r1.documentResults)("showTranslations", (ctx_r1.state.documentMode === "english-only" || ctx_r1.state.documentMode === "french-only") && ctx_r1.documentTranslateOption)("isProcessing", ctx_r1.state.isProcessing)("processingIndex", ctx_r1.documentProcessingIndex);
     \u0275\u0275advance();
-    \u0275\u0275property("results", ctx_r1.documentResults)("includeTranslations", false);
+    \u0275\u0275property("ngIf", ctx_r1.state.comparisonResult);
+    \u0275\u0275advance();
+    \u0275\u0275property("results", ctx_r1.documentResults)("includeTranslations", ctx_r1.state.documentMode === "english-only");
   }
 }
 function MetadataAssistantComponent_section_16_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "section")(1, "p-tabs", 11)(2, "p-tablist")(3, "p-tab", 12);
+    \u0275\u0275elementStart(0, "section")(1, "p-tabs", 11);
+    \u0275\u0275listener("valueChange", function MetadataAssistantComponent_section_16_Template_p_tabs_valueChange_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onTabChange($event));
+    });
+    \u0275\u0275elementStart(2, "p-tablist")(3, "p-tab", 12);
     \u0275\u0275element(4, "i", 13);
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
@@ -31709,69 +33867,87 @@ function MetadataAssistantComponent_section_16_Template(rf, ctx) {
       return \u0275\u0275resetView(ctx_r1.onTranslateToggle($event));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(18, "div", 19)(19, "p-button", 21);
-    \u0275\u0275pipe(20, "translate");
+    \u0275\u0275template(18, MetadataAssistantComponent_section_16_div_18_Template, 2, 7, "div", 21);
+    \u0275\u0275elementStart(19, "div", 19)(20, "p-button", 22);
     \u0275\u0275pipe(21, "translate");
-    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_Template_p_button_onClick_19_listener() {
+    \u0275\u0275pipe(22, "translate");
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_Template_p_button_onClick_20_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.startProcessing());
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(22, MetadataAssistantComponent_section_16_div_22_Template, 3, 4, "div", 22);
+    \u0275\u0275template(23, MetadataAssistantComponent_section_16_div_23_Template, 3, 4, "div", 23);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(23, "div", 17);
-    \u0275\u0275template(24, MetadataAssistantComponent_section_16_div_24_Template, 2, 5, "div", 5)(25, MetadataAssistantComponent_section_16_div_25_Template, 2, 1, "div", 23);
+    \u0275\u0275elementStart(24, "div", 17);
+    \u0275\u0275template(25, MetadataAssistantComponent_section_16_div_25_Template, 2, 5, "div", 5)(26, MetadataAssistantComponent_section_16_div_26_Template, 2, 1, "div", 21);
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(26, MetadataAssistantComponent_section_16_div_26_Template, 3, 6, "div", 24);
+    \u0275\u0275template(27, MetadataAssistantComponent_section_16_div_27_Template, 3, 6, "div", 6);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(27, "p-tabpanel", 14)(28, "div", 16)(29, "div", 17)(30, "ca-document-upload", 25);
-    \u0275\u0275listener("fileSelected", function MetadataAssistantComponent_section_16_Template_ca_document_upload_fileSelected_30_listener($event) {
+    \u0275\u0275elementStart(28, "p-tabpanel", 14)(29, "div", 16)(30, "div", 17)(31, "ca-document-upload", 24);
+    \u0275\u0275listener("englishFileSelected", function MetadataAssistantComponent_section_16_Template_ca_document_upload_englishFileSelected_31_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.onDocumentFileSelected($event));
+      return \u0275\u0275resetView(ctx_r1.onEnglishDocumentSelected($event));
+    })("frenchFileSelected", function MetadataAssistantComponent_section_16_Template_ca_document_upload_frenchFileSelected_31_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onFrenchDocumentSelected($event));
+    })("modeChanged", function MetadataAssistantComponent_section_16_Template_ca_document_upload_modeChanged_31_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onDocumentModeChanged($event));
+    })("translateOptionChanged", function MetadataAssistantComponent_section_16_Template_ca_document_upload_translateOptionChanged_31_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onDocumentTranslateOptionChanged($event));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "div", 19)(32, "ca-shared-model-selector", 26);
-    \u0275\u0275listener("modelChange", function MetadataAssistantComponent_section_16_Template_ca_shared_model_selector_modelChange_32_listener($event) {
+    \u0275\u0275elementStart(32, "div", 19)(33, "ca-shared-model-selector", 25);
+    \u0275\u0275listener("modelChange", function MetadataAssistantComponent_section_16_Template_ca_shared_model_selector_modelChange_33_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onModelChange($event));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(33, "div", 19);
-    \u0275\u0275element(34, "p-message", 27);
-    \u0275\u0275pipe(35, "translate");
+    \u0275\u0275template(34, MetadataAssistantComponent_section_16_div_34_Template, 2, 7, "div", 21);
+    \u0275\u0275elementStart(35, "div", 19);
+    \u0275\u0275element(36, "p-message", 26);
+    \u0275\u0275pipe(37, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(36, "div", 19)(37, "p-button", 21);
-    \u0275\u0275pipe(38, "translate");
-    \u0275\u0275pipe(39, "translate");
-    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_Template_p_button_onClick_37_listener() {
+    \u0275\u0275elementStart(38, "div", 19)(39, "p-button", 22);
+    \u0275\u0275pipe(40, "translate");
+    \u0275\u0275pipe(41, "translate");
+    \u0275\u0275listener("onClick", function MetadataAssistantComponent_section_16_Template_p_button_onClick_39_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.startDocumentProcessing());
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(40, MetadataAssistantComponent_section_16_div_40_Template, 3, 4, "div", 22);
+    \u0275\u0275template(42, MetadataAssistantComponent_section_16_div_42_Template, 3, 4, "div", 23);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(41, "div", 17);
-    \u0275\u0275template(42, MetadataAssistantComponent_section_16_div_42_Template, 2, 5, "div", 5)(43, MetadataAssistantComponent_section_16_div_43_Template, 2, 1, "div", 23)(44, MetadataAssistantComponent_section_16_div_44_Template, 4, 0, "div", 23);
+    \u0275\u0275elementStart(43, "div", 17);
+    \u0275\u0275template(44, MetadataAssistantComponent_section_16_div_44_Template, 2, 5, "div", 5)(45, MetadataAssistantComponent_section_16_div_45_Template, 2, 1, "div", 21)(46, MetadataAssistantComponent_section_16_div_46_Template, 4, 0, "div", 21);
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(45, MetadataAssistantComponent_section_16_div_45_Template, 3, 6, "div", 24);
+    \u0275\u0275template(47, MetadataAssistantComponent_section_16_div_47_Template, 4, 7, "div", 6);
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(6, 35, "metadata.tabs.scrapedContent"), " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("value", ctx_r1.activeTabIndex);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(10, 37, "metadata.tabs.documentUpload"), " ");
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(6, 38, "metadata.tabs.scrapedContent"), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(10, 40, "metadata.tabs.documentUpload"), " ");
     \u0275\u0275advance(6);
     \u0275\u0275property("disabled", ctx_r1.state.isProcessing);
     \u0275\u0275advance(2);
     \u0275\u0275property("selectedModel", ctx_r1.state.selectedModel)("models", ctx_r1.models)("label", "metadata.modelSelector.modelLabel")("cardTitle", "metadata.modelSelector.title")("showCard", true)("showTranslateOption", true)("translateToFrench", ctx_r1.state.translateToFrench)("disabled", ctx_r1.state.isProcessing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.state.translateToFrench);
     \u0275\u0275advance(2);
-    \u0275\u0275property("label", ctx_r1.state.isProcessing ? \u0275\u0275pipeBind1(20, 39, "metadata.button.processing") : \u0275\u0275pipeBind1(21, 41, "metadata.button.process"))("disabled", !ctx_r1.canProcess())("loading", ctx_r1.state.isProcessing);
+    \u0275\u0275property("label", ctx_r1.state.isProcessing ? \u0275\u0275pipeBind1(21, 42, "metadata.button.processing") : \u0275\u0275pipeBind1(22, 44, "metadata.button.process"))("disabled", !ctx_r1.canProcess())("loading", ctx_r1.state.isProcessing);
     \u0275\u0275advance(3);
     \u0275\u0275property("ngIf", ctx_r1.state.results.length > 0 && !ctx_r1.state.isProcessing);
     \u0275\u0275advance(2);
@@ -31784,10 +33960,12 @@ function MetadataAssistantComponent_section_16_Template(rf, ctx) {
     \u0275\u0275property("disabled", ctx_r1.state.isProcessing);
     \u0275\u0275advance(2);
     \u0275\u0275property("selectedModel", ctx_r1.state.selectedModel)("models", ctx_r1.models)("label", "metadata.modelSelector.modelLabel")("cardTitle", "metadata.modelSelector.title")("showCard", true)("showTranslateOption", false)("disabled", ctx_r1.state.isProcessing);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.shouldShowTranslationModelSelector());
     \u0275\u0275advance(2);
-    \u0275\u0275property("text", \u0275\u0275pipeBind1(35, 43, "metadata.document.help"));
+    \u0275\u0275property("text", \u0275\u0275pipeBind1(37, 46, "metadata.document.help"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("label", ctx_r1.state.isProcessing ? \u0275\u0275pipeBind1(38, 45, "metadata.button.processing") : \u0275\u0275pipeBind1(39, 47, "metadata.button.process"))("disabled", !ctx_r1.canProcessDocument())("loading", ctx_r1.state.isProcessing);
+    \u0275\u0275property("label", ctx_r1.state.isProcessing ? \u0275\u0275pipeBind1(40, 48, "metadata.button.processing") : \u0275\u0275pipeBind1(41, 50, "metadata.button.process"))("disabled", !ctx_r1.canProcessDocument())("loading", ctx_r1.state.isProcessing);
     \u0275\u0275advance(3);
     \u0275\u0275property("ngIf", ctx_r1.documentResults.length > 0 && !ctx_r1.state.isProcessing);
     \u0275\u0275advance(2);
@@ -31802,8 +33980,8 @@ function MetadataAssistantComponent_section_16_Template(rf, ctx) {
 }
 function MetadataAssistantComponent_div_18_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 37);
-    \u0275\u0275element(1, "p-message", 38);
+    \u0275\u0275elementStart(0, "div", 31);
+    \u0275\u0275element(1, "p-message", 36);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
   }
@@ -31828,9 +34006,14 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
     processedUrls: 0,
     results: [],
     error: null,
-    selectedModel: "mistralai/mistral-small-3.2-24b-instruct:free",
+    selectedModel: "qwen/qwen3-235b-a22b:free",
+    selectedTranslationModel: "anthropic/claude-3.5-sonnet",
     translateToFrench: false,
-    documentProcessingIndex: null
+    documentProcessingIndex: null,
+    documentMode: "english-only",
+    englishDocument: null,
+    frenchDocument: null,
+    comparisonResult: null
   };
   urlInput = "";
   urls = [];
@@ -31839,26 +34022,71 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
   documentLanguage = null;
   documentText = "";
   documentResults = [];
+  documentTranslateOption = false;
+  documentProcessingIndex = null;
+  activeTabIndex = "0";
   models = [
     {
-      name: "Mistral Small 3.2 24B",
-      value: "mistralai/mistral-small-3.2-24b-instruct:free",
-      description: "metadata.models.mistralDescription"
+      name: "metadata.model.claudeSonnet45",
+      value: "anthropic/claude-sonnet-4.5",
+      description: "metadata.model.claudeSonnet45Description"
     },
     {
-      name: "Meta Llama 3.3 70B",
+      name: "metadata.model.gpt4oMini",
+      value: "openai/gpt-4o-mini",
+      description: "metadata.model.gpt4oMiniDescription"
+    },
+    {
+      name: "metadata.model.gemini25Pro",
+      value: "google/gemini-2.5-pro",
+      description: "metadata.model.gemini25ProDescription"
+    },
+    {
+      name: "metadata.model.qwen3235b",
+      value: "qwen/qwen3-235b-a22b:free",
+      description: "metadata.model.qwen3235bDescription"
+    },
+    {
+      name: "metadata.model.gemini20Flash",
+      value: "google/gemini-2.0-flash-exp:free",
+      description: "metadata.model.gemini20FlashDescription"
+    },
+    {
+      name: "metadata.model.llama33",
       value: "meta-llama/llama-3.3-70b-instruct:free",
-      description: "metadata.models.llamaDescription"
+      description: "metadata.model.llama33Description"
     },
     {
-      name: "Google Gemma 3 27B",
+      name: "metadata.model.gemma327b",
       value: "google/gemma-3-27b-it:free",
-      description: "metadata.models.gemmaDescription"
+      description: "metadata.model.gemma327bDescription"
+    }
+  ];
+  translationModels = [
+    {
+      name: "metadata.translationModel.claude35Sonnet",
+      value: "anthropic/claude-3.5-sonnet",
+      description: "metadata.translationModel.claude35SonnetDescription"
     },
     {
-      name: "Tencent Hunyuan A13B",
-      value: "tencent/hunyuan-a13b-instruct:free",
-      description: "metadata.models.hunyuanDescription"
+      name: "metadata.translationModel.gpt4oMini",
+      value: "openai/gpt-4o-mini",
+      description: "metadata.translationModel.gpt4oMiniDescription"
+    },
+    {
+      name: "metadata.translationModel.gemini20Flash",
+      value: "google/gemini-2.0-flash-exp:free",
+      description: "metadata.translationModel.gemini20FlashDescription"
+    },
+    {
+      name: "metadata.translationModel.llama33",
+      value: "meta-llama/llama-3.3-70b-instruct:free",
+      description: "metadata.translationModel.llama33Description"
+    },
+    {
+      name: "metadata.translationModel.gemma327b",
+      value: "google/gemma-3-27b-it:free",
+      description: "metadata.translationModel.gemma327bDescription"
     }
   ];
   ngOnInit() {
@@ -31887,8 +34115,17 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
   onModelChange(model2) {
     this.stateService.setSelectedModel(model2);
   }
+  onTranslationModelChange(model2) {
+    this.stateService.setSelectedTranslationModel(model2);
+  }
   onTranslateToggle(translate) {
     this.stateService.setTranslateToFrench(translate);
+  }
+  onTabChange(index) {
+    this.activeTabIndex = String(index);
+    if (!this.state.isProcessing) {
+      this.stateService.updateState({ currentStep: "idle" });
+    }
   }
   startProcessing() {
     if (!this.apiKeyService.hasApiKey$.value) {
@@ -31905,6 +34142,7 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       urls: this.urls,
       model: this.state.selectedModel,
       translateToFrench: this.state.translateToFrench,
+      translationModel: this.state.selectedTranslationModel,
       fallbackModels
     }).pipe(takeUntil(this.destroy$)).subscribe({
       next: (results) => {
@@ -31947,10 +34185,27 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       return this.translate.instant("metadata.progress.generatingMetadata");
     } else if (this.state.currentStep === "translating") {
       return this.translate.instant("metadata.progress.translatingContent");
+    } else if (this.state.currentStep === "extracting-text") {
+      return this.translate.instant("metadata.progress.extractingText");
+    } else if (this.state.currentStep === "processing-document") {
+      return this.translate.instant("metadata.progress.processingDocument");
+    } else if (this.state.currentStep === "evaluating") {
+      return this.translate.instant("metadata.progress.evaluatingMetadata");
+    } else if (this.state.currentStep === "comparing") {
+      return this.translate.instant("metadata.progress.comparingDocuments");
     } else if (this.state.currentStep === "complete") {
       return this.translate.instant("metadata.progress.completeTitle");
     }
     return "";
+  }
+  shouldShowTranslationModelSelector() {
+    return this.state.documentMode === "english-only" && this.documentTranslateOption || this.state.documentMode === "french-only" && this.documentTranslateOption || this.state.documentMode === "both";
+  }
+  getTranslationModelSelectorTitle() {
+    if (this.state.documentMode === "french-only" && this.documentTranslateOption) {
+      return "metadata.translationModelSelector.titleToEnglish";
+    }
+    return "metadata.translationModelSelector.title";
   }
   getModelDisplayName(modelValue) {
     const model2 = this.models.find((m) => m.value === modelValue);
@@ -32031,49 +34286,73 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       }
     });
   }
-  onDocumentFileSelected(file) {
+  onEnglishDocumentSelected(file) {
     this.selectedDocument = file;
     this.documentLanguage = null;
     this.documentText = "";
   }
-  startDocumentProcessing() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onFrenchDocumentSelected(_file) {
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onDocumentModeChanged(_mode) {
+    this.selectedDocument = null;
+    this.documentLanguage = null;
+    this.documentText = "";
+    this.documentResults = [];
+    this.documentTranslateOption = false;
+  }
+  onDocumentTranslateOptionChanged(shouldTranslate) {
+    this.documentTranslateOption = shouldTranslate;
+  }
+  onDocumentUploadEvaluation(event) {
+    const { file, index } = event;
     if (!this.apiKeyService.hasApiKey$.value) {
-      this.stateService.setError(this.translate.instant("metadata.errors.noApiKey"));
+      this.messageService.add({
+        severity: "error",
+        summary: this.translate.instant("metadata.errors.noApiKey"),
+        life: 4e3
+      });
       return;
     }
-    if (!this.selectedDocument) {
-      this.stateService.setError(this.translate.instant("metadata.document.errors.processingFailed"));
-      return;
-    }
-    this.stateService.updateState({
-      isProcessing: true,
-      currentStep: "extracting-text",
-      totalUrls: 1,
-      processedUrls: 0,
-      currentUrl: this.selectedDocument.name
-    });
-    this.metadataService.processDocumentForMetadata(this.selectedDocument, this.state.selectedModel).pipe(takeUntil(this.destroy$)).subscribe({
-      next: (result) => {
-        this.documentLanguage = result.language;
-        this.documentText = result.text;
-        this.documentResults = [result.metadata];
-        this.stateService.updateState({
-          isProcessing: false,
-          currentStep: "complete",
-          processedUrls: 1
-        });
+    const result = this.documentResults[index];
+    if (this.state.documentMode === "english-only") {
+      if (!result.frenchTranslatedDescription || !result.frenchTranslatedKeywords) {
         this.messageService.add({
-          severity: "success",
-          summary: this.translate.instant("metadata.progress.completeTitle"),
-          detail: this.translate.instant("metadata.document.languageDetected") + ": " + this.translate.instant(result.language === "en" ? "common.language.english" : "common.language.french"),
+          severity: "warn",
+          summary: this.translate.instant("metadata.document.errors.noTranslation"),
+          detail: this.translate.instant("metadata.document.errors.translationRequired"),
           life: 4e3
         });
+        return;
+      }
+    } else if (this.state.documentMode === "french-only") {
+      if (!result.englishTranslatedDescription || !result.englishTranslatedKeywords) {
+        this.messageService.add({
+          severity: "warn",
+          summary: this.translate.instant("metadata.document.errors.noTranslation"),
+          detail: this.translate.instant("metadata.document.errors.translationRequired"),
+          life: 4e3
+        });
+        return;
+      }
+    }
+    this.documentProcessingIndex = index;
+    this.stateService.updateState({
+      isProcessing: true,
+      currentStep: "processing-document"
+    });
+    this.metadataService.processDocument(file).pipe(takeUntil(this.destroy$)).subscribe({
+      next: (documentMetadata) => {
+        this.stateService.updateState({ currentStep: "evaluating" });
+        this.evaluateDocumentUploadMetadata(index, documentMetadata);
       },
       error: (error) => {
         console.error("Document processing error:", error);
+        this.documentProcessingIndex = null;
         this.stateService.updateState({
           isProcessing: false,
-          currentStep: "idle"
+          currentStep: "complete"
         });
         this.messageService.add({
           severity: "error",
@@ -32084,11 +34363,342 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       }
     });
   }
+  evaluateDocumentUploadMetadata(resultIndex, documentMetadata) {
+    const result = this.documentResults[resultIndex];
+    if (this.state.documentMode === "french-only") {
+      const translatedMetadata = {
+        description: result.englishTranslatedDescription,
+        keywords: result.englishTranslatedKeywords
+      };
+      this.metadataService.evaluateMetadataEnglish(translatedMetadata, documentMetadata).pipe(takeUntil(this.destroy$)).subscribe({
+        next: (evaluationResult) => {
+          this.documentResults[resultIndex] = __spreadProps(__spreadValues({}, result), {
+            documentMetadata,
+            evaluationResult
+          });
+          this.documentProcessingIndex = null;
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete"
+          });
+          this.messageService.add({
+            severity: "success",
+            summary: this.translate.instant("metadata.progress.completeTitle"),
+            detail: this.translate.instant("metadata.document.evaluationComplete"),
+            life: 4e3
+          });
+        },
+        error: (error) => {
+          console.error("Evaluation error:", error);
+          this.documentProcessingIndex = null;
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete"
+          });
+          this.messageService.add({
+            severity: "error",
+            summary: this.translate.instant("metadata.errors.evaluationFailed"),
+            detail: error.message,
+            life: 5e3
+          });
+        }
+      });
+    } else {
+      const translatedMetadata = {
+        description: result.frenchTranslatedDescription,
+        keywords: result.frenchTranslatedKeywords
+      };
+      this.metadataService.evaluateMetadata(translatedMetadata, documentMetadata).pipe(takeUntil(this.destroy$)).subscribe({
+        next: (evaluationResult) => {
+          this.documentResults[resultIndex] = __spreadProps(__spreadValues({}, result), {
+            documentMetadata,
+            evaluationResult
+          });
+          this.documentProcessingIndex = null;
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete"
+          });
+          this.messageService.add({
+            severity: "success",
+            summary: this.translate.instant("metadata.progress.completeTitle"),
+            detail: this.translate.instant("metadata.document.evaluationComplete"),
+            life: 4e3
+          });
+        },
+        error: (error) => {
+          console.error("Evaluation error:", error);
+          this.documentProcessingIndex = null;
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete"
+          });
+          this.messageService.add({
+            severity: "error",
+            summary: this.translate.instant("metadata.errors.evaluationFailed"),
+            detail: error.message,
+            life: 5e3
+          });
+        }
+      });
+    }
+  }
+  // Keep old handler for compatibility
+  onDocumentFileSelected(file) {
+    this.selectedDocument = file;
+    this.documentLanguage = null;
+    this.documentText = "";
+  }
+  startDocumentProcessing() {
+    if (!this.apiKeyService.hasApiKey$.value) {
+      this.stateService.setError(this.translate.instant("metadata.errors.noApiKey"));
+      return;
+    }
+    const mode = this.state.documentMode;
+    if (mode === "english-only" && !this.state.englishDocument) {
+      this.stateService.setError(this.translate.instant("metadata.document.errors.processingFailed"));
+      return;
+    }
+    if (mode === "french-only" && !this.state.frenchDocument) {
+      this.stateService.setError(this.translate.instant("metadata.document.errors.processingFailed"));
+      return;
+    }
+    if (mode === "both" && (!this.state.englishDocument || !this.state.frenchDocument)) {
+      this.stateService.setError(this.translate.instant("metadata.document.errors.processingFailed"));
+      return;
+    }
+    this.stateService.updateState({
+      isProcessing: true,
+      currentStep: "extracting-text",
+      totalUrls: 1,
+      processedUrls: 0
+    });
+    switch (mode) {
+      case "english-only":
+        this.processEnglishOnly();
+        break;
+      case "french-only":
+        this.processFrenchOnly();
+        break;
+      case "both":
+        this.processBothDocuments();
+        break;
+    }
+  }
+  processEnglishOnly() {
+    const englishFile = this.state.englishDocument;
+    this.stateService.updateState({
+      currentUrl: englishFile.name,
+      currentStep: "generating"
+    });
+    if (this.documentTranslateOption) {
+      this.metadataService.processEnglishDocument(englishFile, this.state.selectedModel, this.state.selectedTranslationModel).pipe(takeUntil(this.destroy$)).subscribe({
+        next: (result) => {
+          this.documentLanguage = "en";
+          this.documentResults = [{
+            url: englishFile.name,
+            scrapedContent: "",
+            metaDescription: result.englishMetadata.description,
+            metaKeywords: result.englishMetadata.keywords,
+            frenchTranslatedDescription: result.frenchTranslation.description,
+            frenchTranslatedKeywords: result.frenchTranslation.keywords,
+            language: "en",
+            modelUsed: this.state.selectedModel,
+            fallbackUsed: false
+          }];
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete",
+            processedUrls: 1
+          });
+          this.messageService.add({
+            severity: "success",
+            summary: this.translate.instant("metadata.progress.completeTitle"),
+            detail: this.translate.instant("metadata.document.languageDetected") + ": " + this.translate.instant("common.language.english"),
+            life: 4e3
+          });
+        },
+        error: (error) => {
+          this.handleDocumentProcessingError(error);
+        }
+      });
+    } else {
+      this.metadataService.processDocumentForMetadata(englishFile, this.state.selectedModel).pipe(takeUntil(this.destroy$)).subscribe({
+        next: (result) => {
+          this.documentLanguage = "en";
+          this.documentResults = [{
+            url: englishFile.name,
+            scrapedContent: "",
+            metaDescription: result.metadata.metaDescription,
+            metaKeywords: result.metadata.metaKeywords,
+            language: "en",
+            modelUsed: this.state.selectedModel,
+            fallbackUsed: false
+          }];
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete",
+            processedUrls: 1
+          });
+          this.messageService.add({
+            severity: "success",
+            summary: this.translate.instant("metadata.progress.completeTitle"),
+            detail: this.translate.instant("metadata.document.languageDetected") + ": " + this.translate.instant("common.language.english"),
+            life: 4e3
+          });
+        },
+        error: (error) => {
+          this.handleDocumentProcessingError(error);
+        }
+      });
+    }
+  }
+  processFrenchOnly() {
+    const frenchFile = this.state.frenchDocument;
+    this.stateService.updateState({
+      currentUrl: frenchFile.name,
+      currentStep: "generating"
+    });
+    if (this.documentTranslateOption) {
+      this.metadataService.processFrenchDocumentWithEnglishTranslation(frenchFile, this.state.selectedModel, this.state.selectedTranslationModel).pipe(takeUntil(this.destroy$)).subscribe({
+        next: (result) => {
+          this.documentLanguage = "fr";
+          this.documentResults = [{
+            url: frenchFile.name,
+            scrapedContent: "",
+            metaDescription: result.frenchMetadata.description,
+            metaKeywords: result.frenchMetadata.keywords,
+            englishTranslatedDescription: result.englishTranslation.description,
+            englishTranslatedKeywords: result.englishTranslation.keywords,
+            language: "fr",
+            modelUsed: this.state.selectedModel,
+            fallbackUsed: false
+          }];
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete",
+            processedUrls: 1
+          });
+          this.messageService.add({
+            severity: "success",
+            summary: this.translate.instant("metadata.progress.completeTitle"),
+            detail: this.translate.instant("metadata.document.languageDetected") + ": " + this.translate.instant("common.language.french"),
+            life: 4e3
+          });
+        },
+        error: (error) => {
+          this.handleDocumentProcessingError(error);
+        }
+      });
+    } else {
+      this.metadataService.processDocumentForMetadata(frenchFile, this.state.selectedModel).pipe(takeUntil(this.destroy$)).subscribe({
+        next: (result) => {
+          this.documentLanguage = "fr";
+          this.documentResults = [{
+            url: frenchFile.name,
+            scrapedContent: "",
+            metaDescription: result.metadata.metaDescription,
+            metaKeywords: result.metadata.metaKeywords,
+            language: "fr",
+            modelUsed: result.metadata.modelUsed || this.state.selectedModel,
+            fallbackUsed: false
+          }];
+          this.stateService.updateState({
+            isProcessing: false,
+            currentStep: "complete",
+            processedUrls: 1
+          });
+          this.messageService.add({
+            severity: "success",
+            summary: this.translate.instant("metadata.progress.completeTitle"),
+            detail: this.translate.instant("metadata.document.languageDetected") + ": " + this.translate.instant("common.language.french"),
+            life: 4e3
+          });
+        },
+        error: (error) => {
+          this.handleDocumentProcessingError(error);
+        }
+      });
+    }
+  }
+  processBothDocuments() {
+    const englishFile = this.state.englishDocument;
+    const frenchFile = this.state.frenchDocument;
+    this.stateService.updateState({
+      currentUrl: `${englishFile.name}, ${frenchFile.name}`,
+      currentStep: "comparing"
+    });
+    this.metadataService.processBothDocuments(englishFile, frenchFile, this.state.selectedModel).pipe(takeUntil(this.destroy$)).subscribe({
+      next: (result) => {
+        this.documentLanguage = "en";
+        const comparisonResult = {
+          englishMetadata: {
+            description: result.englishMetadata.description,
+            keywords: result.englishMetadata.keywords
+          },
+          autoTranslatedFrench: {
+            description: result.autoTranslatedFrench.description,
+            keywords: result.autoTranslatedFrench.keywords
+          },
+          frenchDocMetadata: {
+            description: result.frenchDocMetadata.description,
+            keywords: result.frenchDocMetadata.keywords
+          },
+          suggested: {
+            description: result.comparison.suggestedDescription,
+            keywords: result.comparison.suggestedKeywords
+          },
+          rationale: result.comparison.rationale,
+          rationaleEnglish: result.comparison.rationaleEnglish
+        };
+        this.stateService.setComparisonResult(comparisonResult);
+        this.documentResults = [{
+          url: `${englishFile.name} & ${frenchFile.name}`,
+          scrapedContent: "",
+          metaDescription: result.englishMetadata.description,
+          metaKeywords: result.englishMetadata.keywords,
+          frenchTranslatedDescription: result.autoTranslatedFrench.description,
+          frenchTranslatedKeywords: result.autoTranslatedFrench.keywords,
+          language: "en",
+          modelUsed: this.state.selectedModel,
+          fallbackUsed: false
+        }];
+        this.stateService.updateState({
+          isProcessing: false,
+          currentStep: "complete",
+          processedUrls: 1
+        });
+        this.messageService.add({
+          severity: "success",
+          summary: this.translate.instant("metadata.progress.completeTitle"),
+          detail: this.translate.instant("metadata.comparison.title"),
+          life: 4e3
+        });
+      },
+      error: (error) => {
+        this.handleDocumentProcessingError(error);
+      }
+    });
+  }
+  handleDocumentProcessingError(error) {
+    console.error("Document processing error:", error);
+    this.stateService.updateState({
+      isProcessing: false,
+      currentStep: "idle"
+    });
+    this.messageService.add({
+      severity: "error",
+      summary: this.translate.instant("metadata.document.errors.processingFailed"),
+      detail: error.message,
+      life: 5e3
+    });
+  }
   resetDocumentTab() {
     this.selectedDocument = null;
     this.documentLanguage = null;
     this.documentText = "";
     this.documentResults = [];
+    this.stateService.clearDocumentData();
     this.stateService.updateState({
       isProcessing: false,
       currentStep: "idle",
@@ -32096,12 +34706,25 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
     });
   }
   canProcessDocument() {
-    return this.apiKeyService.hasApiKey$.value && this.selectedDocument !== null && !this.state.isProcessing;
+    if (!this.apiKeyService.hasApiKey$.value || this.state.isProcessing) {
+      return false;
+    }
+    const mode = this.state.documentMode;
+    switch (mode) {
+      case "english-only":
+        return this.state.englishDocument !== null;
+      case "french-only":
+        return this.state.frenchDocument !== null;
+      case "both":
+        return this.state.englishDocument !== null && this.state.frenchDocument !== null;
+      default:
+        return false;
+    }
   }
   static \u0275fac = function MetadataAssistantComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MetadataAssistantComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MetadataAssistantComponent, selectors: [["ca-metadata-assistant"]], features: [\u0275\u0275ProvidersFeature([MessageService])], decls: 20, vars: 21, consts: [["default", ""], ["id", "wb-cont"], [1, "api-key-status", "mb-4"], ["class", "text-green-600", 4, "ngIf"], ["class", "text-orange-600", 4, "ngIf"], [4, "ngIf"], ["class", "mt-4", 4, "ngIf"], [1, "text-green-600"], [1, "pi", "pi-check-circle"], [1, "text-orange-600"], [1, "pi", "pi-exclamation-circle"], ["value", "0", 1, "mt-3"], ["value", "0"], [1, "pi", "pi-globe", "mr-1"], ["value", "1"], [1, "pi", "pi-file", "mr-1"], [1, "grid"], [1, "col-12", "lg:col-6"], [3, "urlsChange", "urlInputChange", "disabled"], [1, "mt-3"], [3, "modelChange", "translateChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption", "translateToFrench", "disabled"], ["icon", "pi pi-sparkles", "severity", "primary", "styleClass", "w-full", 3, "onClick", "label", "disabled", "loading"], ["class", "mt-2", 4, "ngIf"], ["class", "mt-3", 4, "ngIf"], ["class", "results-section mt-4", 4, "ngIf"], [3, "fileSelected", "disabled"], [3, "modelChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption", "disabled"], ["severity", "info", "styleClass", "w-full", 3, "text"], [1, "mt-2"], ["icon", "pi pi-refresh", "severity", "secondary", "styleClass", "w-full", 3, "onClick", "label", "outlined"], [3, "progressText", "processedCount", "totalFiles", "showProgress", "showSpinner"], ["severity", "error", "styleClass", "w-full", 3, "text"], [1, "results-section", "mt-4"], [3, "documentSelected", "results", "showTranslations", "isProcessing", "processingIndex"], [3, "results", "includeTranslations"], ["severity", "success", "styleClass", "w-full"], [3, "results", "showTranslations", "isProcessing", "processingIndex"], [1, "mt-4"], ["severity", "warn", "styleClass", "w-full", 3, "text"]], template: function MetadataAssistantComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MetadataAssistantComponent, selectors: [["ca-metadata-assistant"]], features: [\u0275\u0275ProvidersFeature([MessageService])], decls: 20, vars: 21, consts: [["default", ""], ["id", "wb-cont"], [1, "mb-4"], ["class", "text-green-600", 4, "ngIf"], ["class", "text-orange-600", 4, "ngIf"], [4, "ngIf"], ["class", "mt-4", 4, "ngIf"], [1, "text-green-600"], [1, "pi", "pi-check-circle"], [1, "text-orange-600"], [1, "pi", "pi-exclamation-circle"], [1, "mt-3", 3, "valueChange", "value"], ["value", "0"], [1, "pi", "pi-globe", "mr-1"], ["value", "1"], [1, "pi", "pi-file", "mr-1"], [1, "grid"], [1, "col-12", "lg:col-6"], [3, "urlsChange", "urlInputChange", "disabled"], [1, "mt-3"], [3, "modelChange", "translateChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption", "translateToFrench", "disabled"], ["class", "mt-3", 4, "ngIf"], ["icon", "pi pi-sparkles", "severity", "primary", "styleClass", "w-full", 3, "onClick", "label", "disabled", "loading"], ["class", "mt-2", 4, "ngIf"], [3, "englishFileSelected", "frenchFileSelected", "modeChanged", "translateOptionChanged", "disabled"], [3, "modelChange", "selectedModel", "models", "label", "cardTitle", "showCard", "showTranslateOption", "disabled"], ["severity", "info", "styleClass", "w-full", 3, "text"], [1, "mt-2"], ["icon", "pi pi-refresh", "severity", "secondary", "styleClass", "w-full", 3, "onClick", "label", "outlined"], [3, "progressText", "processedCount", "totalFiles", "showProgress", "showSpinner"], ["severity", "error", "styleClass", "w-full", 3, "text"], [1, "mt-4"], [3, "documentSelected", "results", "showTranslations", "isProcessing", "processingIndex"], [3, "results", "includeTranslations"], ["severity", "success", "styleClass", "w-full"], [3, "comparisonData"], ["severity", "warn", "styleClass", "w-full", 3, "text"]], template: function MetadataAssistantComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275element(0, "p-toast");
       \u0275\u0275elementStart(1, "h1", 1);
@@ -32121,7 +34744,7 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       \u0275\u0275template(14, MetadataAssistantComponent_span_14_Template, 4, 3, "span", 4);
       \u0275\u0275pipe(15, "async");
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(16, MetadataAssistantComponent_section_16_Template, 46, 49, "section", 5);
+      \u0275\u0275template(16, MetadataAssistantComponent_section_16_Template, 48, 52, "section", 5);
       \u0275\u0275pipe(17, "async");
       \u0275\u0275template(18, MetadataAssistantComponent_div_18_Template, 3, 3, "div", 6);
       \u0275\u0275pipe(19, "async");
@@ -32167,8 +34790,9 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
     UrlInputComponent,
     MetadataResultComponent,
     CsvExportComponent,
-    DocumentUploadComponent
-  ], styles: ["\n\n.api-key-status[_ngcontent-%COMP%] {\n  margin-bottom: 1.5rem;\n}\n.results-section[_ngcontent-%COMP%] {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=metadata-assistant.component.css.map */"] });
+    DocumentUploadComponent,
+    MetadataComparisonComponent
+  ], styles: ["\n\n/*# sourceMappingURL=metadata-assistant.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MetadataAssistantComponent, [{
@@ -32187,14 +34811,15 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
       UrlInputComponent,
       MetadataResultComponent,
       CsvExportComponent,
-      DocumentUploadComponent
+      DocumentUploadComponent,
+      MetadataComparisonComponent
     ], providers: [MessageService], template: `<p-toast></p-toast>\r
 \r
 <h1 id="wb-cont">{{ 'metadata.title' | translate }}</h1>\r
 <p>{{ 'metadata.description' | translate }}</p>\r
 \r
 <!-- API Key Status -->\r
-<section class="api-key-status mb-4">\r
+<section class="mb-4">\r
   <div>\r
     <strong>{{ 'page.apiKey.status' | translate }}</strong>\r
     <span *ngIf="apiKeyService.hasApiKey$ | async" class="text-green-600">\r
@@ -32208,7 +34833,7 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
 \r
 <!-- Tabs -->\r
 <section *ngIf="apiKeyService.hasApiKey$ | async">\r
-  <p-tabs value="0" class="mt-3">\r
+  <p-tabs [value]="activeTabIndex" class="mt-3" (valueChange)="onTabChange($event)">\r
     <p-tablist>\r
       <p-tab value="0">\r
         <i class="pi pi-globe mr-1"></i>{{ 'metadata.tabs.scrapedContent' | translate }}\r
@@ -32244,6 +34869,20 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
                 [disabled]="state.isProcessing"\r
                 (modelChange)="onModelChange($event)"\r
                 (translateChange)="onTranslateToggle($event)">\r
+              </ca-shared-model-selector>\r
+            </div>\r
+\r
+            <!-- Translation Model Selector (shown when translation is enabled) -->\r
+            <div class="mt-3" *ngIf="state.translateToFrench">\r
+              <ca-shared-model-selector\r
+                [selectedModel]="state.selectedTranslationModel"\r
+                [models]="translationModels"\r
+                [label]="'metadata.translationModelSelector.modelLabel'"\r
+                [cardTitle]="'metadata.translationModelSelector.title'"\r
+                [showCard]="true"\r
+                [showTranslateOption]="false"\r
+                [disabled]="state.isProcessing"\r
+                (modelChange)="onTranslationModelChange($event)">\r
               </ca-shared-model-selector>\r
             </div>\r
 \r
@@ -32298,7 +34937,7 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
         </div>\r
 \r
         <!-- Results Section -->\r
-        <div class="results-section mt-4" *ngIf="state.results.length > 0">\r
+        <div class="mt-4" *ngIf="state.results.length > 0">\r
           <!-- Metadata Results -->\r
           <ca-metadata-result\r
             [results]="state.results"\r
@@ -32324,7 +34963,10 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
             <!-- Document Upload -->\r
             <ca-document-upload\r
               [disabled]="state.isProcessing"\r
-              (fileSelected)="onDocumentFileSelected($event)">\r
+              (englishFileSelected)="onEnglishDocumentSelected($event)"\r
+              (frenchFileSelected)="onFrenchDocumentSelected($event)"\r
+              (modeChanged)="onDocumentModeChanged($event)"\r
+              (translateOptionChanged)="onDocumentTranslateOptionChanged($event)">\r
             </ca-document-upload>\r
 \r
             <!-- Model Selector -->\r
@@ -32338,6 +34980,20 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
                 [showTranslateOption]="false"\r
                 [disabled]="state.isProcessing"\r
                 (modelChange)="onModelChange($event)">\r
+              </ca-shared-model-selector>\r
+            </div>\r
+\r
+            <!-- Translation Model Selector (shown when translation is enabled) -->\r
+            <div class="mt-3" *ngIf="shouldShowTranslationModelSelector()">\r
+              <ca-shared-model-selector\r
+                [selectedModel]="state.selectedTranslationModel"\r
+                [models]="translationModels"\r
+                [label]="'metadata.translationModelSelector.modelLabel'"\r
+                [cardTitle]="getTranslationModelSelectorTitle()"\r
+                [showCard]="true"\r
+                [showTranslateOption]="false"\r
+                [disabled]="state.isProcessing"\r
+                (modelChange)="onTranslationModelChange($event)">\r
               </ca-shared-model-selector>\r
             </div>\r
 \r
@@ -32413,18 +35069,26 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
         </div>\r
 \r
         <!-- Results Section for Documents -->\r
-        <div class="results-section mt-4" *ngIf="documentResults.length > 0">\r
+        <div class="mt-4" *ngIf="documentResults.length > 0">\r
           <ca-metadata-result\r
             [results]="documentResults"\r
-            [showTranslations]="false"\r
+            [showTranslations]="(state.documentMode === 'english-only' || state.documentMode === 'french-only') && documentTranslateOption"\r
             [isProcessing]="state.isProcessing"\r
-            [processingIndex]="null">\r
+            [processingIndex]="documentProcessingIndex"\r
+            (documentSelected)="onDocumentUploadEvaluation($event)">\r
           </ca-metadata-result>\r
+\r
+          <!-- Comparison View (shown when both documents processed) -->\r
+          <div class="mt-4" *ngIf="state.comparisonResult">\r
+            <ca-metadata-comparison\r
+              [comparisonData]="state.comparisonResult">\r
+            </ca-metadata-comparison>\r
+          </div>\r
 \r
           <!-- CSV Export -->\r
           <ca-metadata-csv-export\r
             [results]="documentResults"\r
-            [includeTranslations]="false">\r
+            [includeTranslations]="state.documentMode === 'english-only'">\r
           </ca-metadata-csv-export>\r
         </div>\r
       </p-tabpanel>\r
@@ -32440,11 +35104,11 @@ var MetadataAssistantComponent = class _MetadataAssistantComponent {
     styleClass="w-full">\r
   </p-message>\r
 </div>\r
-`, styles: ["/* src/app/views/metadata-assistant/metadata-assistant.component.css */\n.api-key-status {\n  margin-bottom: 1.5rem;\n}\n.results-section {\n  margin-top: 2rem;\n}\n/*# sourceMappingURL=metadata-assistant.component.css.map */\n"] }]
+`, styles: ["/* src/app/views/metadata-assistant/metadata-assistant.component.css */\n/*# sourceMappingURL=metadata-assistant.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MetadataAssistantComponent, { className: "MetadataAssistantComponent", filePath: "src/app/views/metadata-assistant/metadata-assistant.component.ts", lineNumber: 45 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MetadataAssistantComponent, { className: "MetadataAssistantComponent", filePath: "src/app/views/metadata-assistant/metadata-assistant.component.ts", lineNumber: 47 });
 })();
 
 // src/app/views/llm-evaluation/llm-evaluation.component.ts
@@ -35263,7 +37927,7 @@ var ValidateUrlsComponent = class _ValidateUrlsComponent {
   checkStatus(link) {
     return __async(this, null, function* () {
       try {
-        const response = yield this.fetchService.fetchStatus(link.href, "prod", 5, "random");
+        const response = yield this.fetchService.fetchStatus(link.href, "prod", 3, "random", 100);
         if (!response.ok || response.url.includes("404.html")) {
           link.status = "bad";
         } else if (response.url !== link.href) {
@@ -35285,26 +37949,28 @@ var ValidateUrlsComponent = class _ValidateUrlsComponent {
   /*** Validate a URL item array (half of the URL pair) ***/
   validateUrlItems(urls) {
     return __async(this, null, function* () {
-      const urlsToCheck = urls.map((url) => this.checkStatus(url).finally(() => {
-        const { urlChecked: urlChecked2, urlTotal } = this.iaState.getUrlData();
+      for (const url of urls) {
+        yield this.checkStatus(url);
+        const { urlChecked, urlTotal } = this.iaState.getUrlData();
         this.iaState.setUrlData({
-          urlChecked: urlChecked2 + 1,
-          urlPercent: (urlChecked2 + 1) / urlTotal * 100
+          urlChecked: urlChecked + 1,
+          urlPercent: (urlChecked + 1) / urlTotal * 100
         });
-      }));
-      yield Promise.all(urlsToCheck);
+      }
       const badUrls = urls.filter((url) => url.status === "bad");
-      badUrls.forEach((badUrl) => badUrl.status = "checking");
-      const { urlChecked } = this.iaState.getUrlData();
-      this.iaState.setUrlData({ urlChecked: urlChecked - badUrls.length });
-      const urlsToRecheck = badUrls.map((badUrl) => this.checkStatus(badUrl).finally(() => {
-        const { urlChecked: urlChecked2, urlTotal } = this.iaState.getUrlData();
-        this.iaState.setUrlData({
-          urlChecked: urlChecked2 + 1,
-          urlPercent: (urlChecked2 + 1) / urlTotal * 100
-        });
-      }));
-      yield Promise.all(urlsToRecheck);
+      if (badUrls.length > 0) {
+        badUrls.forEach((badUrl) => badUrl.status = "checking");
+        const { urlChecked } = this.iaState.getUrlData();
+        this.iaState.setUrlData({ urlChecked: urlChecked - badUrls.length });
+        for (const badUrl of badUrls) {
+          yield this.checkStatus(badUrl);
+          const { urlChecked: urlChecked2, urlTotal } = this.iaState.getUrlData();
+          this.iaState.setUrlData({
+            urlChecked: urlChecked2 + 1,
+            urlPercent: (urlChecked2 + 1) / urlTotal * 100
+          });
+        }
+      }
     });
   }
   /*** Validate URL pairs ***/
@@ -42034,7 +44700,7 @@ var routes = [
       }
       return true;
     }],
-    loadComponent: () => import("./chunk-KVTF7AFV.js").then((m) => m.PageAssistantCompareComponent)
+    loadComponent: () => import("./chunk-ODLNWTVI.js").then((m) => m.PageAssistantCompareComponent)
   },
   {
     path: "page-assistant/share",
@@ -42200,7 +44866,6 @@ var HeaderComponent = class _HeaderComponent {
   // constructor(public langToggle: LangToggleService){} //putting the code below into a service works but we aren't calling it anywhere else
   constructor() {
     const curLang = this.localStore.getData("lang") || this.translate.getBrowserLang() || "en";
-    console.log(this.translate.getBrowserLang());
     this.translate.addLangs(["en", "fr"]);
     this.translate.setDefaultLang("en");
     this.translate.use(curLang);
