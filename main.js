@@ -26519,10 +26519,10 @@ defaults:
       css:
         - https://use.fontawesome.com/releases/v5.15.4/css/all.css
         - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.css
-        - https://cra-design.github.io/core-prototype/source/css/testing-banner.css
+        - https://proto-cra.github.io/core-prototype/source/css/testing-banner.css
       script:
         - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.js
-        - https://cra-design.github.io/core-prototype/source/scripts/external-link-detour.js
+        - https://proto-cra.github.io/core-prototype/source/scripts/external-link-detour.js
         `;
       try {
         console.log(`Creating _config.yml for ${repo}`);
@@ -26623,10 +26623,10 @@ Add information on how to manage the repo here.
     });
   }
   filesToCopy = [
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/_includes/header/header.html",
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/_includes/resources-inc/footer.html",
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/source/exit-intent-e.html",
-    "https://raw.githubusercontent.com/cra-design/core-prototype/main/404.html"
+    "https://raw.githubusercontent.com/proto-cra/core-prototype/main/_includes/header/header.html",
+    "https://raw.githubusercontent.com/proto-cra/core-prototype/main/_includes/resources-inc/footer.html",
+    "https://raw.githubusercontent.com/proto-cra/core-prototype/main/source/exit-intent-e.html",
+    "https://raw.githubusercontent.com/proto-cra/core-prototype/main/404.html"
   ];
   copyCoreFiles(owner, repo, branch, token, existingFiles) {
     return __async(this, null, function* () {
