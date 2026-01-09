@@ -40121,13 +40121,13 @@ var FetchService = class _FetchService {
   }
   //Validates URL and checks if it's in the specified allowed host list
   validateHost(url, hostMode) {
-    url = url.trim().toLowerCase();
+    url = url.trim();
     let hostname;
     try {
       const parsedUrl = new URL(url);
       if (parsedUrl.protocol !== "https:" || /\s/.test(url))
         throw new Error();
-      hostname = parsedUrl.hostname;
+      hostname = parsedUrl.hostname.toLowerCase();
     } catch {
       throw new Error(`Invalid URL: ${url}`);
     }
@@ -98673,4 +98673,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-DWS6ZVR5.js.map
+//# sourceMappingURL=chunk-AJXP3XLN.js.map
