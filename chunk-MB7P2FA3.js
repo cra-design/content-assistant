@@ -27010,7 +27010,6 @@ var LinkReportComponent = class _LinkReportComponent {
     return this.headings.filter((r) => activeTypes.has(r.type) && this.matchStatusPass(r.matchStatus));
   }
   ngOnInit() {
-    void this.extractLinks();
   }
   /** Build a stable key for the "destination" (dedupe by this). */
   destKeyForRow(r) {
@@ -32453,4 +32452,4 @@ ${base}`;
 export {
   PageAssistantCompareComponent
 };
-//# sourceMappingURL=chunk-BPOEHYEN.js.map
+//# sourceMappingURL=chunk-MB7P2FA3.js.map
