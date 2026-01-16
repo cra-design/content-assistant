@@ -603,7 +603,8 @@ export class LinkReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    void this.extractLinks();
+    //Temporarily disabled for testing with API keys
+    //void this.extractLinks();
   }
 
   /** Build a stable key for the "destination" (dedupe by this). */
